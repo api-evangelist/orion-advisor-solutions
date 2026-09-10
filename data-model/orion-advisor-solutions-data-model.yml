@@ -1,0 +1,33 @@
+generated: '2026-09-10'
+method: derived
+source: openapi/orion-advisor-solutions-orion-connect-openapi.json
+note: Core entity graph derived from the Orion Connect DTO definitions (3,458
+  schemas). Relationships read from real id-reference fields on the DTOs; this is
+  the portfolio-accounting core, not the full 5,460-operation surface.
+entities:
+- name: Client
+  schema: OAS.WebApi.DTO.Portfolio.ClientDto
+  id_fields: [representativeId, categoryId, statementDeliveryMethodId]
+- name: Account
+  schema: OAS.WebApi.DTO.Portfolio.AccountDto
+  id_fields: [registrationId, managementStyleId, fundFamilyId, accountHistoryId, advCustodyTypeId]
+- name: Registration
+  schema: OAS.WebApi.DTO.Portfolio.RegistrationDto
+- name: Representative
+  note: surfaced at /v1/Portfolio/Representatives
+- name: Household
+  note: impersonation entity (Entity 5 / EntityId HouseholdId in the auth flow);
+    billing links households via billInstanceClientId (OAS.DataModel.Billing.RelatedHouseholdsList)
+relationships:
+- {from: Account, to: Registration, kind: belongs_to, via: registrationId}
+- {from: Client, to: Representative, kind: belongs_to, via: representativeId}
+- {from: Registration, to: Client, kind: belongs_to, via: clientId}
+- {from: Client, to: Account, kind: has_many, via: additionalAccounts}
+- {from: Account, to: Custodian, kind: belongs_to, via: custodian/custodianCode}
+domains:
+- {namespace: OAS.WebApi.DTO, schemas: 1597}
+- {namespace: OAS.DataModel.Portfolio, schemas: 229}
+- {namespace: OAS.DataModel.Reporting, schemas: 111}
+- {namespace: OAS.DataModel.Trading, schemas: 94}
+- {namespace: OAS.DataModel.Billing, schemas: 73}
+- {namespace: OAS.DataModel.Confirm, schemas: 68}

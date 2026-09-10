@@ -1,0 +1,51 @@
+generated: '2026-09-10'
+method: derived
+status: candidate
+source: openapi/orion-advisor-solutions-orion-connect-openapi.json
+note: No official Orion MCP server exists (web search 2026-09-10 found none; the
+  GitHub org ships none). This is a candidate tool set derived from marquee Orion
+  Connect API operations — a representative slice of the 5,460-operation surface,
+  not the provider's own tool list. All API access is credential-gated (Session
+  token via Basic auth exchange).
+deployment:
+  mode: none
+  auth: api-key
+  verified: derived
+server:
+  name: orion-advisor-solutions
+  transport: null
+  url: null
+tools:
+- name: get_token
+  description: Exchange Orion service credentials (Basic auth) for a Session token
+  source_operation: openapi/orion-advisor-solutions-orion-connect-openapi.json#Token_GetTokenAsync
+- name: list_clients
+  description: List clients the authenticated user has access to
+  source_operation: openapi/orion-advisor-solutions-orion-connect-openapi.json#Clients_GetAsync
+- name: get_client
+  description: Get a single client by key
+  source_operation: openapi/orion-advisor-solutions-orion-connect-openapi.json#Clients_GetEntityByKeyAsync
+- name: list_accounts
+  description: List portfolio accounts
+  source_operation: openapi/orion-advisor-solutions-orion-connect-openapi.json#Accounts_GetAccountsAsync
+- name: get_account
+  description: Get a single portfolio account by key
+  source_operation: openapi/orion-advisor-solutions-orion-connect-openapi.json#Accounts_GetEntityByKeyAsync
+- name: list_registrations
+  description: List registrations the authenticated user has access to
+  source_operation: openapi/orion-advisor-solutions-orion-connect-openapi.json#Registrations_GetAsync
+- name: list_transactions
+  description: List portfolio transactions by id set
+  source_operation: openapi/orion-advisor-solutions-orion-connect-openapi.json#Transactions_GetListById
+- name: create_verbose_transaction
+  description: Create a verbose portfolio transaction
+  source_operation: openapi/orion-advisor-solutions-orion-connect-openapi.json#Transactions_CreateVerboseTransactionAsync
+- name: list_fuse_notifications
+  description: Retrieve aggregated Fuse notifications for an integration user
+  source_operation: openapi/orion-advisor-solutions-orion-connect-openapi.json#FusePublicNotification_GetNotifications
+- name: create_fuse_notification
+  description: Post a notification into the Fuse notification stream
+  source_operation: openapi/orion-advisor-solutions-orion-connect-openapi.json#FusePublicNotification_CreateNotification
+- name: register_fuse_integration
+  description: Register a partner integration (webhook config) with Fuse
+  source_operation: openapi/orion-advisor-solutions-orion-connect-openapi.json#FuseConfig_PostIntegration

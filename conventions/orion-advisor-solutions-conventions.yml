@@ -1,0 +1,43 @@
+generated: '2026-09-10'
+method: searched
+source: https://developers.orionadvisor.com/ guides + openapi/orion-advisor-solutions-orion-connect-openapi.json
+authentication:
+  style: session-token
+  detail: 'GET /v1/Security/Token with Basic authorization (base64 uid:pwd of
+    service-level credentials) returns an auth token used as "Authorization:
+    Session {token}" on every call. Impersonation: GET /v1/Security/Token with
+    "Authorization: Impersonate {service_token}" plus Entity/EntityId headers.
+    OAuth token exchange exists (Token_GetTokenForOAuthAsync); SAML 2.0 SSO for
+    partner sign-on. See authentication/orion-advisor-solutions-authentication.yml.'
+idempotency:
+  coverage: none
+  detail: No Idempotency-Key header, replay protection, or idempotent-write
+    mechanism appears in the spec or the public docs. Upserts exist on some
+    resources (e.g. Transactions_UpsertTransactionActivityAsync) but no documented
+    idempotency contract.
+pagination:
+  style: projection-parameters
+  detail: List resources accept OData-style projection options (top/skip via
+    ODataQueryOptions projections in the spec definitions); no cursor mechanism or
+    documented pagination envelope in the public docs.
+versioning:
+  scheme: uri-path
+  current: v1
+error_envelope:
+  shape: undocumented
+  detail: 4xx/5xx responses carry prose descriptions with no declared schema; see
+    errors/orion-advisor-solutions-problem-types.yml.
+request_tracing: none documented
+rate_limit_signaling: none documented — see rate-limits/orion-advisor-solutions-rate-limits.yml
+reversibility:
+  grade: none
+  detail: No reversal operations with documented windows. Write surfaces (trading
+    orders, billing, transactions) expose deletes and updates (e.g.
+    IntegrationsEclipse_DeleteTransactionsFromEclipse, FuseConfig_DeleteIntegration,
+    Token_Delete) but the public docs state no cancel/undo window for any of them;
+    no window is asserted because none is published.
+cross_links:
+  errors: errors/orion-advisor-solutions-problem-types.yml
+  lifecycle: lifecycle/orion-advisor-solutions-lifecycle.yml
+  authentication: authentication/orion-advisor-solutions-authentication.yml
+  rate_limits: rate-limits/orion-advisor-solutions-rate-limits.yml

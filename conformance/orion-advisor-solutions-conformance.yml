@@ -1,0 +1,48 @@
+generated: '2026-09-10'
+method: derived
+source: openapi/orion-advisor-solutions-orion-connect-openapi.json + https://trustcenter.orion.com/ + https://orion.com/security-privacy
+standards:
+- id: oauth2
+  conforms: partial
+  evidence: 'POST /v1/Security/Token is an OAuth token exchange (operationId
+    Token_GetTokenForOAuthAsync); the spec''s only declared securityDefinition is
+    an apiKey-style Session JWT header. Full OAuth flow docs are login-gated on
+    developers.orionadvisor.com.'
+- id: saml-2.0
+  conforms: true
+  evidence: SAML 2.0 SSO documented for partner sign-on (developers.orionadvisor.com
+    guides, e.g. /guides/contextual-sso-into-orion/); apis.yml records SAML 2.0 SSO
+    among supported schemes.
+- id: oidc
+  conforms: false
+  evidence: no /.well-known/openid-configuration served on any host (probed 2026-09-10)
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: 4xx/5xx responses declare no application/problem+json schema; error
+    descriptions are prose only
+- id: odata
+  conforms: partial
+  evidence: spec definitions embed System.Web.Http.OData.Query.ODataQueryOptions
+    projections for list resources (e.g. Portfolio RegistrationDto), but no $metadata
+    surface is published
+- id: idempotency
+  conforms: false
+  evidence: no Idempotency-Key header or replay-protection mechanism in the spec
+    or public docs
+compliance:
+  published: true
+  url: https://trustcenter.orion.com/
+  certifications:
+  - SOC 1 Type 1
+  - SOC 1 Type 2
+  - SOC 2 Type 2
+  - ISO/IEC 27001:2022
+  - ISO/IEC 42001:2023
+  evidence: 'Orion Trust Center (SafeBase) lists the certifications above with
+    downloadable reports; https://orion.com/security-privacy states "Orion and Its
+    Subsidiaries Have Adopted an Information Security Management System (ISMS) and
+    is ISO/IEC 27001 Certified" and displays SOC 1 & 2 Type 2 badges.'
+domain_standard:
+  note: No domain standard is declared in the contract itself — no FDX, FIX, or
+    ISO 20022 message shapes appear in the OpenAPI; the surface is Orion's own
+    DTO model. Reward-only check, so no conformance is asserted.

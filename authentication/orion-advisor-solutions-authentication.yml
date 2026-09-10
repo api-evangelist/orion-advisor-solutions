@@ -1,0 +1,46 @@
+generated: '2026-09-10'
+method: searched
+source: openapi/orion-advisor-solutions-orion-connect-openapi.json
+docs: https://developers.orionadvisor.com/guides/authentication-third-party-website/
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  flows:
+  - basic-to-session-token
+  - impersonation
+  - oauth-token-exchange
+  - saml-2.0-sso
+schemes:
+- name: Authorization
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: 'JWT Authorization header using the Session scheme. Example: "Authorization:
+    Session {token}"'
+  sources:
+  - openapi/orion-advisor-solutions-orion-connect-openapi.json
+flows:
+- flow: basic-to-session-token
+  detail: 'GET https://api.orionadvisor.com/api/v1/security/token with
+    "Authorization: Basic {base64(uid:pwd)}" using Orion service-level credentials
+    (created by Orion Tech Support) returns an auth token, sent on subsequent calls
+    as "Authorization: Session {token}".'
+  operation: openapi/orion-advisor-solutions-orion-connect-openapi.json#Token_GetTokenAsync
+- flow: impersonation
+  detail: 'GET /v1/Security/Token with "Authorization: Impersonate {service_token}"
+    plus "Entity: 5" (Household) and "EntityId: {HouseholdId}" headers returns an
+    auth token impersonated as the specified household — for partners acting on
+    behalf of an end user.'
+- flow: oauth-token-exchange
+  detail: POST /v1/Security/Token (Token_GetTokenForOAuthAsync) supports the OAuth
+    framework; partners integrating on behalf of an end user can acquire a
+    long-lived refresh token. Full flow docs are behind the OrionConnect login.
+  operation: openapi/orion-advisor-solutions-orion-connect-openapi.json#Token_GetTokenForOAuthAsync
+- flow: saml-2.0-sso
+  detail: SAML 2.0 SSO for contextual sign-on into Orion and partner sites
+    (https://developers.orionadvisor.com/guides/contextual-sso-into-orion/).
+credentials:
+  provisioning: On request — Orion technical contact or SME-Integrations@orion.com;
+    https://developers.orionadvisor.com/creds-request/

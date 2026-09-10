@@ -1,0 +1,40 @@
+generated: '2026-09-10'
+method: derived
+source: openapi/orion-advisor-solutions-orion-connect-openapi.json
+format: prose
+note: Derived from the 4xx/5xx responses declared across 5,460 operations. The
+  spec declares no error schema and no application/problem+json — error responses
+  carry prose descriptions only, and most operations declare only a 200. Counts
+  are declared-response totals across the spec.
+coverage:
+  operations_total: 5460
+  responses_400: 42
+  responses_401: 1
+  responses_403: 1
+  responses_404: 11
+  responses_500: 6
+problems:
+- status: 400
+  title: Invalid request / validation error
+  detail: 'Declared on 42 operations. Typical descriptions: "If the request is
+    invalid.", "Failed", "Validation error: ..." (billing fee schedules and fee
+    hierarchies), "If the request is null, has future date, ...", "Exception thrown
+    when none of ClientId, ... provided".'
+- status: 401
+  title: Not authenticated
+  detail: 'Declared on 1 operation: "If the user is not authenticated." In practice
+    every operation requires the Session token securityDefinition; a missing or
+    expired token yields 401.'
+- status: 403
+  title: Forbidden
+  detail: Declared on 1 operation; access rights are entity/role-scoped (Rights_*
+    operations manage groups and privileges).
+- status: 404
+  title: Not found
+  detail: 'Declared on 11 operations. Typical descriptions: "No items found.",
+    "If the product does not exist or is not ...", "Not Found - The requested
+    report does not ...".'
+- status: 500
+  title: Internal server error
+  detail: 'Declared on 6 operations: "Internal Server Error - An error occurred",
+    "If an internal error occurs."'

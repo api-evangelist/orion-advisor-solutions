@@ -1,0 +1,39 @@
+generated: '2026-09-10'
+method: searched
+source: https://developers.orionadvisor.com/guides/notification-webhooks/
+type: webhook-catalog
+note: Orion publishes no AsyncAPI document. The developer portal documents a
+  Fuse notification webhook surface; this captures that catalog. The docs state
+  push delivery is not yet live — the current mechanism is registration plus
+  polling of the notifications resource, with account-event push on the roadmap.
+webhooks:
+  registration:
+    endpoint: https://api.orionadvisor.com/api/v1/Fuse/Config/Integrations
+    test_endpoint: https://testapi.orionadvisor.com/api/v1/Fuse/Config/Integrations
+    method: POST
+    operation: openapi/orion-advisor-solutions-orion-connect-openapi.json#FuseConfig_PostIntegration
+    headers:
+    - 'Authorization: Session {valid_orion_api_token}'
+    - 'client_id: {clientid}'
+    - 'client_secret: {clientsecret}'
+    body: '{"partnerAppId": {clientid}}'
+    returns: webhookGuid used in /Fuse/Users/{webhookGuid}/Notifications
+  notifications_resource:
+    path: /v1/Fuse/Users/{userIntegrationGuid}/Notifications
+    operations:
+    - openapi/orion-advisor-solutions-orion-connect-openapi.json#FusePublicNotification_GetNotifications
+    - openapi/orion-advisor-solutions-orion-connect-openapi.json#FusePublicNotification_CreateNotification
+    - openapi/orion-advisor-solutions-orion-connect-openapi.json#FusePublicNotification_UpsertNotification
+    payload_fields: [Subject, Body, CategoryName, Url, ActionName]
+    action_name_values: [download, null]
+  security:
+    scheme: client_id + client_secret headers issued by Orion
+    verification: none documented for incoming posts
+  retries: not documented
+  events:
+  - id: notification
+    description: Advisor-facing notifications aggregated across the advisor's own
+      system, Orion, and partner integrations
+  roadmap_events:
+  - account creation
+  - account update
