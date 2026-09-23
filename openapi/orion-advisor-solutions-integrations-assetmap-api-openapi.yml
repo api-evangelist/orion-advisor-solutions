@@ -1,0 +1,351 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Asset Map API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/AssetMap
+paths:
+  /v1/Integrations/AssetMap/Actions/Remove:
+    post:
+      tags:
+      - Integrations/AssetMap
+      summary: Removes the AssetMap integration for the current firm
+      description: The user must have the necessary privileges to remove the integration.
+      operationId: AssetMap_RemoveServiceAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+            multipart/form-data:
+              schema:
+                type: boolean
+      security:
+      - Authorization: []
+  /v1/Integrations/AssetMap/Actions/Setup:
+    post:
+      tags:
+      - Integrations/AssetMap
+      summary: Adds the AssetMap integration for the current firm
+      operationId: AssetMap_SetupServiceAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+        required: true
+  /v1/Integrations/AssetMap/GetConfigurations:
+    get:
+      tags:
+      - Integrations/AssetMap
+      operationId: AssetMap_GetConfigurationsAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.AssetMapController.Configurations'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.AssetMapController.Configurations'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.AssetMapController.Configurations'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.AssetMapController.Configurations'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.AssetMapController.Configurations'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.AssetMapController.Configurations'
+      security:
+      - Authorization: []
+      summary: Asset map get configurations async
+      x-summary-source: derived
+  /v1/Integrations/AssetMap/GetLoginToken:
+    get:
+      tags:
+      - Integrations/AssetMap
+      summary: Gets a login token from Asset-Map
+      operationId: AssetMap_GetLoginTokenAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+  /v1/Integrations/AssetMap/GetToken:
+    get:
+      tags:
+      - Integrations/AssetMap
+      summary: Gets an authentication token from Asset-Map
+      operationId: AssetMap_GetTokenAsync
+      parameters:
+      - name: code
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: authorization
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+  /v1/Integrations/AssetMap/OAuth2Login:
+    get:
+      tags:
+      - Integrations/AssetMap
+      summary: Proxies the OAuth2 login request to Asset-Map API to avoid CORS issues
+      operationId: AssetMap_OAuth2LoginAsync
+      parameters:
+      - name: accessToken
+        in: query
+        description: The Asset-Map access token
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        description: Cancellation token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+  /v1/Integrations/AssetMap/Redirect:
+    get:
+      tags:
+      - Integrations/AssetMap
+      summary: Gets the redirect URL for the user to authenticate with Asset-Map
+      operationId: AssetMap_GetRedirectUrlAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/AssetMap/SaveToken:
+    get:
+      tags:
+      - Integrations/AssetMap
+      summary: Used to get token from Fidelity
+      operationId: AssetMap_SaveTokenAsync
+      parameters:
+      - name: code
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: authorization
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto:
+      properties:
+        key:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        termsAccepted:
+          type: boolean
+      xml:
+        name: IntegrationSetupRequestDto
+      type: object
+    OAS.WebApi.Domains.Integrations.AssetMapController.Configurations:
+      properties:
+        apiurl:
+          type: string
+        orionRedirectUri:
+          type: string
+      xml:
+        name: Configurations
+      type: object
+    OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto:
+      properties:
+        partnerAppId:
+          description: The unique ID of the partner app.
+          type: integer
+          format: int32
+        productName:
+          description: The unique name of the partner app product.
+          type: string
+      xml:
+        name: BasicIntegrationConfigDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

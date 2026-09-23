@@ -1,0 +1,272 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Distribution Codes API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/DistributionCodes
+paths:
+  /v1/Trading/DistributionCodes:
+    get:
+      tags:
+      - Trading/DistributionCodes
+      operationId: DistributionCodes_Get
+      parameters:
+      - name: transDesc
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.DistributionCodeDto'
+                xml:
+                  name: DistributionCodeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.DistributionCodeDto'
+                xml:
+                  name: DistributionCodeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.DistributionCodeDto'
+                xml:
+                  name: DistributionCodeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.DistributionCodeDto'
+                xml:
+                  name: DistributionCodeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.DistributionCodeDto'
+                xml:
+                  name: DistributionCodeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.DistributionCodeDto'
+                xml:
+                  name: DistributionCodeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Distribution codes get
+      x-summary-source: derived
+  /v1/Trading/DistributionCodes/{key}/Simple:
+    get:
+      tags:
+      - Trading/DistributionCodes
+      summary: Gets a simple list of distribution codes that has the provided key.
+      operationId: DistributionCodes_GetSimpleByKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+      security:
+      - Authorization: []
+  /v1/Trading/DistributionCodes/Simple:
+    get:
+      tags:
+      - Trading/DistributionCodes
+      summary: Gets a simple list of distribution codes that the logged in user has access to
+      operationId: DistributionCodes_GetSimple
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/DistributionCodes/TransDesc:
+    get:
+      tags:
+      - Trading/DistributionCodes
+      operationId: DistributionCodes_GetTransDesc
+      parameters:
+      - name: isQualified
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: string
+                type: array
+      security:
+      - Authorization: []
+      summary: Distribution codes get trans desc
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Trading.DistributionCodeDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        extId:
+          type: integer
+          format: int32
+        distCode:
+          type: string
+        taxCode:
+          type: string
+        fedCode:
+          type: string
+        description:
+          type: string
+        transDesc:
+          type: string
+        distDesc:
+          type: string
+        taxDesc:
+          readOnly: true
+          type: string
+        isValid:
+          type: boolean
+        isQualified:
+          type: boolean
+      xml:
+        name: DistributionCodeDto
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

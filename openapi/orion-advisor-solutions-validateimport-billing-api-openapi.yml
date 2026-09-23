@@ -1,0 +1,158 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Validate Import/Billing API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: ValidateImport/Billing
+paths:
+  /v1/ValidateImport/Billing/Bills:
+    post:
+      tags:
+      - ValidateImport/Billing
+      summary: Takes an xlsx, xls, or csv file as multipart content.
+      operationId: ValidateImportBilling_ValidateAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillSimpleEntityDto'
+                xml:
+                  name: BillSimpleEntityDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillSimpleEntityDto'
+                xml:
+                  name: BillSimpleEntityDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillSimpleEntityDto'
+                xml:
+                  name: BillSimpleEntityDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillSimpleEntityDto'
+                xml:
+                  name: BillSimpleEntityDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillSimpleEntityDto'
+                xml:
+                  name: BillSimpleEntityDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillSimpleEntityDto'
+                xml:
+                  name: BillSimpleEntityDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto'
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
+      description: import file DTO for validating imports
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+          description: the imported file
+      xml:
+        name: ValidateFileImportDto
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+    OAS.WebApi.DTO.Billing.BillSimpleEntityDto:
+      properties:
+        isRecalc:
+          type: boolean
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: BillSimpleEntityDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

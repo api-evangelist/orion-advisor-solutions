@@ -1,0 +1,5259 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Global/Products API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Global/Products
+paths:
+  /v1/Global/Products:
+    get:
+      tags:
+      - Global/Products
+      summary: Gets a list of global products that the logged in user has access to.
+      operationId: GlobalProducts_Get
+      parameters:
+      - name: searchTicker
+        in: query
+        description: 'Optional. Default: null. If provided returns only products with a ticker that contains the text provided.'
+        required: false
+        schema:
+          type: string
+      - name: exactTicker
+        in: query
+        description: 'Optional. Default: null. If provided returns only products with a ticker that exactly matches the text provided.'
+        required: false
+        schema:
+          type: string
+      - name: exactCusip
+        in: query
+        description: 'Optional. Default: null. If provided returns only products with a cusip that exactly matches the text provided.'
+        required: false
+        schema:
+          type: string
+      - name: searchCusip
+        in: query
+        description: 'Optional. Default: null. If provided returns only products with a cusip that contains the text provided.'
+        required: false
+        schema:
+          type: string
+      - name: exactDownloadSymbol
+        in: query
+        description: 'Optional. Default: null. If provided returns only products with a download symbol that exactly matches the text provided.'
+        required: false
+        schema:
+          type: string
+      - name: searchDownloadSymbol
+        in: query
+        description: 'Optional. Default: null. If provided returns only products with a download symbol that contains the text provided.'
+        required: false
+        schema:
+          type: string
+      - name: exactSymbol
+        in: query
+        description: 'Optional. Default: null. If provided returns only products with a ticker, cusip, or download symbol that exactly matches the text provided.'
+        required: false
+        schema:
+          type: string
+      - name: searchSymbol
+        in: query
+        description: 'Optional. Default: null. If provided returns only products with a ticker, cusip, or download symbol that contains the text provided.'
+        required: false
+        schema:
+          type: string
+      - name: searchName
+        in: query
+        description: 'Optional. Default: null. If provided returns only products with a name that contains the text provided.'
+        required: false
+        schema:
+          type: string
+      - name: searchId
+        in: query
+        description: 'Optional. Default: null. If provided returns only products with the id specified.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: productType
+        in: query
+        description: 'Optional. Default: null. If provided returns only products that are of the specified type.'
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - None
+            - MutualFund
+            - Annuity
+            - AdvisorOne
+            - StockOrETF
+            - Option
+            - Bond
+            - Unknown
+            - CD
+            - Index
+      - name: returnStyle
+        in: query
+        description: 'Optional. Default: Standard.'
+        required: false
+        schema:
+          type: string
+          enum:
+          - Standard
+          - Full
+          default: 0
+      - name: filterType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - BondWithoutBondRates
+          - BondWithBondRates
+      - name: fundFamilyId
+        in: query
+        description: 'Optional. Default: null. If provided returns only products that assigned to the provided fund family (not master fund family).'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: partialId
+        in: query
+        description: 'Optional. Default: null. If provided returns only products where the product id contains the partial id specified.'
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Global/Products/{key}:
+    get:
+      tags:
+      - Global/Products
+      summary: Gets the global product that has the provided key.
+      operationId: GlobalProducts_GetByKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: returnStyle
+        in: query
+        description: 'Optional. Default: Standard.'
+        required: false
+        schema:
+          type: string
+          enum:
+          - Standard
+          - Full
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+      security:
+      - Authorization: []
+  /v1/Global/Products/{key}/SubHolding:
+    get:
+      tags:
+      - Global/Products
+      summary: Gets the subholding information for the global product that has the provided…
+      operationId: GlobalProducts_GetProductSubholdings
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: asOfDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SubHoldingWithAssetClassDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SubHoldingWithAssetClassDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SubHoldingWithAssetClassDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SubHoldingWithAssetClassDto'
+      security:
+      - Authorization: []
+  /v1/Global/Products/Combine:
+    get:
+      tags:
+      - Global/Products
+      operationId: GlobalProductsCombine_GetProductCombinesAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: id
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: completedDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductCombineDto'
+                xml:
+                  name: ProductCombineDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductCombineDto'
+                xml:
+                  name: ProductCombineDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductCombineDto'
+                xml:
+                  name: ProductCombineDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductCombineDto'
+                xml:
+                  name: ProductCombineDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Global products combine get product combines async
+      x-summary-source: derived
+    post:
+      tags:
+      - Global/Products
+      summary: Adds a new Product Combine request to the database
+      operationId: GlobalProductsCombine_CreateEntity
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductCombineDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductCombineDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductCombineDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductCombineDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductCombineDto'
+        description: Product combine object that contains JArray instructions
+        required: true
+  /v1/Global/Products/Core/{productId}:
+    get:
+      tags:
+      - Global/Products
+      summary: Returns the core global product based on a global product id
+      description: 'Sample Request
+
+        GET /Global/Products/Core/1'
+      operationId: GlobalProducts_GetGlobalProductCoreAsync
+      parameters:
+      - name: productId
+        in: path
+        description: Product ID to lookup
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        description: Cancellation Token of the request
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductCoreDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductCoreDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductCoreDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductCoreDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductCoreDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductCoreDto'
+      security:
+      - Authorization: []
+  /v1/Global/Products/DividendTypes/Simple:
+    get:
+      tags:
+      - Global/Products
+      operationId: GlobalDividendTypes_GetSimpleAll
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Global dividend types get simple all
+      x-summary-source: derived
+  /v1/Global/Products/ISIN/Validate:
+    get:
+      tags:
+      - Global/Products
+      summary: Check if a specified ISIN is valid
+      operationId: GlobalProducts_GetIsISINValidAsync
+      parameters:
+      - name: isin
+        in: query
+        description: An ISIN
+        required: true
+        schema:
+          type: string
+      - name: cancellationToken
+        in: header
+        description: A cancellation token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+            multipart/form-data:
+              schema:
+                type: boolean
+      security:
+      - Authorization: []
+  /v1/Global/Products/List:
+    post:
+      tags:
+      - Global/Products
+      operationId: GlobalProducts_GetListById
+      parameters:
+      - name: returnStyle
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Standard
+          - Full
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Global products get list by id
+      x-summary-source: derived
+  /v1/Global/Products/List/DownloadSymbol:
+    post:
+      tags:
+      - Global/Products
+      summary: Get list of global products by DownloadSymbol Null attributes will be excluded…
+      description: 'POST /Global/Products/List/DownloadSymbol
+
+        ["4578820", "4885661"]
+
+
+        Returns:
+
+        [
+
+        {
+
+        "searchString": "4578820",
+
+        "productId": 1234,
+
+        "productName": "PRODUCT NAME",
+
+        "ticker": "1234",
+
+        "cusip": "1234",
+
+        "isin": "1234",
+
+        "productType": "Option",
+
+        "productSubTypeName": null,
+
+        "defaultPrice": null,
+
+        "priceStatus": "PRICE STATUS",
+
+        "inceptionDate": null
+
+        },
+
+        {
+
+        "searchString": "4885661",
+
+        "productId": 456,
+
+        "productName": "PRODUCT NAME",
+
+        "ticker": "TICKER 456",
+
+        "cusip": "456",
+
+        "isin": null,
+
+        "productType": "Option",
+
+        "productSubTypeName": null,
+
+        "defaultPrice": null,
+
+        "priceStatus": "PRICE STATUS",
+
+        "inceptionDate": null
+
+        }
+
+        ]'
+      operationId: GlobalProducts_GetProductsByDownloadSymbolAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductSearchSimpleDto'
+                xml:
+                  name: GlobalProductSearchSimpleDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductSearchSimpleDto'
+                xml:
+                  name: GlobalProductSearchSimpleDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductSearchSimpleDto'
+                xml:
+                  name: GlobalProductSearchSimpleDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductSearchSimpleDto'
+                xml:
+                  name: GlobalProductSearchSimpleDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductSearchSimpleDto'
+                xml:
+                  name: GlobalProductSearchSimpleDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductSearchSimpleDto'
+                xml:
+                  name: GlobalProductSearchSimpleDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: string
+              type: array
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+          text/json:
+            schema:
+              items:
+                type: string
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: string
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: string
+              type: array
+        required: true
+  /v1/Global/Products/List/Id:
+    post:
+      tags:
+      - Global/Products
+      operationId: GlobalProducts_PostV1GlobalProductsListId
+      parameters:
+      - name: returnStyle
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Standard
+          - Full
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Global products post V1 global products list id
+      x-summary-source: derived
+  /v1/Global/Products/List/Ticker:
+    post:
+      tags:
+      - Global/Products
+      summary: Get list of global products with the supplied tickers
+      operationId: GlobalProducts_GetListByTickersAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductDto'
+                xml:
+                  name: GlobalProductDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: string
+              type: array
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+          text/json:
+            schema:
+              items:
+                type: string
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: string
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: string
+              type: array
+        required: true
+  /v1/Global/Products/PriceFactors:
+    get:
+      tags:
+      - Global/Products
+      summary: Gets a list of price factors that the logged in user has access to.
+      operationId: GlobalProductsPriceFactors_Get
+      parameters:
+      - name: productId
+        in: query
+        description: Optional. Default null. Product Id of the desired return object.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: factorDate
+        in: query
+        description: Optional. Default null. Price Date of the desired return object.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: startDate
+        in: query
+        description: Optional. Default null. If provided, returns any price factor on or after the date.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional. Default null. If provided, returns any price factor on or before the date.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+                xml:
+                  name: PriceFactorDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+                xml:
+                  name: PriceFactorDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+                xml:
+                  name: PriceFactorDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+                xml:
+                  name: PriceFactorDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+                xml:
+                  name: PriceFactorDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+                xml:
+                  name: PriceFactorDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Global/Products
+      operationId: GlobalProductsPriceFactors_UpdatePriceFactors
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+                xml:
+                  name: PriceFactorDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+                xml:
+                  name: PriceFactorDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+                xml:
+                  name: PriceFactorDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+                xml:
+                  name: PriceFactorDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+                xml:
+                  name: PriceFactorDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+                xml:
+                  name: PriceFactorDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+              xml:
+                name: PriceFactorDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+              xml:
+                name: PriceFactorDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+              xml:
+                name: PriceFactorDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+              xml:
+                name: PriceFactorDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+              xml:
+                name: PriceFactorDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+              xml:
+                name: PriceFactorDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+              xml:
+                name: PriceFactorDto
+                wrapped: true
+              type: array
+        required: true
+      summary: Global products price factors update price factors
+      x-summary-source: derived
+    post:
+      tags:
+      - Global/Products
+      summary: Used to create a new price factor.
+      operationId: GlobalProductsPriceFactors_CreatePriceFactor
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+        required: true
+  /v1/Global/Products/PriceFactors/{productId}/{factorDate}:
+    put:
+      tags:
+      - Global/Products
+      summary: Used to update an existing price factor.
+      operationId: GlobalProductsPriceFactors_UpdatePriceFactor
+      parameters:
+      - name: productId
+        in: path
+        description: Product Id of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: factorDate
+        in: path
+        description: Factor date of the desired return object.
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+        required: true
+    delete:
+      tags:
+      - Global/Products
+      summary: Used to delete an existing price factor.
+      operationId: GlobalProductsPriceFactors_DeletePriceFactor
+      parameters:
+      - name: productId
+        in: path
+        description: Product Id of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: factorDate
+        in: path
+        description: Factor date of the desired return object.
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Global/Products/PriceFactors/{productId}/{priceDate}:
+    get:
+      tags:
+      - Global/Products
+      summary: Gets the price factor that has the provided key.
+      operationId: GlobalProductsPriceFactors_GetByKey
+      parameters:
+      - name: productId
+        in: path
+        description: Product Id of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: factorDate
+        in: query
+        description: Factor date of the desired return object.
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: priceDate
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorDto'
+      security:
+      - Authorization: []
+  /v1/Global/Products/PriceFactors/Action/Delete:
+    put:
+      tags:
+      - Global/Products
+      summary: Deletes every price factor provided in the list of ids where the Id is…
+      operationId: GlobalProductsPriceFactors_ActionDelete
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorKeyDto'
+                xml:
+                  name: PriceFactorKeyDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorKeyDto'
+                xml:
+                  name: PriceFactorKeyDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorKeyDto'
+                xml:
+                  name: PriceFactorKeyDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorKeyDto'
+                xml:
+                  name: PriceFactorKeyDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorKeyDto'
+                xml:
+                  name: PriceFactorKeyDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorKeyDto'
+                xml:
+                  name: PriceFactorKeyDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorKeyDto'
+              xml:
+                name: PriceFactorKeyDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorKeyDto'
+              xml:
+                name: PriceFactorKeyDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorKeyDto'
+              xml:
+                name: PriceFactorKeyDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorKeyDto'
+              xml:
+                name: PriceFactorKeyDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorKeyDto'
+              xml:
+                name: PriceFactorKeyDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorKeyDto'
+              xml:
+                name: PriceFactorKeyDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceFactorKeyDto'
+              xml:
+                name: PriceFactorKeyDto
+                wrapped: true
+              type: array
+        description: Optional. The ids of the price factors to delete.
+        required: true
+  /v1/Global/Products/Prices:
+    get:
+      tags:
+      - Global/Products
+      operationId: GlobalProductsPrices_Get
+      parameters:
+      - name: productId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: custodianCommonId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: priceDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: maxPrice
+        in: query
+        required: false
+        schema:
+          type: number
+          format: double
+      - name: minPrice
+        in: query
+        required: false
+        schema:
+          type: number
+          format: double
+      - name: maxPriceInclusive
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: minPriceInclusive
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+                xml:
+                  name: PriceGlobalDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+                xml:
+                  name: PriceGlobalDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+                xml:
+                  name: PriceGlobalDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+                xml:
+                  name: PriceGlobalDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+                xml:
+                  name: PriceGlobalDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+                xml:
+                  name: PriceGlobalDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Global products prices get
+      x-summary-source: derived
+    post:
+      tags:
+      - Global/Products
+      summary: Used to create a new global price.
+      operationId: GlobalProductsPrices_CreateGlobalPrice
+      parameters:
+      - name: isValidated
+        in: query
+        description: Whether the price has been verified.
+        required: true
+        schema:
+          type: boolean
+      - name: reason
+        in: query
+        description: The reason for the change.
+        required: true
+        schema:
+          type: string
+          enum:
+          - ThirdPartyWebsite
+          - InstituteWebsite
+          - AdvisorConfirmed
+          - Other
+          - MultiplyPriceFactor
+          - BondPricingFirstIn
+          - LessRoundedPrice
+          - CorrectingDecimalOnPrice
+          - UpdatingCSIPrice
+          - NotUSPrice
+          - DifferentEffectiveDate
+      - name: notes
+        in: query
+        description: Additional notes.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+        required: true
+  /v1/Global/Products/Prices/{productId}/{custodianCommonId}/{priceDate}:
+    get:
+      tags:
+      - Global/Products
+      summary: Gets the global price that has the provided key.
+      operationId: GlobalProductsPrices_GetByKey
+      parameters:
+      - name: productId
+        in: path
+        description: Product Id of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: custodianCommonId
+        in: path
+        description: Custodian Common Id of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: priceDate
+        in: path
+        description: Price date of the desired return object.
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Global/Products
+      summary: Used to update an existing global price.
+      operationId: GlobalProductsPrices_UpdateGlobalPrice
+      parameters:
+      - name: productId
+        in: path
+        description: Product Id of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: custodianCommonId
+        in: path
+        description: Custodian Common Id of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: priceDate
+        in: path
+        description: Price date of the desired return object.
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: isValidated
+        in: query
+        description: Whether the price has been verified.
+        required: true
+        schema:
+          type: boolean
+      - name: reason
+        in: query
+        description: The reason for the change.
+        required: true
+        schema:
+          type: string
+          enum:
+          - ThirdPartyWebsite
+          - InstituteWebsite
+          - AdvisorConfirmed
+          - Other
+          - MultiplyPriceFactor
+          - BondPricingFirstIn
+          - LessRoundedPrice
+          - CorrectingDecimalOnPrice
+          - UpdatingCSIPrice
+          - NotUSPrice
+          - DifferentEffectiveDate
+      - name: notes
+        in: query
+        description: Additional notes.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalDto'
+        required: true
+    delete:
+      tags:
+      - Global/Products
+      summary: Used to delete an existing global price.
+      operationId: GlobalProductsPrices_DeleteGlobalPrice
+      parameters:
+      - name: productId
+        in: path
+        description: Product Id of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: custodianCommonId
+        in: path
+        description: Custodian Common Id of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: priceDate
+        in: path
+        description: Price date of the desired return object.
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Global/Products/Prices/{productId}/{custodianCommonId}/{priceDate}/Audits:
+    get:
+      tags:
+      - Global/Products
+      summary: Gets the audits for the price specified
+      operationId: GlobalProductsPrices_GetAudits
+      parameters:
+      - name: productId
+        in: path
+        description: Product Id of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: custodianCommonId
+        in: path
+        description: Custodian Common Id of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: priceDate
+        in: path
+        description: Price date of the desired return object.
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceAuditDto'
+                xml:
+                  name: PriceAuditDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceAuditDto'
+                xml:
+                  name: PriceAuditDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceAuditDto'
+                xml:
+                  name: PriceAuditDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceAuditDto'
+                xml:
+                  name: PriceAuditDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceAuditDto'
+                xml:
+                  name: PriceAuditDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceAuditDto'
+                xml:
+                  name: PriceAuditDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Global/Products/Prices/Action/Delete:
+    put:
+      tags:
+      - Global/Products
+      operationId: GlobalProductsPrices_ActionDelete
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+                xml:
+                  name: PriceGlobalKeyDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+                xml:
+                  name: PriceGlobalKeyDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+                xml:
+                  name: PriceGlobalKeyDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+                xml:
+                  name: PriceGlobalKeyDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+                xml:
+                  name: PriceGlobalKeyDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+                xml:
+                  name: PriceGlobalKeyDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+              xml:
+                name: PriceGlobalKeyDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+              xml:
+                name: PriceGlobalKeyDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+              xml:
+                name: PriceGlobalKeyDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+              xml:
+                name: PriceGlobalKeyDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+              xml:
+                name: PriceGlobalKeyDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+              xml:
+                name: PriceGlobalKeyDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+              xml:
+                name: PriceGlobalKeyDto
+                wrapped: true
+              type: array
+        required: true
+      summary: Global products prices action delete
+      x-summary-source: derived
+  /v1/Global/Products/Prices/CopyPrices/{copyToProductId}:
+    post:
+      tags:
+      - Global/Products
+      summary: Copies Global prices from one product to another product
+      operationId: GlobalProductsPrices_CopyGlobalPrices
+      parameters:
+      - name: copyToProductId
+        in: path
+        description: Product ID to copy prices into
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: auditNotes
+        in: query
+        description: Additional Notes.
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        description: CancellationToken of the request
+        required: true
+      - name: overwriteOnMatch
+        in: query
+        description: Overwrite prices if it already exists on the product to move to
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+              xml:
+                name: PriceGlobalKeyDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+              xml:
+                name: PriceGlobalKeyDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+              xml:
+                name: PriceGlobalKeyDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+              xml:
+                name: PriceGlobalKeyDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+              xml:
+                name: PriceGlobalKeyDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+              xml:
+                name: PriceGlobalKeyDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+              xml:
+                name: PriceGlobalKeyDto
+                wrapped: true
+              type: array
+        description: List of PriceGlobalKeys where the Id is formatted as {ProductId}/{CustodianCommonId}/{PriceDate}
+        required: true
+  /v1/Global/Products/Prices/MovePrices/{moveToProductId}:
+    post:
+      tags:
+      - Global/Products
+      summary: Moves Global prices from one product to another product
+      operationId: GlobalProductsPrices_MoveGlobalPrices
+      parameters:
+      - name: moveToProductId
+        in: path
+        description: Product ID to move prices into
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: auditNotes
+        in: query
+        description: Additional Notes.
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        description: CancellationToken of the request
+        required: true
+      - name: overwriteOnMatch
+        in: query
+        description: Overwrite prices if it already exists on the product to move to
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+              xml:
+                name: PriceGlobalKeyDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+              xml:
+                name: PriceGlobalKeyDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+              xml:
+                name: PriceGlobalKeyDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+              xml:
+                name: PriceGlobalKeyDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+              xml:
+                name: PriceGlobalKeyDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+              xml:
+                name: PriceGlobalKeyDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto'
+              xml:
+                name: PriceGlobalKeyDto
+                wrapped: true
+              type: array
+        description: List of PriceGlobalKeys where the Id is formatted as {ProductId}/{CustodianCommonId}/{PriceDate}
+        required: true
+  /v1/Global/Products/Simple/Search:
+    get:
+      tags:
+      - Global/Products
+      operationId: GlobalProducts_Search
+      parameters:
+      - name: searchText
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: searchMode
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - SearchByAll
+          - SearchByTicker
+          - SearchByName
+          default: 0
+      - name: isCommunitiesSearch
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: resultSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 50
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductGlobalSearchDto'
+                xml:
+                  name: ProductGlobalSearchDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductGlobalSearchDto'
+                xml:
+                  name: ProductGlobalSearchDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductGlobalSearchDto'
+                xml:
+                  name: ProductGlobalSearchDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductGlobalSearchDto'
+                xml:
+                  name: ProductGlobalSearchDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductGlobalSearchDto'
+                xml:
+                  name: ProductGlobalSearchDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductGlobalSearchDto'
+                xml:
+                  name: ProductGlobalSearchDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Global products search
+      x-summary-source: derived
+  /v1/Global/Products/SubTypes/Simple:
+    get:
+      tags:
+      - Global/Products
+      summary: Optional.
+      operationId: GlobalProductsSubTypes_GetSimpleAll
+      parameters:
+      - name: alternativeOnly
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Global/Products/SymbolExists:
+    get:
+      tags:
+      - Global/Products
+      summary: Gets whether a product with {symbol} as its ticker or download symbol exists
+      operationId: GlobalProducts_GetSymbolExistsFromQueryStringAsync
+      parameters:
+      - name: symbol
+        in: query
+        description: the symbol to check against product tickers and download symbols
+        required: true
+        schema:
+          type: string
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductSymbolExistsResult'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductSymbolExistsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductSymbolExistsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductSymbolExistsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductSymbolExistsResult'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductSymbolExistsResult'
+      security:
+      - Authorization: []
+  /v1/Global/Products/SymbolExists/{symbol}:
+    get:
+      tags:
+      - Global/Products
+      summary: Gets whether a product with {symbol} as its ticker or download symbol exists.
+      operationId: GlobalProducts_GetSymbolExistsAsync
+      parameters:
+      - name: symbol
+        in: path
+        description: the symbol to check against product tickers and download symbols
+        required: true
+        schema:
+          type: string
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductSymbolExistsResult'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductSymbolExistsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductSymbolExistsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductSymbolExistsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductSymbolExistsResult'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductSymbolExistsResult'
+      security:
+      - Authorization: []
+  /v1/Global/Products/Verbose:
+    get:
+      tags:
+      - Global/Products
+      operationId: GlobalProducts_GetVerbose
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - None
+            - Portfolio
+            - DownloadSymbols
+            - FundFamilies
+            - GICS
+            - BondRates
+            - PreferredRates
+            - AlClients
+            - SubHoldings
+            - All
+      - name: productType
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - None
+            - MutualFund
+            - Annuity
+            - AdvisorOne
+            - StockOrETF
+            - Option
+            - Bond
+            - Unknown
+            - CD
+            - Index
+      - name: filterType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - BondWithoutBondRates
+          - BondWithBondRates
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+                xml:
+                  name: GlobalProductVerboseDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+                xml:
+                  name: GlobalProductVerboseDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+                xml:
+                  name: GlobalProductVerboseDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+                xml:
+                  name: GlobalProductVerboseDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Global products get verbose
+      x-summary-source: derived
+    put:
+      tags:
+      - Global/Products
+      operationId: GlobalProducts_UpdateVerboseClientsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+                xml:
+                  name: GlobalProductVerboseDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+                xml:
+                  name: GlobalProductVerboseDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+                xml:
+                  name: GlobalProductVerboseDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+                xml:
+                  name: GlobalProductVerboseDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+              xml:
+                name: GlobalProductVerboseDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+              xml:
+                name: GlobalProductVerboseDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+              xml:
+                name: GlobalProductVerboseDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+              xml:
+                name: GlobalProductVerboseDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+              xml:
+                name: GlobalProductVerboseDto
+                wrapped: true
+              type: array
+        required: true
+      summary: Global products update verbose clients async
+      x-summary-source: derived
+    post:
+      tags:
+      - Global/Products
+      summary: Create product
+      operationId: GlobalProducts_CreateVerboseClientAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+        required: true
+  /v1/Global/Products/Verbose/{key}:
+    get:
+      tags:
+      - Global/Products
+      operationId: GlobalProducts_GetVerboseByKeyAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: expand
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - None
+            - Portfolio
+            - DownloadSymbols
+            - FundFamilies
+            - GICS
+            - BondRates
+            - PreferredRates
+            - AlClients
+            - SubHoldings
+            - All
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+      security:
+      - Authorization: []
+      summary: Global products get verbose by key async
+      x-summary-source: derived
+    put:
+      tags:
+      - Global/Products
+      operationId: GlobalProducts_UpdateVerboseProductAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+        required: true
+      summary: Global products update verbose product async
+      x-summary-source: derived
+  /v1/Global/Products/Verbose/List:
+    post:
+      tags:
+      - Global/Products
+      operationId: GlobalProducts_GetVerboseListById
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - None
+            - Portfolio
+            - DownloadSymbols
+            - FundFamilies
+            - GICS
+            - BondRates
+            - PreferredRates
+            - AlClients
+            - SubHoldings
+            - All
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+                xml:
+                  name: GlobalProductVerboseDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+                xml:
+                  name: GlobalProductVerboseDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+                xml:
+                  name: GlobalProductVerboseDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+                xml:
+                  name: GlobalProductVerboseDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Global products get verbose list by id
+      x-summary-source: derived
+  /v1/Global/Products/Verbose/List/Id:
+    post:
+      tags:
+      - Global/Products
+      operationId: GlobalProducts_PostV1GlobalProductsVerboseListId
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - None
+            - Portfolio
+            - DownloadSymbols
+            - FundFamilies
+            - GICS
+            - BondRates
+            - PreferredRates
+            - AlClients
+            - SubHoldings
+            - All
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+                xml:
+                  name: GlobalProductVerboseDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+                xml:
+                  name: GlobalProductVerboseDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+                xml:
+                  name: GlobalProductVerboseDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+                xml:
+                  name: GlobalProductVerboseDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Global products post V1 global products verbose list id
+      x-summary-source: derived
+  /v1/Global/Products/Verbose/Many:
+    post:
+      tags:
+      - Global/Products
+      summary: Creates one or more global products.
+      operationId: GlobalProducts_CreateGlobalProductsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+              xml:
+                name: GlobalProductVerboseDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+              xml:
+                name: GlobalProductVerboseDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+              xml:
+                name: GlobalProductVerboseDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+              xml:
+                name: GlobalProductVerboseDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+              xml:
+                name: GlobalProductVerboseDto
+                wrapped: true
+              type: array
+        required: true
+  /v1/Global/Products/Verbose/New:
+    get:
+      tags:
+      - Global/Products
+      operationId: GlobalProducts_GetNewVerbose
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - None
+            - Portfolio
+            - DownloadSymbols
+            - FundFamilies
+            - GICS
+            - BondRates
+            - PreferredRates
+            - AlClients
+            - SubHoldings
+            - All
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto'
+      security:
+      - Authorization: []
+      summary: Global products get new verbose
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Portfolio.BondRateDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        datedDate:
+          type: string
+          format: date-time
+        couponRate:
+          type: number
+          format: double
+        maturityDate:
+          type: string
+          format: date-time
+        alternateMaturityDate:
+          type: string
+          format: date-time
+        parValue:
+          type: number
+          format: double
+        paymentFrequency:
+          type: string
+          enum:
+          - AtMaturity
+          - Monthly
+          - BiMonthly
+          - Quarterly
+          - Triannually
+          - Semiannually
+          - Annually
+          - Biennially
+        isCompounding:
+          type: boolean
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        issueDate:
+          type: string
+          format: date-time
+        interestAccrualDate:
+          type: string
+          format: date-time
+        isFederallyTaxable:
+          type: boolean
+        isStateTaxable:
+          type: boolean
+        stateId:
+          type: integer
+          format: int32
+        dayCount:
+          type: string
+          enum:
+          - ThirtyThreeSixty
+          - ActualActual
+          - ActualThreeSixtyFive
+          - ActualThreeSixty
+          - ActualActualIsda
+        isVariableRate:
+          type: boolean
+        isInDefault:
+          type: boolean
+        callDate:
+          type: string
+          format: date-time
+        callPrice:
+          type: number
+          format: double
+        initialCouponDate:
+          type: string
+          format: date-time
+        isOID:
+          type: boolean
+        isAMT:
+          type: boolean
+        inDefaultDate:
+          type: string
+          format: date-time
+      xml:
+        name: BondRateDto
+      type: object
+    OAS.WebApi.DTO.Confirm.Alternative.ExpectedReturnDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        startDate:
+          type: string
+          format: date-time
+        high:
+          type: number
+          format: double
+        low:
+          type: number
+          format: double
+        comment:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+      xml:
+        name: ExpectedReturnDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.GlobalProductSymbolExistsResult:
+      properties:
+        symbol:
+          description: The symbol that was checked.
+          type: string
+        exists:
+          description: Whether the symbol already exists as a product Ticker or Download Symbol.
+          type: boolean
+      xml:
+        name: GlobalProductSymbolExistsResult
+      type: object
+    OAS.WebApi.DTO.Settings.EntityOptionTimeDto:
+      properties:
+        mostRecent:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionTimeValueDto'
+          readOnly: true
+        values:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionTimeValueDto'
+          xml:
+            name: EntityOptionTimeValueDto
+            wrapped: true
+          type: array
+        childParameter:
+          type: string
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        entityId:
+          type: integer
+          format: int32
+        entityName:
+          type: string
+        userDefineDefinitionId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        category:
+          type: string
+        type:
+          type: string
+          enum:
+          - MultiLineEditor
+          - DropDownEditor
+          - DropDownList
+          - CheckBox
+          - Currency
+          - Date
+          - DateTime
+          - Integer
+          - String
+          - Double
+          - Time
+          - Long
+          - CustomObject
+          - Email
+        maxLength:
+          type: integer
+          format: int32
+        code:
+          type: string
+        sequence:
+          type: integer
+          format: int32
+        options:
+          type: object
+        input:
+          type: string
+        securityCode:
+          type: string
+        canEdit:
+          type: boolean
+      xml:
+        name: EntityOptionTimeDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.LocalProductPortfolioDto:
+      properties:
+        assetClassId:
+          type: integer
+          format: int32
+        riskCategoryId:
+          type: integer
+          format: int32
+        isDisabled:
+          type: boolean
+        productStatus:
+          type: string
+          enum:
+          - Open
+          - SoftClose
+          - HardClose
+          - SellOnly
+          - PurchaseOnly
+          - Exclude
+        snPRatingId:
+          type: integer
+          format: int32
+        moodyRatingId:
+          type: integer
+          format: int32
+        isAutoAssign:
+          type: boolean
+        isUsed:
+          type: string
+          enum:
+          - UsedInCurrentDB
+          - UsedInOtherDB
+          - NotUsed
+        isCustodialCash:
+          type: boolean
+        isManaged:
+          type: boolean
+        is13fReportable:
+          type: boolean
+        isAdvReportable:
+          type: boolean
+        allowIntraDayPerformance:
+          type: boolean
+        hasFees:
+          type: boolean
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        useGlobalSetting:
+          type: boolean
+        isFederallyTaxable:
+          type: boolean
+        isStateTaxable:
+          type: boolean
+        useLocalPricesOnly:
+          type: boolean
+        color:
+          type: string
+        annualIncomeRate:
+          type: number
+          format: double
+        paymentFrequency:
+          type: string
+          enum:
+          - AtMaturity
+          - Monthly
+          - BiMonthly
+          - Quarterly
+          - Triannually
+          - Semiannually
+          - Annually
+          - Biennially
+        advAssetCategoryId:
+          type: integer
+          format: int32
+        useDailyInterestAccrual:
+          type: boolean
+        excludeBondAccrualFromValuations:
+          type: boolean
+        productNameOverride:
+          type: string
+        isRiskCategoryExcluded:
+          type: boolean
+        paymentCycleDateType:
+          type: string
+          enum:
+          - Normal
+          - NextBusinessDay
+          - PreviousBusinessDay
+      xml:
+        name: LocalProductPortfolioDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.FundFamilyDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        isActive:
+          type: boolean
+        isAnnuity:
+          type: boolean
+        unitScale:
+          type: integer
+          format: int32
+        priceScale:
+          type: integer
+          format: int32
+        isShareClassSensitive:
+          type: boolean
+        isAcctNumUnique:
+          type: boolean
+        isDefault:
+          type: boolean
+        isCreateDistribution:
+          type: boolean
+        sungardBrokerId:
+          type: integer
+          format: int32
+        custComplexes:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustComplexDto'
+          xml:
+            name: CustComplexDto
+            wrapped: true
+          type: array
+        custodianTradeFileFormats:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustodianTradeFileFormatDto'
+          xml:
+            name: CustodianTradeFileFormatDto
+            wrapped: true
+          type: array
+        userDefinedFields:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+          xml:
+            name: EntityOptionDto
+            wrapped: true
+          type: array
+        entityOptions:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.FundFamilyEntityOptionDto'
+          xml:
+            name: FundFamilyEntityOptionDto
+            wrapped: true
+          type: array
+      xml:
+        name: FundFamilyDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.PreferredRateDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        dividendRate:
+          type: number
+          format: double
+        frequency:
+          type: integer
+          format: int32
+        parValue:
+          type: number
+          format: double
+        isFixedRate:
+          type: boolean
+        isConvertible:
+          type: boolean
+        isVotingRights:
+          type: boolean
+        isCallable:
+          type: boolean
+        isCumulative:
+          type: boolean
+        isParticipating:
+          type: boolean
+        isInDefault:
+          type: boolean
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+      xml:
+        name: PreferredRateDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SubHoldingWithAssetClassDto:
+      properties:
+        asOfDate:
+          type: string
+          format: date-time
+        subHoldingAllocations:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SubHoldingAllocWithAssetClassDto'
+          xml:
+            name: SubHoldingAllocWithAssetClassDto
+            wrapped: true
+          type: array
+      xml:
+        name: SubHoldingWithAssetClassDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SubHoldingDto:
+      properties:
+        asOfDate:
+          type: string
+          format: date-time
+        subHoldingAllocations:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SubHoldingAllocDto'
+          xml:
+            name: SubHoldingAllocDto
+            wrapped: true
+          type: array
+      xml:
+        name: SubHoldingDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.CorporateActionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        statusIcon:
+          type: string
+          enum:
+          - Pending
+          - Complete
+          - Cancelled
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        entryDate:
+          type: string
+          format: date-time
+        remarks:
+          type: string
+        notifyType:
+          type: string
+        notifyTypeUpdate:
+          type: string
+        recordStatus:
+          type: string
+        numOptions:
+          type: integer
+          format: int32
+        securityType:
+          type: string
+        effectiveDate:
+          type: string
+          format: date-time
+        cusip:
+          type: string
+        oldCusip:
+          type: string
+        ticker:
+          type: string
+        name:
+          type: string
+        oldName:
+          type: string
+        expireDate:
+          type: string
+          format: date-time
+        cash:
+          type: number
+          format: double
+        cashCode:
+          type: string
+        stateCode:
+          type: string
+        tenderAgent:
+          type: string
+        infoAgent:
+          type: string
+        maturityDate:
+          type: string
+          format: date-time
+        rate1:
+          type: number
+          format: double
+        rateCode:
+          type: string
+        rate2:
+          type: number
+          format: double
+        voluntaryMandatory:
+          type: string
+        dtc:
+          type: string
+        prorationRate:
+          type: string
+        prorationDate:
+          type: string
+          format: date-time
+        note:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        textNo:
+          type: integer
+          format: int32
+        dealNo:
+          type: integer
+          format: int32
+        costBasisFactor:
+          type: number
+          format: double
+        textNoUpdate:
+          type: integer
+          format: int32
+        fairMarketValue:
+          type: number
+          format: double
+        fairMarketValueOut:
+          type: number
+          format: double
+        moreInfoUrl:
+          type: string
+      xml:
+        name: CorporateActionDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.GlobalProductSearchSimpleDto:
+      properties:
+        searchString:
+          type: string
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        ticker:
+          type: string
+        cusip:
+          type: string
+        isin:
+          type: string
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        productSubTypeName:
+          type: string
+        productSubTypeId:
+          type: integer
+          format: int32
+        defaultPrice:
+          type: number
+          format: double
+        priceStatus:
+          type: string
+          enum:
+          - Normal
+          - Default
+          - Manual
+          - ReceivedMoreThan1Day
+          - InfrequentPricing
+          - SecurityIsWorthless
+          - IndeterminableValue
+          - NotActiveProduct
+        inceptionDate:
+          type: string
+          format: date-time
+      xml:
+        name: GlobalProductSearchSimpleDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.ProductGICSMappingDto:
+      properties:
+        sector:
+          type: string
+        industryGroup:
+          type: string
+        industry:
+          type: string
+        subIndustry:
+          type: string
+      xml:
+        name: ProductGICSMappingDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SubHoldingAllocWithAssetClassDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        allocationPercent:
+          type: number
+          format: double
+        ticker:
+          type: string
+        productName:
+          type: string
+        assetClass:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AssetClassDto'
+      xml:
+        name: SubHoldingAllocWithAssetClassDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.ProductGroupItemDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        ticker:
+          type: string
+        productName:
+          type: string
+      xml:
+        name: ProductGroupItemDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.PriceGlobalDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        priceDate:
+          type: string
+          format: date-time
+        navPrice:
+          type: number
+          format: double
+        custodianCommonName:
+          type: string
+        custodianCommonId:
+          type: integer
+          format: int32
+      xml:
+        name: PriceGlobalDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.GlobalProductCoreDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        ticker:
+          type: string
+        cusip:
+          type: string
+        isin:
+          type: string
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        productSubTypeName:
+          type: string
+        productSubTypeId:
+          type: integer
+          format: int32
+        defaultPrice:
+          type: number
+          format: double
+        priceStatus:
+          type: string
+          enum:
+          - Normal
+          - Default
+          - Manual
+          - ReceivedMoreThan1Day
+          - InfrequentPricing
+          - SecurityIsWorthless
+          - IndeterminableValue
+          - NotActiveProduct
+        inceptionDate:
+          type: string
+          format: date-time
+      xml:
+        name: GlobalProductCoreDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.ProductGlobalSearchDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        ticker:
+          type: string
+        currentPrice:
+          type: number
+          format: double
+        defaultPrice:
+          type: number
+          format: double
+        currentPriceDate:
+          type: string
+          format: date-time
+        productType:
+          type: integer
+          format: int32
+        isActive:
+          type: boolean
+        isAssignedToModelItem:
+          type: boolean
+      xml:
+        name: ProductGlobalSearchDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.PriceFactorKeyDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        factorDate:
+          type: string
+          format: date-time
+      xml:
+        name: PriceFactorKeyDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        portfolio:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductPortfolioDto'
+        downloadSymbols:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.DownloadSymbolFullDto'
+          xml:
+            name: DownloadSymbolFullDto
+            wrapped: true
+          type: array
+        fundFamilies:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.FundFamilyDto'
+          xml:
+            name: FundFamilyDto
+            wrapped: true
+          type: array
+        corporateActions:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CorporateActionDto'
+          xml:
+            name: CorporateActionDto
+            wrapped: true
+          type: array
+        bondRates:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BondRateDto'
+          xml:
+            name: BondRateDto
+            wrapped: true
+          type: array
+        preferredRates:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PreferredRateDto'
+          xml:
+            name: PreferredRateDto
+            wrapped: true
+          type: array
+        alClients:
+          items:
+            type: integer
+            format: int32
+          type: array
+        subHoldings:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SubHoldingDto'
+          xml:
+            name: SubHoldingDto
+            wrapped: true
+          type: array
+        gics:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductGICSMappingDto'
+        localProduct:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.LocalProductVerboseDto'
+      xml:
+        name: GlobalProductVerboseDto
+      type: object
+    OAS.WebApi.DTO.Settings.EntityOptionDto:
+      properties:
+        userDefineDataId:
+          type: integer
+          format: int32
+        value:
+          type: string
+        childParameter:
+          type: string
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        entityId:
+          type: integer
+          format: int32
+        entityName:
+          type: string
+        userDefineDefinitionId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        category:
+          type: string
+        type:
+          type: string
+          enum:
+          - MultiLineEditor
+          - DropDownEditor
+          - DropDownList
+          - CheckBox
+          - Currency
+          - Date
+          - DateTime
+          - Integer
+          - String
+          - Double
+          - Time
+          - Long
+          - CustomObject
+          - Email
+        maxLength:
+          type: integer
+          format: int32
+        code:
+          type: string
+        sequence:
+          type: integer
+          format: int32
+        options:
+          type: object
+        input:
+          type: string
+        securityCode:
+          type: string
+        canEdit:
+          type: boolean
+      xml:
+        name: EntityOptionDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.AssumedRateDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        rateType:
+          type: string
+          enum:
+          - AssumedDividend
+          - AssumedTurnover
+        asOfDate:
+          type: string
+          format: date-time
+        value:
+          type: number
+          format: double
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+      xml:
+        name: AssumedRateDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.CustComplexDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        custodianId:
+          type: integer
+          format: int32
+        custodianName:
+          type: string
+        isDefault:
+          type: boolean
+        fundFamilyId:
+          type: integer
+          format: int32
+        fundFamilyName:
+          type: string
+        collectFormatId:
+          type: integer
+          format: int32
+        collectFormatName:
+          type: string
+        collectMethodName:
+          type: string
+        collectMethodId:
+          type: integer
+          format: int32
+        newAcctFormatId:
+          type: integer
+          format: int32
+        chkReqFormatId:
+          type: integer
+          format: int32
+        swdFormatId:
+          type: integer
+          format: int32
+      xml:
+        name: CustComplexDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        custodianCommonId:
+          type: integer
+          format: int32
+        priceDate:
+          type: string
+          format: date-time
+      xml:
+        name: PriceGlobalKeyDto
+      type: object
+    OAS.WebApi.DTO.Billing.BillProductDto:
+      properties:
+        feeExcluded:
+          type: boolean
+        includeByDefault:
+          type: boolean
+        editedDate:
+          type: string
+          format: date-time
+        editedby:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        feeBillExclusionMode:
+          type: integer
+          format: int32
+        excludedBillEntityIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        id:
+          type: integer
+          format: int32
+      xml:
+        name: BillProductDto
+      type: object
+    OAS.WebApi.DTO.Settings.EntityOptionTimeValueDto:
+      properties:
+        userDefineTimeDataId:
+          type: integer
+          format: int32
+        effectiveDate:
+          type: string
+          format: date-time
+        value:
+          type: string
+      xml:
+        name: EntityOptionTimeValueDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.DownloadSymbolFullDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        symbol:
+          type: string
+        isNASDAQPlatformSymbol:
+          type: boolean
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+      xml:
+        name: DownloadSymbolFullDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.FundFamilyDefinitionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        type:
+          type: string
+          enum:
+          - MultiLineEditor
+          - DropDownEditor
+          - DropDownList
+          - CheckBox
+          - Currency
+          - Date
+          - DateTime
+          - Integer
+          - String
+          - Double
+          - Time
+          - Long
+          - CustomObject
+          - Email
+        description:
+          type: string
+        mask:
+          type: string
+        defaultValue:
+          type: string
+        sequence:
+          type: integer
+          format: int32
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        code:
+          type: string
+        category:
+          type: string
+        customObject:
+          type: string
+        controlProperties:
+          type: string
+        securityCode:
+          type: string
+        isTimeSensitive:
+          type: boolean
+        options:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.FundFamilyOptionDto'
+          xml:
+            name: FundFamilyOptionDto
+            wrapped: true
+          type: array
+      xml:
+        name: FundFamilyDefinitionDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.GlobalProductDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        ticker:
+          type: string
+        cusip:
+          type: string
+        currentOrionPrice:
+          type: number
+          format: double
+        currentOrionPriceDate:
+          type: string
+          format: date-time
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        productSubTypeName:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        productSubTypeId:
+          type: integer
+          format: int32
+        shareClassId:
+          type: integer
+          format: int32
+        shareClassName:
+          type: string
+        shareClassDescription:
+          type: string
+        fundNumber:
+          type: string
+        globalFundFamilyId:
+          type: integer
+          format: int32
+        globalFundFamilyName:
+          type: string
+        isActive:
+          type: boolean
+        is144A:
+          type: boolean
+        isUsePriceTime:
+          type: boolean
+        defaultPrice:
+          type: number
+          format: double
+        expirationDate:
+          type: string
+          format: date-time
+        priceStatus:
+          type: string
+          enum:
+          - Normal
+          - Default
+          - Manual
+          - ReceivedMoreThan1Day
+          - InfrequentPricing
+          - SecurityIsWorthless
+          - IndeterminableValue
+          - NotActiveProduct
+        productParentId:
+          type: integer
+          format: int32
+        productParentName:
+          type: string
+        repurchaseBlockDays:
+          type: integer
+          format: int32
+        apcCode:
+          type: string
+        shortTermTradeFeeDays:
+          type: integer
+          format: int32
+        shortTermTradeFeePercent:
+          type: number
+          format: double
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        micropalCode:
+          type: string
+        estimatedDividendFrequency:
+          type: number
+          format: double
+        subHoldingId:
+          type: integer
+          format: int32
+        strikePrice:
+          type: number
+          format: double
+        optionLotSize:
+          type: integer
+          format: int32
+        excludeFromCB:
+          type: boolean
+        riskScore:
+          type: integer
+          format: int32
+        isFederallyTaxable:
+          type: boolean
+        isStateTaxable:
+          type: boolean
+        includeByDefault:
+          type: boolean
+        allowIncomeOverride:
+          type: boolean
+        isDividendSuspended:
+          type: boolean
+        isin:
+          type: string
+        inceptionDate:
+          type: string
+          format: date-time
+        shortTermDiscountObligation:
+          type: boolean
+        isAdvisorProduct:
+          type: boolean
+        advisorPrefix:
+          type: string
+      xml:
+        name: GlobalProductDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.AlternativeDto:
+      properties:
+        managerId:
+          type: integer
+          format: int32
+        isDirectInvestment:
+          type: boolean
+        vintageYear:
+          type: integer
+          format: int32
+        comment:
+          type: string
+        isK1:
+          type: boolean
+        k1DeliveryDate:
+          type: string
+          format: date-time
+        k1EstimatedDeliveryDate:
+          type: string
+          format: date-time
+        isOrionVisionPending:
+          type: boolean
+        isOrionVision:
+          type: boolean
+        manager:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ManagerDto'
+      xml:
+        name: AlternativeDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.PriceFactorDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        factorDate:
+          type: string
+          format: date-time
+        factor:
+          type: number
+          format: double
+      xml:
+        name: PriceFactorDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.FundFamilyEntityOptionDto:
+      properties:
+        entityId:
+          type: integer
+          format: int32
+        userDefineDefinitionId:
+          type: integer
+          format: int32
+        userDefineDataId:
+          type: integer
+          format: int32
+        value:
+          type: string
+        name:
+          type: string
+        code:
+          type: string
+        securityCode:
+          type: string
+        definition:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.FundFamilyDefinitionDto'
+      xml:
+        name: FundFamilyEntityOptionDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.ManagerDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+      xml:
+        name: ManagerDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.GlobalProductPortfolioDto:
+      properties:
+        fundFamilyId:
+          type: integer
+          format: int32
+        ticker:
+          type: string
+        cusip:
+          type: string
+        isActive:
+          type: boolean
+        productName:
+          type: string
+        shareClassId:
+          type: integer
+          format: int32
+        apcCode:
+          type: string
+        defaultPrice:
+          type: number
+          format: double
+        convSchSells:
+          type: boolean
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        fundNumber:
+          type: string
+        isUsePriceTime:
+          type: boolean
+        shortTermTradeFeeDays:
+          type: integer
+          format: int32
+        shortTermTradeFeePercent:
+          type: number
+          format: double
+        repurchaseBlockDays:
+          type: integer
+          format: int32
+        productSubTypeId:
+          type: integer
+          format: int32
+        is144A:
+          type: boolean
+        productParentId:
+          type: integer
+          format: int32
+        priceStatus:
+          type: string
+          enum:
+          - Normal
+          - Default
+          - Manual
+          - ReceivedMoreThan1Day
+          - InfrequentPricing
+          - SecurityIsWorthless
+          - IndeterminableValue
+          - NotActiveProduct
+        subHoldingId:
+          type: integer
+          format: int32
+        strikePrice:
+          type: number
+          format: double
+        optionLotSize:
+          type: integer
+          format: int32
+        expirationDate:
+          type: string
+          format: date-time
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        isDerivative:
+          type: boolean
+        includeByDefault:
+          type: boolean
+        allowIncomeOverride:
+          type: boolean
+        isDividendSuspended:
+          type: boolean
+        excludeFromCB:
+          type: boolean
+        riskScore:
+          type: integer
+          format: int32
+        isFederallyTaxable:
+          type: boolean
+        isStateTaxable:
+          type: boolean
+        advAssetCategoryId:
+          type: integer
+          format: int32
+        isin:
+          type: string
+        isMLP:
+          type: boolean
+        isIntervalFund:
+          type: boolean
+        inceptionDate:
+          type: string
+          format: date-time
+        shortTermDiscountObligation:
+          type: boolean
+      xml:
+        name: GlobalProductPortfolioDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.ProductCombineDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        createdByDisplay:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        completedDate:
+          type: string
+          format: date-time
+        combinedObject:
+          type: object
+        isCompleted:
+          readOnly: true
+          type: boolean
+      xml:
+        name: ProductCombineDto
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
+    OAS.WebApi.DTO.Portfolio.SubHoldingAllocDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        allocationPercent:
+          type: number
+          format: double
+        ticker:
+          type: string
+        productName:
+          type: string
+      xml:
+        name: SubHoldingAllocDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.AssetClassDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        description:
+          type: string
+      xml:
+        name: AssetClassDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.LocalProductVerboseDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        portfolio:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.LocalProductPortfolioDto'
+        productGroup:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductGroupDto'
+        entityOptions:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+          xml:
+            name: EntityOptionDto
+            wrapped: true
+          type: array
+        userDefinedFields:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+          xml:
+            name: EntityOptionDto
+            wrapped: true
+          type: array
+        userDefinedTimeFields:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionTimeDto'
+          xml:
+            name: EntityOptionTimeDto
+            wrapped: true
+          type: array
+        alternativeExpectedReturns:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Alternative.ExpectedReturnDto'
+          xml:
+            name: ExpectedReturnDto
+            wrapped: true
+          type: array
+        assumedRates:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AssumedRateDto'
+          xml:
+            name: AssumedRateDto
+            wrapped: true
+          type: array
+        alternative:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AlternativeDto'
+        billing:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillProductDto'
+      xml:
+        name: LocalProductVerboseDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.PriceAuditDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        priceDate:
+          type: string
+          format: date-time
+        navPrice:
+          type: number
+          format: double
+        custodianCommonName:
+          type: string
+        custodianCommonId:
+          type: integer
+          format: int32
+        timestamp:
+          type: string
+          format: date-time
+        modifiedBy:
+          type: string
+        modifiedType:
+          type: string
+        reason:
+          type: string
+        notes:
+          type: string
+      xml:
+        name: PriceAuditDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.FundFamilyOptionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        userDefineDefinitionId:
+          type: integer
+          format: int32
+        listValue:
+          type: string
+        isDefault:
+          type: boolean
+        sequence:
+          type: integer
+          format: int32
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+      xml:
+        name: FundFamilyOptionDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.CustodianTradeFileFormatDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        custodianId:
+          type: integer
+          format: int32
+        fundFamilyId:
+          type: integer
+          format: int32
+        registrationTypeId:
+          type: integer
+          format: int32
+        platformId:
+          type: integer
+          format: int32
+        trExFmtId:
+          type: integer
+          format: int32
+        tPlusDays:
+          type: integer
+          format: int32
+        isNAAllowed:
+          type: boolean
+        trExFmtEndResultId:
+          type: integer
+          format: int32
+      xml:
+        name: CustodianTradeFileFormatDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.ProductGroupDto:
+      properties:
+        groupCode:
+          type: string
+        isActive:
+          type: boolean
+        items:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductGroupItemDto'
+          xml:
+            name: ProductGroupItemDto
+            wrapped: true
+          type: array
+      xml:
+        name: ProductGroupDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

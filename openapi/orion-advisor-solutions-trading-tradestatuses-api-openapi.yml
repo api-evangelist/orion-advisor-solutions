@@ -1,0 +1,90 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Trade Statuses API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/TradeStatuses
+paths:
+  /v1/Trading/TradeStatuses:
+    get:
+      tags:
+      - Trading/TradeStatuses
+      summary: Gets a list of trade statuses that the logged in user has access to
+      operationId: TradeStatuses_Get
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeStatusDto'
+                xml:
+                  name: TradeStatusDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeStatusDto'
+                xml:
+                  name: TradeStatusDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeStatusDto'
+                xml:
+                  name: TradeStatusDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeStatusDto'
+                xml:
+                  name: TradeStatusDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeStatusDto'
+                xml:
+                  name: TradeStatusDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeStatusDto'
+                xml:
+                  name: TradeStatusDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Trading.TradeStatusDto:
+      properties:
+        abbreviation:
+          type: string
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: TradeStatusDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

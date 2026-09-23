@@ -1,0 +1,320 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Model Analyzer API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/ModelAnalyzer
+paths:
+  /v1/Trading/ModelAnalyzer/ModelAggs/{modelAggId}:
+    get:
+      tags:
+      - Trading/ModelAnalyzer
+      summary: Brings back the model agg summary for the ModelAggID selected
+      operationId: ModelAnalyzer_GetByIdAsync
+      parameters:
+      - name: modelAggId
+        in: path
+        description: Required. The ModelAgg ID.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: includeMmInRebalance
+        in: query
+        description: Optional.  Boolean parameter to include or exclude Money Market in the Rebalance
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: ignoreDollarModel
+        in: query
+        description: Optional.  Boolean parameter to include or exclude Dollar Model
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: includeCostBasis
+        in: query
+        description: Optional.  Boolean parameter to include or exclude Cost Basis
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: includeTradeBlockedAccounts
+        in: query
+        description: Optional.  Boolean parameter to include or exclude Accounts that are Trade Blocked
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: includeExcludedAssets
+        in: query
+        description: Optional.  Boolean parameter to include or exclude Excluded Assets
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: cancelationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelAnalyzerResultDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelAnalyzerResultDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelAnalyzerResultDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelAnalyzerResultDto'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Trading.ModelAnalyzerProductDto:
+      properties:
+        ticker:
+          type: string
+        productName:
+          type: string
+        productId:
+          type: integer
+          format: int32
+        currentShares:
+          type: number
+          format: double
+        postTradeShares:
+          type: number
+          format: double
+        tradeShares:
+          type: number
+          format: double
+        costBasis:
+          type: number
+          format: double
+        currentValue:
+          type: number
+          format: double
+        postTradeValue:
+          type: number
+          format: double
+        lastPrice:
+          type: number
+          format: double
+        targetPercent:
+          type: number
+          format: double
+        percentDifference:
+          type: number
+          format: double
+        toleranceBand:
+          type: number
+          format: double
+        currentPercent:
+          type: number
+          format: double
+        postTradePercent:
+          type: number
+          format: double
+        assetSummary:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelAnalyzerAssetDto'
+          xml:
+            name: ModelAnalyzerAssetDto
+            wrapped: true
+          type: array
+      xml:
+        name: ModelAnalyzerProductDto
+      type: object
+    OAS.WebApi.DTO.Trading.ModelAnalyzerAssetDto:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        assetId:
+          type: integer
+          format: int32
+        ticker:
+          type: string
+        status:
+          type: string
+          enum:
+          - Open
+          - SoftClose
+          - HardClose
+          - SellOnly
+          - PurchaseOnly
+          - Exclude
+        accountNumber:
+          type: string
+        accountName:
+          type: string
+        currentShares:
+          type: number
+          format: double
+        tradeShares:
+          readOnly: true
+          type: number
+          format: double
+        postTradeShares:
+          type: number
+          format: double
+        tradeAmount:
+          readOnly: true
+          type: number
+          format: double
+        currentValue:
+          type: number
+          format: double
+        postTradeValue:
+          type: number
+          format: double
+        postTradeShortTermGainLoss:
+          type: number
+          format: double
+        postTradeLongTermGainLoss:
+          type: number
+          format: double
+        ytdShortTermRealizedGainLoss:
+          type: number
+          format: double
+        ytdLongTermRealizedGainLoss:
+          type: number
+          format: double
+        shortTermCostBasis:
+          type: number
+          format: double
+        longTermCostBasis:
+          type: number
+          format: double
+        targetPercent:
+          type: number
+          format: double
+        itemToleranceLower:
+          type: number
+          format: double
+        toleranceBand:
+          readOnly: true
+          type: number
+          format: double
+        accountValue:
+          type: number
+          format: double
+        isCustodialCash:
+          type: boolean
+        isExcluded:
+          type: boolean
+        isTradingBlocked:
+          type: boolean
+        lastPrice:
+          type: number
+          format: double
+        currentPercent:
+          readOnly: true
+          type: number
+          format: double
+        postTradePercent:
+          readOnly: true
+          type: number
+          format: double
+        targetValue:
+          readOnly: true
+          type: number
+          format: double
+        targetShares:
+          readOnly: true
+          type: number
+          format: double
+        percentDifference:
+          readOnly: true
+          type: number
+          format: double
+        valueDifference:
+          readOnly: true
+          type: number
+          format: double
+        sharesDifference:
+          readOnly: true
+          type: number
+          format: double
+      xml:
+        name: ModelAnalyzerAssetDto
+      type: object
+    OAS.WebApi.DTO.Trading.ModelAnalyzerResultDto:
+      properties:
+        modelAggId:
+          type: integer
+          format: int32
+        modelName:
+          type: string
+        currentCash:
+          type: number
+          format: double
+        cashValuePostTrade:
+          type: number
+          format: double
+        costBasis:
+          type: number
+          format: double
+        currentValue:
+          type: number
+          format: double
+        cashTradeAmount:
+          readOnly: true
+          type: number
+          format: double
+        productSummary:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelAnalyzerProductDto'
+          xml:
+            name: ModelAnalyzerProductDto
+            wrapped: true
+          type: array
+        excludedSummary:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelAnalyzerExcludedDto'
+          xml:
+            name: ModelAnalyzerExcludedDto
+            wrapped: true
+          type: array
+      xml:
+        name: ModelAnalyzerResultDto
+      type: object
+    OAS.WebApi.DTO.Trading.ModelAnalyzerExcludedDto:
+      properties:
+        ticker:
+          type: string
+        status:
+          type: string
+          enum:
+          - Open
+          - SoftClose
+          - HardClose
+          - SellOnly
+          - PurchaseOnly
+          - Exclude
+        assetSummary:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelAnalyzerAssetDto'
+          xml:
+            name: ModelAnalyzerAssetDto
+            wrapped: true
+          type: array
+      xml:
+        name: ModelAnalyzerExcludedDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

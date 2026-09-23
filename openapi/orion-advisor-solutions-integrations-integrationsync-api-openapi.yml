@@ -1,0 +1,135 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Integration Sync API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/IntegrationSync
+paths:
+  /v1/Integrations/IntegrationSync:
+    get:
+      tags:
+      - Integrations/IntegrationSync
+      operationId: IntegrationSync_Get
+      parameters:
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: syncType
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 2
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSyncDto'
+                xml:
+                  name: IntegrationSyncDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSyncDto'
+                xml:
+                  name: IntegrationSyncDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSyncDto'
+                xml:
+                  name: IntegrationSyncDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSyncDto'
+                xml:
+                  name: IntegrationSyncDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSyncDto'
+                xml:
+                  name: IntegrationSyncDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSyncDto'
+                xml:
+                  name: IntegrationSyncDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Integration sync get
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Integrations.IntegrationSyncDto:
+      properties:
+        entityEnum:
+          type: integer
+          format: int32
+        fkEntity:
+          type: integer
+          format: int32
+        syncType:
+          type: integer
+          format: int32
+        recordId:
+          type: string
+        recordType:
+          type: string
+        householdID:
+          type: integer
+          format: int32
+        individualHouseholdID:
+          type: integer
+          format: int32
+        parentHouseholdID:
+          type: integer
+          format: int32
+      xml:
+        name: IntegrationSyncDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

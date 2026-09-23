@@ -1,0 +1,559 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Confirm/Tax Center API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Confirm/TaxCenter
+paths:
+  /v1/Confirm/TaxCenter/Action/Reviewed:
+    post:
+      tags:
+      - Confirm/TaxCenter
+      summary: Flip reviewed flag
+      operationId: Confirm_ActionReviewedAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: reviewed
+        in: query
+        description: Sets the reviewed flag on the Cost Basis records
+        required: true
+        schema:
+          type: boolean
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: The list of tax errors ids.
+        required: true
+  /v1/Confirm/TaxCenter/Counts:
+    get:
+      tags:
+      - Confirm/TaxCenter
+      summary: Confirm get counts async
+      operationId: Confirm_GetCountsAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CostBasis.TaxCenterCountsDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CostBasis.TaxCenterCountsDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CostBasis.TaxCenterCountsDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CostBasis.TaxCenterCountsDto'
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Confirm/TaxCenter/DownloadSourceSummary:
+    get:
+      tags:
+      - Confirm/TaxCenter
+      summary: Confirm get download source summary
+      operationId: Confirm_GetDownloadSourceSummary
+      parameters:
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.TaxCenterDownloadSourceSummaryDto'
+                xml:
+                  name: TaxCenterDownloadSourceSummaryDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.TaxCenterDownloadSourceSummaryDto'
+                xml:
+                  name: TaxCenterDownloadSourceSummaryDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.TaxCenterDownloadSourceSummaryDto'
+                xml:
+                  name: TaxCenterDownloadSourceSummaryDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.TaxCenterDownloadSourceSummaryDto'
+                xml:
+                  name: TaxCenterDownloadSourceSummaryDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.TaxCenterDownloadSourceSummaryDto'
+                xml:
+                  name: TaxCenterDownloadSourceSummaryDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.TaxCenterDownloadSourceSummaryDto'
+                xml:
+                  name: TaxCenterDownloadSourceSummaryDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Confirm/TaxCenter/Errors/List:
+    post:
+      tags:
+      - Confirm/TaxCenter
+      summary: Return a list of errors by ids
+      operationId: Confirm_GetErrorsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CostBasis.TaxCenterErrorDto'
+                xml:
+                  name: TaxCenterErrorDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CostBasis.TaxCenterErrorDto'
+                xml:
+                  name: TaxCenterErrorDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CostBasis.TaxCenterErrorDto'
+                xml:
+                  name: TaxCenterErrorDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CostBasis.TaxCenterErrorDto'
+                xml:
+                  name: TaxCenterErrorDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CostBasis.TaxCenterErrorDto'
+                xml:
+                  name: TaxCenterErrorDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CostBasis.TaxCenterErrorDto'
+                xml:
+                  name: TaxCenterErrorDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: The list of tax errors ids.
+        required: true
+  /v1/Confirm/TaxCenter/GetTaxErrorAudit:
+    get:
+      tags:
+      - Confirm/TaxCenter
+      summary: Confirm get tax error audit
+      operationId: Confirm_GetTaxErrorAudit
+      parameters:
+      - name: auditType
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - CustodialRealizedSharesDoNotMatch
+            - CustodialRealizedMissing
+            - CustodialUnrealizedMissing
+            - CustodialRealizedUnknownAcquiredDate
+            - CustodialUnrealizedUnknownAcquiredDate
+            - CustodialRealizedUnknownCostBasis
+            - CustodialUnrealizedUnknownCostBasis
+            - OrionUnknownCostBasis
+            - MoneyMarketProducts
+            - OrionMissingCostBasis
+      - name: downloadFormatId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: downloadSourceId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.TaxCenterAuditTypeCountDto'
+                xml:
+                  name: TaxCenterAuditTypeCountDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.TaxCenterAuditTypeCountDto'
+                xml:
+                  name: TaxCenterAuditTypeCountDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.TaxCenterAuditTypeCountDto'
+                xml:
+                  name: TaxCenterAuditTypeCountDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.TaxCenterAuditTypeCountDto'
+                xml:
+                  name: TaxCenterAuditTypeCountDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.TaxCenterAuditTypeCountDto'
+                xml:
+                  name: TaxCenterAuditTypeCountDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.TaxCenterAuditTypeCountDto'
+                xml:
+                  name: TaxCenterAuditTypeCountDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Confirm/TaxCenter/UpdateTaxErrorAudit:
+    post:
+      tags:
+      - Confirm/TaxCenter
+      operationId: Confirm_UpdateTaxErrorAuditAsync
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Confirm update tax error audit async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Portfolio.CostBasis.TaxCenterErrorDto:
+      properties:
+        errorStatusIcon:
+          readOnly: true
+          type: string
+        taxErrorId:
+          type: integer
+          format: int32
+        auditType:
+          type: string
+          enum:
+          - CustodialRealizedSharesDoNotMatch
+          - CustodialRealizedMissing
+          - CustodialUnrealizedMissing
+          - CustodialRealizedUnknownAcquiredDate
+          - CustodialUnrealizedUnknownAcquiredDate
+          - CustodialRealizedUnknownCostBasis
+          - CustodialUnrealizedUnknownCostBasis
+          - OrionUnknownCostBasis
+          - MoneyMarketProducts
+          - OrionMissingCostBasis
+        auditTypeId:
+          type: integer
+          format: int32
+        resolutionMessage:
+          readOnly: true
+          type: string
+        expectedUnits:
+          type: number
+          format: double
+        costUnits:
+          type: number
+          format: double
+        reviewed:
+          type: boolean
+      xml:
+        name: TaxCenterErrorDto
+      type: object
+    OAS.WebApi.DTO.Confirm.TaxCenterAuditTypeCountDto:
+      properties:
+        auditType:
+          type: string
+          enum:
+          - CustodialRealizedSharesDoNotMatch
+          - CustodialRealizedMissing
+          - CustodialUnrealizedMissing
+          - CustodialRealizedUnknownAcquiredDate
+          - CustodialUnrealizedUnknownAcquiredDate
+          - CustodialRealizedUnknownCostBasis
+          - CustodialUnrealizedUnknownCostBasis
+          - OrionUnknownCostBasis
+          - MoneyMarketProducts
+          - OrionMissingCostBasis
+        auditTypeId:
+          readOnly: true
+          type: integer
+          format: int32
+        errorCount:
+          type: integer
+          format: int32
+      xml:
+        name: TaxCenterAuditTypeCountDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.CostBasis.TaxCenterCountsDto:
+      properties:
+        taxErrors:
+          additionalProperties:
+            type: integer
+            format: int32
+          type: object
+      xml:
+        name: TaxCenterCountsDto
+      type: object
+    OAS.WebApi.DTO.Confirm.TaxCenterDownloadSourceSummaryDto:
+      properties:
+        downloadSourceId:
+          type: integer
+          format: int32
+        downloadFormatId:
+          type: integer
+          format: int32
+        downloadDescription:
+          type: string
+        maxRealizedFileDate:
+          type: string
+          format: date-time
+        maxUnrealizedFileDate:
+          type: string
+          format: date-time
+        orionRealizedErrorCount:
+          type: integer
+          format: int32
+        custodianRealizedErrorCount:
+          type: integer
+          format: int32
+        orionUnrealizedErrorCount:
+          type: integer
+          format: int32
+        custodianUnrealizedErrorCount:
+          type: integer
+          format: int32
+        costBasisOverridesErrorCount:
+          type: integer
+          format: int32
+        downloadFormatCostBasisType:
+          type: string
+          enum:
+          - None
+          - Unrealized
+          - Realized
+          - Both
+        downloadFormatInformation:
+          type: string
+      xml:
+        name: TaxCenterDownloadSourceSummaryDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

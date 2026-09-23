@@ -1,0 +1,359 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/e Money API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/eMoney
+paths:
+  /v1/Integrations/eMoney/Client/{clientId}/AssetHoldings/{resourceId}:
+    get:
+      tags:
+      - Integrations/eMoney
+      summary: Gets holding information for a specific product for a specific client from…
+      operationId: eMoney_GetClientsAssetHoldingsAsync
+      parameters:
+      - name: ct
+        in: header
+        description: Cancellation token for the request
+        required: true
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: resourceId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/eMoney/Client/{clientId}/plans/{planId}/goals:
+    get:
+      tags:
+      - Integrations/eMoney
+      summary: Gets the goals for a specific plan for a client from eMoney
+      operationId: eMoney_GetClientsPlanGoalAsync
+      parameters:
+      - name: ct
+        in: header
+        description: Cancellation token for the request
+        required: true
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: planId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/eMoney/Client/{clientId}/plans/{planId}/projection/goalfunding/{goalId}:
+    get:
+      tags:
+      - Integrations/eMoney
+      summary: Gets goal funding for a specific clients plan from eMoney
+      operationId: eMoney_GetClientsPlanGoalFundingAsync
+      parameters:
+      - name: ct
+        in: header
+        description: Cancellation token for the request
+        required: true
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: planId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: goalId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/eMoney/Client/NetWorth:
+    get:
+      tags:
+      - Integrations/eMoney
+      summary: Gets specific client's Networth from eMoney
+      operationId: eMoney_GetClientsNetWorthAsync
+      parameters:
+      - name: ct
+        in: header
+        description: Cancellation token for the request
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/eMoney/Client/Plan/Assets:
+    get:
+      tags:
+      - Integrations/eMoney
+      summary: Gets a specific plan's assets for a client from eMoney
+      operationId: eMoney_GetClientsPlanAssetsAsync
+      parameters:
+      - name: ct
+        in: header
+        description: Cancellation token for the request
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/eMoney/GetClients:
+    get:
+      tags:
+      - Integrations/eMoney
+      operationId: eMoney_GetClientsAsync
+      parameters:
+      - name: page
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: E money get clients async
+      x-summary-source: derived
+  /v1/Integrations/eMoney/SSO:
+    get:
+      tags:
+      - Integrations/eMoney
+      operationId: eMoney_SSOAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.eMoney.EmoneyUser'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.eMoney.EmoneyUser'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.eMoney.EmoneyUser'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.eMoney.EmoneyUser'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.eMoney.EmoneyUser'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.eMoney.EmoneyUser'
+      security:
+      - Authorization: []
+      summary: E money SSO async
+      x-summary-source: derived
+  /v1/Integrations/eMoney/SSO/Client/{clientId}:
+    get:
+      tags:
+      - Integrations/eMoney
+      operationId: eMoney_SsoAsync
+      parameters:
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: E money sso async
+      x-summary-source: derived
+  /v1/Integrations/eMoney/SSO/ClientPortal/{clientId}:
+    get:
+      tags:
+      - Integrations/eMoney
+      operationId: eMoney_ClientPortalSSOAsync
+      parameters:
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: E money client portal SSO async
+      x-summary-source: derived
+components:
+  schemas:
+    OAT.Integrations.eMoney.EmoneyUser:
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+        expires_in:
+          type: integer
+          format: int64
+        expires_datetime:
+          type: string
+          format: date-time
+      xml:
+        name: EmoneyUser
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

@@ -1,0 +1,984 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Clients API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/Clients
+paths:
+  /v1/Billing/Clients:
+    get:
+      tags:
+      - Billing/Clients
+      summary: Get a list of billing clients that the logged in user has access to see.
+      operationId: BillingClients_Get
+      parameters:
+      - name: status
+        in: query
+        description: 'Optional. Default: null. When provided limits the return to only those bill clients included in the status provided.'
+        required: false
+        schema:
+          type: string
+          enum:
+          - NotReady
+      - name: isActive
+        in: query
+        description: 'Optional. Default: null.  When provided limits the return only to active (true) accounts, or inactive (false), or both (null).'
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Clients/{key}:
+    get:
+      tags:
+      - Billing/Clients
+      summary: Gets the client that has the provided key.
+      operationId: BillingClients_GetEntityByKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+      security:
+      - Authorization: []
+  /v1/Billing/Clients/{key}/RelatedAccounts:
+    get:
+      tags:
+      - Billing/Clients
+      summary: Gets a list of related accounts.
+      operationId: BillingClients_GetRelatedAccountsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: isActive
+        in: query
+        description: Optional.  Default null.  When true - only active accounts are returned, when False, only inactive accounts, when null all accounts.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AccountDto'
+                xml:
+                  name: AccountDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AccountDto'
+                xml:
+                  name: AccountDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AccountDto'
+                xml:
+                  name: AccountDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AccountDto'
+                xml:
+                  name: AccountDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AccountDto'
+                xml:
+                  name: AccountDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AccountDto'
+                xml:
+                  name: AccountDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Clients/All:
+    get:
+      tags:
+      - Billing/Clients
+      summary: Get a list of all clients that the logged in user has access to see
+      operationId: BillingClients_GetAllAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: manipulator
+        in: header
+        required: true
+      - name: status
+        in: query
+        description: 'Optional. Default: null. When provided limits the return to only those bill clients included in the status provided.'
+        required: false
+        schema:
+          type: string
+          enum:
+          - NotReady
+      - name: isActive
+        in: query
+        description: 'Optional. Default: null.  When provided limits the return only to active (true) accounts, or inactive (false), or both (null).'
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientGridDto'
+                xml:
+                  name: BillClientGridDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientGridDto'
+                xml:
+                  name: BillClientGridDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientGridDto'
+                xml:
+                  name: BillClientGridDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientGridDto'
+                xml:
+                  name: BillClientGridDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientGridDto'
+                xml:
+                  name: BillClientGridDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientGridDto'
+                xml:
+                  name: BillClientGridDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Clients/Grid:
+    get:
+      tags:
+      - Billing/Clients
+      summary: Get a list of all clients that the logged in user has access to see
+      operationId: BillingClients_GetAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: manipulator
+        in: header
+        required: true
+      - name: status
+        in: query
+        description: 'Optional. Default: null. When provided limits the return to only those bill clients included in the status provided.'
+        required: false
+        schema:
+          type: string
+          enum:
+          - NotReady
+      - name: isActive
+        in: query
+        description: 'Optional. Default: null.  When provided limits the return only to active (true) accounts, or inactive (false), or both (null).'
+        required: false
+        schema:
+          type: boolean
+      - name: top
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: skip
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Clients/List:
+    post:
+      tags:
+      - Billing/Clients
+      summary: Gets a list of bill clients that match one of the keys in the provided list
+      operationId: BillingClients_GetListById
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: List of keys of the desired return objects.
+        required: true
+  /v1/Billing/Clients/List/Id:
+    post:
+      tags:
+      - Billing/Clients
+      summary: Gets a list of bill clients that match one of the keys in the provided list
+      operationId: BillingClients_PostV1BillingClientsListId
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillClientDto'
+                xml:
+                  name: BillClientDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: List of keys of the desired return objects.
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.BillClientGridDto:
+      properties:
+        aum:
+          type: number
+          format: double
+        id:
+          type: integer
+          format: int32
+        billClientId:
+          type: integer
+          format: int32
+        firstName:
+          type: string
+        lastName:
+          type: string
+        fullName:
+          type: string
+        statusType:
+          type: string
+          enum:
+          - ReadyToBill
+          - Hold
+          - PendingReview
+        billStatusId:
+          type: integer
+          format: int32
+        relatedClients:
+          type: integer
+          format: int32
+        recurrentAdjustments:
+          type: integer
+          format: int32
+        feePayingAccounts:
+          type: integer
+          format: int32
+        representativeName:
+          type: string
+        representativeNumber:
+          type: string
+        feeScheduleId:
+          type: integer
+          format: int32
+        feeSchedule:
+          type: string
+        masterPayoutScheduleId:
+          type: integer
+          format: int32
+        masterPayoutSchedule:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        isActive:
+          type: boolean
+        additionalColumns:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Interface.AdditionalColumnDefinition'
+          xml:
+            name: AdditionalColumnDefinition
+            wrapped: true
+          type: array
+      xml:
+        name: BillClientGridDto
+      type: object
+    OAS.WebApi.DTO.Interface.AdditionalColumnDefinition:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      xml:
+        name: AdditionalColumnDefinition
+      type: object
+    OAS.WebApi.DTO.Billing.BillClientDto:
+      properties:
+        aum:
+          type: number
+          format: double
+        id:
+          type: integer
+          format: int32
+        billClientId:
+          type: integer
+          format: int32
+        firstName:
+          type: string
+        lastName:
+          type: string
+        fullName:
+          type: string
+        statusType:
+          type: string
+          enum:
+          - ReadyToBill
+          - Hold
+          - PendingReview
+        billStatusId:
+          type: integer
+          format: int32
+        relatedClients:
+          type: integer
+          format: int32
+        recurrentAdjustments:
+          type: integer
+          format: int32
+        feePayingAccounts:
+          type: integer
+          format: int32
+        representativeName:
+          type: string
+        representativeNumber:
+          type: string
+        feeScheduleId:
+          type: integer
+          format: int32
+        feeSchedule:
+          type: string
+        masterPayoutScheduleId:
+          type: integer
+          format: int32
+        masterPayoutSchedule:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        isActive:
+          type: boolean
+        additionalColumns:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Interface.AdditionalColumnDefinition'
+          xml:
+            name: AdditionalColumnDefinition
+            wrapped: true
+          type: array
+      xml:
+        name: BillClientDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.AccountDto:
+      properties:
+        isActive:
+          type: boolean
+        custodian:
+          type: string
+        custodianCode:
+          type: string
+        managementStyle:
+          type: string
+        currentValue:
+          type: number
+          format: double
+        fundFamily:
+          type: string
+        accountStartValue:
+          type: number
+          format: double
+        createdDate:
+          type: string
+          format: date-time
+        isManaged:
+          type: boolean
+        isSweepAccount:
+          type: boolean
+        isSleeveAccount:
+          type: boolean
+        sleeveType:
+          type: string
+          enum:
+          - Normal sleeve
+          - Custodial account
+          - Contribution sleeve
+          - Distribution sleeve
+          - Unmanaged sleeve
+        isAdvReportable:
+          type: boolean
+        is13FReportable:
+          type: boolean
+        isAuaReportable:
+          type: boolean
+        advCustodyTypeId:
+          type: integer
+          format: int32
+        custodialRepCode:
+          type: string
+        brokerDealer:
+          type: string
+        importKey:
+          type: string
+        outsideId:
+          type: string
+        secondaryAccountNumber:
+          type: string
+        managementStyleId:
+          type: integer
+          format: int32
+        fundFamilyId:
+          type: integer
+          format: int32
+        accountHistoryId:
+          type: integer
+          format: int32
+        registrationId:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        custodianId:
+          type: integer
+          format: int32
+        shareClass:
+          type: string
+        shareClassId:
+          type: integer
+          format: int32
+        subAdvisorId:
+          type: integer
+          format: int32
+        provider:
+          type: string
+        plan:
+          type: integer
+          format: int32
+        planName:
+          type: string
+        modelGroupNumber:
+          type: string
+        isOriginalSMCAccount:
+          type: boolean
+        isTradingBlocked:
+          type: boolean
+        tradingInstructions:
+          type: string
+        downloadSource:
+          type: string
+        businessLine:
+          type: string
+        createdBy:
+          type: string
+        accountStartDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        accountStatusId:
+          type: integer
+          format: int32
+        accountStatus:
+          type: string
+        accountStatusDescription:
+          type: string
+        feeScheduleId:
+          type: integer
+          format: int32
+        feeSchedule:
+          type: string
+        masterPayoutScheduleId:
+          type: integer
+          format: int32
+        masterPayoutSchedule:
+          type: string
+        billFrequency:
+          type: string
+          enum:
+          - Undefined
+          - Monthly
+          - Quarterly
+          - Triannual
+          - Semiannually
+          - Annually
+          - AtMaturity
+        representative:
+          type: string
+        representativeNumber:
+          type: string
+        representativeId:
+          type: integer
+          format: int32
+        household:
+          type: string
+        cancelDate:
+          type: string
+          format: date-time
+        riskBudget:
+          type: integer
+          format: int32
+        modelAggId:
+          type: integer
+          format: int32
+        billPayMethod:
+          type: string
+        acceptsList:
+          type: boolean
+        billStartDate:
+          type: string
+          format: date-time
+        missingInfoFromView:
+          type: string
+        sweepAssetId:
+          type: integer
+          format: int32
+        includeInAggregate:
+          type: boolean
+        isDiscretionary:
+          type: boolean
+        cashBalance:
+          type: number
+          format: double
+        sleeveStrategy:
+          type: string
+        isQualified:
+          type: boolean
+        riskScore:
+          type: number
+          format: double
+        isWrapManaged:
+          type: boolean
+        isWrapSponsored:
+          type: boolean
+        lastName:
+          type: string
+        nickname:
+          type: string
+        isPositionOnlyRecon:
+          type: boolean
+        eclipseFirmId:
+          type: integer
+          format: int32
+        isUnfunded:
+          type: boolean
+        isBundled:
+          type: boolean
+        isExcludedFromFirmAssets:
+          type: boolean
+        annuityIncomeValue:
+          type: number
+          format: double
+        currentRiskScore:
+          type: integer
+          format: int32
+        targetRiskScore:
+          type: integer
+          format: int32
+        riskScoreAsOfDate:
+          type: string
+          format: date-time
+        riskScoreProvider:
+          description: The source of {OAS.WebApi.DTO.Portfolio.AccountDto.TargetRiskScore}{OAS.WebApi.DTO.Portfolio.AccountDto.CurrentRiskScore} and {OAS.WebApi.DTO.Portfolio.AccountDto.RiskScoreAsOfDate}
+          type: string
+        riskTol:
+          type: integer
+          format: int32
+        tieredFeePriority:
+          type: integer
+          format: int32
+        additionalColumns:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Interface.AdditionalColumnDefinition'
+          xml:
+            name: AdditionalColumnDefinition
+            wrapped: true
+          type: array
+        isOps:
+          type: boolean
+        lastPositionDate:
+          type: string
+          format: date-time
+        inBalance:
+          type: boolean
+        lastReconciledEffectiveDate:
+          type: string
+          format: date-time
+        clientGlobalId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        registrationGlobalId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        number:
+          type: string
+        modelName:
+          type: string
+        subAdvisor:
+          type: string
+        accountType:
+          type: string
+        isDataSharingEntity:
+          type: boolean
+      xml:
+        name: AccountDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

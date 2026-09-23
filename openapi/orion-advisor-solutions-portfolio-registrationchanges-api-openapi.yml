@@ -1,0 +1,331 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Portfolio/Registration Changes API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Portfolio/RegistrationChanges
+paths:
+  /v1/Portfolio/RegistrationChanges/{registrationId}:
+    get:
+      tags:
+      - Portfolio/RegistrationChanges
+      summary: Gets a list of registration changes for specific registration id
+      operationId: RegistrationChanges_GetRegistrationChangesAsync
+      parameters:
+      - name: registrationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Portfolio/RegistrationChanges
+      summary: Updates a list of registration changes for specific registration id
+      operationId: RegistrationChanges_UpdateRegistrationChangesAsync
+      parameters:
+      - name: registrationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.RegistrationChangeDto'
+              xml:
+                name: RegistrationChangeDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.RegistrationChangeDto'
+              xml:
+                name: RegistrationChangeDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.RegistrationChangeDto'
+              xml:
+                name: RegistrationChangeDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.RegistrationChangeDto'
+              xml:
+                name: RegistrationChangeDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.RegistrationChangeDto'
+              xml:
+                name: RegistrationChangeDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.RegistrationChangeDto'
+              xml:
+                name: RegistrationChangeDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.RegistrationChangeDto'
+              xml:
+                name: RegistrationChangeDto
+                wrapped: true
+              type: array
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Portfolio.RegistrationChangeDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        registrationId:
+          type: integer
+          format: int32
+        asOfDate:
+          type: string
+          format: date-time
+        changes:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.RegistrationChangeSetDto'
+          xml:
+            name: RegistrationChangeSetDto
+            wrapped: true
+          type: array
+        auditedDate:
+          type: string
+          format: date-time
+        auditedBy:
+          type: string
+      xml:
+        name: RegistrationChangeDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.RegistrationChangeSetDto:
+      properties:
+        entityType:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Rep
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Beneficiary
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QPEDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - Banking
+          - RMD
+          - Systematic
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - AdditionalRep
+          - DownloadSource
+          - DownloadRecord
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        entityId:
+          type: integer
+          format: int32
+        entityName:
+          type: string
+        entityNumber:
+          type: string
+        oldBillRepPercentage:
+          type: number
+          format: double
+        newBillRepPercentage:
+          type: number
+          format: double
+        actionType:
+          type: string
+          enum:
+          - None
+          - Inserted
+          - Updated
+          - Deleted
+        sourceType:
+          type: string
+          enum:
+          - Registration
+          - Client
+        isDeleted:
+          type: boolean
+        isPartOfSet:
+          type: boolean
+        isUncommitted:
+          type: boolean
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+      xml:
+        name: RegistrationChangeSetDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

@@ -1,0 +1,382 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Security/Databases API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Security/Databases
+paths:
+  /v1/Security/Databases:
+    get:
+      tags:
+      - Security/Databases
+      summary: Gets a list of databases the logged in user has access to
+      operationId: ObsoleteDatabases_GetAvailableDatabasesAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      - name: isActive
+        in: query
+        description: 'Optional. Default: null. If provided limits the return to only those database'
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+                xml:
+                  name: DatabaseDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+                xml:
+                  name: DatabaseDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+                xml:
+                  name: DatabaseDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+                xml:
+                  name: DatabaseDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+                xml:
+                  name: DatabaseDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+                xml:
+                  name: DatabaseDto
+                  wrapped: true
+                type: array
+      deprecated: true
+      security:
+      - Authorization: []
+  /v1/Security/Databases/{key}:
+    get:
+      tags:
+      - Security/Databases
+      summary: Gets the database that has the provided key.
+      operationId: ObsoleteDatabases_GetByKeyAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+      deprecated: true
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Security/Databases
+      summary: Use v1/Authorization/User/Databases/{key:int}
+      operationId: ObsoleteDatabases_UpdateDatabaseAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+      deprecated: true
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+        required: true
+  /v1/Security/Databases/FirmTypes:
+    get:
+      tags:
+      - Security/Databases
+      operationId: DatabaseLockdowns_GetFirmTypes
+      parameters:
+      - name: includeNoneOption
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Database lockdowns get firm types
+      x-summary-source: derived
+  /v1/Security/Databases/LockdownTypes:
+    get:
+      tags:
+      - Security/Databases
+      operationId: DatabaseLockdowns_GetLockdownTypes
+      parameters:
+      - name: includeNoneOption
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Database lockdowns get lockdown types
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Security.DatabaseDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        clientName:
+          type: string
+        guid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        selected:
+          type: boolean
+        serviceTeamId:
+          type: integer
+          format: int32
+        masterGroup:
+          type: string
+        lockDown:
+          type: string
+          enum:
+          - None
+          - Billing
+        advisorNumber:
+          type: integer
+          format: int32
+        firmType:
+          type: string
+          enum:
+          - None
+          - Foundations
+          - Essentials
+          - Advantage
+          - OrionTradingOnly
+          - OrionRiskOnly
+          - OrionComplianceOnly
+          - OrionPlanningOnly
+          - OasLegacy
+      xml:
+        name: DatabaseDto
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

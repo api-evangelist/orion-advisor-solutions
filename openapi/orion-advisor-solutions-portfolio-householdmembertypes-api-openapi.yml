@@ -1,0 +1,67 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Portfolio/Household Member Types API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Portfolio/HouseholdMemberTypes
+paths:
+  /v1/Portfolio/HouseholdMemberTypes:
+    get:
+      tags:
+      - Portfolio/HouseholdMemberTypes
+      summary: Gets a list of household member types
+      operationId: HouseholdMemberTypes_GetHouseholdMemberTypes
+      parameters:
+      - name: includeCommonOptions
+        in: query
+        description: 'Optional. Default: True. If true the return list will include existing household member types as well as "Husband", "Wife", "Son", and "Daughter". If false the return list will include only existing household member types.'
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: string
+                type: array
+      security:
+      - Authorization: []
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

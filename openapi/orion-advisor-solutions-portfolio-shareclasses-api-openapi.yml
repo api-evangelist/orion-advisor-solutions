@@ -1,0 +1,198 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Portfolio/Share Classes API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Portfolio/ShareClasses
+paths:
+  /v1/Portfolio/ShareClasses:
+    get:
+      tags:
+      - Portfolio/ShareClasses
+      summary: Gets a list of share classes that the logged in user has access to
+      operationId: ShareClasses_Get
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ShareClassDto'
+                xml:
+                  name: ShareClassDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ShareClassDto'
+                xml:
+                  name: ShareClassDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ShareClassDto'
+                xml:
+                  name: ShareClassDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ShareClassDto'
+                xml:
+                  name: ShareClassDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ShareClassDto'
+                xml:
+                  name: ShareClassDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ShareClassDto'
+                xml:
+                  name: ShareClassDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Portfolio/ShareClasses/{key}:
+    get:
+      tags:
+      - Portfolio/ShareClasses
+      summary: Gets the share class that has the provided key.
+      operationId: ShareClasses_GetEntityByKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ShareClassDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ShareClassDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ShareClassDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ShareClassDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ShareClassDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ShareClassDto'
+      security:
+      - Authorization: []
+  /v1/Portfolio/ShareClasses/Simple:
+    get:
+      tags:
+      - Portfolio/ShareClasses
+      summary: Gets a simple list of share classes that the logged in user has access to
+      operationId: ShareClasses_GetSimple
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
+    OAS.WebApi.DTO.Portfolio.ShareClassDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        class:
+          type: string
+        description:
+          type: string
+      xml:
+        name: ShareClassDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

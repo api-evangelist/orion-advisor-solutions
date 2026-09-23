@@ -1,0 +1,177 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Vision API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/Vision
+paths:
+  /v1/Integrations/Vision/Health:
+    get:
+      tags:
+      - Integrations/Vision
+      operationId: Vision_HealthAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Vision health async
+      x-summary-source: derived
+  /v1/Integrations/Vision/SourceDestination:
+    get:
+      tags:
+      - Integrations/Vision
+      operationId: Vision_TransactionSourceDestinationAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Vision.VisionSourceDestinationDto'
+                xml:
+                  name: VisionSourceDestinationDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Vision.VisionSourceDestinationDto'
+                xml:
+                  name: VisionSourceDestinationDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Vision.VisionSourceDestinationDto'
+                xml:
+                  name: VisionSourceDestinationDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Vision.VisionSourceDestinationDto'
+                xml:
+                  name: VisionSourceDestinationDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Vision.VisionSourceDestinationDto'
+                xml:
+                  name: VisionSourceDestinationDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Vision.VisionSourceDestinationDto'
+                xml:
+                  name: VisionSourceDestinationDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Vision transaction source destination async
+      x-summary-source: derived
+  /v1/Integrations/Vision/SSO:
+    get:
+      tags:
+      - Integrations/Vision
+      operationId: Vision_SSOAsync
+      parameters:
+      - name: showIncomplete
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Vision SSO async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Integrations.Vision.VisionSourceDestinationDto:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        acctCode:
+          type: string
+        assetId:
+          type: integer
+          format: int32
+        transTypeId:
+          type: integer
+          format: int32
+        activityTypeId:
+          type: integer
+          format: int32
+        sourceDestinationId:
+          type: integer
+          format: int32
+        activityType:
+          type: string
+      xml:
+        name: VisionSourceDestinationDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

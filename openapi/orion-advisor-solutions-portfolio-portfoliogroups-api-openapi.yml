@@ -1,0 +1,3977 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Portfolio/Portfolio Groups API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Portfolio/PortfolioGroups
+paths:
+  /v1/Portfolio/PortfolioGroups:
+    get:
+      tags:
+      - Portfolio/PortfolioGroups
+      summary: Gets a list of portfolio groups that the logged in user has access to
+      operationId: PortfolioGroups_GetAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: portfolioGroupId
+        in: query
+        description: Optional. When provided only the portfolio group with the specified key will be returned.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: clientId
+        in: query
+        description: Optional. When provided only portfolio groups for the specified client will be returned.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: representativeId
+        in: query
+        description: 'Optional. Default: null. If provided only portfolio groups that fall within the representative specified will be returned.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: registrationId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: accountId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: assetId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: transactionId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupDto'
+                xml:
+                  name: PortfolioGroupDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupDto'
+                xml:
+                  name: PortfolioGroupDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupDto'
+                xml:
+                  name: PortfolioGroupDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupDto'
+                xml:
+                  name: PortfolioGroupDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupDto'
+                xml:
+                  name: PortfolioGroupDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupDto'
+                xml:
+                  name: PortfolioGroupDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+    post:
+      tags:
+      - Portfolio/PortfolioGroups
+      summary: Portfolio groups create async
+      operationId: PortfolioGroups_CreateAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+        required: true
+      x-summary-source: derived
+  /v1/Portfolio/PortfolioGroups/{key}:
+    get:
+      tags:
+      - Portfolio/PortfolioGroups
+      summary: Gets the portfolio group that has the provided key.
+      operationId: PortfolioGroups_GetByKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Portfolio/PortfolioGroups
+      summary: Portfolio groups update async
+      operationId: PortfolioGroups_UpdateAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+        required: true
+      x-summary-source: derived
+    delete:
+      tags:
+      - Portfolio/PortfolioGroups
+      summary: Portfolio groups delete
+      operationId: PortfolioGroups_Delete
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Portfolio/PortfolioGroups/{key}/Accounts:
+    get:
+      tags:
+      - Portfolio/PortfolioGroups
+      summary: Gets a list of registrations that fall below the portfolio group with the…
+      operationId: PortfolioGroups_GetAccountsPortfolioKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: isActive
+        in: query
+        description: 'Optional. Default: null. If provided returns only the active (true) or inactive accounts (false).'
+        required: false
+        schema:
+          type: boolean
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AccountDto'
+                xml:
+                  name: AccountDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AccountDto'
+                xml:
+                  name: AccountDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AccountDto'
+                xml:
+                  name: AccountDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AccountDto'
+                xml:
+                  name: AccountDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AccountDto'
+                xml:
+                  name: AccountDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AccountDto'
+                xml:
+                  name: AccountDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Portfolio/PortfolioGroups/{key}/Assets:
+    get:
+      tags:
+      - Portfolio/PortfolioGroups
+      summary: Gets a list of asset that fall below the portfolio group with the specified…
+      operationId: PortfolioGroups_GetAssetsPortfolioKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: asOfDate
+        in: query
+        description: 'Optional.  Default: null.  If provided the value of the asset on that date will be returned.'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: includeCostBasis
+        in: query
+        description: 'Optional.  Default: false.  When true, the Cost Basis property will be populated.  This requires extra calculation which will reduce performance when true.'
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AssetDto'
+                xml:
+                  name: AssetDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AssetDto'
+                xml:
+                  name: AssetDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AssetDto'
+                xml:
+                  name: AssetDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AssetDto'
+                xml:
+                  name: AssetDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AssetDto'
+                xml:
+                  name: AssetDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AssetDto'
+                xml:
+                  name: AssetDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Portfolio/PortfolioGroups/{key}/Calculate/InceptionDate:
+    post:
+      tags:
+      - Portfolio/PortfolioGroups
+      summary: Used to calculate the appropriate inception date for the provided portfolio…
+      operationId: PortfolioGroups_CalculateInceptionDateAsync
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: endDate
+        in: query
+        description: 'Optional. Default: Today. The end date of the reporting period.'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: inclusionOption
+        in: query
+        description: 'Optional. Default: Database default. Indicates which accounts/registrations to include.'
+        required: false
+        schema:
+          type: string
+          enum:
+          - Default
+          - All
+          - ActiveOnly
+          - ActiveWithValue
+          - ActiveRegistrationsOnly
+          - RegistrationsWithValue
+          default: -1
+      - name: unmanagedInclusionOption
+        in: query
+        description: 'Optional. Default: Database default. Indicates how unmanaged assets are handled.'
+        required: false
+        schema:
+          type: string
+          enum:
+          - Unmanaged
+          - Performance
+          - ActivitySummary
+          - Allocation
+          - PortfolioDetail
+          - TaxDetail
+      - name: reportCategory
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Unmanaged
+          - Performance
+          - ActivitySummary
+          - Allocation
+          - PortfolioDetail
+          - TaxDetail
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.InceptionDateDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.InceptionDateDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.InceptionDateDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.InceptionDateDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.InceptionDateDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.InceptionDateDto'
+      security:
+      - Authorization: []
+  /v1/Portfolio/PortfolioGroups/{key}/Clients:
+    get:
+      tags:
+      - Portfolio/PortfolioGroups
+      summary: Gets a list of clients that fall below the portfolio group with the specified…
+      operationId: PortfolioGroups_GetClientsByPortfolioKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: isActive
+        in: query
+        description: 'Optional. Default: null. If provided returns only the active (true) or inactive clients (false).'
+        required: false
+        schema:
+          type: boolean
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ClientDto'
+                xml:
+                  name: ClientDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ClientDto'
+                xml:
+                  name: ClientDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ClientDto'
+                xml:
+                  name: ClientDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ClientDto'
+                xml:
+                  name: ClientDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ClientDto'
+                xml:
+                  name: ClientDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ClientDto'
+                xml:
+                  name: ClientDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Portfolio/PortfolioGroups/{key}/NetAmountInvested:
+    get:
+      tags:
+      - Portfolio/PortfolioGroups
+      summary: Portfolio groups get portfolio group net amount invested async
+      operationId: PortfolioGroups_GetPortfolioGroupNetAmountInvestedAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: interval
+        in: query
+        required: false
+        schema:
+          type: string
+          default: A
+      - name: cancellationToken
+        in: header
+        required: false
+      - name: clientPerformanceInclude
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Default
+          - All
+          - ActiveOnly
+          - ActiveWithValue
+          - ActiveRegistrationsOnly
+          - RegistrationsWithValue
+          default: -1
+      - name: unmangedInclusionOverride
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Unmanaged
+          - Performance
+          - ActivitySummary
+          - Allocation
+          - PortfolioDetail
+          - TaxDetail
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AumOverTimeWithNetAmountInvestedDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AumOverTimeWithNetAmountInvestedDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AumOverTimeWithNetAmountInvestedDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AumOverTimeWithNetAmountInvestedDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AumOverTimeWithNetAmountInvestedDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AumOverTimeWithNetAmountInvestedDto'
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Portfolio/PortfolioGroups/{key}/Registrations:
+    get:
+      tags:
+      - Portfolio/PortfolioGroups
+      summary: Gets a list of registrations that fall below the portfolio group with the…
+      operationId: PortfolioGroups_GetRegistrationsByPortfolioKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: isActive
+        in: query
+        description: 'Optional. Default: null. If provided returns only the active (true) or inactive registrations (false).'
+        required: false
+        schema:
+          type: boolean
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.RegistrationDto'
+                xml:
+                  name: RegistrationDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.RegistrationDto'
+                xml:
+                  name: RegistrationDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.RegistrationDto'
+                xml:
+                  name: RegistrationDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.RegistrationDto'
+                xml:
+                  name: RegistrationDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.RegistrationDto'
+                xml:
+                  name: RegistrationDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.RegistrationDto'
+                xml:
+                  name: RegistrationDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Portfolio/PortfolioGroups/{key}/Simple:
+    get:
+      tags:
+      - Portfolio/PortfolioGroups
+      summary: Gets the simple portfolio group that has the provided key.
+      operationId: PortfolioGroups_GetSimpleByKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Portfolio.SimplePortfolioGroup'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Portfolio.SimplePortfolioGroup'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Portfolio.SimplePortfolioGroup'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Portfolio.SimplePortfolioGroup'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Portfolio.SimplePortfolioGroup'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Portfolio.SimplePortfolioGroup'
+      security:
+      - Authorization: []
+  /v1/Portfolio/PortfolioGroups/{key}/Transactions:
+    get:
+      tags:
+      - Portfolio/PortfolioGroups
+      summary: Gets a list of registrations that fall below the portfolio group with the…
+      operationId: PortfolioGroups_GetTransactionsByPortfolioKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: startDate
+        in: query
+        description: Optional. Default null. If provided only transaction that come after the start date will be returned.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional. Default null. If provided only transaction that come before the end date will be returned.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionDto'
+                xml:
+                  name: TransactionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionDto'
+                xml:
+                  name: TransactionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionDto'
+                xml:
+                  name: TransactionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionDto'
+                xml:
+                  name: TransactionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionDto'
+                xml:
+                  name: TransactionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionDto'
+                xml:
+                  name: TransactionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Portfolio/PortfolioGroups/{key}/UserDefinedFields:
+    get:
+      tags:
+      - Portfolio/PortfolioGroups
+      operationId: PortfolioGroups_GetUserDefinedFieldsAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: entities
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - BrokerDealers
+            - Wholesalers
+            - Representatives
+            - Clients
+            - Registrations
+            - Accounts
+            - Assets
+            - Transactions
+            - Products
+            - FundFamilies
+            - ModelRanges
+            - PortfolioGroups
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+                xml:
+                  name: EntityOptionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+                xml:
+                  name: EntityOptionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+                xml:
+                  name: EntityOptionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+                xml:
+                  name: EntityOptionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+                xml:
+                  name: EntityOptionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+                xml:
+                  name: EntityOptionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Portfolio groups get user defined fields async
+      x-summary-source: derived
+  /v1/Portfolio/PortfolioGroups/Search:
+    get:
+      tags:
+      - Portfolio/PortfolioGroups
+      summary: Gets a list of portfolio groups that the logged in user has access to where the…
+      operationId: PortfolioGroups_GetSearch
+      parameters:
+      - name: search
+        in: query
+        description: Partial client name to search for.
+        required: true
+        schema:
+          type: string
+      - name: top
+        in: query
+        description: 'Optional. Default: null. The maximum number of products to return. If null returns all.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: skip
+        in: query
+        description: 'Optional. Default: 0. Defines number of items to skip.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupDto'
+                xml:
+                  name: PortfolioGroupDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupDto'
+                xml:
+                  name: PortfolioGroupDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupDto'
+                xml:
+                  name: PortfolioGroupDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupDto'
+                xml:
+                  name: PortfolioGroupDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupDto'
+                xml:
+                  name: PortfolioGroupDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupDto'
+                xml:
+                  name: PortfolioGroupDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Portfolio/PortfolioGroups/Search/{search}:
+    get:
+      tags:
+      - Portfolio/PortfolioGroups
+      summary: Gets a list of portfolio groups that the logged in user has access to where the…
+      operationId: PortfolioGroups_GetV1PortfolioPortfolioGroupsSearchBySearch
+      parameters:
+      - name: search
+        in: path
+        description: Partial client name to search for.
+        required: true
+        schema:
+          type: string
+      - name: top
+        in: query
+        description: 'Optional. Default: null. The maximum number of products to return. If null returns all.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: skip
+        in: query
+        description: 'Optional. Default: 0. Defines number of items to skip.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupDto'
+                xml:
+                  name: PortfolioGroupDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupDto'
+                xml:
+                  name: PortfolioGroupDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupDto'
+                xml:
+                  name: PortfolioGroupDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupDto'
+                xml:
+                  name: PortfolioGroupDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupDto'
+                xml:
+                  name: PortfolioGroupDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupDto'
+                xml:
+                  name: PortfolioGroupDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Portfolio/PortfolioGroups/Simple:
+    get:
+      tags:
+      - Portfolio/PortfolioGroups
+      summary: Gets a simple list of portfolio groups that the logged in user has access to
+      operationId: PortfolioGroups_GetSimple
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Portfolio/PortfolioGroups/Simple/List:
+    post:
+      tags:
+      - Portfolio/PortfolioGroups
+      summary: Gets a simple list of portfolio groups that match one of the keys in the…
+      operationId: PortfolioGroups_GetSimpleListById
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: List of keys of the desired return objects.
+        required: true
+  /v1/Portfolio/PortfolioGroups/Simple/List/Id:
+    post:
+      tags:
+      - Portfolio/PortfolioGroups
+      summary: Gets a simple list of portfolio groups that match one of the keys in the…
+      operationId: PortfolioGroups_PostV1PortfolioPortfolioGroupsSimpleListId
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: List of keys of the desired return objects.
+        required: true
+  /v1/Portfolio/PortfolioGroups/Simple/Search:
+    get:
+      tags:
+      - Portfolio/PortfolioGroups
+      summary: Gets a simple list of clients that the logged in user has access to where the…
+      operationId: PortfolioGroups_GetSimplePortfolioGroupSearchAsync
+      parameters:
+      - name: search
+        in: query
+        description: Partial client name to search for.
+        required: true
+        schema:
+          type: string
+      - name: top
+        in: query
+        description: 'Optional. Default: null. The maximum number of products to return. If null returns all.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: skip
+        in: query
+        description: 'Optional. Default: 0. Defines number of items to skip.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: hasValue
+        in: query
+        description: Optional. When provided will only return clients that have value (true) or don't have value (false).
+        required: false
+        schema:
+          type: boolean
+      - name: isActive
+        in: query
+        description: 'Optional. Default: null. If provided returns only the active (true) or inactive clients(false).'
+        required: false
+        schema:
+          type: boolean
+      - name: hasEmail
+        in: query
+        description: Optional.
+        required: false
+        schema:
+          type: boolean
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimplePortfolioGroupDto'
+                xml:
+                  name: SimplePortfolioGroupDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimplePortfolioGroupDto'
+                xml:
+                  name: SimplePortfolioGroupDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimplePortfolioGroupDto'
+                xml:
+                  name: SimplePortfolioGroupDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimplePortfolioGroupDto'
+                xml:
+                  name: SimplePortfolioGroupDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimplePortfolioGroupDto'
+                xml:
+                  name: SimplePortfolioGroupDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimplePortfolioGroupDto'
+                xml:
+                  name: SimplePortfolioGroupDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Portfolio/PortfolioGroups/Simple/Search/{search}:
+    get:
+      tags:
+      - Portfolio/PortfolioGroups
+      summary: Gets a simple list of clients that the logged in user has access to where the…
+      operationId: PortfolioGroups_GetV1PortfolioPortfolioGroupsSimpleSearchBySearch
+      parameters:
+      - name: search
+        in: path
+        description: Partial client name to search for.
+        required: true
+        schema:
+          type: string
+      - name: top
+        in: query
+        description: 'Optional. Default: null. The maximum number of products to return. If null returns all.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: skip
+        in: query
+        description: 'Optional. Default: 0. Defines number of items to skip.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: hasValue
+        in: query
+        description: Optional. When provided will only return clients that have value (true) or don't have value (false).
+        required: false
+        schema:
+          type: boolean
+      - name: isActive
+        in: query
+        description: 'Optional. Default: null. If provided returns only the active (true) or inactive clients(false).'
+        required: false
+        schema:
+          type: boolean
+      - name: hasEmail
+        in: query
+        description: Optional.
+        required: false
+        schema:
+          type: boolean
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimplePortfolioGroupDto'
+                xml:
+                  name: SimplePortfolioGroupDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimplePortfolioGroupDto'
+                xml:
+                  name: SimplePortfolioGroupDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimplePortfolioGroupDto'
+                xml:
+                  name: SimplePortfolioGroupDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimplePortfolioGroupDto'
+                xml:
+                  name: SimplePortfolioGroupDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimplePortfolioGroupDto'
+                xml:
+                  name: SimplePortfolioGroupDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimplePortfolioGroupDto'
+                xml:
+                  name: SimplePortfolioGroupDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Portfolio/PortfolioGroups/Verbose:
+    post:
+      tags:
+      - Portfolio/PortfolioGroups
+      operationId: PortfolioGroups_CreateVerboseAsync
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - None
+            - TargetAllocations
+            - All
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+        required: true
+      summary: Portfolio groups create verbose async
+      x-summary-source: derived
+  /v1/Portfolio/PortfolioGroups/Verbose/{key}:
+    get:
+      tags:
+      - Portfolio/PortfolioGroups
+      operationId: PortfolioGroups_GetVerboseByKeyAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: expand
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - None
+            - TargetAllocations
+            - All
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+      security:
+      - Authorization: []
+      summary: Portfolio groups get verbose by key async
+      x-summary-source: derived
+    put:
+      tags:
+      - Portfolio/PortfolioGroups
+      operationId: PortfolioGroups_UpdateVerboseAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: expand
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - None
+            - TargetAllocations
+            - All
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+        required: true
+      summary: Portfolio groups update verbose async
+      x-summary-source: derived
+  /v1/Portfolio/PortfolioGroups/Verbose/New:
+    get:
+      tags:
+      - Portfolio/PortfolioGroups
+      operationId: PortfolioGroups_GetNewVerbose
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - None
+            - TargetAllocations
+            - All
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto'
+      security:
+      - Authorization: []
+      summary: Portfolio groups get new verbose
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Portfolio.PortfolioGroupDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        groupValue:
+          type: number
+          format: double
+        clientName:
+          type: string
+        clientId:
+          type: integer
+          format: int32
+        portfolioType:
+          type: string
+          enum:
+          - Composite
+          - Reporting
+          - Trading
+        isReporting:
+          readOnly: true
+          type: boolean
+        isTrading:
+          readOnly: true
+          type: boolean
+        isComposites:
+          readOnly: true
+          type: boolean
+        eclipsePortfolioId:
+          type: integer
+          format: int32
+        representativeId:
+          type: integer
+          format: int32
+        representativeName:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        effectiveDate:
+          type: string
+          format: date-time
+        changes:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupChangeSimpleDto'
+          xml:
+            name: PortfolioGroupChangeSimpleDto
+            wrapped: true
+          type: array
+        userDefinedFields:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+          xml:
+            name: EntityOptionDto
+            wrapped: true
+          type: array
+        repId:
+          type: integer
+          format: int32
+        custodianId:
+          type: integer
+          format: int32
+        modelAggId:
+          type: integer
+          format: int32
+        platformId:
+          type: integer
+          format: int32
+        planId:
+          type: integer
+          format: int32
+        fundFamilyId:
+          type: integer
+          format: int32
+        stockRange:
+          type: integer
+          format: int32
+        riskTolerance:
+          type: integer
+          format: int32
+        riskBudgetRange:
+          type: integer
+          format: int32
+      xml:
+        name: PortfolioGroupDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.RegistrationDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        accountType:
+          type: string
+        isActive:
+          type: boolean
+        lastName:
+          type: string
+        firstName:
+          type: string
+        currentValue:
+          type: number
+          format: double
+        ssN_TaxID:
+          type: string
+        deceasedSSN_TaxID:
+          type: string
+        dob:
+          type: string
+          format: date-time
+        clientId:
+          type: integer
+          format: int32
+        typeCode:
+          type: string
+        typeId:
+          type: integer
+          format: int32
+        company:
+          type: string
+        jobTitle:
+          type: string
+        gender:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        riskBudget:
+          type: integer
+          format: int32
+        representativeName:
+          type: string
+        representativeNumber:
+          type: string
+        missingInformation:
+          readOnly: true
+          type: string
+        returnObjective:
+          type: string
+        investmentObjective:
+          type: string
+        timeHorizon:
+          type: string
+        stockPercent:
+          type: string
+        bondPercent:
+          readOnly: true
+          type: string
+        sleeveStrategy:
+          type: string
+        targetSpendRate:
+          type: number
+          format: double
+        targetDollarAmount:
+          type: number
+          format: double
+        targetDate:
+          type: string
+          format: date-time
+        isRTQLocked:
+          type: boolean
+        riskTolerance:
+          type: integer
+          format: int32
+        riskExposure:
+          type: string
+        isDataSharingEntity:
+          type: boolean
+        additionalColumns:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Interface.AdditionalColumnDefinition'
+          xml:
+            name: AdditionalColumnDefinition
+            wrapped: true
+          type: array
+        custodialAccountNumber:
+          type: string
+        hasSleeve:
+          type: boolean
+        dod:
+          type: string
+          format: date-time
+        taxType:
+          type: string
+          enum:
+          - Taxable
+          - TaxDeferred
+          - TaxFree
+        globalId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+      xml:
+        name: RegistrationDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.AccountDto:
+      properties:
+        isActive:
+          type: boolean
+        custodian:
+          type: string
+        custodianCode:
+          type: string
+        managementStyle:
+          type: string
+        currentValue:
+          type: number
+          format: double
+        fundFamily:
+          type: string
+        accountStartValue:
+          type: number
+          format: double
+        createdDate:
+          type: string
+          format: date-time
+        isManaged:
+          type: boolean
+        isSweepAccount:
+          type: boolean
+        isSleeveAccount:
+          type: boolean
+        sleeveType:
+          type: string
+          enum:
+          - Normal sleeve
+          - Custodial account
+          - Contribution sleeve
+          - Distribution sleeve
+          - Unmanaged sleeve
+        isAdvReportable:
+          type: boolean
+        is13FReportable:
+          type: boolean
+        isAuaReportable:
+          type: boolean
+        advCustodyTypeId:
+          type: integer
+          format: int32
+        custodialRepCode:
+          type: string
+        brokerDealer:
+          type: string
+        importKey:
+          type: string
+        outsideId:
+          type: string
+        secondaryAccountNumber:
+          type: string
+        managementStyleId:
+          type: integer
+          format: int32
+        fundFamilyId:
+          type: integer
+          format: int32
+        accountHistoryId:
+          type: integer
+          format: int32
+        registrationId:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        custodianId:
+          type: integer
+          format: int32
+        shareClass:
+          type: string
+        shareClassId:
+          type: integer
+          format: int32
+        subAdvisorId:
+          type: integer
+          format: int32
+        provider:
+          type: string
+        plan:
+          type: integer
+          format: int32
+        planName:
+          type: string
+        modelGroupNumber:
+          type: string
+        isOriginalSMCAccount:
+          type: boolean
+        isTradingBlocked:
+          type: boolean
+        tradingInstructions:
+          type: string
+        downloadSource:
+          type: string
+        businessLine:
+          type: string
+        createdBy:
+          type: string
+        accountStartDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        accountStatusId:
+          type: integer
+          format: int32
+        accountStatus:
+          type: string
+        accountStatusDescription:
+          type: string
+        feeScheduleId:
+          type: integer
+          format: int32
+        feeSchedule:
+          type: string
+        masterPayoutScheduleId:
+          type: integer
+          format: int32
+        masterPayoutSchedule:
+          type: string
+        billFrequency:
+          type: string
+          enum:
+          - Undefined
+          - Monthly
+          - Quarterly
+          - Triannual
+          - Semiannually
+          - Annually
+          - AtMaturity
+        representative:
+          type: string
+        representativeNumber:
+          type: string
+        representativeId:
+          type: integer
+          format: int32
+        household:
+          type: string
+        cancelDate:
+          type: string
+          format: date-time
+        riskBudget:
+          type: integer
+          format: int32
+        modelAggId:
+          type: integer
+          format: int32
+        billPayMethod:
+          type: string
+        acceptsList:
+          type: boolean
+        billStartDate:
+          type: string
+          format: date-time
+        missingInfoFromView:
+          type: string
+        sweepAssetId:
+          type: integer
+          format: int32
+        includeInAggregate:
+          type: boolean
+        isDiscretionary:
+          type: boolean
+        cashBalance:
+          type: number
+          format: double
+        sleeveStrategy:
+          type: string
+        isQualified:
+          type: boolean
+        riskScore:
+          type: number
+          format: double
+        isWrapManaged:
+          type: boolean
+        isWrapSponsored:
+          type: boolean
+        lastName:
+          type: string
+        nickname:
+          type: string
+        isPositionOnlyRecon:
+          type: boolean
+        eclipseFirmId:
+          type: integer
+          format: int32
+        isUnfunded:
+          type: boolean
+        isBundled:
+          type: boolean
+        isExcludedFromFirmAssets:
+          type: boolean
+        annuityIncomeValue:
+          type: number
+          format: double
+        currentRiskScore:
+          type: integer
+          format: int32
+        targetRiskScore:
+          type: integer
+          format: int32
+        riskScoreAsOfDate:
+          type: string
+          format: date-time
+        riskScoreProvider:
+          description: The source of {OAS.WebApi.DTO.Portfolio.AccountDto.TargetRiskScore}{OAS.WebApi.DTO.Portfolio.AccountDto.CurrentRiskScore} and {OAS.WebApi.DTO.Portfolio.AccountDto.RiskScoreAsOfDate}
+          type: string
+        riskTol:
+          type: integer
+          format: int32
+        tieredFeePriority:
+          type: integer
+          format: int32
+        additionalColumns:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Interface.AdditionalColumnDefinition'
+          xml:
+            name: AdditionalColumnDefinition
+            wrapped: true
+          type: array
+        isOps:
+          type: boolean
+        lastPositionDate:
+          type: string
+          format: date-time
+        inBalance:
+          type: boolean
+        lastReconciledEffectiveDate:
+          type: string
+          format: date-time
+        clientGlobalId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        registrationGlobalId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        number:
+          type: string
+        modelName:
+          type: string
+        subAdvisor:
+          type: string
+        accountType:
+          type: string
+        isDataSharingEntity:
+          type: boolean
+      xml:
+        name: AccountDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.TransactionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        transDate:
+          type: string
+          format: date-time
+        transactionDescription:
+          type: string
+        productName:
+          type: string
+        ticker:
+          type: string
+        transAmount:
+          type: number
+          format: double
+        noUnits:
+          type: number
+          format: double
+        navPrice:
+          type: number
+          format: double
+        accountNumber:
+          type: string
+        status:
+          type: string
+          enum:
+          - Complete
+          - Pending
+          - Rejected
+          - Reversed
+          - Inactive
+          - PendingCorpAction
+          - FutureAip
+        fileTranCode:
+          type: string
+        type:
+          type: string
+        transTime:
+          type: string
+          format: date-time
+        assetId:
+          type: integer
+          format: int32
+        assetStatusId:
+          type: integer
+          format: int32
+        cusip:
+          type: string
+        notes:
+          type: string
+        transTypeId:
+          type: integer
+          format: int32
+        transactionSubTypeId:
+          type: integer
+          format: int32
+        transactionSubTypeName:
+          type: string
+        transactionSubTypeDescription:
+          type: string
+        contributionCodeId:
+          type: integer
+          format: int32
+        contributionCodeName:
+          type: string
+        distributionCodeId:
+          type: integer
+          format: int32
+        distributionCodeName:
+          type: string
+        accountId:
+          type: integer
+          format: int32
+        accountStatusId:
+          type: integer
+          format: int32
+        managementStyle:
+          type: string
+        payee:
+          type: integer
+          format: int32
+        advisorNotes:
+          type: string
+        state:
+          type: string
+        settleDate:
+          type: string
+          format: date-time
+        tradeReferenceNumber:
+          type: string
+        transactionLinkCode:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        registrationId:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        typeCode:
+          type: string
+        brokerCode:
+          type: string
+        accountType:
+          type: string
+        fundFamily:
+          type: string
+        custodian:
+          type: string
+        count:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        unitBalance:
+          type: number
+          format: double
+        productId:
+          type: integer
+          format: int32
+        performanceFeeBreak:
+          type: boolean
+        financialType:
+          type: string
+          enum:
+          - None
+          - Contribution
+          - Distribution
+          - Exchange
+          - DivReinvest
+          - MgmntFees
+          - DivCash
+          - MiscFees
+          - Journal
+          - Merges
+      xml:
+        name: TransactionDto
+      type: object
+    OAS.WebApi.DTO.Interface.AdditionalColumnDefinition:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      xml:
+        name: AdditionalColumnDefinition
+      type: object
+    OAS.WebApi.DTO.Portfolio.PortfolioGroupChangeSimpleDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        entityName:
+          type: string
+        effectiveDate:
+          type: string
+          format: date-time
+        action:
+          type: string
+          enum:
+          - Add
+          - Update
+          - Delete
+        monthsExclude:
+          type: integer
+          format: int32
+        entityId:
+          type: integer
+          format: int32
+      xml:
+        name: PortfolioGroupChangeSimpleDto
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
+    OAS.WebApi.DTO.Portfolio.AumOverTimeDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        grouping:
+          type: integer
+          format: int32
+        asOfDate:
+          type: string
+          format: date-time
+        value:
+          type: number
+          format: double
+      xml:
+        name: AumOverTimeDto
+      type: object
+    OAS.WebApi.DTO.Reporting.RunReport.InceptionDateDto:
+      properties:
+        inceptionDate:
+          type: string
+          format: date-time
+      xml:
+        name: InceptionDateDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.ClientDto:
+      properties:
+        aum:
+          type: number
+          format: double
+        isActive:
+          type: boolean
+        representativeName:
+          type: string
+        representativeNumber:
+          type: string
+        representativeId:
+          type: integer
+          format: int32
+        brokerDealerName:
+          type: string
+        categoryId:
+          type: integer
+          format: int32
+        statementDeliveryMethodId:
+          type: integer
+          format: int32
+        category:
+          type: string
+        statementDeliveryMethod:
+          type: string
+        videoStatementDeliveryMethod:
+          type: string
+          enum:
+          - Unassigned
+          - NoVideoStatement
+          - WebsiteOnly
+          - Email
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        startDate:
+          type: string
+          format: date-time
+        importKey:
+          type: string
+        lastStatementSent:
+          type: string
+          format: date-time
+        lastStatementSentTo:
+          type: string
+        additionalAccounts:
+          type: integer
+          format: int32
+        cashBalance:
+          type: number
+          format: double
+        missingInformation:
+          readOnly: true
+          type: string
+        lastName:
+          type: string
+        firstName:
+          type: string
+        homePhone:
+          type: string
+        email:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        salutation:
+          type: string
+        address1:
+          type: string
+        address2:
+          type: string
+        address3:
+          type: string
+        zip:
+          type: string
+        fax:
+          type: string
+        faxExt:
+          type: string
+        pager:
+          type: string
+        pagerExt:
+          type: string
+        mobilePhone:
+          type: string
+        businessPhone:
+          type: string
+        businessPhoneExt:
+          type: string
+        otherPhone:
+          type: string
+        otherPhoneExt:
+          type: string
+        reportName:
+          type: string
+        company:
+          type: string
+        jobTitle:
+          type: string
+        ssN_TaxID:
+          type: string
+        personalId:
+          type: integer
+          format: int32
+        gender:
+          type: string
+        probabilityOfSuccess:
+          type: number
+          format: double
+        additionalColumns:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Interface.AdditionalColumnDefinition'
+          xml:
+            name: AdditionalColumnDefinition
+            wrapped: true
+          type: array
+        dob:
+          type: string
+          format: date-time
+        webAddress:
+          type: string
+        homePhoneExt:
+          type: string
+        country:
+          type: string
+        riskScore:
+          type: number
+          format: double
+        ccNum:
+          type: string
+        ccType:
+          type: string
+        ccToken:
+          type: string
+        ccIsValid:
+          type: boolean
+        currentRiskScore:
+          type: integer
+          format: int32
+        targetRiskScore:
+          type: integer
+          format: int32
+        portfolioRiskScore:
+          type: integer
+          format: int32
+        riskScoreAsOfDate:
+          type: string
+          format: date-time
+        riskScoreProvider:
+          description: The source of {OAS.WebApi.DTO.Portfolio.ClientDto.TargetRiskScore}, {OAS.WebApi.DTO.Portfolio.ClientDto.CurrentRiskScore}, {OAS.WebApi.DTO.Portfolio.ClientDto.RiskScoreAsOfDate}, and {OAS.WebApi.DTO.Portfolio.ClientDto.PortfolioRiskScore}
+          type: string
+        advClientCategoryId:
+          type: integer
+          format: int32
+        advClientCategory:
+          type: string
+        isRTQLocked:
+          type: boolean
+        globalId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        isDataSharingEntity:
+          type: boolean
+      xml:
+        name: ClientDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.AssetDto:
+      properties:
+        costBasis:
+          type: number
+          format: double
+        name:
+          type: string
+        accountNumber:
+          type: string
+        ticker:
+          type: string
+        currentShares:
+          type: number
+          format: double
+        currentValue:
+          type: number
+          format: double
+        currentPrice:
+          type: number
+          format: double
+        isManaged:
+          type: boolean
+        assetClass:
+          type: string
+        productCategory:
+          type: string
+        productCategoryAbbreviation:
+          type: string
+        isCustodialCash:
+          type: boolean
+        secondaryAccountNumber:
+          type: string
+        cusip:
+          type: string
+        productId:
+          type: integer
+          format: int32
+        assetLevelStrategyId:
+          type: integer
+          format: int32
+        assetLevelStrategy:
+          type: string
+        status:
+          type: integer
+          format: int32
+        isStrategyOverride:
+          type: boolean
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        accountId:
+          type: integer
+          format: int32
+        registrationId:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        isActive:
+          type: boolean
+        downloadSymbol:
+          type: integer
+          format: int32
+        accountType:
+          type: string
+        fundFamily:
+          type: string
+        custodian:
+          type: string
+        asOfDate:
+          type: string
+          format: date-time
+        registrationName:
+          type: string
+        managementStyle:
+          type: string
+        sleeveType:
+          type: string
+          enum:
+          - Normal sleeve
+          - Custodial account
+          - Contribution sleeve
+          - Distribution sleeve
+          - Unmanaged sleeve
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        productSubType:
+          type: string
+        isGlobalExcluded:
+          type: boolean
+        isFeeExcluded:
+          type: boolean
+        excludeAmountType:
+          type: string
+          enum:
+          - Percent
+          - Dollars
+          - Shares
+        excludeAmount:
+          type: number
+          format: double
+        excludePercentOf:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        excludeFromMargin:
+          type: boolean
+        isRebalance:
+          type: boolean
+        isAdvisorOnly:
+          type: boolean
+        isAdvReportable:
+          type: boolean
+        is13FReportable:
+          type: boolean
+        mscsFundAccountNumber:
+          type: string
+        lastReconDate:
+          type: string
+          format: date-time
+        isOrionVision:
+          type: boolean
+        assetPercentOfAccount:
+          type: number
+          format: double
+        householdName:
+          type: string
+        riskCategory:
+          type: string
+        modelName:
+          type: string
+        registrationType:
+          type: string
+        accountStatusId:
+          type: integer
+          format: int32
+        isin:
+          type: string
+        id:
+          type: integer
+          format: int32
+        isDataSharingEntity:
+          type: boolean
+      xml:
+        name: AssetDto
+      type: object
+    OAS.WebApi.DTO.Settings.EntityOptionDto:
+      properties:
+        userDefineDataId:
+          type: integer
+          format: int32
+        value:
+          type: string
+        childParameter:
+          type: string
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        entityId:
+          type: integer
+          format: int32
+        entityName:
+          type: string
+        userDefineDefinitionId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        category:
+          type: string
+        type:
+          type: string
+          enum:
+          - MultiLineEditor
+          - DropDownEditor
+          - DropDownList
+          - CheckBox
+          - Currency
+          - Date
+          - DateTime
+          - Integer
+          - String
+          - Double
+          - Time
+          - Long
+          - CustomObject
+          - Email
+        maxLength:
+          type: integer
+          format: int32
+        code:
+          type: string
+        sequence:
+          type: integer
+          format: int32
+        options:
+          type: object
+        input:
+          type: string
+        securityCode:
+          type: string
+        canEdit:
+          type: boolean
+      xml:
+        name: EntityOptionDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.PortfolioGroupFullDto:
+      properties:
+        accounts:
+          items:
+            type: integer
+            format: int32
+          type: array
+        registrations:
+          items:
+            type: integer
+            format: int32
+          type: array
+        targetAllocations:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TargetAllocationDto'
+          xml:
+            name: TargetAllocationDto
+            wrapped: true
+          type: array
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        groupValue:
+          type: number
+          format: double
+        clientName:
+          type: string
+        clientId:
+          type: integer
+          format: int32
+        portfolioType:
+          type: string
+          enum:
+          - Composite
+          - Reporting
+          - Trading
+        isReporting:
+          readOnly: true
+          type: boolean
+        isTrading:
+          readOnly: true
+          type: boolean
+        isComposites:
+          readOnly: true
+          type: boolean
+        eclipsePortfolioId:
+          type: integer
+          format: int32
+        representativeId:
+          type: integer
+          format: int32
+        representativeName:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        effectiveDate:
+          type: string
+          format: date-time
+        changes:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioGroupChangeSimpleDto'
+          xml:
+            name: PortfolioGroupChangeSimpleDto
+            wrapped: true
+          type: array
+        userDefinedFields:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+          xml:
+            name: EntityOptionDto
+            wrapped: true
+          type: array
+        repId:
+          type: integer
+          format: int32
+        custodianId:
+          type: integer
+          format: int32
+        modelAggId:
+          type: integer
+          format: int32
+        platformId:
+          type: integer
+          format: int32
+        planId:
+          type: integer
+          format: int32
+        fundFamilyId:
+          type: integer
+          format: int32
+        stockRange:
+          type: integer
+          format: int32
+        riskTolerance:
+          type: integer
+          format: int32
+        riskBudgetRange:
+          type: integer
+          format: int32
+      xml:
+        name: PortfolioGroupFullDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SimplePortfolioGroupDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        clientId:
+          type: integer
+          format: int32
+        portfolioType:
+          type: string
+          enum:
+          - Composite
+          - Reporting
+          - Trading
+        clientName:
+          type: string
+      xml:
+        name: SimplePortfolioGroupDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.TargetAllocationDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        entityId:
+          type: integer
+          format: int32
+        weight:
+          type: number
+          format: double
+        minimumRange:
+          type: number
+          format: double
+        maximumRange:
+          type: number
+          format: double
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+      xml:
+        name: TargetAllocationDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.AumOverTimeWithNetAmountInvestedDto:
+      properties:
+        aumOverTime:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AumOverTimeDto'
+          xml:
+            name: AumOverTimeDto
+            wrapped: true
+          type: array
+        netAmountInvested:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AumOverTimeDto'
+          xml:
+            name: AumOverTimeDto
+            wrapped: true
+          type: array
+      xml:
+        name: AumOverTimeWithNetAmountInvestedDto
+      type: object
+    OAS.DataModel.Portfolio.SimplePortfolioGroup:
+      properties:
+        clientId:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimplePortfolioGroup
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

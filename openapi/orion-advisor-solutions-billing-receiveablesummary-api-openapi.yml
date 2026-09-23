@@ -1,0 +1,157 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Receiveable Summary API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/ReceiveableSummary
+paths:
+  /v1/Billing/ReceiveableSummary:
+    get:
+      tags:
+      - Billing/ReceiveableSummary
+      summary: Get a summary list of recievables
+      operationId: Billing_GetRecievablesAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: startDate
+        in: query
+        description: Optional. Default is null which does not filter.  If date is entered receivables are filtered for created on or after this date.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional. Default is null which does not filter.  If date is entered receivables are filtered for created on or before this date.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: forecastBillOnly
+        in: query
+        description: Optional. Default is null which does not filter.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ReceiveableSummaryDto'
+                xml:
+                  name: ReceiveableSummaryDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ReceiveableSummaryDto'
+                xml:
+                  name: ReceiveableSummaryDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ReceiveableSummaryDto'
+                xml:
+                  name: ReceiveableSummaryDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ReceiveableSummaryDto'
+                xml:
+                  name: ReceiveableSummaryDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ReceiveableSummaryDto'
+                xml:
+                  name: ReceiveableSummaryDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ReceiveableSummaryDto'
+                xml:
+                  name: ReceiveableSummaryDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.ReceiveableSummaryDto:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        fundFamily:
+          type: string
+        productName:
+          type: string
+        moneyMarketBalance:
+          type: number
+          format: double
+        balanceDue:
+          type: number
+          format: double
+        difference:
+          type: number
+          format: double
+        payMethod:
+          type: string
+        clientId:
+          type: integer
+          format: int32
+        clientLastName:
+          type: string
+        clientName:
+          type: string
+        accountType:
+          type: string
+        accountNumber:
+          type: string
+        managementStyle:
+          type: string
+        accountIsActive:
+          type: boolean
+        representativeName:
+          type: string
+        feeReqSrc:
+          type: string
+          enum:
+          - Invalid
+          - HighValueFund
+          - CashAccount
+          - ProRata
+        instanceType:
+          type: string
+      xml:
+        name: ReceiveableSummaryDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

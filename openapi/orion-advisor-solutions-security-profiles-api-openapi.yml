@@ -1,0 +1,1067 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Security/Profiles API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Security Profiles
+paths:
+  /v1/Security/Profiles:
+    get:
+      tags:
+      - Security Profiles
+      summary: Gets a list of profiles that the logged in user has access to.
+      operationId: Profiles_GetAsync
+      parameters:
+      - name: entity
+        in: query
+        description: 'Optional. Default: null. If provided returns only the profiles for the entity level specified.'
+        required: false
+        schema:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+      - name: isActive
+        in: query
+        description: 'Optional. Default: True. If true only the profiles associated to active users are returned.'
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: populateEntityName
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: entityId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: includeInactiveHouseHolds
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserDetailDto'
+                xml:
+                  name: UserDetailDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserDetailDto'
+                xml:
+                  name: UserDetailDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserDetailDto'
+                xml:
+                  name: UserDetailDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserDetailDto'
+                xml:
+                  name: UserDetailDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserDetailDto'
+                xml:
+                  name: UserDetailDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserDetailDto'
+                xml:
+                  name: UserDetailDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Security/Profiles/Search:
+    get:
+      tags:
+      - Security Profiles
+      summary: Gets a list of profiles that the logged in user has access to where the…
+      operationId: Profiles_SearchAsync
+      parameters:
+      - name: search
+        in: query
+        description: UserName, UserId, or EntityName to search for
+        required: true
+        schema:
+          type: string
+      - name: entity
+        in: query
+        description: 'Optional. Default: null. If provided returns only the profiles for the entity level specified.'
+        required: false
+        schema:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+      - name: isActive
+        in: query
+        description: 'Optional. Default: True. If true only the profiles associated to active users are returned.'
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: populateEntityName
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserDetailDto'
+                xml:
+                  name: UserDetailDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserDetailDto'
+                xml:
+                  name: UserDetailDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserDetailDto'
+                xml:
+                  name: UserDetailDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserDetailDto'
+                xml:
+                  name: UserDetailDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserDetailDto'
+                xml:
+                  name: UserDetailDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserDetailDto'
+                xml:
+                  name: UserDetailDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Security/Profiles/Search/{search}:
+    get:
+      tags:
+      - Security Profiles
+      summary: Gets a list of profiles that the logged in user has access to where the…
+      operationId: Profiles_GetV1SecurityProfilesSearchBySearch
+      parameters:
+      - name: search
+        in: path
+        description: UserName, UserId, or EntityName to search for
+        required: true
+        schema:
+          type: string
+      - name: entity
+        in: query
+        description: 'Optional. Default: null. If provided returns only the profiles for the entity level specified.'
+        required: false
+        schema:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+      - name: isActive
+        in: query
+        description: 'Optional. Default: True. If true only the profiles associated to active users are returned.'
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: populateEntityName
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserDetailDto'
+                xml:
+                  name: UserDetailDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserDetailDto'
+                xml:
+                  name: UserDetailDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserDetailDto'
+                xml:
+                  name: UserDetailDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserDetailDto'
+                xml:
+                  name: UserDetailDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserDetailDto'
+                xml:
+                  name: UserDetailDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserDetailDto'
+                xml:
+                  name: UserDetailDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Security.UserDetailDto:
+      properties:
+        userName:
+          type: string
+        loginUserId:
+          type: string
+        userId:
+          type: integer
+          format: int32
+        contactType:
+          type: string
+          enum:
+          - NotApproved
+          - Approved
+          - MainContact
+          - NoLongerWithFirm
+        userDetailId:
+          type: integer
+          format: int32
+        selected:
+          type: boolean
+        userGuid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        entityId:
+          type: integer
+          format: int32
+        entityName:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+      xml:
+        name: UserDetailDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

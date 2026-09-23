@@ -1,0 +1,670 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Status/Hangfire API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Status/Hangfire
+paths:
+  /v1/Status/Hangfire:
+    get:
+      tags:
+      - Status/Hangfire
+      operationId: Status_GetHangfireStatus
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Status.HangfireStatusDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Status.HangfireStatusDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Status.HangfireStatusDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Status.HangfireStatusDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Status.HangfireStatusDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Status.HangfireStatusDto'
+      security:
+      - Authorization: []
+      summary: Status get hangfire status
+      x-summary-source: derived
+  /v1/Status/Hangfire/JobsOnInactiveServers:
+    get:
+      tags:
+      - Status/Hangfire
+      operationId: Status_JobsOnInactiveServers
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Hangfire.Storage.Monitoring.ProcessingJobDto'
+                xml:
+                  name: ProcessingJobDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Hangfire.Storage.Monitoring.ProcessingJobDto'
+                xml:
+                  name: ProcessingJobDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Hangfire.Storage.Monitoring.ProcessingJobDto'
+                xml:
+                  name: ProcessingJobDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Hangfire.Storage.Monitoring.ProcessingJobDto'
+                xml:
+                  name: ProcessingJobDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Status jobs on inactive servers
+      x-summary-source: derived
+components:
+  schemas:
+    Hangfire.Common.Job:
+      properties:
+        type:
+          readOnly: true
+          type: string
+        method:
+          $ref: '#/components/schemas/System.Reflection.MethodInfo'
+          readOnly: true
+        args:
+          items:
+            type: object
+          readOnly: true
+          type: array
+        queue:
+          readOnly: true
+          type: string
+        arguments:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: Job
+      type: object
+    System.Reflection.CustomAttributeData:
+      properties:
+        attributeType:
+          readOnly: true
+          type: string
+        constructor:
+          $ref: '#/components/schemas/System.Reflection.ConstructorInfo'
+          readOnly: true
+        constructorArguments:
+          items:
+            $ref: '#/components/schemas/System.Reflection.CustomAttributeTypedArgument'
+          readOnly: true
+          xml:
+            name: CustomAttributeTypedArgument
+            wrapped: true
+          type: array
+        namedArguments:
+          items:
+            $ref: '#/components/schemas/System.Reflection.CustomAttributeNamedArgument'
+          readOnly: true
+          xml:
+            name: CustomAttributeNamedArgument
+            wrapped: true
+          type: array
+      xml:
+        name: CustomAttributeData
+      type: object
+    System.Reflection.MemberInfo:
+      properties:
+        memberType:
+          readOnly: true
+          type: string
+          enum:
+          - Constructor
+          - Event
+          - Field
+          - Method
+          - Property
+          - TypeInfo
+          - Custom
+          - NestedType
+          - All
+        name:
+          readOnly: true
+          type: string
+        declaringType:
+          readOnly: true
+          type: string
+        reflectedType:
+          readOnly: true
+          type: string
+        customAttributes:
+          items:
+            $ref: '#/components/schemas/System.Reflection.CustomAttributeData'
+          readOnly: true
+          xml:
+            name: CustomAttributeData
+            wrapped: true
+          type: array
+        metadataToken:
+          readOnly: true
+          type: integer
+          format: int32
+        module:
+          readOnly: true
+          type: object
+      xml:
+        name: MemberInfo
+      type: object
+    OAS.WebApi.DTO.Status.HangfireStatusDto:
+      properties:
+        activeServerCount:
+          type: integer
+          format: int32
+        lastHeartbeat:
+          type: string
+          format: date-time
+      xml:
+        name: HangfireStatusDto
+      type: object
+    System.Reflection.CustomAttributeTypedArgument:
+      properties:
+        argumentType:
+          readOnly: true
+          type: string
+        value:
+          readOnly: true
+          type: object
+      xml:
+        name: CustomAttributeTypedArgument
+      type: object
+    System.Reflection.ICustomAttributeProvider:
+      properties: {}
+      xml:
+        name: ICustomAttributeProvider
+      type: object
+    System.Reflection.ConstructorInfo:
+      properties:
+        memberType:
+          readOnly: true
+          type: string
+          enum:
+          - Constructor
+          - Event
+          - Field
+          - Method
+          - Property
+          - TypeInfo
+          - Custom
+          - NestedType
+          - All
+        methodImplementationFlags:
+          readOnly: true
+          type: string
+          enum:
+          - CodeTypeMask
+          - IL
+          - Native
+          - OPTIL
+          - Runtime
+          - ManagedMask
+          - Unmanaged
+          - Managed
+          - ForwardRef
+          - PreserveSig
+          - InternalCall
+          - Synchronized
+          - NoInlining
+          - AggressiveInlining
+          - NoOptimization
+          - SecurityMitigations
+          - MaxMethodImplVal
+        methodHandle:
+          readOnly: true
+          type: object
+        attributes:
+          readOnly: true
+          type: string
+          enum:
+          - MemberAccessMask
+          - PrivateScope
+          - Private
+          - FamANDAssem
+          - Assembly
+          - Family
+          - FamORAssem
+          - Public
+          - Static
+          - Final
+          - Virtual
+          - HideBySig
+          - CheckAccessOnOverride
+          - VtableLayoutMask
+          - ReuseSlot
+          - NewSlot
+          - Abstract
+          - SpecialName
+          - PinvokeImpl
+          - UnmanagedExport
+          - RTSpecialName
+          - ReservedMask
+          - HasSecurity
+          - RequireSecObject
+        callingConvention:
+          readOnly: true
+          type: string
+          enum:
+          - Standard
+          - VarArgs
+          - Any
+          - HasThis
+          - ExplicitThis
+        isGenericMethodDefinition:
+          readOnly: true
+          type: boolean
+        containsGenericParameters:
+          readOnly: true
+          type: boolean
+        isGenericMethod:
+          readOnly: true
+          type: boolean
+        isSecurityCritical:
+          readOnly: true
+          type: boolean
+        isSecuritySafeCritical:
+          readOnly: true
+          type: boolean
+        isSecurityTransparent:
+          readOnly: true
+          type: boolean
+        isPublic:
+          readOnly: true
+          type: boolean
+        isPrivate:
+          readOnly: true
+          type: boolean
+        isFamily:
+          readOnly: true
+          type: boolean
+        isAssembly:
+          readOnly: true
+          type: boolean
+        isFamilyAndAssembly:
+          readOnly: true
+          type: boolean
+        isFamilyOrAssembly:
+          readOnly: true
+          type: boolean
+        isStatic:
+          readOnly: true
+          type: boolean
+        isFinal:
+          readOnly: true
+          type: boolean
+        isVirtual:
+          readOnly: true
+          type: boolean
+        isHideBySig:
+          readOnly: true
+          type: boolean
+        isAbstract:
+          readOnly: true
+          type: boolean
+        isSpecialName:
+          readOnly: true
+          type: boolean
+        isConstructor:
+          readOnly: true
+          type: boolean
+        name:
+          readOnly: true
+          type: string
+        declaringType:
+          readOnly: true
+          type: string
+        reflectedType:
+          readOnly: true
+          type: string
+        customAttributes:
+          items:
+            $ref: '#/components/schemas/System.Reflection.CustomAttributeData'
+          readOnly: true
+          xml:
+            name: CustomAttributeData
+            wrapped: true
+          type: array
+        metadataToken:
+          readOnly: true
+          type: integer
+          format: int32
+        module:
+          readOnly: true
+          type: object
+      xml:
+        name: ConstructorInfo
+      type: object
+    Hangfire.Storage.InvocationData:
+      properties:
+        type:
+          readOnly: true
+          type: string
+        method:
+          readOnly: true
+          type: string
+        parameterTypes:
+          readOnly: true
+          type: string
+        arguments:
+          type: string
+        queue:
+          readOnly: true
+          type: string
+      xml:
+        name: InvocationData
+      type: object
+    Hangfire.Storage.Monitoring.ProcessingJobDto:
+      properties:
+        job:
+          $ref: '#/components/schemas/Hangfire.Common.Job'
+        loadException:
+          type: object
+        invocationData:
+          $ref: '#/components/schemas/Hangfire.Storage.InvocationData'
+        inProcessingState:
+          type: boolean
+        serverId:
+          type: string
+        startedAt:
+          type: string
+          format: date-time
+        stateData:
+          additionalProperties:
+            type: string
+          type: object
+      xml:
+        name: ProcessingJobDto
+      type: object
+    System.Reflection.CustomAttributeNamedArgument:
+      properties:
+        memberInfo:
+          $ref: '#/components/schemas/System.Reflection.MemberInfo'
+          readOnly: true
+        typedValue:
+          $ref: '#/components/schemas/System.Reflection.CustomAttributeTypedArgument'
+          readOnly: true
+        memberName:
+          readOnly: true
+          type: string
+        isField:
+          readOnly: true
+          type: boolean
+      xml:
+        name: CustomAttributeNamedArgument
+      type: object
+    System.Reflection.MethodInfo:
+      properties:
+        memberType:
+          readOnly: true
+          type: string
+          enum:
+          - Constructor
+          - Event
+          - Field
+          - Method
+          - Property
+          - TypeInfo
+          - Custom
+          - NestedType
+          - All
+        returnType:
+          readOnly: true
+          type: string
+        returnParameter:
+          $ref: '#/components/schemas/System.Reflection.ParameterInfo'
+          readOnly: true
+        returnTypeCustomAttributes:
+          $ref: '#/components/schemas/System.Reflection.ICustomAttributeProvider'
+          readOnly: true
+        methodImplementationFlags:
+          readOnly: true
+          type: string
+          enum:
+          - CodeTypeMask
+          - IL
+          - Native
+          - OPTIL
+          - Runtime
+          - ManagedMask
+          - Unmanaged
+          - Managed
+          - ForwardRef
+          - PreserveSig
+          - InternalCall
+          - Synchronized
+          - NoInlining
+          - AggressiveInlining
+          - NoOptimization
+          - SecurityMitigations
+          - MaxMethodImplVal
+        methodHandle:
+          readOnly: true
+          type: object
+        attributes:
+          readOnly: true
+          type: string
+          enum:
+          - MemberAccessMask
+          - PrivateScope
+          - Private
+          - FamANDAssem
+          - Assembly
+          - Family
+          - FamORAssem
+          - Public
+          - Static
+          - Final
+          - Virtual
+          - HideBySig
+          - CheckAccessOnOverride
+          - VtableLayoutMask
+          - ReuseSlot
+          - NewSlot
+          - Abstract
+          - SpecialName
+          - PinvokeImpl
+          - UnmanagedExport
+          - RTSpecialName
+          - ReservedMask
+          - HasSecurity
+          - RequireSecObject
+        callingConvention:
+          readOnly: true
+          type: string
+          enum:
+          - Standard
+          - VarArgs
+          - Any
+          - HasThis
+          - ExplicitThis
+        isGenericMethodDefinition:
+          readOnly: true
+          type: boolean
+        containsGenericParameters:
+          readOnly: true
+          type: boolean
+        isGenericMethod:
+          readOnly: true
+          type: boolean
+        isSecurityCritical:
+          readOnly: true
+          type: boolean
+        isSecuritySafeCritical:
+          readOnly: true
+          type: boolean
+        isSecurityTransparent:
+          readOnly: true
+          type: boolean
+        isPublic:
+          readOnly: true
+          type: boolean
+        isPrivate:
+          readOnly: true
+          type: boolean
+        isFamily:
+          readOnly: true
+          type: boolean
+        isAssembly:
+          readOnly: true
+          type: boolean
+        isFamilyAndAssembly:
+          readOnly: true
+          type: boolean
+        isFamilyOrAssembly:
+          readOnly: true
+          type: boolean
+        isStatic:
+          readOnly: true
+          type: boolean
+        isFinal:
+          readOnly: true
+          type: boolean
+        isVirtual:
+          readOnly: true
+          type: boolean
+        isHideBySig:
+          readOnly: true
+          type: boolean
+        isAbstract:
+          readOnly: true
+          type: boolean
+        isSpecialName:
+          readOnly: true
+          type: boolean
+        isConstructor:
+          readOnly: true
+          type: boolean
+        name:
+          readOnly: true
+          type: string
+        declaringType:
+          readOnly: true
+          type: string
+        reflectedType:
+          readOnly: true
+          type: string
+        customAttributes:
+          items:
+            $ref: '#/components/schemas/System.Reflection.CustomAttributeData'
+          readOnly: true
+          xml:
+            name: CustomAttributeData
+            wrapped: true
+          type: array
+        metadataToken:
+          readOnly: true
+          type: integer
+          format: int32
+        module:
+          readOnly: true
+          type: object
+      xml:
+        name: MethodInfo
+      type: object
+    System.Reflection.ParameterInfo:
+      properties:
+        parameterType:
+          readOnly: true
+          type: string
+        name:
+          readOnly: true
+          type: string
+        hasDefaultValue:
+          readOnly: true
+          type: boolean
+        defaultValue:
+          readOnly: true
+          type: object
+        rawDefaultValue:
+          readOnly: true
+          type: object
+        position:
+          readOnly: true
+          type: integer
+          format: int32
+        attributes:
+          readOnly: true
+          type: string
+          enum:
+          - None
+          - In
+          - Out
+          - Lcid
+          - Retval
+          - Optional
+          - ReservedMask
+          - HasDefault
+          - HasFieldMarshal
+          - Reserved3
+          - Reserved4
+        member:
+          $ref: '#/components/schemas/System.Reflection.MemberInfo'
+          readOnly: true
+        isIn:
+          readOnly: true
+          type: boolean
+        isOut:
+          readOnly: true
+          type: boolean
+        isLcid:
+          readOnly: true
+          type: boolean
+        isRetval:
+          readOnly: true
+          type: boolean
+        isOptional:
+          readOnly: true
+          type: boolean
+        metadataToken:
+          readOnly: true
+          type: integer
+          format: int32
+        customAttributes:
+          items:
+            $ref: '#/components/schemas/System.Reflection.CustomAttributeData'
+          readOnly: true
+          xml:
+            name: CustomAttributeData
+            wrapped: true
+          type: array
+      xml:
+        name: ParameterInfo
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

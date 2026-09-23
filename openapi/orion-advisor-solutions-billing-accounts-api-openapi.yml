@@ -1,0 +1,2790 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Accounts API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing Accounts
+paths:
+  /v1/Billing/Accounts:
+    get:
+      tags:
+      - Billing Accounts
+      operationId: BillingAccounts_GetAll
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: skip
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: top
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - MissingFeeSchedules
+          - MissingPayoutSchedules
+          - BillStatusNotReady
+          - PayingFeeIsZero
+          - PayingFeeIsIndirect
+          - PayingFeeIsInactive
+          - CreditRemaining
+          - CheckPayPaidByOther
+          - SubadvisorFeeSchedule
+          - AccountsPaidByAndFor
+          - StatusNotBilled
+          - MissingManagementStyles
+          - BillAccountStatusNotReady
+          - FeeScheduleIsZero
+          - AssetLevelBilling
+      - name: isActive
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: custodianId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: representativeId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: householdId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: registationId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: accountId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: fundFamilyId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: managementStyleId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: payoutScheduleId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: feeSecheduleId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: businessLineId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Billing accounts get all
+      x-summary-source: derived
+  /v1/Billing/Accounts/{key}:
+    get:
+      tags:
+      - Billing Accounts
+      summary: Gets the bill account that has the provided key.
+      operationId: BillingAccounts_GetEntityByKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+      security:
+      - Authorization: []
+  /v1/Billing/Accounts/{key}/CreditCardNumber:
+    put:
+      tags:
+      - Billing Accounts
+      summary: Return Credit Card Number
+      operationId: BillingAccounts_GetCreditCardNumberAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+          application/json:
+            schema:
+              type: string
+          text/json:
+            schema:
+              type: string
+          application/xml:
+            schema:
+              type: string
+          text/xml:
+            schema:
+              type: string
+          application/x-www-form-urlencoded:
+            schema:
+              type: string
+          multipart/form-data:
+            schema:
+              type: string
+        required: true
+  /v1/Billing/Accounts/{key}/DefaultPercentsForGeneralAccount:
+    get:
+      tags:
+      - Billing Accounts
+      summary: Gets Percent for Account
+      operationId: BillingAccounts_GetDefaultPercentsForGeneralAccount
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: object
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: object
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: object
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: object
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: object
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: object
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Accounts/{key}/RecurringAdjustments:
+    get:
+      tags:
+      - Billing Accounts
+      summary: Returns accounts with recurring adjustments
+      operationId: BillingAccounts_GetRecurrentAdjustments
+      parameters:
+      - name: key
+        in: path
+        description: Bill Account Id which can be different than account id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: isActive
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: object
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: object
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: object
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: object
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: object
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: object
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Accounts/{key}/Tickers/Simple:
+    get:
+      tags:
+      - Billing Accounts
+      summary: Generate Tickers associated with account
+      description: 'Sample Request
+
+        GET v1/Billing/Accounts/{key}/Tickers/Simple'
+      operationId: BillingAccounts_GetAssetsValueAsOfDateAsync
+      parameters:
+      - name: key
+        in: path
+        description: Account Id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Accounts/AccountSearch:
+    get:
+      tags:
+      - Billing Accounts
+      summary: Search Billing Accounts
+      operationId: BillingAccounts_AccountSearchAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        description: Cancellation Token
+        required: true
+      - name: search
+        in: query
+        description: Optional.
+        required: true
+        schema:
+          type: string
+      - name: isActive
+        in: query
+        description: Optional.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Portfolio.SimpleAccount'
+                xml:
+                  name: SimpleAccount
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Portfolio.SimpleAccount'
+                xml:
+                  name: SimpleAccount
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Portfolio.SimpleAccount'
+                xml:
+                  name: SimpleAccount
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Portfolio.SimpleAccount'
+                xml:
+                  name: SimpleAccount
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Portfolio.SimpleAccount'
+                xml:
+                  name: SimpleAccount
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Portfolio.SimpleAccount'
+                xml:
+                  name: SimpleAccount
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Accounts/AccountSearch/{search}:
+    get:
+      tags:
+      - Billing Accounts
+      summary: Search Billing Accounts
+      operationId: BillingAccounts_GetV1BillingAccountsAccountSearchBySearch
+      parameters:
+      - name: cancellationToken
+        in: header
+        description: Cancellation Token
+        required: true
+      - name: search
+        in: path
+        description: Optional.
+        required: true
+        schema:
+          type: string
+      - name: isActive
+        in: query
+        description: Optional.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Portfolio.SimpleAccount'
+                xml:
+                  name: SimpleAccount
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Portfolio.SimpleAccount'
+                xml:
+                  name: SimpleAccount
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Portfolio.SimpleAccount'
+                xml:
+                  name: SimpleAccount
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Portfolio.SimpleAccount'
+                xml:
+                  name: SimpleAccount
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Portfolio.SimpleAccount'
+                xml:
+                  name: SimpleAccount
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Portfolio.SimpleAccount'
+                xml:
+                  name: SimpleAccount
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Accounts/CheckPayforAccounts:
+    post:
+      tags:
+      - Billing Accounts
+      summary: check bill account paymethid indirect can't add payfor accounts
+      operationId: BillingAccounts_CheckPayforAccounts
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: object
+          application/json:
+            schema:
+              type: object
+          text/json:
+            schema:
+              type: object
+          application/xml:
+            schema:
+              type: object
+          text/xml:
+            schema:
+              type: object
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+          multipart/form-data:
+            schema:
+              type: object
+        required: true
+  /v1/Billing/Accounts/GetAllPaidbyBillAccounts:
+    get:
+      tags:
+      - Billing Accounts
+      summary: Return all acount ids paying for someone
+      operationId: BillingAccounts_GetAllPaidbyAccounts
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Accounts/GetCounts:
+    get:
+      tags:
+      - Billing Accounts
+      operationId: BillingAccounts_GetCounts
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingAccountCountsDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingAccountCountsDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingAccountCountsDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingAccountCountsDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingAccountCountsDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingAccountCountsDto'
+      security:
+      - Authorization: []
+      summary: Billing accounts get counts
+      x-summary-source: derived
+  /v1/Billing/Accounts/Grid:
+    get:
+      tags:
+      - Billing Accounts
+      operationId: BillingAccounts_GetAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: manipulator
+        in: header
+        required: true
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - MissingFeeSchedules
+          - MissingPayoutSchedules
+          - BillStatusNotReady
+          - PayingFeeIsZero
+          - PayingFeeIsIndirect
+          - PayingFeeIsInactive
+          - CreditRemaining
+          - CheckPayPaidByOther
+          - SubadvisorFeeSchedule
+          - AccountsPaidByAndFor
+          - StatusNotBilled
+          - MissingManagementStyles
+          - BillAccountStatusNotReady
+          - FeeScheduleIsZero
+          - AssetLevelBilling
+      - name: isActive
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: custodianId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: representativeId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: householdId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: registationId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: accountId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: fundFamilyId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: managementStyleId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: payoutScheduleId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: feeSecheduleId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: businessLineId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Billing accounts get async
+      x-summary-source: derived
+  /v1/Billing/Accounts/Grid/New:
+    get:
+      tags:
+      - Billing Accounts
+      operationId: BillingAccounts_GetAllNewAsync
+      parameters:
+      - name: manipulator
+        in: header
+        required: true
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: assetManipulator
+        in: header
+        required: false
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - MissingFeeSchedules
+          - MissingPayoutSchedules
+          - BillStatusNotReady
+          - PayingFeeIsZero
+          - PayingFeeIsIndirect
+          - PayingFeeIsInactive
+          - CreditRemaining
+          - CheckPayPaidByOther
+          - SubadvisorFeeSchedule
+          - AccountsPaidByAndFor
+          - StatusNotBilled
+          - MissingManagementStyles
+          - BillAccountStatusNotReady
+          - FeeScheduleIsZero
+          - AssetLevelBilling
+      - name: isActive
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: custodianId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: representativeId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: householdId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: registationId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: accountId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: fundFamilyId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: managementStyleId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: payoutScheduleId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: feeSecheduleId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: businessLineId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountBaseDto'
+                xml:
+                  name: BillAccountBaseDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountBaseDto'
+                xml:
+                  name: BillAccountBaseDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountBaseDto'
+                xml:
+                  name: BillAccountBaseDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountBaseDto'
+                xml:
+                  name: BillAccountBaseDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountBaseDto'
+                xml:
+                  name: BillAccountBaseDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountBaseDto'
+                xml:
+                  name: BillAccountBaseDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Billing accounts get all new async
+      x-summary-source: derived
+  /v1/Billing/Accounts/HouseholdRecurringAdjustments:
+    get:
+      tags:
+      - Billing Accounts
+      summary: Returns recurring adjustments for household
+      description: 'Sample Request
+
+        GET /HouseholdRecurringAdjustments
+
+        Sample Response
+
+        [
+
+        {
+
+        "id": 95,
+
+        "adjustmentId": 47,
+
+        "clientName": "Tiara Booker",
+
+        "additionalAnnualAmount": 1000.0000,
+
+        "type": "Dollar",
+
+        "feeScheduleName": null,
+
+        "adjustmentTypeDescription": "Account Debit",
+
+        "entity": "Client"
+
+        }
+
+        ]'
+      operationId: BillingAccounts_GetHouseholdRecurrentAdjustments
+      parameters:
+      - name: householdId
+        in: query
+        description: Optional household id filter
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.HouseholdRecurringAdjustmentDto'
+                xml:
+                  name: HouseholdRecurringAdjustmentDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.HouseholdRecurringAdjustmentDto'
+                xml:
+                  name: HouseholdRecurringAdjustmentDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.HouseholdRecurringAdjustmentDto'
+                xml:
+                  name: HouseholdRecurringAdjustmentDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.HouseholdRecurringAdjustmentDto'
+                xml:
+                  name: HouseholdRecurringAdjustmentDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.HouseholdRecurringAdjustmentDto'
+                xml:
+                  name: HouseholdRecurringAdjustmentDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.HouseholdRecurringAdjustmentDto'
+                xml:
+                  name: HouseholdRecurringAdjustmentDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Accounts/ImportFileFilter:
+    post:
+      tags:
+      - Billing Accounts
+      summary: Takes an xlsx or csv file as multipart content.
+      description: 'Sample Request
+
+        POST v1/Billing/Accounts/ImportFileFilter
+
+        {
+
+        "file": binary,
+
+        "columnName": "AccountId"
+
+        }'
+      operationId: BillingAccounts_ImportFileFilterAsync
+      parameters:
+      - name: token
+        in: header
+        description: Cancellation token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ImportFileFilterDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ImportFileFilterDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ImportFileFilterDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ImportFileFilterDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ImportFileFilterDto'
+        description: File upload data with column information
+        required: true
+  /v1/Billing/Accounts/List:
+    post:
+      tags:
+      - Billing Accounts
+      summary: Gets a list of bill accounts that match one of the keys in the provided list
+      operationId: BillingAccounts_GetListById
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: List of keys of the desired return objects.
+        required: true
+  /v1/Billing/Accounts/List/AccountIds:
+    post:
+      tags:
+      - Billing Accounts
+      summary: Gets a list of Bill Account Grid objects by AccountIds
+      description: 'Sample Request
+
+        POST v1/Billing/AccountsList/AccountIds
+
+        {
+
+        "accountIds": [1, 2, 3]
+
+        }'
+      operationId: BillingAccounts_GetListByAccountIds
+      parameters:
+      - name: limitedDataSet
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountGridDto'
+                xml:
+                  name: BillAccountGridDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountGridDto'
+                xml:
+                  name: BillAccountGridDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountGridDto'
+                xml:
+                  name: BillAccountGridDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountGridDto'
+                xml:
+                  name: BillAccountGridDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountGridDto'
+                xml:
+                  name: BillAccountGridDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountGridDto'
+                xml:
+                  name: BillAccountGridDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: Account IDs to lookup
+        required: true
+  /v1/Billing/Accounts/List/Id:
+    post:
+      tags:
+      - Billing Accounts
+      summary: Gets a list of bill accounts that match one of the keys in the provided list
+      operationId: BillingAccounts_PostV1BillingAccountsListId
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountDto'
+                xml:
+                  name: BillAccountDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: List of keys of the desired return objects.
+        required: true
+  /v1/Billing/Accounts/RecurringAdjustments:
+    get:
+      tags:
+      - Billing Accounts
+      summary: Returns recurring adjustments
+      description: 'Sample Request
+
+        GET /RecurringAdjustments
+
+        Sample Response
+
+        [
+
+        {
+
+        "id": 246,
+
+        "clientId": 83,
+
+        "fundName": "Schwab",
+
+        "accountNumber": "GHED-3",
+
+        "managementStyle": "Managed Account",
+
+        "subAdvisorName": null,
+
+        "feeSchedule": "2Q2017 TEST",
+
+        "masterPayoutSchedule": "MC 80% / GY 20% (AFRD / AHFE. AR89)",
+
+        "accountValue": 1043329.78,
+
+        "clientName": "Tiara Comer",
+
+        "clientFirstName": "Tiara",
+
+        "accountId": 280,
+
+        "additionalAnnualAmount": 0.0000,
+
+        "adjustmentTypeDescription": "Goodwill/Giveaway credit",
+
+        "entityDescription": "Broker Dealer",
+
+        "billScheduleName": "DF Billing Test",
+
+        "type": "Schedule",cr
+
+        "billStartDate": null,
+
+        "feeScheduleId": 504,
+
+        "representativeName": "Kristina Salvador",
+
+        "representativeNumber": "1122025",
+
+        "businessLine": null,
+
+        "accountStartDate": "2007-12-21",
+
+        "endDate": null,
+
+        "adjutmentStartDate": "2007-12-21",
+
+        "adjustmentEndDate": null,
+
+        "outsideId": null
+
+        }
+
+        ]'
+      operationId: BillingAccounts_GetV1BillingAccountsRecurringAdjustments
+      parameters:
+      - name: accountId
+        in: query
+        description: Optional account id filter
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountRecurringAdjustmentDto'
+                xml:
+                  name: BillAccountRecurringAdjustmentDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountRecurringAdjustmentDto'
+                xml:
+                  name: BillAccountRecurringAdjustmentDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountRecurringAdjustmentDto'
+                xml:
+                  name: BillAccountRecurringAdjustmentDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountRecurringAdjustmentDto'
+                xml:
+                  name: BillAccountRecurringAdjustmentDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountRecurringAdjustmentDto'
+                xml:
+                  name: BillAccountRecurringAdjustmentDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountRecurringAdjustmentDto'
+                xml:
+                  name: BillAccountRecurringAdjustmentDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Accounts/SimpleBillAccounts:
+    get:
+      tags:
+      - Billing Accounts
+      summary: Get a list of simple bill accounts that the logged in user has access to see.
+      operationId: BillingAccounts_GetSimple
+      parameters:
+      - name: cancellationToken
+        in: header
+        description: Optional.
+        required: true
+      - name: skip
+        in: query
+        description: Optional.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: top
+        in: query
+        description: Optional.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Optional.
+        required: false
+        schema:
+          type: string
+          enum:
+          - MissingFeeSchedules
+          - MissingPayoutSchedules
+          - BillStatusNotReady
+          - PayingFeeIsZero
+          - PayingFeeIsIndirect
+          - PayingFeeIsInactive
+          - CreditRemaining
+          - CheckPayPaidByOther
+          - SubadvisorFeeSchedule
+          - AccountsPaidByAndFor
+          - StatusNotBilled
+          - MissingManagementStyles
+          - BillAccountStatusNotReady
+          - FeeScheduleIsZero
+          - AssetLevelBilling
+      - name: clientId
+        in: query
+        description: Optional.
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: id
+        in: query
+        description: Optional.
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: isActive
+        in: query
+        description: 'Optional. Default: null.  When provided limits the return only to active (true) accounts, or inactive (false), or both (null).'
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountSimpleDto'
+                xml:
+                  name: BillAccountSimpleDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountSimpleDto'
+                xml:
+                  name: BillAccountSimpleDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountSimpleDto'
+                xml:
+                  name: BillAccountSimpleDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountSimpleDto'
+                xml:
+                  name: BillAccountSimpleDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountSimpleDto'
+                xml:
+                  name: BillAccountSimpleDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountSimpleDto'
+                xml:
+                  name: BillAccountSimpleDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Accounts/Summary:
+    get:
+      tags:
+      - Billing Accounts
+      summary: Gets the bill account summaries
+      operationId: BillingAccounts_GetBillAccountByBillId
+      parameters:
+      - name: billId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: clientId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountSummaryDto'
+                xml:
+                  name: BillAccountSummaryDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountSummaryDto'
+                xml:
+                  name: BillAccountSummaryDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountSummaryDto'
+                xml:
+                  name: BillAccountSummaryDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountSummaryDto'
+                xml:
+                  name: BillAccountSummaryDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountSummaryDto'
+                xml:
+                  name: BillAccountSummaryDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAccountSummaryDto'
+                xml:
+                  name: BillAccountSummaryDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.HouseholdRecurringAdjustmentDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        adjustmentId:
+          type: integer
+          format: int32
+        clientName:
+          type: string
+        additionalAnnualAmount:
+          type: number
+          format: double
+        type:
+          type: string
+        feeScheduleName:
+          type: string
+        adjustmentTypeDescription:
+          type: string
+        entity:
+          type: string
+      xml:
+        name: HouseholdRecurringAdjustmentDto
+      type: object
+    OAS.WebApi.DTO.Billing.BillAccountGridDto:
+      properties:
+        paysForAccountsActive:
+          type: boolean
+        additionalColumns:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Interface.AdditionalColumnDefinition'
+          xml:
+            name: AdditionalColumnDefinition
+            wrapped: true
+          type: array
+        id:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        accountType:
+          type: string
+        registrationName:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        fundName:
+          type: string
+        accountNumber:
+          type: string
+        accountName:
+          type: string
+        remainingAmount:
+          type: number
+          format: double
+        managementStyle:
+          type: string
+        subAdvisorName:
+          type: string
+        feeSchedule:
+          type: string
+        masterPayoutSchedule:
+          type: string
+        payMethod:
+          type: string
+        billFrequency:
+          type: string
+          enum:
+          - Undefined
+          - Monthly
+          - Quarterly
+          - Triannual
+          - Semiannually
+          - Annually
+          - AtMaturity
+        billStyle:
+          type: string
+          enum:
+          - Advance
+          - Arrears
+        billAccountStatus:
+          type: string
+          enum:
+          - Ready
+          - NotReady
+          - ReportingOnly
+          - FinancialPlanningFeeOnly
+        billingStatus:
+          type: string
+          enum:
+          - ReadyToBill
+          - Hold
+          - PendingReview
+        valuationMethod:
+          type: string
+          enum:
+          - PeriodEndingValue
+          - AvgDailyBalance
+          - AvgMonthlyBalance
+        accountValue:
+          type: number
+          format: double
+        accountStartDate:
+          type: string
+          format: date-time
+        clientName:
+          type: string
+        billStartDate:
+          type: string
+          format: date-time
+        lastBilledThroughDate:
+          type: string
+          format: date-time
+        custodialAccountNumber:
+          type: string
+        isPerformanceBilled:
+          type: boolean
+        lastPerfBillDate:
+          type: string
+          format: date-time
+        includeInAggregate:
+          type: boolean
+        useFeeHierarchy:
+          type: boolean
+        cycleMonth:
+          type: integer
+          format: int32
+        performanceMasterPayoutSchedule:
+          type: string
+        performanceFeeSchedule:
+          type: string
+        representativeName:
+          type: string
+        representativeNumber:
+          type: string
+        isActive:
+          type: boolean
+        lastTransactionDate:
+          type: string
+          format: date-time
+        custodian:
+          type: string
+        lastName:
+          type: string
+        businessLine:
+          type: string
+        outsideId:
+          type: string
+        modelName:
+          type: string
+        noFeeAggregate:
+          type: string
+        status:
+          type: string
+          enum:
+          - Ready
+          - NotReady
+          - ReportingOnly
+          - FinancialPlanningFeeOnly
+        paysForAccountNumbers:
+          type: string
+        prevAmountApplied:
+          type: number
+          format: double
+        accountIdThatDoesPaying:
+          type: integer
+          format: int32
+      xml:
+        name: BillAccountGridDto
+      type: object
+    OAS.WebApi.DTO.ValidateImport.ImportFileFilterDto:
+      required:
+      - columnName
+      properties:
+        columnName:
+          type: string
+          pattern: ^(Household ID|Account ID|Account Number|Representative Name|Representative Number|Product ID|Download Symbol)$
+        filterType:
+          type: string
+          enum:
+          - Include
+          - Exclude
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+          description: the imported file
+      xml:
+        name: ImportFileFilterDto
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    OAS.WebApi.DTO.Interface.AdditionalColumnDefinition:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      xml:
+        name: AdditionalColumnDefinition
+      type: object
+    OAS.DataModel.Portfolio.SimpleAccount:
+      properties:
+        number:
+          type: string
+        managementStyle:
+          type: string
+        isActive:
+          type: boolean
+        clientId:
+          type: integer
+          format: int32
+        custodian:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleAccount
+      type: object
+    OAS.WebApi.DTO.Billing.BillAccountBaseDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        accountType:
+          type: string
+        registrationName:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        fundName:
+          type: string
+        accountNumber:
+          type: string
+        accountName:
+          type: string
+        remainingAmount:
+          type: number
+          format: double
+        managementStyle:
+          type: string
+        subAdvisorName:
+          type: string
+        feeSchedule:
+          type: string
+        masterPayoutSchedule:
+          type: string
+        payMethod:
+          type: string
+        billFrequency:
+          type: string
+          enum:
+          - Undefined
+          - Monthly
+          - Quarterly
+          - Triannual
+          - Semiannually
+          - Annually
+          - AtMaturity
+        billStyle:
+          type: string
+          enum:
+          - Advance
+          - Arrears
+        billAccountStatus:
+          type: string
+          enum:
+          - Ready
+          - NotReady
+          - ReportingOnly
+          - FinancialPlanningFeeOnly
+        billingStatus:
+          type: string
+          enum:
+          - ReadyToBill
+          - Hold
+          - PendingReview
+        valuationMethod:
+          type: string
+          enum:
+          - PeriodEndingValue
+          - AvgDailyBalance
+          - AvgMonthlyBalance
+        accountValue:
+          type: number
+          format: double
+        accountStartDate:
+          type: string
+          format: date-time
+        clientName:
+          type: string
+        billStartDate:
+          type: string
+          format: date-time
+        lastBilledThroughDate:
+          type: string
+          format: date-time
+        custodialAccountNumber:
+          type: string
+        isPerformanceBilled:
+          type: boolean
+        lastPerfBillDate:
+          type: string
+          format: date-time
+        includeInAggregate:
+          type: boolean
+        useFeeHierarchy:
+          type: boolean
+        cycleMonth:
+          type: integer
+          format: int32
+        performanceMasterPayoutSchedule:
+          type: string
+        performanceFeeSchedule:
+          type: string
+        representativeName:
+          type: string
+        representativeNumber:
+          type: string
+        isActive:
+          type: boolean
+        lastTransactionDate:
+          type: string
+          format: date-time
+        custodian:
+          type: string
+        lastName:
+          type: string
+        businessLine:
+          type: string
+        outsideId:
+          type: string
+        modelName:
+          type: string
+        noFeeAggregate:
+          type: string
+        status:
+          type: string
+          enum:
+          - Ready
+          - NotReady
+          - ReportingOnly
+          - FinancialPlanningFeeOnly
+        paysForAccountNumbers:
+          type: string
+        prevAmountApplied:
+          type: number
+          format: double
+        accountIdThatDoesPaying:
+          type: integer
+          format: int32
+      xml:
+        name: BillAccountBaseDto
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
+    OAS.WebApi.DTO.Billing.BillAccountSummaryDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        clientId:
+          type: integer
+          format: int32
+        registrationId:
+          type: integer
+          format: int32
+        billMarketValue:
+          type: number
+          format: double
+        feeSchedule:
+          type: string
+        payMethod:
+          type: string
+        masterPayoutSchedule:
+          type: string
+        paysForAccountNumbers:
+          readOnly: true
+          type: string
+        balanceDue:
+          type: number
+          format: double
+        creditRemaining:
+          type: number
+          format: double
+        billStartDate:
+          type: string
+          format: date-time
+        valuationMethod:
+          type: string
+          enum:
+          - PeriodEndingValue
+          - AvgDailyBalance
+          - AvgMonthlyBalance
+        billFrequency:
+          type: string
+          enum:
+          - Undefined
+          - Monthly
+          - Quarterly
+          - Triannual
+          - Semiannually
+          - Annually
+          - AtMaturity
+        isActive:
+          type: boolean
+        registrationName:
+          type: string
+        accountType:
+          type: string
+        representativeNumber:
+          type: string
+        representativeName:
+          type: string
+        accountValue:
+          type: number
+          format: double
+        model:
+          type: string
+      xml:
+        name: BillAccountSummaryDto
+      type: object
+    OAS.WebApi.DTO.Billing.BillingAccountCountsDto:
+      properties:
+        feeScheduleIsZero:
+          type: integer
+          format: int32
+        missingFeeSchedules:
+          type: integer
+          format: int32
+        missingManagementStyles:
+          type: integer
+          format: int32
+        missingPayoutSchedules:
+          type: integer
+          format: int32
+        billStatusNotReady:
+          type: integer
+          format: int32
+        payingFeeIsZero:
+          type: integer
+          format: int32
+        payingFeeIsIndirect:
+          type: integer
+          format: int32
+        payingFeeIsInactive:
+          type: integer
+          format: int32
+        checkPayPaidByOther:
+          type: integer
+          format: int32
+        subadvisorFeeSchedule:
+          type: integer
+          format: int32
+        accountsPaidByAndFor:
+          type: integer
+          format: int32
+        assetLevelBilling:
+          type: integer
+          format: int32
+      xml:
+        name: BillingAccountCountsDto
+      type: object
+    OAS.WebApi.DTO.Billing.BillAccountSimpleDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        accountType:
+          type: string
+        registrationName:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        accountName:
+          type: string
+        feeSchedule:
+          type: string
+        accountValue:
+          type: number
+          format: double
+        accountStartDate:
+          type: string
+          format: date-time
+        clientName:
+          type: string
+        feeScheduleId:
+          type: integer
+          format: int32
+        isActive:
+          type: boolean
+        custodian:
+          type: string
+        businessLine:
+          type: string
+        billStartDate:
+          type: string
+          format: date-time
+      xml:
+        name: BillAccountSimpleDto
+      type: object
+    OAS.WebApi.DTO.Billing.BillAccountDto:
+      properties:
+        tieredFeePriority:
+          type: integer
+          format: int32
+        acceptsList:
+          type: boolean
+        fundFamilyId:
+          type: integer
+          format: int32
+        managementStyleId:
+          type: integer
+          format: int32
+        subAdvisorId:
+          type: integer
+          format: int32
+        feeScheduleId:
+          type: integer
+          format: int32
+        additionalColumns:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Interface.AdditionalColumnDefinition'
+          xml:
+            name: AdditionalColumnDefinition
+            wrapped: true
+          type: array
+        masterPayoutScheduleId:
+          type: integer
+          format: int32
+        payMethodId:
+          type: integer
+          format: int32
+        bankName:
+          type: string
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        addressLine3:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        performanceMasterPayoutScheduleId:
+          type: integer
+          format: int32
+        performanceFeeScheduleId:
+          type: integer
+          format: int32
+        tradeInstruction:
+          type: string
+        paysForAccountsActive:
+          type: string
+        id:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        accountType:
+          type: string
+        registrationName:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        fundName:
+          type: string
+        accountNumber:
+          type: string
+        accountName:
+          type: string
+        remainingAmount:
+          type: number
+          format: double
+        managementStyle:
+          type: string
+        subAdvisorName:
+          type: string
+        feeSchedule:
+          type: string
+        masterPayoutSchedule:
+          type: string
+        payMethod:
+          type: string
+        billFrequency:
+          type: string
+          enum:
+          - Undefined
+          - Monthly
+          - Quarterly
+          - Triannual
+          - Semiannually
+          - Annually
+          - AtMaturity
+        billStyle:
+          type: string
+          enum:
+          - Advance
+          - Arrears
+        billAccountStatus:
+          type: string
+          enum:
+          - Ready
+          - NotReady
+          - ReportingOnly
+          - FinancialPlanningFeeOnly
+        billingStatus:
+          type: string
+          enum:
+          - ReadyToBill
+          - Hold
+          - PendingReview
+        valuationMethod:
+          type: string
+          enum:
+          - PeriodEndingValue
+          - AvgDailyBalance
+          - AvgMonthlyBalance
+        accountValue:
+          type: number
+          format: double
+        accountStartDate:
+          type: string
+          format: date-time
+        clientName:
+          type: string
+        billStartDate:
+          type: string
+          format: date-time
+        lastBilledThroughDate:
+          type: string
+          format: date-time
+        custodialAccountNumber:
+          type: string
+        isPerformanceBilled:
+          type: boolean
+        lastPerfBillDate:
+          type: string
+          format: date-time
+        includeInAggregate:
+          type: boolean
+        useFeeHierarchy:
+          type: boolean
+        cycleMonth:
+          type: integer
+          format: int32
+        performanceMasterPayoutSchedule:
+          type: string
+        performanceFeeSchedule:
+          type: string
+        representativeName:
+          type: string
+        representativeNumber:
+          type: string
+        isActive:
+          type: boolean
+        lastTransactionDate:
+          type: string
+          format: date-time
+        custodian:
+          type: string
+        lastName:
+          type: string
+        businessLine:
+          type: string
+        outsideId:
+          type: string
+        modelName:
+          type: string
+        noFeeAggregate:
+          type: string
+        status:
+          type: string
+          enum:
+          - Ready
+          - NotReady
+          - ReportingOnly
+          - FinancialPlanningFeeOnly
+        paysForAccountNumbers:
+          type: string
+        prevAmountApplied:
+          type: number
+          format: double
+        accountIdThatDoesPaying:
+          type: integer
+          format: int32
+      xml:
+        name: BillAccountDto
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    OAS.WebApi.DTO.Billing.BillAccountRecurringAdjustmentDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        fundName:
+          type: string
+        accountNumber:
+          type: string
+        managementStyle:
+          type: string
+        subAdvisorName:
+          type: string
+        feeSchedule:
+          type: string
+        masterPayoutSchedule:
+          type: string
+        accountValue:
+          type: number
+          format: double
+        clientName:
+          type: string
+        clientFirstName:
+          type: string
+        accountId:
+          type: integer
+          format: int32
+        additionalAnnualAmount:
+          type: number
+          format: double
+        adjustmentTypeDescription:
+          type: string
+        entityDescription:
+          type: string
+        billScheduleName:
+          type: string
+        type:
+          type: string
+        billStartDate:
+          type: string
+          format: date-time
+        feeScheduleId:
+          type: integer
+          format: int32
+        representativeName:
+          type: string
+        representativeNumber:
+          type: string
+        businessLine:
+          type: string
+        accountStartDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        adjustmentStartDate:
+          type: string
+          format: date-time
+        adjustmentEndDate:
+          type: string
+          format: date-time
+        outsideId:
+          type: string
+      xml:
+        name: BillAccountRecurringAdjustmentDto
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

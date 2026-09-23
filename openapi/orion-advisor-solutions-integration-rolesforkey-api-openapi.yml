@@ -1,0 +1,125 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integration/Roles For Key API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integration/RolesForKey
+paths:
+  /v1/Integration/RolesForKey/{key}:
+    get:
+      tags:
+      - Integration/RolesForKey
+      summary: Gets details about the privilege specified by the {key}, along with the Roles…
+      operationId: Integration_GetRolesForPrivilegeKeyAsync
+      parameters:
+      - name: key
+        in: path
+        description: The ID of the privilege.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.IntegrationPrivilegeRolesDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.IntegrationPrivilegeRolesDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.IntegrationPrivilegeRolesDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.IntegrationPrivilegeRolesDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.IntegrationPrivilegeRolesDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.IntegrationPrivilegeRolesDto'
+        '404':
+          description: No items found.
+        '500':
+          description: Internal Server Error
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.DataProcess.DTO.Integration.IntegrationPrivilegeRoleDto:
+      properties:
+        alClientId:
+          type: integer
+          format: int32
+        assignedProfileCount:
+          type: integer
+          format: int32
+        associationExists:
+          type: boolean
+        availableAccessType:
+          type: string
+        deleteIsGranted:
+          type: boolean
+        editIsGranted:
+          type: boolean
+        enabled:
+          type: boolean
+        id:
+          type: integer
+          format: int32
+        isDirty:
+          type: boolean
+        loginEntityId:
+          type: string
+        loginEntityDescription:
+          type: string
+        name:
+          type: string
+        readIsGranted:
+          type: boolean
+      xml:
+        name: IntegrationPrivilegeRoleDto
+      type: object
+    OAS.DataProcess.DTO.Integration.IntegrationPrivilegeRolesDto:
+      properties:
+        categoryId:
+          type: integer
+          format: int32
+        categoryName:
+          type: string
+        code:
+          type: string
+        description:
+          type: string
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        roles:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.IntegrationPrivilegeRoleDto'
+          xml:
+            name: IntegrationPrivilegeRoleDto
+            wrapped: true
+          type: array
+        typeName:
+          type: string
+      xml:
+        name: IntegrationPrivilegeRolesDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

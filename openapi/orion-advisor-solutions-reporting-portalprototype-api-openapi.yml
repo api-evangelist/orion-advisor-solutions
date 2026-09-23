@@ -1,0 +1,276 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Reporting/Portal Proto Type API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Reporting/PortalProtoType
+paths:
+  /v1/Reporting/PortalProtoType/Activity:
+    post:
+      tags:
+      - Reporting/PortalProtoType
+      summary: Portal get activity
+      operationId: Portal_GetActivity
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Activity.ActivitySimpleRequestDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Activity.ActivitySimpleRequestDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Activity.ActivitySimpleRequestDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Activity.ActivitySimpleRequestDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Activity.ActivitySimpleRequestDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Activity.ActivitySimpleRequestDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Activity.ActivitySimpleRequestDto'
+        required: true
+      x-summary-source: derived
+  /v1/Reporting/PortalProtoType/Allocation:
+    get:
+      tags:
+      - Reporting/PortalProtoType
+      summary: Get a List of Assets with properties that can be used to show allocation by…
+      operationId: Portal_GetAllocation
+      parameters:
+      - name: asOfDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: clientId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: displayName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: showAccountNumberCharacters
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 4
+      - name: includeInActive
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: includeNonIncepted
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: enableBondPriceMultiplier
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Reporting/PortalProtoType/Client/{clientId}/NetAmountInvested:
+    get:
+      tags:
+      - Reporting/PortalProtoType
+      summary: Portal get client net amount invested
+      operationId: Portal_GetClientNetAmountInvested
+      parameters:
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Reporting/PortalProtoType/DisplayNames:
+    get:
+      tags:
+      - Reporting/PortalProtoType
+      summary: Get a List of Display Names for all accounts under the given household ID
+      operationId: Portal_GetDisplayNames
+      parameters:
+      - name: clientId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: displayName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: includeInActive
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Reporting.Activity.ActivitySimpleRequestDto:
+      properties:
+        clientId:
+          type: integer
+          format: int32
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        activitySummaryDetail:
+          type: string
+          enum:
+          - BeginningMarketValue
+          - BeginningBondAccrual
+          - EndingMarketValue
+          - EndingBondAccrual
+          - Contributions
+          - Distributions
+          - NetDividendsInterestGainsWithdrawn
+          - MiscellaneousCharges
+          - AdvisoryFeesPaid
+          - DividendsAndInterest
+          - DividendInterestReinvested
+          - ExchangeIn
+          - ExchangeOut
+          - MergeIn
+          - MergeOut
+          - JournalIn
+          - JournalOut
+          - InitialMergeIn
+          - InitialContributions
+          - TransfersInOut
+          - ExchangeInOut
+        clientPerformanceInclude:
+          type: string
+          enum:
+          - Default
+          - All
+          - ActiveOnly
+          - ActiveWithValue
+          - ActiveRegistrationsOnly
+          - RegistrationsWithValue
+        useZeroInceptionValue:
+          type: boolean
+      xml:
+        name: ActivitySimpleRequestDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

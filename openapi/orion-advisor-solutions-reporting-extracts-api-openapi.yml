@@ -1,0 +1,987 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Reporting/Extracts API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Reporting/Extracts
+paths:
+  /v1/Reporting/Extracts/PerformanceData:
+    get:
+      tags:
+      - Reporting/Extracts
+      summary: Extracts get performance data
+      operationId: Extracts_GetPerformanceData
+      parameters:
+      - name: asOfDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: entityId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: entity
+        in: query
+        description: Only allows Client, Registration, Account, and Asset
+        required: false
+        schema:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+          default: 0
+      - name: clientId
+        in: query
+        description: 'Optional. Default: null. When provided limits the return to only the performance data that belong to the provided clientId.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: registrationId
+        in: query
+        description: 'Optional. Default: null. When provided limits the return to only the performance data that belong to the provided registrationId.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: accountId
+        in: query
+        description: 'Optional. Default: null. When provided limits the return to only the performance data that belong to the provided accountId.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: assetId
+        in: query
+        description: 'Optional. Default: null. When provided limits the return to only the performance data that belong to the provided assetId.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: includeCash
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: hasValue
+        in: query
+        description: 'Optional. Default: null. When provided will return only data for assets that have value (true) or do not have value (false) for today.'
+        required: false
+        schema:
+          type: boolean
+      - name: editedStartDate
+        in: query
+        description: 'Optional. Default: null. If provided only records that were edited after the date provided will be returned.'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: editedEndDate
+        in: query
+        description: 'Optional. Default: null. If provided only records that were edited before the date provided will be returned.'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.AssetValueChangeDto'
+                xml:
+                  name: AssetValueChangeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.AssetValueChangeDto'
+                xml:
+                  name: AssetValueChangeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.AssetValueChangeDto'
+                xml:
+                  name: AssetValueChangeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.AssetValueChangeDto'
+                xml:
+                  name: AssetValueChangeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.AssetValueChangeDto'
+                xml:
+                  name: AssetValueChangeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.AssetValueChangeDto'
+                xml:
+                  name: AssetValueChangeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Reporting/Extracts/UnrealizedTaxLots:
+    get:
+      tags:
+      - Reporting/Extracts
+      summary: Extracts get unrealized tax lots
+      operationId: Extracts_GetUnrealizedTaxLots
+      parameters:
+      - name: entityId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: entity
+        in: query
+        description: Only allows Representative, Client, Registration, Account, and Asset
+        required: false
+        schema:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+          default: 0
+      - name: representativeId
+        in: query
+        description: 'Optional. Default: null. When provided limits the return to only those lots that belong to the provided representativeId.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: clientId
+        in: query
+        description: 'Optional. Default: null. When provided limits the return to only those lots that belong to the provided clientId.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: registrationId
+        in: query
+        description: 'Optional. Default: null. When provided limits the return to only those lots that belong to the provided registrationId.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: accountId
+        in: query
+        description: 'Optional. Default: null. When provided limits the return to only those lots that belong to the provided accountId.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: assetId
+        in: query
+        description: 'Optional. Default: null. When provided limits the return to only those lots that belong to the provided assetId.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: includeCash
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: hasValue
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: editedStartDate
+        in: query
+        description: 'Optional. Default: null. If provided only records that were edited after the date provided will be returned.'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: editedEndDate
+        in: query
+        description: 'Optional. Default: null. If provided only records that were edited before the date provided will be returned.'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.UnrealizedTaxLotsDto'
+                xml:
+                  name: UnrealizedTaxLotsDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.UnrealizedTaxLotsDto'
+                xml:
+                  name: UnrealizedTaxLotsDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.UnrealizedTaxLotsDto'
+                xml:
+                  name: UnrealizedTaxLotsDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.UnrealizedTaxLotsDto'
+                xml:
+                  name: UnrealizedTaxLotsDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.UnrealizedTaxLotsDto'
+                xml:
+                  name: UnrealizedTaxLotsDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.UnrealizedTaxLotsDto'
+                xml:
+                  name: UnrealizedTaxLotsDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Reporting/Extracts/UnrealizedTaxLots/List/AccountId:
+    post:
+      tags:
+      - Reporting/Extracts
+      summary: Extracts get unrealized tax lots by account ids
+      operationId: Extracts_GetUnrealizedTaxLotsByAccountIds
+      parameters:
+      - name: includeCash
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: hasValue
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: editedStartDate
+        in: query
+        description: 'Optional. Default: null. If provided only records that were edited after the date provided will be returned.'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: editedEndDate
+        in: query
+        description: 'Optional. Default: null. If provided only records that were edited before the date provided will be returned.'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.UnrealizedTaxLotsDto'
+                xml:
+                  name: UnrealizedTaxLotsDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.UnrealizedTaxLotsDto'
+                xml:
+                  name: UnrealizedTaxLotsDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.UnrealizedTaxLotsDto'
+                xml:
+                  name: UnrealizedTaxLotsDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.UnrealizedTaxLotsDto'
+                xml:
+                  name: UnrealizedTaxLotsDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.UnrealizedTaxLotsDto'
+                xml:
+                  name: UnrealizedTaxLotsDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.UnrealizedTaxLotsDto'
+                xml:
+                  name: UnrealizedTaxLotsDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      x-summary-source: derived
+  /v1/Reporting/Extracts/UnrealizedTaxLots/List/AssetId:
+    post:
+      tags:
+      - Reporting/Extracts
+      summary: Extracts get unrealized tax lots by asset ids
+      operationId: Extracts_GetUnrealizedTaxLotsByAssetIds
+      parameters:
+      - name: includeCash
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: hasValue
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: editedStartDate
+        in: query
+        description: 'Optional. Default: null. If provided only records that were edited after the date provided will be returned.'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: editedEndDate
+        in: query
+        description: 'Optional. Default: null. If provided only records that were edited before the date provided will be returned.'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.UnrealizedTaxLotsDto'
+                xml:
+                  name: UnrealizedTaxLotsDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.UnrealizedTaxLotsDto'
+                xml:
+                  name: UnrealizedTaxLotsDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.UnrealizedTaxLotsDto'
+                xml:
+                  name: UnrealizedTaxLotsDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.UnrealizedTaxLotsDto'
+                xml:
+                  name: UnrealizedTaxLotsDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.UnrealizedTaxLotsDto'
+                xml:
+                  name: UnrealizedTaxLotsDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Extracts.UnrealizedTaxLotsDto'
+                xml:
+                  name: UnrealizedTaxLotsDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Reporting.Extracts.AssetValueChangeDto:
+      properties:
+        assetId:
+          type: integer
+          format: int32
+        asOfDate:
+          type: string
+          format: date-time
+        startAccruedInt:
+          type: number
+          format: double
+        dividendAccrual:
+          type: number
+          format: double
+        editedDate:
+          type: string
+          format: date-time
+      xml:
+        name: AssetValueChangeDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Extracts.UnrealizedTaxLotsDto:
+      properties:
+        lotId:
+          type: integer
+          format: int64
+        assetId:
+          type: integer
+          format: int32
+        asOfDate:
+          type: string
+          format: date-time
+        longTermCost:
+          type: number
+          format: double
+        shortTermCost:
+          type: number
+          format: double
+        longTermUnits:
+          type: number
+          format: double
+        shortTermUnits:
+          type: number
+          format: double
+        acquiredDate:
+          type: string
+          format: date-time
+        amortizationAmt:
+          type: number
+          format: double
+        origCostPerShare:
+          description: The Cost as reported to Orion by the custodian
+          type: number
+          format: double
+        editedDate:
+          type: string
+          format: date-time
+        costPerShare:
+          description: Has the caluclated costpershare (Cost divided by units)
+          type: number
+          format: double
+      xml:
+        name: UnrealizedTaxLotsDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

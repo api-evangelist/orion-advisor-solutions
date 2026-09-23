@@ -1,0 +1,468 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Reporting/Data API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Reporting/Data
+paths:
+  /v1/Reporting/Data/Cache:
+    get:
+      tags:
+      - Reporting/Data
+      operationId: ScopeCache_GetScopeCacheResultAsync
+      parameters:
+      - name: cacheName
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Performance.ScopeCache.ScopeCacheResult'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Performance.ScopeCache.ScopeCacheResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Performance.ScopeCache.ScopeCacheResult'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Performance.ScopeCache.ScopeCacheResult'
+      security:
+      - Authorization: []
+      summary: Scope cache get scope cache result async
+      x-summary-source: derived
+  /v1/Reporting/Data/Cache/Refresh:
+    post:
+      tags:
+      - Reporting/Data
+      operationId: ScopeCache_RunScopeCacheJob
+      parameters:
+      - name: asOfDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.ContextChange'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.ContextChange'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.ContextChange'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.ContextChange'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.ContextChange'
+        required: true
+      summary: Scope cache run scope cache job
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.DataModel.Reporting.Interfaces.IMakeDateRange:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeDateRange
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeActivityOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeActivityOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeTradingOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeTradingOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeBillingOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeBillingOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IReturnStyle:
+      properties:
+        frequency:
+          readOnly: true
+          type: string
+          enum:
+          - Summary
+          - Annually
+          - Quarterly
+          - Monthly
+          - Weekly
+          - Daily
+          - Automatic
+        basedOn:
+          readOnly: true
+          type: string
+          enum:
+          - Calendar
+          - RollingForward
+          - RollingBackward
+        breakBehavior:
+          readOnly: true
+          type: string
+          enum:
+          - AllowPartialPeriods
+          - PartialPeriodsWithBreakPoints
+          - FullPeriodsOnly
+        cumulative:
+          readOnly: true
+          type: boolean
+        cumulativeBasedOn:
+          readOnly: true
+          type: string
+          enum:
+          - ForwardFromStartDate
+          - BackwardFromEndDate
+        context:
+          readOnly: true
+          type: string
+          enum:
+          - Self
+          - Parent
+      xml:
+        name: IReturnStyle
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeComparisonOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeComparisonOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeCostBasisOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeCostBasisOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeMaturityPeriodOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeMaturityPeriodOption
+      type: object
+    OAS.WebApi.DTO.Reporting.Calculate.ScopeDto:
+      properties:
+        sessionId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        asOfDate:
+          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
+        dataLastUpdated:
+          type: string
+          format: date-time
+        calculations:
+          items:
+            $ref: '#/components/schemas/OAS.DataAccess.Domains.Reporting.DataEngine.IGotCalculated'
+          xml:
+            name: IGotCalculated
+            wrapped: true
+          type: array
+      xml:
+        name: ScopeDto
+      type: object
+    OAS.DataModel.Reporting.Calculation.IMakeCalculationOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeCalculationOption
+      type: object
+    OAT.Utilities.Date.IDate:
+      properties:
+        date:
+          readOnly: true
+          type: string
+          format: date-time
+        year:
+          readOnly: true
+          type: integer
+          format: int32
+        month:
+          readOnly: true
+          type: integer
+          format: int32
+        day:
+          readOnly: true
+          type: integer
+          format: int32
+      xml:
+        name: IDate
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakePerformanceOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakePerformanceOption
+      type: object
+    OAS.DataProcess.Performance.ScopeCache.ScopeCacheResult:
+      properties:
+        cacheName:
+          type: string
+        lastUpdated:
+          type: string
+          format: date-time
+        scopeResult:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Calculate.ScopeDto'
+      xml:
+        name: ScopeCacheResult
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeAttributionOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeAttributionOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeTaxOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeTaxOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeIncomeOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeIncomeOption
+      type: object
+    OAS.DataAccess.Domains.Reporting.DataEngine.IGotCalculated:
+      properties:
+        id:
+          type: string
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IGotCalculated
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeTransactionOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeTransactionOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeProjectedIncomeOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeProjectedIncomeOption
+      type: object
+    OAS.DataModel.Reporting.Engine.ContextChange:
+      properties:
+        activityOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeActivityOption'
+        billingOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeBillingOption'
+        calculationOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculation.IMakeCalculationOption'
+        comparisonOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeComparisonOption'
+        costBasisOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeCostBasisOption'
+        dateRange:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeDateRange'
+        incomeOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeIncomeOption'
+        maturityPeriodOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeMaturityPeriodOption'
+        performanceOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakePerformanceOption'
+        projectedIncomeOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeProjectedIncomeOption'
+        statisticalOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeStatisticalOption'
+        taxOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeTaxOption'
+        tradingOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeTradingOption'
+        transactionOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeTransactionOption'
+        attributionOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeAttributionOption'
+        activityOptionId:
+          type: integer
+          format: int32
+        billingOptionId:
+          type: integer
+          format: int32
+        calculationOptionId:
+          type: integer
+          format: int32
+        comparisonOptionId:
+          type: integer
+          format: int32
+        costBasisOptionId:
+          type: integer
+          format: int32
+        dateRangeId:
+          type: integer
+          format: int32
+        incomeOptionId:
+          type: integer
+          format: int32
+        maturityPeriodOptionId:
+          type: integer
+          format: int32
+        performanceOptionId:
+          type: integer
+          format: int32
+        projectedIncomeOptionId:
+          type: integer
+          format: int32
+        promptOptionId:
+          type: integer
+          format: int32
+        reportCategoryId:
+          type: integer
+          format: int32
+        statisticalOptionId:
+          type: integer
+          format: int32
+        taxOptionId:
+          type: integer
+          format: int32
+        tradingOptionId:
+          type: integer
+          format: int32
+        transactionOptionId:
+          type: integer
+          format: int32
+        attributionId:
+          type: integer
+          format: int32
+        returnStyle:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IReturnStyle'
+        percentFormat:
+          type: string
+        dollarFormat:
+          type: string
+        decimalFormat:
+          type: string
+        numericFormat:
+          type: string
+        quickDate:
+          type: string
+          enum:
+          - Day
+          - WTD
+          - MTD
+          - QTD
+          - YTD
+          - OneYear
+          - TwoYear
+          - ThreeYear
+          - FourYear
+          - FiveYear
+          - SixYear
+          - SevenYear
+          - EightYear
+          - NineYear
+          - TenYear
+          - PreviousOneYear
+          - PreviousTwoYear
+          - PreviousThreeYear
+          - PreviousFourYear
+          - PreviousFiveYear
+          - PreviousSixYear
+          - PreviousSevenYear
+          - PreviousEightYear
+          - PreviousNineYear
+          - PreviousTenYear
+          - Inception
+          - HoldingPeriod
+          - AIPLedger
+        globalsSynced:
+          type: boolean
+        useSmaSetting:
+          type: boolean
+      xml:
+        name: ContextChange
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeStatisticalOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeStatisticalOption
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

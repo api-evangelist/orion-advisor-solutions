@@ -1,0 +1,859 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Transactions API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/Transactions
+paths:
+  /v1/Trading/Transactions:
+    get:
+      tags:
+      - Trading/Transactions
+      operationId: TradingTransactions_Get
+      parameters:
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Complete
+          - Pending
+          - Rejected
+          - Reversed
+          - Inactive
+          - PendingCorpAction
+          - FutureAip
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: transTypeId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: asOfDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: hasValue
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: editedStartDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: editedEndDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Trading transactions get
+      x-summary-source: derived
+    put:
+      tags:
+      - Trading/Transactions
+      summary: Obsolete.
+      operationId: TradingTransactions_UpdateList
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+      deprecated: true
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+              xml:
+                name: TradingTransactionDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+              xml:
+                name: TradingTransactionDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+              xml:
+                name: TradingTransactionDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+              xml:
+                name: TradingTransactionDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+              xml:
+                name: TradingTransactionDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+              xml:
+                name: TradingTransactionDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+              xml:
+                name: TradingTransactionDto
+                wrapped: true
+              type: array
+        required: true
+  /v1/Trading/Transactions/{key}:
+    get:
+      tags:
+      - Trading/Transactions
+      summary: Gets the transaction that has the provided key.
+      operationId: TradingTransactions_GetByKey
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Trading/Transactions
+      summary: Obsolete.
+      operationId: TradingTransactions_Update
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+      deprecated: true
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+        required: true
+  /v1/Trading/Transactions/Action/Delete:
+    put:
+      tags:
+      - Trading/Transactions
+      operationId: TradingTransactions_ActionDelete
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Trading transactions action delete
+      x-summary-source: derived
+  /v1/Trading/Transactions/Action/StatusChange/{status}:
+    put:
+      tags:
+      - Trading/Transactions
+      operationId: TradingTransactions_ActionReject
+      parameters:
+      - name: status
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - Complete
+          - Pending
+          - Rejected
+          - Reversed
+          - Inactive
+          - PendingCorpAction
+          - FutureAip
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Trading transactions action reject
+      x-summary-source: derived
+  /v1/Trading/Transactions/List:
+    post:
+      tags:
+      - Trading/Transactions
+      summary: Gets a list of transactions that match one of the keys in the provided list
+      operationId: TradingTransactions_GetListById
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: List of keys of the desired return objects.
+        required: true
+  /v1/Trading/Transactions/List/Id:
+    post:
+      tags:
+      - Trading/Transactions
+      summary: Gets a list of transactions that match one of the keys in the provided list
+      operationId: TradingTransactions_PostV1TradingTransactionsListId
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: List of keys of the desired return objects.
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Trading.TradingTransactionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        assetId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        ticker:
+          type: string
+        accountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        registrationCode:
+          type: string
+        householdId:
+          type: integer
+          format: int32
+        fundFamilyName:
+          type: string
+        custodianName:
+          type: string
+        status:
+          type: string
+          enum:
+          - Complete
+          - Pending
+          - Rejected
+          - Reversed
+          - Inactive
+          - PendingCorpAction
+          - FutureAip
+        transDate:
+          type: string
+          format: date-time
+        transactionDescription:
+          type: string
+        transAmount:
+          type: number
+          format: double
+        navPrice:
+          type: number
+          format: double
+        noUnits:
+          type: number
+          format: double
+        notes:
+          type: string
+        orderId:
+          type: string
+        blockId:
+          type: integer
+          format: int32
+        orderCreatedBy:
+          type: string
+        avgPrice:
+          type: number
+          format: double
+        executionTime:
+          type: string
+          format: date-time
+        transTypeId:
+          type: integer
+          format: int32
+        contributionCodeId:
+          type: integer
+          format: int32
+        distributionCodeId:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        registrationSleeveStrategyName:
+          type: string
+        tradeOrderId:
+          type: integer
+          format: int32
+      xml:
+        name: TradingTransactionDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

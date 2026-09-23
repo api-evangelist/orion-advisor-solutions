@@ -1,0 +1,76 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Portfolio/Counts API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Portfolio/Counts
+paths:
+  /v1/Portfolio/Counts:
+    get:
+      tags:
+      - Portfolio/Counts
+      summary: Endpoint to get counts for all filters
+      operationId: Portfolio_GetCounts
+      parameters:
+      - name: isActive
+        in: query
+        description: 'Optional. Default: null. If provided returns only the active (true) or inactive clients (false).'
+        required: false
+        schema:
+          type: boolean
+      - name: resetCache
+        in: query
+        description: 'Optional. Default: false. The result is cached for thirty minutes. To force the cache to refresh call with resetCache = true.'
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PorfolioCountsDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PorfolioCountsDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PorfolioCountsDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PorfolioCountsDto'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Portfolio.PorfolioCountsDto:
+      properties:
+        client:
+          additionalProperties:
+            type: integer
+            format: int32
+          type: object
+        registration:
+          additionalProperties:
+            type: integer
+            format: int32
+          type: object
+        account:
+          additionalProperties:
+            type: integer
+            format: int32
+          type: object
+      xml:
+        name: PorfolioCountsDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

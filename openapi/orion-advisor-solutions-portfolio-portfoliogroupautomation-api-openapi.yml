@@ -1,0 +1,229 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Portfolio/Portfolio Group Automation API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Portfolio/PortfolioGroupAutomation
+paths:
+  /v1/Portfolio/PortfolioGroupAutomation:
+    get:
+      tags:
+      - Portfolio/PortfolioGroupAutomation
+      summary: Get the Portfolio Group Automation Configuration for the current identity
+      operationId: PortfolioGroupAutomation_GetPortfolioAutomationConfigAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Reporting.FirmJobs.IPortfolioGroupAssignmentAutomationOptions'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Reporting.FirmJobs.IPortfolioGroupAssignmentAutomationOptions'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Reporting.FirmJobs.IPortfolioGroupAssignmentAutomationOptions'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Reporting.FirmJobs.IPortfolioGroupAssignmentAutomationOptions'
+      security:
+      - Authorization: []
+    post:
+      tags:
+      - Portfolio/PortfolioGroupAutomation
+      summary: Create or update the Portfolio Group Automation Configuration for the current…
+      operationId: PortfolioGroupAutomation_UpdatePortfolioAutomationConfigAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: runJob
+        in: query
+        description: Set to true to run the Portfolio Group Assignment Automation Job after the update
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Reporting.FirmJobs.PortfolioGroupAssignmentAutomationOptions'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Reporting.FirmJobs.PortfolioGroupAssignmentAutomationOptions'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Reporting.FirmJobs.PortfolioGroupAssignmentAutomationOptions'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Reporting.FirmJobs.PortfolioGroupAssignmentAutomationOptions'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Reporting.FirmJobs.PortfolioGroupAssignmentAutomationOptions'
+        description: The config to create or update
+        required: true
+  /v1/Portfolio/PortfolioGroupAutomation/Run:
+    post:
+      tags:
+      - Portfolio/PortfolioGroupAutomation
+      summary: Run the Portfolio Group Assignment Automation Job for the current identity…
+      operationId: PortfolioGroupAutomation_RunPortfolioGroupAutomationProcess
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+  /v1/Portfolio/PortfolioGroupAutomation/Run/Household/{householdId}:
+    post:
+      tags:
+      - Portfolio/PortfolioGroupAutomation
+      summary: Run the Portfolio Group Assignment Automation Job single household
+      operationId: PortfolioGroupAutomation_RunPortfolioGroupAutomationProcessForHouseholdAsync
+      parameters:
+      - name: householdId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.DataProcess.Reporting.FirmJobs.IPortfolioGroupAssignmentAutomationOptions:
+      properties:
+        businessLineIds:
+          items:
+            type: integer
+            format: int32
+          readOnly: true
+          type: array
+        createPortfolioGroupOnNonMatch:
+          readOnly: true
+          type: boolean
+        excludeByAccountNumberContains:
+          items:
+            type: string
+          readOnly: true
+          type: array
+        matchByAccountName:
+          readOnly: true
+          type: boolean
+        matchByAccountNumberPrefix:
+          additionalProperties:
+            type: string
+          readOnly: true
+          type: object
+        overwriteExistingPortfolioGroup:
+          readOnly: true
+          type: boolean
+      xml:
+        name: IPortfolioGroupAssignmentAutomationOptions
+      type: object
+    OAS.DataProcess.Reporting.FirmJobs.PortfolioGroupAssignmentAutomationOptions:
+      properties:
+        businessLineIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        matchByAccountNumberPrefix:
+          additionalProperties:
+            type: string
+          type: object
+        matchByAccountName:
+          type: boolean
+        createPortfolioGroupOnNonMatch:
+          type: boolean
+        overwriteExistingPortfolioGroup:
+          type: boolean
+        excludeByAccountNumberContains:
+          items:
+            type: string
+          type: array
+      xml:
+        name: PortfolioGroupAssignmentAutomationOptions
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

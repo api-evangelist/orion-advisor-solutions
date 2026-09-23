@@ -1,0 +1,74 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Portfolio/Esg API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Portfolio/Esg
+paths:
+  /v1/Portfolio/Esg/Restriction/Mappings:
+    get:
+      tags:
+      - Portfolio/Esg
+      operationId: Esg_GetEsgRestrictionMappingsAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Esg get esg restriction mappings async
+      x-summary-source: derived
+  /v1/Portfolio/Esg/Restriction/Securities/{categoryId}:
+    get:
+      tags:
+      - Portfolio/Esg
+      operationId: Esg_GetEsgSecuritiesAsync
+      parameters:
+      - name: categoryId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Esg get esg securities async
+      x-summary-source: derived
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

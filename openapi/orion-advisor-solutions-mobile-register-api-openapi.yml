@@ -1,0 +1,80 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Mobile/Register API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Mobile/Register
+paths:
+  /v1/Mobile/Register/PushNotification:
+    post:
+      tags:
+      - Mobile/Register
+      summary: Used to create mobile tokens for push notifications.
+      operationId: Mobile_RegisterPushNotification
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Mobile.PushNotificationDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Mobile.PushNotificationDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Mobile.PushNotificationDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Mobile.PushNotificationDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Mobile.PushNotificationDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Mobile.PushNotificationDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Mobile.PushNotificationDto'
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Mobile.PushNotificationDto:
+      properties:
+        appId:
+          type: string
+        osType:
+          type: string
+          enum:
+          - iOS
+          - Android
+        token:
+          type: string
+      xml:
+        name: PushNotificationDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

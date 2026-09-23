@@ -1,0 +1,457 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Yahoo Finance API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/YahooFinance
+paths:
+  /v1/Integrations/YahooFinance/Options/{ticker}:
+    get:
+      tags:
+      - Integrations/YahooFinance
+      operationId: IntegrationsYahooFinance_GetTickerOptionsAsync
+      parameters:
+      - name: ticker
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: straddle
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: expiredate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.CoveredCallOptionsDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.CoveredCallOptionsDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.CoveredCallOptionsDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.CoveredCallOptionsDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.CoveredCallOptionsDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.CoveredCallOptionsDto'
+      security:
+      - Authorization: []
+      summary: Integrations yahoo finance get ticker options async
+      x-summary-source: derived
+  /v1/Integrations/YahooFinance/Quote/{contractSymbol}:
+    get:
+      tags:
+      - Integrations/YahooFinance
+      operationId: IntegrationsYahooFinance_GetTickerQuoteAsync
+      parameters:
+      - name: contractSymbol
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.CoveredCallOptionsDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.CoveredCallOptionsDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.CoveredCallOptionsDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.CoveredCallOptionsDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.CoveredCallOptionsDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.CoveredCallOptionsDto'
+      security:
+      - Authorization: []
+      summary: Integrations yahoo finance get ticker quote async
+      x-summary-source: derived
+components:
+  schemas:
+    OAT.Integrations.YahooFinance.Options:
+      properties:
+        expirationDate:
+          type: integer
+          format: int64
+        hasMiniOptions:
+          type: boolean
+        calls:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Call'
+          xml:
+            name: Call
+            wrapped: true
+          type: array
+        puts:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Put'
+          xml:
+            name: Put
+            wrapped: true
+          type: array
+        straddles:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Straddles'
+          xml:
+            name: Straddles
+            wrapped: true
+          type: array
+      xml:
+        name: Options
+      type: object
+    OAT.Integrations.YahooFinance.Straddles:
+      properties:
+        strike:
+          type: number
+          format: double
+        call:
+          $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Call'
+        put:
+          $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Put'
+      xml:
+        name: Straddles
+      type: object
+    OAS.WebApi.Domains.Integrations.CoveredCallOptionsDto:
+      properties:
+        underlyingSymbol:
+          type: string
+        expirationDates:
+          items:
+            type: integer
+            format: int64
+          type: array
+        strikes:
+          items:
+            type: number
+            format: double
+          type: array
+        hasMiniOptions:
+          type: boolean
+        quote:
+          $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Quote'
+        options:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Options'
+          xml:
+            name: Options
+            wrapped: true
+          type: array
+        convertedDates:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.ExpirationDatesDto'
+          xml:
+            name: ExpirationDatesDto
+            wrapped: true
+          type: array
+      xml:
+        name: CoveredCallOptionsDto
+      type: object
+    OAT.Integrations.YahooFinance.Quote:
+      properties:
+        quoteType:
+          type: string
+        quoteSourceName:
+          type: string
+        currency:
+          type: string
+        longName:
+          type: string
+        market:
+          type: string
+        marketState:
+          type: string
+        exchange:
+          type: string
+        sharesOutstanding:
+          type: number
+          format: double
+        bookValue:
+          type: number
+          format: double
+        fiftyDayAverage:
+          type: number
+          format: double
+        fiftyDayAverageChange:
+          type: number
+          format: double
+        fiftyDayAverageChangePercent:
+          type: number
+          format: double
+        twoHundredDayAverage:
+          type: number
+          format: double
+        twoHundredDayAverageChange:
+          type: number
+          format: double
+        twoHundredDayAverageChangePercent:
+          type: number
+          format: double
+        marketCap:
+          type: number
+          format: double
+        forwardPE:
+          type: number
+          format: double
+        priceToBook:
+          type: number
+          format: double
+        sourceInterval:
+          type: integer
+          format: int32
+        exchangeTimezoneName:
+          type: string
+        exchangeTimezoneShortName:
+          type: string
+        gmtOffSetMilliseconds:
+          type: integer
+          format: int32
+        postMarketChangePercent:
+          type: number
+          format: double
+        postMarketTime:
+          type: integer
+          format: int32
+        postMarketPrice:
+          type: number
+          format: double
+        postMarketChange:
+          type: number
+          format: double
+        regularMarketChangePercent:
+          type: number
+          format: double
+        regularMarketPreviousClose:
+          type: number
+          format: double
+        bid:
+          type: number
+          format: double
+        ask:
+          type: number
+          format: double
+        bidSize:
+          type: integer
+          format: int32
+        askSize:
+          type: integer
+          format: int32
+        messageBoardId:
+          type: string
+        fullExchangeName:
+          type: string
+        averageDailyVolume3Month:
+          type: integer
+          format: int32
+        averageDailyVolume10Day:
+          type: integer
+          format: int32
+        fiftyTwoWeekLowChange:
+          type: number
+          format: double
+        fiftyTwoWeekLowChangePercent:
+          type: number
+          format: double
+        fiftyTwoWeekHighChange:
+          type: number
+          format: double
+        fiftyTwoWeekHighChangePercent:
+          type: number
+          format: double
+        fiftyTwoWeekLow:
+          type: number
+          format: double
+        fiftyTwoWeekHigh:
+          type: number
+          format: double
+        dividendDate:
+          type: integer
+          format: int32
+        earningsTimestamp:
+          type: integer
+          format: int32
+        earningsTimestampStart:
+          type: integer
+          format: int32
+        earningsTimestampEnd:
+          type: integer
+          format: int32
+        trailingAnnualDividendRate:
+          type: number
+          format: double
+        trailingPE:
+          type: number
+          format: double
+        epsTrailingTwelveMonths:
+          type: number
+          format: double
+        epsForward:
+          type: number
+          format: double
+        shortName:
+          type: string
+        regularMarketPrice:
+          type: number
+          format: double
+        regularMarketTime:
+          type: integer
+          format: int32
+        regularMarketChange:
+          type: number
+          format: double
+        regularMarketOpen:
+          type: number
+          format: double
+        regularMarketDayHigh:
+          type: number
+          format: double
+        regularMarketDayLow:
+          type: number
+          format: double
+        regularMarketVolume:
+          type: number
+          format: double
+        symbol:
+          type: string
+        expireDate:
+          type: integer
+          format: int64
+      xml:
+        name: Quote
+      type: object
+    OAS.WebApi.Domains.Integrations.ExpirationDatesDto:
+      properties:
+        value:
+          type: integer
+          format: int64
+        displayValue:
+          type: string
+          format: date-time
+      xml:
+        name: ExpirationDatesDto
+      type: object
+    OAT.Integrations.YahooFinance.Put:
+      properties:
+        contractSymbol:
+          type: string
+        strike:
+          type: number
+          format: double
+        currency:
+          type: string
+        lastPrice:
+          type: number
+          format: double
+        change:
+          type: number
+          format: double
+        percentChange:
+          type: number
+          format: double
+        volume:
+          type: integer
+          format: int32
+        openInterest:
+          type: number
+          format: double
+        bid:
+          type: number
+          format: double
+        ask:
+          type: number
+          format: double
+        contractSize:
+          type: string
+        expiration:
+          type: integer
+          format: int64
+        lastTradeDate:
+          type: integer
+          format: int64
+        impliedVolatility:
+          type: number
+          format: double
+        inTheMoney:
+          type: boolean
+      xml:
+        name: Put
+      type: object
+    OAT.Integrations.YahooFinance.Call:
+      properties:
+        contractSymbol:
+          type: string
+        strike:
+          type: number
+          format: double
+        currency:
+          type: string
+        lastPrice:
+          type: number
+          format: double
+        change:
+          type: number
+          format: double
+        percentChange:
+          type: number
+          format: double
+        volume:
+          type: integer
+          format: int32
+        openInterest:
+          type: number
+          format: double
+        bid:
+          type: number
+          format: double
+        ask:
+          type: number
+          format: double
+        contractSize:
+          type: string
+        expiration:
+          type: integer
+          format: int64
+        lastTradeDate:
+          type: integer
+          format: int64
+        impliedVolatility:
+          type: number
+          format: double
+        inTheMoney:
+          type: boolean
+      xml:
+        name: Call
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

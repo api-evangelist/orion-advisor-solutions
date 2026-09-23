@@ -1,0 +1,194 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Utility/Entity Session API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Utility/EntitySession
+paths:
+  /v1/Utility/EntitySession/{parseAsType}/{entityType}:
+    post:
+      tags:
+      - Utility/EntitySession
+      operationId: EntitySession_CreateEntitySessionBodyAsync
+      parameters:
+      - name: parseAsType
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: entityType
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: string
+              type: array
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+          text/json:
+            schema:
+              items:
+                type: string
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: string
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: string
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: string
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: string
+              type: array
+        required: true
+      summary: Entity session create entity session body async
+      x-summary-source: derived
+  /v1/Utility/EntitySession/SimpleFile/{parseAsType}/{entityType}:
+    post:
+      tags:
+      - Utility/EntitySession
+      summary: Creates an entity session ID to associate selected ids Sample Request POST…
+      operationId: EntitySession_CreateEntitySessionAsync
+      parameters:
+      - name: parseAsType
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: entityType
+        in: path
+        description: 'A valid entity type: Registration, Account, Asset'
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        description: Cancellation Token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportSingleFileDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportSingleFileDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportSingleFileDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportSingleFileDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportSingleFileDto'
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Utility.ImportSingleFileDto:
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+      xml:
+        name: ImportSingleFileDto
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

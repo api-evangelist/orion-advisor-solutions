@@ -1,0 +1,95 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Outbox Sync API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/OutboxSync
+paths:
+  /v1/Integrations/OutboxSync/Accounts:
+    post:
+      tags:
+      - Integrations/OutboxSync
+      summary: Re-queues account-context outbox data for the supplied {accountIds}.
+      description: 'Sample Request:
+
+        POST v1/Integrations/OutboxSync/Accounts
+
+        [ 100, 200, 300 ]'
+      operationId: OutboxSync_SyncAccountsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

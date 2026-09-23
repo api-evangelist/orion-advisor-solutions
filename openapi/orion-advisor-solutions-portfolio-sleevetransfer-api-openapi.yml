@@ -1,0 +1,882 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Portfolio/Sleeve Transfer API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Portfolio/SleeveTransfer
+paths:
+  /v1/Portfolio/SleeveTransfer/{entitySessionId}:
+    get:
+      tags:
+      - Portfolio/SleeveTransfer
+      summary: Gets a list of SleevedAssets filtered by the correlated entity level inside of…
+      description: 'Sample Request
+
+        GET /Portfolio/SleeveTransfer/243
+
+        [
+
+        {
+
+        "assetId": 15785,
+
+        "accountId": 437,
+
+        "accountNumber": "SAMPLE-295",
+
+        "productName": "Performance Asset",
+
+        "ticker": "PERFORMANCE",
+
+        "currentQuantity": 60,
+
+        "transferQuantity": 0,
+
+        "remainingQuantity": 0,
+
+        "modelFromAccountId": 435,
+
+        "modelToAccountId": -1,
+
+        "transactionDate": "2023-08-03T11:56:54.573-05:00",
+
+        "useNonBilledJournals": false,
+
+        "assetClass": "Security",
+
+        "riskCategory": "Uncategorized",
+
+        "registrationId": 253,
+
+        "registrationName": "Nancy Fallon",
+
+        "sleeveType": "Custodial account"
+
+        }
+
+        ]'
+      operationId: PortfolioSleeveTransfer_GetSleeveTransferDataAsync
+      parameters:
+      - name: entitySessionId
+        in: path
+        description: The key to use for looking up correlated entities inside of dbo.tblEntitySession
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.AssetSleeveDto'
+                xml:
+                  name: AssetSleeveDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.AssetSleeveDto'
+                xml:
+                  name: AssetSleeveDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.AssetSleeveDto'
+                xml:
+                  name: AssetSleeveDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.AssetSleeveDto'
+                xml:
+                  name: AssetSleeveDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.AssetSleeveDto'
+                xml:
+                  name: AssetSleeveDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.AssetSleeveDto'
+                xml:
+                  name: AssetSleeveDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Portfolio/SleeveTransfer/Action/Transfer/{entitySessionId}:
+    put:
+      tags:
+      - Portfolio/SleeveTransfer
+      summary: Executes the transfers for the entered quanties for all the sleeves specified…
+      operationId: PortfolioSleeveTransfer_ExecuteSleeveTransferAsync
+      parameters:
+      - name: entitySessionId
+        in: path
+        description: EntitySessionId to properly log and correlate the data in datadog
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        description: Cancellation Token
+        required: true
+      - name: syncToEclipse
+        in: query
+        description: Override to False to not sync to eclipse automatically
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.AssetSleeveDto'
+              xml:
+                name: AssetSleeveDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.AssetSleeveDto'
+              xml:
+                name: AssetSleeveDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.AssetSleeveDto'
+              xml:
+                name: AssetSleeveDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.AssetSleeveDto'
+              xml:
+                name: AssetSleeveDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.AssetSleeveDto'
+              xml:
+                name: AssetSleeveDto
+                wrapped: true
+              type: array
+        description: The data to transfer from one sleeve to another
+        required: true
+  /v1/Portfolio/SleeveTransfer/Batch/List:
+    get:
+      tags:
+      - Portfolio/SleeveTransfer
+      summary: Gets the list of Sleeve Transfer Batches
+      description: 'Sample Request
+
+        GET /Portfolio/SleeveTransfer/Batch/List
+
+        {
+
+        "startDate": "12/31/2009",
+
+        "endDate": "04/10/2023"
+
+        }'
+      operationId: PortfolioSleeveTransfer_GetSleeveTransferBatchAsync
+      parameters:
+      - name: startDate
+        in: query
+        description: Start Date to filter from
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: End Date to filter to
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: ct
+        in: header
+        description: Cancellation Token
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveTransferBatchDto'
+                xml:
+                  name: SleeveTransferBatchDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveTransferBatchDto'
+                xml:
+                  name: SleeveTransferBatchDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveTransferBatchDto'
+                xml:
+                  name: SleeveTransferBatchDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveTransferBatchDto'
+                xml:
+                  name: SleeveTransferBatchDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveTransferBatchDto'
+                xml:
+                  name: SleeveTransferBatchDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveTransferBatchDto'
+                xml:
+                  name: SleeveTransferBatchDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Portfolio/SleeveTransfer/Batch/Transactions/{batchId}:
+    get:
+      tags:
+      - Portfolio/SleeveTransfer
+      summary: Gets the list of Sleeve Transfer Batch Transactions
+      description: 'Sample Request
+
+        GET /Portfolio/SleeveTransfer/Batch/Transactions/123'
+      operationId: PortfolioSleeveTransfer_GetSleeveTransferBatchTransactionAsync
+      parameters:
+      - name: batchId
+        in: path
+        description: Batch ID for transactions list
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: ct
+        in: header
+        description: Cancellation Token
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveTransferBatchTransactionDto'
+                xml:
+                  name: SleeveTransferBatchTransactionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveTransferBatchTransactionDto'
+                xml:
+                  name: SleeveTransferBatchTransactionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveTransferBatchTransactionDto'
+                xml:
+                  name: SleeveTransferBatchTransactionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveTransferBatchTransactionDto'
+                xml:
+                  name: SleeveTransferBatchTransactionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveTransferBatchTransactionDto'
+                xml:
+                  name: SleeveTransferBatchTransactionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveTransferBatchTransactionDto'
+                xml:
+                  name: SleeveTransferBatchTransactionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Portfolio/SleeveTransfer/EntitySession/{entityType}:
+    post:
+      tags:
+      - Portfolio/SleeveTransfer
+      summary: Creates an entity session ID to associate selected ids for sleeve transfer…
+      operationId: PortfolioSleeveTransfer_CreateSleeveTransferEntitySessionAsync
+      parameters:
+      - name: entityType
+        in: path
+        description: 'A valid entity type: Registration, Account, Asset'
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        description: Cancellation Token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: List of IDs to associate
+        required: true
+  /v1/Portfolio/SleeveTransfer/SleeveModel/{entitySessionId}:
+    get:
+      tags:
+      - Portfolio/SleeveTransfer
+      summary: Returns a full list of all models (really account sleeves) associated with the…
+      description: '{
+
+        "sleeveModels": [
+
+        {
+
+        "assetId": 11382,
+
+        "accountId": 290,
+
+        "productId": 328404,
+
+        "registrationId": 105,
+
+        "modelAggId": null,
+
+        "modelName": null,
+
+        "sleeveType": "Custodial account",
+
+        "displayModelName": "Custodial"
+
+        },
+
+        {
+
+        "assetId": 14180,
+
+        "accountId": 290,
+
+        "productId": 440869,
+
+        "registrationId": 105,
+
+        "modelAggId": null,
+
+        "modelName": null,
+
+        "sleeveType": "Custodial account",
+
+        "displayModelName": "Custodial"
+
+        }],
+
+        "sleeveModelsByRegistrationId": {
+
+        "105": [
+
+        {
+
+        "modelAggId": null,
+
+        "modelName": null,
+
+        "sleeveType": "Custodial account",
+
+        "displayModelName": "Custodial"
+
+        },
+
+        {
+
+        "modelAggId": null,
+
+        "modelName": null,
+
+        "sleeveType": "Custodial account",
+
+        "displayModelName": "Custodial"
+
+        }]
+
+        },
+
+        "sleeveModelsByProductId": {
+
+        "1": [
+
+        {
+
+        "modelAggId": null,
+
+        "modelName": null,
+
+        "sleeveType": "Normal sleeve",
+
+        "displayModelName": ""
+
+        },
+
+        {
+
+        "modelAggId": 1241,
+
+        "modelName": "Freedom01",
+
+        "sleeveType": "Normal sleeve",
+
+        "displayModelName": "Freedom01 (Normal)"
+
+        },
+
+        {
+
+        "modelAggId": 1242,
+
+        "modelName": "Freedom02",
+
+        "sleeveType": "Normal sleeve",
+
+        "displayModelName": "Freedom02 (Normal)"
+
+        },
+
+        {
+
+        "modelAggId": 1243,
+
+        "modelName": "Freedom03",
+
+        "sleeveType": "Normal sleeve",
+
+        "displayModelName": "Freedom03 (Normal)"
+
+        }
+
+        ],
+
+        "4": [
+
+        {
+
+        "modelAggId": null,
+
+        "modelName": null,
+
+        "sleeveType": "Custodial account",
+
+        "displayModelName": "Custodial"
+
+        }
+
+        ]
+
+        }
+
+        }'
+      operationId: PortfolioSleeveTransfer_GetAllSleeveModelsAsync
+      parameters:
+      - name: entitySessionId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductModelDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductModelDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductModelDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductModelDto'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Portfolio.Sleeve.SleeveTransferBatchDto:
+      properties:
+        id:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        registrationsImpacted:
+          type: integer
+          format: int32
+        assetsImpacted:
+          type: integer
+          format: int32
+        transactionsCreated:
+          type: integer
+          format: int32
+      xml:
+        name: SleeveTransferBatchDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.Sleeve.SleeveTransferBatchTransactionDto:
+      properties:
+        registrationId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        assetId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        modelName:
+          type: string
+        transactionDate:
+          type: string
+          format: date-time
+        transType:
+          type: string
+        transferQuantity:
+          type: number
+          format: double
+        registrationName:
+          type: string
+        accountId:
+          type: integer
+          format: int32
+        householdName:
+          type: string
+        householdId:
+          type: integer
+          format: int32
+        transactionId:
+          type: integer
+          format: int32
+        modelId:
+          type: integer
+          format: int32
+      xml:
+        name: SleeveTransferBatchTransactionDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductModelDto:
+      properties:
+        sleeveModels:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveModelDto'
+          readOnly: true
+          xml:
+            name: SleeveModelDto
+            wrapped: true
+          type: array
+        sleeveModelsByRegistrationId:
+          additionalProperties:
+            items:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductAvailableModel'
+            xml:
+              name: SleeveProductAvailableModel
+              wrapped: true
+            type: array
+          readOnly: true
+          type: object
+        sleeveModelsByProductId:
+          additionalProperties:
+            items:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductAvailableModel'
+            xml:
+              name: SleeveProductAvailableModel
+              wrapped: true
+            type: array
+          readOnly: true
+          type: object
+      xml:
+        name: SleeveProductModelDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.Sleeve.AssetSleeveDto:
+      properties:
+        assetId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        accountId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        productId:
+          type: integer
+          format: int32
+        ticker:
+          type: string
+        currentQuantity:
+          type: number
+          format: double
+        transferQuantity:
+          type: number
+          format: double
+        remainingQuantity:
+          type: number
+          format: double
+        modelFromAccountId:
+          type: integer
+          format: int32
+        modelFromAccountName:
+          type: string
+        modelFromAggId:
+          type: integer
+          format: int32
+        modelToAccountId:
+          type: integer
+          format: int32
+        modelToAccountName:
+          type: string
+        modelToAggId:
+          type: integer
+          format: int32
+        journalDate:
+          type: string
+          format: date-time
+        lastTransactionDate:
+          type: string
+          format: date-time
+        useNonBilledJournals:
+          type: boolean
+        assetClass:
+          type: string
+        riskCategory:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        sleeveType:
+          type: string
+          enum:
+          - Normal sleeve
+          - Custodial account
+          - Contribution sleeve
+          - Distribution sleeve
+          - Unmanaged sleeve
+        transType:
+          type: string
+        currentValue:
+          type: number
+          format: double
+        eclipseEnabled:
+          type: boolean
+      xml:
+        name: AssetSleeveDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.Sleeve.SleeveModelDto:
+      properties:
+        assetId:
+          readOnly: true
+          type: integer
+          format: int32
+        accountId:
+          readOnly: true
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        registrationId:
+          readOnly: true
+          type: integer
+          format: int32
+        modelAggId:
+          readOnly: true
+          type: integer
+          format: int32
+        modelName:
+          readOnly: true
+          type: string
+        sleeveType:
+          readOnly: true
+          type: string
+          enum:
+          - Normal sleeve
+          - Custodial account
+          - Contribution sleeve
+          - Distribution sleeve
+          - Unmanaged sleeve
+        displayModelName:
+          readOnly: true
+          type: string
+      xml:
+        name: SleeveModelDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductAvailableModel:
+      properties:
+        modelAggId:
+          readOnly: true
+          type: integer
+          format: int32
+        modelName:
+          readOnly: true
+          type: string
+        sleeveType:
+          readOnly: true
+          type: string
+          enum:
+          - Normal sleeve
+          - Custodial account
+          - Contribution sleeve
+          - Distribution sleeve
+          - Unmanaged sleeve
+        displayModelName:
+          readOnly: true
+          type: string
+        accountId:
+          readOnly: true
+          type: integer
+          format: int32
+      xml:
+        name: SleeveProductAvailableModel
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

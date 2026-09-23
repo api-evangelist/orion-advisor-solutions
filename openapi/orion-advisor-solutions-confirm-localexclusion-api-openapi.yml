@@ -1,0 +1,357 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Confirm/localexclusion API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Confirm/localexclusion
+paths:
+  /v1/Confirm/localexclusion:
+    get:
+      tags:
+      - Confirm/localexclusion
+      operationId: ConfirmDownloadLocalExclusion_Get
+      parameters:
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: downloadFormat
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: acctNum
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: cusip
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadExcludeDto'
+                xml:
+                  name: DownloadExcludeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadExcludeDto'
+                xml:
+                  name: DownloadExcludeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadExcludeDto'
+                xml:
+                  name: DownloadExcludeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadExcludeDto'
+                xml:
+                  name: DownloadExcludeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadExcludeDto'
+                xml:
+                  name: DownloadExcludeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadExcludeDto'
+                xml:
+                  name: DownloadExcludeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Confirm download local exclusion get
+      x-summary-source: derived
+  /v1/Confirm/localexclusion/AdvisorNumber:
+    get:
+      tags:
+      - Confirm/localexclusion
+      operationId: ConfirmDownloadLocalExclusion_ValidateAdvisorNumber
+      parameters:
+      - name: advisorNumber
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+            multipart/form-data:
+              schema:
+                type: boolean
+      security:
+      - Authorization: []
+      summary: Confirm download local exclusion validate advisor number
+      x-summary-source: derived
+  /v1/Confirm/localexclusion/List/Delete:
+    put:
+      tags:
+      - Confirm/localexclusion
+      operationId: ConfirmDownloadLocalExclusion_DeleteAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Confirm download local exclusion delete async
+      x-summary-source: derived
+  /v1/Confirm/localexclusion/List/Upsert:
+    put:
+      tags:
+      - Confirm/localexclusion
+      operationId: ConfirmDownloadLocalExclusion_BulkUpsertAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadExcludeDto'
+                xml:
+                  name: DownloadExcludeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadExcludeDto'
+                xml:
+                  name: DownloadExcludeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadExcludeDto'
+                xml:
+                  name: DownloadExcludeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadExcludeDto'
+                xml:
+                  name: DownloadExcludeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadExcludeDto'
+                xml:
+                  name: DownloadExcludeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadExcludeDto'
+                xml:
+                  name: DownloadExcludeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadExcludeDto'
+              xml:
+                name: DownloadExcludeDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadExcludeDto'
+              xml:
+                name: DownloadExcludeDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadExcludeDto'
+              xml:
+                name: DownloadExcludeDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadExcludeDto'
+              xml:
+                name: DownloadExcludeDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadExcludeDto'
+              xml:
+                name: DownloadExcludeDto
+                wrapped: true
+              type: array
+        required: true
+      summary: Confirm download local exclusion bulk upsert async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Confirm.DownloadExcludeDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        downloadFormatId:
+          type: integer
+          format: int32
+        downloadFormat:
+          type: string
+        accountNumber:
+          type: string
+        cusip:
+          type: string
+        notes:
+          type: string
+        advisorNotes:
+          type: string
+        isPriceExclusion:
+          type: boolean
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        downloadSourceId:
+          type: integer
+          format: int32
+        downloadSource:
+          type: string
+        fundFamilyName:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        nacSuppression:
+          type: boolean
+      xml:
+        name: DownloadExcludeDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

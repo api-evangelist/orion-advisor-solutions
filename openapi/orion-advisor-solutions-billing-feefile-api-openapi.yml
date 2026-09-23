@@ -1,0 +1,194 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Fee File API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/FeeFile
+paths:
+  /v1/Billing/FeeFile/Action/Schwab:
+    post:
+      tags:
+      - Billing/FeeFile
+      operationId: BillingFeeFile_PostSchwabFeeFileAsync
+      parameters:
+      - name: blobId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIUploadFileDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIUploadFileDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIUploadFileDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIUploadFileDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIUploadFileDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIUploadFileDto'
+      security:
+      - Authorization: []
+      summary: Billing fee file post schwab fee file async
+      x-summary-source: derived
+  /v1/Billing/FeeFile/instance/{id}:
+    get:
+      tags:
+      - Billing/FeeFile
+      operationId: BillingFeeFile_GetFeeFiles
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeFileDto'
+                xml:
+                  name: TradeFileDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeFileDto'
+                xml:
+                  name: TradeFileDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeFileDto'
+                xml:
+                  name: TradeFileDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeFileDto'
+                xml:
+                  name: TradeFileDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeFileDto'
+                xml:
+                  name: TradeFileDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeFileDto'
+                xml:
+                  name: TradeFileDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Billing fee file get fee files
+      x-summary-source: derived
+components:
+  schemas:
+    OAT.Integrations.Schwab.SII.Dto.SchwabSIIServiceMessageDto:
+      properties:
+        code:
+          type: string
+        type:
+          type: string
+        description:
+          type: string
+      xml:
+        name: SchwabSIIServiceMessageDto
+      type: object
+    OAS.WebApi.DTO.Trading.TradeFileDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        tradeFormat:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        fileName:
+          type: string
+        transmitMethod:
+          type: string
+          enum:
+          - Empty
+          - None
+          - FTP
+          - DSTHTTP
+          - Network
+          - SFTP
+          - FTPS
+          - S3
+        status:
+          type: string
+        processBy:
+          type: string
+        processDate:
+          type: string
+          format: date-time
+        uploadTargetId:
+          type: integer
+          format: int32
+        instanceId:
+          type: integer
+          format: int32
+      xml:
+        name: TradeFileDto
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabSIIUploadFileDto:
+      properties:
+        sacoAuthToken:
+          type: string
+        logOnUrl:
+          type: string
+        masterAccountId:
+          type: string
+        serviceMessages:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIServiceMessageDto'
+          xml:
+            name: SchwabSIIServiceMessageDto
+            wrapped: true
+          type: array
+      xml:
+        name: SchwabSIIUploadFileDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

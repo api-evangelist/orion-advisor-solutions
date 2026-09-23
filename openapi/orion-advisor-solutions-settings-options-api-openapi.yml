@@ -1,0 +1,196 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Settings/Options API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Settings/Options
+paths:
+  /v1/Settings/Options:
+    get:
+      tags:
+      - Settings/Options
+      summary: Gets a list of options that the logged in user has access to.
+      operationId: Options_Get
+      parameters:
+      - name: systemGroup
+        in: query
+        description: Optional. Default null. If provided will limit the options that are returned to just those with the provided system group.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+                xml:
+                  name: OptionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+                xml:
+                  name: OptionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+                xml:
+                  name: OptionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+                xml:
+                  name: OptionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+                xml:
+                  name: OptionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+                xml:
+                  name: OptionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Settings/Options/{fieldName}:
+    get:
+      tags:
+      - Settings/Options
+      summary: Gets the option that has the provided name
+      operationId: Options_GetByFieldName
+      parameters:
+      - name: fieldName
+        in: path
+        description: Name of the option to return.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Settings/Options
+      summary: Used to update existing option.
+      operationId: Options_UpdateOption
+      parameters:
+      - name: fieldName
+        in: path
+        description: Name of the option to return.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OptionDto'
+        description: The collection of web options being updated.
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Settings.OptionDto:
+      properties:
+        fieldName:
+          type: string
+        fieldValue:
+          type: string
+        notes:
+          type: string
+        systemGroup:
+          type: string
+      xml:
+        name: OptionDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

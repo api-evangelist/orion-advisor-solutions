@@ -1,0 +1,684 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Schwab Alliance API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/SchwabAlliance
+paths:
+  /v1/Integrations/SchwabAlliance/Action/SAML:
+    get:
+      tags:
+      - Integrations/SchwabAlliance
+      operationId: SchwabAlliance_StartSSOAsync
+      parameters:
+      - name: landingpage
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Schwab alliance start SSO async
+      x-summary-source: derived
+  /v1/Integrations/SchwabAlliance/GetAccountBlockNumbers:
+    get:
+      tags:
+      - Integrations/SchwabAlliance
+      operationId: SchwabAlliance_GetAccountBlockNumbersAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponse'
+      security:
+      - Authorization: []
+      summary: Schwab alliance get account block numbers async
+      x-summary-source: derived
+  /v1/Integrations/SchwabAlliance/GetToken:
+    get:
+      tags:
+      - Integrations/SchwabAlliance
+      operationId: SchwabAlliance_GetTokenAsync
+      parameters:
+      - name: code
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.SchwabAllianceToken'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.SchwabAllianceToken'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.SchwabAllianceToken'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.SchwabAllianceToken'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.SchwabAllianceToken'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.SchwabAllianceToken'
+      security:
+      - Authorization: []
+      summary: Schwab alliance get token async
+      x-summary-source: derived
+  /v1/Integrations/SchwabAlliance/IntegratedFirms/{firmId}/Users:
+    get:
+      tags:
+      - Integrations/SchwabAlliance
+      summary: Gets Schwab-integrated users for a specific firm.
+      operationId: SchwabAlliance_GetIntegratedFirmUsersAsync
+      parameters:
+      - name: firmId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabAlliance/IntegratedFirms/Summary:
+    get:
+      tags:
+      - Integrations/SchwabAlliance
+      summary: Gets all Schwab-integrated firms with user counts.
+      operationId: SchwabAlliance_GetIntegratedFirmsSummaryAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabAlliance/IntegratedUsers/{userId}/{userDetailId}:
+    delete:
+      tags:
+      - Integrations/SchwabAlliance
+      summary: Clears the Schwab Alliance connection for a specific user.
+      operationId: SchwabAlliance_ClearUserConnectionAsync
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: userDetailId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabAlliance/IntegratedUsers/Firm:
+    get:
+      tags:
+      - Integrations/SchwabAlliance
+      summary: Gets Schwab-integrated users for the current user's firm.
+      operationId: SchwabAlliance_GetFirmIntegratedUsersAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabAlliance/Redirect:
+    get:
+      tags:
+      - Integrations/SchwabAlliance
+      operationId: SchwabAlliance_GetRedirectUrlAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Schwab alliance get redirect url async
+      x-summary-source: derived
+  /v1/Integrations/SchwabAlliance/RefreshToken:
+    get:
+      tags:
+      - Integrations/SchwabAlliance
+      operationId: SchwabAlliance_RefreshTokenAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.SchwabAllianceToken'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.SchwabAllianceToken'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.SchwabAllianceToken'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.SchwabAllianceToken'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.SchwabAllianceToken'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.SchwabAllianceToken'
+      security:
+      - Authorization: []
+      summary: Schwab alliance refresh token async
+      x-summary-source: derived
+  /v1/Integrations/SchwabAlliance/ReserveAccountBlockNumbers:
+    post:
+      tags:
+      - Integrations/SchwabAlliance
+      operationId: SchwabAlliance_ReserveAccountBlockNumbersAsync
+      parameters:
+      - name: numberOfAccounts
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponse'
+      security:
+      - Authorization: []
+      summary: Schwab alliance reserve account block numbers async
+      x-summary-source: derived
+  /v1/Integrations/SchwabAlliance/ServiceAccount:
+    get:
+      tags:
+      - Integrations/SchwabAlliance
+      operationId: SchwabAlliance_GetServiceAccountAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Schwab alliance get service account async
+      x-summary-source: derived
+    post:
+      tags:
+      - Integrations/SchwabAlliance
+      operationId: SchwabAlliance_PostServiceAccountAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.Shared.SchwabSAPostDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.Shared.SchwabSAPostDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.Shared.SchwabSAPostDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.Shared.SchwabSAPostDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.Shared.SchwabSAPostDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.Shared.SchwabSAPostDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.Shared.SchwabSAPostDto'
+        required: true
+      summary: Schwab alliance post service account async
+      x-summary-source: derived
+  /v1/Integrations/SchwabAlliance/ServiceAccount/AllTokens:
+    get:
+      tags:
+      - Integrations/SchwabAlliance
+      operationId: SchwabAlliance_ServiceAccountAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Schwab alliance service account async
+      x-summary-source: derived
+  /v1/Integrations/SchwabAlliance/ServiceAccount/Delete:
+    post:
+      tags:
+      - Integrations/SchwabAlliance
+      operationId: SchwabAlliance_DeleteServiceAccountAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.Shared.SchwabSAPostDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.Shared.SchwabSAPostDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.Shared.SchwabSAPostDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.Shared.SchwabSAPostDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.Shared.SchwabSAPostDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.Shared.SchwabSAPostDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.Shared.SchwabSAPostDto'
+        required: true
+      summary: Schwab alliance delete service account async
+      x-summary-source: derived
+  /v1/Integrations/SchwabAlliance/UserToken:
+    get:
+      tags:
+      - Integrations/SchwabAlliance
+      operationId: SchwabAlliance_UserTokenAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.SchwabAllianceToken'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.SchwabAllianceToken'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.SchwabAllianceToken'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.SchwabAllianceToken'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.SchwabAllianceToken'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.SchwabAllianceToken'
+      security:
+      - Authorization: []
+      summary: Schwab alliance user token async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.Integrations.SchwabAlliance.SchwabAllianceToken:
+      properties:
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        scope:
+          type: string
+        token_type:
+          type: string
+        expires_in:
+          type: integer
+          format: int32
+        expires_datetime:
+          type: string
+          format: date-time
+        id_token:
+          type: string
+      xml:
+        name: SchwabAllianceToken
+      type: object
+    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersError:
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        source:
+          $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersErrorSource'
+      xml:
+        name: AccountBlockNumbersError
+      type: object
+    OAS.Integrations.SchwabV2.Shared.SchwabSAPostDto:
+      properties:
+        alClientId:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        userDtlId:
+          type: integer
+          format: int32
+        type:
+          type: string
+          enum:
+          - NotSet
+          - RMD
+          - BlockAccountNumber
+      xml:
+        name: SchwabSAPostDto
+      type: object
+    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseData:
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseAttributes'
+      xml:
+        name: AccountBlockNumbersRetrieveResponseData
+      type: object
+    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseAccount:
+      properties:
+        account:
+          type: integer
+          format: int32
+        updatedBy:
+          type: string
+        UpdatedDate:
+          type: string
+          format: date-time
+      xml:
+        name: AccountBlockNumbersRetrieveResponseAccount
+      type: object
+    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersErrorSource:
+      properties:
+        header:
+          type: string
+      xml:
+        name: AccountBlockNumbersErrorSource
+      type: object
+    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseAttributes:
+      properties:
+        status:
+          type: string
+        maxLimit:
+          type: integer
+          format: int32
+        available:
+          type: integer
+          format: int32
+        reserved:
+          type: integer
+          format: int32
+        accounts:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseAccount'
+          xml:
+            name: AccountBlockNumbersRetrieveResponseAccount
+            wrapped: true
+          type: array
+      xml:
+        name: AccountBlockNumbersRetrieveResponseAttributes
+      type: object
+    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseData'
+        errors:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersError'
+          xml:
+            name: AccountBlockNumbersError
+            wrapped: true
+          type: array
+      xml:
+        name: AccountBlockNumbersRetrieveResponse
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

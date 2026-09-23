@@ -1,0 +1,166 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Aggregator/Holdings API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Aggregator/Holdings
+paths:
+  /v1/Aggregator/Holdings:
+    get:
+      tags:
+      - Aggregator/Holdings
+      summary: Get All Holdings
+      description: 'Sample Request
+
+        GET /Aggregator/Accounts
+
+        {
+
+        "credentialId": 1234,
+
+        "aggregatorId":1060,
+
+        "accountId":1234
+
+        }'
+      operationId: ConfirmAggregator_GetAllHoldings
+      parameters:
+      - name: credentialId
+        in: query
+        description: 'The credential ID(aka: appLinkDtlId)'
+        required: true
+        schema:
+          type: string
+      - name: aggregatorId
+        in: query
+        description: 'The Aggregator ID (aka: appLinkId'
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: accountId
+        in: query
+        description: The akoya account id
+        required: true
+        schema:
+          type: string
+      - name: includeHistory
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Confirm.PlanningPosition'
+                xml:
+                  name: PlanningPosition
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Confirm.PlanningPosition'
+                xml:
+                  name: PlanningPosition
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Confirm.PlanningPosition'
+                xml:
+                  name: PlanningPosition
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Confirm.PlanningPosition'
+                xml:
+                  name: PlanningPosition
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Confirm.PlanningPosition'
+                xml:
+                  name: PlanningPosition
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Confirm.PlanningPosition'
+                xml:
+                  name: PlanningPosition
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.DataModel.Confirm.PlanningPosition:
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int32
+        downloadFileId:
+          type: integer
+          format: int32
+        cusip:
+          type: string
+          maxLength: 50
+          minLength: 0
+        ticker:
+          type: string
+          maxLength: 50
+          minLength: 0
+        acctCode:
+          type: string
+          maxLength: 500
+          minLength: 0
+        unitBalance:
+          type: number
+          format: double
+        price:
+          type: number
+          format: double
+        effectiveDate:
+          type: string
+          format: date-time
+        fileAssetValue:
+          type: number
+          format: double
+        credentialId:
+          type: string
+          maxLength: 100
+          minLength: 0
+        holdingName:
+          type: string
+          maxLength: 50
+          minLength: 0
+        holdingType:
+          type: string
+          maxLength: 50
+          minLength: 0
+      xml:
+        name: PlanningPosition
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

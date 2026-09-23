@@ -1,0 +1,181 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Transaction Types API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/TransactionTypes
+paths:
+  /v1/Trading/TransactionTypes:
+    get:
+      tags:
+      - Trading/TransactionTypes
+      summary: Returns a list of all the transaction types that the logged in user has access…
+      operationId: TransactionTypes_Get
+      parameters:
+      - name: isValid
+        in: query
+        description: Optional. Default null. Used to limit return to only those transaction types that are or aren't valid.
+        required: false
+        schema:
+          type: boolean
+      - name: usagePriority
+        in: query
+        description: Optional. Default 0. Used to limit transaction type on its usage priority. Will return number enter and higher
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: detail
+        in: query
+        description: Optional. Default false. Used to provide more details about the transaction type.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: isBillable
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: isUsed
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: includeRemark
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionTypeDto'
+                xml:
+                  name: TransactionTypeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionTypeDto'
+                xml:
+                  name: TransactionTypeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionTypeDto'
+                xml:
+                  name: TransactionTypeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionTypeDto'
+                xml:
+                  name: TransactionTypeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionTypeDto'
+                xml:
+                  name: TransactionTypeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionTypeDto'
+                xml:
+                  name: TransactionTypeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/TransactionTypes/{key}:
+    get:
+      tags:
+      - Trading/TransactionTypes
+      summary: Gets the TransType that has the provided key.
+      description: 'Sample Request
+
+        GET /Trading/TransactionTypes/53'
+      operationId: TransactionTypes_GetByKey
+      parameters:
+      - name: key
+        in: path
+        description: The TransactionTypeID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionTypeDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionTypeDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionTypeDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionTypeDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionTypeDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionTypeDto'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Trading.TransactionTypeDto:
+      properties:
+        financialType:
+          type: string
+          enum:
+          - None
+          - Contribution
+          - Distribution
+          - Exchange
+          - DivReinvest
+          - MgmntFees
+          - DivCash
+          - MiscFees
+          - Journal
+          - Merges
+        description:
+          type: string
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: TransactionTypeDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

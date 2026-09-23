@@ -1,0 +1,377 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Advisor Cloud Storage API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/AdvisorCloudStorage
+paths:
+  /v1/Integrations/AdvisorCloudStorage/{provider}/Credentials:
+    put:
+      tags:
+      - Integrations/AdvisorCloudStorage
+      summary: Used to save cloud storage credentials.
+      operationId: IntegrationsAdvisorCloudStorage_PutV1IntegrationsAdvisorCloudStorageByProviderCredentials
+      parameters:
+      - name: provider
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - AdvisorShared
+          - Box
+          - Dropbox
+          - Egnyte
+          - ShareFile
+          - Netdocuments
+          - Salesforce
+      - name: orionFolderLocation
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+    post:
+      tags:
+      - Integrations/AdvisorCloudStorage
+      summary: Used to save cloud storage credentials.
+      operationId: IntegrationsAdvisorCloudStorage_SaveCredentialsAsync
+      parameters:
+      - name: provider
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - AdvisorShared
+          - Box
+          - Dropbox
+          - Egnyte
+          - ShareFile
+          - Netdocuments
+          - Salesforce
+      - name: orionFolderLocation
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/AdvisorCloudStorage/{provider}/Redirect:
+    get:
+      tags:
+      - Integrations/AdvisorCloudStorage
+      summary: Used to automatically redirect the user's browser to the appropriate cloud…
+      operationId: IntegrationsAdvisorCloudStorage_GetRedirectUrlAsync
+      parameters:
+      - name: provider
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - AdvisorShared
+          - Box
+          - Dropbox
+          - Egnyte
+          - ShareFile
+          - Netdocuments
+          - Salesforce
+      - name: url
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: token
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/AdvisorCloudStorage/Action/Share/{filepath}:
+    post:
+      tags:
+      - Integrations/AdvisorCloudStorage
+      summary: Used to generate a share link to a file in cloud storage
+      operationId: IntegrationsAdvisorCloudStorage_ShareCloudStorageAsync
+      parameters:
+      - name: filepath
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/AdvisorCloudStorage/Browse/{filepath}:
+    get:
+      tags:
+      - Integrations/AdvisorCloudStorage
+      summary: Used to browse folders and view file meta data from cloud storage
+      operationId: IntegrationsAdvisorCloudStorage_BrowseCloudStorageAsync
+      parameters:
+      - name: filepath
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/AdvisorCloudStorage/Credentials:
+    delete:
+      tags:
+      - Integrations/AdvisorCloudStorage
+      summary: Used to remove previously saved cloud storage credentials
+      operationId: IntegrationsAdvisorCloudStorage_DeleteCredentials
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/AdvisorCloudStorage/Data/{filepath}:
+    get:
+      tags:
+      - Integrations/AdvisorCloudStorage
+      summary: Used to download a file from cloud storage
+      operationId: IntegrationsAdvisorCloudStorage_DownloadCloudStorageAsync
+      parameters:
+      - name: filepath
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+    post:
+      tags:
+      - Integrations/AdvisorCloudStorage
+      summary: Used to upload a file to cloud storage
+      operationId: IntegrationsAdvisorCloudStorage_UploadCloudStorageAsync
+      parameters:
+      - name: filepath
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+    delete:
+      tags:
+      - Integrations/AdvisorCloudStorage
+      summary: Used to delete a file from cloud storage
+      operationId: IntegrationsAdvisorCloudStorage_DeleteCloudStorageAsync
+      parameters:
+      - name: filepath
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/AdvisorCloudStorage/List:
+    get:
+      tags:
+      - Integrations/AdvisorCloudStorage
+      summary: Used to get list of configured cloud storage providers
+      operationId: IntegrationsAdvisorCloudStorage_ListCloudStorageProvidersAsync
+      parameters:
+      - name: checkCredentialsValid
+        in: query
+        description: 'Optional. Default: True. Will validate that the provider is valid before returning it. If false, any provider with credentials saved will be returned.'
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: object
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: object
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: object
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: object
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: object
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: object
+                type: array
+      security:
+      - Authorization: []
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

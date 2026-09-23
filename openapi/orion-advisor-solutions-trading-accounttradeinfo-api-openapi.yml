@@ -1,0 +1,138 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Account Trade Info API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/AccountTradeInfo
+paths:
+  /v1/Trading/AccountTradeInfo/{accountId}:
+    get:
+      tags:
+      - Trading/AccountTradeInfo
+      summary: Gets the account trade info for the provided account
+      operationId: Trading_GetAccountTradeInfo
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountTradeInfoDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountTradeInfoDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountTradeInfoDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountTradeInfoDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountTradeInfoDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountTradeInfoDto'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Trading.AccountTradeInfoDto:
+      properties:
+        isActive:
+          type: boolean
+        accountId:
+          type: integer
+          format: int32
+        accountValue:
+          readOnly: true
+          type: number
+          format: double
+        cashValue:
+          readOnly: true
+          type: number
+          format: double
+        cashValuePostTrade:
+          type: number
+          format: double
+        tradeBlocked:
+          type: boolean
+        tradingInstructions:
+          type: string
+        model:
+          type: string
+        modelAggId:
+          type: integer
+          format: int32
+        minimumCashDollarAmount:
+          readOnly: true
+          type: number
+          format: double
+        minimumCashBalance:
+          type: number
+          format: double
+        minimumCashBalanceType:
+          type: string
+          enum:
+          - Dollars
+          - Percent
+        replenishMinCash:
+          type: boolean
+        assets:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimpleAssetWithValue'
+          xml:
+            name: SimpleAssetWithValue
+            wrapped: true
+          type: array
+      xml:
+        name: AccountTradeInfoDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SimpleAssetWithValue:
+      properties:
+        assetClass:
+          type: string
+        accountNumber:
+          type: string
+        isCustodialCash:
+          type: boolean
+        isTradeExcluded:
+          type: boolean
+        shares:
+          type: number
+          format: double
+        price:
+          type: number
+          format: double
+        value:
+          type: number
+          format: double
+        name:
+          type: string
+        id:
+          type: integer
+          format: int32
+        ticker:
+          type: string
+        productId:
+          type: integer
+          format: int32
+      xml:
+        name: SimpleAssetWithValue
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

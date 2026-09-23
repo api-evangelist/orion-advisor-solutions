@@ -1,0 +1,517 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Schwab Service Request API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/SchwabServiceRequest
+paths:
+  /v1/Integrations/SchwabServiceRequest/{householdId}/UpdateAddress:
+    post:
+      tags:
+      - Integrations/SchwabServiceRequest
+      summary: Method to update address in Schwab
+      operationId: SchwabServiceRequest_UpdateAddressAsync
+      parameters:
+      - name: householdId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabServiceRequest/Create:
+    post:
+      tags:
+      - Integrations/SchwabServiceRequest
+      summary: Method send a request to Schwab Request Center
+      operationId: SchwabServiceRequest_CreateRequestCenterTicketAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Integration.ResultItemOfOAT.Integrations.Schwab.SII.Dto.SchwabServiceResponseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Integration.ResultItemOfOAT.Integrations.Schwab.SII.Dto.SchwabServiceResponseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Integration.ResultItemOfOAT.Integrations.Schwab.SII.Dto.SchwabServiceResponseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Integration.ResultItemOfOAT.Integrations.Schwab.SII.Dto.SchwabServiceResponseDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.ServiceRequestData'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.ServiceRequestData'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.ServiceRequestData'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.ServiceRequestData'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.ServiceRequestData'
+        required: true
+  /v1/Integrations/SchwabServiceRequest/CreateV2:
+    post:
+      tags:
+      - Integrations/SchwabServiceRequest
+      operationId: SchwabServiceRequest_CreateSchwabServiceRequestAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.ServiceRequest.Models.SchwabCreateServiceRequestRequestDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.ServiceRequest.Models.SchwabCreateServiceRequestRequestDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.ServiceRequest.Models.SchwabCreateServiceRequestRequestDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.ServiceRequest.Models.SchwabCreateServiceRequestRequestDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.ServiceRequest.Models.SchwabCreateServiceRequestRequestDto'
+        required: true
+      summary: Schwab service request create schwab service request async
+      x-summary-source: derived
+  /v1/Integrations/SchwabServiceRequest/test:
+    get:
+      tags:
+      - Integrations/SchwabServiceRequest
+      operationId: SchwabServiceRequest_TestGetAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Schwab service request test get async
+      x-summary-source: derived
+  /v1/Integrations/SchwabServiceRequest/Topics:
+    get:
+      tags:
+      - Integrations/SchwabServiceRequest
+      summary: Method to request center topics picklist
+      operationId: SchwabServiceRequest_GetSchwabRequestCenterTopicsAsync
+      parameters:
+      - name: otp
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRequestCenterDTO'
+                xml:
+                  name: SchwabRequestCenterDTO
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRequestCenterDTO'
+                xml:
+                  name: SchwabRequestCenterDTO
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRequestCenterDTO'
+                xml:
+                  name: SchwabRequestCenterDTO
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRequestCenterDTO'
+                xml:
+                  name: SchwabRequestCenterDTO
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRequestCenterDTO'
+                xml:
+                  name: SchwabRequestCenterDTO
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRequestCenterDTO'
+                xml:
+                  name: SchwabRequestCenterDTO
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabServiceRequest/TopicsV2:
+    get:
+      tags:
+      - Integrations/SchwabServiceRequest
+      operationId: SchwabServiceRequest_GetSchwabRequestCenterTopicsV2Async
+      parameters:
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Schwab service request get schwab request center topics V2 async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.DataModel.Integration.ResultItemOfOAT.Integrations.Schwab.SII.Dto.SchwabServiceResponseDto:
+      properties:
+        item:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabServiceResponseDto'
+        hasError:
+          type: boolean
+        status:
+          type: string
+      xml:
+        name: ResultItem`1
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabRequestCenterDTO:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        subtopics:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRequestCenterDTO.Subtopic'
+          xml:
+            name: Subtopic
+            wrapped: true
+          type: array
+      xml:
+        name: SchwabRequestCenterDTO
+      type: object
+    OAS.Integrations.SchwabV2.ServiceRequest.Models.SchwabCreateServiceRequestRequestDto:
+      properties:
+        files:
+          items:
+            $ref: '#/components/schemas/System.Web.HttpPostedFile'
+          xml:
+            name: HttpPostedFile
+            wrapped: true
+          type: array
+        masterAccount:
+          type: string
+        account:
+          type: string
+        topicName:
+          type: string
+        subTopicName:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        schwabCaseId:
+          type: string
+        ccEmail:
+          type: boolean
+        showAccount:
+          type: string
+      xml:
+        name: SchwabCreateServiceRequestRequestDto
+      type: object
+    System.Web.HttpPostedFile:
+      properties:
+        fileName:
+          readOnly: true
+          type: string
+        contentType:
+          readOnly: true
+          type: string
+        contentLength:
+          readOnly: true
+          type: integer
+          format: int32
+        inputStream:
+          $ref: '#/components/schemas/System.IO.Stream'
+          readOnly: true
+      xml:
+        name: HttpPostedFile
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.ServiceRequestData:
+      properties:
+        subTopic:
+          type: string
+        topic:
+          type: string
+        subAccount:
+          type: string
+        masterAccount:
+          type: string
+        requestName:
+          type: string
+        requestDescription:
+          type: string
+        clientChannelOverride:
+          type: string
+        files:
+          items:
+            $ref: '#/components/schemas/System.Web.HttpPostedFile'
+          xml:
+            name: HttpPostedFile
+            wrapped: true
+          type: array
+      xml:
+        name: ServiceRequestData
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabServiceResponseDto:
+      properties:
+        id:
+          type: string
+        trackingId:
+          type: string
+        lastUpdated:
+          type: string
+          format: date-time
+        masterAccount:
+          type: string
+        masterAccountName:
+          type: string
+        fullSubAccountName:
+          type: string
+        subAccountName:
+          type: string
+        subAccount:
+          type: string
+        topic:
+          type: string
+        topicName:
+          type: string
+        subtopic:
+          type: string
+        name:
+          type: string
+        firstLastName:
+          type: string
+        description:
+          type: string
+        carbonCopyTo:
+          type: string
+        schwabCaseId:
+          type: string
+        creator:
+          type: string
+        campaignCode:
+          type: integer
+          format: int32
+        firmId:
+          type: integer
+          format: int32
+        firmName:
+          type: string
+        createDate:
+          type: string
+          format: date-time
+        hasAttachments:
+          type: boolean
+        findYourTeamEmail:
+          type: string
+        confirmationId:
+          type: string
+        isArchived:
+          type: boolean
+        source:
+          type: string
+        statusId:
+          type: integer
+          format: int32
+        forceError:
+          type: boolean
+        attachmentData:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Attachmentdata'
+          xml:
+            name: Attachmentdata
+            wrapped: true
+          type: array
+        schwabChannelCode:
+          type: string
+        carbonCopyEmail:
+          type: boolean
+        phoneNumber:
+          type: string
+        serviceRequestTrackingUrl:
+          type: string
+      xml:
+        name: SchwabServiceResponseDto
+      type: object
+    System.IO.Stream:
+      properties:
+        canRead:
+          readOnly: true
+          type: boolean
+        canSeek:
+          readOnly: true
+          type: boolean
+        canTimeout:
+          readOnly: true
+          type: boolean
+        canWrite:
+          readOnly: true
+          type: boolean
+        length:
+          readOnly: true
+          type: integer
+          format: int64
+        position:
+          type: integer
+          format: int64
+        readTimeout:
+          type: integer
+          format: int32
+        writeTimeout:
+          type: integer
+          format: int32
+      xml:
+        name: Stream
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.Attachmentdata:
+      properties:
+        location:
+          type: string
+        name:
+          type: string
+        size:
+          type: string
+        id:
+          type: string
+        isValidFileType:
+          type: boolean
+      xml:
+        name: Attachmentdata
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabRequestCenterDTO.Subtopic:
+      properties:
+        name:
+          type: string
+        attachmentAllowed:
+          type: boolean
+        attachmentRequired:
+          type: boolean
+        maxAttachmentSize:
+          type: integer
+          format: int32
+      xml:
+        name: Subtopic
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

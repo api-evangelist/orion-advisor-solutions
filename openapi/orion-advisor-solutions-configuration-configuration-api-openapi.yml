@@ -1,0 +1,236 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Configuration/{configuration} API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Configuration/{configuration}
+paths:
+  /v1/Configuration/{configuration}:
+    get:
+      tags:
+      - Configuration/{configuration}
+      summary: Configuration service get configuration
+      operationId: ConfigurationService_GetConfiguration
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: configuration
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - RiskQuestionnaire
+          - ProposalFragments_CustomIndexing_OneYearTransition
+          - ProposalFragments_CustomIndexing_MuiltiYearTransition
+          - ProposalFragments_CustomIndexing_DepositCashIntoPortfolio
+          - ProposalFragments_CustomIndexing_WithdrawCashFromPortfolio
+          - ProposalFragments_CustomIndexing_NewPortfolioFromCash
+          - ProposalFragments_CompareTool
+          - UseHypotheticalPerformance
+      - name: entityEnum
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - Prospect
+          - BillEntityType
+          - AdditionalRepresentative
+      - name: decompress
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: entityId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: configurationCalculation
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Standard
+          - RespectBrokerDealer
+          default: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      x-summary-source: derived
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

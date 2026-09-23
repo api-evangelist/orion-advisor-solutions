@@ -1,0 +1,280 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Financial Planning Fee API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/FinancialPlanningFee
+paths:
+  /v1/Billing/FinancialPlanningFee/Action/Instance/{clientId}/{feeTypeId}:
+    post:
+      tags:
+      - Billing/FinancialPlanningFee
+      summary: Get a list of financial planning fees using a household id
+      operationId: FinancialPlanningFee_GenerateNewFinancialPlanningBillAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: clientId
+        in: path
+        description: ClientId required
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: feeTypeId
+        in: path
+        description: fee type id, optional
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+  /v1/Billing/FinancialPlanningFee/CreateBluePayPayment:
+    post:
+      tags:
+      - Billing/FinancialPlanningFee
+      summary: Generate BluePay payments by taking a list of bill ids and submitting to…
+      description: 'Sample Request
+
+        POST CreateBluePayPayment'
+      operationId: FinancialPlanningFee_CreateBluePayPaymentAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: Ienumerable int
+        required: true
+  /v1/Billing/FinancialPlanningFee/List/{householdId}:
+    get:
+      tags:
+      - Billing/FinancialPlanningFee
+      summary: Get a list of financial planning fees using a household id
+      operationId: FinancialPlanningFee_GetBills
+      parameters:
+      - name: householdId
+        in: path
+        description: Household ID of clients requested
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.FinancialPlanningFeeDto'
+                xml:
+                  name: FinancialPlanningFeeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.FinancialPlanningFeeDto'
+                xml:
+                  name: FinancialPlanningFeeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.FinancialPlanningFeeDto'
+                xml:
+                  name: FinancialPlanningFeeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.FinancialPlanningFeeDto'
+                xml:
+                  name: FinancialPlanningFeeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.FinancialPlanningFeeDto'
+                xml:
+                  name: FinancialPlanningFeeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.FinancialPlanningFeeDto'
+                xml:
+                  name: FinancialPlanningFeeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.FinancialPlanningFeeDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        billInstanceId:
+          type: integer
+          format: int32
+        billType:
+          type: string
+          enum:
+          - Unknown
+          - Renewal
+          - NewMoney
+          - NewAccount
+          - FinancialPlanningFee
+          - Performance
+          - AdvanceCreditDebit
+        clientId:
+          type: integer
+          format: int32
+        clientName:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        dateDue:
+          readOnly: true
+          type: string
+          format: date-time
+        paidDate:
+          type: string
+          format: date-time
+        balanceDue:
+          type: number
+          format: double
+        initialAmt:
+          type: number
+          format: double
+        adjustmentAmount:
+          type: number
+          format: double
+        repId:
+          type: integer
+          format: int32
+        repName:
+          type: string
+        repNumber:
+          type: string
+        status:
+          type: string
+          enum:
+          - NotSent
+          - Sent
+          - Paid
+          - Error
+          - ValidationRequired
+          - Rollback
+        statusIcon:
+          readOnly: true
+          type: string
+        billId:
+          type: integer
+          format: int32
+        errorMessage:
+          type: string
+        frequency:
+          type: string
+          enum:
+          - Undefined
+          - Monthly
+          - Quarterly
+          - Triannual
+          - Semiannually
+          - Annually
+          - AtMaturity
+      xml:
+        name: FinancialPlanningFeeDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

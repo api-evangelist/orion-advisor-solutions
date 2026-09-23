@@ -1,0 +1,364 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/QUODD API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/QUODD
+paths:
+  /v1/Trading/QUODD/check:
+    get:
+      tags:
+      - Trading/QUODD
+      summary: Permission check to show QUODD page(s).
+      description: 'Sample Request
+
+        POST /v1/trading/check
+
+        {
+
+        "realTimePrice_Firm_Check" : "true",
+
+        "realTimePrice_Role_Check" : true
+
+        }'
+      operationId: Quodd_GetQuoddSetupPermissions
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+            multipart/form-data:
+              schema:
+                type: boolean
+      security:
+      - Authorization: []
+  /v1/Trading/QUODD/checkRealTimeStatus:
+    get:
+      tags:
+      - Trading/QUODD
+      summary: Quodd agreement status async
+      description: '/ Sample Request
+
+        GET vor/quodd/api/cid/" + Orion_ID_Here + "/status/flag
+
+        {
+
+        "additional_info": "Exchange agreements required",
+
+        "pending_agreement_ids": [
+
+        10,
+
+        13
+
+        ],
+
+        "ticker_limit": 50,
+
+        "redirect_app": true,
+
+        "status": 2
+
+        }'
+      operationId: Quodd_AgreementStatusAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Trading/QUODD/signAgreement:
+    get:
+      tags:
+      - Trading/QUODD
+      summary: Gets a list of users.
+      description: '/ Sample Request
+
+        POST /vor/quodd/api/cid/orion_client_id/agreement
+
+        {
+
+        "token": "eyJhbGciOiJSUzUxMiJ9....",
+
+        }'
+      operationId: Quodd_SignExchangeAgreementsAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.QuoddSigningTokenDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.QuoddSigningTokenDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.QuoddSigningTokenDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.QuoddSigningTokenDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.QuoddSigningTokenDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.QuoddSigningTokenDto'
+      security:
+      - Authorization: []
+  /v1/Trading/QUODD/update:
+    post:
+      tags:
+      - Trading/QUODD
+      summary: Creates user information Update user information w/ demographic information…
+      description: '/ Sample Request
+
+        POST /vor/quodd/api/user/seat
+
+        {
+
+        "user_Name" : "myfirstuser",
+
+        "user_Type" : 1
+
+        "client_user_id": orion_client_id
+
+        }
+
+
+        POST /vor/quodd/api/cid/orion_client_id/agreement
+
+        {
+
+        "first_name": "Barry",
+
+        "last_name": "Allen",
+
+        "address_line_1": "1600 Pennsylvania Avenue",
+
+        "city": "Central City",
+
+        "state": "NY",
+
+        "zip": "75094",
+
+        "country": "US",
+
+        "email": "barry@starlabs.com",
+
+        "phone": "214-867-5309",
+
+        "is_self_employed": true
+
+        }
+
+        or
+
+        {
+
+        "first_name": "Barry",
+
+        "last_name": "Allen",
+
+        "address_line_1": "1600 Pennsylvania Avenue",
+
+        "city": "Central City",
+
+        "state": "NY",
+
+        "zip": "75094",
+
+        "country": "US",
+
+        "email": "barryallen@orion.com",
+
+        "phone": "214-867-5309",
+
+        "is_self_employed": false,
+
+        "zip": "123456",
+
+        "country": "United States of America",
+
+        "city": "AnyCity1",
+
+        "user_name": "barryallen@orion.com",
+
+        "employer_zip": "4390349034",
+
+        "title": "Map Maker",
+
+        "employer_name": "MapMakers",
+
+        "employer_city": "Employers City",
+
+        "employer_address": "1234 Any Street",
+
+        "employer_country": "United States of America",
+
+        "employee_function": "Trader",
+
+        "address_line_1": "1234 Anystreet",
+
+        "address_line_2": null,
+
+        "employer_state": "NE"
+
+        }
+
+
+        POST /vor/quodd/api/cid/orion_client_id/product/1601,1602,1604,93
+
+
+        ^^ parameters are passed via querystring parameters'
+      operationId: Quodd_QuoddRegistrationAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+            multipart/form-data:
+              schema:
+                type: boolean
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Trading.Dto.QuoddUserRegistrationDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Trading.Dto.QuoddUserRegistrationDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Trading.Dto.QuoddUserRegistrationDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Trading.Dto.QuoddUserRegistrationDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Trading.Dto.QuoddUserRegistrationDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Trading.Dto.QuoddUserRegistrationDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Trading.Dto.QuoddUserRegistrationDto'
+        required: true
+components:
+  schemas:
+    OAS.WebApi.Domains.Trading.Dto.QuoddUserRegistrationDto:
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        address_line_1:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        country:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        is_self_employed:
+          type: boolean
+        title:
+          type: string
+        employer_name:
+          type: string
+        employer_city:
+          type: string
+        employer_state:
+          type: string
+        employer_zip:
+          type: string
+        employer_country:
+          type: string
+        employee_function:
+          type: string
+        employer_address:
+          type: string
+      xml:
+        name: QuoddUserRegistrationDto
+      type: object
+    OAS.WebApi.DTO.Trading.QuoddSigningTokenDto:
+      properties:
+        canSign:
+          type: boolean
+        token:
+          type: string
+        hasAlreadySigned:
+          type: boolean
+      xml:
+        name: QuoddSigningTokenDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

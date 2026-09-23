@@ -1,0 +1,218 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Share File API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/ShareFile
+paths:
+  /v1/Integrations/ShareFile/Configuration:
+    get:
+      tags:
+      - Integrations/ShareFile
+      summary: Gets the configuration data for ShareFile for the current user
+      operationId: ShareFile_GetConfiguration
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto'
+      security:
+      - Authorization: []
+  /v1/Integrations/ShareFile/Remove:
+    post:
+      tags:
+      - Integrations/ShareFile
+      summary: Sets up ShareFile integration for the current user
+      description: The user must have the necessary privileges to setup the integration.
+      operationId: ShareFile_RemoveServiceAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+            multipart/form-data:
+              schema:
+                type: boolean
+      security:
+      - Authorization: []
+  /v1/Integrations/ShareFile/Setup:
+    post:
+      tags:
+      - Integrations/ShareFile
+      summary: Sets up ShareFile integration for the current user
+      description: The user must have the necessary privileges to setup the integration.
+      operationId: ShareFile_SetupServiceAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.IntegrationDto'
+                xml:
+                  name: IntegrationDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.IntegrationDto'
+                xml:
+                  name: IntegrationDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.IntegrationDto'
+                xml:
+                  name: IntegrationDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.IntegrationDto'
+                xml:
+                  name: IntegrationDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.IntegrationDto'
+                xml:
+                  name: IntegrationDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.IntegrationDto'
+                xml:
+                  name: IntegrationDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+        description: An {OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto} containing the parameters for the ShareFile setup.
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto:
+      properties:
+        key:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        termsAccepted:
+          type: boolean
+      xml:
+        name: IntegrationSetupRequestDto
+      type: object
+    OAS.WebApi.DTO.Fuse.IntegrationDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        webhookGuid:
+          type: string
+        partnerAppId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        active:
+          type: boolean
+        label:
+          type: string
+        custom:
+          type: boolean
+        partnerUserName:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+      xml:
+        name: IntegrationDto
+      type: object
+    OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto:
+      properties:
+        partnerAppId:
+          description: The unique ID of the partner app.
+          type: integer
+          format: int32
+        productName:
+          description: The unique name of the partner app product.
+          type: string
+      xml:
+        name: BasicIntegrationConfigDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

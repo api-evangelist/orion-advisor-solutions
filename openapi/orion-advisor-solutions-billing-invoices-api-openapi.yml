@@ -1,0 +1,248 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Invoices API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/Invoices
+paths:
+  /v1/Billing/Invoices:
+    get:
+      tags:
+      - Billing/Invoices
+      summary: Get a list of invoices that the logged in user has access to see.
+      operationId: Invoices_Get
+      parameters:
+      - name: startDate
+        in: query
+        description: Optional. If provided only invoices with a start date greater or equal to value provided will be returned.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional. If provided only invoices with an end date less than or equal to value provided will be returned.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: billInstanceId
+        in: query
+        description: Optional. Only invoices assiciated with the billInstanceId provided will be returned.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.InvoiceDto'
+                xml:
+                  name: InvoiceDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.InvoiceDto'
+                xml:
+                  name: InvoiceDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.InvoiceDto'
+                xml:
+                  name: InvoiceDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.InvoiceDto'
+                xml:
+                  name: InvoiceDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.InvoiceDto'
+                xml:
+                  name: InvoiceDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.InvoiceDto'
+                xml:
+                  name: InvoiceDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Invoices/{key}:
+    get:
+      tags:
+      - Billing/Invoices
+      summary: Gets the invoices that has the provided key.
+      operationId: Invoices_GetEntityByKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.InvoiceDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.InvoiceDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.InvoiceDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.InvoiceDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.InvoiceDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.InvoiceDto'
+      security:
+      - Authorization: []
+  /v1/Billing/Invoices/Simple:
+    get:
+      tags:
+      - Billing/Invoices
+      summary: Get a simple list of invoices that the logged in user has access to see
+      operationId: Invoices_GetV1BillingInvoicesSimple
+      parameters:
+      - name: clientId
+        in: query
+        description: Optional. If provided the result will be limit to include only invoices for the client specified.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: excludeMockBills
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.SimpleInvoiceDto'
+                xml:
+                  name: SimpleInvoiceDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.SimpleInvoiceDto'
+                xml:
+                  name: SimpleInvoiceDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.SimpleInvoiceDto'
+                xml:
+                  name: SimpleInvoiceDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.SimpleInvoiceDto'
+                xml:
+                  name: SimpleInvoiceDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.SimpleInvoiceDto'
+                xml:
+                  name: SimpleInvoiceDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.SimpleInvoiceDto'
+                xml:
+                  name: SimpleInvoiceDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.InvoiceDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        clientName:
+          type: string
+        billType:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        name:
+          readOnly: true
+          type: string
+      xml:
+        name: InvoiceDto
+      type: object
+    OAS.WebApi.DTO.Billing.SimpleInvoiceDto:
+      properties:
+        isMockBill:
+          type: boolean
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleInvoiceDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

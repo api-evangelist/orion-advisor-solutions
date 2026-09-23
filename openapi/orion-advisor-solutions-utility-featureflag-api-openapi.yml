@@ -1,0 +1,274 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Utility/Feature Flag API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Utility/FeatureFlag
+paths:
+  /v1/Utility/FeatureFlag:
+    get:
+      tags:
+      - Utility/FeatureFlag
+      summary: When this endpoint is called without querystring params, then returns all the…
+      operationId: FeatureFlag_GetAllFeatureFlagAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: code
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Utility/FeatureFlag/{featureFlagId}:
+    put:
+      tags:
+      - Utility/FeatureFlag
+      summary: When this endpoint is called it should update the Global value database column…
+      operationId: FeatureFlag_UpdateFeatureFlagDetailsAsync
+      parameters:
+      - name: featureFlagId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FeatureFlagDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FeatureFlagDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FeatureFlagDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FeatureFlagDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FeatureFlagDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FeatureFlagDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FeatureFlagDto'
+        required: true
+  /v1/Utility/FeatureFlag/{featureFlagId}/AlClient:
+    get:
+      tags:
+      - Utility/FeatureFlag
+      summary: when there is corresponding record on the FeatureFlagAlClient then use that…
+      operationId: FeatureFlag_GetFeatureFlagDetailsByIdAsync
+      parameters:
+      - name: featureFlagId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+    post:
+      tags:
+      - Utility/FeatureFlag
+      operationId: FeatureFlag_CreateFeatureFlagAsync
+      parameters:
+      - name: featureFlagId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FeatureFlagAlClientDto'
+              xml:
+                name: FeatureFlagAlClientDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FeatureFlagAlClientDto'
+              xml:
+                name: FeatureFlagAlClientDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FeatureFlagAlClientDto'
+              xml:
+                name: FeatureFlagAlClientDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FeatureFlagAlClientDto'
+              xml:
+                name: FeatureFlagAlClientDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FeatureFlagAlClientDto'
+              xml:
+                name: FeatureFlagAlClientDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FeatureFlagAlClientDto'
+              xml:
+                name: FeatureFlagAlClientDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FeatureFlagAlClientDto'
+              xml:
+                name: FeatureFlagAlClientDto
+                wrapped: true
+              type: array
+        required: true
+      summary: Feature flag create feature flag async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Utility.FeatureFlagDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+        globalValue:
+          type: string
+        description:
+          type: string
+        typeConfigJSON:
+          type: string
+        defaultValue:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        auditedBy:
+          type: string
+      xml:
+        name: FeatureFlagDto
+      type: object
+    OAS.WebApi.DTO.Utility.FeatureFlagAlClientDto:
+      properties:
+        featureFlagId:
+          type: integer
+          format: int32
+        alClientId:
+          type: integer
+          format: int32
+        value:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        auditedBy:
+          type: string
+      xml:
+        name: FeatureFlagAlClientDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

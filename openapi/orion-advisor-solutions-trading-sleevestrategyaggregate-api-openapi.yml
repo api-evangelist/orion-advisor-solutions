@@ -1,0 +1,3971 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Sleeve Strategy Aggregate API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/SleeveStrategyAggregate
+paths:
+  /v1/Trading/SleeveStrategyAggregate:
+    get:
+      tags:
+      - Trading/SleeveStrategyAggregate
+      summary: Returns all of the Sleeve Strategies Aggregates in the database
+      operationId: SleeveStrategyAggregate_Get
+      parameters:
+      - name: onlyAggregates
+        in: query
+        description: 'Optional.  Default: true If true, only strategy aggregates with more that one detail will be returned.'
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: includeSleeveRiskInfo
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: repId
+        in: query
+        description: 'Optional. Default: null If provided the results will be filtered to just the Strategies owned by the rep with the Id given.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: registrationId
+        in: query
+        description: 'Optional. Default: null If provided the results will be filtered to just the Strategies accessible by the Id given.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: regTypeId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: custodianId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: brokerDealerId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateDto'
+                xml:
+                  name: SleeveStrategyAggregateDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateDto'
+                xml:
+                  name: SleeveStrategyAggregateDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateDto'
+                xml:
+                  name: SleeveStrategyAggregateDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateDto'
+                xml:
+                  name: SleeveStrategyAggregateDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateDto'
+                xml:
+                  name: SleeveStrategyAggregateDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateDto'
+                xml:
+                  name: SleeveStrategyAggregateDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+    post:
+      tags:
+      - Trading/SleeveStrategyAggregate
+      summary: Creates new Sleeve Strategy Aggregate
+      operationId: SleeveStrategyAggregate_CreateEntityAsync
+      parameters:
+      - name: allowOneDetail
+        in: query
+        description: 'Optional:  Default false.  If false and a strategy agg with only one detail is passed in, an exception will be thrown saying more than one detail is required.  This should only be true from the call to create a regular strategy.'
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+        required: true
+  /v1/Trading/SleeveStrategyAggregate/{key}:
+    get:
+      tags:
+      - Trading/SleeveStrategyAggregate
+      summary: Returns the Sleeve Strategies Aggregates for the given key
+      operationId: SleeveStrategyAggregate_GetByKeyAsync
+      parameters:
+      - name: key
+        in: path
+        description: Results will be filtered to just the Strategy Aggregate for the given key.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Trading/SleeveStrategyAggregate
+      summary: Saves changes to the Sleeve Strategy Aggregate and the Details
+      operationId: SleeveStrategyAggregate_UpdateSleeveStrategyAggregateAsync
+      parameters:
+      - name: key
+        in: path
+        description: 'Required: The Sleeve Strategy Aggregate ID.'
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto'
+        description: 'Required: The Sleeve Strategy Aggregate and Details that are being changed for the selected Sleeve Strategy'
+        required: true
+    delete:
+      tags:
+      - Trading/SleeveStrategyAggregate
+      summary: Deletes the existing Sleeve Strategy Aggregate
+      operationId: SleeveStrategyAggregate_Delete
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Trading/SleeveStrategyAggregate/{key}/Action/Process/Registration:
+    post:
+      tags:
+      - Trading/SleeveStrategyAggregate
+      summary: Used to update multiple registrations sleeves as well as it's underlying…
+      operationId: SleeveStrategyAggregate_ProcessSleeveStrategyAggregateAsync
+      parameters:
+      - name: key
+        in: path
+        description: The Sleeve Strategy Id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ProcessStrategiesDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ProcessStrategiesDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ProcessStrategiesDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ProcessStrategiesDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ProcessStrategiesDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ProcessStrategiesDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ProcessStrategiesDto'
+        description: List of Registrations that have been assigned to the Sleeve Strategy and a List of Registrations unassinged from the strategy.
+        required: true
+  /v1/Trading/SleeveStrategyAggregate/{key}/DetailHistories:
+    get:
+      tags:
+      - Trading/SleeveStrategyAggregate
+      summary: Returns the data regarding the changes in the Sleeve Strategy Detail changes
+      operationId: SleeveStrategyAggregate_GetSleeveStrategyDetailHistoryByKey
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateDetailHistoryDto'
+                xml:
+                  name: SleeveStrategyAggregateDetailHistoryDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateDetailHistoryDto'
+                xml:
+                  name: SleeveStrategyAggregateDetailHistoryDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateDetailHistoryDto'
+                xml:
+                  name: SleeveStrategyAggregateDetailHistoryDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateDetailHistoryDto'
+                xml:
+                  name: SleeveStrategyAggregateDetailHistoryDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateDetailHistoryDto'
+                xml:
+                  name: SleeveStrategyAggregateDetailHistoryDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateDetailHistoryDto'
+                xml:
+                  name: SleeveStrategyAggregateDetailHistoryDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/SleeveStrategyAggregate/{key}/Histories:
+    get:
+      tags:
+      - Trading/SleeveStrategyAggregate
+      summary: Returns the data regarding the changes in the Sleeve Strategy Aggregates
+      operationId: SleeveStrategyAggregate_GetSleeveStrategyHistoryByKey
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateHistoryDto'
+                xml:
+                  name: SleeveStrategyAggregateHistoryDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateHistoryDto'
+                xml:
+                  name: SleeveStrategyAggregateHistoryDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateHistoryDto'
+                xml:
+                  name: SleeveStrategyAggregateHistoryDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateHistoryDto'
+                xml:
+                  name: SleeveStrategyAggregateHistoryDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateHistoryDto'
+                xml:
+                  name: SleeveStrategyAggregateHistoryDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateHistoryDto'
+                xml:
+                  name: SleeveStrategyAggregateHistoryDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/SleeveStrategyAggregate/CountRegistrationsAssigned/{key}:
+    get:
+      tags:
+      - Trading/SleeveStrategyAggregate
+      summary: Returns how many registration sleeves have been assigned to the Sleeve Strategy
+      operationId: SleeveStrategyAggregate_CountRegistrationsAssinged
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+  /v1/Trading/SleeveStrategyAggregate/RegistrationsAssignedSimple/{key}:
+    get:
+      tags:
+      - Trading/SleeveStrategyAggregate
+      summary: Returns the Registration Sleeve information for the sleeves assigned to the…
+      operationId: SleeveStrategyAggregate_GetRegistrationsAssignedSimple
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RegistrationsAssignedToStrategySimpleDto'
+                xml:
+                  name: RegistrationsAssignedToStrategySimpleDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RegistrationsAssignedToStrategySimpleDto'
+                xml:
+                  name: RegistrationsAssignedToStrategySimpleDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RegistrationsAssignedToStrategySimpleDto'
+                xml:
+                  name: RegistrationsAssignedToStrategySimpleDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RegistrationsAssignedToStrategySimpleDto'
+                xml:
+                  name: RegistrationsAssignedToStrategySimpleDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RegistrationsAssignedToStrategySimpleDto'
+                xml:
+                  name: RegistrationsAssignedToStrategySimpleDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RegistrationsAssignedToStrategySimpleDto'
+                xml:
+                  name: RegistrationsAssignedToStrategySimpleDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/SleeveStrategyAggregate/Restrictions:
+    get:
+      tags:
+      - Trading/SleeveStrategyAggregate
+      summary: Gets a list of sleeve strategy aggregate restrictions that the logged in user…
+      operationId: SleeveStrategyAggregateRestrictions_GetAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: sleeveStrategyAggregateId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: registrationId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+                xml:
+                  name: SleeveStrategyAggregateRestrictionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+                xml:
+                  name: SleeveStrategyAggregateRestrictionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+                xml:
+                  name: SleeveStrategyAggregateRestrictionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+                xml:
+                  name: SleeveStrategyAggregateRestrictionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+    post:
+      tags:
+      - Trading/SleeveStrategyAggregate
+      summary: Used to create a new sleeve strategy aggregate restriction.
+      operationId: SleeveStrategyAggregateRestrictions_CreateAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+        required: true
+  /v1/Trading/SleeveStrategyAggregate/Restrictions/{key}:
+    get:
+      tags:
+      - Trading/SleeveStrategyAggregate
+      summary: Gets the sleeve strategy aggregate restriction that has the provided key.
+      operationId: SleeveStrategyAggregateRestrictions_GetByKeyAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Trading/SleeveStrategyAggregate
+      summary: Used to update an existing sleeve strategy aggregate restriction.
+      operationId: SleeveStrategyAggregateRestrictions_UpdateAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+        required: true
+    delete:
+      tags:
+      - Trading/SleeveStrategyAggregate
+      summary: Used to delete an existing sleeve strategy aggregate restriction.
+      operationId: SleeveStrategyAggregateRestrictions_DeleteAsync
+      parameters:
+      - name: key
+        in: path
+        description: Sleeve Strategy Aggregate Restriction ID to be deleted.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Trading/SleeveStrategyAggregate/ReturnRegSleeveWithStrategyAggregate/{key}:
+    get:
+      tags:
+      - Trading/SleeveStrategyAggregate
+      summary: Used to update multiple registrations sleeves as well as it's underlying…
+      operationId: SleeveStrategyAggregate_ReturnRegSleeveWithStrategyAggregate
+      parameters:
+      - name: key
+        in: path
+        description: The Sleeve Strategy Id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: registrationId
+        in: query
+        description: RegistrationId assigned to the Sleeve Strategy.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RegistrationSleeveFullDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RegistrationSleeveFullDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RegistrationSleeveFullDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RegistrationSleeveFullDto'
+      security:
+      - Authorization: []
+  /v1/Trading/SleeveStrategyAggregate/Search:
+    get:
+      tags:
+      - Trading/SleeveStrategyAggregate
+      summary: Returns a list of the Sleeve Strategy Aggregate ids and names beginning with…
+      operationId: SleeveStrategyAggregate_Search
+      parameters:
+      - name: search
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: top
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: skip
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/SleeveStrategyAggregate/Search/{search}:
+    get:
+      tags:
+      - Trading/SleeveStrategyAggregate
+      summary: Returns a list of the Sleeve Strategy Aggregate ids and names beginning with…
+      operationId: SleeveStrategyAggregate_GetV1TradingSleeveStrategyAggregateSearchBySearch
+      parameters:
+      - name: search
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: top
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: skip
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/SleeveStrategyAggregate/Simple:
+    get:
+      tags:
+      - Trading/SleeveStrategyAggregate
+      summary: Returns a list of all the Sleeve Strategy Aggregate id and names
+      operationId: SleeveStrategyAggregate_GetSleeveStrategySimple
+      parameters:
+      - name: registrationId
+        in: query
+        description: 'Optional. Default: null If provided the results will be filtered to just the Strategies accessible by the Id given.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Trading.SleeveStrategyAggregateDetailDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        sleeveStrategyAggregateId:
+          type: integer
+          format: int32
+        sleeveStrategyId:
+          type: integer
+          format: int32
+        riskScore:
+          type: number
+          format: double
+        targetAllocation:
+          type: number
+          format: double
+        contributionAllocation:
+          type: number
+          format: double
+        distributionAllocation:
+          type: number
+          format: double
+        toleranceUpper:
+          type: number
+          format: double
+        toleranceLower:
+          type: number
+          format: double
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+        strategy:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyWithDetailsDto'
+      xml:
+        name: SleeveStrategyAggregateDetailDto
+      type: object
+    OAS.WebApi.DTO.Trading.SleeveStrategyAggregateDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        firmId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        contributionAllocationMethod:
+          type: string
+          enum:
+          - UseAssigned
+          - UseTarget
+          - UseOUB
+          - UseCurrent
+        distributionAllocationMethod:
+          type: string
+          enum:
+          - UseAssigned
+          - UseTarget
+          - UseOUB
+          - UseCurrent
+        autoRebalFreq:
+          type: string
+          enum:
+          - None
+          - Monthly
+          - Quarterly
+          - Semiannual
+          - Annual
+        autoRebalMonth:
+          type: integer
+          format: int32
+        autoRebalDay:
+          type: integer
+          format: int32
+        investmentObjectiveId:
+          description: Objectives often include Conservative Income, Aggressive Growth, Growth, Growth and Income, Income Only.
+          type: integer
+          format: int32
+        entityId:
+          type: integer
+          format: int32
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+        grouping:
+          type: string
+        singleStrategyId:
+          type: integer
+          format: int32
+        sleeveStrategyCount:
+          type: integer
+          format: int32
+        entities:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateEntityDto'
+          xml:
+            name: SleeveStrategyAggregateEntityDto
+            wrapped: true
+          type: array
+        owned:
+          type: boolean
+        include:
+          type: boolean
+        allowCustomization:
+          type: boolean
+        riskScore:
+          type: number
+          format: double
+        useRestrictions:
+          type: boolean
+        hasReadOnlyAccess:
+          type: boolean
+        sleeveStrategyRiskTypeId:
+          type: integer
+          format: int32
+        sleeveStrategyRiskScore:
+          type: number
+          format: double
+        eclipseFirmId:
+          type: integer
+          format: int32
+        associatedModelAggId:
+          type: integer
+          format: int32
+      xml:
+        name: SleeveStrategyAggregateDto
+      type: object
+    OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        entityId:
+          type: integer
+          format: int32
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        sleeveStrategyAggregateId:
+          type: integer
+          format: int32
+        entityName:
+          type: string
+        validationMessage:
+          type: string
+        exceptions:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionExceptionDto'
+          xml:
+            name: SleeveStrategyAggregateRestrictionExceptionDto
+            wrapped: true
+          type: array
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+      xml:
+        name: SleeveStrategyAggregateRestrictionDto
+      type: object
+    OAS.WebApi.DTO.Trading.SleeveStrategyAssetLevelAllowedDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        sleeveStrategyId:
+          type: integer
+          format: int32
+        assetLevelType:
+          type: string
+          enum:
+          - Default
+          - AssetCategory
+          - AssetClass
+          - RiskCategory
+        assetLevelId:
+          type: integer
+          format: int32
+      xml:
+        name: SleeveStrategyAssetLevelAllowedDto
+      type: object
+    OAS.WebApi.DTO.Trading.ModelItemFullDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        productClass:
+          type: string
+        ticker:
+          type: string
+        targetPercent:
+          type: number
+          format: double
+        itemTol:
+          type: integer
+          format: int32
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        itemTolUpper:
+          type: number
+          format: double
+        itemTolLower:
+          type: number
+          format: double
+        oub:
+          type: number
+          format: double
+        modelAggId:
+          type: integer
+          format: int32
+        productRiskScore:
+          type: integer
+          format: int32
+      xml:
+        name: ModelItemFullDto
+      type: object
+    OAS.WebApi.DTO.Trading.SleeveStrategyAggregateSpecialDetailDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        sleeveStrategyAggregateId:
+          type: integer
+          format: int32
+        sleeveType:
+          type: string
+          enum:
+          - Normal sleeve
+          - Custodial account
+          - Contribution sleeve
+          - Distribution sleeve
+          - Unmanaged sleeve
+        sleeveTypeVal:
+          readOnly: true
+          type: integer
+          format: int32
+        managementStyleId:
+          type: integer
+          format: int32
+        managementStyleName:
+          type: string
+        aggregateModelId:
+          type: integer
+          format: int32
+        aggregateName:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+      xml:
+        name: SleeveStrategyAggregateSpecialDetailDto
+      type: object
+    OAS.WebApi.DTO.Trading.SleeveNormalAcctBillingDto:
+      properties:
+        billFeeScheduleId:
+          type: integer
+          format: int32
+        billFeeScheduleName:
+          type: string
+        billMasterPayoutScheduleId:
+          type: integer
+          format: int32
+        billMasterPayoutScheduleName:
+          type: string
+        recurringAdjustments:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BillRecurrentAdjustmentDto'
+          xml:
+            name: BillRecurrentAdjustmentDto
+            wrapped: true
+          type: array
+      xml:
+        name: SleeveNormalAcctBillingDto
+      type: object
+    OAS.WebApi.DTO.Trading.SleeveCustodialAcctBillingDto:
+      properties:
+        billFeeScheduleId:
+          type: integer
+          format: int32
+        billFeeScheduleName:
+          type: string
+        billMasterPayoutScheduleId:
+          type: integer
+          format: int32
+        billMasterPayoutScheduleName:
+          type: string
+        recurringAdjustments:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BillRecurrentAdjustmentDto'
+          xml:
+            name: BillRecurrentAdjustmentDto
+            wrapped: true
+          type: array
+      xml:
+        name: SleeveCustodialAcctBillingDto
+      type: object
+    OAS.WebApi.DTO.Trading.ProcessStrategiesDto:
+      properties:
+        assignedRegistrationIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        unassignedRegistrationIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        removeCustomizations:
+          description: 'true -&gt; process customized sleeves to match the strategy and remove the IsCustomized flag
+
+            false -&gt; do not process the customized sleeves to match the strategy, leave them customized'
+          type: boolean
+      xml:
+        name: ProcessStrategiesDto
+      type: object
+    OAS.WebApi.DTO.Trading.AggregateModelSubstituteDto:
+      properties:
+        sleeveStrategyDetailId:
+          type: integer
+          format: int32
+        sleeveStrategyId:
+          type: integer
+          format: int32
+        aggregateModelId:
+          type: integer
+          format: int32
+        modelAggName:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+        isSubstitute:
+          type: boolean
+      xml:
+        name: AggregateModelSubstituteDto
+      type: object
+    OAS.WebApi.DTO.Trading.RegistrationsAssignedToStrategySimpleDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        isActive:
+          type: boolean
+        needsUpdate:
+          type: boolean
+        needsUpdateReason:
+          type: string
+        hasCustomizedSleeves:
+          description: true -&gt; one or more AccountSleeves are customized
+          type: boolean
+        isSleeveAssignedToReg:
+          description: "true -&gt; passed sleeve is assigned to registration\nfalse - &gt; passed sleeve is not assigned to registration but \npassed sleeve is one of the sleeves of sleeve agg that is assigned to registration"
+          type: boolean
+      xml:
+        name: RegistrationsAssignedToStrategySimpleDto
+      type: object
+    OAS.WebApi.DTO.Trading.AccountSleeveProcessDto:
+      properties:
+        modelAllocations:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelItemFullDto'
+          xml:
+            name: ModelItemFullDto
+            wrapped: true
+          type: array
+        sweepAssetId:
+          type: integer
+          format: int32
+        custodialBilling:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveCustodialAcctBillingDto'
+        sleeveBilling:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveNormalAcctBillingDto'
+        minimumCash:
+          type: number
+          format: double
+        replenishMinCash:
+          type: boolean
+        substitutes:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AggregateModelSubstituteDto'
+          xml:
+            name: AggregateModelSubstituteDto
+            wrapped: true
+          type: array
+        hasSMAModel:
+          type: boolean
+        modelAggType:
+          type: string
+          enum:
+          - Normal
+          - CustomIndex
+          - SelfDirected
+        minimumInvestmentAmount:
+          type: number
+          format: double
+        createdFromOciProcess:
+          type: boolean
+        accountId:
+          type: integer
+          format: int32
+        sleeveDescription:
+          type: string
+        targetAllocation:
+          type: number
+          format: double
+        currentAllocation:
+          type: number
+          format: double
+        currentValue:
+          type: number
+          format: double
+        contributionAllocation:
+          type: number
+          format: double
+        distributionAllocation:
+          type: number
+          format: double
+        corporateActionAllocation:
+          type: number
+          format: double
+        toleranceUpper:
+          type: number
+          format: double
+        toleranceLower:
+          type: number
+          format: double
+        sleeveType:
+          type: string
+          enum:
+          - Normal sleeve
+          - Custodial account
+          - Contribution sleeve
+          - Distribution sleeve
+          - Unmanaged sleeve
+        modelAgg:
+          type: string
+        managementStyle:
+          type: string
+        subAdvisor:
+          type: string
+        modelType:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        subAdvisorId:
+          type: integer
+          format: int32
+        modelAggId:
+          type: integer
+          format: int32
+        managementStyleId:
+          type: integer
+          format: int32
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        targetBalanceType:
+          type: string
+          enum:
+          - Dollars
+          - Percent
+        doNotTrade:
+          type: boolean
+        riskScore:
+          type: number
+          format: double
+        regValue:
+          type: number
+          format: double
+        isCustomized:
+          type: boolean
+        sleeveStrategyDetailId:
+          type: integer
+          format: int32
+        sleeveStrategyId:
+          type: integer
+          format: int32
+        sleeveStrategy:
+          type: string
+        sleeveStrategyToleranceUpper:
+          type: number
+          format: double
+        sleeveStrategyToleranceLower:
+          type: number
+          format: double
+        modelAggExcludeRebalanceSleeve:
+          type: boolean
+        businessLine:
+          type: string
+        unitBalanceScale:
+          type: string
+        assets:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AssetDto'
+          xml:
+            name: AssetDto
+            wrapped: true
+          type: array
+        categoryAllocations:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountSleeveAssetCategoryAllocationsDto'
+          readOnly: true
+          xml:
+            name: AccountSleeveAssetCategoryAllocationsDto
+            wrapped: true
+          type: array
+      xml:
+        name: AccountSleeveProcessDto
+      type: object
+    OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionExceptionDto:
+      description: A data transfer object which represents an exception to a restriction.
+      properties:
+        id:
+          type: integer
+          format: int32
+        entityId:
+          type: integer
+          format: int32
+        entity:
+          description: The entity type of the exception for the restriction.
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        entityName:
+          description: The name (e.g., representative name) of the exception to the restriction.
+          type: string
+        restrictionId:
+          description: The ID of the restriction that this DTO is an exception to.
+          type: integer
+          format: int32
+        restriction:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateRestrictionDto'
+          description: The restriction for which this exception applies.
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+      xml:
+        name: SleeveStrategyAggregateRestrictionExceptionDto
+      type: object
+    OAS.WebApi.DTO.Trading.SleeveStrategyWithDetailsDto:
+      properties:
+        details:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyDetailDto'
+          xml:
+            name: SleeveStrategyDetailDto
+            wrapped: true
+          type: array
+        deletedSleeveTargets:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.DeletedSleeveTargetDto'
+          xml:
+            name: DeletedSleeveTargetDto
+            wrapped: true
+          type: array
+        id:
+          type: integer
+          format: int32
+        firmId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        contributionAllocationMethod:
+          type: string
+          enum:
+          - UseAssigned
+          - UseTarget
+          - UseOUB
+          - UseCurrent
+        distributionAllocationMethod:
+          type: string
+          enum:
+          - UseAssigned
+          - UseTarget
+          - UseOUB
+          - UseCurrent
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        autoRebalFreq:
+          type: string
+          enum:
+          - None
+          - Monthly
+          - Quarterly
+          - Semiannual
+          - Annual
+        autoRebalMonth:
+          type: integer
+          format: int32
+        autoRebalDay:
+          type: integer
+          format: int32
+        mandate:
+          type: boolean
+        entityId:
+          type: integer
+          format: int32
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        riskScore:
+          type: number
+          format: double
+        originalRiskScore:
+          type: number
+          format: double
+        sleeveStrategyRiskTypeId:
+          type: integer
+          format: int32
+        tolerancePercent:
+          type: number
+          format: double
+        hasAssignedRegistrations:
+          type: boolean
+        include:
+          type: boolean
+        useRestrictions:
+          type: boolean
+        assetLevelAllowed:
+          type: string
+          enum:
+          - Default
+          - AssetCategory
+          - AssetClass
+          - RiskCategory
+        owned:
+          type: boolean
+        investmentObjectiveId:
+          type: integer
+          format: int32
+        entities:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyEntityDto'
+          xml:
+            name: SleeveStrategyEntityDto
+            wrapped: true
+          type: array
+        assetLevelsAllowed:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAssetLevelAllowedDto'
+          xml:
+            name: SleeveStrategyAssetLevelAllowedDto
+            wrapped: true
+          type: array
+      xml:
+        name: SleeveStrategyWithDetailsDto
+      type: object
+    OAS.WebApi.DTO.Trading.SleeveStrategyDetailDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        sleeveStrategyId:
+          type: integer
+          format: int32
+        aggregateModelId:
+          type: integer
+          format: int32
+        managementStyleId:
+          type: integer
+          format: int32
+        subAdvisorId:
+          type: integer
+          format: int32
+        targetAllocation:
+          type: number
+          format: double
+        contributionAllocation:
+          type: number
+          format: double
+        distributionAllocation:
+          type: number
+          format: double
+        toleranceUpper:
+          type: number
+          format: double
+        toleranceLower:
+          type: number
+          format: double
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        sleeveType:
+          type: string
+          enum:
+          - Normal sleeve
+          - Custodial account
+          - Contribution sleeve
+          - Distribution sleeve
+          - Unmanaged sleeve
+        autoTradeTypes:
+          type: string
+          enum:
+          - None
+          - RegistrationRebalance
+          - SleeveRebalance
+          - ContributionAllocation
+          - TransferInRebalance
+        aggregateName:
+          type: string
+        doNotTrade:
+          type: boolean
+        managementStyleName:
+          type: string
+        subAdvisorName:
+          type: string
+        aggregateModelType:
+          type: string
+        aggregateModelTypeId:
+          type: integer
+          format: int32
+        riskScore:
+          type: number
+          format: double
+        minimumInvestmentAmount:
+          type: number
+          format: double
+        aggregateExcludeRebalanceSleeve:
+          type: boolean
+        substitutes:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AggregateModelSubstituteDto'
+          xml:
+            name: AggregateModelSubstituteDto
+            wrapped: true
+          type: array
+      xml:
+        name: SleeveStrategyDetailDto
+      type: object
+    OAS.WebApi.DTO.Trading.SleeveStrategyAggregateHistoryDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        changeType:
+          type: string
+        sleeveStrategyAggregateId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        contributionAllocationMethod:
+          type: integer
+          format: int32
+        distributionAllocationMethod:
+          type: integer
+          format: int32
+        autoRebalFreq:
+          type: string
+          enum:
+          - None
+          - Monthly
+          - Quarterly
+          - Semiannual
+          - Annual
+        autoRebalMonth:
+          type: integer
+          format: int32
+        autoRebalDay:
+          type: integer
+          format: int32
+        createdDate:
+          type: string
+          format: date-time
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+        allowCustomization:
+          type: boolean
+        useRestrictions:
+          type: boolean
+        eclipseFirmId:
+          type: integer
+          format: int32
+        associatedModelAggId:
+          type: integer
+          format: int32
+      xml:
+        name: SleeveStrategyAggregateHistoryDto
+      type: object
+    OAS.WebApi.DTO.Trading.SleeveStrategyAggregateWithDetailsDto:
+      properties:
+        details:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateDetailDto'
+          xml:
+            name: SleeveStrategyAggregateDetailDto
+            wrapped: true
+          type: array
+        specialDetails:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateSpecialDetailDto'
+          xml:
+            name: SleeveStrategyAggregateSpecialDetailDto
+            wrapped: true
+          type: array
+        id:
+          type: integer
+          format: int32
+        firmId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        contributionAllocationMethod:
+          type: string
+          enum:
+          - UseAssigned
+          - UseTarget
+          - UseOUB
+          - UseCurrent
+        distributionAllocationMethod:
+          type: string
+          enum:
+          - UseAssigned
+          - UseTarget
+          - UseOUB
+          - UseCurrent
+        autoRebalFreq:
+          type: string
+          enum:
+          - None
+          - Monthly
+          - Quarterly
+          - Semiannual
+          - Annual
+        autoRebalMonth:
+          type: integer
+          format: int32
+        autoRebalDay:
+          type: integer
+          format: int32
+        investmentObjectiveId:
+          description: Objectives often include Conservative Income, Aggressive Growth, Growth, Growth and Income, Income Only.
+          type: integer
+          format: int32
+        entityId:
+          type: integer
+          format: int32
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+        grouping:
+          type: string
+        singleStrategyId:
+          type: integer
+          format: int32
+        sleeveStrategyCount:
+          type: integer
+          format: int32
+        entities:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveStrategyAggregateEntityDto'
+          xml:
+            name: SleeveStrategyAggregateEntityDto
+            wrapped: true
+          type: array
+        owned:
+          type: boolean
+        include:
+          type: boolean
+        allowCustomization:
+          type: boolean
+        riskScore:
+          type: number
+          format: double
+        useRestrictions:
+          type: boolean
+        hasReadOnlyAccess:
+          type: boolean
+        sleeveStrategyRiskTypeId:
+          type: integer
+          format: int32
+        sleeveStrategyRiskScore:
+          type: number
+          format: double
+        eclipseFirmId:
+          type: integer
+          format: int32
+        associatedModelAggId:
+          type: integer
+          format: int32
+      xml:
+        name: SleeveStrategyAggregateWithDetailsDto
+      type: object
+    OAS.WebApi.DTO.Trading.RegistrationSleeveFullDto:
+      properties:
+        accountSleeves:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountSleeveProcessDto'
+          xml:
+            name: AccountSleeveProcessDto
+            wrapped: true
+          type: array
+        custodialBilling:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveCustodialAcctBillingDto'
+        sleeveBilling:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveNormalAcctBillingDto'
+        excludedAssets:
+          items:
+            type: integer
+            format: int32
+          type: array
+        includedAssets:
+          items:
+            type: integer
+            format: int32
+          type: array
+        deletedSleeveTargets:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.DeletedSleeveTargetDto'
+          xml:
+            name: DeletedSleeveTargetDto
+            wrapped: true
+          type: array
+        clientId:
+          type: integer
+          format: int32
+        isPendingAccount:
+          type: boolean
+        registrationId:
+          type: integer
+          format: int32
+        sleeveStrategyAggId:
+          type: integer
+          format: int32
+        sleeveStrategyId:
+          type: integer
+          format: int32
+        isActive:
+          type: boolean
+        isDoNotTrade:
+          type: boolean
+        custodialAccountNumber:
+          type: string
+        asOfDate:
+          type: string
+          format: date-time
+        eclipseFirmId:
+          type: integer
+          format: int32
+        tolerancePercent:
+          type: number
+          format: double
+        aggregateRiskScore:
+          type: number
+          format: double
+        registrationRiskTolerance:
+          type: integer
+          format: int32
+        contributionAllocationMethod:
+          type: string
+          enum:
+          - UseAssigned
+          - UseTarget
+          - UseOUB
+          - UseCurrent
+        distributionAllocationMethod:
+          type: string
+          enum:
+          - UseAssigned
+          - UseTarget
+          - UseOUB
+          - UseCurrent
+        corporateActionAllocationMethod:
+          type: string
+          enum:
+          - UseAssigned
+          - UseTarget
+          - UseOUB
+          - UseCurrent
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        autoRebalFrequency:
+          type: string
+          enum:
+          - None
+          - Monthly
+          - Quarterly
+          - Semiannual
+          - Annual
+        autoRebalMonth:
+          type: integer
+          format: int32
+        autoRebalDay:
+          type: integer
+          format: int32
+        mandate:
+          type: boolean
+        needsUpdate:
+          type: boolean
+        needsUpdateReason:
+          type: string
+      xml:
+        name: RegistrationSleeveFullDto
+      type: object
+    OAS.WebApi.DTO.Trading.SleeveStrategyEntityDto:
+      properties:
+        entityId:
+          type: integer
+          format: int32
+        entityEnum:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+      xml:
+        name: SleeveStrategyEntityDto
+      type: object
+    OAS.WebApi.DTO.Trading.SleeveStrategyAggregateEntityDto:
+      properties:
+        entityId:
+          type: integer
+          format: int32
+        entityEnum:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+      xml:
+        name: SleeveStrategyAggregateEntityDto
+      type: object
+    OAS.WebApi.DTO.Trading.SleeveStrategyAggregateDetailHistoryDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        changeType:
+          type: string
+        sleeveStrategyAggregateDtlId:
+          type: integer
+          format: int32
+        sleeveStrategyAggregateId:
+          type: integer
+          format: int32
+        sleeveStrategyId:
+          type: integer
+          format: int32
+        targetAllocation:
+          type: number
+          format: double
+        contributionAllocation:
+          type: number
+          format: double
+        distributionAllocation:
+          type: number
+          format: double
+        toleranceUpper:
+          type: number
+          format: double
+        toleranceLower:
+          type: number
+          format: double
+        strategyName:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+      xml:
+        name: SleeveStrategyAggregateDetailHistoryDto
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
+    OAS.WebApi.DTO.Trading.DeletedSleeveTargetDto:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        deletedModelId:
+          type: integer
+          format: int32
+        targetModelId:
+          type: integer
+          format: int32
+      xml:
+        name: DeletedSleeveTargetDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.AssetDto:
+      properties:
+        costBasis:
+          type: number
+          format: double
+        name:
+          type: string
+        accountNumber:
+          type: string
+        ticker:
+          type: string
+        currentShares:
+          type: number
+          format: double
+        currentValue:
+          type: number
+          format: double
+        currentPrice:
+          type: number
+          format: double
+        isManaged:
+          type: boolean
+        assetClass:
+          type: string
+        productCategory:
+          type: string
+        productCategoryAbbreviation:
+          type: string
+        isCustodialCash:
+          type: boolean
+        secondaryAccountNumber:
+          type: string
+        cusip:
+          type: string
+        productId:
+          type: integer
+          format: int32
+        assetLevelStrategyId:
+          type: integer
+          format: int32
+        assetLevelStrategy:
+          type: string
+        status:
+          type: integer
+          format: int32
+        isStrategyOverride:
+          type: boolean
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        accountId:
+          type: integer
+          format: int32
+        registrationId:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        isActive:
+          type: boolean
+        downloadSymbol:
+          type: integer
+          format: int32
+        accountType:
+          type: string
+        fundFamily:
+          type: string
+        custodian:
+          type: string
+        asOfDate:
+          type: string
+          format: date-time
+        registrationName:
+          type: string
+        managementStyle:
+          type: string
+        sleeveType:
+          type: string
+          enum:
+          - Normal sleeve
+          - Custodial account
+          - Contribution sleeve
+          - Distribution sleeve
+          - Unmanaged sleeve
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        productSubType:
+          type: string
+        isGlobalExcluded:
+          type: boolean
+        isFeeExcluded:
+          type: boolean
+        excludeAmountType:
+          type: string
+          enum:
+          - Percent
+          - Dollars
+          - Shares
+        excludeAmount:
+          type: number
+          format: double
+        excludePercentOf:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        excludeFromMargin:
+          type: boolean
+        isRebalance:
+          type: boolean
+        isAdvisorOnly:
+          type: boolean
+        isAdvReportable:
+          type: boolean
+        is13FReportable:
+          type: boolean
+        mscsFundAccountNumber:
+          type: string
+        lastReconDate:
+          type: string
+          format: date-time
+        isOrionVision:
+          type: boolean
+        assetPercentOfAccount:
+          type: number
+          format: double
+        householdName:
+          type: string
+        riskCategory:
+          type: string
+        modelName:
+          type: string
+        registrationType:
+          type: string
+        accountStatusId:
+          type: integer
+          format: int32
+        isin:
+          type: string
+        id:
+          type: integer
+          format: int32
+        isDataSharingEntity:
+          type: boolean
+      xml:
+        name: AssetDto
+      type: object
+    OAS.WebApi.DTO.Trading.AccountSleeveAssetCategoryAllocationsDto:
+      properties:
+        category:
+          type: string
+        value:
+          type: number
+          format: double
+        percent:
+          type: number
+          format: double
+      xml:
+        name: AccountSleeveAssetCategoryAllocationsDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.BillRecurrentAdjustmentDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        annualAmount:
+          type: number
+          format: double
+        type:
+          type: integer
+          format: int32
+        schedule:
+          type: integer
+          format: int32
+        adjustmentType:
+          type: integer
+          format: int32
+        responsibleEntity:
+          type: integer
+          format: int32
+        endDate:
+          type: string
+          format: date-time
+        startDate:
+          type: string
+          format: date-time
+      xml:
+        name: BillRecurrentAdjustmentDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

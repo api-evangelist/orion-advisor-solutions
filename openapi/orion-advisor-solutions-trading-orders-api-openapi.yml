@@ -1,0 +1,3675 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Orders API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/Orders
+paths:
+  /v1/Trading/Orders:
+    get:
+      tags:
+      - Trading/Orders
+      summary: Gets a list of orders that the logged in user has access to and were created…
+      operationId: Orders_GetAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: startDate
+        in: query
+        description: Optional. The start of the range to report.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional. The end of the range to report.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: blocked
+        in: query
+        description: Optional. Default null. If provided will limit the return to only orders that have or haven't been blocked.
+        required: false
+        schema:
+          type: boolean
+      - name: status
+        in: query
+        description: "Optional. Default null. If provided will limit the return as follows:\n            open: to return only non-filled orders\n            closed: to return only filled orders\n            unallocated\n            : to return only orders that have unsent, or unconfirmed allocations\n            pending: to return only orders that have pending transactions"
+        required: false
+        schema:
+          type: string
+      - name: accountId
+        in: query
+        description: Optional. Default null. If provided will limit the return to only orders belonging to the account specified.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: tradeRequestInstanceId
+        in: query
+        description: Optional. Default null. If provided will limit the return to only orders belonging to the instance specified.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: onlyActualFixOrders
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: tradeIt
+        in: query
+        description: Optional.  Default null (all orders).  If provided only enabled/disabled trades are returned (tradeIt=true is enabled trades).
+        required: false
+        schema:
+          type: boolean
+      - name: entity
+        in: query
+        description: Optional.  If provided, entityId is required as well.  instance for only the specified entity/entityid are returned
+        required: false
+        schema:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+      - name: entityId
+        in: query
+        description: Optional.  If provided, entity is required as well.  instance for only the specified entity/entityid are returned
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/Orders/{key}:
+    get:
+      tags:
+      - Trading/Orders
+      summary: Gets the order that has the provided key.
+      operationId: Orders_GetByKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Trading/Orders
+      summary: Saves the trade order.
+      operationId: Orders_UpdateEntityAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: key
+        in: path
+        description: FixTradeRequestId to be saved.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: execute
+        in: query
+        description: Optional.  Default is False.  When True, the trade order will be saved, blocked, and executed.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: autoAllocate
+        in: query
+        description: Optional.  Indicates if the blocks should be auto allocated or not.  If left blank, The auto allocate will be left as they were when the block was created.  This is only used when executeBlock=true
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: returnWholeAccount
+        in: query
+        description: Optional.  Default is False. When True, ever order for this account will be returned. When false only the one order will be returned.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: blocked
+        in: query
+        description: Optional. Default null. If returnWholeAccount = True and provided will limit the return to only orders that have or haven't been blocked.
+        required: false
+        schema:
+          type: boolean
+      - name: status
+        in: query
+        description: "Optional. Default null. If returnWholeAccount = True and provided will limit the return as follows:\n            open: to return only non-filled orders\n            closed: to return only filled orders\n            unallocated: to return only orders that have unsent, or unconfirmed allocations\n            pending: to return only orders that have pending transactions"
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+        description: FixTradeRequest object to be saved.
+        required: true
+    delete:
+      tags:
+      - Trading/Orders
+      operationId: Orders_Delete
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      summary: Orders delete
+      x-summary-source: derived
+  /v1/Trading/Orders/{key}/AssetLots/{assetId}:
+    get:
+      tags:
+      - Trading/Orders
+      summary: Splits the order based on the lots selected
+      operationId: Orders_GetAssetCostCustodianOnlyUnrealized
+      parameters:
+      - name: key
+        in: path
+        description: FixTradeRequestId to be saved.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: assetId
+        in: path
+        description: FixTradeRequest object to be saved.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustodianOnlyCostBasisLotDto'
+                xml:
+                  name: CustodianOnlyCostBasisLotDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustodianOnlyCostBasisLotDto'
+                xml:
+                  name: CustodianOnlyCostBasisLotDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustodianOnlyCostBasisLotDto'
+                xml:
+                  name: CustodianOnlyCostBasisLotDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustodianOnlyCostBasisLotDto'
+                xml:
+                  name: CustodianOnlyCostBasisLotDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustodianOnlyCostBasisLotDto'
+                xml:
+                  name: CustodianOnlyCostBasisLotDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustodianOnlyCostBasisLotDto'
+                xml:
+                  name: CustodianOnlyCostBasisLotDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/Orders/{key}/RealtimePrice:
+    get:
+      tags:
+      - Trading/Orders
+      summary: Gets the price to use for the order that has the provided key.
+      operationId: Orders_GetRealtimePriceAsync
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+      security:
+      - Authorization: []
+  /v1/Trading/Orders/{key}/SplitByLots:
+    put:
+      tags:
+      - Trading/Orders
+      summary: Splits the order based on the lots selected
+      operationId: Orders_SplitOrderByLots
+      parameters:
+      - name: key
+        in: path
+        description: FixTradeRequestId to be saved.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SelectedLotsDto'
+              xml:
+                name: SelectedLotsDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SelectedLotsDto'
+              xml:
+                name: SelectedLotsDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SelectedLotsDto'
+              xml:
+                name: SelectedLotsDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SelectedLotsDto'
+              xml:
+                name: SelectedLotsDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SelectedLotsDto'
+              xml:
+                name: SelectedLotsDto
+                wrapped: true
+              type: array
+        description: Cost Basis object that has the selected lots that will be used to split the order.
+        required: true
+  /v1/Trading/Orders/Action/CalculateGainLoss:
+    put:
+      tags:
+      - Trading/Orders
+      summary: Calculates gain loss on all trades for the day
+      operationId: Orders_ActionCalculateGainLossAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+  /v1/Trading/Orders/Action/CreateBlocks:
+    put:
+      tags:
+      - Trading/Orders
+      operationId: Orders_CreateBlocksAsync
+      parameters:
+      - name: autoAllocate
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.CreateBlocksDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.CreateBlocksDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.CreateBlocksDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.CreateBlocksDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.CreateBlocksDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.CreateBlocksDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Orders create blocks async
+      x-summary-source: derived
+  /v1/Trading/Orders/Action/CreateOptionTradeFile:
+    post:
+      tags:
+      - Trading/Orders
+      summary: Creates trade file(s) for the provided list of option trades that do not exist…
+      operationId: Orders_CreateOptionFileAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.OptionTrades'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.OptionTrades'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.OptionTrades'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.OptionTrades'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.OptionTrades'
+        description: The batch token plus trades to process.
+        required: true
+  /v1/Trading/Orders/Action/Delete:
+    put:
+      tags:
+      - Trading/Orders
+      operationId: Orders_ActionDelete
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ActionDeleteDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ActionDeleteDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ActionDeleteDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ActionDeleteDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Orders action delete
+      x-summary-source: derived
+  /v1/Trading/Orders/Action/DeleteZeroQuantity:
+    put:
+      tags:
+      - Trading/Orders
+      operationId: Orders_ActionDeleteZeroQty
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Orders action delete zero qty
+      x-summary-source: derived
+  /v1/Trading/Orders/Action/Disable:
+    put:
+      tags:
+      - Trading/Orders
+      operationId: Orders_ActionDisableAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: returnWholeAccount
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: blocked
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Orders action disable async
+      x-summary-source: derived
+  /v1/Trading/Orders/Action/Enable:
+    put:
+      tags:
+      - Trading/Orders
+      operationId: Orders_ActionEnableAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: returnWholeAccount
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: blocked
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Orders action enable async
+      x-summary-source: derived
+  /v1/Trading/Orders/Action/RebuildOrderFromSplit:
+    put:
+      tags:
+      - Trading/Orders
+      summary: Rebuilds the order from the orders that were created from splitting the…
+      operationId: Orders_RebuildOrder
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: integer
+              format: int32
+          application/json:
+            schema:
+              type: integer
+              format: int32
+          text/json:
+            schema:
+              type: integer
+              format: int32
+          application/xml:
+            schema:
+              type: integer
+              format: int32
+          text/xml:
+            schema:
+              type: integer
+              format: int32
+          application/x-www-form-urlencoded:
+            schema:
+              type: integer
+              format: int32
+          multipart/form-data:
+            schema:
+              type: integer
+              format: int32
+        description: One of the FixTradeRequestIds that is from the original order that is to be reconstructed.
+        required: true
+  /v1/Trading/Orders/Action/RefreshPrices:
+    put:
+      tags:
+      - Trading/Orders
+      operationId: Orders_ActionRefreshPricesAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Orders action refresh prices async
+      x-summary-source: derived
+  /v1/Trading/Orders/Action/ResetMutualFundTrades:
+    put:
+      tags:
+      - Trading/Orders
+      operationId: Orders_ResetMutualFundTrades
+      parameters:
+      - name: useTradeIds
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Orders reset mutual fund trades
+      x-summary-source: derived
+  /v1/Trading/Orders/Action/RoundQuantity/{nearest}:
+    put:
+      tags:
+      - Trading/Orders
+      operationId: Orders_ActionRoundQuantity
+      parameters:
+      - name: nearest
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Orders action round quantity
+      x-summary-source: derived
+  /v1/Trading/Orders/Action/SetApprovalStatus:
+    put:
+      tags:
+      - Trading/Orders
+      operationId: Orders_ActionSetApprovalStatus
+      parameters:
+      - name: approvalStatus
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - Approved
+          - PendingApproval
+          - NotApproved
+      - name: instanceId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Orders action set approval status
+      x-summary-source: derived
+  /v1/Trading/Orders/Action/Unlink:
+    put:
+      tags:
+      - Trading/Orders
+      operationId: Orders_ActionUnlink
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Orders action unlink
+      x-summary-source: derived
+  /v1/Trading/Orders/Action/UpdateReinvest:
+    put:
+      tags:
+      - Trading/Orders
+      operationId: Orders_UpdateReinvestAsync
+      parameters:
+      - name: reinvestDividends
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: reinvestSTCapGains
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: reinvestLTCapGains
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Orders update reinvest async
+      x-summary-source: derived
+  /v1/Trading/Orders/GetFIXMutualFundsNotSent:
+    get:
+      tags:
+      - Trading/Orders
+      summary: Gets all of the FIX Mutual Fund orders that have been blocked and not sent
+      operationId: Orders_GetFixMutualFundsNotSent
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixMutualFundsNotSentDto'
+                xml:
+                  name: FixMutualFundsNotSentDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixMutualFundsNotSentDto'
+                xml:
+                  name: FixMutualFundsNotSentDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixMutualFundsNotSentDto'
+                xml:
+                  name: FixMutualFundsNotSentDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixMutualFundsNotSentDto'
+                xml:
+                  name: FixMutualFundsNotSentDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixMutualFundsNotSentDto'
+                xml:
+                  name: FixMutualFundsNotSentDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixMutualFundsNotSentDto'
+                xml:
+                  name: FixMutualFundsNotSentDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/Orders/GetOpenOrders:
+    get:
+      tags:
+      - Trading/Orders
+      summary: Gets the open orders for TOM Orders tab
+      operationId: Orders_GetOpenOrdersAsync
+      parameters:
+      - name: tradeRequestInstanceId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: onlyActualFixOrders
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/Orders/Histories:
+    get:
+      tags:
+      - Trading/Orders
+      summary: Gets the order histories that fit the parameters specified.
+      operationId: OrderHistories_GetDeleted
+      parameters:
+      - name: modificationType
+        in: query
+        description: Optional. Options are Insert, Update, Delete.  If null, all will be returned.
+        required: false
+        schema:
+          type: string
+          enum:
+          - Deleted
+          - Updated
+          - Inserted
+      - name: startDate
+        in: query
+        description: Optional.  Start Date for the requested time period.  If null, min date will be the default.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional.  End Date for the requested time period. If null, max date will be the default.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixTradeRequestHistoryDto'
+                xml:
+                  name: FixTradeRequestHistoryDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixTradeRequestHistoryDto'
+                xml:
+                  name: FixTradeRequestHistoryDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixTradeRequestHistoryDto'
+                xml:
+                  name: FixTradeRequestHistoryDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixTradeRequestHistoryDto'
+                xml:
+                  name: FixTradeRequestHistoryDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixTradeRequestHistoryDto'
+                xml:
+                  name: FixTradeRequestHistoryDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixTradeRequestHistoryDto'
+                xml:
+                  name: FixTradeRequestHistoryDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/Orders/NewFixedIncomeTrades:
+    put:
+      tags:
+      - Trading/Orders
+      summary: Creates new orders with real tickers that will
+      operationId: Orders_NewFixedIncomeTrades
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixIncomeTradeOrderListDto'
+              xml:
+                name: FixIncomeTradeOrderListDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixIncomeTradeOrderListDto'
+              xml:
+                name: FixIncomeTradeOrderListDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixIncomeTradeOrderListDto'
+              xml:
+                name: FixIncomeTradeOrderListDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixIncomeTradeOrderListDto'
+              xml:
+                name: FixIncomeTradeOrderListDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixIncomeTradeOrderListDto'
+              xml:
+                name: FixIncomeTradeOrderListDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixIncomeTradeOrderListDto'
+              xml:
+                name: FixIncomeTradeOrderListDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixIncomeTradeOrderListDto'
+              xml:
+                name: FixIncomeTradeOrderListDto
+                wrapped: true
+              type: array
+        description: Fixed Income trade data that will make the new orders.
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Trading.OrderDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        tradeIt:
+          type: boolean
+        productId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        assetId:
+          type: integer
+          format: int32
+        transactionId:
+          type: integer
+          format: int32
+        registrationId:
+          type: integer
+          format: int32
+        fixBlockOrderId:
+          type: integer
+          format: int32
+        hasBlock:
+          readOnly: true
+          type: boolean
+        trInstanceId:
+          type: integer
+          format: int32
+        handlInst:
+          type: string
+        execInst:
+          type: string
+        side:
+          type: string
+        optionTradeType:
+          type: string
+          enum:
+          - None
+          - CoveredCall
+        optionDwnldMgrId:
+          type: integer
+          format: int32
+        optionTRInterfaceId:
+          type: integer
+          format: int32
+        locateReqd:
+          type: boolean
+        ordType:
+          type: string
+        assetClassName:
+          type: string
+        representativeName:
+          type: string
+        limitPrice:
+          type: number
+          format: double
+        stopPrice:
+          type: number
+          format: double
+        timeInForce:
+          type: string
+        expireTime:
+          type: string
+          format: date-time
+        warningMessage:
+          type: string
+        orderQty:
+          type: number
+          format: double
+        originalOrderQty:
+          type: number
+          format: double
+        orderAmt:
+          type: number
+          format: double
+        orderPct:
+          type: number
+          format: double
+        sharesOwned:
+          type: number
+          format: double
+        mktValue:
+          type: number
+          format: double
+        navPrice:
+          type: number
+          format: double
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        notes:
+          type: string
+        instanceNotes:
+          type: string
+        tradeReason:
+          type: string
+        isDiscretionary:
+          type: boolean
+        settlmntTyp:
+          type: string
+        futSettDate:
+          type: string
+          format: date-time
+        rowVersion:
+          type: string
+          format: byte
+        productName:
+          type: string
+        ticker:
+          type: string
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        cusip:
+          type: string
+        accountNumber:
+          type: string
+        batchName:
+          type: string
+        allocStatus:
+          type: string
+        ordStatus:
+          type: string
+        registrationName:
+          type: string
+        accountType:
+          type: string
+        accountValueCurrent:
+          type: number
+          format: double
+        cashValueCurrent:
+          type: number
+          format: double
+        cashValuePostTrade:
+          type: number
+          format: double
+        assetUnitsCurrent:
+          type: number
+          format: double
+        cashValuePreTradePerc:
+          type: number
+          format: double
+        cashValuePostTradePerc:
+          type: number
+          format: double
+        shortTermGain:
+          type: number
+          format: double
+        longTermGain:
+          type: number
+          format: double
+        totalGain:
+          readOnly: true
+          type: number
+          format: double
+        daysUntilLongTerm:
+          type: integer
+          format: int32
+        washAmount:
+          type: number
+          format: double
+        washUnits:
+          type: number
+          format: double
+        calculationMethod:
+          type: string
+        gainLossMessage:
+          readOnly: true
+          type: string
+        blockName:
+          readOnly: true
+          type: string
+        custodian:
+          type: string
+        custodianId:
+          type: integer
+          format: int32
+        fixRouting:
+          type: string
+        tradeToAcctPerc:
+          readOnly: true
+          type: number
+          format: double
+        application:
+          type: string
+          enum:
+          - Undefined
+          - GlobalTrade
+          - Modeling
+          - CheckReq
+          - FeeReq
+          - BuySell
+          - ACHReq
+          - EligibleTrades
+          - All
+          - CashFundADV
+          - CashFundSWD
+          - SWPDCA
+          - SysPurchTrade
+          - Distribution
+          - Contribution
+        tradingInstructions:
+          type: string
+        repNotes:
+          type: string
+        clientDirected:
+          type: boolean
+        subAdvisor:
+          type: string
+        reinvestDividends:
+          type: boolean
+        reinvestLTCapGains:
+          type: boolean
+        reinvestSTCapGains:
+          type: boolean
+        instanceDescription:
+          type: string
+        currentModelName:
+          description: This is the model currently assigned to the account. Previously was returned by the {OAS.WebApi.DTO.Trading.OrderDto.ModelName} property.
+          type: string
+        modelName:
+          description: This is the model assigned to the account at the time the trade was created, starting with the 8/2014 build.
+          type: string
+        masterAccountNumber:
+          type: string
+        managementStyle:
+          type: string
+        groupNum:
+          type: string
+        qualified:
+          type: boolean
+        minCashBalanceType:
+          type: string
+          enum:
+          - Dollars
+          - Percent
+        minCashBalance:
+          type: number
+          format: double
+        replenishMinCash:
+          type: boolean
+        swpAmount:
+          type: number
+          format: double
+        swpFrequency:
+          type: string
+          enum:
+          - Monthly
+          - Quarterly
+          - Semiannually
+          - Annually
+        nextSwpDate:
+          type: string
+          format: date-time
+        cashNeededNext4Months:
+          type: number
+          format: double
+        targetCashPerc:
+          type: number
+          format: double
+        targetCash:
+          readOnly: true
+          type: number
+          format: double
+        dollarModelAmount:
+          type: number
+          format: double
+        totalCashNeed:
+          readOnly: true
+          type: number
+          format: double
+        approvalStatus:
+          type: string
+          enum:
+          - Approved
+          - PendingApproval
+          - NotApproved
+        nsccTradeType:
+          type: string
+          enum:
+          - UseDefault
+          - NormalPurchase
+          - Nav
+          - Roa
+          - Loi
+        exchangeId:
+          type: integer
+          format: int32
+        exchangeTicker:
+          type: string
+        rebalanceLevel:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        solicited:
+          type: boolean
+        vspDate:
+          type: string
+          format: date-time
+        vspPrice:
+          type: number
+          format: double
+        sellPriority:
+          type: integer
+          format: int32
+        roaAmount:
+          type: number
+          format: double
+        trustType:
+          type: string
+          enum:
+          - None
+          - CTC
+          - EAS
+        assetCostCustodianId:
+          type: integer
+          format: int32
+        cashValuePostTradeExecution:
+          type: number
+          format: double
+        riskBudget:
+          type: integer
+          format: int32
+        registrationSleeveStrategyName:
+          type: string
+        hasFixLog:
+          type: boolean
+        eclipseOrderId:
+          type: integer
+          format: int32
+      xml:
+        name: OrderDto
+      type: object
+    OAS.WebApi.DTO.Trading.FixIncomeTradeOrdersInfoDto:
+      properties:
+        fixTradeRequestId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        ticker:
+          type: string
+        price:
+          type: number
+          format: double
+        orderQty:
+          type: number
+          format: double
+      xml:
+        name: FixIncomeTradeOrdersInfoDto
+      type: object
+    OAS.WebApi.DTO.Trading.FixTradeRequestHistoryDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        tradeRequestFixId:
+          type: integer
+          format: int32
+        tradeIt:
+          type: boolean
+        productId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        assetId:
+          type: integer
+          format: int32
+        transactionId:
+          type: integer
+          format: int32
+        fixBlockOrderId:
+          type: integer
+          format: int32
+        trInstanceId:
+          type: integer
+          format: int32
+        handlInst:
+          type: string
+        execInst:
+          type: string
+        side:
+          type: string
+        locateReqd:
+          type: boolean
+        ordType:
+          type: string
+        limitPrice:
+          type: number
+          format: double
+        stopPrice:
+          type: number
+          format: double
+        timeInForce:
+          type: string
+        ticker:
+          type: string
+        expireTime:
+          type: string
+          format: date-time
+        warningMessage:
+          type: string
+        orderQty:
+          type: number
+          format: double
+        originalOrderQty:
+          type: number
+          format: double
+        orderAmt:
+          type: number
+          format: double
+        orderPct:
+          type: number
+          format: double
+        sharesOwned:
+          type: number
+          format: double
+        mktValue:
+          type: number
+          format: double
+        navPrice:
+          type: number
+          format: double
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        notes:
+          type: string
+        isDiscretionary:
+          type: boolean
+        settlmntTyp:
+          type: string
+        futSettDate:
+          type: string
+          format: date-time
+        changeType:
+          type: string
+        recalcState:
+          type: integer
+          format: int32
+        approvalStatus:
+          type: integer
+          format: int32
+        tradeRequestFixExchangeId:
+          type: integer
+          format: int32
+        solicited:
+          type: boolean
+        sellPriority:
+          type: integer
+          format: int32
+        registrationId:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        tradingInstructions:
+          type: string
+        productName:
+          type: string
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        accountType:
+          type: string
+        custodian:
+          type: string
+        trustType:
+          type: string
+          enum:
+          - None
+          - CTC
+          - EAS
+        fixRouting:
+          type: string
+        subAdvisor:
+          type: string
+        currentModelName:
+          type: string
+        masterAccountNumber:
+          type: string
+        managementStyle:
+          type: string
+        groupNum:
+          type: string
+        qualified:
+          type: boolean
+        rebalanceLevel:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        representativeName:
+          type: string
+        allocStatus:
+          type: string
+        ordStatus:
+          type: string
+        vspDate:
+          type: string
+          format: date-time
+        vspPrice:
+          type: number
+          format: double
+        minCashBalance:
+          type: number
+          format: double
+        minCashBalanceType:
+          type: string
+          enum:
+          - Dollars
+          - Percent
+        replenishMinCash:
+          type: boolean
+        assetCostCustodianId:
+          type: integer
+          format: int32
+        cashValuePostTradeExecution:
+          type: number
+          format: double
+        registrationSleeveStrategyName:
+          type: string
+      xml:
+        name: FixTradeRequestHistoryDto
+      type: object
+    OAS.WebApi.DTO.Trading.FixIncomeTradeOrderListDto:
+      properties:
+        fixTradeRequestId:
+          type: integer
+          format: int32
+        fixIncomeTradeOrdersInfos:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixIncomeTradeOrdersInfoDto'
+          xml:
+            name: FixIncomeTradeOrdersInfoDto
+            wrapped: true
+          type: array
+      xml:
+        name: FixIncomeTradeOrderListDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.CustodianOnlyCostBasisLotDto:
+      properties:
+        acquiredDate:
+          type: string
+          format: date-time
+        assetId:
+          type: integer
+          format: int32
+        assetCostCustodianId:
+          type: integer
+          format: int32
+        type:
+          type: string
+          enum:
+          - Sell
+          - Buy
+          - WashSale
+          - NotUsed
+          - MoneyMarket
+          - StepUp
+          - Spinoff
+        productName:
+          type: string
+        description:
+          type: string
+        symbol:
+          type: string
+        costBasisPerUnit:
+          type: number
+          format: double
+        valuePrice:
+          type: number
+          format: double
+        units:
+          type: number
+          format: double
+        avaiableUnits:
+          type: number
+          format: double
+        currentValue:
+          type: number
+          format: double
+        costBasis:
+          type: number
+          format: double
+        gainLoss:
+          type: number
+          format: double
+        gainLossPercent:
+          type: number
+          format: double
+        selectedLots:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SelectedLotsDto'
+          xml:
+            name: SelectedLotsDto
+            wrapped: true
+          type: array
+      xml:
+        name: CustodianOnlyCostBasisLotDto
+      type: object
+    OAS.Remote.Trading.OptionTrade:
+      properties:
+        tradeRequestFixId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        masterAccountNumber:
+          type: string
+        tradeInterfaceId:
+          type: integer
+          format: int32
+        side:
+          type: string
+        discretionary:
+          type: boolean
+        solicited:
+          type: boolean
+        symbol:
+          type: string
+        quantity:
+          type: number
+          format: double
+        expiration:
+          type: string
+          format: date-time
+        callOrPut:
+          type: string
+        openOrClose:
+          type: string
+        strikePrice:
+          type: number
+          format: double
+      xml:
+        name: OptionTrade
+      type: object
+    OAS.WebApi.DTO.Trading.CreateBlocksDto:
+      properties:
+        batchId:
+          type: integer
+          format: int32
+        orderIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+      xml:
+        name: CreateBlocksDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SelectedLotsDto:
+      properties:
+        acquiredDate:
+          type: string
+          format: date-time
+        assetCostCustodianId:
+          type: integer
+          format: int32
+        assetId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        symbol:
+          type: string
+        costBasisPerUnit:
+          type: number
+          format: double
+        units:
+          type: number
+          format: double
+      xml:
+        name: SelectedLotsDto
+      type: object
+    OAS.WebApi.DTO.Trading.ActionDeleteDto:
+      properties:
+        deletedIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        updatedItems:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+          xml:
+            name: OrderDto
+            wrapped: true
+          type: array
+      xml:
+        name: ActionDeleteDto
+      type: object
+    OAS.WebApi.DTO.Trading.FixMutualFundsNotSentDto:
+      properties:
+        custodian:
+          type: string
+        side:
+          type: string
+        numberOrders:
+          type: integer
+          format: int32
+        dollarAmount:
+          type: number
+          format: double
+        ids:
+          items:
+            type: integer
+            format: int32
+          type: array
+      xml:
+        name: FixMutualFundsNotSentDto
+      type: object
+    OAS.Remote.Trading.OptionTrades:
+      properties:
+        trades:
+          items:
+            $ref: '#/components/schemas/OAS.Remote.Trading.OptionTrade'
+          readOnly: true
+          xml:
+            name: OptionTrade
+            wrapped: true
+          type: array
+        routine:
+          type: string
+          enum:
+          - Undefined
+          - Rebalance
+          - GlobalTrades
+          - BuySell
+          - SellAll
+          - TargetPercent
+          - ProRated
+          - QuickTrade
+          - QuickTradeBlock
+          - Distribution
+          - OptionTrade
+        scheduled:
+          type: boolean
+        recalcInstance:
+          type: boolean
+        scheduledRunTime:
+          type: object
+        description:
+          type: string
+        nsccTransactionType:
+          type: string
+          enum:
+          - UseDefault
+          - NormalPurchase
+          - Nav
+          - Roa
+          - Loi
+        assetValues:
+          type: string
+          enum:
+          - UseDefault
+          - Current
+          - Pending
+          - PendingTransactionsAndOrders
+        minTradeAmount:
+          type: number
+          format: double
+        postProcess:
+          type: string
+          enum:
+          - Run
+          - Skip
+        useProductSubstitution:
+          type: string
+          enum:
+          - UseDefault
+          - Use
+          - Ignore
+        stfWarningDays:
+          type: integer
+          format: int32
+        tradeInstanceID:
+          type: integer
+          format: int32
+        includeCustodialCash:
+          type: boolean
+        notes:
+          type: string
+        inboxAlert:
+          type: boolean
+        disableRealTimePrices:
+          type: boolean
+        sessionID:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        caption:
+          type: string
+        filename:
+          type: string
+        runDisconnected:
+          type: boolean
+        instanceType:
+          type: string
+          enum:
+          - Undefined
+          - GlobalTrade
+          - Modeling
+          - CheckReq
+          - FeeReq
+          - BuySell
+          - ACHReq
+          - EligibleTrades
+          - All
+          - CashFundADV
+          - CashFundSWD
+          - SWPDCA
+          - SysPurchTrade
+          - Distribution
+          - Contribution
+        securityTicket:
+          type: string
+          format: byte
+        commonSecurityTicket:
+          type: string
+          format: byte
+        authToken:
+          type: string
+        commonServer:
+          type: string
+        databaseID:
+          type: integer
+          format: int32
+        correlationId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        a_UserDetailId:
+          type: integer
+          format: int32
+        i_UserDetailId:
+          type: integer
+          format: int32
+      xml:
+        name: OptionTrades
+      type: object
+    OAS.WebApi.DTO.Trading.RealtimePriceDto:
+      properties:
+        date:
+          type: string
+          format: date-time
+        last:
+          type: number
+          format: double
+        isRealTimeQuote:
+          type: boolean
+        isDelayedQuote:
+          type: boolean
+        changeFromLastClose:
+          type: number
+          format: double
+        changeFromLastMarketClose:
+          type: number
+          format: double
+        changeFromMarketClose:
+          type: number
+          format: double
+        changeFromMarketOpen:
+          type: number
+          format: double
+        changeFromPrev:
+          type: number
+          format: double
+        lastClosePrice:
+          type: number
+          format: double
+        lastMarketClosePrice:
+          type: number
+          format: double
+        marketClosePrice:
+          type: number
+          format: double
+        marketOpenPrice:
+          type: number
+          format: double
+        percentChangeFromLastClose:
+          type: number
+          format: double
+        percentChangeFromLastMarketClose:
+          type: number
+          format: double
+        percentChangeFromMarketClose:
+          type: number
+          format: double
+        percentChangeFromMarketOpen:
+          type: number
+          format: double
+        percentChangeFromOpen:
+          type: number
+          format: double
+        percentChangeFromPrev:
+          type: number
+          format: double
+        ask:
+          type: number
+          format: double
+        askQuantity:
+          type: number
+          format: double
+        bid:
+          type: number
+          format: double
+        bidQuantity:
+          type: number
+          format: double
+        changeFromOpen:
+          type: number
+          format: double
+        changeFromPrevious:
+          type: number
+          format: double
+        cusip:
+          type: string
+        delay:
+          type: number
+          format: double
+        high:
+          type: number
+          format: double
+        low:
+          type: number
+          format: double
+        name:
+          type: string
+        outcome:
+          type: string
+        percentageChangeFromOpen:
+          type: number
+          format: double
+        percentageChangeFromPrevious:
+          type: number
+          format: double
+        quantity:
+          type: number
+          format: double
+        volume:
+          type: number
+          format: double
+        open:
+          type: number
+          format: double
+        priceSource:
+          type: string
+        symbol:
+          type: string
+      xml:
+        name: RealtimePriceDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

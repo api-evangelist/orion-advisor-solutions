@@ -1,0 +1,161 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Scheduler/Jobs API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Scheduler/Jobs
+paths:
+  /v1/Scheduler/Jobs:
+    get:
+      tags:
+      - Scheduler/Jobs
+      summary: Gets a list of job schedules that the logged in user has access to
+      operationId: Job_Get
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Scheduler.JobDto'
+                xml:
+                  name: JobDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Scheduler.JobDto'
+                xml:
+                  name: JobDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Scheduler.JobDto'
+                xml:
+                  name: JobDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Scheduler.JobDto'
+                xml:
+                  name: JobDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Scheduler.JobDto'
+                xml:
+                  name: JobDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Scheduler.JobDto'
+                xml:
+                  name: JobDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Scheduler/Jobs/{key}:
+    get:
+      tags:
+      - Scheduler/Jobs
+      summary: Gets the job schedules that has the provided key.
+      operationId: Job_GetEntityByKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Scheduler.JobDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Scheduler.JobDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Scheduler.JobDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Scheduler.JobDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Scheduler.JobDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Scheduler.JobDto'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Scheduler.JobDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        isActive:
+          type: boolean
+        maxRunTime:
+          type: integer
+          format: int32
+        jobType:
+          type: string
+        entryMethod:
+          type: string
+        assemblyVersion:
+          type: integer
+          format: int32
+        assemblyResolveLocation:
+          type: string
+        appConfig:
+          type: string
+        lastUpdated:
+          type: string
+          format: date-time
+        adminAssemblyResolveLocation:
+          type: string
+        enableSecurity:
+          type: boolean
+        requireApproval:
+          type: boolean
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        updatedBy:
+          type: string
+        updatedDate:
+          type: string
+          format: date-time
+      xml:
+        name: JobDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

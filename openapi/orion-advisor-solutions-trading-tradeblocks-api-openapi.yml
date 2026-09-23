@@ -1,0 +1,835 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Trade Blocks API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/TradeBlocks
+paths:
+  /v1/Trading/TradeBlocks:
+    get:
+      tags:
+      - Trading/TradeBlocks
+      operationId: TradeBlock_GetTradeBlockDetailsAsync
+      parameters:
+      - name: relatedType
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: relatedTypeId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Trade block get trade block details async
+      x-summary-source: derived
+    put:
+      tags:
+      - Trading/TradeBlocks
+      summary: Replaces trade block detail records with the given {tradeBlockDetailDtos}…
+      description: 'The trade block detail records to be replaced are identified by the
+
+        {OAS.WebApi.DTO.Trading.TradeBlockDetailDto.Id} values in {tradeBlockDetailDtos}.'
+      operationId: TradeBlock_UpdateTradeBlockDetailsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        description: The cancellation token.
+        required: true
+      - name: createSyncEvent
+        in: query
+        description: Whether or not to create a sync event that will notify other systems
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBlockDetailDto'
+              xml:
+                name: TradeBlockDetailDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBlockDetailDto'
+              xml:
+                name: TradeBlockDetailDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBlockDetailDto'
+              xml:
+                name: TradeBlockDetailDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBlockDetailDto'
+              xml:
+                name: TradeBlockDetailDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBlockDetailDto'
+              xml:
+                name: TradeBlockDetailDto
+                wrapped: true
+              type: array
+        required: true
+    post:
+      tags:
+      - Trading/TradeBlocks
+      summary: Creates trade block detail records for the given {tradeBlockDetailDtos} payload
+      description: 'Sample Request
+
+        POST Trading/TradeBlocks'
+      operationId: TradeBlock_CreateTradeBlockDetailsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        description: The cancellation token.
+        required: true
+      - name: createSyncEvent
+        in: query
+        description: Whether or not to create a sync event that will notify other systems
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBlockDetailDto'
+              xml:
+                name: TradeBlockDetailDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBlockDetailDto'
+              xml:
+                name: TradeBlockDetailDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBlockDetailDto'
+              xml:
+                name: TradeBlockDetailDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBlockDetailDto'
+              xml:
+                name: TradeBlockDetailDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBlockDetailDto'
+              xml:
+                name: TradeBlockDetailDto
+                wrapped: true
+              type: array
+        description: "An array of {OAS.WebApi.DTO.Trading.TradeBlockDetailDto} objects within a JSON\n            object."
+        required: true
+  /v1/Trading/TradeBlocks/{tradeBlockId}:
+    get:
+      tags:
+      - Trading/TradeBlocks
+      summary: Returns the Trade Block Detail having the given ID
+      description: 'Sample Request:
+
+        GET Trading/TradeBlocks/{id}'
+      operationId: TradeBlock_GetAsync
+      parameters:
+      - name: tradeBlockId
+        in: path
+        description: The Trade Block Detail identifier.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        description: The cancellation token.
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+    delete:
+      tags:
+      - Trading/TradeBlocks
+      summary: Deletes the trade block details record identified by the given {tradeBlockId}
+      description: 'Sample Request
+
+        DELETE Trading/TradeBlocks/{id}'
+      operationId: TradeBlock_DeleteAsync
+      parameters:
+      - name: tradeBlockId
+        in: path
+        description: The Trade Block Detail identifier.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        description: The cancellation token.
+        required: true
+      - name: createSyncEvent
+        in: query
+        description: Whether or not to create a sync event that will notify other systems
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Trading/TradeBlocks/DeleteByGlobalIds:
+    post:
+      tags:
+      - Trading/TradeBlocks
+      summary: Deletes the trade block details records identified by the collection of…
+      description: 'Sample Request
+
+        DELETE Trading/TradeBlocks'
+      operationId: TradeBlock_DeleteTradeBlockDetailsByGlobalIdAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        description: The cancellation token.
+        required: true
+      - name: createSyncEvent
+        in: query
+        description: Whether or not to create a sync event that will notify other systems
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                example: 00000000-0000-0000-0000-000000000000
+                type: string
+                format: uuid
+              type: array
+          application/json:
+            schema:
+              items:
+                example: 00000000-0000-0000-0000-000000000000
+                type: string
+                format: uuid
+              type: array
+          text/json:
+            schema:
+              items:
+                example: 00000000-0000-0000-0000-000000000000
+                type: string
+                format: uuid
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                example: 00000000-0000-0000-0000-000000000000
+                type: string
+                format: uuid
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                example: 00000000-0000-0000-0000-000000000000
+                type: string
+                format: uuid
+              type: array
+        required: true
+  /v1/Trading/TradeBlocks/DeleteByReasonForCurrentUser:
+    post:
+      tags:
+      - Trading/TradeBlocks
+      summary: Soft-deletes trade block details for the authenticated user, the given…
+      operationId: TradeBlock_DeleteByReasonForCurrentUserAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.DeleteByReasonForCurrentUserRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.DeleteByReasonForCurrentUserRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.DeleteByReasonForCurrentUserRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.DeleteByReasonForCurrentUserRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.DeleteByReasonForCurrentUserRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.DeleteByReasonForCurrentUserRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.DeleteByReasonForCurrentUserRequest'
+        description: Reason global id and one or more entity (enum/id) pairs.
+        required: true
+  /v1/Trading/TradeBlocks/DeleteRequests:
+    post:
+      tags:
+      - Trading/TradeBlocks
+      summary: Deletes the trade block details records identified by the collection of…
+      description: 'Sample Request
+
+        DELETE Trading/TradeBlocks'
+      operationId: TradeBlock_DeleteTradeBlockDetailsByIdAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        description: The cancellation token.
+        required: true
+      - name: createSyncEvent
+        in: query
+        description: Whether or not to create a sync event that will notify other systems
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: The Trade Block Detail identifiers.
+        required: true
+  /v1/Trading/TradeBlocks/QueueForAccountIds:
+    post:
+      tags:
+      - Trading/TradeBlocks
+      summary: Creates outbox events for the provided {accountIds} with active Trade Block…
+      operationId: TradeBlock_QueueTradeBlockDetailsForAccountIdsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+  /v1/Trading/TradeBlocks/Reasons:
+    get:
+      tags:
+      - Trading/TradeBlocks
+      summary: Returns Trade Block Reasons
+      description: 'Sample Request:
+
+        GET Trading/TradeBlocks/Reasons'
+      operationId: TradeBlock_GetReasonsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        description: The cancellation token.
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Trading/TradeBlocks/Reasons/Simple:
+    get:
+      tags:
+      - Trading/TradeBlocks
+      summary: Returns a simple list of Trade Block Reasons for the OAS.Search
+      description: 'Sample Request:
+
+        GET Trading/TradeBlocks/Reasons/Simple'
+      operationId: TradeBlock_GetReasonsSimpleAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        description: The cancellation token.
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Trading/TradeBlocks/Related:
+    get:
+      tags:
+      - Trading/TradeBlocks
+      summary: Returns Trade Block Related Entities
+      description: 'Sample Request:
+
+        GET Trading/TradeBlocks/Related'
+      operationId: TradeBlock_GetTradeBlockRelatedEntitiesAsync
+      parameters:
+      - name: relatedType
+        in: query
+        description: The entity type that the trade block applies to. Registration = 6, Account = 7
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: relatedTypeId
+        in: query
+        description: The ID of the related type for which the trade block details are returned.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        description: The cancellation token.
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Trading.TradeBlockEntityScopeRequest:
+      description: 'Registration or account scope: entity enum as int (Registration = 6, Account = 7; see OrionConnect EntityEnum).'
+      properties:
+        entityEnum:
+          type: integer
+          format: int32
+        entityId:
+          type: integer
+          format: int32
+      xml:
+        name: TradeBlockEntityScopeRequest
+      type: object
+    OAS.WebApi.DTO.Trading.DeleteByReasonForCurrentUserRequest:
+      description: Request to soft-delete trade block details for the current user and reason across one or more entity scopes.
+      properties:
+        tradeBlockReasonGlobalId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        entityScopes:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBlockEntityScopeRequest'
+          xml:
+            name: TradeBlockEntityScopeRequest
+            wrapped: true
+          type: array
+        createSyncEvent:
+          type: boolean
+      xml:
+        name: DeleteByReasonForCurrentUserRequest
+      type: object
+    OAS.WebApi.DTO.Trading.TradeBlockReasonDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          description: The name of the trade block reason.
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        globalId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        eclipseFirmId:
+          type: integer
+          format: int32
+        isSystemMaintained:
+          type: boolean
+        allowDetailAssignment:
+          type: boolean
+        syncToEclipse:
+          type: boolean
+      xml:
+        name: TradeBlockReasonDto
+      type: object
+    OAS.WebApi.DTO.Trading.TradeBlockDetailDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        entityId:
+          description: The ID of the {OAS.WebApi.DTO.Trading.TradeBlockDetailDto.EntityEnum}.
+          type: integer
+          format: int32
+        entityEnum:
+          description: The entity type (aka relation type) that the block applies to.
+          type: integer
+          format: int32
+        tradeBlockReasonId:
+          description: The cross-reference to a {OAS.WebApi.DTO.Trading.TradeBlockDetailDto.TradeBlockReason}.
+          type: integer
+          format: int32
+        description:
+          description: A description of why this particular trade block was created.
+          type: string
+        startDate:
+          description: The date that the trade block becomes/became effective.
+          type: string
+          format: date-time
+        endDate:
+          description: The last day that the trade block is in effect for.
+          type: string
+          format: date-time
+        isDeleted:
+          description: <see langword="true" /> if the trade block detail had been (soft) deleted.
+          type: boolean
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        entityName:
+          type: string
+        globalId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        errorMessage:
+          type: string
+        isDisabled:
+          type: boolean
+        tradeBlockReason:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBlockReasonDto'
+        origin:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBlockOriginContextDto'
+          description: 'Per-detail origin metadata from Eclipse when createSyncEvent=false on the batch request.
+
+            Not persisted; used by OAT to decide fan-out to other Eclipse firms.'
+      xml:
+        name: TradeBlockDetailDto
+      type: object
+    OAS.WebApi.DTO.Trading.TradeBlockOriginContextDto:
+      description: 'Factual metadata about where and why a trade block originated in Eclipse.
+
+        Orion Connect uses this to decide its own sync and fan-out behavior.'
+      properties:
+        wasPortfolioLevelBlock:
+          description: 'True when the block was created from a portfolio-level action that maps to
+
+            a registration entity in Orion Connect.'
+          type: boolean
+        originatingEclipseFirmId:
+          description: The Eclipse firm where the originating action occurred.
+          type: integer
+          format: int32
+      xml:
+        name: TradeBlockOriginContextDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

@@ -1,0 +1,99 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Confirm/Sleeve Settings API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Confirm/SleeveSettings
+paths:
+  /v1/Confirm/SleeveSettings:
+    get:
+      tags:
+      - Confirm/SleeveSettings
+      summary: Gets all the sleeve rules from tblDownloadSleeveRules
+      operationId: DownloadSleeveSettings_GetSleeveSettings
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+  /v1/Confirm/SleeveSettings/Save:
+    put:
+      tags:
+      - Confirm/SleeveSettings
+      summary: Saves the sleeve json arrays to userDefinedData
+      operationId: DownloadSleeveSettings_SaveSleeveRules
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.SleeveUserRuleDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.SleeveUserRuleDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.SleeveUserRuleDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.SleeveUserRuleDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.SleeveUserRuleDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.SleeveUserRuleDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.SleeveUserRuleDto'
+        description: The reequest object to be sent contains ids and json arrays.
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Confirm.SleeveUserRuleDto:
+      properties:
+        journalRules:
+          type: string
+        allocationRules:
+          type: string
+        journalUserDefinedID:
+          type: integer
+          format: int32
+        allocationUserDefinedID:
+          type: integer
+          format: int32
+      xml:
+        name: SleeveUserRuleDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

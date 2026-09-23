@@ -1,0 +1,1427 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Confirm/Held Away API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Confirm/HeldAway
+paths:
+  /v1/Confirm/HeldAway/Accounts:
+    get:
+      tags:
+      - Confirm/HeldAway
+      summary: Gets Held Away Accounts
+      operationId: HeldAway_GetAccountData
+      parameters:
+      - name: startDate
+        in: query
+        description: Required. The start date of the range of Asset Confirm Errors for.
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        description: 'Optional. Default: null, Today wil be used if not set'
+        required: false
+        schema:
+          type: string
+      - name: errorsOnly
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAccountDto'
+                xml:
+                  name: HeldAwayAccountDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAccountDto'
+                xml:
+                  name: HeldAwayAccountDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAccountDto'
+                xml:
+                  name: HeldAwayAccountDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAccountDto'
+                xml:
+                  name: HeldAwayAccountDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAccountDto'
+                xml:
+                  name: HeldAwayAccountDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAccountDto'
+                xml:
+                  name: HeldAwayAccountDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Confirm/HeldAway/Accounts/AssetValueConfirmError:
+    get:
+      tags:
+      - Confirm/HeldAway
+      operationId: HeldAway_GetAssetValueChangeWithErrors
+      parameters:
+      - name: accountIds
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetValueWithErrorDto'
+                xml:
+                  name: HeldAwayAssetValueWithErrorDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetValueWithErrorDto'
+                xml:
+                  name: HeldAwayAssetValueWithErrorDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetValueWithErrorDto'
+                xml:
+                  name: HeldAwayAssetValueWithErrorDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetValueWithErrorDto'
+                xml:
+                  name: HeldAwayAssetValueWithErrorDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetValueWithErrorDto'
+                xml:
+                  name: HeldAwayAssetValueWithErrorDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetValueWithErrorDto'
+                xml:
+                  name: HeldAwayAssetValueWithErrorDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Held away get asset value change with errors
+      x-summary-source: derived
+  /v1/Confirm/HeldAway/Accounts/Transactions:
+    get:
+      tags:
+      - Confirm/HeldAway
+      operationId: HeldAway_GetTransactionsByAccounts
+      parameters:
+      - name: accountIds
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionithErrorDto'
+                xml:
+                  name: HeldAwayTransactionithErrorDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionithErrorDto'
+                xml:
+                  name: HeldAwayTransactionithErrorDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionithErrorDto'
+                xml:
+                  name: HeldAwayTransactionithErrorDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionithErrorDto'
+                xml:
+                  name: HeldAwayTransactionithErrorDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionithErrorDto'
+                xml:
+                  name: HeldAwayTransactionithErrorDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionithErrorDto'
+                xml:
+                  name: HeldAwayTransactionithErrorDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Held away get transactions by accounts
+      x-summary-source: derived
+  /v1/Confirm/HeldAway/Action/AcceptableConfirmError:
+    put:
+      tags:
+      - Confirm/HeldAway
+      summary: Change Acceptable heldAways value
+      operationId: HeldAway_AcceptableConfirmErrorAsync
+      parameters:
+      - name: acceptable
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: note
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetConfirmErrorUpdateKeyDto'
+              xml:
+                name: HeldAwayAssetConfirmErrorUpdateKeyDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetConfirmErrorUpdateKeyDto'
+              xml:
+                name: HeldAwayAssetConfirmErrorUpdateKeyDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetConfirmErrorUpdateKeyDto'
+              xml:
+                name: HeldAwayAssetConfirmErrorUpdateKeyDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetConfirmErrorUpdateKeyDto'
+              xml:
+                name: HeldAwayAssetConfirmErrorUpdateKeyDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetConfirmErrorUpdateKeyDto'
+              xml:
+                name: HeldAwayAssetConfirmErrorUpdateKeyDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetConfirmErrorUpdateKeyDto'
+              xml:
+                name: HeldAwayAssetConfirmErrorUpdateKeyDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetConfirmErrorUpdateKeyDto'
+              xml:
+                name: HeldAwayAssetConfirmErrorUpdateKeyDto
+                wrapped: true
+              type: array
+        required: true
+  /v1/Confirm/HeldAway/Action/RefreshConfirmErrors:
+    post:
+      tags:
+      - Confirm/HeldAway
+      summary: Refreshes Confirm error counts for the requested accounts.
+      operationId: HeldAway_RefreshConfirmErrorsAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: waitLimit
+        in: query
+        description: Deprectaed parameter
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 20
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: List of account Ids to refresh
+        required: true
+  /v1/Confirm/HeldAway/Action/UpdateExcludedFromPositionOnly:
+    post:
+      tags:
+      - Confirm/HeldAway
+      operationId: HeldAway_UpdateExcludedFromPositionOnly
+      parameters:
+      - name: accountId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: excludedFromPositionOnly
+        in: query
+        required: true
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Held away update excluded from position only
+      x-summary-source: derived
+  /v1/Confirm/HeldAway/Assets:
+    get:
+      tags:
+      - Confirm/HeldAway
+      summary: Gets Held Away Assets
+      operationId: HeldAway_GetAssetsByAccount
+      parameters:
+      - name: accountId
+        in: query
+        description: Required.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        description: Required. The start date of the range of Asset Confirm Errors for.
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        description: 'Optional. Default: null, Today wil be used if not set'
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetDto'
+                xml:
+                  name: HeldAwayAssetDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetDto'
+                xml:
+                  name: HeldAwayAssetDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetDto'
+                xml:
+                  name: HeldAwayAssetDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetDto'
+                xml:
+                  name: HeldAwayAssetDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetDto'
+                xml:
+                  name: HeldAwayAssetDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetDto'
+                xml:
+                  name: HeldAwayAssetDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Confirm/HeldAway/AssetValueConfirmError:
+    get:
+      tags:
+      - Confirm/HeldAway
+      summary: Gets Held Away asset value changes with asset confirm errors.
+      operationId: HeldAway_GetV1ConfirmHeldAwayAssetValueConfirmError
+      parameters:
+      - name: startDate
+        in: query
+        description: Required..
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        description: 'Optional. Default: null, Today wil be used if not set'
+        required: false
+        schema:
+          type: string
+      - name: accountId
+        in: query
+        description: 'Optional. Default: null, Asset Id will override if provided'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: assetId
+        in: query
+        description: 'Optional. Default: null'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetValueWithErrorDto'
+                xml:
+                  name: HeldAwayAssetValueWithErrorDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetValueWithErrorDto'
+                xml:
+                  name: HeldAwayAssetValueWithErrorDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetValueWithErrorDto'
+                xml:
+                  name: HeldAwayAssetValueWithErrorDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetValueWithErrorDto'
+                xml:
+                  name: HeldAwayAssetValueWithErrorDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetValueWithErrorDto'
+                xml:
+                  name: HeldAwayAssetValueWithErrorDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAssetValueWithErrorDto'
+                xml:
+                  name: HeldAwayAssetValueWithErrorDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Confirm/HeldAway/AssetValues:
+    get:
+      tags:
+      - Confirm/HeldAway
+      summary: Gets all asset values
+      operationId: HeldAway_GetAssetValuesByAccount
+      parameters:
+      - name: accountId
+        in: query
+        description: Required.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        description: Required. The start date of the range of Asset Confirm Errors for.
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        description: 'Optional. Default: null, Today wil be used if not set'
+        required: false
+        schema:
+          type: string
+      - name: balanceDate
+        in: query
+        description: 'Optional. Default: null, Today wil be used if not set'
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAllAssetValueDto'
+                xml:
+                  name: HeldAwayAllAssetValueDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAllAssetValueDto'
+                xml:
+                  name: HeldAwayAllAssetValueDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAllAssetValueDto'
+                xml:
+                  name: HeldAwayAllAssetValueDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAllAssetValueDto'
+                xml:
+                  name: HeldAwayAllAssetValueDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAllAssetValueDto'
+                xml:
+                  name: HeldAwayAllAssetValueDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayAllAssetValueDto'
+                xml:
+                  name: HeldAwayAllAssetValueDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Confirm/HeldAway/Counts:
+    get:
+      tags:
+      - Confirm/HeldAway
+      summary: Gets Held Away counts
+      operationId: HeldAway_GetPositionOnlyCounts
+      parameters:
+      - name: startDate
+        in: query
+        description: Required. The start date of the range of Asset Confirm Errors for.
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        description: 'Optional. Default: null, Today wil be used if not set'
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayCountDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayCountDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayCountDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayCountDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayCountDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayCountDto'
+      security:
+      - Authorization: []
+  /v1/Confirm/HeldAway/CreateTransactions:
+    post:
+      tags:
+      - Confirm/HeldAway
+      summary: Used to create transactions and assets if need
+      operationId: HeldAway_CreateTransactions
+      parameters:
+      - name: accountId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionCreateDto'
+              xml:
+                name: HeldAwayTransactionCreateDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionCreateDto'
+              xml:
+                name: HeldAwayTransactionCreateDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionCreateDto'
+              xml:
+                name: HeldAwayTransactionCreateDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionCreateDto'
+              xml:
+                name: HeldAwayTransactionCreateDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionCreateDto'
+              xml:
+                name: HeldAwayTransactionCreateDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionCreateDto'
+              xml:
+                name: HeldAwayTransactionCreateDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionCreateDto'
+              xml:
+                name: HeldAwayTransactionCreateDto
+                wrapped: true
+              type: array
+        required: true
+  /v1/Confirm/HeldAway/DownloadTransToTransaction:
+    put:
+      tags:
+      - Confirm/HeldAway
+      summary: Used to create transaction from the download tran
+      operationId: HeldAway_ConvertDownloadTransToTransactionAsync
+      parameters:
+      - name: downloadTransId
+        in: query
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: assetId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+  /v1/Confirm/HeldAway/Transactions:
+    get:
+      tags:
+      - Confirm/HeldAway
+      summary: Gets Held Away transactions with asset confirm errors.
+      operationId: HeldAway_GetTransactions
+      parameters:
+      - name: startDate
+        in: query
+        description: Required.
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        description: 'Optional. Default: null, Today wil be used if not set'
+        required: false
+        schema:
+          type: string
+      - name: accountId
+        in: query
+        description: 'Optional. Default: null, Asset Id will override if provided'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: assetId
+        in: query
+        description: 'Optional. Default: null'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionithErrorDto'
+                xml:
+                  name: HeldAwayTransactionithErrorDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionithErrorDto'
+                xml:
+                  name: HeldAwayTransactionithErrorDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionithErrorDto'
+                xml:
+                  name: HeldAwayTransactionithErrorDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionithErrorDto'
+                xml:
+                  name: HeldAwayTransactionithErrorDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionithErrorDto'
+                xml:
+                  name: HeldAwayTransactionithErrorDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionithErrorDto'
+                xml:
+                  name: HeldAwayTransactionithErrorDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Confirm/HeldAway/TransactionTypes:
+    get:
+      tags:
+      - Confirm/HeldAway
+      summary: Gets Held Away transactions types and their offsets
+      operationId: HeldAway_GetTransactionTypesWithOffset
+      parameters:
+      - name: usagePriority
+        in: query
+        description: Optional. Default 10. Used to limit transaction type on its usage priority. Will return number enter and higher
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionTypeWithOffsetDto'
+                xml:
+                  name: HeldAwayTransactionTypeWithOffsetDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionTypeWithOffsetDto'
+                xml:
+                  name: HeldAwayTransactionTypeWithOffsetDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionTypeWithOffsetDto'
+                xml:
+                  name: HeldAwayTransactionTypeWithOffsetDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionTypeWithOffsetDto'
+                xml:
+                  name: HeldAwayTransactionTypeWithOffsetDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionTypeWithOffsetDto'
+                xml:
+                  name: HeldAwayTransactionTypeWithOffsetDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.HeldAwayTransactionTypeWithOffsetDto'
+                xml:
+                  name: HeldAwayTransactionTypeWithOffsetDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Confirm.HeldAwayAssetConfirmErrorUpdateKeyDto:
+      properties:
+        assetId:
+          type: integer
+          format: int32
+        asOfDate:
+          type: string
+          format: date-time
+      xml:
+        name: HeldAwayAssetConfirmErrorUpdateKeyDto
+      type: object
+    OAS.WebApi.DTO.Confirm.HeldAwayTransactionithErrorDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        accountId:
+          type: integer
+          format: int32
+        transactionError:
+          type: boolean
+        acceptable:
+          type: boolean
+        asOfDate:
+          type: string
+          format: date-time
+        transactionDescription:
+          type: string
+        tradeStatus:
+          type: string
+          enum:
+          - Complete
+          - Pending
+          - Rejected
+          - Reversed
+          - Inactive
+          - PendingCorpAction
+          - FutureAip
+        transactionAmount:
+          type: number
+          format: double
+        units:
+          type: number
+          format: double
+        price:
+          type: number
+          format: double
+        orionUnits:
+          type: number
+          format: double
+        custodianUnits:
+          type: number
+          format: double
+        note:
+          type: string
+        excludedFromPositionOnly:
+          type: boolean
+        ticker:
+          type: string
+        assetId:
+          type: integer
+          format: int32
+        lastUpdate:
+          type: string
+          format: date-time
+        message:
+          type: string
+        performanceError:
+          type: boolean
+      xml:
+        name: HeldAwayTransactionithErrorDto
+      type: object
+    OAS.WebApi.DTO.Confirm.HeldAwayCountDto:
+      properties:
+        performanceErrorCount:
+          type: integer
+          format: int32
+        transactionErrorCount:
+          type: integer
+          format: int32
+        accountCount:
+          type: integer
+          format: int32
+      xml:
+        name: HeldAwayCountDto
+      type: object
+    OAS.WebApi.DTO.Confirm.HeldAwayAssetValueWithErrorDto:
+      properties:
+        assetId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        accountId:
+          type: integer
+          format: int32
+        performanceError:
+          type: boolean
+        acceptable:
+          type: boolean
+        asOfDate:
+          readOnly: true
+          type: string
+          format: date-time
+        startValue:
+          type: number
+          format: double
+        performance:
+          type: number
+          format: double
+        cashFlowAmount:
+          type: number
+          format: double
+        price:
+          type: number
+          format: double
+        ticker:
+          type: string
+        note:
+          type: string
+        message:
+          type: string
+        value:
+          type: number
+          format: double
+        productId:
+          type: integer
+          format: int32
+        factor:
+          type: number
+          format: double
+        valueChange:
+          type: number
+          format: double
+        feeAmount:
+          type: number
+          format: double
+        startAccruedInterst:
+          type: number
+          format: double
+        accruedInterstChange:
+          type: number
+          format: double
+        lastUpdate:
+          type: string
+          format: date-time
+        asOf:
+          type: integer
+          format: int32
+        transactionError:
+          type: boolean
+      xml:
+        name: HeldAwayAssetValueWithErrorDto
+      type: object
+    OAS.WebApi.DTO.Confirm.HeldAwayAllAssetValueDto:
+      properties:
+        assetId:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        ticker:
+          type: string
+        price:
+          type: number
+          format: double
+        custodianUnits:
+          type: number
+          format: double
+        orionUnits:
+          type: number
+          format: double
+        units:
+          type: number
+          format: double
+        amount:
+          type: number
+          format: double
+        performanceError:
+          type: boolean
+        transactionError:
+          type: boolean
+        transactionDate:
+          type: string
+          format: date-time
+        isCashAsset:
+          type: boolean
+      xml:
+        name: HeldAwayAllAssetValueDto
+      type: object
+    OAS.WebApi.DTO.Confirm.HeldAwayTransactionCreateDto:
+      properties:
+        assetId:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        transactionDate:
+          type: string
+          format: date-time
+        price:
+          type: number
+          format: double
+        units:
+          type: number
+          format: double
+        amount:
+          type: number
+          format: double
+        transTypeId:
+          type: integer
+          format: int32
+        note:
+          type: string
+      xml:
+        name: HeldAwayTransactionCreateDto
+      type: object
+    OAS.WebApi.DTO.Confirm.HeldAwayAccountDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        accountName:
+          type: string
+        accountNumber:
+          type: string
+        downloadSourceName:
+          type: string
+        performanceErrorCount:
+          type: integer
+          format: int32
+        transactionErrorCount:
+          type: integer
+          format: int32
+        isManaged:
+          type: boolean
+        clientId:
+          type: integer
+          format: int32
+        representativeId:
+          type: integer
+          format: int32
+        downloadFileId:
+          type: integer
+          format: int32
+        secondaryAccountNumber:
+          type: string
+        fileFundCode:
+          type: string
+        note:
+          type: string
+        fileDate:
+          type: string
+          format: date-time
+        firstName:
+          type: string
+        lastName:
+          type: string
+        representativeName:
+          type: string
+        firstTransactionErrorDate:
+          type: string
+          format: date-time
+      xml:
+        name: HeldAwayAccountDto
+      type: object
+    OAS.WebApi.DTO.Confirm.HeldAwayAssetDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        ticker:
+          type: string
+        performanceError:
+          type: boolean
+        transactionError:
+          type: boolean
+        errorDate:
+          type: string
+          format: date-time
+        excludedFromPositionOnly:
+          type: boolean
+      xml:
+        name: HeldAwayAssetDto
+      type: object
+    OAS.WebApi.DTO.Confirm.HeldAwayTransactionTypeWithOffsetDto:
+      properties:
+        description:
+          type: string
+        offsetId:
+          type: integer
+          format: int32
+        offsetName:
+          type: string
+        offsetDescription:
+          type: string
+        offsetMultiplier:
+          type: number
+          format: double
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: HeldAwayTransactionTypeWithOffsetDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

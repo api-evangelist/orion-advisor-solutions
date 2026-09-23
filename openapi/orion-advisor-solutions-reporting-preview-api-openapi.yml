@@ -1,0 +1,343 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Reporting/Preview API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Reporting/Preview
+paths:
+  /v1/Reporting/Preview:
+    post:
+      tags:
+      - Reporting/Preview
+      operationId: Preview_GeneratePreview
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.PreviewDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.PreviewDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.PreviewDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.PreviewDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.PreviewDto'
+        required: true
+      summary: Preview generate preview
+      x-summary-source: derived
+  /v1/Reporting/Preview/Calculate/InceptionDate/{entity}/{entityId}:
+    get:
+      tags:
+      - Reporting/Preview
+      operationId: Preview_GetPreviewInceptionDate
+      parameters:
+      - name: entity
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: entityId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.InceptionDateDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.InceptionDateDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.InceptionDateDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.InceptionDateDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.InceptionDateDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.InceptionDateDto'
+      security:
+      - Authorization: []
+      summary: Preview get preview inception date
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.DataModel.Reporting.Interfaces.IReportFeatureFlagOverrider:
+      properties:
+        dynamicBenchmarkProcessType:
+          readOnly: true
+          type: string
+          enum:
+          - Cloud
+          - LocalService
+        forceAssetGroupingIntraDayPerformance:
+          readOnly: true
+          type: boolean
+        activityProcessType:
+          readOnly: true
+          type: string
+          enum:
+          - Cloud
+          - LocalService
+        costBasisProcessType:
+          type: string
+          enum:
+          - Old
+          - Cloud
+          - LocalService
+        morningstarLevel2Assignment:
+          type: boolean
+        localPriceCutOverDate:
+          type: string
+          format: date-time
+        noScope:
+          type: boolean
+        ensureAssetsUpdated:
+          type: boolean
+        storeReportDataCompressed:
+          type: boolean
+        showEInModelNames:
+          type: boolean
+        performanceProcessType:
+          type: string
+          enum:
+          - Cloud
+          - LocalService
+        forceNonSummaryPerformanceToUseTwr:
+          type: boolean
+        forceNetOfFeesPerformance:
+          type: boolean
+        costBasisStoredSource:
+          type: string
+          enum:
+          - Orion
+          - Custodian
+        tradingWithParentGrouping:
+          type: boolean
+        useGlobalSettingsUniqueIds:
+          type: boolean
+        showEquations:
+          type: boolean
+        isReportCompare:
+          type: boolean
+        useBenchmarksInAccountChangeHistory:
+          type: boolean
+        benchmarkAssignmentOverride:
+          type: string
+        useAsOfDateForAdvizr:
+          type: boolean
+        accountNumbersToShow:
+          type: integer
+          format: int32
+        useBatchSettingsBulkCopy:
+          type: boolean
+        showExcludedFromRebalance:
+          type: boolean
+        useInMemoryForModelVsActual:
+          type: boolean
+        useNewLineChartRenderer:
+          type: boolean
+        useNewScatterPlotChartRenderer:
+          type: boolean
+        useInMemoryIncomeCalculation:
+          type: boolean
+        useModelAllocationHistory:
+          type: boolean
+        useDisclaimerShadowDom:
+          type: boolean
+      xml:
+        name: IReportFeatureFlagOverrider
+      type: object
+    OAS.DataModel.Reporting.ReportOption:
+      required:
+      - id
+      - $type
+      properties:
+        id:
+          type: string
+        $type:
+          readOnly: true
+          type: string
+        optionGuid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        optionId:
+          type: integer
+          format: int32
+        isDisabled:
+          type: boolean
+        isGlobal:
+          type: boolean
+        isIgnored:
+          type: boolean
+        name:
+          type: string
+        useInception:
+          type: boolean
+        prompt:
+          type: string
+          enum:
+          - Never
+          - Always
+      xml:
+        name: ReportOption
+      type: object
+    OAS.DataModel.Reporting.ControlBase:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        width:
+          type: string
+      xml:
+        name: ControlBase
+      type: object
+    OAS.DataModel.Reporting.Controls.ListControl:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        controls:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
+          xml:
+            name: ControlBase
+            wrapped: true
+          type: array
+        customClass:
+          type: string
+        width:
+          type: string
+      xml:
+        name: ListControl
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.DateExpression:
+      properties:
+        date:
+          type: string
+        expression:
+          type: string
+        dateSource:
+          type: string
+          enum:
+          - Static
+          - Dynamic
+      xml:
+        name: DateExpression
+      type: object
+    OAS.WebApi.DTO.Reporting.RunReport.InceptionDateDto:
+      properties:
+        inceptionDate:
+          type: string
+          format: date-time
+      xml:
+        name: InceptionDateDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.PreviewDto:
+      properties:
+        entity:
+          type: string
+          enum:
+          - Database
+          - BrokerDealer
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - AggregateModel
+          - DynamicGrouping
+          - PortfolioGroup
+          - UserDetail
+          - Prospect
+          - CustomGrouping
+        entityIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        orientation:
+          type: string
+          enum:
+          - Portrait
+          - Landscape
+        start:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.DateExpression'
+        end:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.DateExpression'
+        selectedTheme:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        controls:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Controls.ListControl'
+        options:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+        featureFlagsOverride:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IReportFeatureFlagOverrider'
+      xml:
+        name: PreviewDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

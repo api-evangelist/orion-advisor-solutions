@@ -1,0 +1,800 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/SAML API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/SAML
+paths:
+  /v1/Integrations/SAML/CAIS:
+    get:
+      tags:
+      - Integrations/SAML
+      operationId: IntegrationSaml_CAIS_SamlAsync
+      parameters:
+      - name: relayState
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: isWealth
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Integration saml CAIS saml async
+      x-summary-source: derived
+  /v1/Integrations/SAML/CAISWM:
+    get:
+      tags:
+      - Integrations/SAML
+      operationId: IntegrationSaml_CAISWealthManagement_SamlAsync
+      parameters:
+      - name: relayState
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: isWealth
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Integration saml CAIS wealth management saml async
+      x-summary-source: derived
+  /v1/Integrations/SAML/DPL:
+    get:
+      tags:
+      - Integrations/SAML
+      operationId: IntegrationSaml_DPL_SamlAsync
+      parameters:
+      - name: relayState
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Integration saml DPL saml async
+      x-summary-source: derived
+  /v1/Integrations/SAML/iCapital:
+    get:
+      tags:
+      - Integrations/SAML
+      operationId: IntegrationSaml_iCapital_SamlAsync
+      parameters:
+      - name: relayState
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Integration saml i capital saml async
+      x-summary-source: derived
+  /v1/Integrations/SAML/SamlServices/AddOrUpdateSamlPartner:
+    post:
+      tags:
+      - Integrations/SAML
+      operationId: IntegrationSaml_AddOrUpdateSamlPartnerInfoAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SamlServices.Models.PartnerInfoDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SamlServices.Models.PartnerInfoDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SamlServices.Models.PartnerInfoDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SamlServices.Models.PartnerInfoDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SamlServices.Models.PartnerInfoDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SamlServices.Models.PartnerInfoDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SamlServices.Models.PartnerInfoDto'
+        required: true
+      summary: Integration saml add or update saml partner info async
+      x-summary-source: derived
+  /v1/Integrations/SAML/SamlServices/CheckSamlUpdatePrivilege:
+    get:
+      tags:
+      - Integrations/SAML
+      summary: Check if user can perform SAML updates (certificates, etc)
+      operationId: IntegrationSaml_CheckSamlUpdatePrivilegeAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/SAML/SamlServices/GetClientGlobalId/{houseHoldGlobalId}:
+    get:
+      tags:
+      - Integrations/SAML
+      summary: Integration saml get client global id async
+      operationId: IntegrationSaml_GetClientGlobalIdAsync
+      parameters:
+      - name: houseHoldGlobalId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Integrations/SAML/SamlServices/GetExpiringCertificates/{interval}/{duration}:
+    get:
+      tags:
+      - Integrations/SAML
+      operationId: IntegrationSaml_GetExpiringCertificatesAsync
+      parameters:
+      - name: interval
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: duration
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Integration saml get expiring certificates async
+      x-summary-source: derived
+  /v1/Integrations/SAML/SamlServices/GetMappedUser:
+    get:
+      tags:
+      - Integrations/SAML
+      summary: Integration saml get mapped user async
+      operationId: IntegrationSaml_GetMappedUserAsync
+      parameters:
+      - name: applink
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: external
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Integrations/SAML/SamlServices/GetPartnerDatabases:
+    get:
+      tags:
+      - Integrations/SAML
+      summary: Integration saml get partner databases async
+      operationId: IntegrationSaml_GetPartnerDatabasesAsync
+      parameters:
+      - name: partnerid
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Integrations/SAML/SamlServices/GetPartnerInfo:
+    get:
+      tags:
+      - Integrations/SAML
+      summary: 'Step 1: After SamlResponse is received and parsed, obtain PartnerInfo from…'
+      operationId: IntegrationSaml_GetPartnerInfoAsync
+      parameters:
+      - name: issuer
+        in: query
+        description: Saml Issuer from Assertion
+        required: true
+        schema:
+          type: string
+      - name: partnerAppId
+        in: query
+        description: Saml Partner Id from Assertion
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/SAML/SamlServices/GetSamlConfig:
+    get:
+      tags:
+      - Integrations/SAML
+      operationId: IntegrationSaml_GetSamlConfigAsync
+      parameters:
+      - name: samlIssuer
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: partnerAppId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: certSerialNumber
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Integration saml get saml config async
+      x-summary-source: derived
+  /v1/Integrations/SAML/SamlServices/GetSamlConfigByCertSerial:
+    get:
+      tags:
+      - Integrations/SAML
+      operationId: IntegrationSaml_GetSamlConfigByCertSerialNoAsync
+      parameters:
+      - name: serialNumber
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Integration saml get saml config by cert serial no async
+      x-summary-source: derived
+  /v1/Integrations/SAML/SamlServices/GetSamlConfigByCertThumbprint:
+    get:
+      tags:
+      - Integrations/SAML
+      operationId: IntegrationSaml_GetSamlConfigByCertThumbprintAsync
+      parameters:
+      - name: thumbprint
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Integration saml get saml config by cert thumbprint async
+      x-summary-source: derived
+  /v1/Integrations/SAML/SamlServices/GetSamlConfigByIssuer:
+    get:
+      tags:
+      - Integrations/SAML
+      operationId: IntegrationSaml_GetSamlConfigByIssuerAsync
+      parameters:
+      - name: samlIssuer
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Integration saml get saml config by issuer async
+      x-summary-source: derived
+  /v1/Integrations/SAML/SamlServices/GetSamlConfigByPartnerId:
+    get:
+      tags:
+      - Integrations/SAML
+      operationId: IntegrationSaml_GetV1IntegrationsSAMLSamlServicesGetSamlConfigByPartnerId
+      parameters:
+      - name: partnerId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Integration saml get V1 integrations SAML saml services get saml config by…
+      x-summary-source: derived
+  /v1/Integrations/SAML/SamlServices/GetServiceCredentials:
+    get:
+      tags:
+      - Integrations/SAML
+      summary: Integration saml get service credentials async
+      operationId: IntegrationSaml_GetServiceCredentialsAsync
+      parameters:
+      - name: partnerid
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: firmid
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: issuer
+        in: query
+        description: Saml Issuer from Assertion
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Integrations/SAML/SamlServices/GetUserProfiles:
+    get:
+      tags:
+      - Integrations/SAML
+      summary: Integration saml get user profiles async
+      operationId: IntegrationSaml_GetUserProfilesAsync
+      parameters:
+      - name: userId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Integrations/SAML/SamlServices/SaveMappedUser:
+    post:
+      tags:
+      - Integrations/SAML
+      summary: Integration saml save mapped user async
+      operationId: IntegrationSaml_SaveMappedUserAsync
+      parameters:
+      - name: userId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: applink
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: external
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Integrations/SAML/SamlServices/Test:
+    get:
+      tags:
+      - Integrations/SAML
+      operationId: IntegrationSaml_HelloWorld
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Integration saml hello world
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.Integrations.SamlServices.Models.PartnerInfoDto:
+      properties:
+        partnerId:
+          type: integer
+          format: int32
+        publicCertificate:
+          type: string
+        certificateSerialNumber:
+          type: string
+        certificateThumbprint:
+          type: string
+        certificateEffectiveDateUtc:
+          type: string
+          format: date-time
+        certificateExpirationUtc:
+          type: string
+          format: date-time
+        samlIssuer:
+          type: string
+        partnerName:
+          type: string
+        productName:
+          type: string
+        productDescription:
+          type: string
+      xml:
+        name: PartnerInfoDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

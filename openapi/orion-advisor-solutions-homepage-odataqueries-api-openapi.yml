@@ -1,0 +1,222 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Homepage/O Data Queries API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Homepage/ODataQueries
+paths:
+  /v1/Homepage/ODataQueries/Counts:
+    post:
+      tags:
+      - Homepage/ODataQueries
+      summary: Returns result counts and Portfolio Audit links for 1–10 OData query slots
+      operationId: ODataQueries_GetCountsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ODataQueryCountsRequestDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ODataQueryCountsRequestDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ODataQueryCountsRequestDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ODataQueryCountsRequestDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ODataQueryCountsRequestDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ODataQueryCountsRequestDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ODataQueryCountsRequestDto'
+        required: true
+  /v1/Homepage/ODataQueries/DashboardCards/{dashboardCardId}/Slots:
+    get:
+      tags:
+      - Homepage/ODataQueries
+      summary: Returns ODATA_QUERY_SLOTS stored on an assigned dashboard card
+      operationId: ODataQueries_GetSlotsAsync
+      parameters:
+      - name: dashboardCardId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Homepage/ODataQueries
+      summary: Replaces ODATA_QUERY_SLOTS on an assigned dashboard card (Workflow Assistant /…
+      operationId: ODataQueries_UpdateSlotsAsync
+      parameters:
+      - name: dashboardCardId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ODataQuerySlotsUpdateDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ODataQuerySlotsUpdateDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ODataQuerySlotsUpdateDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ODataQuerySlotsUpdateDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ODataQuerySlotsUpdateDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ODataQuerySlotsUpdateDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ODataQuerySlotsUpdateDto'
+        required: true
+  /v1/Homepage/ODataQueries/EntityRoutes:
+    get:
+      tags:
+      - Homepage/ODataQueries
+      summary: Returns supported OData entity routes for Workflow Assistant saved-query tiles
+      operationId: ODataQueries_GetEntityRoutes
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.HomepageDashboard.ODataQueryCountsRequestDto:
+      properties:
+        slots:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ODataQuerySlotDto'
+          xml:
+            name: ODataQuerySlotDto
+            wrapped: true
+          type: array
+      xml:
+        name: ODataQueryCountsRequestDto
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.ODataQuerySlotDto:
+      properties:
+        name:
+          type: string
+        entityRoute:
+          type: string
+        odataFilter:
+          type: string
+        linkPath:
+          type: string
+      xml:
+        name: ODataQuerySlotDto
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.ODataQuerySlotsUpdateDto:
+      properties:
+        slots:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ODataQuerySlotDto'
+          xml:
+            name: ODataQuerySlotDto
+            wrapped: true
+          type: array
+      xml:
+        name: ODataQuerySlotsUpdateDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

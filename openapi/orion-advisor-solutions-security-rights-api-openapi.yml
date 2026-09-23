@@ -1,0 +1,257 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Security/Rights API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Security/Rights
+paths:
+  /v1/Security/Rights:
+    get:
+      tags:
+      - Security/Rights
+      summary: Gets a list of rights that the logged in user has
+      operationId: ObsoleteRights_GetRights
+      parameters:
+      - name: resetCache
+        in: query
+        description: 'Optional. Default: false. The result is cached for fifteen minutes. To force the cache to refresh call with resetCache = true.'
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+      deprecated: true
+      security:
+      - Authorization: []
+  /v1/Security/Rights/{securitycode}:
+    get:
+      tags:
+      - Security/Rights
+      summary: Gets the right that the logged in user has that matches the security code…
+      operationId: ObsoleteRights_GetRight
+      parameters:
+      - name: securitycode
+        in: path
+        description: The security code for
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+      deprecated: true
+      security:
+      - Authorization: []
+  /v1/Security/Rights/Groups:
+    get:
+      tags:
+      - Security/Rights
+      summary: Gets the groups that the logged in user has access to
+      operationId: ObsoleteRights_GetGroups
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: string
+                type: array
+      deprecated: true
+      security:
+      - Authorization: []
+  /v1/Security/Rights/ObjectTypeCode/{code}:
+    get:
+      tags:
+      - Security/Rights
+      summary: Gets the rights that the logged in user has that fall within the object type…
+      operationId: ObsoleteRights_GetRightsByObjectTypeCode
+      parameters:
+      - name: code
+        in: path
+        description: The object type code to return the rights of.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+      deprecated: true
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Security.RightDto:
+      properties:
+        code:
+          type: string
+        defaulDesc:
+          type: string
+        canRead:
+          type: boolean
+        canAdd:
+          type: boolean
+        canUpdate:
+          type: boolean
+        canDelete:
+          type: boolean
+        objectTypeCode:
+          type: string
+        minimumVersion:
+          type: string
+      xml:
+        name: RightDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

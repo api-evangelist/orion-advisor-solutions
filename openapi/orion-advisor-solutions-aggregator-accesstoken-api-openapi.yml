@@ -1,0 +1,79 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Aggregator/Access Token API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Aggregator/AccessToken
+paths:
+  /v1/Aggregator/AccessToken:
+    get:
+      tags:
+      - Aggregator/AccessToken
+      summary: Gets a new access token from an id token request
+      description: 'Sample Request
+
+        GET /Aggregator/AccessToken
+
+        {
+
+        "idToken": "ThisIsAnIdTokenExampleValue"
+
+        }'
+      operationId: ConfirmAggregator_GetTokenAsync
+      parameters:
+      - name: idToken
+        in: query
+        description: The Id Token of a credential
+        required: true
+        schema:
+          type: string
+      - name: token
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AggregatorTokenResponseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AggregatorTokenResponseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AggregatorTokenResponseDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AggregatorTokenResponseDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AggregatorTokenResponseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AggregatorTokenResponseDto'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Confirm.AggregatorTokenResponseDto:
+      description: Response object for aggregator token api calls
+      properties:
+        idToken:
+          description: Id token from tblapplinkdtl externalId
+          type: string
+        aggregatorName:
+          description: Aggergator name from tblapplink
+          type: string
+      xml:
+        name: AggregatorTokenResponseDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

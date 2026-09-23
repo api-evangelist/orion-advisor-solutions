@@ -1,0 +1,226 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/MFE API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/MFE
+paths:
+  /v1/Integrations/MFE/ModelSearch:
+    get:
+      tags:
+      - Integrations/MFE
+      operationId: ModelSearch_GetModelAggsByNameAsync
+      parameters:
+      - name: search
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Model search get model aggs by name async
+      x-summary-source: derived
+  /v1/Integrations/MFE/ModelSearch/Compare:
+    post:
+      tags:
+      - Integrations/MFE
+      operationId: ModelSearch_GetModelAggCompareDataAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Model search get model agg compare data async
+      x-summary-source: derived
+  /v1/Integrations/MFE/ModelSearch/Compare/Stats:
+    post:
+      tags:
+      - Integrations/MFE
+      operationId: ModelSearch_GetModelAggCompareStatDataAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Integrations.MFE.ModelSearch.Dtos.CompareModelRiskMetricsRequestDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Integrations.MFE.ModelSearch.Dtos.CompareModelRiskMetricsRequestDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Integrations.MFE.ModelSearch.Dtos.CompareModelRiskMetricsRequestDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Integrations.MFE.ModelSearch.Dtos.CompareModelRiskMetricsRequestDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Integrations.MFE.ModelSearch.Dtos.CompareModelRiskMetricsRequestDto'
+        required: true
+      summary: Model search get model agg compare stat data async
+      x-summary-source: derived
+  /v1/Integrations/MFE/ModelSearch/GridData:
+    get:
+      tags:
+      - Integrations/MFE
+      operationId: ModelSearch_GetGridDataAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Model search get grid data async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.DataProcess.Integrations.MFE.ModelSearch.Dtos.CompareModelRiskMetricsRequestDto:
+      properties:
+        modelIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        duration:
+          type: string
+          enum:
+          - _all
+          - _10yr
+          - _5yr
+          - _3yr
+          - _2yr
+          - _1yr
+          - _ytd
+          - _6mth
+          - _3mth
+          - _1mth
+          - _1wk
+      xml:
+        name: CompareModelRiskMetricsRequestDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

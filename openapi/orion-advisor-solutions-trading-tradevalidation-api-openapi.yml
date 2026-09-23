@@ -1,0 +1,131 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Trade Validation API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/TradeValidation
+paths:
+  /v1/Trading/TradeValidation:
+    get:
+      tags:
+      - Trading/TradeValidation
+      summary: Gets account trade validation
+      operationId: Trading_GetAccountTradeValidation
+      parameters:
+      - name: accountId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: sellProductId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: buyProductId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: shares
+        in: query
+        required: false
+        schema:
+          type: number
+          format: double
+      - name: dollars
+        in: query
+        required: false
+        schema:
+          type: number
+          format: double
+      - name: percent
+        in: query
+        required: false
+        schema:
+          type: number
+          format: double
+      - name: usePendingValue
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: verboseValidation
+        in: query
+        description: Optional. Default = False.  When true, extra checks are done, STF Warning and Existing open trade order exists.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: checkBuyOverspendingCash
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountTradeValidationDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountTradeValidationDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountTradeValidationDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountTradeValidationDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountTradeValidationDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountTradeValidationDto'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Trading.AccountTradeValidationDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        cashValuePostTrade:
+          type: number
+          format: double
+        cashTradeAmount:
+          type: number
+          format: double
+        warnings:
+          items:
+            type: string
+          type: array
+        errors:
+          items:
+            type: string
+          type: array
+      xml:
+        name: AccountTradeValidationDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

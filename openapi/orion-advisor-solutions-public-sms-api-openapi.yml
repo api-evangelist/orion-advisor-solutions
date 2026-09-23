@@ -1,0 +1,78 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Public/SMS API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Public/SMS
+paths:
+  /v1/Public/SMS:
+    get:
+      tags:
+      - Public/SMS
+      operationId: Public_ProcessSMS
+      parameters:
+      - name: from
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: body
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: SmsMessageSid
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: FromZip
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: FromCity
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: SmsSid
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: AccountSid
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Public process SMS
+      x-summary-source: derived
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

@@ -1,0 +1,2039 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Communities API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/Communities
+paths:
+  /v1/Integrations/Communities/Custodians/List:
+    get:
+      tags:
+      - Integrations/Communities
+      summary: Communities get all communities custodians async
+      operationId: Communities_GetAllCommunitiesCustodiansAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: string
+                type: array
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Integrations/Communities/DailySyncLogDetails/{key}:
+    get:
+      tags:
+      - Integrations/Communities
+      summary: Get daily sync log by processLogId for Communities
+      operationId: Communities_GetDailySyncLogDetails
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: string
+                  format: byte
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: string
+                  format: byte
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                  format: byte
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: string
+                  format: byte
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: string
+                  format: byte
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: string
+                  format: byte
+                type: array
+      security:
+      - Authorization: []
+  /v1/Integrations/Communities/DailySyncLogs:
+    get:
+      tags:
+      - Integrations/Communities
+      summary: Get daily sync logs for Communities
+      operationId: Communities_GetDailySyncLogs
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: string
+                  format: byte
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: string
+                  format: byte
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                  format: byte
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: string
+                  format: byte
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: string
+                  format: byte
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: string
+                  format: byte
+                type: array
+      security:
+      - Authorization: []
+  /v1/Integrations/Communities/ManagerFactSheet/{modelId}:
+    get:
+      tags:
+      - Integrations/Communities
+      summary: Get the model fact sheet from v2 communities
+      operationId: Communities_ManagerFactSheetAsync
+      parameters:
+      - name: modelId
+        in: path
+        description: key for the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      - name: requestEntity
+        in: query
+        description: optional parameter to specify the type of entity id passed in. default model with optional modelAgg
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/Communities/ModelAllocationHistory/{id}:
+    get:
+      tags:
+      - Integrations/Communities
+      summary: Get Model Allocation History by model Id
+      operationId: Communities_GetModelAllocationHistoryAsync
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: string
+                  format: byte
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: string
+                  format: byte
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                  format: byte
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: string
+                  format: byte
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: string
+                  format: byte
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: string
+                  format: byte
+                type: array
+      security:
+      - Authorization: []
+  /v1/Integrations/Communities/Models:
+    get:
+      tags:
+      - Integrations/Communities
+      summary: Gets community models
+      operationId: Communities_Get
+      parameters:
+      - name: strategistId
+        in: query
+        description: 'Optional.  Default: null.  When there is value, only  the community models for that strategistId will be returned.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: lastRebalanceDate
+        in: query
+        description: 'Optional.  Default: null.  When there is value, only  the community models with a LastRebalanceDate &gt; than the date entered will be returned.'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: dateRebalanceRequested
+        in: query
+        description: 'Optional.  Default: null.  When true, only  the community models with a DateRebalanceRequested &gt; than the date entered will be returned.'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: needsRebalance
+        in: query
+        description: "Optional.  Default: null.  When true, only  the community models that have a lastRebalanceDate geater than dateRebalanceRequested will be returned  \n            \t\t\t\t\t\t\t\t\t\t\t\tand when false, only  the community models that have a lastRebalanceDate less than dateRebalanceRequested will be returned ."
+        required: false
+        schema:
+          type: boolean
+      - name: managerId
+        in: query
+        description: 'Optional.  Default: null.  When there is value, only  the community models for that managerId will be returned.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelDto'
+                xml:
+                  name: CommunityModelDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelDto'
+                xml:
+                  name: CommunityModelDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelDto'
+                xml:
+                  name: CommunityModelDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelDto'
+                xml:
+                  name: CommunityModelDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelDto'
+                xml:
+                  name: CommunityModelDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelDto'
+                xml:
+                  name: CommunityModelDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Integrations/Communities/Models/{key}:
+    get:
+      tags:
+      - Integrations/Communities
+      summary: Returns the Community model that has the given {key}.
+      operationId: Communities_GetByKeyAsync
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelWithDetailsDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelWithDetailsDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelWithDetailsDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelWithDetailsDto'
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Integrations/Communities
+      summary: Updates the community model that has the provided key.
+      operationId: Communities_UpdateCommunityModelAsync
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelWithDetailsDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelWithDetailsDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelWithDetailsDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelWithDetailsDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelWithDetailsDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelWithDetailsDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelWithDetailsDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelWithDetailsDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelWithDetailsDto'
+        required: true
+  /v1/Integrations/Communities/Models/AssignedToAccounts/Validate:
+    post:
+      tags:
+      - Integrations/Communities
+      operationId: Communities_CheckCommunityModelsAssignedToAccountsAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: deleteSwitch
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Communities check community models assigned to accounts async
+      x-summary-source: derived
+  /v1/Integrations/Communities/Models/CountModelsNeedingRebalance:
+    get:
+      tags:
+      - Integrations/Communities
+      summary: Gets community models
+      operationId: Communities_CountModelsNeedingRebalance
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+  /v1/Integrations/Communities/Models/List:
+    post:
+      tags:
+      - Integrations/Communities
+      summary: Returns the models that have the given {keys}
+      operationId: Communities_GetListByIdAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelWithDetailsDto'
+                xml:
+                  name: CommunityModelWithDetailsDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelWithDetailsDto'
+                xml:
+                  name: CommunityModelWithDetailsDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelWithDetailsDto'
+                xml:
+                  name: CommunityModelWithDetailsDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelWithDetailsDto'
+                xml:
+                  name: CommunityModelWithDetailsDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+  /v1/Integrations/Communities/Models/OutsourceModelInfo:
+    post:
+      tags:
+      - Integrations/Communities
+      operationId: Communities_CommunityOutSourceModelInfoAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Communities community out source model info async
+      x-summary-source: derived
+  /v1/Integrations/Communities/Models/Simple:
+    get:
+      tags:
+      - Integrations/Communities
+      summary: Gets community models
+      operationId: Communities_GetSimple
+      parameters:
+      - name: strategistId
+        in: query
+        description: 'Optional.  Default: null.  When there is value, only  the community models for that strategistId will be returned.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: lastRebalanceDate
+        in: query
+        description: 'Optional.  Default: null.  When there is value, only  the community models with a LastRebalanceDate &gt; than the date entered will be returned.'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: dateRebalanceRequested
+        in: query
+        description: 'Optional.  Default: null.  When true, only  the community models with a DateRebalanceRequested &gt; than the date entered will be returned.'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: needsRebalance
+        in: query
+        description: "Optional.  Default: null.  When true, only  the community models that have a lastRebalanceDate geater than dateRebalanceRequested will be returned  \n            \t\t\t\t\t\t\t\t\t\t\t\tand when false, only  the community models that have a lastRebalanceDate less than dateRebalanceRequested will be returned ."
+        required: false
+        schema:
+          type: boolean
+      - name: managerId
+        in: query
+        description: 'Optional.  Default: null.  When there is value, only  the community models for that managerId will be returned.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Integration.Communities.SimpleCommunityModel'
+                xml:
+                  name: SimpleCommunityModel
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Integration.Communities.SimpleCommunityModel'
+                xml:
+                  name: SimpleCommunityModel
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Integration.Communities.SimpleCommunityModel'
+                xml:
+                  name: SimpleCommunityModel
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Integration.Communities.SimpleCommunityModel'
+                xml:
+                  name: SimpleCommunityModel
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Integration.Communities.SimpleCommunityModel'
+                xml:
+                  name: SimpleCommunityModel
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Integration.Communities.SimpleCommunityModel'
+                xml:
+                  name: SimpleCommunityModel
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Integrations/Communities/Models/SimpleList:
+    post:
+      tags:
+      - Integrations/Communities
+      summary: Get Model information by Community Model Id's
+      operationId: Communities_GetSimpleListByCommunityModelIds
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelSimpleDto'
+                xml:
+                  name: CommunityModelSimpleDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelSimpleDto'
+                xml:
+                  name: CommunityModelSimpleDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelSimpleDto'
+                xml:
+                  name: CommunityModelSimpleDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelSimpleDto'
+                xml:
+                  name: CommunityModelSimpleDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelSimpleDto'
+                xml:
+                  name: CommunityModelSimpleDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelSimpleDto'
+                xml:
+                  name: CommunityModelSimpleDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int64
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int64
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int64
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int64
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int64
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int64
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int64
+              type: array
+        required: true
+  /v1/Integrations/Communities/ModelUpdate:
+    post:
+      tags:
+      - Integrations/Communities
+      summary: Create, Update, Delete sync of Models from Communities to Orion Connect
+      operationId: Communities_ModelUpdateFromCommunitiesAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.CommunitySyncMessageListOfOAS.Eclipse.Lambda.Model.CommunityModel'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.CommunitySyncMessageListOfOAS.Eclipse.Lambda.Model.CommunityModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.CommunitySyncMessageListOfOAS.Eclipse.Lambda.Model.CommunityModel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.CommunitySyncMessageListOfOAS.Eclipse.Lambda.Model.CommunityModel'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.CommunitySyncMessageListOfOAS.Eclipse.Lambda.Model.CommunityModel'
+        description: Model data
+        required: true
+  /v1/Integrations/Communities/Performance/{modelId}:
+    get:
+      tags:
+      - Integrations/Communities
+      summary: Community Model Performance
+      operationId: Communities_CommunityModelPerformanceById
+      parameters:
+      - name: modelId
+        in: path
+        description: Community Model Id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: months
+        in: query
+        description: Number of months for performance
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: rate
+        in: query
+        description: Rate of Return
+        required: true
+        schema:
+          type: number
+          format: double
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/Communities/Personal/GetPersonalDataForSync:
+    post:
+      tags:
+      - Integrations/Communities
+      operationId: Communities_GetPersonalDataForSyncAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Communities get personal data for sync async
+      x-summary-source: derived
+  /v1/Integrations/Communities/ProductExclusions/Sync:
+    get:
+      tags:
+      - Integrations/Communities
+      operationId: Communities_GetProductExclusionsForSyncAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Communities get product exclusions for sync async
+      x-summary-source: derived
+  /v1/Integrations/Communities/Products/Sync:
+    get:
+      tags:
+      - Integrations/Communities
+      operationId: Communities_GetProductsForSyncAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Communities get products for sync async
+      x-summary-source: derived
+  /v1/Integrations/Communities/RemoveRebalanceRequestedDate/{key}:
+    put:
+      tags:
+      - Integrations/Communities
+      summary: Removes the rebalance requested date from the community model
+      operationId: Communities_RemoveRebalanceRequestedDateAsync
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+            multipart/form-data:
+              schema:
+                type: boolean
+      security:
+      - Authorization: []
+  /v1/Integrations/Communities/Reports/StrategistAumReport:
+    post:
+      tags:
+      - Integrations/Communities
+      operationId: CommunitiesReports_ProcessStrategistAumReport
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.Communities.CommunitiesStrategistAumReportRequestDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.Communities.CommunitiesStrategistAumReportRequestDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.Communities.CommunitiesStrategistAumReportRequestDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.Communities.CommunitiesStrategistAumReportRequestDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.Communities.CommunitiesStrategistAumReportRequestDto'
+        required: true
+      summary: Communities reports process strategist aum report
+      x-summary-source: derived
+  /v1/Integrations/Communities/Reports/StrategistFlowReport:
+    post:
+      tags:
+      - Integrations/Communities
+      operationId: CommunitiesReports_ProcessStrategistFlowReport
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.Communities.CommunitiesStrategistFlowReportRequestDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.Communities.CommunitiesStrategistFlowReportRequestDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.Communities.CommunitiesStrategistFlowReportRequestDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.Communities.CommunitiesStrategistFlowReportRequestDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.Communities.CommunitiesStrategistFlowReportRequestDto'
+        required: true
+      summary: Communities reports process strategist flow report
+      x-summary-source: derived
+  /v1/Integrations/Communities/StrategistTiers:
+    get:
+      tags:
+      - Integrations/Communities
+      operationId: Communities_GetStrategistTiersAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Communities get strategist tiers async
+      x-summary-source: derived
+  /v1/Integrations/Communities/UpdateRebalanceExecutionRequestedDate:
+    put:
+      tags:
+      - Integrations/Communities
+      summary: Communities update rebalance execution requested date async
+      operationId: Communities_UpdateRebalanceExecutionRequestedDateAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunitiesRebalanceRequestExecutionDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunitiesRebalanceRequestExecutionDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunitiesRebalanceRequestExecutionDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunitiesRebalanceRequestExecutionDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunitiesRebalanceRequestExecutionDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunitiesRebalanceRequestExecutionDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunitiesRebalanceRequestExecutionDto'
+        required: true
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Integrations.Communities.CommunitiesRebalanceRequestExecutionDto:
+      properties:
+        modelId:
+          type: integer
+          format: int32
+        communityModelId:
+          type: integer
+          format: int32
+        dateRebalanceExecutionRequested:
+          type: string
+          format: date-time
+      xml:
+        name: CommunitiesRebalanceRequestExecutionDto
+      type: object
+    OAS.Eclipse.Lambda.Model.CommunitySyncMessageListOfOAS.Eclipse.Lambda.Model.CommunityModel:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.CommunityModel'
+          xml:
+            name: CommunityModel
+            wrapped: true
+          type: array
+        orionBaseUrl:
+          type: string
+        communitiesBaseUrl:
+          type: string
+        strategist:
+          $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.Strategist'
+        manager:
+          $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.Manager'
+        orionFirmId:
+          type: integer
+          format: int32
+        orionToken:
+          type: string
+        userName:
+          type: string
+        timeStamp:
+          type: string
+          format: date-time
+        logId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        firmType:
+          type: integer
+          format: int32
+        updateOrionConnect:
+          type: boolean
+        tradeType:
+          type: integer
+          format: int32
+        communitiesTradeQueueId:
+          type: integer
+          format: int32
+      xml:
+        name: CommunitySyncMessageList`1
+      type: object
+    OAS.WebApi.DTO.Integrations.Communities.CommunityModelWithDetailsDto:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelItemFullDto'
+          xml:
+            name: ModelItemFullDto
+            wrapped: true
+          type: array
+        modelId:
+          type: integer
+          format: int32
+        communityModelId:
+          type: integer
+          format: int64
+        communityModelName:
+          type: string
+        targetRiskUpper:
+          type: number
+          format: double
+        targetRiskLower:
+          type: number
+          format: double
+        style:
+          type: string
+        advisorFee:
+          type: number
+          format: double
+        weightedAvgNetExpenses:
+          type: number
+          format: double
+        currentRisk:
+          type: number
+          format: double
+        minimumAmount:
+          type: number
+          format: double
+        dateRebalanceRequested:
+          type: string
+          format: date-time
+        lastRebalanceDate:
+          type: string
+          format: date-time
+        needsRebalance:
+          type: boolean
+        platFormId:
+          type: integer
+          format: int32
+        shareClassId:
+          type: integer
+          format: int32
+        notes:
+          type: string
+        groupNum:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        strategistId:
+          type: integer
+          format: int32
+        strategistName:
+          type: string
+        modelManagerId:
+          type: integer
+          format: int32
+        modelManagerName:
+          type: string
+        name:
+          type: string
+        isActive:
+          type: boolean
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        modelCode:
+          type: string
+        cashPerc:
+          type: integer
+          format: int32
+        cashTol:
+          type: integer
+          format: int32
+        fundList:
+          type: string
+        modelNum:
+          type: integer
+          format: int32
+        modelTol:
+          type: integer
+          format: int32
+        isDynamic:
+          type: boolean
+        modelType:
+          type: string
+        percEquity:
+          type: integer
+          format: int32
+        subAdvisorId:
+          type: integer
+          format: int32
+        useRestrictions:
+          type: boolean
+        fundName:
+          type: string
+        class:
+          type: string
+        managementStyle:
+          type: string
+        custodian:
+          type: string
+        subAdvisor:
+          type: string
+        accountCount:
+          type: integer
+          format: int32
+        aum:
+          type: number
+          format: double
+        astroUsage:
+          type: string
+          enum:
+          - Undefined
+          - Disabled
+          - Restricted
+          - FullAccess
+        opsTier:
+          type: string
+        dateRebalanceExecutionRequested:
+          type: string
+          format: date-time
+        benchmark:
+          type: string
+        strategistExternalId:
+          type: integer
+          format: int32
+      xml:
+        name: CommunityModelWithDetailsDto
+      type: object
+    OAS.DataProcess.DTO.Integration.Communities.CommunitiesDataExportFileDto:
+      properties:
+        alClientId:
+          type: integer
+          format: int32
+        fileId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+      xml:
+        name: CommunitiesDataExportFileDto
+      type: object
+    OAS.WebApi.DTO.Trading.ModelItemFullDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        productClass:
+          type: string
+        ticker:
+          type: string
+        targetPercent:
+          type: number
+          format: double
+        itemTol:
+          type: integer
+          format: int32
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        itemTolUpper:
+          type: number
+          format: double
+        itemTolLower:
+          type: number
+          format: double
+        oub:
+          type: number
+          format: double
+        modelAggId:
+          type: integer
+          format: int32
+        productRiskScore:
+          type: integer
+          format: int32
+      xml:
+        name: ModelItemFullDto
+      type: object
+    OAS.DataModel.Integration.Communities.SimpleCommunityModel:
+      properties:
+        strategistId:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleCommunityModel
+      type: object
+    OAS.Eclipse.Lambda.Model.ModelItem:
+      properties:
+        ticker:
+          type: string
+        orionConnectExternalId:
+          type: integer
+          format: int32
+        targetPercent:
+          type: number
+          format: double
+        upperTolerance:
+          type: number
+          format: double
+        lowerTolerance:
+          type: number
+          format: double
+        assetCategoryName:
+          type: string
+        assetClassName:
+          type: string
+        subClassName:
+          type: string
+        tlhSecurities:
+          items:
+            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.TLHSecurity'
+          xml:
+            name: TLHSecurity
+            wrapped: true
+          type: array
+      xml:
+        name: ModelItem
+      type: object
+    OAS.Eclipse.Lambda.Model.TLHSecurity:
+      properties:
+        productId:
+          type: integer
+          format: int32
+      xml:
+        name: TLHSecurity
+      type: object
+    OAS.Eclipse.Lambda.Model.CommunityModel:
+      properties:
+        requiresRebalance:
+          type: boolean
+        targetRiskUpper:
+          type: number
+          format: double
+        targetRiskLower:
+          type: number
+          format: double
+        style:
+          type: string
+        advisorFee:
+          type: number
+          format: double
+        weightedAvgNetExpenses:
+          type: number
+          format: double
+        currentRisk:
+          type: number
+          format: double
+        minimumAmount:
+          type: number
+          format: double
+        strategistId:
+          type: integer
+          format: int32
+        modelManagerId:
+          type: integer
+          format: int32
+        modelAggTypeId:
+          type: integer
+          format: int32
+        assetType:
+          type: string
+        riskCategory:
+          type: string
+        assetClass:
+          type: string
+        strategyType:
+          type: string
+        taxManaged:
+          type: boolean
+        sociallyResponsible:
+          type: boolean
+        morningStarTicker:
+          type: string
+        morningstarProductId:
+          type: integer
+          format: int32
+        mandate:
+          type: string
+        investmentCategory:
+          type: string
+        astroUsage:
+          type: integer
+          format: int32
+        optionLevelApproval:
+          type: integer
+          format: int32
+        allowAlternativeToleranceBands:
+          type: boolean
+        allowOverlay:
+          type: boolean
+        isDynamicSync:
+          type: boolean
+        subAdvisorType:
+          type: string
+        benchmark:
+          type: string
+        researchedStatus:
+          type: string
+        modelId:
+          type: integer
+          format: int32
+        modelName:
+          type: string
+        managementStyle:
+          type: string
+        action:
+          type: string
+        securities:
+          items:
+            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.ModelItem'
+          xml:
+            name: ModelItem
+            wrapped: true
+          type: array
+        accounts:
+          items:
+            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.AssignedAccount'
+          xml:
+            name: AssignedAccount
+            wrapped: true
+          type: array
+        isAstroEnabled:
+          type: boolean
+        syncToAstro:
+          type: boolean
+        communityModelId:
+          type: integer
+          format: int32
+        sleeveSuffix:
+          type: string
+        productTypes:
+          items:
+            type: integer
+            format: int32
+          type: array
+        orionConnectRiskCategory:
+          type: integer
+          format: int32
+        orionConnectProductClass:
+          type: integer
+          format: int32
+        isSma:
+          type: boolean
+        astroTemplateId:
+          type: string
+        altsManagedByStrategist:
+          type: boolean
+        altsModelLevel:
+          type: boolean
+        excludeRebalanceSleeve:
+          type: boolean
+        modelTypeId:
+          type: integer
+          format: int32
+        tags:
+          items:
+            type: string
+          type: array
+      xml:
+        name: CommunityModel
+      type: object
+    OAS.Eclipse.Lambda.Model.Strategist:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        abbreviation:
+          type: string
+      xml:
+        name: Strategist
+      type: object
+    OAS.DataProcess.DTO.Integration.Communities.CommunitiesStrategistAumReportRequestDto:
+      properties:
+        requestId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        asOfDate:
+          type: string
+          format: date-time
+        strategistExternalIds:
+          type: string
+        dataExportFiles:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.Communities.CommunitiesDataExportFileDto'
+          xml:
+            name: CommunitiesDataExportFileDto
+            wrapped: true
+          type: array
+      xml:
+        name: CommunitiesStrategistAumReportRequestDto
+      type: object
+    OAS.Eclipse.Lambda.Model.AssignedAccount:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        orionAccountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        orionConnectFirmId:
+          type: integer
+          format: int32
+        portfolioId:
+          type: integer
+          format: int32
+        modelAllocationSynchLevel:
+          type: string
+      xml:
+        name: AssignedAccount
+      type: object
+    OAS.DataProcess.DTO.Integration.Communities.CommunitiesStrategistFlowReportRequestDto:
+      properties:
+        requestId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        strategistExternalIds:
+          type: string
+        dataExportFiles:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.Communities.CommunitiesDataExportFileDto'
+          xml:
+            name: CommunitiesDataExportFileDto
+            wrapped: true
+          type: array
+      xml:
+        name: CommunitiesStrategistFlowReportRequestDto
+      type: object
+    OAS.WebApi.DTO.Integrations.Communities.CommunityModelDto:
+      properties:
+        modelId:
+          type: integer
+          format: int32
+        communityModelId:
+          type: integer
+          format: int64
+        communityModelName:
+          type: string
+        targetRiskUpper:
+          type: number
+          format: double
+        targetRiskLower:
+          type: number
+          format: double
+        style:
+          type: string
+        advisorFee:
+          type: number
+          format: double
+        weightedAvgNetExpenses:
+          type: number
+          format: double
+        currentRisk:
+          type: number
+          format: double
+        minimumAmount:
+          type: number
+          format: double
+        dateRebalanceRequested:
+          type: string
+          format: date-time
+        lastRebalanceDate:
+          type: string
+          format: date-time
+        needsRebalance:
+          type: boolean
+        platFormId:
+          type: integer
+          format: int32
+        shareClassId:
+          type: integer
+          format: int32
+        notes:
+          type: string
+        groupNum:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        strategistId:
+          type: integer
+          format: int32
+        strategistName:
+          type: string
+        modelManagerId:
+          type: integer
+          format: int32
+        modelManagerName:
+          type: string
+        name:
+          type: string
+        isActive:
+          type: boolean
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        modelCode:
+          type: string
+        cashPerc:
+          type: integer
+          format: int32
+        cashTol:
+          type: integer
+          format: int32
+        fundList:
+          type: string
+        modelNum:
+          type: integer
+          format: int32
+        modelTol:
+          type: integer
+          format: int32
+        isDynamic:
+          type: boolean
+        modelType:
+          type: string
+        percEquity:
+          type: integer
+          format: int32
+        subAdvisorId:
+          type: integer
+          format: int32
+        useRestrictions:
+          type: boolean
+        fundName:
+          type: string
+        class:
+          type: string
+        managementStyle:
+          type: string
+        custodian:
+          type: string
+        subAdvisor:
+          type: string
+        accountCount:
+          type: integer
+          format: int32
+        aum:
+          type: number
+          format: double
+        astroUsage:
+          type: string
+          enum:
+          - Undefined
+          - Disabled
+          - Restricted
+          - FullAccess
+        opsTier:
+          type: string
+        dateRebalanceExecutionRequested:
+          type: string
+          format: date-time
+        benchmark:
+          type: string
+        strategistExternalId:
+          type: integer
+          format: int32
+      xml:
+        name: CommunityModelDto
+      type: object
+    OAS.Eclipse.Lambda.Model.Manager:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        category:
+          type: string
+        abbreviation:
+          type: string
+      xml:
+        name: Manager
+      type: object
+    OAS.WebApi.DTO.Integrations.Communities.CommunityModelSimpleDto:
+      properties:
+        communityModelId:
+          type: integer
+          format: int64
+        communityModelName:
+          type: string
+        modelId:
+          type: integer
+          format: int32
+        strategistId:
+          type: integer
+          format: int32
+        strategistName:
+          type: string
+      xml:
+        name: CommunityModelSimpleDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

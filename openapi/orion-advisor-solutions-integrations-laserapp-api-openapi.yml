@@ -1,0 +1,931 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Laser App API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/LaserApp
+paths:
+  /v1/Integrations/LaserApp/Accounts/{accountId}/Forms:
+    get:
+      tags:
+      - Integrations/LaserApp
+      summary: Returns a list of forms available for the specified criteria
+      operationId: LaserApp_GetFormsForAccount
+      parameters:
+      - name: accountId
+        in: path
+        description: The id of the account to returns forms for.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: sourceOfFunds
+        in: query
+        description: The source of funds related to the account.
+        required: false
+        schema:
+          type: string
+          enum:
+          - Rollover
+          - Transfer
+          - ACHWIRE
+          - CashCheck
+      - name: formType
+        in: query
+        description: 'Form types for the selected account: 1 = New Account, 2 = Distribution'
+        required: false
+        schema:
+          type: string
+          enum:
+          - NewAccount
+          - Distribution
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Integrations/LaserApp/Accounts/{accountId}/Submit:
+    post:
+      tags:
+      - Integrations/LaserApp
+      summary: Laser app submit forms for account
+      operationId: LaserApp_SubmitFormsForAccount
+      parameters:
+      - name: accountId
+        in: path
+        description: Account id to pass to LaserApp
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+              xml:
+                name: FormRecordDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+              xml:
+                name: FormRecordDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+              xml:
+                name: FormRecordDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+              xml:
+                name: FormRecordDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+              xml:
+                name: FormRecordDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+              xml:
+                name: FormRecordDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+              xml:
+                name: FormRecordDto
+                wrapped: true
+              type: array
+        description: An array of FormRecord objects that will be populated in LaserApp
+        required: true
+      x-summary-source: derived
+  /v1/Integrations/LaserApp/Configuration:
+    get:
+      tags:
+      - Integrations/LaserApp
+      summary: Retrieves LaserApp Integration details
+      operationId: LaserApp_GetConfiguration
+      parameters:
+      - name: custodianId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.LaserApp.IntegrationConfig'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.LaserApp.IntegrationConfig'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.LaserApp.IntegrationConfig'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.LaserApp.IntegrationConfig'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.LaserApp.IntegrationConfig'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.LaserApp.IntegrationConfig'
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Integrations/LaserApp
+      summary: Saves laserapp integration settings
+      operationId: LaserApp_UpdateConfiguration
+      parameters:
+      - name: custodianId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.LaserApp.IntegrationConfig'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.LaserApp.IntegrationConfig'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.LaserApp.IntegrationConfig'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.LaserApp.IntegrationConfig'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.LaserApp.IntegrationConfig'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.LaserApp.IntegrationConfig'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.LaserApp.IntegrationConfig'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.LaserApp.IntegrationConfig'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.LaserApp.IntegrationConfig'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.LaserApp.IntegrationConfig'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.LaserApp.IntegrationConfig'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.LaserApp.IntegrationConfig'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.LaserApp.IntegrationConfig'
+        required: true
+  /v1/Integrations/LaserApp/Configuration/Test:
+    get:
+      tags:
+      - Integrations/LaserApp
+      summary: Checks to see if laserapp integration has been setup for this database
+      operationId: LaserApp_CheckConfiguration
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/LaserApp/Forms:
+    get:
+      tags:
+      - Integrations/LaserApp
+      summary: Returns a list of forms available from LaserApp
+      operationId: LaserApp_GetForms
+      parameters:
+      - name: resetCache
+        in: query
+        description: 'Optional. Default: false. If true the list of forms will be refreshed from LaserApp. If false, the list will only be updated if it has been 10 hours since the last time it was updated.'
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: custodianId
+        in: query
+        description: Optional. Return all forms that have this paperwork assignment.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: brokerDealerId
+        in: query
+        description: Optional. Return all forms that have this paperwork assignment.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: managementStyleId
+        in: query
+        description: Optional. Return all forms that have this paperwork assignment.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: fundFamilyId
+        in: query
+        description: Optional. Return all forms that have this paperwork assignment.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: accountTypeId
+        in: query
+        description: Obsolete. Will be removed after August 2016. Replaced with registrationTypeId.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: registrationTypeId
+        in: query
+        description: Optional. Return all forms that have this paperwork assignment.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: representativeId
+        in: query
+        description: Optional. Return all forms that have this paperwork assignment.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: subadvisorId
+        in: query
+        description: Optional. Return all forms that have this paperwork assignment.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: sourceOfFunds
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Rollover
+          - Transfer
+          - ACHWIRE
+          - CashCheck
+      - name: formType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - NewAccount
+          - Distribution
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Integrations/LaserApp/Forms/{key}:
+    get:
+      tags:
+      - Integrations/LaserApp
+      summary: Gets the form that has the provided key.
+      operationId: LaserApp_GetFormByKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordFullDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordFullDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordFullDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordFullDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordFullDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordFullDto'
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Integrations/LaserApp
+      operationId: LaserApp_UpdateForm
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordFullDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordFullDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordFullDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordFullDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordFullDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordFullDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordFullDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordFullDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordFullDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordFullDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordFullDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordFullDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordFullDto'
+        required: true
+      summary: Laser app update form
+      x-summary-source: derived
+  /v1/Integrations/LaserApp/Forms/Search:
+    get:
+      tags:
+      - Integrations/LaserApp
+      operationId: LaserApp_GetLaserAppFormSearch
+      parameters:
+      - name: search
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Laser app get laser app form search
+      x-summary-source: derived
+  /v1/Integrations/LaserApp/Forms/Search/{search}:
+    get:
+      tags:
+      - Integrations/LaserApp
+      operationId: LaserApp_GetV1IntegrationsLaserAppFormsSearchBySearch
+      parameters:
+      - name: search
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto'
+                xml:
+                  name: FormRecordDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Laser app get V1 integrations laser app forms search by search
+      x-summary-source: derived
+  /v1/Integrations/LaserApp/PostBackFromLaserApp:
+    post:
+      tags:
+      - Integrations/LaserApp
+      summary: This endpoint is called from the LaserApp application, to post the filled out…
+      operationId: LaserApp_PostBackFromLaserAppAsync
+      parameters:
+      - name: request
+        in: header
+        required: true
+        schema:
+          type: object
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAT.Integrations.LaserApp.IntegrationConfig:
+      properties:
+        partnerId:
+          type: string
+        formsServiceUserName:
+          type: string
+        formsServiceAuthCode:
+          type: string
+        formsServiceURL:
+          type: string
+        anywhereServiceAuthCode:
+          type: string
+        anywhereServiceURL:
+          type: string
+        postUrl:
+          type: string
+        postFormat:
+          type: string
+          enum:
+          - Raw_no_image
+          - PDF
+          - TIF
+          - Fillable_PDF
+        theme:
+          type: string
+          enum:
+          - brown_chocolate
+          - black_stripes
+          - blue_spirit
+          - orange_oktoberfest
+          - red_firehouse
+          - green_fairway
+          - blue_overcast
+        sigMethod:
+          type: string
+          enum:
+          - NoFormsSignable
+          - Basic
+          - DocuSign
+          - Silanis
+          - SIGNiX
+        remoteSigAuth:
+          type: string
+        remoteSigPass:
+          type: string
+        remoteSigId:
+          type: boolean
+        postButtonCaption:
+          type: string
+        signIXClientId:
+          type: string
+        signIXSubmitterEmail:
+          type: string
+        printButtonState:
+          type: string
+          enum:
+          - Print_button_enabled
+          - Print_button_disabled
+          - Print_button_invisible
+        smartEnforce:
+          type: string
+          enum:
+          - Smart_fields_optional
+          - Smart_fields_required
+      xml:
+        name: IntegrationConfig
+      type: object
+    OAS.WebApi.DTO.Portfolio.Paperwork.FormSelectionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        custodian:
+          type: string
+        custodianId:
+          type: integer
+          format: int32
+        brokerDealer:
+          type: string
+        brokerDealerId:
+          type: integer
+          format: int32
+        managementStyle:
+          type: string
+        platformId:
+          type: integer
+          format: int32
+        fundFamily:
+          type: string
+        fundFamilyId:
+          type: integer
+          format: int32
+        accountType:
+          type: string
+        registrationTypeId:
+          type: integer
+          format: int32
+        representative:
+          type: string
+        representativeId:
+          type: integer
+          format: int32
+        subAdvisor:
+          type: string
+        subAdvisorId:
+          type: integer
+          format: int32
+        sourceOfFunds:
+          type: string
+          enum:
+          - Rollover
+          - Transfer
+          - ACHWIRE
+          - CashCheck
+        formType:
+          type: string
+          enum:
+          - NewAccount
+          - Distribution
+        feeScheduleId:
+          type: integer
+          format: int32
+        feeSchedule:
+          type: string
+      xml:
+        name: FormSelectionDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordFullDto:
+      properties:
+        selections:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Paperwork.FormSelectionDto'
+          xml:
+            name: FormSelectionDto
+            wrapped: true
+          type: array
+        id:
+          type: integer
+          format: int32
+        guid:
+          type: string
+        title:
+          type: string
+        majorVersion:
+          type: integer
+          format: int32
+        minorVersion:
+          type: integer
+          format: int32
+        cDate:
+          type: string
+          format: date-time
+        rDate:
+          type: string
+          format: date-time
+        pages:
+          type: integer
+          format: int32
+        isRequired:
+          type: boolean
+        paperworkSource:
+          type: string
+          enum:
+          - LaserApp
+          - AdvisoryWorld
+          - Firm
+          - Quik
+      xml:
+        name: FormRecordFullDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.Paperwork.FormRecordDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        guid:
+          type: string
+        title:
+          type: string
+        majorVersion:
+          type: integer
+          format: int32
+        minorVersion:
+          type: integer
+          format: int32
+        cDate:
+          type: string
+          format: date-time
+        rDate:
+          type: string
+          format: date-time
+        pages:
+          type: integer
+          format: int32
+        isRequired:
+          type: boolean
+        paperworkSource:
+          type: string
+          enum:
+          - LaserApp
+          - AdvisoryWorld
+          - Firm
+          - Quik
+      xml:
+        name: FormRecordDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

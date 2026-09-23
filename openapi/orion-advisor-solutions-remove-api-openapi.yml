@@ -1,0 +1,48 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Remove API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Remove
+paths:
+  /Actions/Remove:
+    post:
+      tags:
+      - Remove
+      summary: Removes the Schwab integration for the current user
+      description: The user must have the necessary privileges to remove the integration.
+      operationId: Supernova_RemoveServiceAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+            multipart/form-data:
+              schema:
+                type: boolean
+      security:
+      - Authorization: []
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

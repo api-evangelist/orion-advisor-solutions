@@ -1,0 +1,2465 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Payout Dashboard API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/PayoutDashboard
+paths:
+  /v1/Billing/PayoutDashboard:
+    get:
+      tags:
+      - Billing/PayoutDashboard
+      summary: Get the list of accounts for the appropriate values The return is limited to…
+      operationId: PayoutDashboard_Get
+      parameters:
+      - name: top
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: skip
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - PendingApproval
+          - CurrentlyApproved
+          - CreditAndExpenses
+          - OutsideAccounts
+          - Paid
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: payee
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardDto'
+                xml:
+                  name: PayoutDashboardDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardDto'
+                xml:
+                  name: PayoutDashboardDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardDto'
+                xml:
+                  name: PayoutDashboardDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardDto'
+                xml:
+                  name: PayoutDashboardDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardDto'
+                xml:
+                  name: PayoutDashboardDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardDto'
+                xml:
+                  name: PayoutDashboardDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/PayoutDashboard/Action/Delete:
+    put:
+      tags:
+      - Billing/PayoutDashboard
+      operationId: PayoutDashboard_ActionDeleteAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Payout dashboard action delete async
+      x-summary-source: derived
+  /v1/Billing/PayoutDashboard/CreateExpense:
+    post:
+      tags:
+      - Billing/PayoutDashboard
+      summary: Creates a new expense
+      operationId: PayoutDashboard_CreateNewExpenseAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardDto'
+        required: true
+  /v1/Billing/PayoutDashboard/Payment/{paymentId}/Action/Report:
+    get:
+      tags:
+      - Billing/PayoutDashboard
+      operationId: PayoutDashboardPayment_GetExcelPayeeReport
+      parameters:
+      - name: paymentId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Payout dashboard payment get excel payee report
+      x-summary-source: derived
+  /v1/Billing/PayoutDashboard/Payment/DeletePayables:
+    post:
+      tags:
+      - Billing/PayoutDashboard
+      summary: Unflushes Payables
+      operationId: PayoutDashboardPayment_DeletePayablesAsync
+      parameters:
+      - name: paymentId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+      security:
+      - Authorization: []
+  /v1/Billing/PayoutDashboard/Payment/Expenses:
+    post:
+      tags:
+      - Billing/PayoutDashboard
+      summary: Creates a new payout adjustment, which updates payables
+      operationId: PayoutDashboardPayment_CreateNewExpensesAndCreditsAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+        required: true
+  /v1/Billing/PayoutDashboard/Payment/GenerateReport:
+    post:
+      tags:
+      - Billing/PayoutDashboard
+      summary: Takes list of Payout Dashboard Ids and generates a report for them
+      operationId: PayoutDashboardPayment_GenerateRepReportAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+  /v1/Billing/PayoutDashboard/Payment/GetHangFireProgressById:
+    get:
+      tags:
+      - Billing/PayoutDashboard
+      operationId: PayoutDashboardPayment_GetHangFireProgressById
+      parameters:
+      - name: jobId
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Hangfire.Console.Monitoring.LineDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hangfire.Console.Monitoring.LineDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Hangfire.Console.Monitoring.LineDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Hangfire.Console.Monitoring.LineDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/Hangfire.Console.Monitoring.LineDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/Hangfire.Console.Monitoring.LineDto'
+      security:
+      - Authorization: []
+      summary: Payout dashboard payment get hang fire progress by id
+      x-summary-source: derived
+  /v1/Billing/PayoutDashboard/Payment/List:
+    get:
+      tags:
+      - Billing/PayoutDashboard
+      summary: Returns a list of Payments for a given date range
+      description: 'Get /Billing/PayoutDashboard/Payment/List?endDate=04/09/2024&startDate=04/01/2024
+
+        Sample Results:
+
+        [
+
+        {
+
+        "id": 123,
+
+        "payeeId": 345,
+
+        "payee": "Name",
+
+        "asOfDate": "2024-04-09",
+
+        "paymentAmount": 123.45
+
+        "adjustmentAmount": 0.0000,
+
+        "uncollectedAmount": null,
+
+        "totalPaymentAmount": 123.45
+
+        "createdDate": "2024-04-09",
+
+        "createdBy": "name@email.com",
+
+        "editedDate": "2024-04-09",
+
+        "editedBy": "name@email.com",
+
+        "note": null,
+
+        "toPay": false,
+
+        "blobId": null,
+
+        "hangFireId": null
+
+        }
+
+        ]'
+      operationId: PayoutDashboardPayment_GetPaymentList
+      parameters:
+      - name: startDate
+        in: query
+        description: Optional. Start Date to search payments.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional. End Date to search payments.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+                xml:
+                  name: BillPayoutDashboardPaymentDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+                xml:
+                  name: BillPayoutDashboardPaymentDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+                xml:
+                  name: BillPayoutDashboardPaymentDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+                xml:
+                  name: BillPayoutDashboardPaymentDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+                xml:
+                  name: BillPayoutDashboardPaymentDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+                xml:
+                  name: BillPayoutDashboardPaymentDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/PayoutDashboard/Payment/MultiplePayments:
+    post:
+      tags:
+      - Billing/PayoutDashboard
+      summary: Used to Create payments.
+      description: 'Post /Billing/PayoutDashboard/Payment/MultiplePayments?endDate=04/09/2024&startDate=04/01/2024
+
+        Sample Body
+
+        [
+
+        {
+
+        "adjustmentAmount": 0,
+
+        "asOfDate": "2024-04-09T09:00:27.03218-05:00",
+
+        "payee": "RIA",
+
+        "payeeId": 7,
+
+        "paymentAmount": -123.45,
+
+        "toPay": true,
+
+        "totalPaymentAmount": -123.45,
+
+        "uncollectedAmount": 14535.88
+
+        }
+
+        ]
+
+        Sample Response
+
+        [
+
+        {
+
+        "adjustmentAmount": 0.0,
+
+        "asOfDate": "2024-04-09",
+
+        "blobId": null,
+
+        "createdBy": null,
+
+        "createdDate": "0001-01-01",
+
+        "editedBy": null,
+
+        "editedDate": "0001-01-01",
+
+        "hangFireId": null,
+
+        "id": 0,
+
+        "note": null,
+
+        "payee": "RIA",
+
+        "payeeId": 123,
+
+        "paymentAmount": -123.45,
+
+        "toPay": true,
+
+        "totalPaymentAmount": -456.78,
+
+        "uncollectedAmount": 456.45
+
+        }
+
+        ]'
+      operationId: PayoutDashboardPayment_CreateNewPaymentsAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      - name: startDate
+        in: query
+        description: Optional. Start date of Payment Range
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional. End date of Payment Range
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+                xml:
+                  name: BillPayoutDashboardPaymentDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+                xml:
+                  name: BillPayoutDashboardPaymentDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+                xml:
+                  name: BillPayoutDashboardPaymentDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+                xml:
+                  name: BillPayoutDashboardPaymentDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+                xml:
+                  name: BillPayoutDashboardPaymentDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+                xml:
+                  name: BillPayoutDashboardPaymentDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+              xml:
+                name: BillPayoutDashboardPaymentDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+              xml:
+                name: BillPayoutDashboardPaymentDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+              xml:
+                name: BillPayoutDashboardPaymentDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+              xml:
+                name: BillPayoutDashboardPaymentDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+              xml:
+                name: BillPayoutDashboardPaymentDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+              xml:
+                name: BillPayoutDashboardPaymentDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+              xml:
+                name: BillPayoutDashboardPaymentDto
+                wrapped: true
+              type: array
+        required: true
+  /v1/Billing/PayoutDashboard/Payment/New:
+    get:
+      tags:
+      - Billing/PayoutDashboard
+      summary: This operation will provide entity payout payments.
+      description: 'Sample Request
+
+        GET /Billing/PayoutDashboard/Payment/Consolidation/New?startDate=NULL&endDate=03/13/2024'
+      operationId: PayoutDashboardPayment_GetNewPaymentsListAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      - name: startDate
+        in: query
+        description: Optional. Start Date to search payments.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional. End Date to search payments.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Billing.BillPayoutDashboardPaymentListDto'
+                xml:
+                  name: BillPayoutDashboardPaymentListDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Billing.BillPayoutDashboardPaymentListDto'
+                xml:
+                  name: BillPayoutDashboardPaymentListDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Billing.BillPayoutDashboardPaymentListDto'
+                xml:
+                  name: BillPayoutDashboardPaymentListDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Billing.BillPayoutDashboardPaymentListDto'
+                xml:
+                  name: BillPayoutDashboardPaymentListDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Billing.BillPayoutDashboardPaymentListDto'
+                xml:
+                  name: BillPayoutDashboardPaymentListDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Billing.BillPayoutDashboardPaymentListDto'
+                xml:
+                  name: BillPayoutDashboardPaymentListDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+    post:
+      tags:
+      - Billing/PayoutDashboard
+      summary: Used to Create payments.
+      description: 'Post /Billing/PayoutDashboard/Payment/New?endDate=04/09/2024&startDate=04/01/2024
+
+        Sample Body
+
+        [
+
+        {
+
+        "description": "payee name description",
+
+        "id": 1,
+
+        "isPayableEntity": true,
+
+        "name": "payee"
+
+        }
+
+        ]
+
+        Sample Response
+
+        [
+
+        {
+
+        "adjustmentAmount": 0.0,
+
+        "asOfDate": "2024-04-09",
+
+        "blobId": null,
+
+        "createdBy": null,
+
+        "createdDate": "0001-01-01",
+
+        "editedBy": null,
+
+        "editedDate": "0001-01-01",
+
+        "hangFireId": null,
+
+        "id": 0,
+
+        "note": null,
+
+        "payee": "payee",
+
+        "payeeId": 1,
+
+        "paymentAmount": 0.0,
+
+        "toPay": true,
+
+        "totalPaymentAmount": 0.0,
+
+        "uncollectedAmount": -123.45
+
+        }
+
+        ]'
+      operationId: PayoutDashboardPayment_GetNewPaymentsAsync
+      parameters:
+      - name: startDate
+        in: query
+        description: Optional. Start date of Payment Range
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional. End date of Payment Range
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+                xml:
+                  name: BillPayoutDashboardPaymentDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+                xml:
+                  name: BillPayoutDashboardPaymentDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+                xml:
+                  name: BillPayoutDashboardPaymentDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+                xml:
+                  name: BillPayoutDashboardPaymentDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+                xml:
+                  name: BillPayoutDashboardPaymentDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto'
+                xml:
+                  name: BillPayoutDashboardPaymentDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+              xml:
+                name: SimpleEntity
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+              xml:
+                name: SimpleEntity
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+              xml:
+                name: SimpleEntity
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+              xml:
+                name: SimpleEntity
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+              xml:
+                name: SimpleEntity
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+              xml:
+                name: SimpleEntity
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+              xml:
+                name: SimpleEntity
+                wrapped: true
+              type: array
+        required: true
+  /v1/Billing/PayoutDashboard/Payment/PaymentProcessing:
+    get:
+      tags:
+      - Billing/PayoutDashboard
+      operationId: PayoutDashboardPayment_PaymentProcessing
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+            multipart/form-data:
+              schema:
+                type: boolean
+      security:
+      - Authorization: []
+      summary: Payout dashboard payment payment processing
+      x-summary-source: derived
+  /v1/Billing/PayoutDashboard/Reports/{key}:
+    get:
+      tags:
+      - Billing/PayoutDashboard
+      summary: Returns Report Data. Requires Admin/Advisor with permissions
+      operationId: PayoutDashboardReport_GetBlobAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+    delete:
+      tags:
+      - Billing/PayoutDashboard
+      summary: This endpoint is no longer valid and will be removed 7/11/2024.
+      operationId: PayoutDashboardReport_DeleteBlobAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      deprecated: true
+      security:
+      - Authorization: []
+  /v1/Billing/PayoutDashboard/Reports/Action/Delete:
+    put:
+      tags:
+      - Billing/PayoutDashboard
+      summary: Used to delete Advisory Fee Reports
+      operationId: PayoutDashboardReport_DeleteBlobsAsync
+      parameters:
+      - name: ct
+        in: header
+        description: Cancellation Token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+  /v1/Billing/PayoutDashboard/Reports/Action/ManualReportUpload:
+    post:
+      tags:
+      - Billing/PayoutDashboard
+      summary: Manually uploads an advisory fee report. Requires Admin
+      operationId: PayoutDashboardReport_ManualReportUploadAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FileImportDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FileImportDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FileImportDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FileImportDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FileImportDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FileImportDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ManualReportFileUploadDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ManualReportFileUploadDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ManualReportFileUploadDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ManualReportFileUploadDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ManualReportFileUploadDto'
+        description: ManualReportFileUploadDto
+        required: true
+  /v1/Billing/PayoutDashboard/Reports/CreatePaymentReports:
+    post:
+      tags:
+      - Billing/PayoutDashboard
+      summary: Generates a Payment Report. Requires Admin/Advisor with edit
+      operationId: PayoutDashboardReport_CreatePendingPaymentReportsAsync
+      parameters:
+      - name: billEntityId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: entityId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: runForAll
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: isPaidStatus
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Billing/PayoutDashboard/Reports/Download/{filename}:
+    get:
+      tags:
+      - Billing/PayoutDashboard
+      summary: Used to download a previously generated report
+      operationId: PayoutDashboardReport_RunReportAsync
+      parameters:
+      - name: filename
+        in: path
+        description: The filename provided by the generate endpoint.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Billing/PayoutDashboard/Reports/List:
+    get:
+      tags:
+      - Billing/PayoutDashboard
+      operationId: PayoutDashboardReport_GetPayoutDashboardReports
+      parameters:
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: entity
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+      - name: entityId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: showBDRepReport
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AdvisoryFeeReportBlobDto'
+                xml:
+                  name: AdvisoryFeeReportBlobDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AdvisoryFeeReportBlobDto'
+                xml:
+                  name: AdvisoryFeeReportBlobDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AdvisoryFeeReportBlobDto'
+                xml:
+                  name: AdvisoryFeeReportBlobDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AdvisoryFeeReportBlobDto'
+                xml:
+                  name: AdvisoryFeeReportBlobDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AdvisoryFeeReportBlobDto'
+                xml:
+                  name: AdvisoryFeeReportBlobDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AdvisoryFeeReportBlobDto'
+                xml:
+                  name: AdvisoryFeeReportBlobDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Payout dashboard report get payout dashboard reports
+      x-summary-source: derived
+  /v1/Billing/PayoutDashboard/RepPayees:
+    get:
+      tags:
+      - Billing/PayoutDashboard
+      operationId: PayoutDashboard_GetRepPayees
+      parameters:
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Payout dashboard get rep payees
+      x-summary-source: derived
+  /v1/Billing/PayoutDashboard/Summary/ActivityChart:
+    get:
+      tags:
+      - Billing/PayoutDashboard
+      operationId: PayoutDashboard_GetSummaryChart
+      parameters:
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: payee
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardActivityChartDto'
+                xml:
+                  name: PayoutDashboardActivityChartDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardActivityChartDto'
+                xml:
+                  name: PayoutDashboardActivityChartDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardActivityChartDto'
+                xml:
+                  name: PayoutDashboardActivityChartDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardActivityChartDto'
+                xml:
+                  name: PayoutDashboardActivityChartDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardActivityChartDto'
+                xml:
+                  name: PayoutDashboardActivityChartDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PayoutDashboardActivityChartDto'
+                xml:
+                  name: PayoutDashboardActivityChartDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Payout dashboard get summary chart
+      x-summary-source: derived
+  /v1/Billing/PayoutDashboard/Summary/Header:
+    get:
+      tags:
+      - Billing/PayoutDashboard
+      operationId: PayoutDashboard_GetSummaryHeader
+      parameters:
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: payee
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                additionalProperties:
+                  type: number
+                  format: double
+                type: object
+            application/json:
+              schema:
+                additionalProperties:
+                  type: number
+                  format: double
+                type: object
+            text/json:
+              schema:
+                additionalProperties:
+                  type: number
+                  format: double
+                type: object
+            multipart/form-data:
+              schema:
+                additionalProperties:
+                  type: number
+                  format: double
+                type: object
+      security:
+      - Authorization: []
+      summary: Payout dashboard get summary header
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.AdvisoryFeeReportBlobDto:
+      properties:
+        entityName:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        id:
+          type: integer
+          format: int32
+        openWith:
+          type: string
+        fileName:
+          type: string
+        blobDesc:
+          type: string
+        blobText:
+          type: string
+        category:
+          type: string
+        isZip:
+          type: boolean
+      xml:
+        name: AdvisoryFeeReportBlobDto
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    OAS.DataModel.Billing.BillPayoutDashboardPaymentListDto:
+      properties:
+        payeeId:
+          type: integer
+          format: int32
+        paymentAmount:
+          type: number
+          format: double
+        adjustmentAmount:
+          type: number
+          format: double
+        uncollectedAmount:
+          type: number
+          format: double
+        payee:
+          type: string
+        totalPaymentAmount:
+          type: number
+          format: double
+        toPay:
+          type: boolean
+        asOfDate:
+          type: string
+          format: date-time
+      xml:
+        name: BillPayoutDashboardPaymentListDto
+      type: object
+    OAS.WebApi.DTO.Billing.ManualReportFileUploadDto:
+      required:
+      - entity
+      - entityId
+      - ownerName
+      - file
+      - fileExtension
+      properties:
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        entityId:
+          type: integer
+          format: int32
+        ownerName:
+          type: string
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+        fileExtension:
+          type: string
+          pattern: ^(PDF|Excel)$
+          enum:
+          - PDF
+          - Excel
+      xml:
+        name: ManualReportFileUploadDto
+      type: object
+    OAS.WebApi.DTO.Utility.FileImportDto:
+      properties:
+        pkBlob:
+          type: integer
+          format: int32
+        fkParent:
+          type: integer
+          format: int32
+        fileName:
+          type: string
+        blobDesc:
+          type: string
+        blobText:
+          type: string
+        emailsSent:
+          type: integer
+          format: int32
+        invalidEmail:
+          type: integer
+          format: int32
+        message:
+          type: string
+      xml:
+        name: FileImportDto
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
+    OAS.WebApi.DTO.Billing.PayoutDashboardDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        isActive:
+          type: boolean
+        clientName:
+          type: string
+        repName:
+          type: string
+        fundName:
+          type: string
+        calculatedDate:
+          type: string
+          format: date-time
+        totalFeeAmount:
+          type: number
+          format: double
+        changeAmount:
+          type: number
+          format: double
+        payeeName:
+          type: string
+        billedMarketValue:
+          type: number
+          format: double
+        feeSchedule:
+          type: string
+        payoutSchedule:
+          type: string
+        adjustmentTypeId:
+          type: integer
+          format: int32
+        adjustmentType:
+          type: string
+        expenseType:
+          type: string
+          enum:
+          - None
+          - Credit
+          - Expense
+        repStatus:
+          type: string
+          enum:
+          - ActiveNoIssues
+          - HoldForCompliance
+          - ActiveNoNewClients
+          - InActive
+          - Pending
+          - Limited
+          - Prospect
+          - Rejected
+        repNumber:
+          type: string
+        bdName:
+          type: string
+        notes:
+          type: string
+        receivableNotes:
+          type: string
+        paidDate:
+          type: string
+          format: date-time
+        entity:
+          type: string
+        billId:
+          type: integer
+          format: int32
+        payableId:
+          type: integer
+          format: int32
+        paymentId:
+          type: integer
+          format: int32
+        dateRange:
+          type: string
+        clientLastName:
+          type: string
+        billAccountItemId:
+          type: integer
+          format: int32
+        billEntityId:
+          type: integer
+          format: int32
+      xml:
+        name: PayoutDashboardDto
+      type: object
+    OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        payeeId:
+          type: integer
+          format: int32
+        payee:
+          type: string
+        asOfDate:
+          type: string
+          format: date-time
+        paymentAmount:
+          type: number
+          format: double
+        adjustmentAmount:
+          type: number
+          format: double
+        uncollectedAmount:
+          type: number
+          format: double
+        totalPaymentAmount:
+          readOnly: true
+          type: number
+          format: double
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        note:
+          type: string
+        toPay:
+          type: boolean
+        blobId:
+          type: integer
+          format: int32
+        hangFireId:
+          type: string
+      xml:
+        name: BillPayoutDashboardPaymentDto
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    Hangfire.Console.Monitoring.LineDto:
+      properties:
+        type:
+          readOnly: true
+          type: string
+          enum:
+          - Any
+          - Text
+          - ProgressBar
+        timestamp:
+          readOnly: true
+          type: string
+          format: date-time
+        color:
+          readOnly: true
+          type: string
+      xml:
+        name: LineDto
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+    OAS.WebApi.DTO.Billing.PayoutDashboardActivityChartDto:
+      properties:
+        calculatedDate:
+          type: string
+          format: date-time
+        payoutStatus:
+          type: string
+          enum:
+          - PendingApproval
+          - CurrentlyApproved
+          - CreditAndExpenses
+          - OutsideAccounts
+          - Paid
+        amount:
+          type: number
+          format: double
+      xml:
+        name: PayoutDashboardActivityChartDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

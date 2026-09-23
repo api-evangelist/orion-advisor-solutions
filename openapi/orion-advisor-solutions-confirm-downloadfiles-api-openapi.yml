@@ -1,0 +1,4274 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Confirm/Download Files API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Confirm/DownloadFiles
+paths:
+  /v1/Confirm/DownloadFiles:
+    get:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_GetAll
+      parameters:
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: recordType
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - Name
+            - Position
+            - Transaction
+            - Price
+            - Dividend
+            - Product
+            - NotImported
+            - Header
+            - Security
+            - CorpAction
+            - TranDetail
+            - Generic
+            - CostBasis
+            - Beneficiary
+            - StoredPerformance
+            - Systematic
+            - RMD
+            - Banking
+      - name: memoCode
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDto'
+                xml:
+                  name: DownloadFileDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDto'
+                xml:
+                  name: DownloadFileDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDto'
+                xml:
+                  name: DownloadFileDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDto'
+                xml:
+                  name: DownloadFileDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDto'
+                xml:
+                  name: DownloadFileDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDto'
+                xml:
+                  name: DownloadFileDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Download files get all
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/{downloadFileId}/Details:
+    get:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_GetFileDetails
+      parameters:
+      - name: downloadFileId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: downloadStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - NotConfirmed
+            - Confirmed
+            - Excluded
+            - AggregationOnly
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Download files get file details
+      x-summary-source: derived
+    put:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_UpdateFileDetailsRoute
+      parameters:
+      - name: downloadFileId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+              xml:
+                name: DownloadFileDetailDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+              xml:
+                name: DownloadFileDetailDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+              xml:
+                name: DownloadFileDetailDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+              xml:
+                name: DownloadFileDetailDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+              xml:
+                name: DownloadFileDetailDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+              xml:
+                name: DownloadFileDetailDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+              xml:
+                name: DownloadFileDetailDto
+                wrapped: true
+              type: array
+        required: true
+      summary: Download files update file details route
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/{downloadFileId}/Details/{key}:
+    get:
+      tags:
+      - Confirm/DownloadFiles
+      summary: Gets the download file detail record for the download file with the provided key
+      operationId: DownloadFiles_GetFileDetailByKey
+      parameters:
+      - name: downloadFileId
+        in: path
+        description: The key of the download file.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_UpdateFileDetail
+      parameters:
+      - name: downloadFileId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+        required: true
+      summary: Download files update file detail
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/{downloadFileId}/Details/Action/FindReplace:
+    put:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_FindReplace
+      parameters:
+      - name: downloadFileId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: findString
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: replaceString
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: findReplaceFlag
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - None
+          - Address1
+          - Address2
+          - Address3
+          - City
+          - ClientName
+          - ProductName
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Download files find replace
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/{downloadFileId}/Details/Action/Prefix:
+    put:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_ActionPrefix
+      parameters:
+      - name: downloadFileId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: prefixString
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: prefixFlag
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - None
+          - ProductName
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Download files action prefix
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/{downloadFileId}/Details/Action/Proper:
+    put:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_ActionProper
+      parameters:
+      - name: downloadFileId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: properFlag
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - None
+          - Address1
+          - Address2
+          - Address3
+          - City
+          - ClientName
+          - ProductName
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Download files action proper
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/{downloadFileId}/Details/Action/Undo:
+    put:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_ActionUndoRecordsAsync
+      parameters:
+      - name: downloadFileId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Download files action undo records async
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/{downloadFileId}/Details/Action/VerifyApply:
+    put:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_ActionVerifyOrApplyRecordsAsync
+      parameters:
+      - name: downloadFileId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: apply
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: allowDuplicateTransactions
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: allowAddProductToDatabase
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: allowAddDividend
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: allowCreateUnverifiedSells
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: newAccountCreation
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - Default
+          - DoNotCreate
+          - Create
+          - AutoExclude
+      - name: matchDownloadSource
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: bypassExclusion
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: priceHolidayOverride
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: allowSymbolCreate
+        in: query
+        required: true
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Download files action verify or apply records async
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/{downloadFileId}/Details/List:
+    post:
+      tags:
+      - Confirm/DownloadFiles
+      summary: Gets the download file detail records for the download file with the provided…
+      operationId: DownloadFiles_GetFileDetailByKeyList
+      parameters:
+      - name: downloadFileId
+        in: path
+        description: The key of the download file.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: Keys of the desired return objects.
+        required: true
+  /v1/Confirm/DownloadFiles/{downloadFileId}/Details/List/Id:
+    post:
+      tags:
+      - Confirm/DownloadFiles
+      summary: Gets the download file detail records for the download file with the provided…
+      operationId: DownloadFiles_PostV1ConfirmDownloadFilesByDownloadFileIdDetailsListId
+      parameters:
+      - name: downloadFileId
+        in: path
+        description: The key of the download file.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: Keys of the desired return objects.
+        required: true
+  /v1/Confirm/DownloadFiles/{downloadFileId}/Download:
+    get:
+      tags:
+      - Confirm/DownloadFiles
+      summary: Used download the raw file for the download file specified
+      operationId: DownloadFiles_DownloadFile
+      parameters:
+      - name: downloadFileId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Confirm/DownloadFiles/{key}:
+    get:
+      tags:
+      - Confirm/DownloadFiles
+      summary: Gets the download file that has the provided key.
+      operationId: DownloadFiles_GetByKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDto'
+      security:
+      - Authorization: []
+  /v1/Confirm/DownloadFiles/{key}/Positions/Import:
+    post:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: ReviewedPositionFiles_ImportTransactionsAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Reviewed position files import transactions async
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/{key}/UpdateAgentAnalysisStatus:
+    put:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_UpdateAgentAnalysisStatusToCompleteAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Download files update agent analysis status to complete async
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/Action/ConfirmDetails:
+    put:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_ManualConfirmAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: isValidated
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: reason
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - ThirdPartyWebsite
+          - InstituteWebsite
+          - AdvisorConfirmed
+          - Other
+          - MultiplyPriceFactor
+          - BondPricingFirstIn
+          - LessRoundedPrice
+          - CorrectingDecimalOnPrice
+          - UpdatingCSIPrice
+          - NotUSPrice
+          - DifferentEffectiveDate
+      - name: notes
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Download files manual confirm async
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/Action/Download/{sessionId}:
+    get:
+      tags:
+      - Confirm/DownloadFiles
+      summary: Download files download files
+      operationId: DownloadFiles_DownloadFiles
+      parameters:
+      - name: sessionId
+        in: path
+        description: The identifier for a specific download session.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/Action/DownloadFiles:
+    post:
+      tags:
+      - Confirm/DownloadFiles
+      summary: Downloads zip file with the set of files selected
+      operationId: DownloadFiles_PrepareDownloadFiles
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: List of keys for desired files to download.
+        required: true
+  /v1/Confirm/DownloadFiles/Action/DownloadMany:
+    post:
+      tags:
+      - Confirm/DownloadFiles
+      summary: Downloads several confirmation files across one or more advisor databases
+      operationId: DownloadFiles_DownloadManyFiles
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFilesOptionsDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFilesOptionsDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFilesOptionsDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFilesOptionsDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFilesOptionsDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFilesOptionsDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFilesOptionsDto'
+        required: true
+  /v1/Confirm/DownloadFiles/Action/DownloadTestFiles:
+    get:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_DownloadTestFilesAsync
+      parameters:
+      - name: alClientId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: fileIds
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Download files download test files async
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/Action/ExcludeDetails:
+    put:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_ManualExcludeAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Download files manual exclude async
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/Action/ImportFile:
+    post:
+      tags:
+      - Confirm/DownloadFiles
+      summary: Import file
+      operationId: DownloadFiles_ImportFileAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportFileDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportFileDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportFileDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportFileDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportFileDto'
+        required: true
+  /v1/Confirm/DownloadFiles/Action/ImportFiles:
+    post:
+      tags:
+      - Confirm/DownloadFiles
+      summary: Import file
+      operationId: DownloadFiles_ImportFilesAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileReturnDto'
+                xml:
+                  name: DownloadFileImportMultiFileReturnDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileReturnDto'
+                xml:
+                  name: DownloadFileImportMultiFileReturnDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileReturnDto'
+                xml:
+                  name: DownloadFileImportMultiFileReturnDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileReturnDto'
+                xml:
+                  name: DownloadFileImportMultiFileReturnDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileReturnDto'
+                xml:
+                  name: DownloadFileImportMultiFileReturnDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileReturnDto'
+                xml:
+                  name: DownloadFileImportMultiFileReturnDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileDto'
+        required: true
+  /v1/Confirm/DownloadFiles/Action/ImportFilesByDownloadSources:
+    post:
+      tags:
+      - Confirm/DownloadFiles
+      summary: Imports the files by download sources asynchronous
+      description: 'Sample Request
+
+        POST /Confirm/DownloadFiles/Action/ImportFilesByDownloadSources
+
+        {"downloadSourceIds":[189,170,184,96,251,75,81],"autoApply":0}'
+      operationId: DownloadFiles_ImportFilesByDownloadSourcesAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        description: The cancellation token.
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileReturnDto'
+                xml:
+                  name: DownloadFileImportMultiFileReturnDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileReturnDto'
+                xml:
+                  name: DownloadFileImportMultiFileReturnDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileReturnDto'
+                xml:
+                  name: DownloadFileImportMultiFileReturnDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileReturnDto'
+                xml:
+                  name: DownloadFileImportMultiFileReturnDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileReturnDto'
+                xml:
+                  name: DownloadFileImportMultiFileReturnDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileReturnDto'
+                xml:
+                  name: DownloadFileImportMultiFileReturnDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportFilesMultiDownloadSourceDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportFilesMultiDownloadSourceDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportFilesMultiDownloadSourceDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportFilesMultiDownloadSourceDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportFilesMultiDownloadSourceDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportFilesMultiDownloadSourceDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileImportFilesMultiDownloadSourceDto'
+        description: The download sources to import.
+        required: true
+  /v1/Confirm/DownloadFiles/Action/ResetPositionFile/{downloadFileId}:
+    put:
+      tags:
+      - Confirm/DownloadFiles
+      summary: Download files reset position file async
+      operationId: DownloadFiles_ResetPositionFileAsync
+      parameters:
+      - name: downloadFileId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/Action/VerifyApplyFile:
+    post:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_VerifyApplyFileAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Confirmation.VerifyApplyFileRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Confirmation.VerifyApplyFileRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Confirmation.VerifyApplyFileRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Confirmation.VerifyApplyFileRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Confirmation.VerifyApplyFileRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Confirmation.VerifyApplyFileRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Confirmation.VerifyApplyFileRequest'
+        required: true
+      summary: Download files verify apply file async
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/Details:
+    get:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_GetAllDetailsAsync
+      parameters:
+      - name: recordType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Name
+          - Position
+          - Transaction
+          - Price
+          - Dividend
+          - Product
+          - NotImported
+          - Header
+          - Security
+          - CorpAction
+          - TranDetail
+          - Generic
+          - CostBasis
+          - Beneficiary
+          - StoredPerformance
+          - Systematic
+          - RMD
+          - Banking
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: downloadStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - NotConfirmed
+            - Confirmed
+            - Excluded
+            - AggregationOnly
+      - name: downloadSourceId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: accountNumber
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: downloadFileId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: memoCode
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: effStartDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: effEndDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: cusip
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: readOnly
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Download files get all details async
+      x-summary-source: derived
+    post:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_GetAllDetailsPostAsync
+      parameters:
+      - name: recordType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Name
+          - Position
+          - Transaction
+          - Price
+          - Dividend
+          - Product
+          - NotImported
+          - Header
+          - Security
+          - CorpAction
+          - TranDetail
+          - Generic
+          - CostBasis
+          - Beneficiary
+          - StoredPerformance
+          - Systematic
+          - RMD
+          - Banking
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: downloadStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - NotConfirmed
+            - Confirmed
+            - Excluded
+            - AggregationOnly
+      - name: downloadSourceId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: accountNumber
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: memoCode
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: effStartDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: effEndDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: cusip
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: readOnly
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: string
+              xml:
+                name: IntArray
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                type: string
+              xml:
+                name: IntArray
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                type: string
+              xml:
+                name: IntArray
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: string
+              xml:
+                name: IntArray
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: string
+              xml:
+                name: IntArray
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: string
+              xml:
+                name: IntArray
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: string
+              xml:
+                name: IntArray
+                wrapped: true
+              type: array
+        required: true
+      summary: Download files get all details post async
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/Details/Action/RateAgentNextBestAction:
+    put:
+      tags:
+      - Confirm/DownloadFiles
+      summary: Persists analyst ratings and optional feedback for agent next-best-action…
+      operationId: DownloadFiles_SaveAgentNextBestActionRatingsAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.RateAgentNextBestActionRequestDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.RateAgentNextBestActionRequestDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.RateAgentNextBestActionRequestDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.RateAgentNextBestActionRequestDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.RateAgentNextBestActionRequestDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.RateAgentNextBestActionRequestDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.RateAgentNextBestActionRequestDto'
+        required: true
+  /v1/Confirm/DownloadFiles/Details/Records:
+    get:
+      tags:
+      - Confirm/DownloadFiles
+      summary: Get Download Records By FileId, RecordId, And RecordType
+      operationId: DownloadFiles_GetAllDetailsByRecordAsync
+      parameters:
+      - name: fileSessionId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: recordSessionId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: recordType
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - Name
+          - Position
+          - Transaction
+          - Price
+          - Dividend
+          - Product
+          - NotImported
+          - Header
+          - Security
+          - CorpAction
+          - TranDetail
+          - Generic
+          - CostBasis
+          - Beneficiary
+          - StoredPerformance
+          - Systematic
+          - RMD
+          - Banking
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Confirm/DownloadFiles/ExclusionReason:
+    get:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_GetReasonAll
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+            application/json:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+            text/json:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+            multipart/form-data:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+      security:
+      - Authorization: []
+      summary: Download files get reason all
+      x-summary-source: derived
+    post:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_AddReason
+      parameters:
+      - name: reason
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Confirm.ConfirmExclusionReason'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Confirm.ConfirmExclusionReason'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Confirm.ConfirmExclusionReason'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Confirm.ConfirmExclusionReason'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Confirm.ConfirmExclusionReason'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Confirm.ConfirmExclusionReason'
+      security:
+      - Authorization: []
+      summary: Download files add reason
+      x-summary-source: derived
+    delete:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_DeleteReason
+      parameters:
+      - name: Id
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Download files delete reason
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/FileImports:
+    get:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_GetAllConfirmationBatchProcessing
+      parameters:
+      - name: includeErrors
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - New
+            - Processing
+            - Failed
+            - PartiallyComplete
+            - Complete
+            - Canceled
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.BatchProcessingDto'
+                xml:
+                  name: BatchProcessingDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.BatchProcessingDto'
+                xml:
+                  name: BatchProcessingDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.BatchProcessingDto'
+                xml:
+                  name: BatchProcessingDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.BatchProcessingDto'
+                xml:
+                  name: BatchProcessingDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.BatchProcessingDto'
+                xml:
+                  name: BatchProcessingDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.BatchProcessingDto'
+                xml:
+                  name: BatchProcessingDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Download files get all confirmation batch processing
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/FileImports/Counts:
+    get:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_GetAllConfirmationBatchProcessingCounts
+      parameters:
+      - name: includeErrors
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - New
+            - Processing
+            - Failed
+            - PartiallyComplete
+            - Complete
+            - Canceled
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.GridCountDto'
+                xml:
+                  name: GridCountDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.GridCountDto'
+                xml:
+                  name: GridCountDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.GridCountDto'
+                xml:
+                  name: GridCountDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.GridCountDto'
+                xml:
+                  name: GridCountDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.GridCountDto'
+                xml:
+                  name: GridCountDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.GridCountDto'
+                xml:
+                  name: GridCountDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Download files get all confirmation batch processing counts
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/Positions/CreateTrans:
+    post:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: ReviewedPositionFiles_ImportTrasactionByStoredProcAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Reviewed position files import trasaction by stored proc async
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/Positions/Transactions:
+    post:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: ReviewedPositionFiles_CreateTrasactionByStoredProcAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileCreateTransDto'
+                xml:
+                  name: DownloadFileCreateTransDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileCreateTransDto'
+                xml:
+                  name: DownloadFileCreateTransDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileCreateTransDto'
+                xml:
+                  name: DownloadFileCreateTransDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileCreateTransDto'
+                xml:
+                  name: DownloadFileCreateTransDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileCreateTransDto'
+                xml:
+                  name: DownloadFileCreateTransDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileCreateTransDto'
+                xml:
+                  name: DownloadFileCreateTransDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Reviewed position files create trasaction by stored proc async
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/Recommendations:
+    post:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_UpsertRecommendationsAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Download files upsert recommendations async
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/RecordType/{recordType}/Details:
+    put:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_UpdateRecordTypeFileDetails
+      parameters:
+      - name: recordType
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - Name
+          - Position
+          - Transaction
+          - Price
+          - Dividend
+          - Product
+          - NotImported
+          - Header
+          - Security
+          - CorpAction
+          - TranDetail
+          - Generic
+          - CostBasis
+          - Beneficiary
+          - StoredPerformance
+          - Systematic
+          - RMD
+          - Banking
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+              xml:
+                name: DownloadFileDetailDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+              xml:
+                name: DownloadFileDetailDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+              xml:
+                name: DownloadFileDetailDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+              xml:
+                name: DownloadFileDetailDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+              xml:
+                name: DownloadFileDetailDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+              xml:
+                name: DownloadFileDetailDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+              xml:
+                name: DownloadFileDetailDto
+                wrapped: true
+              type: array
+        required: true
+      summary: Download files update record type file details
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/RecordType/{recordType}/Details/List:
+    post:
+      tags:
+      - Confirm/DownloadFiles
+      summary: Gets the download file detail records for the provided keys of the given record…
+      operationId: DownloadFiles_GetRecordTypeDetailByKeyList
+      parameters:
+      - name: recordType
+        in: path
+        description: The key of the record type.
+        required: true
+        schema:
+          type: string
+          enum:
+          - Name
+          - Position
+          - Transaction
+          - Price
+          - Dividend
+          - Product
+          - NotImported
+          - Header
+          - Security
+          - CorpAction
+          - TranDetail
+          - Generic
+          - CostBasis
+          - Beneficiary
+          - StoredPerformance
+          - Systematic
+          - RMD
+          - Banking
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailDto'
+                xml:
+                  name: DownloadFileDetailDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: Keys of the desired return objects.
+        required: true
+  /v1/Confirm/DownloadFiles/Simple:
+    get:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_GetSimpleAll
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Download files get simple all
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/SleeveColumnData:
+    get:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_GetSleeveColumnData
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+      summary: Download files get sleeve column data
+      x-summary-source: derived
+    put:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_SaveSleeveColumnData
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+            multipart/form-data:
+              schema:
+                type: boolean
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.SleeveColumnDataDto'
+              xml:
+                name: SleeveColumnDataDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.SleeveColumnDataDto'
+              xml:
+                name: SleeveColumnDataDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.SleeveColumnDataDto'
+              xml:
+                name: SleeveColumnDataDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.SleeveColumnDataDto'
+              xml:
+                name: SleeveColumnDataDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.SleeveColumnDataDto'
+              xml:
+                name: SleeveColumnDataDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.SleeveColumnDataDto'
+              xml:
+                name: SleeveColumnDataDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.SleeveColumnDataDto'
+              xml:
+                name: SleeveColumnDataDto
+                wrapped: true
+              type: array
+        required: true
+      summary: Download files save sleeve column data
+      x-summary-source: derived
+  /v1/Confirm/DownloadFiles/SleeveData:
+    post:
+      tags:
+      - Confirm/DownloadFiles
+      operationId: DownloadFiles_GetSleeveData
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Download files get sleeve data
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Confirm.SleeveColumnDataDto:
+      properties:
+        columnName:
+          type: string
+        columnSize:
+          type: integer
+          format: int32
+        columnCodeName:
+          type: string
+        columnEnabled:
+          type: boolean
+      xml:
+        name: SleeveColumnDataDto
+      type: object
+    OAS.WebApi.DTO.Utility.BatchProcessingErrorDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        batchId:
+          type: integer
+          format: int32
+        errorMessage:
+          type: string
+        details:
+          type: string
+        severityCode:
+          type: integer
+          format: int32
+        severity:
+          type: string
+          enum:
+          - Error
+          - Warning
+          - Information
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+      xml:
+        name: BatchProcessingErrorDto
+      type: object
+    OAS.WebApi.DTO.Confirm.DownloadFileCreateTransDto:
+      properties:
+        confirmOverviewId:
+          type: integer
+          format: int32
+        downloadSourceId:
+          type: integer
+          format: int32
+        downloadFileId:
+          type: integer
+          format: int32
+        alClientId:
+          type: integer
+          format: int32
+      xml:
+        name: DownloadFileCreateTransDto
+      type: object
+    OAS.WebApi.DTO.Utility.GridCountDto:
+      properties:
+        name:
+          type: string
+        key:
+          type: string
+        value:
+          type: object
+        count:
+          type: integer
+          format: int32
+      xml:
+        name: GridCountDto
+      type: object
+    OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileDto:
+      properties:
+        downloadSourceId:
+          description: The Download Source ID
+          type: integer
+          format: int32
+        files:
+          description: The HttpFiles
+          items:
+            $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+          xml:
+            name: HttpFile
+            wrapped: true
+          type: array
+        autoApply:
+          description: Enum Representing if to apply/verify
+          type: string
+          enum:
+          - None
+          - VerifyPrice
+          - ApplyPrice
+          - VerifyName
+          - ApplyName
+          - VerifyTran
+          - ApplyTran
+          - VerifyPos
+          - ApplyPos
+          - VerifyCorpAction
+          - ApplyCorpAction
+          - VerifySecurity
+          - ApplySecurity
+          - VerifyDiv
+          - ApplyDiv
+          - VerifyTranDetail
+          - ApplyTranDetail
+          - VerifyGeneric
+          - ApplyGeneric
+          - VerifyCostBasis
+          - ApplyCostBasis
+          - VerifyBeneficiary
+          - ApplyBeneficiary
+          - VerifyBanking
+          - ApplyBanking
+          - VerifyRMD
+          - ApplyRMD
+          - VerifySystematic
+          - ApplySystematic
+          - VerifyStoredPerformance
+          - ApplyStoredPerformance
+          - VerifyAndApplyAll
+        fromUrl:
+          description: Bool flag indicating whether it is from a url
+          type: boolean
+      xml:
+        name: DownloadFileImportMultiFileDto
+      type: object
+    OAS.WebApi.DTO.Confirm.DownloadFilesOptionsDto:
+      properties:
+        downloadFileIds:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileKeyValue'
+          xml:
+            name: DownloadFileKeyValue
+            wrapped: true
+          type: array
+      xml:
+        name: DownloadFilesOptionsDto
+      type: object
+    OAS.WebApi.DTO.Utility.BatchProcessingDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        correlationId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        alClientName:
+          type: string
+        status:
+          type: string
+          enum:
+          - New
+          - Processing
+          - Failed
+          - PartiallyComplete
+          - Complete
+          - Canceled
+        message:
+          readOnly: true
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedDate:
+          type: string
+          format: date-time
+        elapsed:
+          readOnly: true
+          type: string
+        parentId:
+          type: integer
+          format: int32
+        isDone:
+          type: boolean
+        totalItems:
+          type: integer
+          format: int32
+        itemsCompleted:
+          type: integer
+          format: int32
+        processingType:
+          type: string
+          enum:
+          - Undefined
+          - Trading
+          - PendingTransactions
+          - CheckForWashTrades
+          - CustomImport
+          - CostBasis
+          - Composites
+          - TradeExecution
+          - ConvertToSleeves
+          - Confirmation
+          - DataQueries
+          - Notifications
+          - Export
+          - Maintenance
+          - ConfirmationUndo
+        errorCount:
+          readOnly: true
+          type: integer
+          format: int32
+        warningCount:
+          type: integer
+          format: int32
+        details:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.BatchProcessingErrorDto'
+          xml:
+            name: BatchProcessingErrorDto
+            wrapped: true
+          type: array
+      xml:
+        name: BatchProcessingDto
+      type: object
+    OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileReturnDto:
+      description: Download File Import Multiple File Return DTO
+      properties:
+        filename:
+          description: The file name being imported
+          type: string
+        batchProcessingId:
+          description: Batch Processing Id for the import
+          type: integer
+          format: int32
+        errorMessage:
+          description: Any error message from trying to start the import
+          type: string
+      xml:
+        name: DownloadFileImportMultiFileReturnDto
+      type: object
+    OAS.WebApi.DTO.Confirm.DownloadFileDetailDto:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        id:
+          type: integer
+          format: int32
+        downloadFileId:
+          type: integer
+          format: int32
+        downloadSourceId:
+          type: integer
+          format: int32
+        downloadDescription:
+          type: string
+        status:
+          type: string
+          enum:
+          - NotConfirmed
+          - Confirmed
+          - Excluded
+          - AggregationOnly
+        createdDate:
+          type: string
+          format: date-time
+        fileDate:
+          type: string
+          format: date-time
+        link:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailLinkDto'
+        memoDescription:
+          type: string
+        memoCount:
+          type: integer
+          format: int32
+        memoSeverity:
+          type: integer
+          format: int32
+        memos:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadMemoDto'
+          xml:
+            name: DownloadMemoDto
+            wrapped: true
+          type: array
+        downloadFormatId:
+          type: integer
+          format: int32
+        databaseId:
+          type: integer
+          format: int32
+        databaseName:
+          type: string
+        memoDescriptionList:
+          items:
+            type: string
+          type: array
+        suggestion:
+          type: string
+        suggestionAuditedBy:
+          type: string
+      xml:
+        name: DownloadFileDetailDto
+      type: object
+    OAS.WebApi.DTO.Confirm.DownloadFileImportFileDto:
+      properties:
+        downloadSourceId:
+          type: integer
+          format: int32
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+        autoApply:
+          type: string
+          enum:
+          - None
+          - VerifyPrice
+          - ApplyPrice
+          - VerifyName
+          - ApplyName
+          - VerifyTran
+          - ApplyTran
+          - VerifyPos
+          - ApplyPos
+          - VerifyCorpAction
+          - ApplyCorpAction
+          - VerifySecurity
+          - ApplySecurity
+          - VerifyDiv
+          - ApplyDiv
+          - VerifyTranDetail
+          - ApplyTranDetail
+          - VerifyGeneric
+          - ApplyGeneric
+          - VerifyCostBasis
+          - ApplyCostBasis
+          - VerifyBeneficiary
+          - ApplyBeneficiary
+          - VerifyBanking
+          - ApplyBanking
+          - VerifyRMD
+          - ApplyRMD
+          - VerifySystematic
+          - ApplySystematic
+          - VerifyStoredPerformance
+          - ApplyStoredPerformance
+          - VerifyAndApplyAll
+      xml:
+        name: DownloadFileImportFileDto
+      type: object
+    OAS.WebApi.DTO.Confirm.DownloadFileKeyValue:
+      properties:
+        alClientId:
+          type: integer
+          format: int32
+        fileId:
+          type: integer
+          format: int32
+      xml:
+        name: DownloadFileKeyValue
+      type: object
+    OAS.WebApi.DTO.Confirm.RateAgentNextBestActionRequestDto:
+      required:
+      - accuracy
+      - records
+      properties:
+        accuracy:
+          description: 'One of: Is Accurate, Not Accurate, Partially Accurate.'
+          type: string
+        notes:
+          description: Required when accuracy is Not Accurate or Partially Accurate.
+          type: string
+        records:
+          description: Download rows to rate; each entry includes {OAS.WebApi.DTO.Confirm.RateAgentNextBestActionRecordRequestDto.DownloadFileId} and detail {OAS.WebApi.DTO.Confirm.RateAgentNextBestActionRecordRequestDto.Id}.
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.RateAgentNextBestActionRecordRequestDto'
+          xml:
+            name: RateAgentNextBestActionRecordRequestDto
+            wrapped: true
+          type: array
+      xml:
+        name: RateAgentNextBestActionRequestDto
+      type: object
+    OAS.WebApi.DTO.Confirm.DownloadFileImportFilesMultiDownloadSourceDto:
+      properties:
+        downloadSourceIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        autoApply:
+          type: string
+          enum:
+          - None
+          - VerifyPrice
+          - ApplyPrice
+          - VerifyName
+          - ApplyName
+          - VerifyTran
+          - ApplyTran
+          - VerifyPos
+          - ApplyPos
+          - VerifyCorpAction
+          - ApplyCorpAction
+          - VerifySecurity
+          - ApplySecurity
+          - VerifyDiv
+          - ApplyDiv
+          - VerifyTranDetail
+          - ApplyTranDetail
+          - VerifyGeneric
+          - ApplyGeneric
+          - VerifyCostBasis
+          - ApplyCostBasis
+          - VerifyBeneficiary
+          - ApplyBeneficiary
+          - VerifyBanking
+          - ApplyBanking
+          - VerifyRMD
+          - ApplyRMD
+          - VerifySystematic
+          - ApplySystematic
+          - VerifyStoredPerformance
+          - ApplyStoredPerformance
+          - VerifyAndApplyAll
+        encoding:
+          type: string
+      xml:
+        name: DownloadFileImportFilesMultiDownloadSourceDto
+      type: object
+    OAS.DataModel.Confirm.ConfirmExclusionReason:
+      properties:
+        id:
+          type: integer
+          format: int32
+        reason:
+          type: string
+      xml:
+        name: ConfirmExclusionReason
+      type: object
+    OAS.Remote.Confirmation.VerifyApplyFileRequest:
+      properties:
+        downloadFileId:
+          type: integer
+          format: int32
+        apply:
+          type: boolean
+        triggerAgenticRecon:
+          type: boolean
+        currentAttempt:
+          type: integer
+          format: int32
+      xml:
+        name: VerifyApplyFileRequest
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    OAS.WebApi.DTO.Confirm.DownloadFileDetailLinkDto:
+      properties:
+        representativeId:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        registrationId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        assetId:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        transactionId:
+          type: integer
+          format: int32
+        personalId:
+          type: integer
+          format: int32
+        receivableId:
+          type: integer
+          format: int32
+        dividendId:
+          type: integer
+          format: int32
+      xml:
+        name: DownloadFileDetailLinkDto
+      type: object
+    OAS.WebApi.DTO.Confirm.DownloadMemoDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        memoCode:
+          type: integer
+          format: int32
+        description:
+          type: string
+      xml:
+        name: DownloadMemoDto
+      type: object
+    OAS.WebApi.DTO.Confirm.DownloadFileDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        downloadSource:
+          type: string
+        fileName:
+          type: string
+        fileDate:
+          type: string
+          format: date-time
+        recordType:
+          type: string
+          enum:
+          - Name
+          - Position
+          - Transaction
+          - Price
+          - Dividend
+          - Product
+          - NotImported
+          - Header
+          - Security
+          - CorpAction
+          - TranDetail
+          - Generic
+          - CostBasis
+          - Beneficiary
+          - StoredPerformance
+          - Systematic
+          - RMD
+          - Banking
+        totalRecords:
+          type: integer
+          format: int32
+        totalRecordsImported:
+          type: integer
+          format: int32
+        message:
+          type: string
+        dateConfirmed:
+          type: string
+          format: date-time
+        notConfirmed:
+          type: integer
+          format: int32
+        confirmed:
+          type: integer
+          format: int32
+        excluded:
+          type: integer
+          format: int32
+        costBasisType:
+          type: string
+          enum:
+          - None
+          - Unrealized
+          - Realized
+          - Both
+        batchProcessingId:
+          type: integer
+          format: int32
+      xml:
+        name: DownloadFileDto
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
+    OAS.WebApi.DTO.Confirm.RateAgentNextBestActionRecordRequestDto:
+      description: 'One download detail row to rate, identified by file and record id (JSON: downloadFileId, id).'
+      properties:
+        downloadFileId:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+      xml:
+        name: RateAgentNextBestActionRecordRequestDto
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

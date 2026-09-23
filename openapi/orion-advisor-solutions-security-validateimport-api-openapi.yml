@@ -1,0 +1,472 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Security/Validate Import API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Security/ValidateImport
+paths:
+  /v1/Security/ValidateImport/Users/{entity}:
+    post:
+      tags:
+      - Security/ValidateImport
+      operationId: SecurityValidateImportUsers_ProcessFileAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: entity
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - RIA
+          - Administrator
+          - SubAdvisor
+          - ThirdPartyAdministrator
+          - Custodian
+          - PlanSponsor
+          - ThirdParty
+          - ServiceAccount
+          - Participant
+          - RepAccountManager
+          - Payee
+          - RIATable
+          - Cotenant
+      - name: prepopulateUseInformationFromProfile
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserInfoDetailsValidationDto'
+                xml:
+                  name: UserInfoDetailsValidationDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserInfoDetailsValidationDto'
+                xml:
+                  name: UserInfoDetailsValidationDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserInfoDetailsValidationDto'
+                xml:
+                  name: UserInfoDetailsValidationDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserInfoDetailsValidationDto'
+                xml:
+                  name: UserInfoDetailsValidationDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserInfoDetailsValidationDto'
+                xml:
+                  name: UserInfoDetailsValidationDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserInfoDetailsValidationDto'
+                xml:
+                  name: UserInfoDetailsValidationDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto'
+        required: true
+      summary: Security validate import users process file async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
+      description: import file DTO for validating imports
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+          description: the imported file
+      xml:
+        name: ValidateFileImportDto
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    OAS.WebApi.DTO.Security.ProfileDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        loginEntityId:
+          type: integer
+          format: int32
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        entityId:
+          type: integer
+          format: int32
+        advisorName:
+          type: string
+        entityName:
+          type: string
+        roleId:
+          type: integer
+          format: int32
+        isUserDefault:
+          type: boolean
+        alClientId:
+          type: integer
+          format: int32
+        roleName:
+          type: string
+        isInCurrentDb:
+          type: boolean
+      xml:
+        name: ProfileDto
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    OAS.WebApi.DTO.Security.UserInfoDetailsValidationDto:
+      properties:
+        isValid:
+          type: boolean
+        validationMessage:
+          type: string
+        warningMessage:
+          type: string
+        profiles:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Security.ProfileDto'
+          xml:
+            name: ProfileDto
+            wrapped: true
+          type: array
+        password:
+          type: string
+        isSecureExchangeRecipient:
+          type: boolean
+        partnerAppId:
+          type: integer
+          format: int32
+        twoFactor:
+          type: boolean
+        errorMessage:
+          type: string
+        id:
+          type: integer
+          format: int32
+        userId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        isActive:
+          type: boolean
+        activeDate:
+          type: string
+          format: date-time
+        inactiveDate:
+          type: string
+          format: date-time
+        lastLogin:
+          type: string
+          format: date-time
+        lastPasswordChange:
+          type: string
+          format: date-time
+        isReset:
+          type: boolean
+        mobilePhone:
+          type: string
+        businessPhone:
+          type: string
+        businessPhoneExtension:
+          type: string
+        company:
+          type: string
+        jobTitle:
+          type: string
+        entityName:
+          type: string
+        contactType:
+          type: string
+          enum:
+          - NotApproved
+          - Approved
+          - MainContact
+          - NoLongerWithFirm
+        createdDate:
+          type: string
+          format: date-time
+      xml:
+        name: UserInfoDetailsValidationDto
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

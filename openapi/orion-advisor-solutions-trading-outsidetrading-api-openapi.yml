@@ -1,0 +1,819 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Outside Trading API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/OutsideTrading
+paths:
+  /v1/Trading/OutsideTrading/AvailableCustodians:
+    get:
+      tags:
+      - Trading/OutsideTrading
+      summary: Returns a list of available custodians
+      operationId: OutsideTrading_GetAvailableCustodians
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingCustodiansDto'
+                xml:
+                  name: OutsideTradingCustodiansDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingCustodiansDto'
+                xml:
+                  name: OutsideTradingCustodiansDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingCustodiansDto'
+                xml:
+                  name: OutsideTradingCustodiansDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingCustodiansDto'
+                xml:
+                  name: OutsideTradingCustodiansDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingCustodiansDto'
+                xml:
+                  name: OutsideTradingCustodiansDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingCustodiansDto'
+                xml:
+                  name: OutsideTradingCustodiansDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/OutsideTrading/CreateAccountModelAndRebalance:
+    post:
+      tags:
+      - Trading/OutsideTrading
+      summary: From the householdId, positions, and allocations given, temporary model…
+      operationId: OutsideTrading_CreateAccountModelAndRebalanceAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingRebalancedAccountDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingRebalancedAccountDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingRebalancedAccountDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingRebalancedAccountDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingRebalancedAccountDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingRebalancedAccountDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingPositionsAndAllocations'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingPositionsAndAllocations'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingPositionsAndAllocations'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingPositionsAndAllocations'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingPositionsAndAllocations'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingPositionsAndAllocations'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingPositionsAndAllocations'
+        description: A householdId and custodianId combination with positions and allocations that will be used to create trades.
+        required: true
+  /v1/Trading/OutsideTrading/CreateAdditionalCustodians:
+    post:
+      tags:
+      - Trading/OutsideTrading
+      summary: With the householdId and list of custodians, create new custodians for the…
+      operationId: OutsideTrading_CreateAdditionalCustodians
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ClientAndCustodiansDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ClientAndCustodiansDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ClientAndCustodiansDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ClientAndCustodiansDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ClientAndCustodiansDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ClientAndCustodiansDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingAdditionalCustodians'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingAdditionalCustodians'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingAdditionalCustodians'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingAdditionalCustodians'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingAdditionalCustodians'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingAdditionalCustodians'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingAdditionalCustodians'
+        description: Object with householdId and list of cutodians for the firm.
+        required: true
+  /v1/Trading/OutsideTrading/CreateClientAndCustodian:
+    post:
+      tags:
+      - Trading/OutsideTrading
+      summary: From the firm name and list of custodians, a client, registration and…
+      operationId: OutsideTrading_CreateClientAndCustodianAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ClientAndCustodiansDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ClientAndCustodiansDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ClientAndCustodiansDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ClientAndCustodiansDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ClientAndCustodiansDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ClientAndCustodiansDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingFirmAndCustodiansDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingFirmAndCustodiansDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingFirmAndCustodiansDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingFirmAndCustodiansDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingFirmAndCustodiansDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingFirmAndCustodiansDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingFirmAndCustodiansDto'
+        description: Object with firm name and list of custodians for the firm.
+        required: true
+  /v1/Trading/OutsideTrading/OutsideTradingCreateTradeFiles:
+    post:
+      tags:
+      - Trading/OutsideTrading
+      summary: From the returned list of orders create blocks and return the trade file
+      operationId: OutsideTrading_OutsideTradingCreateTradeFilesAsync
+      parameters:
+      - name: disableUpdate
+        in: query
+        description: Optional bool. If true the process of updating passed in orders will be skipped.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingTradeFileDto'
+                xml:
+                  name: OutsideTradingTradeFileDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingTradeFileDto'
+                xml:
+                  name: OutsideTradingTradeFileDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingTradeFileDto'
+                xml:
+                  name: OutsideTradingTradeFileDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingTradeFileDto'
+                xml:
+                  name: OutsideTradingTradeFileDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingTradeFileDto'
+                xml:
+                  name: OutsideTradingTradeFileDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingTradeFileDto'
+                xml:
+                  name: OutsideTradingTradeFileDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingRebalancedAccountDto'
+              xml:
+                name: OutsideTradingRebalancedAccountDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingRebalancedAccountDto'
+              xml:
+                name: OutsideTradingRebalancedAccountDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingRebalancedAccountDto'
+              xml:
+                name: OutsideTradingRebalancedAccountDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingRebalancedAccountDto'
+              xml:
+                name: OutsideTradingRebalancedAccountDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingRebalancedAccountDto'
+              xml:
+                name: OutsideTradingRebalancedAccountDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingRebalancedAccountDto'
+              xml:
+                name: OutsideTradingRebalancedAccountDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingRebalancedAccountDto'
+              xml:
+                name: OutsideTradingRebalancedAccountDto
+                wrapped: true
+              type: array
+        description: A list of householdId and custodianId combinations with the associated byte[] trade file.
+        required: true
+  /v1/Trading/OutsideTrading/UpdateBlockAccountNumber:
+    put:
+      tags:
+      - Trading/OutsideTrading
+      summary: Update the Block Account Number
+      operationId: OutsideTrading_UpdateBlockAccountNumber
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingUpdateBlockAccountNumberDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingUpdateBlockAccountNumberDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingUpdateBlockAccountNumberDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingUpdateBlockAccountNumberDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingUpdateBlockAccountNumberDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingUpdateBlockAccountNumberDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingUpdateBlockAccountNumberDto'
+        description: A householdId and custodianId combinations with BlockAccountNumber.
+        required: true
+  /v1/Trading/OutsideTrading/ValidateAccount:
+    post:
+      tags:
+      - Trading/OutsideTrading
+      summary: Validate a account
+      operationId: OutsideTrading_ValidateAccountAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingPositions'
+              xml:
+                name: OutsideTradingPositions
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingPositions'
+              xml:
+                name: OutsideTradingPositions
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingPositions'
+              xml:
+                name: OutsideTradingPositions
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingPositions'
+              xml:
+                name: OutsideTradingPositions
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingPositions'
+              xml:
+                name: OutsideTradingPositions
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingPositions'
+              xml:
+                name: OutsideTradingPositions
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingPositions'
+              xml:
+                name: OutsideTradingPositions
+                wrapped: true
+              type: array
+        description: List of tickers and allocations for validation of a possible account.
+        required: true
+  /v1/Trading/OutsideTrading/ValidateModel:
+    post:
+      tags:
+      - Trading/OutsideTrading
+      summary: Validate a model
+      operationId: OutsideTrading_ValidateModelAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingModelAllocations'
+              xml:
+                name: OutsideTradingModelAllocations
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingModelAllocations'
+              xml:
+                name: OutsideTradingModelAllocations
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingModelAllocations'
+              xml:
+                name: OutsideTradingModelAllocations
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingModelAllocations'
+              xml:
+                name: OutsideTradingModelAllocations
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingModelAllocations'
+              xml:
+                name: OutsideTradingModelAllocations
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingModelAllocations'
+              xml:
+                name: OutsideTradingModelAllocations
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingModelAllocations'
+              xml:
+                name: OutsideTradingModelAllocations
+                wrapped: true
+              type: array
+        description: List of tickers and targets for validation of a possible model.
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Trading.ClientAndCustodiansDto:
+      properties:
+        clientId:
+          type: integer
+          format: int32
+        custodians:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ClientCustodiansDto'
+          xml:
+            name: ClientCustodiansDto
+            wrapped: true
+          type: array
+      xml:
+        name: ClientAndCustodiansDto
+      type: object
+    OAS.WebApi.DTO.Trading.OutsideTradingOrdersDto:
+      properties:
+        orderId:
+          type: integer
+          format: int32
+        side:
+          type: string
+        ticker:
+          type: string
+        shares:
+          type: number
+          format: double
+        dollars:
+          type: number
+          format: double
+        estPositionValuePostTrade:
+          type: number
+          format: double
+        tradeIt:
+          type: boolean
+        warningMessage:
+          type: string
+      xml:
+        name: OutsideTradingOrdersDto
+      type: object
+    OAS.DataModel.Trading.OutsideTradingModelAllocations:
+      properties:
+        ticker:
+          type: string
+        targetPercent:
+          type: number
+          format: double
+        upperTolerance:
+          type: number
+          format: double
+        lowerTolerance:
+          type: number
+          format: double
+      xml:
+        name: OutsideTradingModelAllocations
+      type: object
+    OAS.DataModel.Trading.OutsideTradingPositionsAndAllocations:
+      properties:
+        householdId:
+          type: integer
+          format: int32
+        custodianId:
+          type: integer
+          format: int32
+        custodialAcctNumber:
+          type: string
+        reason:
+          type: string
+          enum:
+          - Undefined
+          - Add
+          - Withdraw
+          - SwdFunding
+          - NeedReview
+          - SwpDca
+          - Withdraw100Pct
+        dollarAmount:
+          type: number
+          format: double
+        positions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingPositions'
+          xml:
+            name: OutsideTradingPositions
+            wrapped: true
+          type: array
+        allocations:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Trading.OutsideTradingModelAllocations'
+          xml:
+            name: OutsideTradingModelAllocations
+            wrapped: true
+          type: array
+      xml:
+        name: OutsideTradingPositionsAndAllocations
+      type: object
+    OAS.WebApi.DTO.Trading.OutsideTradingUpdateBlockAccountNumberDto:
+      properties:
+        householdId:
+          type: integer
+          format: int32
+        custodianId:
+          type: integer
+          format: int32
+        blockAccountNumber:
+          type: string
+      xml:
+        name: OutsideTradingUpdateBlockAccountNumberDto
+      type: object
+    OAS.DataModel.Trading.OutsideTradingPositions:
+      properties:
+        ticker:
+          type: string
+        shares:
+          type: number
+          format: double
+      xml:
+        name: OutsideTradingPositions
+      type: object
+    OAS.WebApi.DTO.Trading.OutsideTradingFirmAndCustodiansDto:
+      properties:
+        firm:
+          type: string
+        custodians:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingCustodiansDto'
+          xml:
+            name: OutsideTradingCustodiansDto
+            wrapped: true
+          type: array
+      xml:
+        name: OutsideTradingFirmAndCustodiansDto
+      type: object
+    OAS.WebApi.DTO.Trading.OutsideTradingAdditionalCustodians:
+      properties:
+        householdId:
+          type: integer
+          format: int32
+        custodians:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingCustodiansDto'
+          xml:
+            name: OutsideTradingCustodiansDto
+            wrapped: true
+          type: array
+      xml:
+        name: OutsideTradingAdditionalCustodians
+      type: object
+    OAS.WebApi.DTO.Trading.OutsideTradingCustodiansDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        custodianCode:
+          type: string
+        name:
+          type: string
+        blockAcctNumber:
+          type: string
+      xml:
+        name: OutsideTradingCustodiansDto
+      type: object
+    OAS.WebApi.DTO.Trading.OutsideTradingRebalancedAccountDto:
+      properties:
+        householdId:
+          type: integer
+          format: int32
+        custodianId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        acctNumber:
+          type: string
+        estPostTradeCashValue:
+          type: number
+          format: double
+        orders:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingOrdersDto'
+          xml:
+            name: OutsideTradingOrdersDto
+            wrapped: true
+          type: array
+      xml:
+        name: OutsideTradingRebalancedAccountDto
+      type: object
+    OAS.WebApi.DTO.Trading.OutsideTradingTradeFileDto:
+      properties:
+        householdId:
+          type: integer
+          format: int32
+        custodianId:
+          type: integer
+          format: int32
+        tradeFile:
+          type: string
+          format: byte
+        filename:
+          type: string
+        displayName:
+          type: string
+      xml:
+        name: OutsideTradingTradeFileDto
+      type: object
+    OAS.WebApi.DTO.Trading.ClientCustodiansDto:
+      properties:
+        code:
+          type: string
+        custodianId:
+          type: integer
+          format: int32
+      xml:
+        name: ClientCustodiansDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

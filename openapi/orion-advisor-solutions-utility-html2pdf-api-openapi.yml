@@ -1,0 +1,117 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Utility/Html2 PDF API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Utility/Html2Pdf
+paths:
+  /v1/Utility/Html2Pdf:
+    post:
+      tags:
+      - Utility/Html2Pdf
+      operationId: Utility_Html2Pdf
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.PdfSettingDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.PdfSettingDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.PdfSettingDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.PdfSettingDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.PdfSettingDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.PdfSettingDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.PdfSettingDto'
+        required: true
+      summary: Utility html2 pdf
+      x-summary-source: derived
+  /v1/Utility/Html2Pdf/{sessionId}:
+    get:
+      tags:
+      - Utility/Html2Pdf
+      operationId: Utility_Html2PdfAsync
+      parameters:
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Utility html2 pdf async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Utility.PdfSettingDto:
+      required:
+      - url
+      properties:
+        downloadFileName:
+          type: string
+        url:
+          type: string
+      xml:
+        name: PdfSettingDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

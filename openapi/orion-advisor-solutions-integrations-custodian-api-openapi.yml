@@ -1,0 +1,517 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Custodian API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/Custodian
+paths:
+  /v1/Integrations/Custodian/Account/{accountId}:
+    get:
+      tags:
+      - Integrations/Custodian
+      operationId: Custodian_GetCustodianForClientAccountAsync
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellation
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Custodian get custodian for client account async
+      x-summary-source: derived
+  /v1/Integrations/Custodian/Account/{accountId}/FidelityType:
+    get:
+      tags:
+      - Integrations/Custodian
+      operationId: Custodian_GetFidelityTypeForClientAccountAsync
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellation
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Custodian get fidelity type for client account async
+      x-summary-source: derived
+  /v1/Integrations/Custodian/Client/{clientId}:
+    get:
+      tags:
+      - Integrations/Custodian
+      operationId: Custodian_GetCustodianForClientAsync
+      parameters:
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellation
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      deprecated: true
+      security:
+      - Authorization: []
+      summary: Custodian get custodian for client async
+      x-summary-source: derived
+  /v1/Integrations/Custodian/Document:
+    get:
+      tags:
+      - Integrations/Custodian
+      operationId: Custodian_GetFolders
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      deprecated: true
+      security:
+      - Authorization: []
+      summary: Custodian get folders
+      x-summary-source: derived
+  /v1/Integrations/Custodian/Document/{custodian}/{documentType}:
+    get:
+      tags:
+      - Integrations/Custodian
+      summary: Returns the document
+      operationId: Custodian_GetV1IntegrationsCustodianDocumentByCustodianByDocumentType
+      parameters:
+      - name: custodian
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - Pershing
+          - Apex
+          - TD
+          - Schwab
+          - Fidelity
+          - GoldmanSachs
+          - Axos
+          - Undefined
+          - Brinker_Fidelity
+          - Arch
+      - name: documentType
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - GENERAL_DOCUMENT
+          - STATEMENTS
+          - CONFIRMS
+          - TAX_STATEMENTS
+          - NOTIFICATIONS
+          - LETTERS
+          - CORRESPONDENCE
+          - TRADES
+          - THIRD_PARTY_REPORTS
+          - Tax1099
+          - Tax1099R
+          - Tax5489
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: fileName
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: custodianToken
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: accountNumber
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: accountType
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: taxDocType
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: reportType
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/Custodian/Document/{custodian}/{documentType}/{id}:
+    get:
+      tags:
+      - Integrations/Custodian
+      summary: Returns the document
+      operationId: Custodian_GetDocumentAsync
+      parameters:
+      - name: custodian
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - Pershing
+          - Apex
+          - TD
+          - Schwab
+          - Fidelity
+          - GoldmanSachs
+          - Axos
+          - Undefined
+          - Brinker_Fidelity
+          - Arch
+      - name: documentType
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - GENERAL_DOCUMENT
+          - STATEMENTS
+          - CONFIRMS
+          - TAX_STATEMENTS
+          - NOTIFICATIONS
+          - LETTERS
+          - CORRESPONDENCE
+          - TRADES
+          - THIRD_PARTY_REPORTS
+          - Tax1099
+          - Tax1099R
+          - Tax5489
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: fileName
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: custodianToken
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: accountNumber
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: accountType
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: taxDocType
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: reportType
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/Custodian/Document/Client/{clientId}:
+    get:
+      tags:
+      - Integrations/Custodian
+      summary: This is the starting point for getting Client Custodian Documents
+      operationId: Custodian_GetSetUpCustodianForClientAsync
+      parameters:
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/Custodian/Document/Client/BrinkerTest/{clientId}:
+    get:
+      tags:
+      - Integrations/Custodian
+      operationId: Custodian_TestBrinkerAsync
+      parameters:
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Custodian test brinker async
+      x-summary-source: derived
+  /v1/Integrations/Custodian/Document/Custodian/{custodian}/Client/{orionClientId}:
+    get:
+      tags:
+      - Integrations/Custodian
+      summary: Get documents for by custodian and client Id
+      operationId: Custodian_GetDocumentsByClientAsync
+      parameters:
+      - name: custodian
+        in: path
+        description: The custodian to use.
+        required: true
+        schema:
+          type: string
+          enum:
+          - Pershing
+          - Apex
+          - TD
+          - Schwab
+          - Fidelity
+          - GoldmanSachs
+          - Axos
+          - Undefined
+          - Brinker_Fidelity
+          - Arch
+      - name: orionClientId
+        in: path
+        description: The Orion Client ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        description: Optional starting date range. If null the last year will be returned.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional ending date range. If null the last year will be returned.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: documentTypes
+        in: query
+        description: The types of documents you want back. If null all will be returned.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - GENERAL_DOCUMENT
+            - STATEMENTS
+            - CONFIRMS
+            - TAX_STATEMENTS
+            - NOTIFICATIONS
+            - LETTERS
+            - CORRESPONDENCE
+            - TRADES
+            - THIRD_PARTY_REPORTS
+            - Tax1099
+            - Tax1099R
+            - Tax5489
+      - name: custodianToken
+        in: query
+        description: A token to be passed to the custodian.
+        required: false
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

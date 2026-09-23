@@ -1,0 +1,439 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Sleeve Update Queue API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/SleeveUpdateQueue
+paths:
+  /v1/Trading/SleeveUpdateQueue:
+    get:
+      tags:
+      - Trading/SleeveUpdateQueue
+      summary: Returns all of the Sleeve Update Queue items in the database
+      operationId: SleeveUpdateQueue_GetAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: status
+        in: query
+        description: Will return only the Sleeve Update Queue items that have the matching status passed in.
+        required: false
+        schema:
+          type: string
+          enum:
+          - Pending
+          - Approved
+          - Rejected
+          - Completed
+          - Failed
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+                xml:
+                  name: SleeveUpdateQueueDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+                xml:
+                  name: SleeveUpdateQueueDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+                xml:
+                  name: SleeveUpdateQueueDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+                xml:
+                  name: SleeveUpdateQueueDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+                xml:
+                  name: SleeveUpdateQueueDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+                xml:
+                  name: SleeveUpdateQueueDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+    post:
+      tags:
+      - Trading/SleeveUpdateQueue
+      summary: Update list of Sleeve Update Queues
+      operationId: SleeveUpdateQueue_CreateEntityAsync
+      parameters:
+      - name: ct
+        in: header
+        description: CancellationToken
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+        description: The object containing the list of keys and the desired status.
+        required: true
+  /v1/Trading/SleeveUpdateQueue/{key}:
+    get:
+      tags:
+      - Trading/SleeveUpdateQueue
+      summary: Returns the Sleeve Update Queue item in the database
+      operationId: SleeveUpdateQueue_GetByKeyAsync
+      parameters:
+      - name: key
+        in: path
+        description: The id of the Sleeve Update Queue item desired.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+      security:
+      - Authorization: []
+  /v1/Trading/SleeveUpdateQueue/Action/ProcessAllApproved:
+    post:
+      tags:
+      - Trading/SleeveUpdateQueue
+      summary: Process all of the approved Sleeve Update Queue items
+      operationId: SleeveUpdateQueue_ProcessAllApprovedAsync
+      parameters:
+      - name: ct
+        in: header
+        description: CancellationToken
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+                xml:
+                  name: SleeveUpdateQueueDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+                xml:
+                  name: SleeveUpdateQueueDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+                xml:
+                  name: SleeveUpdateQueueDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+                xml:
+                  name: SleeveUpdateQueueDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+                xml:
+                  name: SleeveUpdateQueueDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+                xml:
+                  name: SleeveUpdateQueueDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/SleeveUpdateQueue/UdpateStatus/{key}:
+    put:
+      tags:
+      - Trading/SleeveUpdateQueue
+      summary: Update one Sleeve Update Queue
+      operationId: SleeveUpdateQueue_UpdateAsync
+      parameters:
+      - name: key
+        in: path
+        description: The id of the Sleeve Update Queue item desired.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: The status that the user wants to change to, Pending / Approved / Rejected.
+        required: true
+        schema:
+          type: string
+          enum:
+          - Pending
+          - Approved
+          - Rejected
+          - Completed
+          - Failed
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+      security:
+      - Authorization: []
+  /v1/Trading/SleeveUpdateQueue/UdpateStatusList:
+    put:
+      tags:
+      - Trading/SleeveUpdateQueue
+      summary: Update list of Sleeve Update Queues
+      operationId: SleeveUpdateQueue_UpdateListAsync
+      parameters:
+      - name: ct
+        in: header
+        description: CancellationToken
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+                xml:
+                  name: SleeveUpdateQueueDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+                xml:
+                  name: SleeveUpdateQueueDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+                xml:
+                  name: SleeveUpdateQueueDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+                xml:
+                  name: SleeveUpdateQueueDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+                xml:
+                  name: SleeveUpdateQueueDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto'
+                xml:
+                  name: SleeveUpdateQueueDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ChangeSleeveUpdateStatusDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ChangeSleeveUpdateStatusDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ChangeSleeveUpdateStatusDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ChangeSleeveUpdateStatusDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ChangeSleeveUpdateStatusDto'
+        description: The object containing the list of keys and the desired status.
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Trading.ChangeSleeveUpdateStatusDto:
+      properties:
+        keys:
+          items:
+            type: integer
+            format: int32
+          type: array
+        status:
+          type: string
+          enum:
+          - Pending
+          - Approved
+          - Rejected
+          - Completed
+          - Failed
+      xml:
+        name: ChangeSleeveUpdateStatusDto
+      type: object
+    OAS.WebApi.DTO.Trading.SleeveUpdateQueueDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        status:
+          type: string
+          enum:
+          - Pending
+          - Approved
+          - Rejected
+          - Completed
+          - Failed
+        currentSleeves:
+          type: string
+        updatedSleeves:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+      xml:
+        name: SleeveUpdateQueueDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

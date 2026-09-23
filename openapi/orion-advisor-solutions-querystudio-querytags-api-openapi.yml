@@ -1,0 +1,428 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Query Studio/Query Tags API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: QueryStudio/QueryTags
+paths:
+  /v1/QueryStudio/QueryTags:
+    get:
+      tags:
+      - QueryStudio/QueryTags
+      operationId: QueryTag_GetQueryTagsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: activeOnly
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryTagDto'
+                xml:
+                  name: QueryTagDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryTagDto'
+                xml:
+                  name: QueryTagDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryTagDto'
+                xml:
+                  name: QueryTagDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryTagDto'
+                xml:
+                  name: QueryTagDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Query tag get query tags async
+      x-summary-source: derived
+    put:
+      tags:
+      - QueryStudio/QueryTags
+      operationId: QueryTag_UpdateQueryTagAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryTagDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryTagDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryTagDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryTagDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryTagDto'
+        required: true
+      summary: Query tag update query tag async
+      x-summary-source: derived
+    post:
+      tags:
+      - QueryStudio/QueryTags
+      operationId: QueryTag_CreateQueryTagAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryTagDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryTagDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryTagDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryTagDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryTagDto'
+        required: true
+      summary: Query tag create query tag async
+      x-summary-source: derived
+  /v1/QueryStudio/QueryTags/{queryTagId}:
+    get:
+      tags:
+      - QueryStudio/QueryTags
+      operationId: QueryTag_GetQueryTagByIdAsync
+      parameters:
+      - name: queryTagId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryTagDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryTagDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryTagDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryTagDto'
+      security:
+      - Authorization: []
+      summary: Query tag get query tag by id async
+      x-summary-source: derived
+  /v1/QueryStudio/QueryTags/Action/Category:
+    post:
+      tags:
+      - QueryStudio/QueryTags
+      operationId: QueryTag_UpdateCategoryForTagsAsync
+      parameters:
+      - name: category
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Query tag update category for tags async
+      x-summary-source: derived
+  /v1/QueryStudio/QueryTags/Action/IsActive:
+    post:
+      tags:
+      - QueryStudio/QueryTags
+      operationId: QueryTag_UpdateIsActiveForTagsAsync
+      parameters:
+      - name: isActive
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Query tag update is active for tags async
+      x-summary-source: derived
+  /v1/QueryStudio/QueryTags/CreateTagsFromTable:
+    post:
+      tags:
+      - QueryStudio/QueryTags
+      operationId: QueryTag_CreateQueryTagsFromTableAsync
+      parameters:
+      - name: tableName
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      summary: Query tag create query tags from table async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.QueryStudio.SourceParameterDto:
+      properties:
+        name:
+          type: string
+        displayName:
+          type: string
+        dataType:
+          type: integer
+          format: int32
+        parameterOrder:
+          type: integer
+          format: int32
+        defaultValue:
+          type: string
+      xml:
+        name: SourceParameterDto
+      type: object
+    OAS.WebApi.DTO.QueryStudio.QueryTagOptionsDto:
+      properties:
+        columnName:
+          type: string
+        dateFormat:
+          type: string
+        decimalPlaces:
+          type: integer
+          format: int32
+        formatAsCurrency:
+          type: boolean
+        useNegativeParenthesis:
+          type: boolean
+        useThousandsSeparator:
+          type: boolean
+        scope:
+          additionalProperties:
+            type: object
+          type: object
+        sourceParameters:
+          additionalProperties:
+            type: object
+          type: object
+      xml:
+        name: QueryTagOptionsDto
+      type: object
+    OAS.WebApi.DTO.QueryStudio.QueryTagDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        label:
+          type: string
+        description:
+          type: string
+        tagDataType:
+          type: integer
+          format: int32
+        sourceName:
+          type: string
+        sourceType:
+          type: integer
+          format: int32
+        keywords:
+          type: string
+        category:
+          type: string
+        isActive:
+          type: boolean
+        isNullable:
+          type: boolean
+        options:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryTagOptionsDto'
+        sourceParameters:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.SourceParameterDto'
+          xml:
+            name: SourceParameterDto
+            wrapped: true
+          type: array
+        guid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        auditedBy:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        entityEnum:
+          type: integer
+          format: int32
+        isDefaultTagForEntityEnum:
+          type: boolean
+        selectExpression:
+          type: string
+        isScope:
+          readOnly: true
+          type: boolean
+      xml:
+        name: QueryTagDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

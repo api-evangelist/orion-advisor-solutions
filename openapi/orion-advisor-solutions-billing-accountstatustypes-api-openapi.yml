@@ -1,0 +1,96 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Account Status Types API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/AccountStatusTypes
+paths:
+  /v1/Billing/AccountStatusTypes:
+    get:
+      tags:
+      - Billing/AccountStatusTypes
+      summary: Get list of Bill Account Status Types
+      operationId: Billing_GetBillAccountStatusTypeList
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Billing.BillAccountStatus'
+                xml:
+                  name: BillAccountStatus
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Billing.BillAccountStatus'
+                xml:
+                  name: BillAccountStatus
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Billing.BillAccountStatus'
+                xml:
+                  name: BillAccountStatus
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Billing.BillAccountStatus'
+                xml:
+                  name: BillAccountStatus
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Billing.BillAccountStatus'
+                xml:
+                  name: BillAccountStatus
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Billing.BillAccountStatus'
+                xml:
+                  name: BillAccountStatus
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.DataModel.Billing.BillAccountStatus:
+      required:
+      - id
+      - status
+      - isBilled
+      properties:
+        id:
+          type: integer
+          format: int32
+        status:
+          type: string
+          maxLength: 25
+          minLength: 0
+        isBilled:
+          type: boolean
+      xml:
+        name: BillAccountStatus
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

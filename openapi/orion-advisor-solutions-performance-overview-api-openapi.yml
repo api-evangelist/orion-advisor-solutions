@@ -1,0 +1,775 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Performance/Overview API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Performance/Overview
+paths:
+  /v1/Performance/Overview:
+    get:
+      tags:
+      - Performance/Overview
+      operationId: PerformanceOverview_GetOverviewPerformanceAsync
+      parameters:
+      - name: entity
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+      - name: entityId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: grouping
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - Undefined
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - AssetClass
+          - ProductType
+          - Platform
+          - RiskCategory
+          - Product
+          - IndexBlend
+          - AssetCategory
+          - AssetLevelStrategy
+          - AggregateModel
+          - AccountType
+          - PortfolioGroup
+      - name: annualize
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: includeBenchmarks
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.PerformanceWithDateRangeInfoDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.PerformanceWithDateRangeInfoDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.PerformanceWithDateRangeInfoDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.PerformanceWithDateRangeInfoDto'
+      security:
+      - Authorization: []
+      summary: Performance overview get overview performance async
+      x-summary-source: derived
+    post:
+      tags:
+      - Performance/Overview
+      summary: Returns Overview Performance.
+      operationId: PerformanceOverview_PostV1PerformanceOverview
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.PerformanceWithDateRangeInfoDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.PerformanceWithDateRangeInfoDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.PerformanceWithDateRangeInfoDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.PerformanceWithDateRangeInfoDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.OverviewPerformanceRequestParameters'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.OverviewPerformanceRequestParameters'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.OverviewPerformanceRequestParameters'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.OverviewPerformanceRequestParameters'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.OverviewPerformanceRequestParameters'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.OverviewPerformanceRequestParameters'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.OverviewPerformanceRequestParameters'
+        required: true
+  /v1/Performance/Overview/Action/Run:
+    post:
+      tags:
+      - Performance/Overview
+      operationId: PerformanceOverview_RunPerformanceOverview
+      parameters:
+      - name: force
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+      summary: Performance overview run performance overview
+      x-summary-source: derived
+  /v1/Performance/Overview/Multiple/Action/Run:
+    post:
+      tags:
+      - Performance/Overview
+      operationId: PerformanceOverview_PostV1PerformanceOverviewMultipleActionRun
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Performance overview post V1 performance overview multiple action run
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.DataProcess.Performance.Overview.PerformanceWithDateRangeInfoDto:
+      properties:
+        performance:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.PerformanceDto'
+          xml:
+            name: PerformanceDto
+            wrapped: true
+          type: array
+        dateRanges:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.PerformanceDateRangeDto'
+          xml:
+            name: PerformanceDateRangeDto
+            wrapped: true
+          type: array
+        status:
+          $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.PerformanceStatusDto'
+        asOfDate:
+          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
+      xml:
+        name: PerformanceWithDateRangeInfoDto
+      type: object
+    OAS.DataProcess.Performance.Overview.PerformanceDto:
+      properties:
+        entityId:
+          type: integer
+          format: int32
+        entityEnum:
+          type: integer
+          format: int32
+        parentId:
+          type: integer
+          format: int32
+        groupName:
+          type: string
+        marketValue:
+          type: number
+          format: double
+        day:
+          type: number
+          format: double
+        mtd:
+          type: number
+          format: double
+        qtd:
+          type: number
+          format: double
+        ytd:
+          type: number
+          format: double
+        oneYear:
+          type: number
+          format: double
+        threeYear:
+          type: number
+          format: double
+        fiveYear:
+          type: number
+          format: double
+        tenYear:
+          type: number
+          format: double
+        inception:
+          type: number
+          format: double
+      xml:
+        name: PerformanceDto
+      type: object
+    OAT.Utilities.Date.IDate:
+      properties:
+        date:
+          readOnly: true
+          type: string
+          format: date-time
+        year:
+          readOnly: true
+          type: integer
+          format: int32
+        month:
+          readOnly: true
+          type: integer
+          format: int32
+        day:
+          readOnly: true
+          type: integer
+          format: int32
+      xml:
+        name: IDate
+      type: object
+    OAS.DataProcess.Performance.Overview.PerformanceStatusDto:
+      properties:
+        status:
+          type: string
+        lastUpdated:
+          type: string
+          format: date-time
+      xml:
+        name: PerformanceStatusDto
+      type: object
+    OAS.DataProcess.Performance.Overview.OverviewPerformanceRequestParameters:
+      properties:
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        entityId:
+          type: integer
+          format: int32
+        grouping:
+          type: string
+          enum:
+          - Undefined
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - AssetClass
+          - ProductType
+          - Platform
+          - RiskCategory
+          - Product
+          - IndexBlend
+          - AssetCategory
+          - AssetLevelStrategy
+          - AggregateModel
+          - AccountType
+          - PortfolioGroup
+        annualizePerformance:
+          type: boolean
+        includeBenchmarks:
+          type: boolean
+      xml:
+        name: OverviewPerformanceRequestParameters
+      type: object
+    OAS.DataProcess.Performance.Overview.PerformanceDateRangeDto:
+      properties:
+        dateRangeName:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+      xml:
+        name: PerformanceDateRangeDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

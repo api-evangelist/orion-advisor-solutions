@@ -1,0 +1,122 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Confirm/Pgp API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Confirm/Pgp
+paths:
+  /v1/Confirm/Pgp/Action/Decrypt:
+    post:
+      tags:
+      - Confirm/Pgp
+      operationId: ConfirmPgp_DecryptAsync
+      parameters:
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Confirm pgp decrypt async
+      x-summary-source: derived
+  /v1/Confirm/Pgp/Action/Encrypt:
+    post:
+      tags:
+      - Confirm/Pgp
+      operationId: ConfirmPgp_EncryptAsync
+      parameters:
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Confirm pgp encrypt async
+      x-summary-source: derived
+  /v1/Confirm/Pgp/UserIds:
+    get:
+      tags:
+      - Confirm/Pgp
+      operationId: ConfirmPgp_GetUserIdsAsync
+      parameters:
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: string
+                type: array
+      security:
+      - Authorization: []
+      summary: Confirm pgp get user ids async
+      x-summary-source: derived
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

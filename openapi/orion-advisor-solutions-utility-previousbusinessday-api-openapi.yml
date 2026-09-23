@@ -1,0 +1,91 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Utility/Previous Business Day API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Utility/PreviousBusinessDay
+paths:
+  /v1/Utility/PreviousBusinessDay:
+    get:
+      tags:
+      - Utility/PreviousBusinessDay
+      summary: Utility get previous business day
+      operationId: Utility_GetPreviousBusinessDay
+      parameters:
+      - name: asOfDate
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Utility/PreviousBusinessDay/v2:
+    get:
+      tags:
+      - Utility/PreviousBusinessDay
+      summary: Returns the Previous Business Day
+      operationId: Utility_GetV1UtilityPreviousBusinessDayV2
+      parameters:
+      - name: date
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

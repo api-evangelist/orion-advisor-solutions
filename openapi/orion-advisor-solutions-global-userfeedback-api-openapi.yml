@@ -1,0 +1,129 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Global/User Feedback API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Global/UserFeedback
+paths:
+  /v1/Global/UserFeedback/Response:
+    post:
+      tags:
+      - Global/UserFeedback
+      summary: Saves a user feedback response
+      description: 'Captures user feedback including rating values, codes, and notes.
+
+        The user and ALClient are automatically determined from the authenticated user''s context.
+
+
+        Sample request:
+
+
+        POST /v1/Global/UserFeedback/Response
+
+        {
+
+        "code": "NPS",
+
+        "ratingValue": 9,
+
+        "note": "Great experience with the platform!"
+
+        }'
+      operationId: UserFeedback_CreateResponseAsync
+      parameters:
+      - name: ct
+        in: header
+        description: Cancellation token.
+        required: true
+      responses:
+        '200':
+          description: Returns the newly created feedback response.
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+        '400':
+          description: If the request is invalid.
+        '401':
+          description: If the user is not authenticated.
+        '500':
+          description: If an internal error occurs.
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.UserFeedbackResponseDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.UserFeedbackResponseDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.UserFeedbackResponseDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.UserFeedbackResponseDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.UserFeedbackResponseDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.UserFeedbackResponseDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.UserFeedbackResponseDto'
+        description: The feedback response to save.
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Utility.UserFeedbackResponseDto:
+      description: DTO for user feedback responses.
+      required:
+      - code
+      properties:
+        id:
+          description: The unique identifier of the feedback response.
+          type: integer
+          format: int32
+        alClientId:
+          description: The ALClient ID associated with the feedback.
+          type: integer
+          format: int32
+        code:
+          description: A code identifier for the type of feedback (e.g., "NPS", "FEATURE_RATING", "SATISFACTION").
+          type: string
+          maxLength: 50
+          minLength: 0
+        note:
+          description: Additional notes or comments from the user.
+          type: string
+          maxLength: 2000
+          minLength: 0
+        ratingValue:
+          description: A numeric rating value provided by the user.
+          type: integer
+          format: int32
+          maximum: 32767
+          minimum: -32768
+      xml:
+        name: UserFeedbackResponseDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

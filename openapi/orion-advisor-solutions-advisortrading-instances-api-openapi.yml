@@ -1,0 +1,105 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Advisor Trading/Instances API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: AdvisorTrading/Instances
+paths:
+  /v1/AdvisorTrading/Instances/Rep/{repId}:
+    get:
+      tags:
+      - AdvisorTrading/Instances
+      operationId: AdvisorTradingInstances_GetTradeInstancesByRepIdAsync
+      parameters:
+      - name: repId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      - name: skip
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: take
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Advisor trading instances get trade instances by rep id async
+      x-summary-source: derived
+  /v1/AdvisorTrading/Instances/Rep/{repId}/{tradeInstanceId}/Orders:
+    get:
+      tags:
+      - AdvisorTrading/Instances
+      operationId: AdvisorTradingInstances_GetTradeOrdersByInstanceAsync
+      parameters:
+      - name: repId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: tradeInstanceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Advisor trading instances get trade orders by instance async
+      x-summary-source: derived
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

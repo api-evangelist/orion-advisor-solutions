@@ -1,0 +1,78 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Portfolio/Systematic Account API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Portfolio/SystematicAccount
+paths:
+  /v1/Portfolio/SystematicAccount/{systematicAccountId}/Audit:
+    get:
+      tags:
+      - Portfolio/SystematicAccount
+      summary: Get audit for systematic account
+      operationId: SystematicAccountAudits_Get
+      parameters:
+      - name: systematicAccountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: object
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: object
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: object
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: object
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: object
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: object
+                type: array
+      security:
+      - Authorization: []
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

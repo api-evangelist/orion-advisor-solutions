@@ -1,0 +1,2070 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Schwab SII API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/SchwabSII
+paths:
+  /v1/Integrations/SchwabSII/Accounts/{accountId}/Preferences/CostBasis:
+    get:
+      tags:
+      - Integrations/SchwabSII
+      summary: Method to retrieve Account CostBasis Preferences from Schwab SII
+      operationId: SchwabSii_GetCostBasisPreferencesAsync
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: otp
+        in: query
+        description: One-Time Password
+        required: false
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIICostBasicPreferencesResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIICostBasicPreferencesResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIICostBasicPreferencesResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIICostBasicPreferencesResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIICostBasicPreferencesResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIICostBasicPreferencesResponse'
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabSII/Accounts/{accountId}/RealizedGainLoss:
+    get:
+      tags:
+      - Integrations/SchwabSII
+      summary: Method to retrieve Account Realized Gain Loss information from Schwab Rest API
+      operationId: SchwabSii_GetRestAccountRealizedGainLossAsync
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestRealizedGainLossResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestRealizedGainLossResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestRealizedGainLossResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestRealizedGainLossResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestRealizedGainLossResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestRealizedGainLossResponse'
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabSII/Accounts/{accountId}/Report/PDF:
+    post:
+      tags:
+      - Integrations/SchwabSII
+      summary: Method to retrieve Account Report PDF from Schwab Rest API
+      operationId: SchwabSii_GetRestAccountReportsPdfAsync
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestReportRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestReportRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestReportRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestReportRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestReportRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestReportRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestReportRequest'
+        required: true
+  /v1/Integrations/SchwabSII/Accounts/{accountId}/Report/PDF/{sessionId}:
+    get:
+      tags:
+      - Integrations/SchwabSII
+      summary: Method to retrieve Account Report PDF from Schwab Rest API
+      operationId: SchwabSii_GetV1IntegrationsSchwabSIIAccountsByAccountIdReportPDFBySessionId
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabSII/Accounts/{accountId}/Reports:
+    get:
+      tags:
+      - Integrations/SchwabSII
+      summary: Method to retrieve Account Reports from Schwab Rest API
+      operationId: SchwabSii_GetRestAccountReportsAsync
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: reportType
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestReportResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestReportResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestReportResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestReportResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestReportResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestReportResponse'
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabSII/Accounts/{accountId}/TransactionDetail:
+    get:
+      tags:
+      - Integrations/SchwabSII
+      summary: Method to retrieve Account Profile from Schwab Rest API
+      operationId: SchwabSii_GetRestAccountTransactionDetailAsync
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: execDate
+        in: query
+        description: Execution date from Transaction requested
+        required: true
+        schema:
+          type: string
+      - name: publishTimeStamp
+        in: query
+        description: Execution date from Transaction requested
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestTransDetailResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestTransDetailResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestTransDetailResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestTransDetailResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestTransDetailResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestTransDetailResponse'
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabSII/Accounts/{accountId}/Transactions:
+    get:
+      tags:
+      - Integrations/SchwabSII
+      summary: Method to retrieve Account Profile from Schwab Rest API
+      operationId: SchwabSii_GetRestAccountTransactionsAsync
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestTransactionResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestTransactionResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestTransactionResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestTransactionResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestTransactionResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestTransactionResponse'
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabSII/Accounts/{accountId}/UnrealizedGainLoss:
+    get:
+      tags:
+      - Integrations/SchwabSII
+      summary: Method to retrieve Account Unrealized Gain Loss Information from Schwab Rest API
+      operationId: SchwabSii_GetRestAccountUnrealizedGainLossAsync
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestUnrealizedGainLossDetailResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestUnrealizedGainLossDetailResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestUnrealizedGainLossDetailResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestUnrealizedGainLossDetailResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestUnrealizedGainLossDetailResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestUnrealizedGainLossDetailResponse'
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabSII/Accounts/{accountId}/UnrealizedGainLoss/{positionId}/Lots:
+    get:
+      tags:
+      - Integrations/SchwabSII
+      summary: Method to retrieve Account Unrealized Gain Loss Lot Information from Schwab…
+      operationId: SchwabSii_GetRestAccountUnrealizedGainLossLotDetailAsync
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: positionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: cacheId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.UnRealizedPositionLotDetailResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.UnRealizedPositionLotDetailResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.UnRealizedPositionLotDetailResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.UnRealizedPositionLotDetailResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.UnRealizedPositionLotDetailResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.UnRealizedPositionLotDetailResponse'
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabSII/Actions/Remove:
+    post:
+      tags:
+      - Integrations/SchwabSII
+      summary: Removes the Schwab integration for the current user
+      description: The user must have the necessary privileges to remove the integration.
+      operationId: SchwabSii_RemoveServiceAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+            multipart/form-data:
+              schema:
+                type: boolean
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabSII/Actions/Setup:
+    post:
+      tags:
+      - Integrations/SchwabSII
+      operationId: SchwabSii_SetupServiceAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+        required: true
+      summary: Schwab sii setup service async
+      x-summary-source: derived
+  /v1/Integrations/SchwabSII/EnrollmentStatus:
+    get:
+      tags:
+      - Integrations/SchwabSII
+      summary: Method to retrieve Enrollment Status with Schwab SII
+      operationId: SchwabSii_GetEnrollmentStatus
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIEnrollmentStatusDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIEnrollmentStatusDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIEnrollmentStatusDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIEnrollmentStatusDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIEnrollmentStatusDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIEnrollmentStatusDto'
+      deprecated: true
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabSII/Rest/Accounts/{accountId}/Alerts:
+    get:
+      tags:
+      - Integrations/SchwabSII
+      summary: Method to retrieve Account Alerts from Schwab Rest API
+      operationId: SchwabSii_GetRestAccountAlertsAsync
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIAccountAlertsInquiryDtoRest'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIAccountAlertsInquiryDtoRest'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIAccountAlertsInquiryDtoRest'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIAccountAlertsInquiryDtoRest'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIAccountAlertsInquiryDtoRest'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIAccountAlertsInquiryDtoRest'
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabSII/Rest/Accounts/{accountId}/Balances:
+    get:
+      tags:
+      - Integrations/SchwabSII
+      summary: Method to retrieve Account Balances from Schwab Rest API
+      operationId: SchwabSii_GetRestAccountBalancesAsync
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: otp
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestBalance'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestBalance'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestBalance'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestBalance'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestBalance'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestBalance'
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabSII/Rest/Accounts/{accountId}/Positions:
+    get:
+      tags:
+      - Integrations/SchwabSII
+      summary: Method to retrieve Account Positions from Schwab Rest API
+      operationId: SchwabSii_GetRestAccountPositionsAsync
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestPostionsDetail'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestPostionsDetail'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestPostionsDetail'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestPostionsDetail'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestPostionsDetail'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestPostionsDetail'
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabSII/Rest/Accounts/{accountId}/Profile:
+    get:
+      tags:
+      - Integrations/SchwabSII
+      summary: Method to retrieve Account Profile from Schwab Rest API
+      operationId: SchwabSii_GetRestAccountProfileAsync
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestProfilesResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestProfilesResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestProfilesResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestProfilesResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestProfilesResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestProfilesResponse'
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabSII/Rest/GetSACToken:
+    get:
+      tags:
+      - Integrations/SchwabSII
+      summary: Method to retrieve SAC token for SSO
+      operationId: SchwabSii_GetSACTokenAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabSII/SSO:
+    get:
+      tags:
+      - Integrations/SchwabSII
+      summary: New implementations should call Ssov2Connection
+      operationId: SchwabSii_SSOAsync
+      parameters:
+      - name: otp
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pageId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: symbol
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: accountId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: actionId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      deprecated: true
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabSII/SsoV2/{landingPage}:
+    get:
+      tags:
+      - Integrations/SchwabSII
+      summary: Modernized SSO v2 Flow
+      description: 'In the existing REST SSO, the user identifier is UserGuid and is used as the SAML SUBJECT for consistency only. Theoritically, it''s any unique user identifier and has
+
+        NO RELATIONSHIP to existing REST SSO.
+
+        REF: {M:OAT.Integrations.Schwab.SII.SchwabRESTService.SingleSignOnAsync(OAT.Integrations.Schwab.SII.SchwabSiiUser,System.String)}httpRequestMessage.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(user.UserGuid)));'
+      operationId: SchwabSii_Ssov2ConnectionAsync
+      parameters:
+      - name: landingPage
+        in: path
+        description: 'Optional: landing page <code>sanc</code>. If not provided, wrong code, default SAC home page.'
+        required: true
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: cancellationToken
+        in: header
+        required: false
+      - name: context.subaccount
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: context.masteraccount
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: context.accountNumber
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: context.alertid
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: context.hidenavigation
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: context.trackingid
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: context.symbol
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabSII/TestConnection:
+    get:
+      tags:
+      - Integrations/SchwabSII
+      summary: Method to test the connectivity with Schwab SII
+      operationId: SchwabSii_TestConnection
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+            multipart/form-data:
+              schema:
+                type: boolean
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabSII/Unenroll:
+    get:
+      tags:
+      - Integrations/SchwabSII
+      summary: Method to retrieve Enrollment Status with Schwab SII
+      operationId: SchwabSii_UnenrollAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIUnenrollDTO'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIUnenrollDTO'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIUnenrollDTO'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIUnenrollDTO'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIUnenrollDTO'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIUnenrollDTO'
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabSII/UserAuthorization:
+    get:
+      tags:
+      - Integrations/SchwabSII
+      summary: Method to retrieve User Authorization from Schwab. Uses latest OAuth
+      operationId: SchwabSii_UserAuthorizationGetAsync
+      parameters:
+      - name: otp
+        in: query
+        description: One-Time Password
+        required: false
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabV2.User_Authorizations.SchwabUserAuthorizationsResponseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabV2.User_Authorizations.SchwabUserAuthorizationsResponseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabV2.User_Authorizations.SchwabUserAuthorizationsResponseDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabV2.User_Authorizations.SchwabUserAuthorizationsResponseDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabV2.User_Authorizations.SchwabUserAuthorizationsResponseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.SchwabV2.User_Authorizations.SchwabUserAuthorizationsResponseDto'
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabSII/UserAuthorization/Action/LogOut:
+    get:
+      tags:
+      - Integrations/SchwabSII
+      summary: Method to retrieve LogOut User Authorization from Schwab SII
+      operationId: SchwabSii_UserAuthorizationLogOutAsync
+      parameters:
+      - name: SSOCorrelatorId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: otp
+        in: query
+        description: One-Time Password
+        required: false
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabSII/UserAuthorization/Token:
+    get:
+      tags:
+      - Integrations/SchwabSII
+      summary: Method to retrieve User Authorization Token from Schwab SII
+      operationId: SchwabSii_UserAuthorizationGetTokenAsync
+      parameters:
+      - name: accountId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: otp
+        in: query
+        description: One-Time Password
+        required: false
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIUserAuthorizationTokenDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIUserAuthorizationTokenDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIUserAuthorizationTokenDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIUserAuthorizationTokenDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIUserAuthorizationTokenDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIUserAuthorizationTokenDto'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAT.Integrations.Schwab.SII.Dto.RealizedGainLossTransactionlist:
+      properties:
+        acquiredOrOpened:
+          type: string
+        costBasis:
+          type: string
+        longTermRealizedGainLoss:
+          type: string
+        lotsAvailable:
+          type: boolean
+        transactionLotList:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.RealizedGainLossTransactionlotlist'
+          xml:
+            name: RealizedGainLossTransactionlotlist
+            wrapped: true
+          type: array
+        notes:
+          type: string
+        quantitySold:
+          type: string
+        securityName:
+          type: string
+        shortTermRealizedGainLoss:
+          type: string
+        soldClosed:
+          type: string
+        symbol:
+          type: string
+        totalProceeds:
+          type: string
+        totalRealizedGainLossDollar:
+          type: string
+        totalRealizedGainLossPercent:
+          type: string
+        transactionId:
+          type: string
+      xml:
+        name: RealizedGainLossTransactionlist
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.AccountPreferences:
+      properties:
+        summary:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.AccountPreferencesSummary'
+        details:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.AccountPreferencesDetail'
+          xml:
+            name: AccountPreferencesDetail
+            wrapped: true
+          type: array
+      xml:
+        name: AccountPreferences
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.Transaction:
+      properties:
+        action:
+          type: string
+        tickerSymbol:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+          format: double
+        quantity:
+          type: number
+          format: double
+        securityType:
+          type: string
+        symbol:
+          type: string
+        totalAmount:
+          type: number
+          format: double
+        executedDate:
+          type: string
+          format: date-time
+        publishTimeStamp:
+          type: string
+          format: date-time
+        tradeDate:
+          type: string
+      xml:
+        name: Transaction
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.AccountPreferencesDetail:
+      properties:
+        accountNumber:
+          type: string
+        accountName:
+          type: string
+        nonTaxableAccount:
+          type: boolean
+        initialCbProvider:
+          type: string
+        accountingMethod:
+          type: string
+        averageMF:
+          type: boolean
+        adjustCostBasisFI:
+          type: boolean
+        gainLossTab:
+          type: boolean
+        schwabAllianceLogOn:
+          type: boolean
+        cBonStatements:
+          type: boolean
+        yearEndGainLossReport:
+          type: string
+      xml:
+        name: AccountPreferencesDetail
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.Holder:
+      properties:
+        role:
+          type: string
+        beneficiaryAssetPercentage:
+          type: string
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: Holder
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabRestReportResponse:
+      properties:
+        documents:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Document'
+          xml:
+            name: Document
+            wrapped: true
+          type: array
+        actualResponseCount:
+          type: integer
+          format: int32
+        nextRowId:
+          type: integer
+          format: int32
+        totalCount:
+          type: integer
+          format: int32
+        serviceMessage:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIServiceMessageDto'
+      xml:
+        name: SchwabRestReportResponse
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.RealizedGainLossSummary:
+      properties:
+        accountId:
+          type: string
+        totalKnownCostBasis:
+          type: string
+        totalKnownLongTermRealizedGainLoss:
+          type: string
+        totalKnownProceeds:
+          type: string
+        totalKnownShortTermRealizedGainLoss:
+          type: string
+        totalKnownRealizedGainLossDollar:
+          type: string
+        totalKnownRealizedGainLossPercent:
+          type: string
+        errors:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.error'
+          xml:
+            name: error
+            wrapped: true
+          type: array
+      xml:
+        name: RealizedGainLossSummary
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.Alert:
+      properties:
+        accountId:
+          type: string
+        alertId:
+          type: integer
+          format: int32
+        msgAlertType:
+          type: string
+        msgCategory:
+          type: string
+        msgCreateDate:
+          type: string
+        msgAlertDesc:
+          type: string
+        masterAccountId:
+          type: integer
+          format: int32
+        messageDetailText:
+          type: string
+        msgPriority:
+          type: string
+        status:
+          type: string
+        subAccountName:
+          type: string
+        msgSubject:
+          type: string
+        msgText:
+          type: string
+        msgTransferStatus:
+          type: string
+        msgTransferStatusDate:
+          type: string
+      xml:
+        name: Alert
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.Positionsdetail:
+      properties:
+        dayChange:
+          type: string
+        marketValue:
+          type: number
+          format: double
+        quantity:
+          type: number
+          format: double
+        quotedPrice:
+          type: number
+          format: double
+        securityName:
+          type: string
+        securityType:
+          type: string
+        symbol:
+          type: string
+      xml:
+        name: Positionsdetail
+      type: object
+    OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto:
+      properties:
+        partnerAppId:
+          description: The unique ID of the partner app.
+          type: integer
+          format: int32
+        productName:
+          description: The unique name of the partner app product.
+          type: string
+      xml:
+        name: BasicIntegrationConfigDto
+      type: object
+    OAS.Integrations.SchwabV2.User_Authorizations.SchwabUAData:
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/OAS.Integrations.SchwabV2.User_Authorizations.SchwabUAAttributes'
+      xml:
+        name: SchwabUAData
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.RealizedGainLossLotdetail:
+      properties:
+        adjustedCostBasis:
+          type: string
+        adjustedCostPerShare:
+          type: string
+        adjustedDisallowedLossW:
+          type: string
+        adjustedRealizedGainLossDollar:
+          type: string
+        adjustedRealizedGainLossPercent:
+          type: string
+        costBasis:
+          type: string
+        costPerShare:
+          type: string
+        disallowedLossW:
+          type: string
+        holdingPeriod:
+          type: string
+        proceedsPerShare:
+          type: string
+        realizedGainLossDollar:
+          type: string
+        realizedGainLossPercent:
+          type: string
+      xml:
+        name: RealizedGainLossLotdetail
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.UnRealizedSummary:
+      properties:
+        accountId:
+          type: string
+        totalKnownCostBasis:
+          type: string
+        totalKnownMarketValue:
+          type: string
+        totalKnownUnrealizedGainLossDollar:
+          type: string
+        totalKnownUnrealizedGainLossPercent:
+          type: string
+      xml:
+        name: UnRealizedSummary
+      type: object
+    OAS.Integrations.SchwabV2.User_Authorizations.SchwabUAAuthorizations:
+      properties:
+        authorization:
+          type: string
+        isAuthorized:
+          type: boolean
+      xml:
+        name: SchwabUAAuthorizations
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.Document:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        preparedByDate:
+          type: string
+          format: date-time
+        reportId:
+          type: string
+        reportName:
+          type: string
+        reportType:
+          type: string
+        reportDescription:
+          type: string
+      xml:
+        name: Document
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabRestUnrealizedGainLossDetailResponse:
+      properties:
+        summary:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.UnRealizedSummary'
+        positions:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.UnRealizedPosition'
+          xml:
+            name: UnRealizedPosition
+            wrapped: true
+          type: array
+        cacheId:
+          type: string
+        isAmortized:
+          type: boolean
+        actualResponseCount:
+          type: integer
+          format: int32
+        totalCount:
+          type: integer
+          format: int32
+        nextRowId:
+          type: integer
+          format: int32
+        errors:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.error'
+          xml:
+            name: error
+            wrapped: true
+          type: array
+      xml:
+        name: SchwabRestUnrealizedGainLossDetailResponse
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabRestProfileResponse:
+      properties:
+        accountId:
+          type: string
+        contact:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Contacts'
+        holders:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Holder'
+          xml:
+            name: Holder
+            wrapped: true
+          type: array
+        registrationType:
+          type: string
+      xml:
+        name: SchwabRestProfileResponse
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabRestReportRequest:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        startRow:
+          type: integer
+          format: int32
+        maxRows:
+          type: integer
+          format: int32
+        startDate:
+          type: integer
+          format: int32
+        endDate:
+          type: integer
+          format: int32
+        reportType:
+          type: string
+        reportName:
+          type: string
+        reportId:
+          type: string
+      xml:
+        name: SchwabRestReportRequest
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabSIIAccountAlertsInquiryDtoRest:
+      properties:
+        alerts:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Alert'
+          xml:
+            name: Alert
+            wrapped: true
+          type: array
+        nextRowId:
+          type: integer
+          format: int32
+        totalCount:
+          type: integer
+          format: int32
+        responseActual:
+          type: integer
+          format: int32
+      xml:
+        name: SchwabSIIAccountAlertsInquiryDtoRest
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.UnRealizedPosition:
+      properties:
+        costBasis:
+          type: string
+        marketValue:
+          type: string
+        notes:
+          type: string
+        positionId:
+          type: string
+        quantity:
+          type: string
+        securityName:
+          type: string
+        symbol:
+          type: string
+        unrealizedGainLossDollar:
+          type: string
+        unrealizedGainLossPercent:
+          type: string
+      xml:
+        name: UnRealizedPosition
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.Accountbalances:
+      properties:
+        accountNetWorth:
+          type: number
+          format: double
+        cash:
+          type: number
+          format: double
+        marginBalance:
+          type: number
+          format: double
+        moneyMarketFund:
+          type: number
+          format: double
+        totalAccountBalance:
+          type: number
+          format: double
+        totalMarketValue:
+          type: number
+          format: double
+      xml:
+        name: Accountbalances
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabRestBalance:
+      properties:
+        accountBalances:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Accountbalances'
+      xml:
+        name: SchwabRestBalance
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.Contacts:
+      properties:
+        city:
+          type: string
+        country:
+          type: string
+        mailingAddress:
+          type: string
+        stateZip:
+          type: string
+      xml:
+        name: Contacts
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.AccountPreferencesSummary:
+      properties:
+        initialCbSource:
+          type: string
+        accountingMethod:
+          type: string
+        averageMF:
+          type: boolean
+        adjustCbFI:
+          type: boolean
+        autoSubscribe:
+          type: boolean
+        statementType:
+          type: string
+        masterAccountId:
+          type: string
+      xml:
+        name: AccountPreferencesSummary
+      type: object
+    OAS.Integrations.SchwabV2.User_Authorizations.SchwabUserAuthorizationsResponseDto:
+      properties:
+        data:
+          $ref: '#/components/schemas/OAS.Integrations.SchwabV2.User_Authorizations.SchwabUAData'
+      xml:
+        name: SchwabUserAuthorizationsResponseDto
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabSIIUserAuthorizationTokenDto:
+      properties:
+        sacoAuthToken:
+          type: string
+        logOnUrl:
+          type: string
+        responseDateTime:
+          type: string
+          format: date-time
+        serviceMessages:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIServiceMessageDto'
+          xml:
+            name: SchwabSIIServiceMessageDto
+            wrapped: true
+          type: array
+        accountNumber:
+          type: string
+      xml:
+        name: SchwabSIIUserAuthorizationTokenDto
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.UnrealizedLotDetailLot:
+      properties:
+        acquiredOrOpened:
+          type: string
+        costBasis:
+          type: string
+        holdingPeriod:
+          type: string
+        lotDetail:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Lotdetail'
+        lotDetailType:
+          type: string
+        lotId:
+          type: string
+        marketValue:
+          type: string
+        notes:
+          type: string
+        quantity:
+          type: string
+        unrealizedGainLossDollar:
+          type: string
+        unrealizedGainLossPercent:
+          type: string
+      xml:
+        name: UnrealizedLotDetailLot
+      type: object
+    OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto:
+      properties:
+        key:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        termsAccepted:
+          type: boolean
+      xml:
+        name: IntegrationSetupRequestDto
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.UnRealizedPositionLotDetailResponse:
+      properties:
+        positions:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.UnrealizedLotPosition'
+          xml:
+            name: UnrealizedLotPosition
+            wrapped: true
+          type: array
+        errors:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.error'
+          xml:
+            name: error
+            wrapped: true
+          type: array
+      xml:
+        name: UnRealizedPositionLotDetailResponse
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabSIIUnenrollDTO:
+      properties:
+        serviceStatusField:
+          type: boolean
+        statusIndicatorField:
+          type: boolean
+        responseDateTimeField:
+          type: string
+          format: date-time
+        serviceMessagesField:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIServiceMessageDto'
+          xml:
+            name: SchwabSIIServiceMessageDto
+            wrapped: true
+          type: array
+      xml:
+        name: SchwabSIIUnenrollDTO
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabSIIEnrollmentStatusDto:
+      properties:
+        enrollmentStatus:
+          type: string
+        statusIndicator:
+          type: string
+          enum:
+          - Active
+          - InActive
+        enrollmentRequestData:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIEnrollmentRequestDto'
+        serviceMessages:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIServiceMessageDto'
+          xml:
+            name: SchwabSIIServiceMessageDto
+            wrapped: true
+          type: array
+      xml:
+        name: SchwabSIIEnrollmentStatusDto
+      type: object
+    OAS.Integrations.SchwabV2.User_Authorizations.SchwabUAAttributes:
+      properties:
+        isUserFsa:
+          type: boolean
+        authorizations:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.SchwabV2.User_Authorizations.SchwabUAAuthorizations'
+          xml:
+            name: SchwabUAAuthorizations
+            wrapped: true
+          type: array
+      xml:
+        name: SchwabUAAttributes
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabSIICostBasicPreferencesResponse:
+      properties:
+        accountPreferences:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.AccountPreferences'
+        actualResponseCount:
+          type: integer
+          format: int32
+        totalCount:
+          type: integer
+          format: int32
+        nextRowId:
+          type: integer
+          format: int32
+        errors:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.error'
+          xml:
+            name: error
+            wrapped: true
+          type: array
+      xml:
+        name: SchwabSIICostBasicPreferencesResponse
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabRestRealizedGainLossResponse:
+      properties:
+        summary:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.RealizedGainLossSummary'
+        transactionList:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.RealizedGainLossTransactionlist'
+          xml:
+            name: RealizedGainLossTransactionlist
+            wrapped: true
+          type: array
+        actualResponseCount:
+          type: integer
+          format: int32
+        totalCount:
+          type: integer
+          format: int32
+        nextRowId:
+          type: integer
+          format: int32
+        errors:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.error'
+          xml:
+            name: error
+            wrapped: true
+          type: array
+      xml:
+        name: SchwabRestRealizedGainLossResponse
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.UnrealizedLotPosition:
+      properties:
+        lots:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.UnrealizedLotDetailLot'
+          xml:
+            name: UnrealizedLotDetailLot
+            wrapped: true
+          type: array
+        positionId:
+          type: string
+      xml:
+        name: UnrealizedLotPosition
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabRestTransactionResponse:
+      properties:
+        transactionsResponse:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Transactionsresponse'
+      xml:
+        name: SchwabRestTransactionResponse
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.RealizedGainLossTransactionlotlist:
+      properties:
+        acquiredOrOpened:
+          type: string
+        costBasis:
+          type: string
+        longTermRealizedGainLoss:
+          type: string
+        lotDetail:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.RealizedGainLossLotdetail'
+        lotDetailType:
+          type: string
+        lotId:
+          type: string
+        notes:
+          type: string
+        quantitySold:
+          type: string
+        shortTermRealizedGainLoss:
+          type: string
+        soldClosed:
+          type: string
+        totalProceeds:
+          type: string
+        totalRealizedGainLossDollar:
+          type: string
+        totalRealizedGainLossPercent:
+          type: string
+      xml:
+        name: RealizedGainLossTransactionlotlist
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.error:
+      properties:
+        code:
+          type: string
+        detail:
+          type: string
+        id:
+          type: string
+        status:
+          type: string
+        title:
+          type: string
+      xml:
+        name: error
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabSIIServiceMessageDto:
+      properties:
+        code:
+          type: string
+        type:
+          type: string
+        description:
+          type: string
+      xml:
+        name: SchwabSIIServiceMessageDto
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabRestProfilesResponse:
+      properties:
+        profiles:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestProfileResponse'
+          xml:
+            name: SchwabRestProfileResponse
+            wrapped: true
+          type: array
+      xml:
+        name: SchwabRestProfilesResponse
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.Transactionsresponse:
+      properties:
+        transactions:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Transaction'
+          xml:
+            name: Transaction
+            wrapped: true
+          type: array
+      xml:
+        name: Transactionsresponse
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.Positions:
+      properties:
+        positionsDetails:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Positionsdetail'
+          xml:
+            name: Positionsdetail
+            wrapped: true
+          type: array
+      xml:
+        name: Positions
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabSIIEnrollmentRequestDto:
+      properties:
+        url:
+          type: string
+        sourceData:
+          type: string
+        digitalSignature:
+          type: string
+      xml:
+        name: SchwabSIIEnrollmentRequestDto
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabRestPostionsDetail:
+      properties:
+        positions:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Positions'
+      xml:
+        name: SchwabRestPostionsDetail
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.Lotdetail:
+      properties:
+        adjustedCostBasis:
+          type: string
+        adjustedCostPerShare:
+          type: string
+        adjustedUnrealizedGainLossDollar:
+          type: string
+        adjustedUnrealizedGainLossPercent:
+          type: string
+        costBasis:
+          type: string
+        costPerShare:
+          type: string
+        currentPrice:
+          type: string
+        todaysChangeInPriceDollar:
+          type: string
+        todaysChangeInPricePercent:
+          type: string
+        todaysChangeInValueDollar:
+          type: string
+        todaysChangeInValuePercent:
+          type: string
+        unrealizedGainLossDollar:
+          type: string
+        unrealizedGainLossPercent:
+          type: string
+      xml:
+        name: Lotdetail
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.Transactiondetail:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        actionCode:
+          type: string
+        tickerSymbol:
+          type: string
+        issueClassCode:
+          type: string
+        majorIssueClassCode:
+          type: string
+        maturityDate:
+          type: string
+          format: date-time
+        optionFriendlySymbol:
+          type: string
+        orderId:
+          type: integer
+          format: int32
+        securityNumber:
+          type: integer
+          format: int32
+        symbol:
+          type: string
+        accruedInterest:
+          type: number
+          format: double
+        amount:
+          type: number
+          format: double
+        commission:
+          type: number
+          format: double
+        description:
+          type: string
+        priceAmount:
+          type: number
+          format: double
+        executionDate:
+          type: string
+          format: date-time
+        historyMessage:
+          type: string
+        netAmount:
+          type: number
+          format: double
+        orderHandlingAmount:
+          type: number
+          format: double
+        otherAmount:
+          type: number
+          format: double
+        primeBrokerAmount:
+          type: number
+          format: double
+        redemptionFee:
+          type: number
+          format: double
+        securityFee:
+          type: number
+          format: double
+        settlementDate:
+          type: string
+          format: date-time
+        shareQuantity:
+          type: number
+          format: double
+        stateTax:
+          type: number
+          format: double
+        tradeAwayAmount:
+          type: number
+          format: double
+        withholdingTax:
+          type: number
+          format: double
+      xml:
+        name: Transactiondetail
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabRestTransDetailResponse:
+      properties:
+        transactionDetail:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Transactiondetail'
+      xml:
+        name: SchwabRestTransDetailResponse
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

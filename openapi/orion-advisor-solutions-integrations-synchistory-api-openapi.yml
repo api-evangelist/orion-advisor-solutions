@@ -1,0 +1,126 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Sync History API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/SyncHistory
+paths:
+  /v1/Integrations/SyncHistory:
+    get:
+      tags:
+      - Integrations/SyncHistory
+      operationId: IntegrationSyncHistory_Get
+      parameters:
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: syncType
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSyncHistoryDto'
+                xml:
+                  name: IntegrationSyncHistoryDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSyncHistoryDto'
+                xml:
+                  name: IntegrationSyncHistoryDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSyncHistoryDto'
+                xml:
+                  name: IntegrationSyncHistoryDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSyncHistoryDto'
+                xml:
+                  name: IntegrationSyncHistoryDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSyncHistoryDto'
+                xml:
+                  name: IntegrationSyncHistoryDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSyncHistoryDto'
+                xml:
+                  name: IntegrationSyncHistoryDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Integration sync history get
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Integrations.IntegrationSyncHistoryDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        syncType:
+          type: string
+        status:
+          type: string
+        messages:
+          type: string
+      xml:
+        name: IntegrationSyncHistoryDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

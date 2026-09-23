@@ -1,0 +1,245 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Reporting/Automated Compares API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Reporting/AutomatedCompares
+paths:
+  /v1/Reporting/AutomatedCompares/TestBaseline:
+    post:
+      tags:
+      - Reporting/AutomatedCompares
+      operationId: AutomatedCompares_TestBaseline
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Compares.AutomatedComparesTestDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Compares.AutomatedComparesTestDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Compares.AutomatedComparesTestDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Compares.AutomatedComparesTestDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Compares.AutomatedComparesTestDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Compares.AutomatedComparesTestDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Compares.AutomatedComparesTestDto'
+        required: true
+      summary: Automated compares test baseline
+      x-summary-source: derived
+  /v1/Reporting/AutomatedCompares/TestClone/{previousRegressionId}:
+    get:
+      tags:
+      - Reporting/AutomatedCompares
+      operationId: AutomatedCompares_TestClone
+      parameters:
+      - name: previousRegressionId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Automated compares test clone
+      x-summary-source: derived
+  /v1/Reporting/AutomatedCompares/TestReport:
+    get:
+      tags:
+      - Reporting/AutomatedCompares
+      operationId: AutomatedCompares_TestBaselineReportAsync
+      parameters:
+      - name: regressionId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: alClientId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: hhId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: reportGuid
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: previousRegressionId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Automated compares test baseline report async
+      x-summary-source: derived
+  /v1/Reporting/AutomatedCompares/TestVisual:
+    post:
+      tags:
+      - Reporting/AutomatedCompares
+      operationId: AutomatedCompares_TestVisualAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Reporting.TestVisualDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Reporting.TestVisualDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Reporting.TestVisualDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Reporting.TestVisualDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Reporting.TestVisualDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Reporting.TestVisualDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Reporting.TestVisualDto'
+        required: true
+      summary: Automated compares test visual async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.DataModel.Reporting.Compares.AutomatedComparesTestDto:
+      properties:
+        clientsToRunFor:
+          items:
+            type: integer
+            format: int32
+          type: array
+        reportIdsToRunFor:
+          items:
+            example: 00000000-0000-0000-0000-000000000000
+            type: string
+            format: uuid
+          type: array
+      xml:
+        name: AutomatedComparesTestDto
+      type: object
+    OAS.WebApi.Domains.Reporting.TestVisualDto:
+      properties:
+        baselineInstanceId:
+          type: integer
+          format: int32
+        cloneInstanceId:
+          type: integer
+          format: int32
+      xml:
+        name: TestVisualDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

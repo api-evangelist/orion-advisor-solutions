@@ -1,0 +1,223 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Cash Funding API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/CashFunding
+paths:
+  /v1/Billing/CashFunding:
+    get:
+      tags:
+      - Billing/CashFunding
+      summary: Returns a list of Cash Funding Accounts with Balance Due
+      description: 'Sample Request:
+
+        GET: /Billing/CashFunding?forecast=false&startDate=03/01/2024&endDate=03/31/2024&take=50000
+
+
+        Response:
+
+        [
+
+        {
+
+        "id": 123,
+
+        "registrationName": "First Last",
+
+        "registrationId": 456,
+
+        "fundFamily": "Fund Family",
+
+        "productName": "Cash and Equivalents",
+
+        "moneyMarketBalance": 123.45,
+
+        "balanceDue": -123.45,
+
+        "difference": 123.45,
+
+        "payMethod": "Method",
+
+        "instanceType": "Forecast",
+
+        "clientId": 789,
+
+        "clientLastName": "Last",
+
+        "clientName": "First Last",
+
+        "accountType": "Acct Type",
+
+        "accountNumber": "acct-num",
+
+        "managementStyle": "Managed Style",
+
+        "accountIsActive": true,
+
+        "representativeName": "First Last",
+
+        "feeReqSrc": "Cash account"
+
+        },
+
+        ]'
+      operationId: Billing_GetCashFundingAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: startDate
+        in: query
+        description: Required. Begining date of the range.
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Required. End date of range
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: forecast
+        in: query
+        description: Required. 1 = Forecast Bill, 0 = Live Bill
+        required: true
+        schema:
+          type: boolean
+      - name: take
+        in: query
+        description: Required
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: skip
+        in: query
+        description: Optional
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.CashFundingGridDto'
+                xml:
+                  name: CashFundingGridDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.CashFundingGridDto'
+                xml:
+                  name: CashFundingGridDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.CashFundingGridDto'
+                xml:
+                  name: CashFundingGridDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.CashFundingGridDto'
+                xml:
+                  name: CashFundingGridDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.CashFundingGridDto'
+                xml:
+                  name: CashFundingGridDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.CashFundingGridDto'
+                xml:
+                  name: CashFundingGridDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.CashFundingGridDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        fundFamily:
+          type: string
+        productName:
+          type: string
+        moneyMarketBalance:
+          type: number
+          format: double
+        balanceDue:
+          type: number
+          format: double
+        difference:
+          type: number
+          format: double
+        payMethod:
+          type: string
+        instanceType:
+          type: string
+        clientId:
+          type: integer
+          format: int32
+        clientLastName:
+          type: string
+        clientName:
+          type: string
+        accountType:
+          type: string
+        accountNumber:
+          type: string
+        managementStyle:
+          type: string
+        accountIsActive:
+          type: boolean
+        representativeName:
+          type: string
+        feeReqSrc:
+          type: string
+          enum:
+          - Invalid
+          - HighValueFund
+          - CashAccount
+          - ProRata
+      xml:
+        name: CashFundingGridDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

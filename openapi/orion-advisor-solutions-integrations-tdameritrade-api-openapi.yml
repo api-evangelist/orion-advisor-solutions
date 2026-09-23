@@ -1,0 +1,1375 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/TD Ameritrade API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/TDAmeritrade
+paths:
+  /v1/Integrations/TDAmeritrade/Accounts:
+    get:
+      tags:
+      - Integrations/TDAmeritrade
+      summary: Method to retrive Account data for all Accounts linked to the user
+      operationId: TDAmeritrade_GetAccounts
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAccountsDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAccountsDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAccountsDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAccountsDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAccountsDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAccountsDto'
+      security:
+      - Authorization: []
+  /v1/Integrations/TDAmeritrade/Accounts/{accountId}:
+    get:
+      tags:
+      - Integrations/TDAmeritrade
+      summary: Method to retrive Account data for the Account
+      operationId: TDAmeritrade_GetV1IntegrationsTDAmeritradeAccountsByAccountId
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAccountsDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAccountsDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAccountsDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAccountsDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAccountsDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAccountsDto'
+      security:
+      - Authorization: []
+  /v1/Integrations/TDAmeritrade/Accounts/{accountId}/Alerts:
+    get:
+      tags:
+      - Integrations/TDAmeritrade
+      summary: Method to retrive Account Alerts from TD Ameritrade
+      operationId: TDAmeritrade_GetAccountAlerts
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: alertType
+        in: query
+        description: Flag Enum; Account = 1, Trading = 2, CashManagement = 4
+        required: true
+        schema:
+          type: string
+          enum:
+          - Account
+          - Trading
+          - CashManagement
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAlertsReturnDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAlertsReturnDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAlertsReturnDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAlertsReturnDto'
+      security:
+      - Authorization: []
+  /v1/Integrations/TDAmeritrade/Accounts/{accountId}/Balances:
+    get:
+      tags:
+      - Integrations/TDAmeritrade
+      summary: Method to retrive Account Balances from TD Ameritrade
+      operationId: TDAmeritrade_GetAccountBalances
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDBalancesDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDBalancesDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDBalancesDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDBalancesDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDBalancesDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDBalancesDto'
+      security:
+      - Authorization: []
+  /v1/Integrations/TDAmeritrade/Accounts/{accountId}/Extended:
+    get:
+      tags:
+      - Integrations/TDAmeritrade
+      summary: Method to retrive Account data for the Account
+      operationId: TDAmeritrade_GetAccountExtendeds
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: includeBalances
+        in: query
+        description: Optional. Default is false.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: includePositions
+        in: query
+        description: Optional. Default is false.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: includeTransactions
+        in: query
+        description: Optional. Default is false. If true, default date range is 7 days from today
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: startDate
+        in: query
+        description: Optional, used for Transactions. Default is null. Required field if endDate is present.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional, used for Transactions. Default is null. Required field if startDate is present.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAccountsExtendedDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAccountsExtendedDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAccountsExtendedDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAccountsExtendedDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAccountsExtendedDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAccountsExtendedDto'
+      security:
+      - Authorization: []
+  /v1/Integrations/TDAmeritrade/Accounts/{accountId}/Positions:
+    get:
+      tags:
+      - Integrations/TDAmeritrade
+      summary: Method to retrive Account Positions from TD Ameritrade
+      operationId: TDAmeritrade_GetAccountPositions
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDPositionsDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDPositionsDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDPositionsDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDPositionsDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDPositionsDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDPositionsDto'
+      security:
+      - Authorization: []
+  /v1/Integrations/TDAmeritrade/Accounts/{accountId}/Transactions:
+    get:
+      tags:
+      - Integrations/TDAmeritrade
+      summary: Method to retrive Account Transactions from TD Ameritrade
+      operationId: TDAmeritrade_GetAccountTransactions
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDTransactionsDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDTransactionsDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDTransactionsDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDTransactionsDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDTransactionsDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDTransactionsDto'
+      security:
+      - Authorization: []
+  /v1/Integrations/TDAmeritrade/Action/StartSSO:
+    get:
+      tags:
+      - Integrations/TDAmeritrade
+      summary: TD ameritrade start SSO async
+      operationId: TDAmeritrade_StartSSOAsync
+      parameters:
+      - name: referenceId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: tdaContext
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Integrations/TDAmeritrade/AdvancedAlerts/Configuration:
+    get:
+      tags:
+      - Integrations/TDAmeritrade
+      summary: Returns configuration settings for Advanced Alerts integration
+      operationId: TDAmeritrade_GetAdvancedAlertsConfiguration
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.TDAmeritradeController.AdvancedAlertsIntegrationConfig'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.TDAmeritradeController.AdvancedAlertsIntegrationConfig'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.TDAmeritradeController.AdvancedAlertsIntegrationConfig'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.TDAmeritradeController.AdvancedAlertsIntegrationConfig'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.TDAmeritradeController.AdvancedAlertsIntegrationConfig'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.TDAmeritradeController.AdvancedAlertsIntegrationConfig'
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Integrations/TDAmeritrade
+      summary: Updates Advanced Alerts configuration information
+      operationId: TDAmeritrade_UpdateAdvancedAlertsConfiguration
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.TDAmeritradeController.AdvancedAlertsIntegrationConfig'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.TDAmeritradeController.AdvancedAlertsIntegrationConfig'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.TDAmeritradeController.AdvancedAlertsIntegrationConfig'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.TDAmeritradeController.AdvancedAlertsIntegrationConfig'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.TDAmeritradeController.AdvancedAlertsIntegrationConfig'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.TDAmeritradeController.AdvancedAlertsIntegrationConfig'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.TDAmeritradeController.AdvancedAlertsIntegrationConfig'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.TDAmeritradeController.AdvancedAlertsIntegrationConfig'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.TDAmeritradeController.AdvancedAlertsIntegrationConfig'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.TDAmeritradeController.AdvancedAlertsIntegrationConfig'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.TDAmeritradeController.AdvancedAlertsIntegrationConfig'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.TDAmeritradeController.AdvancedAlertsIntegrationConfig'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.TDAmeritradeController.AdvancedAlertsIntegrationConfig'
+        required: true
+  /v1/Integrations/TDAmeritrade/CheckUser:
+    get:
+      tags:
+      - Integrations/TDAmeritrade
+      summary: Method to check user
+      operationId: TDAmeritrade_CheckUser
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUsersInfoDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUsersInfoDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUsersInfoDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUsersInfoDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUsersInfoDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUsersInfoDto'
+      security:
+      - Authorization: []
+  /v1/Integrations/TDAmeritrade/User:
+    post:
+      tags:
+      - Integrations/TDAmeritrade
+      summary: Method to save user's credentials
+      operationId: TDAmeritrade_SaveUserAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+        required: true
+  /v1/Integrations/TDAmeritrade/VeoOneUser:
+    get:
+      tags:
+      - Integrations/TDAmeritrade
+      summary: Method to check user
+      operationId: TDAmeritrade_VeoOneUser
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Integrations/TDAmeritrade
+      summary: Method to save user's credentials
+      operationId: TDAmeritrade_VeoOneUserAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserDto'
+        required: true
+components:
+  schemas:
+    OAT.Integrations.TD.Dto.TDTransactionsDto:
+      properties:
+        transaction:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDTransactionDto'
+          xml:
+            name: TDTransactionDto
+            wrapped: true
+          type: array
+        responseInfo:
+          $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDResponseInfo'
+        errors:
+          type: string
+      xml:
+        name: TDTransactionsDto
+      type: object
+    OAT.Integrations.TD.Dto.TDTransactionsExtendedDto:
+      properties:
+        transaction:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDTransactionDto'
+          xml:
+            name: TDTransactionDto
+            wrapped: true
+          type: array
+      xml:
+        name: TDTransactionsExtendedDto
+      type: object
+    OAT.Integrations.TD.Dto.TDPositionsDto:
+      properties:
+        position:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDPositionDto'
+          xml:
+            name: TDPositionDto
+            wrapped: true
+          type: array
+        responseInfo:
+          $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDResponseInfo'
+        errors:
+          type: string
+      xml:
+        name: TDPositionsDto
+      type: object
+    OAT.Integrations.TD.Dto.TDResponseInfo:
+      properties:
+        responseDescription:
+          type: string
+        totalSize:
+          type: integer
+          format: int32
+        cutOffSize:
+          type: integer
+          format: int32
+      xml:
+        name: TDResponseInfo
+      type: object
+    OAT.Integrations.TD.Dto.TDAccountDto:
+      properties:
+        accountNumber:
+          type: string
+        accountDescription:
+          type: string
+        accountTitle:
+          type: string
+        accountType:
+          type: string
+        repCode:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        address1:
+          type: string
+        address2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        secondaryPhone:
+          type: string
+        isSecondaryPhoneInternational:
+          type: boolean
+        accountStatus:
+          type: string
+        optionLevel:
+          type: string
+        isAmerivestAccount:
+          type: boolean
+        isMarginAccount:
+          type: boolean
+        dateOpened:
+          type: string
+          format: date-time
+        accountCategoryCode:
+          type: string
+        dividendInstructions:
+          type: string
+        isCashAccount:
+          type: boolean
+        isIncomeAccount:
+          type: boolean
+        isNonPurposeLoanAccount:
+          type: boolean
+        isShortMarginAccount:
+          type: boolean
+        isSpecSubscripAccount:
+          type: boolean
+        isConvertibleBondAccount:
+          type: boolean
+        isNonConvertibleBondAccount:
+          type: boolean
+        isDvpOrRvpAccount:
+          type: boolean
+        isTradingBlocked:
+          type: boolean
+        isBlockAccount:
+          type: boolean
+        isSelected:
+          type: boolean
+      xml:
+        name: TDAccountDto
+      type: object
+    OAS.WebApi.Domains.Integrations.TDAmeritradeController.AdvancedAlertsIntegrationConfig:
+      properties:
+        enabled:
+          type: boolean
+      xml:
+        name: AdvancedAlertsIntegrationConfig
+      type: object
+    OAT.Integrations.TD.Dto.TDPositionDto:
+      properties:
+        accountNumber:
+          type: string
+        value:
+          type: number
+          format: float
+        price:
+          type: number
+          format: float
+        todaysValueChange:
+          type: number
+          format: float
+        todaysQuantityChange:
+          type: number
+          format: float
+        coupon:
+          type: number
+          format: float
+        nav:
+          type: number
+          format: float
+        repCode:
+          type: string
+        assetType:
+          type: string
+        symbol:
+          type: string
+        cusip:
+          type: string
+        securityDescription:
+          type: string
+        asOfDate:
+          type: string
+        quantity:
+          type: number
+          format: float
+        marketValue:
+          type: number
+          format: float
+        bid:
+          type: number
+          format: float
+        ask:
+          type: number
+          format: float
+        close:
+          type: number
+          format: float
+        gain:
+          type: number
+          format: float
+        change:
+          type: number
+          format: float
+        lastPrice:
+          type: number
+          format: float
+      xml:
+        name: TDPositionDto
+      type: object
+    OAT.Integrations.TD.Dto.TDAlertReturnDto:
+      properties:
+        userID:
+          type: string
+        account:
+          type: string
+        repCode:
+          type: string
+        createdOn:
+          type: string
+        alertId:
+          type: string
+        alertSubscriptionType:
+          type: string
+        content:
+          type: object
+        contentString:
+          type: string
+      xml:
+        name: TDAlertReturnDto
+      type: object
+    OAT.Integrations.TD.Dto.TDTransactionDto:
+      properties:
+        accountNumber:
+          type: string
+        repCode:
+          type: string
+        transactionId:
+          type: string
+        symbolOrCusip:
+          type: string
+        symbol:
+          type: string
+        symbolDescription:
+          type: string
+        cusip:
+          type: string
+        assetType:
+          type: string
+        bondCouponRate:
+          type: number
+          format: float
+        bondMaturityDate:
+          type: string
+          format: date-time
+        asOfDate:
+          type: string
+          format: date-time
+        processingDate:
+          type: string
+          format: date-time
+        quantity:
+          type: number
+          format: float
+        price:
+          type: number
+          format: float
+        netTransactionAmt:
+          type: number
+          format: float
+        withholdingAmt:
+          type: number
+          format: float
+        debitCreditCode:
+          type: string
+        creditDebitAmt:
+          type: number
+          format: float
+        commissionAmt:
+          type: number
+          format: float
+        settlementDate:
+          type: string
+          format: date-time
+        transactionType:
+          type: string
+        transactionTypeDescription:
+          type: string
+        category:
+          type: string
+        accountTypeCode:
+          type: string
+        optionTypeCode:
+          type: string
+        transactionDescription:
+          type: string
+        buySellIndicator:
+          type: string
+        optionTypeDescription:
+          type: string
+      xml:
+        name: TDTransactionDto
+      type: object
+    OAT.Integrations.TD.Dto.TDAccountsExtendedDto:
+      properties:
+        account:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAccountExtendedDto'
+          xml:
+            name: TDAccountExtendedDto
+            wrapped: true
+          type: array
+        responseInfo:
+          $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDResponseInfo'
+        errors:
+          type: string
+      xml:
+        name: TDAccountsExtendedDto
+      type: object
+    OAT.Integrations.TD.Dto.TDAccountExtendedDto:
+      properties:
+        balance:
+          $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDBalanceExtendedDto'
+        positions:
+          $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDPositionsExtendedDto'
+        transactionsHistory:
+          $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDTransactionsExtendedDto'
+        accountNumber:
+          type: string
+        accountDescription:
+          type: string
+        accountTitle:
+          type: string
+        accountType:
+          type: string
+        repCode:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        address1:
+          type: string
+        address2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        secondaryPhone:
+          type: string
+        isSecondaryPhoneInternational:
+          type: boolean
+        accountStatus:
+          type: string
+        optionLevel:
+          type: string
+        isAmerivestAccount:
+          type: boolean
+        isMarginAccount:
+          type: boolean
+        dateOpened:
+          type: string
+          format: date-time
+        accountCategoryCode:
+          type: string
+        dividendInstructions:
+          type: string
+        isCashAccount:
+          type: boolean
+        isIncomeAccount:
+          type: boolean
+        isNonPurposeLoanAccount:
+          type: boolean
+        isShortMarginAccount:
+          type: boolean
+        isSpecSubscripAccount:
+          type: boolean
+        isConvertibleBondAccount:
+          type: boolean
+        isNonConvertibleBondAccount:
+          type: boolean
+        isDvpOrRvpAccount:
+          type: boolean
+        isTradingBlocked:
+          type: boolean
+        isBlockAccount:
+          type: boolean
+        isSelected:
+          type: boolean
+      xml:
+        name: TDAccountExtendedDto
+      type: object
+    OAT.Integrations.TD.Dto.TDPositionExtendedDto:
+      properties:
+        dayGainPercent:
+          type: number
+          format: float
+        gainPercentage:
+          type: number
+          format: float
+        dividendAmount:
+          type: number
+          format: float
+        dividendYield:
+          type: number
+          format: float
+        exDividendDate:
+          type: string
+          format: date-time
+        isMarginable:
+          type: boolean
+        shortSecurityDescription:
+          type: string
+        maintenanceRequirement:
+          type: number
+          format: float
+        repCode:
+          type: string
+        assetType:
+          type: string
+        symbol:
+          type: string
+        cusip:
+          type: string
+        securityDescription:
+          type: string
+        asOfDate:
+          type: string
+        quantity:
+          type: number
+          format: float
+        marketValue:
+          type: number
+          format: float
+        bid:
+          type: number
+          format: float
+        ask:
+          type: number
+          format: float
+        close:
+          type: number
+          format: float
+        gain:
+          type: number
+          format: float
+        change:
+          type: number
+          format: float
+        lastPrice:
+          type: number
+          format: float
+      xml:
+        name: TDPositionExtendedDto
+      type: object
+    OAT.Integrations.TD.Dto.TDAccountsDto:
+      properties:
+        account:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAccountDto'
+          xml:
+            name: TDAccountDto
+            wrapped: true
+          type: array
+        responseInfo:
+          $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDResponseInfo'
+        errors:
+          type: string
+      xml:
+        name: TDAccountsDto
+      type: object
+    OAT.Integrations.TD.Dto.TDBalancesDto:
+      properties:
+        balance:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDBalanceDto'
+          xml:
+            name: TDBalanceDto
+            wrapped: true
+          type: array
+        responseInfo:
+          $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDResponseInfo'
+        errors:
+          $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDErrorDto'
+      xml:
+        name: TDBalancesDto
+      type: object
+    OAT.Integrations.TD.Dto.TDUsersInfoDto:
+      properties:
+        user:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDUserInfoDto'
+          xml:
+            name: TDUserInfoDto
+            wrapped: true
+          type: array
+        responseInfo:
+          $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDResponseInfo'
+        errors:
+          type: string
+      xml:
+        name: TDUsersInfoDto
+      type: object
+    OAT.Integrations.TD.Dto.TDPositionsExtendedDto:
+      properties:
+        position:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDPositionExtendedDto'
+          xml:
+            name: TDPositionExtendedDto
+            wrapped: true
+          type: array
+      xml:
+        name: TDPositionsExtendedDto
+      type: object
+    OAT.Integrations.TD.Dto.TDUserInfoDto:
+      properties:
+        userId:
+          type: string
+      xml:
+        name: TDUserInfoDto
+      type: object
+    OAT.Integrations.TD.Dto.TDUserDto:
+      properties:
+        userId:
+          type: string
+        password:
+          type: string
+      xml:
+        name: TDUserDto
+      type: object
+    OAT.Integrations.TD.Dto.TDAlertsReturnDto:
+      properties:
+        alerts:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.TD.Dto.TDAlertReturnDto'
+          xml:
+            name: TDAlertReturnDto
+            wrapped: true
+          type: array
+        errorMsg:
+          type: string
+      xml:
+        name: TDAlertsReturnDto
+      type: object
+    OAT.Integrations.TD.Dto.TDErrorDto:
+      properties:
+        errorMessages:
+          type: string
+      xml:
+        name: TDErrorDto
+      type: object
+    OAT.Integrations.TD.Dto.TDBalanceDto:
+      properties:
+        accountNumber:
+          type: string
+        accountType:
+          type: string
+        accountDescription:
+          type: string
+        repCode:
+          type: string
+        accountValue:
+          type: number
+          format: float
+        moneyMarket:
+          type: number
+          format: float
+        cashEquivalents:
+          type: number
+          format: float
+        buyingPower:
+          type: number
+          format: float
+        netBalance:
+          type: number
+          format: float
+        optionBuyingPower:
+          type: number
+          format: float
+      xml:
+        name: TDBalanceDto
+      type: object
+    OAT.Integrations.TD.Dto.TDBalanceExtendedDto:
+      properties:
+        availableFunds:
+          type: number
+          format: float
+        todaysNetChange:
+          type: number
+          format: float
+        netChange:
+          type: number
+          format: float
+        cashNetBalance:
+          type: number
+          format: float
+        marginNetBalance:
+          type: number
+          format: float
+        shortNetBalance:
+          type: number
+          format: float
+        asOfDate:
+          type: string
+          format: date-time
+        accountValueNetChange:
+          type: number
+          format: float
+        accruedInterest:
+          type: number
+          format: float
+        accruedInterestNetChange:
+          type: number
+          format: float
+        availableFundsForTrading:
+          type: number
+          format: float
+        bondsValue:
+          type: number
+          format: float
+        cashEquivalentNetChange:
+          type: number
+          format: float
+        cashBalanceNetChange:
+          type: number
+          format: float
+        dayTradeBuyingPower:
+          type: number
+          format: float
+        equityPercentage:
+          type: number
+          format: float
+        equityPercentageNetChange:
+          type: number
+          format: float
+        longMarginableValue:
+          type: number
+          format: float
+        longMarginableValueNetChange:
+          type: number
+          format: float
+        longPositions:
+          type: number
+          format: float
+        longPositionsNetChange:
+          type: number
+          format: float
+        maintenanceCalls:
+          type: number
+          format: float
+        maintenanceCallsNetChange:
+          type: number
+          format: float
+        maintenanceRequirement:
+          type: number
+          format: float
+        maintenanceRequirementNetChange:
+          type: number
+          format: float
+        marginEquity:
+          type: number
+          format: float
+        marginEquityNetChange:
+          type: number
+          format: float
+        marginBalanceNetChange:
+          type: number
+          format: float
+        moneyMarketNetChange:
+          type: number
+          format: float
+        mutualFundValue:
+          type: number
+          format: float
+        mutualFundValueNetChange:
+          type: number
+          format: float
+        nonMarginableFunds:
+          type: number
+          format: float
+        optionsValue:
+          type: number
+          format: float
+        optionsValueNetChange:
+          type: number
+          format: float
+        pendingDeposits:
+          type: number
+          format: float
+        pendingDepositsNetChange:
+          type: number
+          format: float
+        shortMarginableValue:
+          type: number
+          format: float
+        shortMarginableValueNetChange:
+          type: number
+          format: float
+        marginBalance:
+          type: number
+          format: float
+        shortBalance:
+          type: number
+          format: float
+        shortBalanceNetChange:
+          type: number
+          format: float
+        shortPositions:
+          type: number
+          format: float
+        shortPositionsNetChange:
+          type: number
+          format: float
+        stocksValue:
+          type: number
+          format: float
+        stocksValueNetChange:
+          type: number
+          format: float
+        totalPositionsValue:
+          type: number
+          format: float
+        shortStockValue:
+          type: number
+          format: float
+        shortStockValueNetChange:
+          type: number
+          format: float
+        shortOptionValue:
+          type: number
+          format: float
+        shortOptionValueNetChange:
+          type: number
+          format: float
+        stockBuyingPower:
+          type: number
+          format: float
+        bondValueNetChange:
+          type: number
+          format: float
+        accountNumber:
+          type: string
+        accountType:
+          type: string
+        accountDescription:
+          type: string
+        repCode:
+          type: string
+        accountValue:
+          type: number
+          format: float
+        moneyMarket:
+          type: number
+          format: float
+        cashEquivalents:
+          type: number
+          format: float
+        buyingPower:
+          type: number
+          format: float
+        netBalance:
+          type: number
+          format: float
+        optionBuyingPower:
+          type: number
+          format: float
+      xml:
+        name: TDBalanceExtendedDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

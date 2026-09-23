@@ -1,0 +1,1242 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Element Trading API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/ElementTrading
+paths:
+  /v1/Integrations/ElementTrading/Accounts/Sleeve/Rebalance:
+    post:
+      tags:
+      - Integrations/ElementTrading
+      operationId: ElementTrading_RebalanceAccount
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: regLevel
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: rebalanceType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Portfolio
+          - Sleeve
+          - Model
+          default: 1
+      - name: eclipseFirmId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: resetCache
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseResponse'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Element trading rebalance account
+      x-summary-source: derived
+  /v1/Integrations/ElementTrading/Eclipse/Firm/{firmId}/Models:
+    get:
+      tags:
+      - Integrations/ElementTrading
+      summary: Gets a list of all eclipse models associated with a rep
+      operationId: ElementTrading_GetAllModelList
+      parameters:
+      - name: firmId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: searchTerm
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      - name: resetCache
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: includeSelfDirected
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+  /v1/Integrations/ElementTrading/Eclipse/Firm/Cache:
+    get:
+      tags:
+      - Integrations/ElementTrading
+      operationId: ElementTrading_UpdateEclipseClientCache
+      parameters:
+      - name: eclipseFirmId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      - name: resetCache
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseResponse'
+      security:
+      - Authorization: []
+      summary: Element trading update eclipse client cache
+      x-summary-source: derived
+  /v1/Integrations/ElementTrading/Eclipse/Registrations/{registrationId}/Account:
+    get:
+      tags:
+      - Integrations/ElementTrading
+      operationId: ElementTrading_GetEclipseAccountFromRegistration
+      parameters:
+      - name: registrationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      - name: eclipseFirmId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: resetCache
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.EclipseAccountResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.EclipseAccountResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.EclipseAccountResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.EclipseAccountResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.EclipseAccountResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.EclipseAccountResponse'
+      security:
+      - Authorization: []
+      summary: Element trading get eclipse account from registration
+      x-summary-source: derived
+  /v1/Integrations/ElementTrading/Entity/{entityType}/{entityId}/RiskScoreModel:
+    get:
+      tags:
+      - Integrations/ElementTrading
+      operationId: ElementTrading_GetRiskScoreModel
+      parameters:
+      - name: entityType
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Rep
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Beneficiary
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QPEDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - Banking
+          - RMD
+          - Systematic
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - AdditionalRep
+          - DownloadSource
+          - DownloadRecord
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+      - name: entityId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Element.RiskScoreModelDto'
+                xml:
+                  name: RiskScoreModelDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Element.RiskScoreModelDto'
+                xml:
+                  name: RiskScoreModelDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Element.RiskScoreModelDto'
+                xml:
+                  name: RiskScoreModelDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Element.RiskScoreModelDto'
+                xml:
+                  name: RiskScoreModelDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Element.RiskScoreModelDto'
+                xml:
+                  name: RiskScoreModelDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Element.RiskScoreModelDto'
+                xml:
+                  name: RiskScoreModelDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Element trading get risk score model
+      x-summary-source: derived
+  /v1/Integrations/ElementTrading/Registrations/{registrationId}/EclipsePreferences:
+    get:
+      tags:
+      - Integrations/ElementTrading
+      summary: See Domains -> RepExpTrading -> TradingPreferencesController
+      operationId: ElementTrading_GetRegistrationEclipsePreferences
+      parameters:
+      - name: registrationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      - name: eclipseFirmId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: resetCache
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipsePreferenceResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipsePreferenceResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipsePreferenceResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipsePreferenceResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipsePreferenceResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipsePreferenceResponse'
+      deprecated: true
+      security:
+      - Authorization: []
+    post:
+      tags:
+      - Integrations/ElementTrading
+      summary: See Domains -> Trading -> RepExpTrading -> TradingPreferencesController
+      operationId: ElementTrading_UpdateRegistrationEclipsePreferences
+      parameters:
+      - name: registrationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      - name: eclipseFirmId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: resetCache
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipsePreferenceResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipsePreferenceResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipsePreferenceResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipsePreferenceResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipsePreferenceResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipsePreferenceResponse'
+      deprecated: true
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipsePreferenceRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipsePreferenceRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipsePreferenceRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipsePreferenceRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipsePreferenceRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipsePreferenceRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipsePreferenceRequest'
+        required: true
+  /v1/Integrations/ElementTrading/Reps/{repId}/ModelAggs/Minimal:
+    get:
+      tags:
+      - Integrations/ElementTrading
+      operationId: ElementTrading_GetRepModelAggsSimpleAsync
+      parameters:
+      - name: repId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: filterSelfDirected
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: subAdvisorModels
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: useFullRestrictions
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: custodianId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: registrationTypeId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.Element.ModelAggMinimal'
+                xml:
+                  name: ModelAggMinimal
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.Element.ModelAggMinimal'
+                xml:
+                  name: ModelAggMinimal
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.Element.ModelAggMinimal'
+                xml:
+                  name: ModelAggMinimal
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.Element.ModelAggMinimal'
+                xml:
+                  name: ModelAggMinimal
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.Element.ModelAggMinimal'
+                xml:
+                  name: ModelAggMinimal
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.Element.ModelAggMinimal'
+                xml:
+                  name: ModelAggMinimal
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Element trading get rep model aggs simple async
+      x-summary-source: derived
+  /v1/Integrations/ElementTrading/Tickers/NonExisting/Search:
+    post:
+      tags:
+      - Integrations/ElementTrading
+      operationId: ElementTrading_GetNonExistingSecurities
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: string
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: string
+              type: array
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+          text/json:
+            schema:
+              items:
+                type: string
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: string
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: string
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: string
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: string
+              type: array
+        required: true
+      summary: Element trading get non existing securities
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Integrations.Element.RiskScoreModelItemsDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        itemTolUpper:
+          type: number
+          format: double
+        itemTolLower:
+          type: number
+          format: double
+        targetPercent:
+          type: number
+          format: double
+      xml:
+        name: RiskScoreModelItemsDto
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipseResponse:
+      properties:
+        status:
+          type: boolean
+        message:
+          type: string
+        entityId:
+          type: integer
+          format: int32
+        platform:
+          type: string
+          enum:
+          - TOM
+          - Eclipse
+      xml:
+        name: EclipseResponse
+      type: object
+    OAS.Integrations.Eclipse.Models.EclipsePreferenceRequest:
+      properties:
+        level:
+          type: string
+        id:
+          type: integer
+          format: int32
+        ids:
+          items:
+            type: integer
+            format: int32
+          type: array
+        securityPreferences:
+          $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.SecurityPreference'
+      xml:
+        name: EclipsePreferenceRequest
+      type: object
+    OAS.WebApi.DTO.Integrations.Element.RiskScoreModelAccountDto:
+      properties:
+        name:
+          type: string
+        value:
+          type: number
+          format: double
+        registrationId:
+          type: integer
+          format: int32
+        isActive:
+          type: boolean
+        accountId:
+          type: integer
+          format: int32
+      xml:
+        name: RiskScoreModelAccountDto
+      type: object
+    OAS.Integrations.Eclipse.EclipseAccountResponse:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        portfolio:
+          type: string
+        portfolioId:
+          type: integer
+          format: int32
+        accountId:
+          type: string
+        restrictedPlanId:
+          type: integer
+          format: int32
+        orionConnectFirmId:
+          type: integer
+          format: int32
+        orionConnectExternalId:
+          type: integer
+          format: int32
+        astroEnabled:
+          type: boolean
+        isDoNotBuySell:
+          type: boolean
+        needAnalyticsStatus:
+          type: string
+        tags:
+          type: string
+      xml:
+        name: EclipseAccountResponse
+      type: object
+    OAS.WebApi.Domains.Integrations.Element.ModelAggMinimal:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        subAdvisorId:
+          type: integer
+          format: int32
+        subAdvisorName:
+          type: string
+        riskScore:
+          type: number
+          format: double
+        modelAggType:
+          type: string
+        modelIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        modelAggTypeId:
+          type: integer
+          format: int32
+        managementStyleId:
+          type: integer
+          format: int32
+        minimumInvestmentAmount:
+          type: number
+          format: double
+        isAstroEnabled:
+          type: boolean
+        researchedStatus:
+          type: string
+      xml:
+        name: ModelAggMinimal
+      type: object
+    OAS.Integrations.Eclipse.Models.EclipsePreferenceResponse:
+      properties:
+        levelName:
+          type: string
+        recordId:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        preferenceId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        displayName:
+          type: string
+        categoryType:
+          type: string
+        securityPreferences:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.IndividualSecurityPreference'
+          xml:
+            name: IndividualSecurityPreference
+            wrapped: true
+          type: array
+      xml:
+        name: EclipsePreferenceResponse
+      type: object
+    OAS.WebApi.DTO.Integrations.Element.RiskScoreModelDto:
+      properties:
+        modelId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        isActive:
+          type: boolean
+        subAdvisor:
+          type: integer
+          format: int32
+        representative:
+          type: integer
+          format: int32
+        asOfDate:
+          type: string
+          format: date-time
+        eclipseModelId:
+          type: integer
+          format: int32
+        modelAggId:
+          type: integer
+          format: int32
+        parentId:
+          type: integer
+          format: int64
+        riskScore:
+          type: integer
+          format: int32
+        accounts:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Element.RiskScoreModelAccountDto'
+          xml:
+            name: RiskScoreModelAccountDto
+            wrapped: true
+          type: array
+        items:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Element.RiskScoreModelItemsDto'
+          xml:
+            name: RiskScoreModelItemsDto
+            wrapped: true
+          type: array
+      xml:
+        name: RiskScoreModelDto
+      type: object
+    OAS.Integrations.Eclipse.Models.SecurityPreference:
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSetFromParent:
+          type: boolean
+        preferenceId:
+          type: integer
+          format: int32
+        resetToParent:
+          type: boolean
+        addSecurities:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.IndividualSecurityPreference'
+          xml:
+            name: IndividualSecurityPreference
+            wrapped: true
+          type: array
+        editSecurities:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.IndividualSecurityPreference'
+          xml:
+            name: IndividualSecurityPreference
+            wrapped: true
+          type: array
+        deleteSecurities:
+          items:
+            type: integer
+            format: int32
+          type: array
+      xml:
+        name: SecurityPreference
+      type: object
+    OAS.Integrations.Eclipse.Models.IndividualSecurityPreference:
+      properties:
+        alternatives:
+          items:
+            type: integer
+            format: int32
+          type: array
+        buyPriority:
+          type: integer
+          format: int32
+        buyTradeMaxAmtBySecurity:
+          type: number
+          format: double
+        buyTradeMaxPctBySecurity:
+          type: number
+          format: double
+        buyTradeMinAmtBySecurity:
+          type: number
+          format: double
+        buyTradeMinPctBySecurity:
+          type: number
+          format: double
+        id:
+          type: integer
+          format: int32
+        isAdd:
+          type: boolean
+        isEdit:
+          type: boolean
+        redemptionFeeAmount:
+          type: number
+          format: double
+        redemptionFeeDays:
+          type: integer
+          format: int32
+        redemptionFeeTypeId:
+          type: integer
+          format: int32
+        securityName:
+          type: string
+        securityType:
+          type: string
+        sellPriority:
+          type: integer
+          format: int32
+        sellTradeMaxAmtBySecurity:
+          type: number
+          format: double
+        sellTradeMaxPctBySecurity:
+          type: number
+          format: double
+        sellTradeMinAmtBySecurity:
+          type: number
+          format: double
+        sellTradeMinPctBySecurity:
+          type: number
+          format: double
+        symbol:
+          type: string
+        taxableDivReInvest:
+          type: number
+          format: double
+        taxDefDivReinvest:
+          type: number
+          format: double
+        taxExemptDivReinvest:
+          type: number
+          format: double
+        capGainReinvestTaxable:
+          type: number
+          format: double
+        capGainsReinvestTaxExempt:
+          type: number
+          format: double
+        capGainsReinvestTaxDef:
+          type: number
+          format: double
+        sellTransactionFee:
+          type: number
+          format: double
+        buyTransactionFee:
+          type: number
+          format: double
+        custodianRedemptionFeeTypeId:
+          type: integer
+          format: int32
+        custodianRedemptionDays:
+          type: integer
+          format: int32
+        custodianRedemptionFeeAmount:
+          type: number
+          format: double
+        custodianRedemptionFeeMinAmount:
+          type: number
+          format: double
+        custodianRedemptionFeeMaxAmount:
+          type: number
+          format: double
+        excludeHolding:
+          type: boolean
+        tBuyPriority:
+          type: integer
+          format: int32
+        tSellPriority:
+          type: integer
+          format: int32
+        teBuyPriority:
+          type: integer
+          format: int32
+        teSellPriority:
+          type: integer
+          format: int32
+        tdBuyPriority:
+          type: integer
+          format: int32
+        tdSellPriority:
+          type: integer
+          format: int32
+        minInitialBuyAmount:
+          type: number
+          format: double
+        tlh:
+          items:
+            type: integer
+            format: int32
+          type: array
+        doNotTLH:
+          type: boolean
+        optionTradingDeltaMaxCalls:
+          type: integer
+          format: int32
+        optionTradingDeltaMaxPuts:
+          type: integer
+          format: int32
+        optionTradingDeltaMinCalls:
+          type: integer
+          format: int32
+        optionTradingDeltaMinPuts:
+          type: integer
+          format: int32
+        coveredCallPercent:
+          type: number
+          format: double
+        protectivePutPercent:
+          type: number
+          format: double
+        astroRestrictionMin:
+          type: integer
+          format: int32
+        astroRestrictionMax:
+          type: integer
+          format: int32
+        astroRestrictionType:
+          type: integer
+          format: int32
+        taxableAlternate:
+          type: integer
+          format: int32
+        taxDeferredAlternate:
+          type: integer
+          format: int32
+        taxExemptAlternate:
+          type: integer
+          format: int32
+        alternateCustodianId:
+          type: integer
+          format: int32
+        custodianName:
+          type: string
+        taxableSecurityId:
+          type: integer
+          format: int32
+        taxableSecurity:
+          type: string
+        taxDeferredSecurityId:
+          type: integer
+          format: int32
+        taxExemptSecurityId:
+          type: integer
+          format: int32
+        taxExemptSecurity:
+          type: string
+        custodianSecuritySymbolId:
+          type: integer
+          format: int32
+        optionsExpiringSoonDays:
+          type: integer
+          format: int32
+        optionTradingStrikePrice:
+          type: number
+          format: double
+        protectivePutCashPercent:
+          type: number
+          format: double
+        redemptionFeeMaxAmount:
+          type: number
+          format: double
+        redemptionFeeMinAmount:
+          type: number
+          format: double
+        strikePriceMaxPercent:
+          type: number
+          format: double
+      xml:
+        name: IndividualSecurityPreference
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

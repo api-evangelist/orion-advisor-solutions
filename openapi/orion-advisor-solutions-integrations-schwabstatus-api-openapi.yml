@@ -1,0 +1,612 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Schwab Status API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/SchwabStatus
+paths:
+  /v1/Integrations/SchwabStatus/AlertsV2:
+    get:
+      tags:
+      - Integrations/SchwabStatus
+      operationId: SchwabStatus_GetV2AlertsAsync
+      parameters:
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: accountNumber
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: nextCursor
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: overrideToken
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filterType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Schwab status get V2 alerts async
+      x-summary-source: derived
+  /v1/Integrations/SchwabStatus/AlertsV2/Details:
+    post:
+      tags:
+      - Integrations/SchwabStatus
+      operationId: SchwabStatus_PostV2AlertsAsync
+      parameters:
+      - name: overrideToken
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.Alerts.SchwabAlertsV2DetailDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.Alerts.SchwabAlertsV2DetailDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.Alerts.SchwabAlertsV2DetailDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.Alerts.SchwabAlertsV2DetailDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.Alerts.SchwabAlertsV2DetailDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.Alerts.SchwabAlertsV2DetailDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.SchwabV2.Alerts.SchwabAlertsV2DetailDto'
+        required: true
+      summary: Schwab status post V2 alerts async
+      x-summary-source: derived
+  /v1/Integrations/SchwabStatus/AlertsV2/Details/{detailId}:
+    get:
+      tags:
+      - Integrations/SchwabStatus
+      operationId: SchwabStatus_GetV1IntegrationsSchwabStatusAlertsV2DetailsByDetailId
+      parameters:
+      - name: detailId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: overrideToken
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Schwab status get V1 integrations schwab status alerts V2 details by detail id
+      x-summary-source: derived
+  /v1/Integrations/SchwabStatus/AlertsV2/ForceRefresh:
+    get:
+      tags:
+      - Integrations/SchwabStatus
+      operationId: SchwabStatus_ForceRefreshAsync
+      parameters:
+      - name: userId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: userDetailId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Schwab status force refresh async
+      x-summary-source: derived
+  /v1/Integrations/SchwabStatus/Limit/{limit}/Skip/{skip}:
+    get:
+      tags:
+      - Integrations/SchwabStatus
+      operationId: SchwabStatus_AccountsAsync
+      parameters:
+      - name: limit
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: skip
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Schwab status accounts async
+      x-summary-source: derived
+  /v1/Integrations/SchwabStatus/OPS/Limit/{limit}/Skip/{skip}:
+    get:
+      tags:
+      - Integrations/SchwabStatus
+      summary: 'Note: Timeouts will occur if requested dataset is too large.'
+      operationId: SchwabStatus_OPSAsync
+      parameters:
+      - name: limit
+        in: path
+        description: Internal. Opaque to Schwab API
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: skip
+        in: path
+        description: Internal. Opaque to Schwab API
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        description: 'Default: 1 day ago'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: 'Default: Current UTC time'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: firstPageOnly
+        in: query
+        description: 'Default: True'
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabStatus/OTP:
+    post:
+      tags:
+      - Integrations/SchwabStatus
+      operationId: SchwabStatus_OtpAsync
+      parameters:
+      - name: otp
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Schwab status otp async
+      x-summary-source: derived
+  /v1/Integrations/SchwabStatus/StatusV2/OPS:
+    get:
+      tags:
+      - Integrations/SchwabStatus
+      summary: This is v2 of the current implementation of the AS Status API.
+      operationId: SchwabStatus_GetStatusV2OpsAsync
+      parameters:
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: firstPageOnly
+        in: query
+        description: 'Default: true'
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: maskAcct
+        in: query
+        description: 'Mask account numbers. Default: false'
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: statusFilter
+        in: query
+        description: "Comma separated list of filters. Default: empty string (unfiltered)\n                <list><item>Action Needed</item><item>Canceled</item><item>In Process</item><item>New</item><item>Resolved</item></list>"
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabStatus/StatusV2/OPS/Events:
+    get:
+      tags:
+      - Integrations/SchwabStatus
+      operationId: SchwabStatus_GetStatusV2EventsOpsAsync
+      parameters:
+      - name: feedId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: statusObjectId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Schwab status get status V2 events ops async
+      x-summary-source: derived
+  /v1/Integrations/SchwabStatus/StatusV2/OPS/Limit/{limit}/Skip/{skip}:
+    get:
+      tags:
+      - Integrations/SchwabStatus
+      summary: 'Proxy for AS Status POST: /stat-feed/status-objects'
+      operationId: SchwabStatus_GetPagedStatusV2OpsAsync
+      parameters:
+      - name: limit
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: skip
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        description: 'Note: Schwab API is based on EST. The earliest and default date supported is 90 days prior'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: 'Note: Schwab API is based on EST'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: firstPageOnly
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: maskAcct
+        in: query
+        description: 'Mask account numbers. Default: false'
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: statusFilter
+        in: query
+        description: "Comma separated list of filters. Default: empty string (unfiltered)\n                <list><item>Action Needed</item><item>Canceled</item><item>In Process</item><item>New</item><item>Resolved</item></list>"
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/SchwabStatus/TestCert:
+    get:
+      tags:
+      - Integrations/SchwabStatus
+      operationId: SchwabStatus_TestCertAsync
+      parameters:
+      - name: limit
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: skip
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Schwab status test cert async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.Integrations.SchwabV2.Alerts.SchwabAlertsV2DetailDto:
+      properties:
+        detailId:
+          type: string
+        masterAccount:
+          type: string
+        account:
+          type: string
+        showAccount:
+          type: boolean
+      xml:
+        name: SchwabAlertsV2DetailDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

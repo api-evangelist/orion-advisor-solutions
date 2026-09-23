@@ -1,0 +1,136 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Utility/Workflow Process Types API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Utility/WorkflowProcessTypes
+paths:
+  /v1/Utility/WorkflowProcessTypes:
+    get:
+      tags:
+      - Utility/WorkflowProcessTypes
+      summary: Gets a list of Workflow Process Types that the logged in user has access to
+      operationId: WorkflowProcessTypes_Get
+      parameters:
+      - name: processTypeCode
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTypeDto'
+                xml:
+                  name: WorkflowProcessTypeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTypeDto'
+                xml:
+                  name: WorkflowProcessTypeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTypeDto'
+                xml:
+                  name: WorkflowProcessTypeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTypeDto'
+                xml:
+                  name: WorkflowProcessTypeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTypeDto'
+                xml:
+                  name: WorkflowProcessTypeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTypeDto'
+                xml:
+                  name: WorkflowProcessTypeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Utility/WorkflowProcessTypes/{key}:
+    get:
+      tags:
+      - Utility/WorkflowProcessTypes
+      summary: Gets the Workflow Process Type that has the provided key.
+      operationId: WorkflowProcessTypes_GetEntityByKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTypeDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTypeDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTypeDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTypeDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTypeDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTypeDto'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Utility.WorkflowProcessTypeDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        processTypeName:
+          type: string
+        processTypeDescription:
+          type: string
+        processTypeCode:
+          type: string
+      xml:
+        name: WorkflowProcessTypeDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

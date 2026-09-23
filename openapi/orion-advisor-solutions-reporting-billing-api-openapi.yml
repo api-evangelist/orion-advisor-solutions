@@ -1,0 +1,1650 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Reporting/Billing API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Reporting/Billing
+paths:
+  /v1/Reporting/Billing/AdvisoryFeeNotification/Reports/Action/{key}/Run/{sessionId}:
+    get:
+      tags:
+      - Reporting/Billing
+      summary: Runs the report generation process for the Advisory Fee Notification
+      description: 'Sample Request
+
+        GET /v1/Reporting/Billing/AdvisoryFeeNotification/Reports/01-07-2024_07-07-2024/Run/36f385c9-ddc9-4798-8104-498573d1809a?hud=Basic&Authorization=sample_auth_token'
+      operationId: AdvisoryFeeNotificationReport_RunReport
+      parameters:
+      - name: key
+        in: path
+        description: The unique key for the report generation request.
+        required: true
+        schema:
+          type: string
+      - name: sessionId
+        in: path
+        description: The unique session identifier for the report.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: hud
+        in: query
+        description: The HUD (Heads-Up Display) option for the report.
+        required: false
+        schema:
+          type: string
+          enum:
+          - None
+          - Basic
+          - Debug
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.AdvisoryFeeNotification.AdvisoryFeeNotificationReportModel'
+            application/xhtml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.AdvisoryFeeNotification.AdvisoryFeeNotificationReportModel'
+            application/xhtml+xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.AdvisoryFeeNotification.AdvisoryFeeNotificationReportModel'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.AdvisoryFeeNotification.AdvisoryFeeNotificationReportModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.AdvisoryFeeNotification.AdvisoryFeeNotificationReportModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.AdvisoryFeeNotification.AdvisoryFeeNotificationReportModel'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.AdvisoryFeeNotification.AdvisoryFeeNotificationReportModel'
+      security:
+      - Authorization: []
+  /v1/Reporting/Billing/AdvisoryFeeNotification/Reports/Action/{key}/Run/{sessionId}/Pdf:
+    get:
+      tags:
+      - Reporting/Billing
+      summary: Retrieves a previously generated Advisory Fee Notification report PDF
+      description: 'Sample Request
+
+        GET /v1/Reporting/Billing/AdvisoryFeeNotification/Reports/01-07-2024_07-07-2024/Run/36f385c9-ddc9-4798-8104-498573d1809a/PDF'
+      operationId: AdvisoryFeeNotificationReport_GetGeneratedReportPdfAsync
+      parameters:
+      - name: key
+        in: path
+        description: The unique key for the report generation request.
+        required: true
+        schema:
+          type: string
+      - name: sessionId
+        in: path
+        description: The unique session identifier for the report.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: cancellationToken
+        in: header
+        description: CancellationToken object for managing cancellation of the request.
+        required: true
+      responses:
+        '201':
+          description: Report generated successfully
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+        '404':
+          description: Not Found - The requested report does not exist.
+        '500':
+          description: Internal Server Error - An error occurred while processing the request.
+      security:
+      - Authorization: []
+  /v1/Reporting/Billing/AdvisoryFeeNotification/Reports/Action/Generate:
+    post:
+      tags:
+      - Reporting/Billing
+      summary: Generates an Advisory Fee Notification Report
+      description: 'Sample Request
+
+        POST v1/Reporting/Billing/AdvisoryFeeNotification/Reports'
+      operationId: AdvisoryFeeNotificationReport_GenerateAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        description: CancellationToken object
+        required: true
+      responses:
+        '201':
+          description: Report generated successfully
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+        '400':
+          description: Invalid request
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.AdvisoryFeeNotification.AdvisoryFeeNotificationDTO'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.AdvisoryFeeNotification.AdvisoryFeeNotificationDTO'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.AdvisoryFeeNotification.AdvisoryFeeNotificationDTO'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.AdvisoryFeeNotification.AdvisoryFeeNotificationDTO'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.AdvisoryFeeNotification.AdvisoryFeeNotificationDTO'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.AdvisoryFeeNotification.AdvisoryFeeNotificationDTO'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.AdvisoryFeeNotification.AdvisoryFeeNotificationDTO'
+        description: The AdvisoryFeeNotificationDTO containing the details for generating the report.
+        required: true
+  /v1/Reporting/Billing/PayeePayable/Reports/Action/{key}/Run/{sessionId}:
+    get:
+      tags:
+      - Reporting/Billing
+      summary: Retrieves a previously generated Bill Cancellation By Payee Payable report
+      description: 'Sample Request
+
+        GET /v1/Reporting/Billing/PayeePayable/Reports/01-07-2024_07-07-2024/Run/36f385c9-ddc9-4798-8104-498573d1809a?hud=Basic&Authorization=sample_auth_token'
+      operationId: PayeePayableReport_RunReport
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: hud
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - None
+          - Basic
+          - Debug
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.PayeePayable.PayeePayableReportModel'
+            application/xhtml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.PayeePayable.PayeePayableReportModel'
+            application/xhtml+xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.PayeePayable.PayeePayableReportModel'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.PayeePayable.PayeePayableReportModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.PayeePayable.PayeePayableReportModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.PayeePayable.PayeePayableReportModel'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.PayeePayable.PayeePayableReportModel'
+      security:
+      - Authorization: []
+  /v1/Reporting/Billing/PayeePayable/Reports/Action/{key}/Run/{sessionId}/Pdf:
+    get:
+      tags:
+      - Reporting/Billing
+      summary: Retrieves a previously generated Bill Cancellation By Payee Payable report PDF
+      description: 'Sample Request
+
+        GET /v1/Reporting/Billing/PayeePayable/Reports/01-07-2024_07-07-2024/Run/36f385c9-ddc9-4798-8104-498573d1809a/PDF'
+      operationId: PayeePayableReport_GetGeneratedReportPdfAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Reporting/Billing/PayeePayable/Reports/Action/Generate:
+    post:
+      tags:
+      - Reporting/Billing
+      summary: Generates a Bill Cancellation By Payee Payable Report
+      description: 'Sample Request
+
+        POST v1/Reporting/Billing/PayeePayable/Reports/Generate'
+      operationId: PayeePayableReport_GenerateAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.PayeePayble.PayeePayableDTO'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.PayeePayble.PayeePayableDTO'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.PayeePayble.PayeePayableDTO'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.PayeePayble.PayeePayableDTO'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.PayeePayble.PayeePayableDTO'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.PayeePayble.PayeePayableDTO'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.PayeePayble.PayeePayableDTO'
+        required: true
+  /v1/Reporting/Billing/Reports/BillCancellationByAccount/Action/{key}/Run/{sessionId}:
+    get:
+      tags:
+      - Reporting/Billing
+      summary: Retrieves a previously generated Bill Cancellation By Account report
+      description: 'Sample Request
+
+        GET /v1/Reporting/Billing/Reports/BillCancellationByAccount/01-07-2024_07-07-2024/Run/36f385c9-ddc9-4798-8104-498573d1809a?hud=Basic&Authorization=sample_auth_token'
+      operationId: BillCancellationByAccountReport_RunReport
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: hud
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - None
+          - Basic
+          - Debug
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.BillCancellationByAccount.BillCancellationByAccountReportModel'
+            application/xhtml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.BillCancellationByAccount.BillCancellationByAccountReportModel'
+            application/xhtml+xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.BillCancellationByAccount.BillCancellationByAccountReportModel'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.BillCancellationByAccount.BillCancellationByAccountReportModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.BillCancellationByAccount.BillCancellationByAccountReportModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.BillCancellationByAccount.BillCancellationByAccountReportModel'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.BillCancellationByAccount.BillCancellationByAccountReportModel'
+      security:
+      - Authorization: []
+  /v1/Reporting/Billing/Reports/BillCancellationByAccount/Action/{key}/Run/{sessionId}/Pdf:
+    get:
+      tags:
+      - Reporting/Billing
+      summary: Retrieves a previously generated Bill Cancellation By Account report PDF
+      description: 'Sample Request
+
+        GET /v1/Reporting/Billing/Reports/BillCancellationByAccount/01-07-2024_07-07-2024/Run/36f385c9-ddc9-4798-8104-498573d1809a/PDF'
+      operationId: BillCancellationByAccountReport_GetGeneratedReportPdfAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Reporting/Billing/Reports/BillCancellationByAccount/Action/Generate:
+    post:
+      tags:
+      - Reporting/Billing
+      summary: Generates a Bill Cancellation By Account Report
+      description: 'Sample Request
+
+        POST v1/Reporting/Billing/Reports/BillCancellationByAccount/Generate
+
+        {
+
+        "startDate": "2024-03-01",
+
+        "endDate": "2024-06-28",
+
+        "reportFormat": "Html"
+
+        }'
+      operationId: BillCancellationByAccountReport_GenerateAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.BillCancellationByAccount.BillCancellationByAccountDTO'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.BillCancellationByAccount.BillCancellationByAccountDTO'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.BillCancellationByAccount.BillCancellationByAccountDTO'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.BillCancellationByAccount.BillCancellationByAccountDTO'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.BillCancellationByAccount.BillCancellationByAccountDTO'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.BillCancellationByAccount.BillCancellationByAccountDTO'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.BillCancellationByAccount.BillCancellationByAccountDTO'
+        required: true
+  /v1/Reporting/Billing/Reports/LegacyAdvisoryFeeReport/Action/{key}/Run/{sessionId}:
+    get:
+      tags:
+      - Reporting/Billing
+      summary: Runs the report generation process for the Legacy Advisory Fee Notification
+      description: 'Sample Request
+
+        GET /v1/Reporting/Billing/Reports/LegacyAdvisoryFeeReport/Action/{key:guid}/Run/{sessionId:guid}?hud=Basic&Authorization=sample_auth_token'
+      operationId: LegacyAdvisoryFeeReport_RunReport
+      parameters:
+      - name: key
+        in: path
+        description: The unique key for the report generation request.
+        required: true
+        schema:
+          type: string
+      - name: sessionId
+        in: path
+        description: The unique session identifier for the report.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: hud
+        in: query
+        description: The HUD (Heads-Up Display) option for the report.
+        required: false
+        schema:
+          type: string
+          enum:
+          - None
+          - Basic
+          - Debug
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportModel'
+            application/xhtml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportModel'
+            application/xhtml+xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportModel'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportModel'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportModel'
+      security:
+      - Authorization: []
+  /v1/Reporting/Billing/Reports/LegacyAdvisoryFeeReport/Action/{key}/Run/{sessionId}/Pdf:
+    get:
+      tags:
+      - Reporting/Billing
+      summary: Retrieves a previously generated Legacy Advisory Fee Notification report PDF
+      description: 'Sample Request
+
+        GET /v1/Reporting/Billing/Reports/LegacyAdvisoryFeeReport/Action/{key:guid}/Run/{sessionId:guid}/Pdf'
+      operationId: LegacyAdvisoryFeeReport_GetGeneratedReportPdfAsync
+      parameters:
+      - name: key
+        in: path
+        description: The unique key for the report generation request.
+        required: true
+        schema:
+          type: string
+      - name: sessionId
+        in: path
+        description: The unique session identifier for the report.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: cancellationToken
+        in: header
+        description: CancellationToken object for managing cancellation of the request.
+        required: true
+      responses:
+        '201':
+          description: Report generated successfully
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+        '404':
+          description: Not Found - The requested report does not exist.
+        '500':
+          description: Internal Server Error - An error occurred while processing the request.
+      security:
+      - Authorization: []
+  /v1/Reporting/Billing/Reports/LegacyAdvisoryFeeReport/Action/Generate:
+    post:
+      tags:
+      - Reporting/Billing
+      summary: Generates a Legacy Advisory Fee Report
+      description: 'Sample Request
+
+        POST v1/Reporting/Billing/AdvisoryFeeNotification/Reports
+
+        POST /v1/Reporting/Billing/Reports/LegacyAdvisoryFeeReport/Action/Generate'
+      operationId: LegacyAdvisoryFeeReport_GenerateAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        description: CancellationToken object
+        required: true
+      responses:
+        '201':
+          description: Report generated successfully
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+        '400':
+          description: Invalid request
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportDto'
+        description: The AdvisoryFeeNotificationDTO containing the details for generating the report.
+        required: true
+  /v1/Reporting/Billing/Reports/LegacyAdvisoryFeeReport/Action/Generate/Preview:
+    get:
+      tags:
+      - Reporting/Billing
+      operationId: LegacyAdvisoryFeeReport_GeneratePreviewAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: entity
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: entityId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: paymentIds
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportModel'
+            application/xhtml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportModel'
+            application/xhtml+xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportModel'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportModel'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportModel'
+      security:
+      - Authorization: []
+      summary: Legacy advisory fee report generate preview async
+      x-summary-source: derived
+  /v1/Reporting/Billing/Reports/RevenuePayout/Action/{key}/Run/{sessionId}:
+    get:
+      tags:
+      - Reporting/Billing
+      operationId: BillRevenuePayoutReport_RunReport
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: hud
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - None
+          - Basic
+          - Debug
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutReportModel'
+            application/xhtml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutReportModel'
+            application/xhtml+xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutReportModel'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutReportModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutReportModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutReportModel'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutReportModel'
+      security:
+      - Authorization: []
+      summary: Bill revenue payout report run report
+      x-summary-source: derived
+  /v1/Reporting/Billing/Reports/RevenuePayout/Action/{key}/Run/{sessionId}/Pdf:
+    get:
+      tags:
+      - Reporting/Billing
+      operationId: BillRevenuePayoutReport_GetGeneratedReportPdfAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Bill revenue payout report get generated report pdf async
+      x-summary-source: derived
+  /v1/Reporting/Billing/Reports/RevenuePayout/Action/{revenuePayoutId}/{revenuePayoutPaymentId}/Generate:
+    get:
+      tags:
+      - Reporting/Billing
+      operationId: BillRevenuePayoutReport_GenerateReportAsync
+      parameters:
+      - name: revenuePayoutId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: revenuePayoutPaymentId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: hud
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - None
+          - Basic
+          - Debug
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutReportModel'
+            application/xhtml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutReportModel'
+            application/xhtml+xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutReportModel'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutReportModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutReportModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutReportModel'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutReportModel'
+      security:
+      - Authorization: []
+      summary: Bill revenue payout report generate report async
+      x-summary-source: derived
+  /v1/Reporting/Billing/Reports/RevenuePayout/Action/Generate:
+    post:
+      tags:
+      - Reporting/Billing
+      operationId: BillRevenuePayoutReport_GenerateAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutDTO'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutDTO'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutDTO'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutDTO'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutDTO'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutDTO'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutDTO'
+        required: true
+      summary: Bill revenue payout report generate async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportModel:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        title:
+          type: string
+        author:
+          type: string
+        subject:
+          type: string
+        keywords:
+          type: string
+        generationTime:
+          type: string
+          format: date-time
+        coverPage:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        firstHeader:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        header:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        footer:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        body:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        overlay:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        hud:
+          type: string
+          enum:
+          - None
+          - Basic
+          - Debug
+        urlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilderCore'
+          readOnly: true
+        pdfDownloadUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        renderCssUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        standardCssUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        expirationDate:
+          type: string
+          format: date-time
+        orientation:
+          type: string
+          enum:
+          - Portrait
+          - Landscape
+        paperSize:
+          type: string
+          enum:
+          - Letter
+          - Legal
+          - A4
+        margins:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.DataEngine.PaperMargins'
+      xml:
+        name: LegacyAdvisoryFeeReportModel
+      type: object
+    OAS.DataModel.Reporting.DataEngine.PaperMargins:
+      properties:
+        units:
+          type: string
+        top:
+          type: number
+          format: double
+        bottom:
+          type: number
+          format: double
+        right:
+          type: number
+          format: double
+        left:
+          type: number
+          format: double
+      xml:
+        name: PaperMargins
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IGetRendered:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IGetRendered
+      type: object
+    OAS.DataModel.Reporting.ReportUrlBuilderCore:
+      properties: {}
+      xml:
+        name: ReportUrlBuilderCore
+      type: object
+    OAS.DataProcess.Billing.Reports.PayeePayble.PayeePayableDTO:
+      properties:
+        reportFormat:
+          type: string
+          enum:
+          - Xml
+          - 'Null'
+          - Csv
+          - Image
+          - PDF
+          - Html
+          - Html40
+          - Html32
+          - Mhtml
+          - Excel
+          - ExcelX
+          - HtmlOwc
+          - Json
+          - CustomImport
+      xml:
+        name: PayeePayableDTO
+      type: object
+    OAS.DataProcess.Billing.Reports.PayeePayable.PayeePayableReportModel:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        title:
+          type: string
+        author:
+          type: string
+        subject:
+          type: string
+        keywords:
+          type: string
+        generationTime:
+          type: string
+          format: date-time
+        firstHeader:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        header:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        footer:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        body:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        overlay:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        hud:
+          type: string
+          enum:
+          - None
+          - Basic
+          - Debug
+        urlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilderCore'
+          readOnly: true
+        pdfDownloadUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        renderCssUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        standardCssUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        expirationDate:
+          type: string
+          format: date-time
+        orientation:
+          type: string
+          enum:
+          - Portrait
+          - Landscape
+        paperSize:
+          type: string
+          enum:
+          - Letter
+          - Legal
+          - A4
+        margins:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.DataEngine.PaperMargins'
+      xml:
+        name: PayeePayableReportModel
+      type: object
+    OAS.DataProcess.Billing.Reports.BillCancellationByAccount.BillCancellationByAccountDTO:
+      properties:
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        reportFormat:
+          type: string
+          enum:
+          - Xml
+          - 'Null'
+          - Csv
+          - Image
+          - PDF
+          - Html
+          - Html40
+          - Html32
+          - Mhtml
+          - Excel
+          - ExcelX
+          - HtmlOwc
+          - Json
+          - CustomImport
+      xml:
+        name: BillCancellationByAccountDTO
+      type: object
+    OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutDTO:
+      properties:
+        revenuePayoutPaymentId:
+          type: integer
+          format: int32
+        revenuePayoutId:
+          type: integer
+          format: int32
+        reportFormat:
+          type: string
+          enum:
+          - Xml
+          - 'Null'
+          - Csv
+          - Image
+          - PDF
+          - Html
+          - Html40
+          - Html32
+          - Mhtml
+          - Excel
+          - ExcelX
+          - HtmlOwc
+          - Json
+          - CustomImport
+      xml:
+        name: RevenuePayoutDTO
+      type: object
+    OAS.DataProcess.Billing.Reports.AdvisoryFeeNotification.AdvisoryFeeNotificationReportModel:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        title:
+          type: string
+        author:
+          type: string
+        subject:
+          type: string
+        keywords:
+          type: string
+        generationTime:
+          type: string
+          format: date-time
+        firstHeader:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        header:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        footer:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        body:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        overlay:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        hud:
+          type: string
+          enum:
+          - None
+          - Basic
+          - Debug
+        urlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilderCore'
+          readOnly: true
+        pdfDownloadUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        renderCssUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        standardCssUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        expirationDate:
+          type: string
+          format: date-time
+        orientation:
+          type: string
+          enum:
+          - Portrait
+          - Landscape
+        paperSize:
+          type: string
+          enum:
+          - Letter
+          - Legal
+          - A4
+        margins:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.DataEngine.PaperMargins'
+        breakOutEachAdjustment:
+          type: boolean
+      xml:
+        name: AdvisoryFeeNotificationReportModel
+      type: object
+    OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutReportModel:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        title:
+          type: string
+        author:
+          type: string
+        subject:
+          type: string
+        keywords:
+          type: string
+        generationTime:
+          type: string
+          format: date-time
+        firstHeader:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        header:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        footer:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        body:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        overlay:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        hud:
+          type: string
+          enum:
+          - None
+          - Basic
+          - Debug
+        urlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilderCore'
+          readOnly: true
+        pdfDownloadUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        renderCssUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        standardCssUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        expirationDate:
+          type: string
+          format: date-time
+        orientation:
+          type: string
+          enum:
+          - Portrait
+          - Landscape
+        paperSize:
+          type: string
+          enum:
+          - Letter
+          - Legal
+          - A4
+        margins:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.DataEngine.PaperMargins'
+      xml:
+        name: RevenuePayoutReportModel
+      type: object
+    OAS.DataModel.Reporting.ReportUrlBuilder:
+      properties:
+        originalPath:
+          readOnly: true
+          type: string
+        urlKind:
+          readOnly: true
+          type: string
+          enum:
+          - Literal
+          - OrionApi
+          - OrionUi
+      xml:
+        name: ReportUrlBuilder
+      type: object
+    OAS.DataProcess.Billing.Reports.BillCancellationByAccount.BillCancellationByAccountReportModel:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        title:
+          type: string
+        author:
+          type: string
+        subject:
+          type: string
+        keywords:
+          type: string
+        generationTime:
+          type: string
+          format: date-time
+        firstHeader:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        header:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        footer:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        body:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        overlay:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        hud:
+          type: string
+          enum:
+          - None
+          - Basic
+          - Debug
+        urlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilderCore'
+          readOnly: true
+        pdfDownloadUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        renderCssUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        standardCssUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        expirationDate:
+          type: string
+          format: date-time
+        orientation:
+          type: string
+          enum:
+          - Portrait
+          - Landscape
+        paperSize:
+          type: string
+          enum:
+          - Letter
+          - Legal
+          - A4
+        margins:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.DataEngine.PaperMargins'
+      xml:
+        name: BillCancellationByAccountReportModel
+      type: object
+    OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportDto:
+      properties:
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        entityId:
+          type: integer
+          format: int32
+        paymentIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        filterEntityId:
+          type: integer
+          format: int32
+        isPaid:
+          type: boolean
+        reportFormat:
+          type: string
+          enum:
+          - Xml
+          - 'Null'
+          - Csv
+          - Image
+          - PDF
+          - Html
+          - Html40
+          - Html32
+          - Mhtml
+          - Excel
+          - ExcelX
+          - HtmlOwc
+          - Json
+          - CustomImport
+      xml:
+        name: LegacyAdvisoryFeeReportDto
+      type: object
+    OAS.DataProcess.Billing.Reports.AdvisoryFeeNotification.AdvisoryFeeNotificationDTO:
+      properties:
+        billId:
+          type: integer
+          format: int32
+        reportFormat:
+          type: string
+          enum:
+          - Xml
+          - 'Null'
+          - Csv
+          - Image
+          - PDF
+          - Html
+          - Html40
+          - Html32
+          - Mhtml
+          - Excel
+          - ExcelX
+          - HtmlOwc
+          - Json
+          - CustomImport
+        breakOutEachAdjustment:
+          type: boolean
+      xml:
+        name: AdvisoryFeeNotificationDTO
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

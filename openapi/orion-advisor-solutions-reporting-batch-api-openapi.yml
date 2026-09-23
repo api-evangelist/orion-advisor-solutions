@@ -1,0 +1,4477 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Reporting/Batch API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Reporting/Batch
+paths:
+  /v1/Reporting/Batch:
+    get:
+      tags:
+      - Reporting/Batch
+      summary: Gets a list of report batches that the logged in user has access to
+      operationId: ReportBatch_GetAllAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: qpeItemId
+        in: query
+        description: 'Optional. Default: null. If provided only batches for the qpeItemId specified will be returned.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDto'
+                xml:
+                  name: ReportBatchDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDto'
+                xml:
+                  name: ReportBatchDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDto'
+                xml:
+                  name: ReportBatchDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDto'
+                xml:
+                  name: ReportBatchDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDto'
+                xml:
+                  name: ReportBatchDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDto'
+                xml:
+                  name: ReportBatchDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Reporting/Batch/{batchId}/Action/SendTestEmail:
+    post:
+      tags:
+      - Reporting/Batch
+      operationId: ReportBatch_SendTestBatchEmailAsync
+      parameters:
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+          application/json:
+            schema:
+              type: string
+          text/json:
+            schema:
+              type: string
+          application/xml:
+            schema:
+              type: string
+          text/xml:
+            schema:
+              type: string
+          application/x-www-form-urlencoded:
+            schema:
+              type: string
+          multipart/form-data:
+            schema:
+              type: string
+        required: true
+      summary: Report batch send test batch email async
+      x-summary-source: derived
+  /v1/Reporting/Batch/{batchId}/Action/ToggleLockDown:
+    post:
+      tags:
+      - Reporting/Batch
+      summary: Used to generate the stored PDFs for either the whole batch or only those…
+      operationId: ReportBatch_ToggleBatchLockdown
+      parameters:
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: lockdown
+        in: query
+        description: Required. Specifies whether the batch should be locked down (true) or not locked down (false).
+        required: true
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDto'
+      security:
+      - Authorization: []
+  /v1/Reporting/Batch/{batchId}/Entities:
+    get:
+      tags:
+      - Reporting/Batch
+      operationId: ReportBatchEntities_GetAll
+      parameters:
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: generationStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - NotGenerated
+            - ErroredReport
+            - OnHold
+            - Generated
+            - PendingGeneration
+            - WillNotBeGenerated
+      - name: syncStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - None
+            - Added
+            - Removed
+      - name: viewableBy
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - Undefined
+            - Payee
+            - BrokerDealer
+            - Wholesaler
+            - Representative
+            - Client
+            - Registration
+            - Account
+            - Asset
+            - Product
+            - Transaction
+            - Distribution
+            - FundFamily
+            - Personal
+            - PayoutSchedule
+            - FeeSchedule
+            - Platform
+            - RIA
+            - Custodian
+            - Journal
+            - SWP
+            - Other
+            - NASD
+            - CashFunding
+            - Bill
+            - BillInstance
+            - BillMasterPayout
+            - Model
+            - NewAccountClient
+            - NewAccountReg
+            - DownloadExclusion
+            - Price
+            - UserDefinedFields
+            - NewAcctUserDef
+            - ManagersMessage
+            - IndexEntry
+            - PerformanceFee
+            - PerformancePayout
+            - NewAccountAsset
+            - Owner
+            - Administrator
+            - OutsideClient
+            - SubAdvisor
+            - ModelRange
+            - FaxCover
+            - Fax
+            - OneTimeDistribution
+            - WebLogin
+            - Plan401k
+            - BillAccountItem
+            - ThirdPartyAdministrator
+            - CrmContact
+            - Participant
+            - PlanSponsor
+            - CRMEmailList
+            - ThirdParty
+            - WorkflowItem
+            - WorkflowAction
+            - ServiceAccount
+            - EntityOption
+            - HouseholdMember
+            - DownloadSymbol
+            - IndexBlend
+            - NABenefit
+            - AggregateModel
+            - CompositeRange
+            - RepAccountManager
+            - ScriptsScrubs
+            - ServiceAccountBrokerDealer
+            - BusinessLine
+            - Blob
+            - AssetClass
+            - ServiceAccountLite
+            - NewAcctUserDefDtl
+            - Branch
+            - AssetLevelStrategy
+            - Report
+            - DataQueries
+            - PriceUnUsed
+            - ModelItem
+            - AssetCategory
+            - RiskCategory
+            - PlatformRange
+            - Dividend
+            - RegistrationType
+            - CustodianCommon
+            - RepState
+            - QpeDashboard
+            - ReportBatch
+            - ModelGroup
+            - ShareClass
+            - DownloadFile
+            - User
+            - DynamicGrouping
+            - ProductType
+            - ProductSubType
+            - InvestmentObjective
+            - PortfolioGroup
+            - OrionRealizedLot
+            - OrionUnrealizedLot
+            - CustodianRealizedLot
+            - CustodianUnrealizedLot
+            - AssetCategoryParent
+            - TaxType
+            - AuditRequest
+            - AuditRequestLetter
+            - ManagedUnmanaged
+            - AuditRowAttachment
+            - InformPolicy
+            - InformAnswerAttachment
+            - UserDetail
+            - BillPayMethod
+            - ModelInclusion
+            - CommunityModel
+            - EclipseModel
+            - Global
+            - ClientCategory
+            - Taxability
+            - Qualified
+            - TaxID
+            - BondState
+            - ProductTaxability
+            - TargetAllocation
+            - RIATable
+            - ProductRegion
+            - ProductPropertyType
+            - ProductManagerAip
+            - MoodyRating
+            - SPRating
+            - BondMaturityYear
+            - InterestRate
+            - RegistrationTaxType
+            - MaturityPeriod
+            - NewHousehold
+            - BillPayoutDashboardPayment
+            - OptionLevel
+            - MarginAgreement
+            - PrimeBrokerage
+            - InformHistoricalDocument
+            - SleeveStrategyAggregate
+            - MorningstarSector
+            - BillEntity
+            - SleeveStrategy
+            - MorningstarGeography
+            - GenericProspect
+            - BillEntityType
+            - AdditionalRep
+            - BillPayoutReport
+            - ProductSubHolding
+            - DownloadSource
+            - ModelVsActual
+            - ProductVintageYear
+            - EclipsePortfolio
+            - Country
+            - Currency
+            - SecurityClassification1
+            - SecurityClassification2
+            - SecurityClassification3
+            - SecurityClassification4
+            - SecurityClassification5
+            - SecurityClassification6
+            - SecurityClassification7
+            - SecurityClassification8
+            - SecurityClassification9
+            - SecurityClassification10
+            - SecurityClassification11
+            - SecurityClassification12
+            - SecurityClassification13
+            - SecurityClassification14
+            - SecurityClassification15
+            - SecurityClassification16
+            - SecurityClassification17
+            - SecurityClassification18
+            - SecurityClassification19
+            - SecurityClassification20
+            - SecurityClassification21
+            - SecurityClassification22
+            - SecurityClassification23
+            - SecurityClassification24
+            - SecurityClassification25
+            - DownloadRecord
+            - CustomGrouping
+            - Cotenant
+            - AllocatedUnrealizedCostBasis
+            - AllocatedRealizedCostBasis
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchEntityDto'
+                xml:
+                  name: ReportBatchEntityDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchEntityDto'
+                xml:
+                  name: ReportBatchEntityDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchEntityDto'
+                xml:
+                  name: ReportBatchEntityDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchEntityDto'
+                xml:
+                  name: ReportBatchEntityDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchEntityDto'
+                xml:
+                  name: ReportBatchEntityDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchEntityDto'
+                xml:
+                  name: ReportBatchEntityDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Report batch entities get all
+      x-summary-source: derived
+  /v1/Reporting/Batch/{batchId}/Entities/{key}:
+    get:
+      tags:
+      - Reporting/Batch
+      summary: Gets the report batch entity with the provided key.
+      operationId: ReportBatchEntities_GetByKeyAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchEntityDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchEntityDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchEntityDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchEntityDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchEntityDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchEntityDto'
+      security:
+      - Authorization: []
+  /v1/Reporting/Batch/{batchId}/Entities/{key}/Action/Download:
+    get:
+      tags:
+      - Reporting/Batch
+      summary: Used to generate the stored PDF for this entity in the batch.
+      operationId: ReportBatchEntities_DownloadReportAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Reporting/Batch/{batchId}/Entities/Action/DetectErrors:
+    post:
+      tags:
+      - Reporting/Batch
+      summary: Used to generate the stored PDFs for either the whole batch or only those…
+      operationId: ReportBatchEntities_DetectErrorsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDetectErrorDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDetectErrorDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDetectErrorDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDetectErrorDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDetectErrorDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDetectErrorDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDetectErrorDto'
+        description: Required. If provided only the entities included will be updated. If omitted all entities in the batch will be updated.
+        required: true
+  /v1/Reporting/Batch/{batchId}/Entities/Action/Download:
+    post:
+      tags:
+      - Reporting/Batch
+      operationId: ReportBatchEntities_PrepareDownloadReportsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - NotGenerated
+            - ErroredReport
+            - OnHold
+            - Generated
+            - PendingGeneration
+            - WillNotBeGenerated
+      - name: manifestFileType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - None
+          - Legacy
+          - Short
+          default: 0
+      - name: combinationMethod
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - None
+          - Aggregate
+          - Zip
+          - Merge
+          - MergeSimplex
+          - MergeDuplex
+          - TarGzip
+          default: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Report batch entities prepare download reports async
+      x-summary-source: derived
+  /v1/Reporting/Batch/{batchId}/Entities/Action/Download/{sessionId}:
+    get:
+      tags:
+      - Reporting/Batch
+      summary: Used to actually download a group of reports that was requested using POST…
+      operationId: ReportBatchEntities_DownloadReportsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: sessionId
+        in: path
+        description: The identifier for a specific batch download session.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Reporting/Batch/{batchId}/Entities/Action/DownloadAll/{combinationMethod}:
+    get:
+      tags:
+      - Reporting/Batch
+      operationId: ReportBatchEntities_DownloadAllReportsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - NotGenerated
+            - ErroredReport
+            - OnHold
+            - Generated
+            - PendingGeneration
+            - WillNotBeGenerated
+      - name: manifestFileType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - None
+          - Legacy
+          - Short
+          default: 0
+      - name: combinationMethod
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Report batch entities download all reports async
+      x-summary-source: derived
+  /v1/Reporting/Batch/{batchId}/Entities/Action/Generate:
+    post:
+      tags:
+      - Reporting/Batch
+      summary: Used to generate the stored PDFs for either the whole batch or only those…
+      operationId: ReportBatchEntities_GenerateReportsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: Optional. If provided only the entities included will be updated. If omitted all entities in the batch will be updated.
+        required: true
+    delete:
+      tags:
+      - Reporting/Batch
+      summary: Used to stop report generation
+      operationId: ReportBatchEntities_CancelGenerateReportsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+            multipart/form-data:
+              schema:
+                type: boolean
+      security:
+      - Authorization: []
+  /v1/Reporting/Batch/{batchId}/Entities/Action/OnHold:
+    post:
+      tags:
+      - Reporting/Batch
+      summary: Used to update the OnHold property on some or all entities in the batch.
+      operationId: ReportBatchEntities_UpdateOnHoldAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: onHold
+        in: query
+        description: Whether to place the selected entities on hold (true) or remove them from hold (false).
+        required: true
+        schema:
+          type: boolean
+      - name: generate
+        in: query
+        description: Optional. If provided and removing hold a generation batch will be created for all entities specified. If provided and adding hold an error will be generated since you cannot generate reports for entities that are on hold.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: Optional. If provided only the entities included will be updated. If omitted all entities in the batch will be updated.
+        required: true
+  /v1/Reporting/Batch/{batchId}/Entities/Action/ResetElectronicStatement:
+    post:
+      tags:
+      - Reporting/Batch
+      summary: Used to reset the electronic statement status of some of the entities in the…
+      operationId: ReportBatchEntities_ResetElectronicStatementEntityAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: Only the entities included will be reset. If omitted an error will be returned.
+        required: true
+  /v1/Reporting/Batch/{batchId}/Entities/Action/ResetGeneration:
+    post:
+      tags:
+      - Reporting/Batch
+      summary: Used to reset the generation status of some of the entities in the batch.
+      operationId: ReportBatchEntities_ResetGenerationEntityAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: Only the entities included will be reset. If omitted an error will be returned.
+        required: true
+  /v1/Reporting/Batch/{batchId}/Entities/Action/ResetPrintVendor:
+    post:
+      tags:
+      - Reporting/Batch
+      summary: Used to reset the print vendor status of some of the entities in the batch.
+      operationId: ReportBatchEntities_ResetPrintVendorEntityAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: Only the entities included will be reset. If omitted an error will be returned.
+        required: true
+  /v1/Reporting/Batch/{batchId}/Entities/Action/SendElectronicStatement:
+    post:
+      tags:
+      - Reporting/Batch
+      summary: Used to send e-statement notification for either the whole batch or only those…
+      operationId: ReportBatchEntities_SendElectronicStatementAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: Optional. If provided only the entities included will be updated. If omitted all entities in the batch will be updated.
+        required: true
+  /v1/Reporting/Batch/{batchId}/Entities/Action/SendToPrintVendor:
+    post:
+      tags:
+      - Reporting/Batch
+      summary: Used to generate the stored PDFs for either the whole batch or only those…
+      operationId: ReportBatchEntities_SendReportsToPrintVendorAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: Optional. If provided only the entities included will be updated. If omitted all entities in the batch will be updated.
+        required: true
+  /v1/Reporting/Batch/{batchId}/Entities/Action/Sync:
+    post:
+      tags:
+      - Reporting/Batch
+      summary: If the provided batch has a dynamic group associated this will sync the list of…
+      operationId: ReportBatchEntities_SyncDynamicGroupEntitiesAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: syncDeliveryMethods
+        in: query
+        description: 'Optional. Default: true. If true the email and print vendor status will be updated to what is appropriate given batch settings. NOTE: Only items marked as either WillNotBeSent or HasNotBeenSent will be updated.'
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+  /v1/Reporting/Batch/{batchId}/Entities/Action/SyncList:
+    post:
+      tags:
+      - Reporting/Batch
+      summary: If the provided batch does not have a dynamic group associated this will sync…
+      operationId: ReportBatchEntities_SyncEntityListAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: addOnly
+        in: query
+        description: 'Default: False. When true the sync will only add new entities. It will not remove unspecified entities.'
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: syncDeliveryMethods
+        in: query
+        description: 'Optional. Default: true. If true the email and print vendor status will be updated to what is appropriate given batch settings. NOTE: Only items marked as either WillNotBeSent or HasNotBeenSent will be updated.'
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+              xml:
+                name: SimpleEntity
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+              xml:
+                name: SimpleEntity
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+              xml:
+                name: SimpleEntity
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+              xml:
+                name: SimpleEntity
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+              xml:
+                name: SimpleEntity
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+              xml:
+                name: SimpleEntity
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+              xml:
+                name: SimpleEntity
+                wrapped: true
+              type: array
+        required: true
+  /v1/Reporting/Batch/{batchId}/Entities/Action/ViewableBy:
+    post:
+      tags:
+      - Reporting/Batch
+      summary: Used to update the viewableBy property on some or all entities in the batch.
+      operationId: ReportBatchEntities_UpdateViewableByAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: viewableBy
+        in: query
+        description: Whether to place the selected entities on hold (true) or remove them from hold (false).
+        required: true
+        schema:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: Optional. If provided only the entities included will be updated. If omitted all entities in the batch that are generated will be updated.
+        required: true
+  /v1/Reporting/Batch/{batchId}/Inserts:
+    get:
+      tags:
+      - Reporting/Batch
+      summary: Gets a list of inserts for the provided report batch id that the logged in user…
+      operationId: ReportBatchInserts_GetInsertsForBatch
+      parameters:
+      - name: batchId
+        in: path
+        description: Key of the batch.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+                xml:
+                  name: ReportBatchInsertDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+                xml:
+                  name: ReportBatchInsertDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+                xml:
+                  name: ReportBatchInsertDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+                xml:
+                  name: ReportBatchInsertDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+                xml:
+                  name: ReportBatchInsertDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+                xml:
+                  name: ReportBatchInsertDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Reporting/Batch
+      summary: Updates the list of inserts for the provided report batch id that the logged in…
+      operationId: ReportBatchInserts_UpdateInsertsForBatch
+      parameters:
+      - name: batchId
+        in: path
+        description: Key of the batch.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+                xml:
+                  name: ReportBatchInsertDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+                xml:
+                  name: ReportBatchInsertDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+                xml:
+                  name: ReportBatchInsertDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+                xml:
+                  name: ReportBatchInsertDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+                xml:
+                  name: ReportBatchInsertDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+                xml:
+                  name: ReportBatchInsertDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+              xml:
+                name: ReportBatchInsertDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+              xml:
+                name: ReportBatchInsertDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+              xml:
+                name: ReportBatchInsertDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+              xml:
+                name: ReportBatchInsertDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+              xml:
+                name: ReportBatchInsertDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+              xml:
+                name: ReportBatchInsertDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+              xml:
+                name: ReportBatchInsertDto
+                wrapped: true
+              type: array
+        required: true
+  /v1/Reporting/Batch/{batchId}/Inserts/{key}:
+    get:
+      tags:
+      - Reporting/Batch
+      summary: Gets the report batch entity with the provided key.
+      operationId: ReportBatchInserts_GetByKey
+      parameters:
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+      security:
+      - Authorization: []
+  /v1/Reporting/Batch/{batchId}/Inserts/{key}/Action/Upload:
+    post:
+      tags:
+      - Reporting/Batch
+      operationId: ReportBatchInserts_UploadFileForInsertAsync
+      parameters:
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertFileDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertFileDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertFileDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertFileDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertFileDto'
+        required: true
+      summary: Report batch inserts upload file for insert async
+      x-summary-source: derived
+  /v1/Reporting/Batch/{batchId}/Inserts/{key}/Download:
+    get:
+      tags:
+      - Reporting/Batch
+      summary: Gets the raw data of the specific insert with the key provided which is…
+      operationId: ReportBatchInserts_GetInsertBlobFile
+      parameters:
+      - name: batchId
+        in: path
+        description: Key of the batch.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Reporting/Batch/{key}:
+    get:
+      tags:
+      - Reporting/Batch
+      summary: Gets the report batches with the provided key.
+      operationId: ReportBatch_GetByKey
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDto'
+      security:
+      - Authorization: []
+  /v1/Reporting/Batch/Action/ConcurrentReportExecutionInfo:
+    get:
+      tags:
+      - Reporting/Batch
+      operationId: ReportBatch_GetConcurrentReportExecutionInfo
+      parameters:
+      - name: clear
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.Caching.IDistributedSemaphoreInfo'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Caching.IDistributedSemaphoreInfo'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Caching.IDistributedSemaphoreInfo'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.Caching.IDistributedSemaphoreInfo'
+      security:
+      - Authorization: []
+      summary: Report batch get concurrent report execution info
+      x-summary-source: derived
+  /v1/Reporting/Batch/Action/RefreshConcurrentReportExecutionLimit:
+    post:
+      tags:
+      - Reporting/Batch
+      operationId: ReportBatch_RefreshConcurrentReportExecutionLimit
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+      summary: Report batch refresh concurrent report execution limit
+      x-summary-source: derived
+  /v1/Reporting/Batch/Reports/{reportId}:
+    get:
+      tags:
+      - Reporting/Batch
+      summary: Endpoint to get report information needed for the batch wizard
+      operationId: ReportBatch_GetBatchSpecificReportInfoAsync
+      parameters:
+      - name: reportId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchReportInfoDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchReportInfoDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchReportInfoDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchReportInfoDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchReportInfoDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchReportInfoDto'
+      security:
+      - Authorization: []
+  /v1/Reporting/Batch/Reports/{reportListId}:
+    get:
+      tags:
+      - Reporting/Batch
+      summary: Endpoint to get report information needed for the batch wizard
+      operationId: ReportBatch_GetBatchSpecificReportInfo
+      parameters:
+      - name: reportListId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchReportInfoDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchReportInfoDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchReportInfoDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchReportInfoDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchReportInfoDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchReportInfoDto'
+      security:
+      - Authorization: []
+  /v1/Reporting/Batch/Verbose:
+    get:
+      tags:
+      - Reporting/Batch
+      operationId: ReportBatch_GetVerbose
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - None
+            - Batch
+            - Inserts
+            - All
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+                xml:
+                  name: ReportBatchVerboseDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+                xml:
+                  name: ReportBatchVerboseDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+                xml:
+                  name: ReportBatchVerboseDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+                xml:
+                  name: ReportBatchVerboseDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+                xml:
+                  name: ReportBatchVerboseDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+                xml:
+                  name: ReportBatchVerboseDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Report batch get verbose
+      x-summary-source: derived
+    post:
+      tags:
+      - Reporting/Batch
+      summary: Creates a new report batch
+      operationId: ReportBatch_CreateVerboseReportBatchAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+        required: true
+  /v1/Reporting/Batch/Verbose/{key}:
+    get:
+      tags:
+      - Reporting/Batch
+      operationId: ReportBatch_GetVerboseByKeyAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: expand
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - None
+            - Batch
+            - Inserts
+            - All
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+      security:
+      - Authorization: []
+      summary: Report batch get verbose by key async
+      x-summary-source: derived
+    put:
+      tags:
+      - Reporting/Batch
+      summary: Updates a report batch
+      operationId: ReportBatch_UpdateReportBatchAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto'
+        required: true
+    delete:
+      tags:
+      - Reporting/Batch
+      summary: Deletes a report batch
+      operationId: ReportBatch_DeleteReportBatchAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Reporting.ReportBatchInsertFileDto:
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+      xml:
+        name: ReportBatchInsertFileDto
+      type: object
+    OAS.WebApi.DTO.Reporting.RunReport.RunToDto:
+      properties:
+        reportFormat:
+          type: string
+          enum:
+          - Xml
+          - 'Null'
+          - Csv
+          - Image
+          - PDF
+          - Html
+          - Html40
+          - Html32
+          - Mhtml
+          - Excel
+          - ExcelX
+          - HtmlOwc
+          - Json
+          - CustomImport
+        storageType:
+          type: string
+        provider:
+          type: string
+        folderPath:
+          type: string
+        combinationMethod:
+          type: string
+          enum:
+          - None
+          - Aggregate
+          - Zip
+          - Merge
+          - MergeSimplex
+          - MergeDuplex
+          - TarGzip
+        userIdList:
+          items:
+            type: integer
+            format: int32
+          type: array
+        archiveReport:
+          type: boolean
+        uploadTargetId:
+          type: integer
+          format: int32
+        source:
+          type: string
+          enum:
+          - OnDemandUI
+          - OnDemandAPI
+          - QueryTester
+          - Scheduled
+          - AuditRequestOnDemand
+          - AuditTestOnDemand
+          - AuditTestSchedule
+          - SubscriptionNotification
+          - ReportBatchSyncDynamicGroupEntities
+          - ReconCompleteNotification
+          - DashboardDataAuditProcess
+          - DashboardDataAuditProcessCountOnly
+      xml:
+        name: RunToDto
+      type: object
+    OAS.WebApi.DTO.Reporting.ReportBatchDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        postedReportName:
+          type: string
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        reportId:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportIdResolver'
+        reportName:
+          type: string
+        qpeItemId:
+          type: integer
+          format: int32
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        auditedBy:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        printAlternativeAddresses:
+          type: boolean
+        dynamicGroupingId:
+          type: integer
+          format: int32
+        customReportId:
+          type: integer
+          format: int32
+        videoStatementId:
+          type: integer
+          format: int32
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        hasCoverPage:
+          type: boolean
+        isLockedDown:
+          type: boolean
+        emailSubject:
+          type: string
+        emailBody:
+          type: string
+        restrictReps:
+          type: boolean
+      xml:
+        name: ReportBatchDto
+      type: object
+    OAS.WebApi.DTO.Reporting.ReportBatchVerboseDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        hasCoverPage:
+          type: boolean
+        canEdit:
+          type: boolean
+        isGenerating:
+          type: boolean
+        reportName:
+          type: string
+        batch:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchVerboseBatchDto'
+        inserts:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchInsertDto'
+          xml:
+            name: ReportBatchInsertDto
+            wrapped: true
+          type: array
+      xml:
+        name: ReportBatchVerboseDto
+      type: object
+    OAS.WebApi.DTO.Reporting.ReportIdResolver:
+      properties:
+        reportGuid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        reportListId:
+          type: integer
+          format: int32
+      xml:
+        name: ReportIdResolver
+      type: object
+    OAS.WebApi.DTO.Reporting.ReportBatchDetectErrorDto:
+      properties:
+        batchEntityIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        errors:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchDetectErrorOnPageDto'
+          xml:
+            name: ReportBatchDetectErrorOnPageDto
+            wrapped: true
+          type: array
+      xml:
+        name: ReportBatchDetectErrorDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Custom.CustomReportPromptDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+        prompt:
+          type: string
+        promptDescription:
+          type: string
+        promptType:
+          type: string
+          enum:
+          - None
+          - Text
+          - Numeric
+          - Date
+          - Dynamic Group
+        defaultValue:
+          type: string
+        isPromptUser:
+          type: boolean
+        sortOrder:
+          type: integer
+          format: int32
+      xml:
+        name: CustomReportPromptDto
+      type: object
+    OAS.WebApi.DTO.Reporting.ReportBatchDetectErrorOnPageDto:
+      properties:
+        type:
+          type: string
+          enum:
+          - Forbidden
+          - Expected
+        searchText:
+          type: string
+        scope:
+          type: string
+          enum:
+          - FirstPage
+          - LastPage
+          - AnyPage
+          - EveryPage
+      xml:
+        name: ReportBatchDetectErrorOnPageDto
+      type: object
+    OAS.WebApi.DTO.Reporting.ReportBatchReportInfoDto:
+      properties:
+        id:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportIdResolver'
+        name:
+          type: string
+        hasCoverPage:
+          type: boolean
+        allowed:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportBatchReportInfoAllowedEntitysDto'
+          xml:
+            name: ReportBatchReportInfoAllowedEntitysDto
+            wrapped: true
+          type: array
+      xml:
+        name: ReportBatchReportInfoDto
+      type: object
+    OAS.Caching.IDistributedSemaphoreInfo:
+      properties:
+        name:
+          readOnly: true
+          type: string
+        limit:
+          readOnly: true
+          type: integer
+          format: int32
+        maxLockTime:
+          readOnly: true
+          type: string
+        locksGiven:
+          readOnly: true
+          type: integer
+          format: int32
+        locks:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: IDistributedSemaphoreInfo
+      type: object
+    OAS.WebApi.DTO.Reporting.Custom.CustomReportFullDto:
+      properties:
+        runTo:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.RunToDto'
+        databaseIdList:
+          items:
+            type: integer
+            format: int32
+          type: array
+        prompts:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Custom.CustomReportPromptDto'
+          xml:
+            name: CustomReportPromptDto
+            wrapped: true
+          type: array
+        importTypeId:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        scheduleIsActive:
+          type: boolean
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        activeScheduleCount:
+          type: integer
+          format: int32
+        isCustom:
+          type: boolean
+        isFavorite:
+          type: boolean
+        scheduleId:
+          type: integer
+          format: int32
+        isLandscape:
+          type: boolean
+        reportClass:
+          type: string
+        isInternal:
+          type: boolean
+        guid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        promptClass:
+          type: string
+        reportType:
+          type: string
+          enum:
+          - Query
+          - CustomImport
+          - Scrub
+        userOwnerId:
+          type: integer
+          format: int32
+        queryType:
+          readOnly: true
+          type: string
+          enum:
+          - None
+          - Custom
+          - Excel
+          - All
+        title:
+          readOnly: true
+          type: string
+        isNoteEnabled:
+          type: boolean
+        isReadOnly:
+          type: boolean
+        isQuerySmith:
+          type: boolean
+        category:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+      xml:
+        name: CustomReportFullDto
+      type: object
+    OAS.WebApi.DTO.Reporting.ReportBatchReportInfoAllowedEntitysDto:
+      properties:
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        selectionMethods:
+          items:
+            type: string
+            enum:
+            - Manual
+            - DynamicGroup
+            - CustomReport
+            - All
+            - Active
+            - ActiveWithValue
+            - BillInstance
+          xml:
+            name: BatchEntitySelectionMethod
+            wrapped: true
+          type: array
+      xml:
+        name: ReportBatchReportInfoAllowedEntitysDto
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+    OAS.WebApi.DTO.Reporting.ReportBatchVerboseBatchDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        postedReportName:
+          type: string
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        reportId:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportIdResolver'
+        qpeItemId:
+          type: integer
+          format: int32
+        auditedBy:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        printAlternativeAddresses:
+          type: boolean
+        dynamicGroupingId:
+          type: integer
+          format: int32
+        customReportId:
+          type: integer
+          format: int32
+        videoStatementId:
+          type: integer
+          format: int32
+        isActive:
+          type: boolean
+        isLockedDown:
+          type: boolean
+        entitySelectionMethod:
+          type: string
+          enum:
+          - Manual
+          - DynamicGroup
+          - CustomReport
+          - All
+          - Active
+          - ActiveWithValue
+          - BillInstance
+        representativeId:
+          type: integer
+          format: int32
+        billInstanceId:
+          type: integer
+          format: int32
+        emailSubject:
+          type: string
+        emailBody:
+          type: string
+        emailFrom:
+          type: string
+        folder:
+          type: string
+        customReport:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Custom.CustomReportFullDto'
+        statementDeliveryMethod:
+          type: string
+          enum:
+          - UseAssigned
+          - Mail
+          - Email
+          - Website
+        ftpFileName:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        fromInception:
+          type: boolean
+        showInternalOnlyWarning:
+          type: boolean
+        includeAllBills:
+          type: boolean
+        expirationDate:
+          type: string
+          format: date-time
+        restrictReps:
+          type: boolean
+        isAdvisoryFee:
+          type: boolean
+      xml:
+        name: ReportBatchVerboseBatchDto
+      type: object
+    OAS.WebApi.DTO.Reporting.ReportBatchEntityDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        viewableBy:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        syncStatus:
+          type: string
+          enum:
+          - None
+          - Added
+          - Removed
+        generationStatus:
+          type: string
+          enum:
+          - NotGenerated
+          - ErroredReport
+          - OnHold
+          - Generated
+          - PendingGeneration
+          - WillNotBeGenerated
+        errorText:
+          type: string
+        hasFile:
+          type: boolean
+        auditedBy:
+          type: string
+        brokerDealer:
+          type: string
+        printVendorStatus:
+          type: string
+          enum:
+          - HasNotBeenSent
+          - Error
+          - SuccessfullySent
+          - Pending
+          - WillNotBeSent
+        printVendorFileName:
+          type: string
+        printVendorTime:
+          type: string
+          format: date-time
+        transmitMethod:
+          type: string
+        emailStatus:
+          type: string
+          enum:
+          - HasNotBeenSent
+          - Error
+          - SuccessfullySent
+          - Pending
+          - WillNotBeSent
+        emailCurrent:
+          type: string
+        emailUsed:
+          type: string
+        emailTime:
+          type: string
+          format: date-time
+      xml:
+        name: ReportBatchEntityDto
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    OAS.WebApi.DTO.Reporting.ReportBatchInsertDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        location:
+          type: string
+          enum:
+          - BeforeCoverPage
+          - AfterCoverPageBeforeReport
+          - AfterReport
+        sequence:
+          type: integer
+          format: int32
+        type:
+          type: string
+          enum:
+          - BlankPage
+          - CustomInsert
+          - BatchInsert
+          - BlankPageEvenOnly
+        hasFile:
+          type: boolean
+        entityCount:
+          type: integer
+          format: int32
+        warningMessage:
+          type: string
+      xml:
+        name: ReportBatchInsertDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

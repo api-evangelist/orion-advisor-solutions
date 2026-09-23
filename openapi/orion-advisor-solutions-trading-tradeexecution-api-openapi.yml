@@ -1,0 +1,111 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Trade Execution API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/TradeExecution
+paths:
+  /v1/Trading/TradeExecution/ErrorCheck:
+    get:
+      tags:
+      - Trading/TradeExecution
+      operationId: Trading_GetRunTradeErrorChecks
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.TradeRunErrorChecksAccountDto'
+                xml:
+                  name: TradeRunErrorChecksAccountDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.TradeRunErrorChecksAccountDto'
+                xml:
+                  name: TradeRunErrorChecksAccountDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.TradeRunErrorChecksAccountDto'
+                xml:
+                  name: TradeRunErrorChecksAccountDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.TradeRunErrorChecksAccountDto'
+                xml:
+                  name: TradeRunErrorChecksAccountDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.TradeRunErrorChecksAccountDto'
+                xml:
+                  name: TradeRunErrorChecksAccountDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.TradeRunErrorChecksAccountDto'
+                xml:
+                  name: TradeRunErrorChecksAccountDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Trading get run trade error checks
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Utility.TradeRunErrorChecksAccountDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        accountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        instanceId:
+          type: integer
+          format: int32
+        tradeOrderCaption:
+          type: string
+        errorType:
+          type: string
+        severity:
+          type: integer
+          format: int32
+        errorMessage:
+          type: string
+        accountValue:
+          type: number
+          format: double
+        subAdvisor:
+          type: string
+      xml:
+        name: TradeRunErrorChecksAccountDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

@@ -1,0 +1,627 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Audit API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/Audit
+paths:
+  /v1/Billing/Audit/{key}/File:
+    get:
+      tags:
+      - Billing/Audit
+      operationId: BillingAudit_GetBlobAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Billing audit get blob async
+      x-summary-source: derived
+    delete:
+      tags:
+      - Billing/Audit
+      operationId: BillingAudit_DeleteBlobAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Billing audit delete blob async
+      x-summary-source: derived
+  /v1/Billing/Audit/AuditFiles:
+    get:
+      tags:
+      - Billing/Audit
+      operationId: BillingAudit_GetBlobs
+      parameters:
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: billInstanceId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AuditFileBlobDto'
+                xml:
+                  name: AuditFileBlobDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AuditFileBlobDto'
+                xml:
+                  name: AuditFileBlobDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AuditFileBlobDto'
+                xml:
+                  name: AuditFileBlobDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AuditFileBlobDto'
+                xml:
+                  name: AuditFileBlobDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AuditFileBlobDto'
+                xml:
+                  name: AuditFileBlobDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AuditFileBlobDto'
+                xml:
+                  name: AuditFileBlobDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Billing audit get blobs
+      x-summary-source: derived
+  /v1/Billing/Audit/Consolidation/AuditFiles:
+    get:
+      tags:
+      - Billing/Audit
+      summary: List of Audit Files for a date range
+      operationId: BillingAudit_GetConsolidatedBlobs
+      parameters:
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AuditFileBlobDto'
+                xml:
+                  name: AuditFileBlobDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AuditFileBlobDto'
+                xml:
+                  name: AuditFileBlobDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AuditFileBlobDto'
+                xml:
+                  name: AuditFileBlobDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AuditFileBlobDto'
+                xml:
+                  name: AuditFileBlobDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AuditFileBlobDto'
+                xml:
+                  name: AuditFileBlobDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AuditFileBlobDto'
+                xml:
+                  name: AuditFileBlobDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Audit/PayablesByRep:
+    post:
+      tags:
+      - Billing/Audit
+      operationId: BillingPayables_GetBlobsAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RepPayableSummaryDto'
+                xml:
+                  name: RepPayableSummaryDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RepPayableSummaryDto'
+                xml:
+                  name: RepPayableSummaryDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RepPayableSummaryDto'
+                xml:
+                  name: RepPayableSummaryDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RepPayableSummaryDto'
+                xml:
+                  name: RepPayableSummaryDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RepPayableSummaryDto'
+                xml:
+                  name: RepPayableSummaryDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RepPayableSummaryDto'
+                xml:
+                  name: RepPayableSummaryDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RepPayableSummaryParamsDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RepPayableSummaryParamsDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RepPayableSummaryParamsDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RepPayableSummaryParamsDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RepPayableSummaryParamsDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RepPayableSummaryParamsDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RepPayableSummaryParamsDto'
+        required: true
+      summary: Billing payables get blobs async
+      x-summary-source: derived
+  /v1/Billing/Audit/PayablesByRep/{key}:
+    get:
+      tags:
+      - Billing/Audit
+      operationId: BillingPayables_GetBlobAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Billing payables get blob async
+      x-summary-source: derived
+  /v1/Billing/Audit/PayablesByRep/Action/Delete/{key}:
+    delete:
+      tags:
+      - Billing/Audit
+      operationId: BillingPayables_DeleteBlobAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Billing payables delete blob async
+      x-summary-source: derived
+  /v1/Billing/Audit/PayablesByRep/Action/Download:
+    post:
+      tags:
+      - Billing/Audit
+      operationId: BillingPayables_StageForDownloadAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Billing payables stage for download async
+      x-summary-source: derived
+  /v1/Billing/Audit/PayablesByRep/Action/Download/{sessionId}:
+    get:
+      tags:
+      - Billing/Audit
+      operationId: BillingPayables_GetFilesAsZipAsync
+      parameters:
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Billing payables get files as zip async
+      x-summary-source: derived
+  /v1/Billing/Audit/PayablesByRep/Action/SendFile:
+    post:
+      tags:
+      - Billing/Audit
+      summary: Send files to users associated with Reps
+      description: 'Sample Request
+
+        POST /Billing/Audit/PayablesByRep/Action/SendFile
+
+        Payload
+
+        [23448]'
+      operationId: BillingPayables_SendFileAsync
+      parameters:
+      - name: ct
+        in: header
+        description: Cancellation token.
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: List of blobIds.
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Reporting.RepPayableSummaryDto:
+      properties:
+        fileId:
+          type: integer
+          format: int32
+        openWith:
+          type: string
+        fileName:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        description:
+          type: string
+      xml:
+        name: RepPayableSummaryDto
+      type: object
+    OAS.WebApi.DTO.Billing.AuditFileBlobDto:
+      properties:
+        instanceId:
+          type: integer
+          format: int32
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        createdDate:
+          type: string
+          format: date-time
+        id:
+          type: integer
+          format: int32
+        openWith:
+          type: string
+        fileName:
+          type: string
+        blobDesc:
+          type: string
+        blobText:
+          type: string
+        category:
+          type: string
+        isZip:
+          type: boolean
+      xml:
+        name: AuditFileBlobDto
+      type: object
+    OAS.WebApi.DTO.Reporting.RepPayableSummaryParamsDto:
+      properties:
+        keys:
+          items:
+            type: integer
+            format: int32
+          type: array
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+      xml:
+        name: RepPayableSummaryParamsDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

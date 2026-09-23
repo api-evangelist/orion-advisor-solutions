@@ -1,0 +1,73 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Recalc Process API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/RecalcProcess
+paths:
+  /v1/Billing/RecalcProcess/GetHangFireProgressById:
+    get:
+      tags:
+      - Billing/RecalcProcess
+      summary: get hangfire job Id for recalc process
+      operationId: BillGenerator_GetHangFireProgressById
+      parameters:
+      - name: jobId
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Hangfire.Console.Monitoring.LineDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hangfire.Console.Monitoring.LineDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Hangfire.Console.Monitoring.LineDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Hangfire.Console.Monitoring.LineDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/Hangfire.Console.Monitoring.LineDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/Hangfire.Console.Monitoring.LineDto'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    Hangfire.Console.Monitoring.LineDto:
+      properties:
+        type:
+          readOnly: true
+          type: string
+          enum:
+          - Any
+          - Text
+          - ProgressBar
+        timestamp:
+          readOnly: true
+          type: string
+          format: date-time
+        color:
+          readOnly: true
+          type: string
+      xml:
+        name: LineDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

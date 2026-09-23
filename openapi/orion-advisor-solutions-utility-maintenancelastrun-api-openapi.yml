@@ -1,0 +1,81 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Utility/Maintenance Last Run API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Utility/MaintenanceLastRun
+paths:
+  /v1/Utility/MaintenanceLastRun/{key}:
+    get:
+      tags:
+      - Utility/MaintenanceLastRun
+      summary: Gets the Maintenance Last Run that has the provided key.
+      operationId: Utility_GetEntityByKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.MaintenanceLastRunDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.MaintenanceLastRunDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.MaintenanceLastRunDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.MaintenanceLastRunDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.MaintenanceLastRunDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.MaintenanceLastRunDto'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Utility.MaintenanceLastRunDto:
+      properties:
+        maintenanceName:
+          type: string
+        startDateTime:
+          type: string
+          format: date-time
+        endDateTime:
+          type: string
+          format: date-time
+        recordProcessed:
+          type: integer
+          format: int32
+        recordPending:
+          type: integer
+          format: int32
+        spid:
+          type: integer
+          format: int32
+        frequency:
+          type: string
+        errorMessage:
+          type: string
+      xml:
+        name: MaintenanceLastRunDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

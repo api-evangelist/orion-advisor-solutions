@@ -1,0 +1,218 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Utility/API Logs API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Utility/APILogs
+paths:
+  /v1/Utility/APILogs:
+    get:
+      tags:
+      - Utility/APILogs
+      summary: Get a list of API log records for the current users "partnerAppId"
+      operationId: APILogs_GetAllAPILogs
+      parameters:
+      - name: userId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: startTime
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endTime
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: hasException
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: correlationId
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Utility.spimRequestLogViewerGetList'
+                xml:
+                  name: spimRequestLogViewerGetList
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Utility.spimRequestLogViewerGetList'
+                xml:
+                  name: spimRequestLogViewerGetList
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Utility.spimRequestLogViewerGetList'
+                xml:
+                  name: spimRequestLogViewerGetList
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Utility.spimRequestLogViewerGetList'
+                xml:
+                  name: spimRequestLogViewerGetList
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Utility.spimRequestLogViewerGetList'
+                xml:
+                  name: spimRequestLogViewerGetList
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Utility.spimRequestLogViewerGetList'
+                xml:
+                  name: spimRequestLogViewerGetList
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Utility/APILogs/{correlationId}:
+    get:
+      tags:
+      - Utility/APILogs
+      summary: Get a single api log record for the correlation id
+      operationId: APILogs_GetByCorrelationId
+      parameters:
+      - name: correlationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Utility.spimRequestLogViewerGetList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Utility.spimRequestLogViewerGetList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Utility.spimRequestLogViewerGetList'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Utility.spimRequestLogViewerGetList'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Utility.spimRequestLogViewerGetList'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Utility.spimRequestLogViewerGetList'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.DataModel.Utility.spimRequestLogViewerGetList:
+      required:
+      - appName
+      properties:
+        dbName:
+          type: string
+          maxLength: 200
+          minLength: 0
+        userID:
+          type: string
+          maxLength: 200
+          minLength: 0
+        requestTime:
+          type: string
+          format: date-time
+        responseTime:
+          type: string
+          format: date-time
+        duration:
+          type: integer
+          format: int32
+        fkUserDtl:
+          type: integer
+          format: int32
+        appName:
+          type: string
+          maxLength: 100
+          minLength: 0
+        hostName:
+          type: string
+          maxLength: 128
+          minLength: 0
+        clientIp:
+          type: string
+          maxLength: 20
+          minLength: 0
+        verb:
+          type: string
+          maxLength: 10
+          minLength: 0
+        routeUrl:
+          type: string
+        request:
+          type: string
+        response:
+          type: string
+        hasException:
+          type: boolean
+        message:
+          type: string
+        stackTrace:
+          type: string
+        correlationId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        app:
+          type: string
+          maxLength: 255
+          minLength: 0
+        appPath:
+          type: string
+          maxLength: 255
+          minLength: 0
+        loginEntity:
+          type: string
+          maxLength: 30
+          minLength: 0
+        fkPartnerApp:
+          type: integer
+          format: int32
+        userAgent:
+          type: string
+      xml:
+        name: spimRequestLogViewerGetList
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

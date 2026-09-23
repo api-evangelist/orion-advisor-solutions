@@ -1,0 +1,200 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Related Billing Client API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/RelatedBillingClient
+paths:
+  /v1/Billing/RelatedBillingClient:
+    get:
+      tags:
+      - Billing/RelatedBillingClient
+      operationId: Billing_GetRelatedBillingClients
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.RelatedBillingClientDto'
+                xml:
+                  name: RelatedBillingClientDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.RelatedBillingClientDto'
+                xml:
+                  name: RelatedBillingClientDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.RelatedBillingClientDto'
+                xml:
+                  name: RelatedBillingClientDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.RelatedBillingClientDto'
+                xml:
+                  name: RelatedBillingClientDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.RelatedBillingClientDto'
+                xml:
+                  name: RelatedBillingClientDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.RelatedBillingClientDto'
+                xml:
+                  name: RelatedBillingClientDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Billing get related billing clients
+      x-summary-source: derived
+  /v1/Billing/RelatedBillingClient/{key}:
+    get:
+      tags:
+      - Billing/RelatedBillingClient
+      operationId: Billing_GetRelatedBillingClientsById
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.RelatedBillingClientDto'
+                xml:
+                  name: RelatedBillingClientDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.RelatedBillingClientDto'
+                xml:
+                  name: RelatedBillingClientDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.RelatedBillingClientDto'
+                xml:
+                  name: RelatedBillingClientDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.RelatedBillingClientDto'
+                xml:
+                  name: RelatedBillingClientDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.RelatedBillingClientDto'
+                xml:
+                  name: RelatedBillingClientDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.RelatedBillingClientDto'
+                xml:
+                  name: RelatedBillingClientDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Billing get related billing clients by id
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.RelatedBillingClientDto:
+      properties:
+        firstClientId:
+          type: integer
+          format: int32
+        firstClientName:
+          type: string
+        firstClientFirstName:
+          type: string
+        firstClientLastName:
+          type: string
+        firstClientIsActive:
+          type: boolean
+        firstClientValue:
+          type: number
+          format: double
+        firstClientRepresentative:
+          type: string
+        firstClientRepresentativeNumber:
+          type: string
+        firstClientBillStatusType:
+          type: string
+          enum:
+          - ReadyToBill
+          - Hold
+          - PendingReview
+        secondClientId:
+          type: integer
+          format: int32
+        secondClientName:
+          type: string
+        secondClientFirstName:
+          type: string
+        secondClientLastName:
+          type: string
+        secondClientIsActive:
+          type: boolean
+        secondClientValue:
+          type: number
+          format: double
+        secondClientRepresentative:
+          type: string
+        secondClientRepresentativeNumber:
+          type: string
+        secondClientBillStatusType:
+          type: string
+          enum:
+          - ReadyToBill
+          - Hold
+          - PendingReview
+      xml:
+        name: RelatedBillingClientDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

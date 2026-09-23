@@ -1,0 +1,196 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Bill Data Export API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/BillDataExport
+paths:
+  /v1/Billing/BillDataExport:
+    get:
+      tags:
+      - Billing/BillDataExport
+      summary: Get list of unpaid bills
+      operationId: Billing_GetBillDataExport
+      parameters:
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: billInstanceId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillDataDto'
+                xml:
+                  name: BillDataDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillDataDto'
+                xml:
+                  name: BillDataDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillDataDto'
+                xml:
+                  name: BillDataDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillDataDto'
+                xml:
+                  name: BillDataDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillDataDto'
+                xml:
+                  name: BillDataDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillDataDto'
+                xml:
+                  name: BillDataDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.BillDataDto:
+      properties:
+        billAccountItemId:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        fundFamilyName:
+          type: string
+        accountNumber:
+          type: string
+        balanceDue:
+          type: number
+          format: double
+        representativeName:
+          type: string
+        aggregateValue:
+          type: number
+          format: double
+        billedMarketValue:
+          type: number
+          format: double
+        payMethod:
+          type: string
+        feeSchedule:
+          type: string
+        masterPayoutSchedule:
+          type: string
+        initialAmount:
+          type: number
+          format: double
+        adjustmentsValue:
+          type: number
+          format: double
+        feePercent:
+          type: number
+          format: double
+        daysInCycle:
+          type: integer
+          format: int32
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        registrationId:
+          type: integer
+          format: int32
+        clientName:
+          type: string
+        clientLastName:
+          type: string
+        accountType:
+          type: string
+        outsideId:
+          type: string
+        subAdvisorName:
+          type: string
+        custodian:
+          type: string
+        billFrequency:
+          type: string
+          enum:
+          - Undefined
+          - Monthly
+          - Quarterly
+          - Triannual
+          - Semiannually
+          - Annually
+          - AtMaturity
+        valueMethod:
+          type: string
+          enum:
+          - PeriodEndingValue
+          - AvgDailyBalance
+          - AvgMonthlyBalance
+        managementStyle:
+          type: string
+        calcDate:
+          type: string
+          format: date-time
+        billId:
+          type: integer
+          format: int32
+        billInstanceId:
+          type: integer
+          format: int32
+        modelName:
+          type: string
+      xml:
+        name: BillDataDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

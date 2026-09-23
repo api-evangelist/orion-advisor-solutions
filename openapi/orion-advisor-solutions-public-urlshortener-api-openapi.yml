@@ -1,0 +1,51 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Public/Url Shortener API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Public/UrlShortener
+paths:
+  /v1/Public/UrlShortener/{slug}:
+    get:
+      tags:
+      - Public/UrlShortener
+      operationId: Public_GetUrlShortenerAsync
+      parameters:
+      - name: slug
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Public get url shortener async
+      x-summary-source: derived
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

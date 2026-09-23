@@ -1,0 +1,97 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Tolerisk API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/Tolerisk
+paths:
+  /v1/Integrations/Tolerisk/GetToken:
+    get:
+      tags:
+      - Integrations/Tolerisk
+      summary: Used to get token from Fidelity
+      operationId: Tolerisk_GetTokenAsync
+      parameters:
+      - name: code
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: authorization
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+  /v1/Integrations/Tolerisk/Redirect:
+    get:
+      tags:
+      - Integrations/Tolerisk
+      operationId: Tolerisk_GetRedirectUrlAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Tolerisk get redirect url async
+      x-summary-source: derived
+  /v1/Integrations/Tolerisk/SaveOrionToken:
+    get:
+      tags:
+      - Integrations/Tolerisk
+      operationId: Tolerisk_CallSaveOrionTokenAsync
+      parameters:
+      - name: OrionId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: authorization
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      summary: Tolerisk call save orion token async
+      x-summary-source: derived
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

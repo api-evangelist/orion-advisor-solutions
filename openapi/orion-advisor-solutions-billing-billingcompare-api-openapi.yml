@@ -1,0 +1,705 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Billing Compare API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/BillingCompare
+paths:
+  /v1/Billing/BillingCompare:
+    get:
+      tags:
+      - Billing/BillingCompare
+      summary: Get list of Billing Compares in DB
+      operationId: BillCompareDashboard_GetBillingCompare
+      parameters:
+      - name: ofDate
+        in: query
+        description: Filter by Bills As of Date
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingCompareDto'
+                xml:
+                  name: BillingCompareDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingCompareDto'
+                xml:
+                  name: BillingCompareDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingCompareDto'
+                xml:
+                  name: BillingCompareDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingCompareDto'
+                xml:
+                  name: BillingCompareDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingCompareDto'
+                xml:
+                  name: BillingCompareDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingCompareDto'
+                xml:
+                  name: BillingCompareDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/BillingCompare/HouseholdBills/{clientId}:
+    get:
+      tags:
+      - Billing/BillingCompare
+      summary: Get Household Bills
+      operationId: BillCompareDashboard_GetHouseholdBills
+      parameters:
+      - name: clientId
+        in: path
+        description: ClientId
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Billing.BillComboForHousehold'
+                xml:
+                  name: BillComboForHousehold
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Billing.BillComboForHousehold'
+                xml:
+                  name: BillComboForHousehold
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Billing.BillComboForHousehold'
+                xml:
+                  name: BillComboForHousehold
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Billing.BillComboForHousehold'
+                xml:
+                  name: BillComboForHousehold
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Billing.BillComboForHousehold'
+                xml:
+                  name: BillComboForHousehold
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Billing.BillComboForHousehold'
+                xml:
+                  name: BillComboForHousehold
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/BillingCompare/instance:
+    get:
+      tags:
+      - Billing/BillingCompare
+      summary: This operation will compare account items between two bill instances
+      description: 'Sample Request
+
+        GET /Billing/BillingCompare/instance?billInstanceA=3729&billInstanceB=3726&take=10000&skip=10000
+
+        [
+
+        {
+
+        "clientId": 383,
+
+        "repName": "Kadeem Shelton",
+
+        "repNo": null,
+
+        "clientName": null,
+
+        "lName": null,
+
+        "accountId": 2400,
+
+        "regName": "Alanna Sowell",
+
+        "acctCode": "010000180",
+
+        "fundName": "401(k) Account",
+
+        "isActive": true,
+
+        "feeSchedule": "TieredFee",
+
+        "feePercent": null,
+
+        "payMethod": null,
+
+        "valueMethod": null,
+
+        "billStyle": null,
+
+        "billFrequency": null,
+
+        "billId": 0,
+
+        "ofDate": "2024-03-31T00:00:00-05:00",
+
+        "flowValue": 0.0000,
+
+        "flowBalance": 0.0000,
+
+        "renewalValue": 175000.0000,
+
+        "renewalAggregate": 175000.0000,
+
+        "renewalInitialAmount": 652.6600,
+
+        "renewalAdjustments": 0.0000,
+
+        "renewalBalanceDue": 652.6600,
+
+        "previousDate": "2024-03-31T00:00:00-05:00",
+
+        "previousFlowValue": 0.0000,
+
+        "previousFlowBalance": 0.0000,
+
+        "previousValue": 175000.0000,
+
+        "previousAggregate": 175000.0000,
+
+        "previousInitialAmount": 652.6600,
+
+        "previousAdjustments": 0.0000,
+
+        "previousBalanceDue": 652.6600,
+
+        "differenceValue": 0.0000,
+
+        "differentInitial": 0.0000,
+
+        "differentBalanceDue": 0.0000,
+
+        "percentofValue": null,
+
+        "percentofFee": 0.0000
+
+        }
+
+        ]'
+      operationId: BillCompareDashboard_GetBillingCompareByInstance
+      parameters:
+      - name: billInstanceA
+        in: query
+        description: Requires. Bill Instance A
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: billInstanceB
+        in: query
+        description: Requires. Bill Instance B
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: take
+        in: query
+        description: Number of Records to return
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 100000
+      - name: skip
+        in: query
+        description: Number of records to skip.
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingCompareDto'
+                xml:
+                  name: BillingCompareDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingCompareDto'
+                xml:
+                  name: BillingCompareDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingCompareDto'
+                xml:
+                  name: BillingCompareDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingCompareDto'
+                xml:
+                  name: BillingCompareDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingCompareDto'
+                xml:
+                  name: BillingCompareDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingCompareDto'
+                xml:
+                  name: BillingCompareDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/BillingCompare/instance/new:
+    get:
+      tags:
+      - Billing/BillingCompare
+      summary: Enhanced billing compare that returns both Receivables and Payables data with…
+      operationId: BillCompareDashboard_GetBillingCompareEnhancedByInstanceAsync
+      parameters:
+      - name: billInstanceA
+        in: query
+        description: Requires. Bill Instance A
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: billInstanceB
+        in: query
+        description: Requires. Bill Instance B
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        description: Cancellation token
+        required: true
+      - name: take
+        in: query
+        description: Number of Records to return
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 100000
+      - name: skip
+        in: query
+        description: Number of records to skip
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingCompareEnhancedDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingCompareEnhancedDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingCompareEnhancedDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingCompareEnhancedDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingCompareEnhancedDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingCompareEnhancedDto'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.BillingCompareDto:
+      properties:
+        clientId:
+          type: integer
+          format: int32
+        repName:
+          type: string
+        repNo:
+          type: string
+        clientName:
+          type: string
+        lName:
+          type: string
+        accountId:
+          type: integer
+          format: int32
+        regName:
+          type: string
+        acctCode:
+          type: string
+        fundName:
+          type: string
+        isActive:
+          type: boolean
+        feeSchedule:
+          type: string
+        feePercent:
+          type: number
+          format: double
+        payMethod:
+          type: string
+        valueMethod:
+          type: string
+        billStyle:
+          type: string
+        billFrequency:
+          type: string
+        billId:
+          type: integer
+          format: int32
+        ofDate:
+          type: string
+          format: date-time
+        flowValue:
+          type: number
+          format: double
+        flowBalance:
+          type: number
+          format: double
+        renewalValue:
+          type: number
+          format: double
+        renewalAggregate:
+          type: number
+          format: double
+        renewalInitialAmount:
+          type: number
+          format: double
+        renewalAdjustments:
+          type: number
+          format: double
+        renewalBalanceDue:
+          type: number
+          format: double
+        previousDate:
+          type: string
+          format: date-time
+        previousFlowValue:
+          type: number
+          format: double
+        previousFlowBalance:
+          type: number
+          format: double
+        previousValue:
+          type: number
+          format: double
+        previousAggregate:
+          type: number
+          format: double
+        previousInitialAmount:
+          type: number
+          format: double
+        previousAdjustments:
+          type: number
+          format: double
+        previousBalanceDue:
+          type: number
+          format: double
+        differenceValue:
+          type: number
+          format: double
+        differentInitial:
+          type: number
+          format: double
+        differentBalanceDue:
+          type: number
+          format: double
+        percentofValue:
+          type: number
+          format: double
+        percentofFee:
+          type: number
+          format: double
+      xml:
+        name: BillingCompareDto
+      type: object
+    OAS.DataModel.Billing.BillComboForHousehold:
+      properties:
+        billId:
+          type: integer
+          format: int32
+        billType:
+          type: string
+        dateRange:
+          type: string
+      xml:
+        name: BillComboForHousehold
+      type: object
+    OAS.WebApi.DTO.Billing.BillEntityDetailDto:
+      properties:
+        billEntityName:
+          type: string
+        payoutRate:
+          type: number
+          format: double
+        payoutRateName:
+          type: string
+        initialAmount:
+          type: number
+          format: double
+        adjustmentAmount:
+          type: number
+          format: double
+      xml:
+        name: BillEntityDetailDto
+      type: object
+    OAS.WebApi.DTO.Billing.BillingComparePayablesDto:
+      properties:
+        clientId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        regName:
+          type: string
+        acctCode:
+          type: string
+        instance1PayablesTotal:
+          type: number
+          format: double
+        instance2PayablesTotal:
+          type: number
+          format: double
+        payablesDifference:
+          type: number
+          format: double
+        instance1PayoutSchedule:
+          type: string
+        instance2PayoutSchedule:
+          type: string
+        instance1BillEntities:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillEntityDetailDto'
+          xml:
+            name: BillEntityDetailDto
+            wrapped: true
+          type: array
+        instance2BillEntities:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillEntityDetailDto'
+          xml:
+            name: BillEntityDetailDto
+            wrapped: true
+          type: array
+        warningMessage:
+          type: string
+        clientName:
+          type: string
+        lName:
+          type: string
+        repName:
+          type: string
+        repNo:
+          type: string
+      xml:
+        name: BillingComparePayablesDto
+      type: object
+    OAS.WebApi.DTO.Billing.BillingCompareReceivablesDto:
+      properties:
+        clientId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        acctCode:
+          type: string
+        regName:
+          type: string
+        lName:
+          type: string
+        fundName:
+          type: string
+        isActive:
+          type: boolean
+        instance1MarketValue:
+          type: number
+          format: double
+        instance2MarketValue:
+          type: number
+          format: double
+        marketValueDifference:
+          type: number
+          format: double
+        instance1InitialAmount:
+          type: number
+          format: double
+        instance2InitialAmount:
+          type: number
+          format: double
+        initialDifference:
+          type: number
+          format: double
+        instance1BalanceDue:
+          type: number
+          format: double
+        instance2BalanceDue:
+          type: number
+          format: double
+        balanceDueDifference:
+          type: number
+          format: double
+        instance1FeeSchedule:
+          type: string
+        instance2FeeSchedule:
+          type: string
+        instance1AsOfDate:
+          type: string
+          format: date-time
+        instance2AsOfDate:
+          type: string
+          format: date-time
+        instance1Aggregate:
+          type: number
+          format: double
+        instance2Aggregate:
+          type: number
+          format: double
+        instance1FlowValue:
+          type: number
+          format: double
+        instance2FlowValue:
+          type: number
+          format: double
+        instance1FlowBalance:
+          type: number
+          format: double
+        instance2FlowBalance:
+          type: number
+          format: double
+        instance1Adjustments:
+          type: number
+          format: double
+        instance2Adjustments:
+          type: number
+          format: double
+        percentofFeeChange:
+          type: number
+          format: double
+        repName:
+          type: string
+        repNo:
+          type: string
+        warningMessage:
+          type: string
+        clientName:
+          type: string
+      xml:
+        name: BillingCompareReceivablesDto
+      type: object
+    OAS.WebApi.DTO.Billing.BillingCompareEnhancedDto:
+      description: Enhanced billing compare response that includes both Receivables and Payables data
+      properties:
+        receivables:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingCompareReceivablesDto'
+          xml:
+            name: BillingCompareReceivablesDto
+            wrapped: true
+          type: array
+        payables:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillingComparePayablesDto'
+          xml:
+            name: BillingComparePayablesDto
+            wrapped: true
+          type: array
+        payablesBillEntityColumns:
+          items:
+            type: string
+          type: array
+      xml:
+        name: BillingCompareEnhancedDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

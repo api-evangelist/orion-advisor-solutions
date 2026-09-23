@@ -1,0 +1,359 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/openai API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: integrations/openai
+paths:
+  /v1/integrations/openai/chat/completions:
+    post:
+      tags:
+      - integrations/openai
+      operationId: OpenAI_GetChatCompletionAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OpenAI_API.Chat.ChatMessage'
+              xml:
+                name: ChatMessage
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OpenAI_API.Chat.ChatMessage'
+              xml:
+                name: ChatMessage
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OpenAI_API.Chat.ChatMessage'
+              xml:
+                name: ChatMessage
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OpenAI_API.Chat.ChatMessage'
+              xml:
+                name: ChatMessage
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OpenAI_API.Chat.ChatMessage'
+              xml:
+                name: ChatMessage
+                wrapped: true
+              type: array
+        required: true
+      summary: Open AI get chat completion async
+      x-summary-source: derived
+  /v1/integrations/openai/portfolioview/{clientId}/meetingagenda:
+    post:
+      tags:
+      - integrations/openai
+      operationId: OpenAI_CreateMeetingAgendaAsync
+      parameters:
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.EnvisionReportDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.EnvisionReportDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.EnvisionReportDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.EnvisionReportDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.EnvisionReportDto'
+        required: true
+      summary: Open AI create meeting agenda async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.DataModel.Reporting.Interfaces.IReportFeatureFlagOverrider:
+      properties:
+        dynamicBenchmarkProcessType:
+          readOnly: true
+          type: string
+          enum:
+          - Cloud
+          - LocalService
+        forceAssetGroupingIntraDayPerformance:
+          readOnly: true
+          type: boolean
+        activityProcessType:
+          readOnly: true
+          type: string
+          enum:
+          - Cloud
+          - LocalService
+        costBasisProcessType:
+          type: string
+          enum:
+          - Old
+          - Cloud
+          - LocalService
+        morningstarLevel2Assignment:
+          type: boolean
+        localPriceCutOverDate:
+          type: string
+          format: date-time
+        noScope:
+          type: boolean
+        ensureAssetsUpdated:
+          type: boolean
+        storeReportDataCompressed:
+          type: boolean
+        showEInModelNames:
+          type: boolean
+        performanceProcessType:
+          type: string
+          enum:
+          - Cloud
+          - LocalService
+        forceNonSummaryPerformanceToUseTwr:
+          type: boolean
+        forceNetOfFeesPerformance:
+          type: boolean
+        costBasisStoredSource:
+          type: string
+          enum:
+          - Orion
+          - Custodian
+        tradingWithParentGrouping:
+          type: boolean
+        useGlobalSettingsUniqueIds:
+          type: boolean
+        showEquations:
+          type: boolean
+        isReportCompare:
+          type: boolean
+        useBenchmarksInAccountChangeHistory:
+          type: boolean
+        benchmarkAssignmentOverride:
+          type: string
+        useAsOfDateForAdvizr:
+          type: boolean
+        accountNumbersToShow:
+          type: integer
+          format: int32
+        useBatchSettingsBulkCopy:
+          type: boolean
+        showExcludedFromRebalance:
+          type: boolean
+        useInMemoryForModelVsActual:
+          type: boolean
+        useNewLineChartRenderer:
+          type: boolean
+        useNewScatterPlotChartRenderer:
+          type: boolean
+        useInMemoryIncomeCalculation:
+          type: boolean
+        useModelAllocationHistory:
+          type: boolean
+        useDisclaimerShadowDom:
+          type: boolean
+      xml:
+        name: IReportFeatureFlagOverrider
+      type: object
+    OAS.DataModel.Reporting.ReportOption:
+      required:
+      - id
+      - $type
+      properties:
+        id:
+          type: string
+        $type:
+          readOnly: true
+          type: string
+        optionGuid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        optionId:
+          type: integer
+          format: int32
+        isDisabled:
+          type: boolean
+        isGlobal:
+          type: boolean
+        isIgnored:
+          type: boolean
+        name:
+          type: string
+        useInception:
+          type: boolean
+        prompt:
+          type: string
+          enum:
+          - Never
+          - Always
+      xml:
+        name: ReportOption
+      type: object
+    OpenAI_API.Chat.ChatMessage:
+      properties:
+        role:
+          type: string
+        content:
+          type: string
+        name:
+          type: string
+      xml:
+        name: ChatMessage
+      type: object
+    OAS.DataModel.Reporting.Engine.IGroupingOptionOverrider:
+      properties:
+        allowExpireClientsToStorePerformance:
+          type: boolean
+        ensureAssetsUpdated:
+          type: boolean
+        groupCustodialCashTogether:
+          type: boolean
+        groupLinksTogether:
+          type: boolean
+        returnActiveLinkedEntity:
+          type: boolean
+        useAccountChange:
+          type: boolean
+        useSmaSettings:
+          type: boolean
+        accountInclusion:
+          type: string
+        includeHistoricalLinks:
+          type: string
+      xml:
+        name: IGroupingOptionOverrider
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.EnvisionReportDto:
+      properties:
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        requiredOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+        additionalOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOptionCategory'
+          xml:
+            name: ReportOptionCategory
+            wrapped: true
+          type: array
+        deliveryOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+        hasAdditionalOptions:
+          type: boolean
+        featureFlagOverrides:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IReportFeatureFlagOverrider'
+        groupingOptionOverrider:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.IGroupingOptionOverrider'
+        isFavorite:
+          type: boolean
+        reportName:
+          type: string
+        reportDescription:
+          type: string
+        parentCategory:
+          type: string
+        category:
+          type: string
+        runAssignedVersion:
+          type: boolean
+      xml:
+        name: EnvisionReportDto
+      type: object
+    OAS.DataModel.Reporting.ReportOptionCategory:
+      required:
+      - category
+      - options
+      properties:
+        category:
+          type: string
+        options:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+      xml:
+        name: ReportOptionCategory
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

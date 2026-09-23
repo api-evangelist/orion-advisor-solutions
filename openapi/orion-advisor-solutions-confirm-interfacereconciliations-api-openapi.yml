@@ -1,0 +1,499 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Confirm/Interface Reconciliations API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Confirm/InterfaceReconciliations
+paths:
+  /v1/Confirm/InterfaceReconciliations:
+    get:
+      tags:
+      - Confirm/InterfaceReconciliations
+      summary: Gets a list of interface reconciliations that the logged in user has access to
+      operationId: InterfaceReconciliations_Get
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: isActive
+        in: query
+        description: Optional. Default null. If provided only recons for active (when true) or inactive (when false) download sources will be returned.
+        required: false
+        schema:
+          type: boolean
+      - name: startDate
+        in: query
+        description: Optional. Default null. If provided only recons that come after the start date will be returned.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional. Default null. If provided only recons that come before the end date will be returned.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: transactionStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: positionStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: costBasisStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.InterfaceReconciliationDto'
+                xml:
+                  name: InterfaceReconciliationDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.InterfaceReconciliationDto'
+                xml:
+                  name: InterfaceReconciliationDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.InterfaceReconciliationDto'
+                xml:
+                  name: InterfaceReconciliationDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.InterfaceReconciliationDto'
+                xml:
+                  name: InterfaceReconciliationDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.InterfaceReconciliationDto'
+                xml:
+                  name: InterfaceReconciliationDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.InterfaceReconciliationDto'
+                xml:
+                  name: InterfaceReconciliationDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Confirm/InterfaceReconciliations/{downloadSourceId}/{createDate}:
+    get:
+      tags:
+      - Confirm/InterfaceReconciliations
+      summary: Gets the interface reconciliation that has the provided key.
+      operationId: InterfaceReconciliations_GetByKey
+      parameters:
+      - name: downloadSourceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: createDate
+        in: path
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.InterfaceReconciliationDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.InterfaceReconciliationDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.InterfaceReconciliationDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.InterfaceReconciliationDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.InterfaceReconciliationDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.InterfaceReconciliationDto'
+      security:
+      - Authorization: []
+  /v1/Confirm/InterfaceReconciliations/{downloadSourceId}/SourceName:
+    get:
+      tags:
+      - Confirm/InterfaceReconciliations
+      summary: Returns the download source name using the download source id provided
+      operationId: InterfaceReconciliations_GetDownloadSourceName
+      parameters:
+      - name: downloadSourceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+  /v1/Confirm/InterfaceReconciliations/Action/SendReconCompleteNotification:
+    get:
+      tags:
+      - Confirm/InterfaceReconciliations
+      operationId: InterfaceReconciliations_GetReconCompleteNotification
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Confirm.InterfaceReconciliationsController.ReconNotificationDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Confirm.InterfaceReconciliationsController.ReconNotificationDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Confirm.InterfaceReconciliationsController.ReconNotificationDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Confirm.InterfaceReconciliationsController.ReconNotificationDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Confirm.InterfaceReconciliationsController.ReconNotificationDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Confirm.InterfaceReconciliationsController.ReconNotificationDto'
+      security:
+      - Authorization: []
+      summary: Interface reconciliations get recon complete notification
+      x-summary-source: derived
+    post:
+      tags:
+      - Confirm/InterfaceReconciliations
+      operationId: InterfaceReconciliations_SendReconCompleteNotificationAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Confirm.InterfaceReconciliationsController.ReconNotificationDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Confirm.InterfaceReconciliationsController.ReconNotificationDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Confirm.InterfaceReconciliationsController.ReconNotificationDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Confirm.InterfaceReconciliationsController.ReconNotificationDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Confirm.InterfaceReconciliationsController.ReconNotificationDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Confirm.InterfaceReconciliationsController.ReconNotificationDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Confirm.InterfaceReconciliationsController.ReconNotificationDto'
+        required: true
+      summary: Interface reconciliations send recon complete notification async
+      x-summary-source: derived
+  /v1/Confirm/InterfaceReconciliations/Counts:
+    get:
+      tags:
+      - Confirm/InterfaceReconciliations
+      summary: Returns summary counts of unconfirmed records
+      operationId: InterfaceReconciliations_GetCounts
+      parameters:
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.InterfaceReconciliationCountsDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.InterfaceReconciliationCountsDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.InterfaceReconciliationCountsDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.InterfaceReconciliationCountsDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.InterfaceReconciliationCountsDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.InterfaceReconciliationCountsDto'
+      security:
+      - Authorization: []
+  /v1/Confirm/InterfaceReconciliations/Status:
+    get:
+      tags:
+      - Confirm/InterfaceReconciliations
+      summary: Returns the current reconcillation status
+      operationId: InterfaceReconciliations_GetReconStatus
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.InterfaceReconciliationStatusDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.InterfaceReconciliationStatusDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.InterfaceReconciliationStatusDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.InterfaceReconciliationStatusDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.InterfaceReconciliationStatusDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.InterfaceReconciliationStatusDto'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Portfolio.InterfaceReconciliationStatusDto:
+      properties:
+        isReconciled:
+          type: boolean
+        reconcileTime:
+          type: string
+          format: date-time
+        showInTom:
+          type: boolean
+      xml:
+        name: InterfaceReconciliationStatusDto
+      type: object
+    OAS.WebApi.Domains.Confirm.InterfaceReconciliationsController.ReconNotificationDto:
+      properties:
+        emailToList:
+          type: string
+        sendACR:
+          type: boolean
+        sendEmail:
+          type: boolean
+        emailBodyNoACR:
+          type: string
+        emailBodyWithACR:
+          type: string
+        sendChatter:
+          type: boolean
+      xml:
+        name: ReconNotificationDto
+      type: object
+    OAS.WebApi.DTO.Confirm.InterfaceReconciliationDto:
+      properties:
+        downloadSourceId:
+          type: integer
+          format: int32
+        createdDate:
+          type: string
+          format: date-time
+        downloadSourceName:
+          type: string
+        transactionStatus:
+          type: string
+        positionStatus:
+          type: string
+        completeDate:
+          type: string
+          format: date-time
+        transactionFileCount:
+          type: integer
+          format: int32
+        transactionNotConfirmedCount:
+          type: integer
+          format: int32
+        transactionConfirmedCount:
+          type: integer
+          format: int32
+        transactionExcludedCount:
+          type: integer
+          format: int32
+        transactionCount:
+          type: integer
+          format: int32
+        positionFileCount:
+          type: integer
+          format: int32
+        positionNotConfirmedCount:
+          type: integer
+          format: int32
+        positionConfirmedCount:
+          type: integer
+          format: int32
+        positionExcludedCount:
+          type: integer
+          format: int32
+        positionCount:
+          type: integer
+          format: int32
+        downloadFileNotesCount:
+          type: integer
+          format: int32
+        downloadSourceNotesCount:
+          type: integer
+          format: int32
+        nameFileCount:
+          type: integer
+          format: int32
+        nameNotConfirmedCount:
+          type: integer
+          format: int32
+        nameConfirmedCount:
+          type: integer
+          format: int32
+        nameExcludedCount:
+          type: integer
+          format: int32
+        nameStatus:
+          type: string
+        nameCount:
+          type: integer
+          format: int32
+        costBasisFileCount:
+          type: integer
+          format: int32
+        costBasisNotConfirmedCount:
+          type: integer
+          format: int32
+        costBasisConfirmedCount:
+          type: integer
+          format: int32
+        costBasisExcludedCount:
+          type: integer
+          format: int32
+        costBasisStatus:
+          type: string
+        costBasisCount:
+          type: integer
+          format: int32
+        notesCount:
+          readOnly: true
+          type: integer
+          format: int32
+        nameNumberConfirmed:
+          readOnly: true
+          type: string
+        transactionNumberConfirmed:
+          readOnly: true
+          type: string
+        positionNumberConfirmed:
+          readOnly: true
+          type: string
+      xml:
+        name: InterfaceReconciliationDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.InterfaceReconciliationCountsDto:
+      properties:
+        unconfirmedAccounts:
+          type: integer
+          format: int32
+        unconfirmedPositions:
+          type: integer
+          format: int32
+        unconfirmedTransactions:
+          type: integer
+          format: int32
+      xml:
+        name: InterfaceReconciliationCountsDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

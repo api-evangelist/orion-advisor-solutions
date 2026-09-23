@@ -1,0 +1,205 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Confirm/Download Source Note API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Confirm/DownloadSourceNote
+paths:
+  /v1/Confirm/DownloadSourceNote:
+    get:
+      tags:
+      - Confirm/DownloadSourceNote
+      summary: Returns a list of Download Source Notes
+      description: 'Sample Request
+
+        GET /Confirm/DownloadSourceNote'
+      operationId: DownloadSourceNote_GetDownloadSourceNotesAsync
+      parameters:
+      - name: ct
+        in: header
+        description: Cancellation Token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceNoteDto'
+                xml:
+                  name: DownloadSourceNoteDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceNoteDto'
+                xml:
+                  name: DownloadSourceNoteDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceNoteDto'
+                xml:
+                  name: DownloadSourceNoteDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceNoteDto'
+                xml:
+                  name: DownloadSourceNoteDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceNoteDto'
+                xml:
+                  name: DownloadSourceNoteDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceNoteDto'
+                xml:
+                  name: DownloadSourceNoteDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Confirm/DownloadSourceNote/Upsert/{downloadSourceNoteType}:
+    put:
+      tags:
+      - Confirm/DownloadSourceNote
+      summary: Will either create or update a given download source note depending if one…
+      description: 'Sample Request
+
+        PUT /Confirm/DownloadSourceNote/Upsert
+
+        {
+
+        "downloadSourceId": 1,
+
+        "analystNote": "test note",
+
+        "advisorNote": "test note 2"
+
+        }'
+      operationId: DownloadSourceNote_UpsertDownloadSourceNoteAsync
+      parameters:
+      - name: downloadSourceNoteType
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - AdvisorNote
+          - AnalystNote
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceNoteDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceNoteDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceNoteDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceNoteDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceNoteDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceNoteDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceNoteDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceNoteDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceNoteDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceNoteDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceNoteDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceNoteDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceNoteDto'
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Confirm.DownloadSourceNoteDto:
+      properties:
+        downloadSourceId:
+          type: integer
+          format: int32
+        downloadSourceDescription:
+          type: string
+        serviceTeam:
+          type: string
+        analystAssigned:
+          type: string
+        downloadFormat:
+          type: string
+        downloadFormatId:
+          type: integer
+          format: int32
+        analystNote:
+          type: string
+        advisorNote:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        analystNoteEditedDate:
+          type: string
+          format: date-time
+        analystNoteEditedBy:
+          type: string
+        advisorNoteEditedDate:
+          type: string
+          format: date-time
+        advisorNoteEditedBy:
+          type: string
+        isDownloadSourceActive:
+          type: boolean
+      xml:
+        name: DownloadSourceNoteDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

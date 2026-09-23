@@ -1,0 +1,262 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Fix Batches API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/FixBatches
+paths:
+  /v1/Trading/FixBatches/{fixBatchId}/FixBlockOrders:
+    get:
+      tags:
+      - Trading/FixBatches
+      operationId: FixBatch_GetBlocks
+      parameters:
+      - name: fixBatchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Fix batch get blocks
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Trading.FixBlockOrderDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        fixBatchId:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        custodianId:
+          type: integer
+          format: int32
+        custodianName:
+          type: string
+        fixVersion:
+          type: string
+        execBroker:
+          type: string
+        clOrdId:
+          type: string
+        handlInst:
+          type: string
+        execInst:
+          type: string
+        side:
+          type: string
+        locateReqd:
+          type: boolean
+        orderQty:
+          type: number
+          format: double
+        orderAmt:
+          type: number
+          format: double
+        ordType:
+          type: string
+        limitPrice:
+          type: number
+          format: double
+        stopPrice:
+          type: number
+          format: double
+        timeInForce:
+          type: string
+        expireTime:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        tradedBy:
+          type: string
+        transactTime:
+          type: string
+          format: date-time
+        orderId:
+          type: string
+        ordStatus:
+          type: string
+        cumQty:
+          type: number
+          format: double
+        avgPrice:
+          type: number
+          format: double
+        leavesQty:
+          type: number
+          format: double
+        ordRejReason:
+          type: string
+        cxlRejReason:
+          type: string
+        allocRejCode:
+          type: string
+        lastShares:
+          type: number
+          format: double
+        msgSequenceNumber:
+          type: integer
+          format: int32
+        allocId:
+          type: string
+        refAllocId:
+          type: string
+        allocStatus:
+          type: string
+        lastText:
+          type: string
+        lastTextType:
+          type: integer
+          format: int32
+        autoAllocate:
+          type: boolean
+        pendingOrdStatus:
+          type: string
+        settlmntTyp:
+          type: string
+        futSettDate:
+          type: string
+          format: date-time
+        masterAccountNumber:
+          type: string
+        ticker:
+          type: string
+        cusip:
+          type: string
+        batchName:
+          type: string
+        shortTermGain:
+          type: number
+          format: double
+        longTermGain:
+          type: number
+          format: double
+        gainLossMessage:
+          type: string
+        tradesGainLossNotCalcedCount:
+          type: integer
+          format: int32
+        blockName:
+          readOnly: true
+          type: string
+        productName:
+          type: string
+        needsAttention:
+          type: string
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        tradeType:
+          type: integer
+          format: int32
+        strikePrice:
+          type: number
+          format: double
+        cfiCode:
+          type: string
+        orderCapacity:
+          type: string
+        positionEffect:
+          type: string
+        maturityDate:
+          type: string
+          format: date-time
+        solicited:
+          type: boolean
+        reportBlockStatus:
+          type: string
+        algorithmTag:
+          type: string
+        isOpen:
+          type: boolean
+        isClosed:
+          type: boolean
+      xml:
+        name: FixBlockOrderDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

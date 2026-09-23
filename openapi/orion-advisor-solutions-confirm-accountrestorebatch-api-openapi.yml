@@ -1,0 +1,478 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Confirm/Account Restore Batch API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Confirm/AccountRestoreBatch
+paths:
+  /v1/Confirm/AccountRestoreBatch:
+    get:
+      tags:
+      - Confirm/AccountRestoreBatch
+      summary: Gets the list of Account Restore Batches
+      description: 'Sample Request
+
+        GET /Confirm/AccountRestoreBatch
+
+        {
+
+        "startDate": "12/31/2009",
+
+        "endDate": "04/10/2023"
+
+        }'
+      operationId: AccountRestoreBatch_GetAccountRestoreBatchSummaryListAsync
+      parameters:
+      - name: startDate
+        in: query
+        description: Start Date to filter from
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: End Date to filter to
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: ct
+        in: header
+        description: Cancellation Token
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSummaryDto'
+                xml:
+                  name: AccountRestoreSummaryDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSummaryDto'
+                xml:
+                  name: AccountRestoreSummaryDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSummaryDto'
+                xml:
+                  name: AccountRestoreSummaryDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSummaryDto'
+                xml:
+                  name: AccountRestoreSummaryDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSummaryDto'
+                xml:
+                  name: AccountRestoreSummaryDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSummaryDto'
+                xml:
+                  name: AccountRestoreSummaryDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+    post:
+      tags:
+      - Confirm/AccountRestoreBatch
+      summary: Creates an Account Restore batch
+      description: 'Sample Request
+
+        POST /Confirm/AccountRestoreBatch
+
+        [ {
+
+        "accountId": 1,
+
+        "accountNumber": "123abc456def",
+
+        "name": "My Account",
+
+        "accountType": "Sample",
+
+        "fundFamily": "My Fund",
+
+        "currentValue": 1000.0,
+
+        "downloadSource": "Source of the download",
+
+        "effectiveDate": "2021-01-01",
+
+        "lastPositionDate": "2023-11-06",
+
+        "inBalance": true,
+
+        "validationMessage": null
+
+        } ]'
+      operationId: AccountRestoreBatch_CreateAccountRestoreBatchesAsync
+      parameters:
+      - name: ct
+        in: header
+        description: A cancellation token
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSimpleDto'
+              xml:
+                name: AccountRestoreSimpleDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSimpleDto'
+              xml:
+                name: AccountRestoreSimpleDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSimpleDto'
+              xml:
+                name: AccountRestoreSimpleDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSimpleDto'
+              xml:
+                name: AccountRestoreSimpleDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSimpleDto'
+              xml:
+                name: AccountRestoreSimpleDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSimpleDto'
+              xml:
+                name: AccountRestoreSimpleDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSimpleDto'
+              xml:
+                name: AccountRestoreSimpleDto
+                wrapped: true
+              type: array
+        description: A list of account restore objects.
+        required: true
+  /v1/Confirm/AccountRestoreBatch/{accountRestoreId}:
+    get:
+      tags:
+      - Confirm/AccountRestoreBatch
+      summary: Returns a list of Account Restore Details for a given restore id
+      description: 'Sample Request
+
+        GET /Confirm/AccountRestoreBatch/1'
+      operationId: AccountRestoreBatch_GetAccountRestoreBatchDetailsAsync
+      parameters:
+      - name: accountRestoreId
+        in: path
+        description: Account Restore Id to filter.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        description: Cancellation Token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreBatchStatusDetailDto'
+                xml:
+                  name: AccountRestoreBatchStatusDetailDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreBatchStatusDetailDto'
+                xml:
+                  name: AccountRestoreBatchStatusDetailDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreBatchStatusDetailDto'
+                xml:
+                  name: AccountRestoreBatchStatusDetailDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreBatchStatusDetailDto'
+                xml:
+                  name: AccountRestoreBatchStatusDetailDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreBatchStatusDetailDto'
+                xml:
+                  name: AccountRestoreBatchStatusDetailDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreBatchStatusDetailDto'
+                xml:
+                  name: AccountRestoreBatchStatusDetailDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Confirm/AccountRestoreBatch/Action/Retry/{accountRestoreId}:
+    put:
+      tags:
+      - Confirm/AccountRestoreBatch
+      summary: Resets the status of the Restore Batch to New to be reprocessed
+      description: 'Sample Request
+
+        PUT /Confirm/AccountRestoreBatch/Action/Retry/1'
+      operationId: AccountRestoreBatch_RetryBatchAsync
+      parameters:
+      - name: accountRestoreId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        description: Cancellation Token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSummaryDto:
+      properties:
+        batchId:
+          type: integer
+          format: int32
+        restoreStatus:
+          type: string
+        numberOfAccounts:
+          type: integer
+          format: int32
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+      xml:
+        name: AccountRestoreSummaryDto
+      type: object
+    OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreBatchStatusDetailDto:
+      properties:
+        batchId:
+          type: integer
+          format: int32
+        batchStatus:
+          type: string
+          enum:
+          - New
+          - CreateNameFile
+          - CreateTransactionPosition
+          - ApplyTransactionPosition
+          - CleanupPositions
+          - Notify
+          - Complete
+          - Error
+          - UndoCancelledAccounts
+        accountNumber:
+          type: string
+        accountId:
+          type: integer
+          format: int32
+        accountStatus:
+          type: string
+          enum:
+          - Pending
+          - Processing
+          - Complete
+          - Error
+        startDate:
+          type: string
+          format: date-time
+        wasPlugged:
+          type: boolean
+        statusMessage:
+          type: string
+        statusMessageHtml:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        householdId:
+          type: integer
+          format: int32
+        householdName:
+          type: string
+        isCancelled:
+          type: boolean
+        restoreData:
+          type: boolean
+        accountInBalance:
+          type: boolean
+      xml:
+        name: AccountRestoreBatchStatusDetailDto
+      type: object
+    OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSimpleDto:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        name:
+          type: string
+        accountType:
+          type: string
+        fundFamily:
+          type: string
+        currentValue:
+          type: number
+          format: double
+        downloadSource:
+          type: string
+        effectiveDate:
+          type: string
+          format: date-time
+        isCancelled:
+          type: boolean
+        restoreData:
+          type: boolean
+        lastPositionDate:
+          type: string
+          format: date-time
+        inBalance:
+          type: boolean
+        validationMessage:
+          type: string
+        validationMessageType:
+          type: integer
+          format: int32
+        accountRestoreId:
+          type: integer
+          format: int32
+      xml:
+        name: AccountRestoreSimpleDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

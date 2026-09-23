@@ -1,0 +1,351 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Consolidation API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/Consolidation
+paths:
+  /v1/Billing/Consolidation/PostAuditFiles:
+    post:
+      tags:
+      - Billing/Consolidation
+      summary: Generate Audit files
+      description: 'Sample Request
+
+        POST v1/Billing/Consolidation/PostAuditFiles
+
+        {
+
+        "startDate": null,
+
+        "endDate": null,
+
+        "billInstanceIds": "123,2333",
+
+        "entityList": [
+
+        {
+
+        "entity": 18,
+
+        "ids": [
+
+        31,
+
+        1
+
+        ],
+
+        "selected": true
+
+        },
+
+        {
+
+        "entity": 12,
+
+        "ids": [],
+
+        "selected": false
+
+        },
+
+        {
+
+        "entity": 79,
+
+        "selected": false
+
+        }
+
+        ]
+
+        }'
+      operationId: Billing_GenerateConsolidationBillingAuditFilesAsync
+      parameters:
+      - name: ct
+        in: header
+        description: Cancellation Token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AuditFileBlobDto'
+                xml:
+                  name: AuditFileBlobDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AuditFileBlobDto'
+                xml:
+                  name: AuditFileBlobDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AuditFileBlobDto'
+                xml:
+                  name: AuditFileBlobDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AuditFileBlobDto'
+                xml:
+                  name: AuditFileBlobDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AuditFileBlobDto'
+                xml:
+                  name: AuditFileBlobDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AuditFileBlobDto'
+                xml:
+                  name: AuditFileBlobDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostAuditDataDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostAuditDataDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostAuditDataDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostAuditDataDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostAuditDataDto'
+        description: File data
+        required: true
+  /v1/Billing/Consolidation/ReceiveableSummary:
+    get:
+      tags:
+      - Billing/Consolidation
+      summary: Obsolete.
+      operationId: Billing_GetV1BillingConsolidationReceiveableSummary
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.CashFundingGridDto'
+                xml:
+                  name: CashFundingGridDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.CashFundingGridDto'
+                xml:
+                  name: CashFundingGridDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.CashFundingGridDto'
+                xml:
+                  name: CashFundingGridDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.CashFundingGridDto'
+                xml:
+                  name: CashFundingGridDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.CashFundingGridDto'
+                xml:
+                  name: CashFundingGridDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.CashFundingGridDto'
+                xml:
+                  name: CashFundingGridDto
+                  wrapped: true
+                type: array
+      deprecated: true
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.AuditFileBlobDto:
+      properties:
+        instanceId:
+          type: integer
+          format: int32
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        createdDate:
+          type: string
+          format: date-time
+        id:
+          type: integer
+          format: int32
+        openWith:
+          type: string
+        fileName:
+          type: string
+        blobDesc:
+          type: string
+        blobText:
+          type: string
+        category:
+          type: string
+        isZip:
+          type: boolean
+      xml:
+        name: AuditFileBlobDto
+      type: object
+    OAS.WebApi.DTO.Billing.CashFundingGridDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        fundFamily:
+          type: string
+        productName:
+          type: string
+        moneyMarketBalance:
+          type: number
+          format: double
+        balanceDue:
+          type: number
+          format: double
+        difference:
+          type: number
+          format: double
+        payMethod:
+          type: string
+        instanceType:
+          type: string
+        clientId:
+          type: integer
+          format: int32
+        clientLastName:
+          type: string
+        clientName:
+          type: string
+        accountType:
+          type: string
+        accountNumber:
+          type: string
+        managementStyle:
+          type: string
+        accountIsActive:
+          type: boolean
+        representativeName:
+          type: string
+        feeReqSrc:
+          type: string
+          enum:
+          - Invalid
+          - HighValueFund
+          - CashAccount
+          - ProRata
+      xml:
+        name: CashFundingGridDto
+      type: object
+    OAS.DataModel.Billing.PostAuditEntity:
+      properties:
+        entity:
+          type: string
+          enum:
+          - FundFamily
+          - Custodian
+          - BusinessLine
+        ids:
+          items:
+            type: integer
+            format: int32
+          type: array
+        selected:
+          type: boolean
+      xml:
+        name: PostAuditEntity
+      type: object
+    OAS.WebApi.DTO.Billing.PostAuditDataDto:
+      properties:
+        billData:
+          description: UNUSED
+          type: boolean
+        payableSummary:
+          description: UNUSED
+          type: boolean
+        billingAudit:
+          description: UNUSED
+          type: boolean
+        startDate:
+          description: Start date of the bill instance date range to filter on
+          type: string
+          format: date-time
+        endDate:
+          description: End date of the bill instance date range to filter on
+          type: string
+          format: date-time
+        billInstanceIds:
+          description: A comma-separated list of bill instance IDs to include
+          type: string
+        entityList:
+          description: List of payable entities to filter the accounts on
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Billing.PostAuditEntity'
+          xml:
+            name: PostAuditEntity
+            wrapped: true
+          type: array
+      xml:
+        name: PostAuditDataDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

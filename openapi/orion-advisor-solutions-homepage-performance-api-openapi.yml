@@ -1,0 +1,83 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Homepage/Performance API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Homepage/Performance
+paths:
+  /v1/Homepage/Performance:
+    post:
+      tags:
+      - Homepage/Performance
+      summary: Gets combined database performance (from cache) and benchmark performance using…
+      operationId: Dashboard_GetPerformanceAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.HomepagePerformanceRequestDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.HomepagePerformanceRequestDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.HomepagePerformanceRequestDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.HomepagePerformanceRequestDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.HomepagePerformanceRequestDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.HomepagePerformanceRequestDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.HomepagePerformanceRequestDto'
+        description: DTO containing representative IDs and benchmark information
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.HomepageDashboard.HomepagePerformanceRequestDto:
+      properties:
+        entityIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        benchmarkKey:
+          type: string
+      xml:
+        name: HomepagePerformanceRequestDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

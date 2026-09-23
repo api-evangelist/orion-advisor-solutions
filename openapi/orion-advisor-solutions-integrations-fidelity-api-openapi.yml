@@ -1,0 +1,1316 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Fidelity API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/Fidelity
+paths:
+  /v1/Integrations/Fidelity/AccountPositions:
+    get:
+      tags:
+      - Integrations/Fidelity
+      summary: Fidelity account positions async
+      operationId: Fidelity_AccountPositionsAsync
+      parameters:
+      - name: accountId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountPositionsResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountPositionsResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountPositionsResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountPositionsResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountPositionsResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountPositionsResponse'
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Integrations/Fidelity/AccountTrxHistory:
+    get:
+      tags:
+      - Integrations/Fidelity
+      summary: Fidelity account trx history async
+      operationId: Fidelity_AccountTrxHistoryAsync
+      parameters:
+      - name: accountId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountHistoryResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountHistoryResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountHistoryResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountHistoryResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountHistoryResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountHistoryResponse'
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Integrations/Fidelity/AcctBalance:
+    get:
+      tags:
+      - Integrations/Fidelity
+      summary: quoteCode can have three values R - Real-time Price - Price obtained at the…
+      operationId: Fidelity_AcctBalanceAsync
+      parameters:
+      - name: accountId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: quoteCode
+        in: query
+        required: false
+        schema:
+          type: string
+          default: R
+      - name: ind
+        in: query
+        required: false
+        schema:
+          type: string
+          default: intra
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountBalanceResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountBalanceResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountBalanceResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountBalanceResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountBalanceResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountBalanceResponse'
+      security:
+      - Authorization: []
+  /v1/Integrations/Fidelity/ClientDocuments/Traceroute/{clientId}:
+    get:
+      tags:
+      - Integrations/Fidelity
+      operationId: Fidelity_ClientDocuemtnsTracerouteAsync
+      parameters:
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Fidelity client docuemtns traceroute async
+      x-summary-source: derived
+  /v1/Integrations/Fidelity/ClientDocumentToken/Client/{clientId}:
+    get:
+      tags:
+      - Integrations/Fidelity
+      summary: A list of all the Clients Tokens for this Client
+      operationId: Fidelity_GetClientDocumentTokensAsync
+      parameters:
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+    post:
+      tags:
+      - Integrations/Fidelity
+      summary: Adds a new Client to Fidelity Documents
+      description: This end-point will not double save. It is safe to post to this end-point multiple times.
+      operationId: Fidelity_CreateClientDocumentTokenAsync
+      parameters:
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.FidelityDocuments.FidelityDocumentTokenInputDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.FidelityDocuments.FidelityDocumentTokenInputDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.FidelityDocuments.FidelityDocumentTokenInputDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.FidelityDocuments.FidelityDocumentTokenInputDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.FidelityDocuments.FidelityDocumentTokenInputDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.FidelityDocuments.FidelityDocumentTokenInputDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.FidelityDocuments.FidelityDocumentTokenInputDto'
+        required: true
+  /v1/Integrations/Fidelity/ClientDocumentToken/Client/{clientId}/{opaqueId}:
+    delete:
+      tags:
+      - Integrations/Fidelity
+      summary: Deletes opaqueId for this client with this ID
+      operationId: Fidelity_DeleteClientDocumentTokensAsync
+      parameters:
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: opaqueId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/Fidelity/ClientDocumentToken/Refresh/Client/{clientId}:
+    get:
+      tags:
+      - Integrations/Fidelity
+      operationId: Fidelity_RefreshClientDocumentTokensAsync
+      parameters:
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Fidelity refresh client document tokens async
+      x-summary-source: derived
+  /v1/Integrations/Fidelity/Echotest:
+    get:
+      tags:
+      - Integrations/Fidelity
+      operationId: Fidelity_EchoTestAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/EchoTest.EchoResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EchoTest.EchoResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/EchoTest.EchoResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/EchoTest.EchoResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EchoTest.EchoResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/EchoTest.EchoResponse'
+      security:
+      - Authorization: []
+      summary: Fidelity echo test async
+      x-summary-source: derived
+  /v1/Integrations/Fidelity/GetInvestorAlertMessages:
+    get:
+      tags:
+      - Integrations/Fidelity
+      operationId: Fidelity_GetInvestorAlertMessagesAsync
+      parameters:
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.ResultListOfOAT.Integrations.Fidelity.Classes.CurrentInvestorAlertsMessagesTypeDTO'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.ResultListOfOAT.Integrations.Fidelity.Classes.CurrentInvestorAlertsMessagesTypeDTO'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.ResultListOfOAT.Integrations.Fidelity.Classes.CurrentInvestorAlertsMessagesTypeDTO'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.ResultListOfOAT.Integrations.Fidelity.Classes.CurrentInvestorAlertsMessagesTypeDTO'
+      security:
+      - Authorization: []
+      summary: Fidelity get investor alert messages async
+      x-summary-source: derived
+  /v1/Integrations/Fidelity/GetSubscriberAlertMessagesCount:
+    get:
+      tags:
+      - Integrations/Fidelity
+      operationId: Fidelity_GetSubscriberAlertMessagesCountAsync
+      parameters:
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.ResultListOfOAT.Integrations.Fidelity.Classes.SubscriberAlertMessagesCountDetailsTypeDTO'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.ResultListOfOAT.Integrations.Fidelity.Classes.SubscriberAlertMessagesCountDetailsTypeDTO'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.ResultListOfOAT.Integrations.Fidelity.Classes.SubscriberAlertMessagesCountDetailsTypeDTO'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.ResultListOfOAT.Integrations.Fidelity.Classes.SubscriberAlertMessagesCountDetailsTypeDTO'
+      security:
+      - Authorization: []
+      summary: Fidelity get subscriber alert messages count async
+      x-summary-source: derived
+  /v1/Integrations/Fidelity/GetSubscriberAlertsMessages:
+    get:
+      tags:
+      - Integrations/Fidelity
+      operationId: Fidelity_GetSubscriberAlertsMessagesAsync
+      parameters:
+      - name: accountId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.ResultListOfOAT.Integrations.Fidelity.Classes.CurrentAlertsMessagesTypeDTO'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.ResultListOfOAT.Integrations.Fidelity.Classes.CurrentAlertsMessagesTypeDTO'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.ResultListOfOAT.Integrations.Fidelity.Classes.CurrentAlertsMessagesTypeDTO'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.ResultListOfOAT.Integrations.Fidelity.Classes.CurrentAlertsMessagesTypeDTO'
+      security:
+      - Authorization: []
+      summary: Fidelity get subscriber alerts messages async
+      x-summary-source: derived
+  /v1/Integrations/Fidelity/GetUserAlertMessagesCount:
+    get:
+      tags:
+      - Integrations/Fidelity
+      operationId: Fidelity_GetUserAlertMessagesCountAsync
+      parameters:
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.ResultItemOfOAT.Integrations.Fidelity.Classes.MessageCountDetailsDTO'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.ResultItemOfOAT.Integrations.Fidelity.Classes.MessageCountDetailsDTO'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.ResultItemOfOAT.Integrations.Fidelity.Classes.MessageCountDetailsDTO'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.ResultItemOfOAT.Integrations.Fidelity.Classes.MessageCountDetailsDTO'
+      security:
+      - Authorization: []
+      summary: Fidelity get user alert messages count async
+      x-summary-source: derived
+  /v1/Integrations/Fidelity/NewPortfolio/Pending:
+    post:
+      tags:
+      - Integrations/Fidelity
+      summary: Gets pending accounts from Akoya for the specified client
+      operationId: Fidelity_RefreshAccountsAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/Fidelity/PreGen:
+    post:
+      tags:
+      - Integrations/Fidelity
+      operationId: Fidelity_PregenAccountsAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Code.Integrations.FidelityPreGenInDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Code.Integrations.FidelityPreGenInDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Code.Integrations.FidelityPreGenInDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Code.Integrations.FidelityPreGenInDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Code.Integrations.FidelityPreGenInDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Code.Integrations.FidelityPreGenInDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Code.Integrations.FidelityPreGenInDto'
+        required: true
+      summary: Fidelity pregen accounts async
+      x-summary-source: derived
+  /v1/Integrations/Fidelity/Streetscape/Redirect:
+    get:
+      tags:
+      - Integrations/Fidelity
+      summary: Fidelity get streetscape redirect url async
+      operationId: Fidelity_GetStreetscapeRedirectUrlAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Integrations/Fidelity/Streetscape/SSO:
+    get:
+      tags:
+      - Integrations/Fidelity
+      summary: Connects through a single-sign-on (SSO) to Streetscape
+      operationId: Fidelity_StreetscapeSsoAsync
+      parameters:
+      - name: relayState
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: accountNumber
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/Fidelity/Streetscape/Token:
+    get:
+      tags:
+      - Integrations/Fidelity
+      summary: Fidelity get streetscape token async
+      operationId: Fidelity_GetStreetscapeTokenAsync
+      parameters:
+      - name: code
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Integrations/Fidelity/Wealthscape/Redirect:
+    get:
+      tags:
+      - Integrations/Fidelity
+      summary: Fidelity get wealth scape redirect url async
+      operationId: Fidelity_GetWealthScapeRedirectUrlAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Integrations/Fidelity/Wealthscape/SSO:
+    get:
+      tags:
+      - Integrations/Fidelity
+      summary: Connects through a single-sign-on (SSO) to Wealthscape
+      operationId: Fidelity_WealthscapeSsoAsync
+      parameters:
+      - name: relayState
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: accountNumber
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/Fidelity/Wealthscape/Token:
+    get:
+      tags:
+      - Integrations/Fidelity
+      summary: Fidelity get wealthscape token async
+      operationId: Fidelity_GetWealthscapeTokenAsync
+      parameters:
+      - name: code
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      x-summary-source: derived
+components:
+  schemas:
+    OAT.Integrations.Fidelity.Classes.AccountHistoryDTO:
+      properties:
+        entrydate:
+          type: string
+          format: date-time
+        tradedate:
+          type: string
+          format: date-time
+        settledate:
+          type: string
+          format: date-time
+        price:
+          type: number
+          format: double
+        netAmount:
+          type: number
+          format: double
+        secId:
+          type: string
+        description:
+          type: string
+        quantity:
+          type: number
+          format: double
+        transactionType:
+          type: string
+      xml:
+        name: AccountHistoryDTO
+      type: object
+    OAT.Integrations.Fidelity.Classes.SubscriberAlertMessagesCountResultsType:
+      properties:
+        classCode:
+          type: string
+        superCategoryCode:
+          type: string
+        categoryCode:
+          type: string
+        subCategoryCode:
+          type: string
+        unReadCount:
+          type: integer
+          format: int32
+        unReadCountFieldSpecified:
+          type: boolean
+      xml:
+        name: SubscriberAlertMessagesCountResultsType
+      type: object
+    EchoTest.EchoResponseType:
+      properties:
+        echo:
+          type: string
+      xml:
+        name: EchoResponseType
+      type: object
+    EchoTest.EchoResponse:
+      properties:
+        externalPrincipalIdentity:
+          $ref: '#/components/schemas/EchoTest.ExternalPrincipalIdentity'
+        externalProcessingDirectives:
+          $ref: '#/components/schemas/EchoTest.ExternalProcessingDirectives'
+        echoResponse1:
+          $ref: '#/components/schemas/EchoTest.EchoResponseType'
+      xml:
+        name: EchoResponse
+      type: object
+    EchoTest.ExternalPrincipalIdentity:
+      properties:
+        b2BPartnerPrincipalId:
+          type: string
+        requestorId:
+          type: string
+        targetPrincipalId:
+          type: string
+        thirdPartyPrincipalId:
+          type: string
+        authMethod:
+          type: string
+        authToken:
+          type: string
+        securityTokens:
+          items:
+            $ref: '#/components/schemas/EchoTest.SecurityTokenType'
+          xml:
+            name: SecurityTokenType
+            wrapped: true
+          type: array
+        principalDomain:
+          type: string
+        principalRole:
+          type: string
+        correspondentModel:
+          type: string
+        marketSegment:
+          type: string
+        scsCompanyId:
+          type: integer
+          format: int32
+        scsCompanyIdSpecified:
+          type: boolean
+        superBranch:
+          type: string
+        branch:
+          type: string
+        b2BUserAgent:
+          type: string
+      xml:
+        name: ExternalPrincipalIdentity
+      type: object
+    OAT.Integrations.Fidelity.Classes.ResultListOfOAT.Integrations.Fidelity.Classes.SubscriberAlertMessagesCountDetailsTypeDTO:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.SubscriberAlertMessagesCountDetailsTypeDTO'
+          xml:
+            name: SubscriberAlertMessagesCountDetailsTypeDTO
+            wrapped: true
+          type: array
+        hasError:
+          type: boolean
+        status:
+          type: string
+      xml:
+        name: ResultList`1
+      type: object
+    EchoTest.ExternalProcessingDirectives:
+      properties:
+        logTrackingId:
+          type: string
+        timeoutMillis:
+          type: integer
+          format: int32
+        timeoutMillisSpecified:
+          type: boolean
+      xml:
+        name: ExternalProcessingDirectives
+      type: object
+    OAT.Integrations.Fidelity.Classes.ResultListOfOAT.Integrations.Fidelity.Classes.CurrentInvestorAlertsMessagesTypeDTO:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.CurrentInvestorAlertsMessagesTypeDTO'
+          xml:
+            name: CurrentInvestorAlertsMessagesTypeDTO
+            wrapped: true
+          type: array
+        hasError:
+          type: boolean
+        status:
+          type: string
+      xml:
+        name: ResultList`1
+      type: object
+    OAT.Integrations.Fidelity.Classes.AccountPositionsResponse:
+      properties:
+        status:
+          type: string
+        hasError:
+          type: boolean
+        accountPositionsLst:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.PositionsDTO'
+          xml:
+            name: PositionsDTO
+            wrapped: true
+          type: array
+      xml:
+        name: AccountPositionsResponse
+      type: object
+    OAS.WebApi.Code.Integrations.FidelityPreGenInDto:
+      properties:
+        numberOfAccounts:
+          type: integer
+          format: int32
+        repId:
+          type: integer
+          format: int32
+        isRepSelf:
+          readOnly: true
+          type: boolean
+      xml:
+        name: FidelityPreGenInDto
+      type: object
+    OAT.Integrations.Fidelity.Classes.PositionsDTO:
+      properties:
+        securityId:
+          type: string
+        closingQuantity:
+          type: number
+          format: double
+        closingPrice:
+          type: number
+          format: double
+        cost:
+          type: number
+          format: double
+        closingMarketValue:
+          type: number
+          format: double
+        currencyCode:
+          type: string
+        description:
+          type: string
+      xml:
+        name: PositionsDTO
+      type: object
+    OAT.Integrations.Fidelity.Classes.CurrentInvestorAlertsMessagesTypeDTO:
+      properties:
+        messageId:
+          type: string
+        classCode:
+          type: string
+        classDesc:
+          type: string
+        superCategoryCode:
+          type: string
+        superCategoryDesc:
+          type: string
+        categoryCode:
+          type: string
+        categoryDesc:
+          type: string
+        subCategoryCode:
+          type: string
+        subCategoryDesc:
+          type: string
+        userStatusCode:
+          type: string
+        clientId:
+          type: string
+        creationTmstmp:
+          type: string
+          format: date-time
+        creationTmstmpSpecified:
+          type: boolean
+        branchCode:
+          type: string
+        regRep1Code:
+          type: string
+        regRep2Code:
+          type: string
+        agencyCode:
+          type: string
+        gNum:
+          type: string
+        acctNum:
+          type: string
+        userActionCode:
+          type: string
+        messageSubject:
+          type: string
+        rowNum:
+          type: integer
+          format: int32
+        rowNumSpecified:
+          type: boolean
+        deepLink:
+          type: string
+      xml:
+        name: CurrentInvestorAlertsMessagesTypeDTO
+      type: object
+    OAT.Integrations.Fidelity.Classes.SubscriberAlertMessagesCountDetailsTypeDTO:
+      properties:
+        subscriberAlertMessagesCountResults:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.SubscriberAlertMessagesCountResultsType'
+          xml:
+            name: SubscriberAlertMessagesCountResultsType
+            wrapped: true
+          type: array
+        requestorId:
+          type: string
+        recipientTypeCode:
+          type: string
+      xml:
+        name: SubscriberAlertMessagesCountDetailsTypeDTO
+      type: object
+    OAT.Integrations.Fidelity.Classes.CurrentAlertsMessagesTypeDTO:
+      properties:
+        messageSentTmstmpFieldSpecified:
+          type: boolean
+        creationTmstmpFieldSpecified:
+          type: boolean
+        messageId:
+          type: string
+        associatedMessageId:
+          type: string
+        requestorId:
+          type: string
+        businessLineCode:
+          type: string
+        classCode:
+          type: string
+        classDesc:
+          type: string
+        superCategoryCode:
+          type: string
+        superCategoryDesc:
+          type: string
+        categoryCode:
+          type: string
+        categoryDesc:
+          type: string
+        subCategoryCode:
+          type: string
+        subCategoryDesc:
+          type: string
+        userStatusCode:
+          type: string
+        clientId:
+          type: string
+        messageSentTmstmp:
+          type: string
+          format: date-time
+        creationTmstmp:
+          type: string
+          format: date-time
+        branchCode:
+          type: string
+        regRep1Code:
+          type: string
+        regRep2Code:
+          type: string
+        agencyCode:
+          type: string
+        gNum:
+          type: string
+        acctNum:
+          type: string
+        userActionCode:
+          type: string
+        clientName:
+          type: string
+        givingAcctNum:
+          type: string
+        fbsiShortName:
+          type: string
+        wcCustomShortName:
+          type: string
+        accountOwner:
+          type: string
+        groupName:
+          type: string
+        itemNumber:
+          type: string
+        productClass:
+          type: string
+        deepLink:
+          type: string
+      xml:
+        name: CurrentAlertsMessagesTypeDTO
+      type: object
+    EchoTest.SecurityTokenType:
+      properties:
+        tokenType:
+          type: string
+        tokenValue:
+          type: string
+      xml:
+        name: SecurityTokenType
+      type: object
+    OAS.Integrations.FidelityDocuments.FidelityDocumentTokenInputDto:
+      required:
+      - firstName
+      - lastName
+      - dateOfBirth
+      - last4SSN
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date-time
+        last4SSN:
+          type: string
+        userGuid:
+          type: string
+      xml:
+        name: FidelityDocumentTokenInputDto
+      type: object
+    OAT.Integrations.Fidelity.Classes.ResultListOfOAT.Integrations.Fidelity.Classes.CurrentAlertsMessagesTypeDTO:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.CurrentAlertsMessagesTypeDTO'
+          xml:
+            name: CurrentAlertsMessagesTypeDTO
+            wrapped: true
+          type: array
+        hasError:
+          type: boolean
+        status:
+          type: string
+      xml:
+        name: ResultList`1
+      type: object
+    OAT.Integrations.Fidelity.Classes.ResultItemOfOAT.Integrations.Fidelity.Classes.MessageCountDetailsDTO:
+      properties:
+        item:
+          $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.MessageCountDetailsDTO'
+        hasError:
+          type: boolean
+        status:
+          type: string
+      xml:
+        name: ResultItem`1
+      type: object
+    OAT.Integrations.Fidelity.Classes.MessageCountDetailsDTO:
+      properties:
+        totalMessageCount:
+          type: integer
+          format: int32
+        totalMessageCountFieldSpecified:
+          type: boolean
+        readMessageCount:
+          type: integer
+          format: int32
+        readMessageCountFieldSpecified:
+          type: boolean
+        unReadMessageCount:
+          type: integer
+          format: int32
+        unReadMessageCountFieldSpecified:
+          type: boolean
+        flaggedMessageCount:
+          type: integer
+          format: int32
+        flaggedMessageCountFieldSpecified:
+          type: boolean
+      xml:
+        name: MessageCountDetailsDTO
+      type: object
+    OAT.Integrations.Fidelity.Classes.AccountBalanceResponse:
+      properties:
+        status:
+          type: string
+        hasError:
+          type: boolean
+        accountBalances:
+          $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountBalancesDTO'
+      xml:
+        name: AccountBalanceResponse
+      type: object
+    OAT.Integrations.Fidelity.Classes.AccountHistoryResponse:
+      properties:
+        status:
+          type: string
+        hasError:
+          type: boolean
+        accountHistoryLst:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountHistoryDTO'
+          xml:
+            name: AccountHistoryDTO
+            wrapped: true
+          type: array
+      xml:
+        name: AccountHistoryResponse
+      type: object
+    OAT.Integrations.Fidelity.Classes.AccountBalancesDTO:
+      properties:
+        totalAccountValue:
+          type: number
+          format: double
+        totalSecuritiesMarketValue:
+          type: number
+          format: double
+        coreSweepFund:
+          type: number
+          format: double
+        cashDebitCredit:
+          type: number
+          format: double
+        cashMarketValue:
+          type: number
+          format: double
+        settledCash:
+          type: number
+          format: double
+        unsettledCashCredit:
+          type: number
+          format: double
+        unsettledCashDebit:
+          type: number
+          format: double
+        cashAvailableWithdraw:
+          type: number
+          format: double
+        buyingPowerCashOnly:
+          type: number
+          format: double
+      xml:
+        name: AccountBalancesDTO
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

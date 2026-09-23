@@ -1,0 +1,180 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Confirm/Download Format Version API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Confirm/DownloadFormatVersion
+paths:
+  /v1/Confirm/DownloadFormatVersion/{formatId}:
+    get:
+      tags:
+      - Confirm/DownloadFormatVersion
+      summary: Gets a list of Download Formats that the logged in user has access to
+      operationId: DownloadFormatVersions_GetDownloadFormatVersionsAsync
+      parameters:
+      - name: formatId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Confirm/DownloadFormatVersion/{formatId}/AlClient:
+    get:
+      tags:
+      - Confirm/DownloadFormatVersion
+      summary: Get a list of download Format versions set for each alClient
+      operationId: DownloadFormatVersions_GetDownloadFormatVersionsForDatabasesAsync
+      parameters:
+      - name: formatId
+        in: path
+        description: the format to check the version assigned to each alClient
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+    post:
+      tags:
+      - Confirm/DownloadFormatVersion
+      summary: Save format version for each alClient
+      operationId: DownloadFormatVersions_SaveAllDownloadFormatVersionsForDatabasesAsync
+      parameters:
+      - name: formatId
+        in: path
+        description: the format id for the versions to set for each alClient
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFormatVersionALClientDto'
+              xml:
+                name: DownloadFormatVersionALClientDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFormatVersionALClientDto'
+              xml:
+                name: DownloadFormatVersionALClientDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFormatVersionALClientDto'
+              xml:
+                name: DownloadFormatVersionALClientDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFormatVersionALClientDto'
+              xml:
+                name: DownloadFormatVersionALClientDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFormatVersionALClientDto'
+              xml:
+                name: DownloadFormatVersionALClientDto
+                wrapped: true
+              type: array
+        description: A collection of objects determining which version to be set each alClient for the format id
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Confirm.DownloadFormatVersionALClientDto:
+      properties:
+        databaseName:
+          type: string
+        downloadFormatVersionId:
+          type: integer
+          format: int32
+        auditedBy:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        alClientId:
+          type: integer
+          format: int32
+        downloadFormatId:
+          type: integer
+          format: int32
+      xml:
+        name: DownloadFormatVersionALClientDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

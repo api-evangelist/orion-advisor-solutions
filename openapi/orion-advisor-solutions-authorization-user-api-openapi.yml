@@ -1,0 +1,1940 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Authorization/User API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Authorization/User
+paths:
+  /v1/Authorization/User:
+    get:
+      tags:
+      - Authorization/User
+      summary: Gets commonly used information about the logged in user
+      operationId: User_GetUserAsync
+      parameters:
+      - name: forMobileApp
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserProfileDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserProfileDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserProfileDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserProfileDto'
+      security:
+      - Authorization: []
+    post:
+      tags:
+      - Authorization/User
+      summary: Create a new Client level user.
+      operationId: User_CreateUser
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserProfileDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserProfileDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserProfileDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserProfileDto'
+      deprecated: true
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Security.NewUserDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Security.NewUserDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Security.NewUserDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Security.NewUserDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Security.NewUserDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Security.NewUserDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Security.NewUserDto'
+        description: New User Login information
+        required: true
+  /v1/Authorization/User/AvailableToConnect/{searchText}:
+    get:
+      tags:
+      - Authorization/User
+      summary: Gets a list of users that the current user is allowed to connect with
+      operationId: User_AllowedToConnect
+      parameters:
+      - name: searchText
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: forMobileApp
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserProfileDto'
+                xml:
+                  name: UserProfileDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserProfileDto'
+                xml:
+                  name: UserProfileDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserProfileDto'
+                xml:
+                  name: UserProfileDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.UserProfileDto'
+                xml:
+                  name: UserProfileDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Authorization/User/Databases:
+    get:
+      tags:
+      - Authorization/User
+      summary: Gets a list of databases the logged in user has access to
+      operationId: Databases_GetAvailableDatabasesAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      - name: isActive
+        in: query
+        description: 'Optional. Default: null. If provided limits the return to only those database'
+        required: false
+        schema:
+          type: boolean
+      - name: filterForMasterGroup
+        in: query
+        description: Optional. Default null.  If provided limits the return to only the databases in the logged in users mastergroup.
+        required: false
+        schema:
+          type: boolean
+      - name: searchText
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: filterForCotenant
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+                xml:
+                  name: DatabaseDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+                xml:
+                  name: DatabaseDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+                xml:
+                  name: DatabaseDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+                xml:
+                  name: DatabaseDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+                xml:
+                  name: DatabaseDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+                xml:
+                  name: DatabaseDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Authorization/User/Databases/{key}:
+    get:
+      tags:
+      - Authorization/User
+      summary: Gets the database that has the provided key.
+      operationId: Databases_GetByKeyAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Authorization/User
+      operationId: Databases_UpdateDatabaseAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DatabaseDto'
+        required: true
+      summary: Databases update database async
+      x-summary-source: derived
+  /v1/Authorization/User/Databases/Action/LockDown:
+    put:
+      tags:
+      - Authorization/User
+      operationId: Databases_ReleaseLockDownAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+      summary: Databases release lock down async
+      x-summary-source: derived
+  /v1/Authorization/User/Databases/LockDown:
+    get:
+      tags:
+      - Authorization/User
+      operationId: Databases_GetLockDownType
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+      summary: Databases get lock down type
+      x-summary-source: derived
+  /v1/Authorization/User/Gravatar:
+    get:
+      tags:
+      - Authorization/User
+      summary: Gets commonly used information about the logged in user
+      operationId: User_GetUsersGravatarAsync
+      parameters:
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 80
+      - name: defaultImage
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - _404
+          - Mp
+          - Identicon
+          - Monsterid
+          - Wavatar
+          - Retro
+          - Rodohbash
+          - Black
+          default: 3
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Authorization/User/Integrations/{app}:
+    get:
+      tags:
+      - Authorization/User
+      summary: Retreives the Intgration information for the specified integration partner…
+      operationId: UserIntegrations_GetUserIntegrationDtl
+      parameters:
+      - name: app
+        in: path
+        description: Integraton partners application code
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Security.UserDetailIntegration'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Security.UserDetailIntegration'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Security.UserDetailIntegration'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Security.UserDetailIntegration'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Security.UserDetailIntegration'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Security.UserDetailIntegration'
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Authorization/User
+      summary: Updates the current users integration information for the Currently logged in…
+      operationId: UserIntegrations_UpdateUserIntegrationDtl
+      parameters:
+      - name: app
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: forCurrentUser
+        in: query
+        description: Optional.  Default is true.  When true, the integration information is saved for the currently logged in user.  If false, The integration info is saved for the specified user in the body - UserDetailId
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Security.UserDetailIntegration'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Security.UserDetailIntegration'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Security.UserDetailIntegration'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Security.UserDetailIntegration'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Security.UserDetailIntegration'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Security.UserDetailIntegration'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Security.UserDetailIntegration'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Security.UserDetailIntegration'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Security.UserDetailIntegration'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Security.UserDetailIntegration'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Security.UserDetailIntegration'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Security.UserDetailIntegration'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Security.UserDetailIntegration'
+        required: true
+    delete:
+      tags:
+      - Authorization/User
+      summary: Deletes the integration information for the specified integration application…
+      operationId: UserIntegrations_DeleteUserIntegrationDtl
+      parameters:
+      - name: app
+        in: path
+        description: Integraton partners application code
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Authorization/User/Integrations/SaleForce:
+    post:
+      tags:
+      - Authorization/User
+      operationId: UserIntegrations_CreateIntegrationDetailForSaleForceAsync
+      parameters:
+      - name: sessionId
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: User integrations create integration detail for sale force async
+      x-summary-source: derived
+  /v1/Authorization/User/Logo:
+    get:
+      tags:
+      - Authorization/User
+      summary: Gets the user's logo
+      operationId: User_GetLogoAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: imageType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Report
+          - Portal
+          - Firm
+          default: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Authorization/User/Privileges:
+    get:
+      tags:
+      - Authorization/User
+      operationId: AuthorizationPrivileges_GetCurrentUserPrivileges
+      parameters:
+      - name: resetCache
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: object
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: object
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: object
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: object
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: object
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: object
+                type: array
+      security:
+      - Authorization: []
+      summary: Authorization privileges get current user privileges
+      x-summary-source: derived
+  /v1/Authorization/User/Privileges/{code}:
+    get:
+      tags:
+      - Authorization/User
+      summary: Gets the right that the logged in user has that matches the security code…
+      operationId: AuthorizationPrivileges_GetPrivilege
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: resetCache
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.AuthorizationPrivilegeDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.AuthorizationPrivilegeDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.AuthorizationPrivilegeDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.AuthorizationPrivilegeDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.AuthorizationPrivilegeDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.AuthorizationPrivilegeDto'
+      security:
+      - Authorization: []
+  /v1/Authorization/User/Privileges/Codes:
+    post:
+      tags:
+      - Authorization/User
+      summary: Gets the rights that the logged in user has that matches the security codes…
+      operationId: AuthorizationPrivileges_GetPrivileges
+      parameters:
+      - name: resetCache
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.AuthorizationPrivilegeDto'
+                xml:
+                  name: AuthorizationPrivilegeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.AuthorizationPrivilegeDto'
+                xml:
+                  name: AuthorizationPrivilegeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.AuthorizationPrivilegeDto'
+                xml:
+                  name: AuthorizationPrivilegeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.AuthorizationPrivilegeDto'
+                xml:
+                  name: AuthorizationPrivilegeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.AuthorizationPrivilegeDto'
+                xml:
+                  name: AuthorizationPrivilegeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.AuthorizationPrivilegeDto'
+                xml:
+                  name: AuthorizationPrivilegeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: string
+              type: array
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+          text/json:
+            schema:
+              items:
+                type: string
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: string
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: string
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: string
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: string
+              type: array
+        description: The privilege codes being queried
+        required: true
+  /v1/Authorization/User/Reset:
+    put:
+      tags:
+      - Authorization/User
+      summary: Marks the currently logged in user as reset, requiring a password change on…
+      description: Cannot be used for API-only users, nor while impersonating.
+      operationId: User_ResetUserAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Authorization/User/Rights:
+    get:
+      tags:
+      - Authorization/User
+      summary: Gets a list of rights that the logged in user has
+      operationId: Rights_GetRights
+      parameters:
+      - name: resetCache
+        in: query
+        description: 'Optional. Default: false. The result is cached for fifteen minutes. To force the cache to refresh call with resetCache = true.'
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Authorization/User/Rights/{securitycode}:
+    get:
+      tags:
+      - Authorization/User
+      summary: Gets the right that the logged in user has that matches the security code…
+      operationId: Rights_GetRight
+      parameters:
+      - name: securitycode
+        in: path
+        description: The security code for
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+      security:
+      - Authorization: []
+  /v1/Authorization/User/Rights/Groups:
+    get:
+      tags:
+      - Authorization/User
+      summary: Gets the groups that the logged in user has access to
+      operationId: Rights_GetGroups
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: string
+                type: array
+      deprecated: true
+      security:
+      - Authorization: []
+  /v1/Authorization/User/Rights/ObjectTypeCode/{code}:
+    get:
+      tags:
+      - Authorization/User
+      summary: Gets the rights that the logged in user has that fall within the object type…
+      operationId: Rights_GetRightsByObjectTypeCode
+      parameters:
+      - name: code
+        in: path
+        description: The object type code to return the rights of.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RightDto'
+                xml:
+                  name: RightDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Authorization/User/ServiceTeam:
+    get:
+      tags:
+      - Authorization/User
+      operationId: User_GetServiceTeam
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.ServiceTeamDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.ServiceTeamDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.ServiceTeamDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.ServiceTeamDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.ServiceTeamDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.ServiceTeamDto'
+      security:
+      - Authorization: []
+      summary: User get service team
+      x-summary-source: derived
+  /v1/Authorization/User/Verbose:
+    get:
+      tags:
+      - Authorization/User
+      operationId: User_GetVerbose
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - None
+            - Portfolio
+            - Personal
+            - All
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.UserVerboseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.UserVerboseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.UserVerboseDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.UserVerboseDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.UserVerboseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.UserVerboseDto'
+      security:
+      - Authorization: []
+      summary: User get verbose
+      x-summary-source: derived
+    put:
+      tags:
+      - Authorization/User
+      operationId: User_UpdateVerboseUser
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.UserVerboseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.UserVerboseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.UserVerboseDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.UserVerboseDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.UserVerboseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.UserVerboseDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.UserVerboseDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.UserVerboseDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.UserVerboseDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.UserVerboseDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.UserVerboseDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.UserVerboseDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.UserVerboseDto'
+        required: true
+      summary: User update verbose user
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.DataModel.Security.UserDetailIntegration:
+      required:
+      - id
+      - userDetailId
+      - integrationType
+      - integrationInfo
+      properties:
+        id:
+          type: integer
+          format: int32
+        userDetailId:
+          type: integer
+          format: int32
+        integrationType:
+          type: string
+          enum:
+          - Undefined
+          - Salesforce
+          - Orion
+          - OrionWeb
+          - Redtail
+          - Junxure
+          - WebApi
+          - eMoney
+          - inStream
+          - trxRebalance
+          - RiskAlyze
+          - AssetLock
+        integrationInfo:
+          type: string
+          maxLength: 1000
+          minLength: 0
+      xml:
+        name: UserDetailIntegration
+      type: object
+    OAS.WebApi.DTO.Authorization.UserVerboseDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        portfolio:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.UserPortfolioDto'
+        personal:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.UserPersonalDto'
+      xml:
+        name: UserVerboseDto
+      type: object
+    OAS.WebApi.DTO.Authorization.ServiceTeamDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        team:
+          type: string
+        emailAddress:
+          type: string
+        phone:
+          type: string
+        assignedDatabaseCount:
+          type: integer
+          format: int32
+        memberCount:
+          type: integer
+          format: int32
+        teamType:
+          type: string
+          enum:
+          - ServiceTeam
+          - ReconTeam
+          - ApplicationTeam
+          - AlternateApplicationTeam
+          - RemovedServiceTeam
+        chatUrl:
+          type: string
+        firmChatRouteId:
+          type: string
+        chatRouteIntendedRecipient:
+          type: string
+      xml:
+        name: ServiceTeamDto
+      type: object
+    OAS.WebApi.DTO.Security.RightDto:
+      properties:
+        code:
+          type: string
+        defaulDesc:
+          type: string
+        canRead:
+          type: boolean
+        canAdd:
+          type: boolean
+        canUpdate:
+          type: boolean
+        canDelete:
+          type: boolean
+        objectTypeCode:
+          type: string
+        minimumVersion:
+          type: string
+      xml:
+        name: RightDto
+      type: object
+    OAS.WebApi.DTO.Security.AuthorizationPrivilegeDto:
+      properties:
+        code:
+          type: string
+        readIsGranted:
+          type: boolean
+        editIsGranted:
+          type: boolean
+        deleteIsGranted:
+          type: boolean
+      xml:
+        name: AuthorizationPrivilegeDto
+      type: object
+    OAS.WebApi.DTO.Authorization.UserPortfolioDto:
+      properties:
+        loginUserId:
+          type: string
+        lastPasswordChange:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        twoFactor:
+          type: boolean
+      xml:
+        name: UserPortfolioDto
+      type: object
+    OAS.WebApi.DTO.Authorization.VerifiablePhoneNumberDto:
+      properties:
+        isVerified:
+          type: boolean
+        number:
+          type: string
+      xml:
+        name: VerifiablePhoneNumberDto
+      type: object
+    OAS.DataModel.Security.NewUserDto:
+      properties:
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        entityId:
+          type: integer
+          format: int32
+        userName:
+          type: string
+        password:
+          type: string
+        verifyBirthDate:
+          type: string
+          format: date-time
+        verifyLastFourSSN:
+          type: string
+      xml:
+        name: NewUserDto
+      type: object
+    OAS.WebApi.DTO.Security.DatabaseDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        clientName:
+          type: string
+        guid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        selected:
+          type: boolean
+        serviceTeamId:
+          type: integer
+          format: int32
+        masterGroup:
+          type: string
+        lockDown:
+          type: string
+          enum:
+          - None
+          - Billing
+        advisorNumber:
+          type: integer
+          format: int32
+        firmType:
+          type: string
+          enum:
+          - None
+          - Foundations
+          - Essentials
+          - Advantage
+          - OrionTradingOnly
+          - OrionRiskOnly
+          - OrionComplianceOnly
+          - OrionPlanningOnly
+          - OasLegacy
+      xml:
+        name: DatabaseDto
+      type: object
+    OAS.WebApi.DTO.Authorization.UserPersonalDto:
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        entityName:
+          type: string
+        homePhone:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.FullPhoneNumberDto'
+        businessPhone:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.FullPhoneNumberDto'
+        mobilePhone:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.VerifiablePhoneNumberDto'
+        otherPhone:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.FullPhoneNumberDto'
+        email:
+          type: string
+      xml:
+        name: UserPersonalDto
+      type: object
+    OAS.DataModel.Authentication.PasswordInfo:
+      properties:
+        shouldChange:
+          type: boolean
+        count:
+          type: integer
+          format: int32
+      xml:
+        name: PasswordInfo
+      type: object
+    OAS.WebApi.DTO.Authorization.FullPhoneNumberDto:
+      properties:
+        extension:
+          type: string
+        number:
+          type: string
+      xml:
+        name: FullPhoneNumberDto
+      type: object
+    OAS.WebApi.DTO.Security.UserProfileDto:
+      properties:
+        entity:
+          type: string
+        userName:
+          type: string
+        loginUserId:
+          type: string
+        databaseCount:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        userDetailId:
+          type: integer
+          format: int32
+        roleId:
+          type: integer
+          format: int32
+        alClientId:
+          type: integer
+          format: int32
+        alClientName:
+          type: string
+        alClientGuid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        alClientLockType:
+          type: integer
+          format: int32
+        instanceName:
+          readOnly: true
+          type: string
+        userGuid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
+        twoFactor:
+          type: boolean
+        daysUntilPasswordExpires:
+          type: integer
+          format: int32
+        rights:
+          additionalProperties:
+            type: boolean
+          type: object
+        entityId:
+          type: integer
+          format: int32
+        entityName:
+          type: string
+        parentEntityId:
+          type: integer
+          format: int32
+        parentEntity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        masterGroup:
+          type: string
+        advisorNumber:
+          type: string
+        passwordInfo:
+          $ref: '#/components/schemas/OAS.DataModel.Authentication.PasswordInfo'
+        isOps:
+          type: boolean
+      xml:
+        name: UserProfileDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

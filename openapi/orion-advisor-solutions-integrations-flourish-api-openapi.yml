@@ -1,0 +1,1662 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Flourish API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/Flourish
+paths:
+  /v1/Integrations/Flourish/CreateUser:
+    post:
+      tags:
+      - Integrations/Flourish
+      summary: Creates a Client Household along with one or two Client Users as members.
+      operationId: Flourish_PostuserAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.CreateUserRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.CreateUserRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.CreateUserRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.CreateUserRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.CreateUserRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.CreateUserRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.CreateUserRequest'
+        required: true
+  /v1/Integrations/Flourish/GetMenuValues:
+    get:
+      tags:
+      - Integrations/Flourish
+      summary: Flourish get menu values async
+      operationId: Flourish_GetMenuValuesAsync
+      parameters:
+      - name: clientId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Integrations/Flourish/GetToken:
+    get:
+      tags:
+      - Integrations/Flourish
+      summary: This is the second part of the Oauth process.
+      operationId: Flourish_GetTokenAsync
+      parameters:
+      - name: code
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/Flourish/Invite/{userId}:
+    post:
+      tags:
+      - Integrations/Flourish
+      summary: Resends the email invitation for a Client User that is NOT yet ACTIVE> (i.e.
+      operationId: Flourish_ReInviteAsync
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/Flourish/Invite-and-Apply:
+    post:
+      tags:
+      - Integrations/Flourish
+      summary: Creates a Client Household along with one or two Client Users as members.
+      operationId: Flourish_InviteApplyAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.InviteAndApplyRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.InviteAndApplyRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.InviteAndApplyRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.InviteAndApplyRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.InviteAndApplyRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.InviteAndApplyRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.InviteAndApplyRequest'
+        required: true
+  /v1/Integrations/Flourish/InviteClient/{clientId}:
+    get:
+      tags:
+      - Integrations/Flourish
+      summary: Resends the email invitation for a Client User that is NOT yet ACTIVE> (i.e.
+      operationId: Flourish_InviteClientAsync
+      parameters:
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/Flourish/InviteContact:
+    post:
+      tags:
+      - Integrations/Flourish
+      summary: Creates a contact that can be invited to Flourish at a later time.This fully…
+      operationId: Flourish_PostContactAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.ContactRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.ContactRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.ContactRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.ContactRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.ContactRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.ContactRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.ContactRequest'
+        required: true
+  /v1/Integrations/Flourish/Rates:
+    get:
+      tags:
+      - Integrations/Flourish
+      summary: Returns the current interest rates paid by Flourish Cash along with their…
+      operationId: Flourish_GetRatesAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.Rates'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.Rates'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.Rates'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.Rates'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.Rates'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.Rates'
+      security:
+      - Authorization: []
+  /v1/Integrations/Flourish/Redirect:
+    get:
+      tags:
+      - Integrations/Flourish
+      summary: Starts the Oauth process to Flourish, will need a Username and Password for a…
+      operationId: Flourish_GetRedirectUrl
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/Flourish/RefreshToken:
+    get:
+      tags:
+      - Integrations/Flourish
+      summary: This process can be manually fired off before an of the api call to Flourish or…
+      operationId: Flourish_RefreshTokenAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.FlourishToken'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.FlourishToken'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.FlourishToken'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.FlourishToken'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.FlourishToken'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.FlourishToken'
+      security:
+      - Authorization: []
+  /v1/Integrations/Flourish/SearchbyEmails:
+    post:
+      tags:
+      - Integrations/Flourish
+      summary: Search by email for users associated with this advisor
+      operationId: Flourish_SearchByEmailAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.EmailSearchRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.EmailSearchRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.EmailSearchRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.EmailSearchRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.EmailSearchRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.EmailSearchRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.EmailSearchRequest'
+        required: true
+  /v1/Integrations/Flourish/SearchbyUserids:
+    post:
+      tags:
+      - Integrations/Flourish
+      summary: the request payload for userIds defines array of string...but they're actually…
+      operationId: Flourish_SearchByUserIdAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.UserIdSearchRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.UserIdSearchRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.UserIdSearchRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.UserIdSearchRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.UserIdSearchRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.UserIdSearchRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.UserIdSearchRequest'
+        required: true
+  /v1/Integrations/Flourish/UpdateTosStatus:
+    post:
+      tags:
+      - Integrations/Flourish
+      summary: Flourish update tos status async
+      operationId: Flourish_UpdateTosStatusAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.FlourishTosDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.FlourishTosDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.FlourishTosDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.FlourishTosDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.FlourishTosDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.FlourishTosDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.FlourishTosDto'
+        required: true
+      x-summary-source: derived
+  /v1/Integrations/Flourish/UserInfo/{userid}:
+    get:
+      tags:
+      - Integrations/Flourish
+      summary: Returns a user's personal information and account information
+      operationId: Flourish_GetUserByUserIdAsync
+      parameters:
+      - name: userid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/Flourish/Users:
+    get:
+      tags:
+      - Integrations/Flourish
+      summary: Lists the users associated with the advisor.
+      operationId: Flourish_GetuserAsync
+      parameters:
+      - name: inviteAfter
+        in: query
+        description: The date and time the user was last sent an invitation e.g. "2025-01-29T13:53:51.0547252-06:00"
+        required: false
+        schema:
+          type: string
+      - name: count
+        in: query
+        description: Default and max is 1000
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: previousId
+        in: query
+        description: When paging the last id previously returned
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.Integrations.Flourish.Models.AddressObjectNoCountry:
+      properties:
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        postalCode:
+          type: string
+        state:
+          type: string
+          enum:
+          - AK
+          - AL
+          - AR
+          - AZ
+          - CA
+          - CO
+          - CT
+          - DC
+          - DE
+          - FL
+          - GA
+          - HI
+          - IA
+          - ID
+          - IL
+          - IN
+          - KS
+          - KY
+          - LA
+          - MA
+          - MD
+          - ME
+          - MI
+          - MN
+          - MO
+          - MS
+          - MT
+          - NC
+          - ND
+          - NE
+          - NH
+          - NJ
+          - NM
+          - NV
+          - NY
+          - OH
+          - OK
+          - OR
+          - PA
+          - RI
+          - SC
+          - SD
+          - TN
+          - TX
+          - UT
+          - VA
+          - VT
+          - WA
+          - WI
+          - WV
+          - WY
+      xml:
+        name: AddressObjectNoCountry
+      type: object
+    OAS.Integrations.Flourish.Models.FlourishToken:
+      properties:
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        scope:
+          type: string
+        token_type:
+          type: string
+        code_verifier:
+          type: string
+        expires_in:
+          type: integer
+          format: int32
+        expires_datetime:
+          type: string
+          format: date-time
+        error:
+          type: string
+        flourish_tos_status:
+          type: string
+          enum:
+          - Unaccepted
+          - Accepted
+          - Rejected
+        last_flourish_tos_interaction:
+          type: string
+          format: date-time
+      xml:
+        name: FlourishToken
+      type: object
+    OAS.Integrations.Flourish.Models.FlourishTosDto:
+      properties:
+        flourishTosStatus:
+          type: string
+          enum:
+          - Unaccepted
+          - Accepted
+          - Rejected
+      xml:
+        name: FlourishTosDto
+      type: object
+    OAS.Integrations.Flourish.Models.Contactdata:
+      properties:
+        alienResidencyStatus:
+          type: string
+        annualIncome:
+          type: string
+        citizenship:
+          type: string
+        currentEmployerAddress:
+          $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.AddressObject'
+        currentEmployerName:
+          type: string
+        dateOfBirth:
+          type: string
+        employmentStatus:
+          type: string
+        gender:
+          type: string
+        hasFinraAffiliation:
+          type: boolean
+        homePhone:
+          type: string
+        liquidNetWorth:
+          type: string
+        mailingAddress:
+          $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.AddressObject'
+        middleName:
+          type: string
+        mobilePhone:
+          type: string
+        occupation:
+          type: string
+        otherPhone:
+          type: string
+        primaryAddress:
+          $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.AddressObject'
+        primarySourceOfWealth:
+          type: string
+        taxId:
+          type: string
+        usePrimaryAddressAsMailingAddress:
+          type: boolean
+        workPhone:
+          type: string
+      xml:
+        name: Contactdata
+      type: object
+    OAS.Integrations.Flourish.Models.Secondaryuserdata:
+      properties:
+        alienResidencyStatus:
+          type: string
+        annualIncome:
+          type: string
+        citizenship:
+          type: string
+          enum:
+          - ABW
+          - AFG
+          - AGO
+          - AIA
+          - ALA
+          - ALB
+          - AND
+          - ARE
+          - ARG
+          - ARM
+          - ASM
+          - ATA
+          - ATF
+          - ATG
+          - AUS
+          - AUT
+          - AZE
+          - BDI
+          - BEL
+          - BEN
+          - BES
+          - BFA
+          - BGD
+          - BGR
+          - BHR
+          - BHS
+          - BIH
+          - BLM
+          - BLR
+          - BLZ
+          - BMU
+          - BOL
+          - BRA
+          - BRB
+          - BRN
+          - BTN
+          - BVT
+          - BWA
+          - CAF
+          - CAN
+          - CCK
+          - CHE
+          - CHL
+          - CHN
+          - CIV
+          - CMR
+          - COD
+          - COG
+          - COK
+          - COL
+          - COM
+          - CPV
+          - CRI
+          - CUB
+          - CUW
+          - CXR
+          - CYM
+          - CYP
+          - CZE
+          - DEU
+          - DJI
+          - DMA
+          - DNK
+          - DOM
+          - DZA
+          - ECU
+          - EGY
+          - ERI
+          - ESH
+          - ESP
+          - EST
+          - ETH
+          - FIN
+          - FJI
+          - FLK
+          - FRA
+          - FRO
+          - FSM
+          - GAB
+          - GBR
+          - GEO
+          - GGY
+          - GHA
+          - GIB
+          - GIN
+          - GLP
+          - GMB
+          - GNB
+          - GNQ
+          - GRC
+          - GRD
+          - GRL
+          - GTM
+          - GUF
+          - GUM
+          - GUY
+          - HKG
+          - HMD
+          - HND
+          - HRV
+          - HTI
+          - HUN
+          - IDN
+          - IMN
+          - IND
+          - IOT
+          - IRL
+          - IRN
+          - IRQ
+          - ISL
+          - ISR
+          - ITA
+          - JAM
+          - JEY
+          - JOR
+          - JPN
+          - KAZ
+          - KEN
+          - KGZ
+          - KHM
+          - KIR
+          - KNA
+          - KOR
+          - KWT
+          - LAO
+          - LBN
+          - LBR
+          - LBY
+          - LCA
+          - LIE
+          - LKA
+          - LSO
+          - LTU
+          - LUX
+          - LVA
+          - MAC
+          - MAF
+          - MAR
+          - MCO
+          - MDA
+          - MDG
+          - MDV
+          - MEX
+          - MHL
+          - MKD
+          - MLI
+          - MLT
+          - MMR
+          - MNE
+          - MNG
+          - MNP
+          - MOZ
+          - MRT
+          - MSR
+          - MTQ
+          - MUS
+          - MWI
+          - MYS
+          - MYT
+          - NAM
+          - NCL
+          - NER
+          - NFK
+          - NGA
+          - NIC
+          - NIU
+          - NLD
+          - NOR
+          - NPL
+          - NRU
+          - NZL
+          - OMN
+          - PAK
+          - PAN
+          - PCN
+          - PER
+          - PHL
+          - PLW
+          - PNG
+          - POL
+          - PRI
+          - PRK
+          - PRT
+          - PRY
+          - PSE
+          - PYF
+          - QAT
+          - REU
+          - ROU
+          - RUS
+          - RWA
+          - SAU
+          - SDN
+          - SEN
+          - SGP
+          - SGS
+          - SHN
+          - SJM
+          - SLB
+          - SLE
+          - SLV
+          - SMR
+          - SOM
+          - SPM
+          - SRB
+          - SSD
+          - STP
+          - SUR
+          - SVK
+          - SVN
+          - SWE
+          - SWZ
+          - SXM
+          - SYC
+          - SYR
+          - TCA
+          - TCD
+          - TGO
+          - THA
+          - TJK
+          - TKL
+          - TKM
+          - TLS
+          - TON
+          - TTO
+          - TUN
+          - TUR
+          - TUV
+          - TWN
+          - TZA
+          - UGA
+          - UKR
+          - UMI
+          - URY
+          - USA
+          - UZB
+          - VAT
+          - VCT
+          - VEN
+          - VGB
+          - VIR
+          - VNM
+          - VUT
+          - WLF
+          - WSM
+          - YEM
+          - ZAF
+          - ZMB
+          - ZWE
+        currentEmployerAddress:
+          $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.AddressObjectNoCountry'
+        currentEmployerName:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date-time
+        employmentStatus:
+          type: string
+        gender:
+          type: string
+        hasFinraAffiliation:
+          type: boolean
+        homePhone:
+          type: string
+        liquidNetWorth:
+          type: string
+        mailingAddress:
+          $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.AddressObjectNoCountry'
+        middleName:
+          type: string
+        mobilePhone:
+          type: string
+        occupation:
+          type: string
+          enum:
+          - ACCOUNTING_PROFESSIONAL
+          - CLERICAL_ADMINISTRATIVE_SERVICES
+          - CONSULTANT
+          - EDUCATOR
+          - EXECUTIVE_SENIOR_MANAGEMENT
+          - FINANCIAL_SERVICES_BANKING_PROFESSIONAL
+          - FOREIGN_GOVERNMENT_EMPLOYEE_NON_US
+          - INFORMATION_TECHNOLOGY_PROFESSIONAL
+          - LEGAL_PROFESSIONAL
+          - MEDICAL_PROFESSIONAL
+          - MILITARY
+          - OTHER
+          - SALES_MARKETING
+          - TRADE_SERVICE_CAREER_LABOR_MANUFACTURING_PRODUCTION
+          - US_GOVERNMENT_EMPLOYEE_FEDERAL_STATE_LOCAL
+        occupationOther:
+          type: string
+        otherPhone:
+          type: string
+        primaryAddress:
+          $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.AddressObjectNoCountry'
+        primarySourceOfWealth:
+          type: string
+          enum:
+          - FAMILY_RELATIVES_INHERITANCE
+          - GAMBLING_LOTTERY
+          - GIFTS
+          - INVESTMENT_CAPITAL_GAINS
+          - OTHER
+          - SALARY_WAGES
+          - SALE_OR_PROPERTY_BUSINESS
+          - SOCIAL_SECURITY_BENEFITS
+        primarySourceOfWealthOther:
+          type: string
+        reportingHouseholdId:
+          type: string
+        taxId:
+          type: string
+        usePrimaryAddressAsMailingAddress:
+          type: boolean
+        workPhone:
+          type: string
+      xml:
+        name: Secondaryuserdata
+      type: object
+    OAS.Integrations.Flourish.Models.Primaryuserdata:
+      properties:
+        alienResidencyStatus:
+          type: string
+        annualIncome:
+          type: string
+        citizenship:
+          type: string
+          enum:
+          - ABW
+          - AFG
+          - AGO
+          - AIA
+          - ALA
+          - ALB
+          - AND
+          - ARE
+          - ARG
+          - ARM
+          - ASM
+          - ATA
+          - ATF
+          - ATG
+          - AUS
+          - AUT
+          - AZE
+          - BDI
+          - BEL
+          - BEN
+          - BES
+          - BFA
+          - BGD
+          - BGR
+          - BHR
+          - BHS
+          - BIH
+          - BLM
+          - BLR
+          - BLZ
+          - BMU
+          - BOL
+          - BRA
+          - BRB
+          - BRN
+          - BTN
+          - BVT
+          - BWA
+          - CAF
+          - CAN
+          - CCK
+          - CHE
+          - CHL
+          - CHN
+          - CIV
+          - CMR
+          - COD
+          - COG
+          - COK
+          - COL
+          - COM
+          - CPV
+          - CRI
+          - CUB
+          - CUW
+          - CXR
+          - CYM
+          - CYP
+          - CZE
+          - DEU
+          - DJI
+          - DMA
+          - DNK
+          - DOM
+          - DZA
+          - ECU
+          - EGY
+          - ERI
+          - ESH
+          - ESP
+          - EST
+          - ETH
+          - FIN
+          - FJI
+          - FLK
+          - FRA
+          - FRO
+          - FSM
+          - GAB
+          - GBR
+          - GEO
+          - GGY
+          - GHA
+          - GIB
+          - GIN
+          - GLP
+          - GMB
+          - GNB
+          - GNQ
+          - GRC
+          - GRD
+          - GRL
+          - GTM
+          - GUF
+          - GUM
+          - GUY
+          - HKG
+          - HMD
+          - HND
+          - HRV
+          - HTI
+          - HUN
+          - IDN
+          - IMN
+          - IND
+          - IOT
+          - IRL
+          - IRN
+          - IRQ
+          - ISL
+          - ISR
+          - ITA
+          - JAM
+          - JEY
+          - JOR
+          - JPN
+          - KAZ
+          - KEN
+          - KGZ
+          - KHM
+          - KIR
+          - KNA
+          - KOR
+          - KWT
+          - LAO
+          - LBN
+          - LBR
+          - LBY
+          - LCA
+          - LIE
+          - LKA
+          - LSO
+          - LTU
+          - LUX
+          - LVA
+          - MAC
+          - MAF
+          - MAR
+          - MCO
+          - MDA
+          - MDG
+          - MDV
+          - MEX
+          - MHL
+          - MKD
+          - MLI
+          - MLT
+          - MMR
+          - MNE
+          - MNG
+          - MNP
+          - MOZ
+          - MRT
+          - MSR
+          - MTQ
+          - MUS
+          - MWI
+          - MYS
+          - MYT
+          - NAM
+          - NCL
+          - NER
+          - NFK
+          - NGA
+          - NIC
+          - NIU
+          - NLD
+          - NOR
+          - NPL
+          - NRU
+          - NZL
+          - OMN
+          - PAK
+          - PAN
+          - PCN
+          - PER
+          - PHL
+          - PLW
+          - PNG
+          - POL
+          - PRI
+          - PRK
+          - PRT
+          - PRY
+          - PSE
+          - PYF
+          - QAT
+          - REU
+          - ROU
+          - RUS
+          - RWA
+          - SAU
+          - SDN
+          - SEN
+          - SGP
+          - SGS
+          - SHN
+          - SJM
+          - SLB
+          - SLE
+          - SLV
+          - SMR
+          - SOM
+          - SPM
+          - SRB
+          - SSD
+          - STP
+          - SUR
+          - SVK
+          - SVN
+          - SWE
+          - SWZ
+          - SXM
+          - SYC
+          - SYR
+          - TCA
+          - TCD
+          - TGO
+          - THA
+          - TJK
+          - TKL
+          - TKM
+          - TLS
+          - TON
+          - TTO
+          - TUN
+          - TUR
+          - TUV
+          - TWN
+          - TZA
+          - UGA
+          - UKR
+          - UMI
+          - URY
+          - USA
+          - UZB
+          - VAT
+          - VCT
+          - VEN
+          - VGB
+          - VIR
+          - VNM
+          - VUT
+          - WLF
+          - WSM
+          - YEM
+          - ZAF
+          - ZMB
+          - ZWE
+        currentEmployerAddress:
+          $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.AddressObjectNoCountry'
+        currentEmployerName:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date-time
+        employmentStatus:
+          type: string
+        gender:
+          type: string
+        hasFinraAffiliation:
+          type: boolean
+        homePhone:
+          type: string
+        liquidNetWorth:
+          type: string
+        mailingAddress:
+          $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.AddressObjectNoCountry'
+        middleName:
+          type: string
+        mobilePhone:
+          type: string
+        occupation:
+          type: string
+          enum:
+          - ACCOUNTING_PROFESSIONAL
+          - CLERICAL_ADMINISTRATIVE_SERVICES
+          - CONSULTANT
+          - EDUCATOR
+          - EXECUTIVE_SENIOR_MANAGEMENT
+          - FINANCIAL_SERVICES_BANKING_PROFESSIONAL
+          - FOREIGN_GOVERNMENT_EMPLOYEE_NON_US
+          - INFORMATION_TECHNOLOGY_PROFESSIONAL
+          - LEGAL_PROFESSIONAL
+          - MEDICAL_PROFESSIONAL
+          - MILITARY
+          - OTHER
+          - SALES_MARKETING
+          - TRADE_SERVICE_CAREER_LABOR_MANUFACTURING_PRODUCTION
+          - US_GOVERNMENT_EMPLOYEE_FEDERAL_STATE_LOCAL
+        occupationOther:
+          type: string
+        otherPhone:
+          type: string
+        primaryAddress:
+          $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.AddressObjectNoCountry'
+        primarySourceOfWealth:
+          type: string
+          enum:
+          - FAMILY_RELATIVES_INHERITANCE
+          - GAMBLING_LOTTERY
+          - GIFTS
+          - INVESTMENT_CAPITAL_GAINS
+          - OTHER
+          - SALARY_WAGES
+          - SALE_OR_PROPERTY_BUSINESS
+          - SOCIAL_SECURITY_BENEFITS
+        primarySourceOfWealthOther:
+          type: string
+        reportingHouseholdId:
+          type: string
+        taxId:
+          type: string
+        usePrimaryAddressAsMailingAddress:
+          type: boolean
+        workPhone:
+          type: string
+      xml:
+        name: Primaryuserdata
+      type: object
+    OAS.Integrations.Flourish.Models.CreateUserRequest:
+      properties:
+        email:
+          type: string
+        firstName:
+          type: string
+        isCurrentAdvisoryClient:
+          type: boolean
+        lastName:
+          type: string
+        secondaryEmail:
+          type: string
+        secondaryFirstName:
+          type: string
+        secondaryLastName:
+          type: string
+      xml:
+        name: CreateUserRequest
+      type: object
+    OAS.Integrations.Flourish.Models.Household:
+      properties:
+        externalId:
+          type: string
+        name:
+          type: string
+      xml:
+        name: Household
+      type: object
+    OAS.Integrations.Flourish.Models.Rates:
+      properties:
+        rateSchedules:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.Rateschedule'
+          xml:
+            name: Rateschedule
+            wrapped: true
+          type: array
+      xml:
+        name: Rates
+      type: object
+    OAS.Integrations.Flourish.Models.InviteAndApplyRequest:
+      properties:
+        email:
+          type: string
+        firstName:
+          type: string
+        isCurrentAdvisoryClient:
+          type: boolean
+        lastName:
+          type: string
+        primaryUserData:
+          $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.Primaryuserdata'
+        secondaryEmail:
+          type: string
+        secondaryFirstName:
+          type: string
+        secondaryLastName:
+          type: string
+        secondaryUserData:
+          $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.Secondaryuserdata'
+      xml:
+        name: InviteAndApplyRequest
+      type: object
+    OAS.Integrations.Flourish.Models.UserIdSearchRequest:
+      properties:
+        userIds:
+          items:
+            type: string
+          type: array
+      xml:
+        name: UserIdSearchRequest
+      type: object
+    OAS.Integrations.Flourish.Models.Tier:
+      properties:
+        rangeBottom:
+          type: number
+          format: double
+        rangeTop:
+          type: number
+          format: double
+        rate:
+          type: number
+          format: double
+      xml:
+        name: Tier
+      type: object
+    OAS.Integrations.Flourish.Models.EmailSearchRequest:
+      properties:
+        emails:
+          items:
+            type: string
+          type: array
+      xml:
+        name: EmailSearchRequest
+      type: object
+    OAS.Integrations.Flourish.Models.AddressObject:
+      properties:
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        postalCode:
+          type: string
+        state:
+          type: string
+          enum:
+          - AK
+          - AL
+          - AR
+          - AZ
+          - CA
+          - CO
+          - CT
+          - DC
+          - DE
+          - FL
+          - GA
+          - HI
+          - IA
+          - ID
+          - IL
+          - IN
+          - KS
+          - KY
+          - LA
+          - MA
+          - MD
+          - ME
+          - MI
+          - MN
+          - MO
+          - MS
+          - MT
+          - NC
+          - ND
+          - NE
+          - NH
+          - NJ
+          - NM
+          - NV
+          - NY
+          - OH
+          - OK
+          - OR
+          - PA
+          - RI
+          - SC
+          - SD
+          - TN
+          - TX
+          - UT
+          - VA
+          - VT
+          - WA
+          - WI
+          - WV
+          - WY
+      xml:
+        name: AddressObject
+      type: object
+    OAS.Integrations.Flourish.Models.ContactRequest:
+      properties:
+        contactData:
+          $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.Contactdata'
+        email:
+          type: string
+        externalId:
+          type: string
+        firstName:
+          type: string
+        household:
+          $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.Household'
+        lastName:
+          type: string
+      xml:
+        name: ContactRequest
+      type: object
+    OAS.Integrations.Flourish.Models.Rateschedule:
+      properties:
+        fdicCoverage:
+          type: number
+          format: double
+        fdicEffectiveDate:
+          type: string
+          format: date-time
+        rateEffectiveDate:
+          type: string
+          format: date-time
+        scheduleType:
+          type: string
+        tiers:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.Tier'
+          xml:
+            name: Tier
+            wrapped: true
+          type: array
+      xml:
+        name: Rateschedule
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

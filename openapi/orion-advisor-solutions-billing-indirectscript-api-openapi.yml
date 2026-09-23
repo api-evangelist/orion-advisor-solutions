@@ -1,0 +1,100 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Indirect Script API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/IndirectScript
+paths:
+  /v1/Billing/IndirectScript:
+    post:
+      tags:
+      - Billing/IndirectScript
+      summary: Legacy Post Payments page removed (OC-33680).
+      operationId: Billing_RunIndirectScript
+      parameters:
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.IndirectScriptDto'
+                xml:
+                  name: IndirectScriptDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.IndirectScriptDto'
+                xml:
+                  name: IndirectScriptDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.IndirectScriptDto'
+                xml:
+                  name: IndirectScriptDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.IndirectScriptDto'
+                xml:
+                  name: IndirectScriptDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.IndirectScriptDto'
+                xml:
+                  name: IndirectScriptDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.IndirectScriptDto'
+                xml:
+                  name: IndirectScriptDto
+                  wrapped: true
+                type: array
+      deprecated: true
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.IndirectScriptDto:
+      properties:
+        receivableId:
+          type: integer
+          format: int32
+        message:
+          type: string
+      xml:
+        name: IndirectScriptDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

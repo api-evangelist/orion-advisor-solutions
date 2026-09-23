@@ -1,0 +1,337 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Portfolio/Client Changes API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Portfolio/ClientChanges
+paths:
+  /v1/Portfolio/ClientChanges/{clientId}:
+    get:
+      tags:
+      - Portfolio/ClientChanges
+      summary: Gets a list of client changes for specific client id
+      operationId: ClientChanges_GetClientChangesAsync
+      parameters:
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Portfolio/ClientChanges
+      summary: Updates a list of client changes for specific client id
+      operationId: ClientChanges_UpdateClientChangesAsync
+      parameters:
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ClientChangeDto'
+              xml:
+                name: ClientChangeDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ClientChangeDto'
+              xml:
+                name: ClientChangeDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ClientChangeDto'
+              xml:
+                name: ClientChangeDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ClientChangeDto'
+              xml:
+                name: ClientChangeDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ClientChangeDto'
+              xml:
+                name: ClientChangeDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ClientChangeDto'
+              xml:
+                name: ClientChangeDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ClientChangeDto'
+              xml:
+                name: ClientChangeDto
+                wrapped: true
+              type: array
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Portfolio.ClientChangeDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        asOfDate:
+          type: string
+          format: date-time
+        changes:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ClientChangeSetDto'
+          xml:
+            name: ClientChangeSetDto
+            wrapped: true
+          type: array
+        auditedDate:
+          type: string
+          format: date-time
+        auditedBy:
+          type: string
+      xml:
+        name: ClientChangeDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.ClientChangeSetDto:
+      properties:
+        entityType:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Rep
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Beneficiary
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QPEDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - Banking
+          - RMD
+          - Systematic
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - AdditionalRep
+          - DownloadSource
+          - DownloadRecord
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        oldEntityId:
+          type: integer
+          format: int32
+        newEntityId:
+          type: integer
+          format: int32
+        oldEntityName:
+          type: string
+        newEntityName:
+          type: string
+        oldRepTitleId:
+          type: integer
+          format: int32
+        newRepTitleId:
+          type: integer
+          format: int32
+        oldRepTitleName:
+          type: string
+        newRepTitleName:
+          type: string
+        oldEntityNumber:
+          type: string
+        newEntityNumber:
+          type: string
+        actionType:
+          type: string
+          enum:
+          - None
+          - Inserted
+          - Updated
+          - Deleted
+        isDeleted:
+          type: boolean
+        isPartOfSet:
+          type: boolean
+        isUncommitted:
+          type: boolean
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+      xml:
+        name: ClientChangeSetDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

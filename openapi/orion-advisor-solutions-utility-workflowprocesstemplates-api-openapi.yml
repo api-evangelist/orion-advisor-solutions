@@ -1,0 +1,147 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Utility/Workflow Process Templates API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Utility/WorkflowProcessTemplates
+paths:
+  /v1/Utility/WorkflowProcessTemplates:
+    get:
+      tags:
+      - Utility/WorkflowProcessTemplates
+      summary: Gets a list of Workflow Process Templates that the logged in user has access to
+      operationId: WorkflowProcessTemplates_Get
+      parameters:
+      - name: processTypeId
+        in: query
+        description: Optional.  When provided will only return Workflow Process Types that have the provided Type Id. Overrides processTypeCode.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: processTypeCode
+        in: query
+        description: Optional.  When provided will only return Workflow Process Types that have the provided Type Code. Overridden by processTypeId.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTemplateDto'
+                xml:
+                  name: WorkflowProcessTemplateDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTemplateDto'
+                xml:
+                  name: WorkflowProcessTemplateDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTemplateDto'
+                xml:
+                  name: WorkflowProcessTemplateDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTemplateDto'
+                xml:
+                  name: WorkflowProcessTemplateDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTemplateDto'
+                xml:
+                  name: WorkflowProcessTemplateDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTemplateDto'
+                xml:
+                  name: WorkflowProcessTemplateDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Utility/WorkflowProcessTemplates/{key}:
+    get:
+      tags:
+      - Utility/WorkflowProcessTemplates
+      summary: Gets the WorkflowProcessTemplate that has the provided key.
+      operationId: WorkflowProcessTemplates_GetEntityByKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTemplateDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTemplateDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTemplateDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTemplateDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTemplateDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.WorkflowProcessTemplateDto'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Utility.WorkflowProcessTemplateDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        processName:
+          type: string
+        processDescription:
+          type: string
+        processCode:
+          type: string
+        workflowProcessTypeId:
+          type: integer
+          format: int32
+      xml:
+        name: WorkflowProcessTemplateDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

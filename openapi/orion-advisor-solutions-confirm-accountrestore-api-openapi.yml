@@ -1,0 +1,192 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Confirm/Account Restore API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Confirm/AccountRestore
+paths:
+  /v1/Confirm/AccountRestore/Simple:
+    post:
+      tags:
+      - Confirm/AccountRestore
+      summary: Returns a list data for account restores based on account numbers
+      description: 'Sample Request
+
+        POST /Confirm/AccountRestore/Simple
+
+        [
+
+        {
+
+        "accountId": 21390,
+
+        "accountNumber": "123456543"
+
+        }
+
+        ]'
+      operationId: AccountRestore_GetRestoreAccountSimpleAsync
+      parameters:
+      - name: ct
+        in: header
+        description: CancellationToken of the request
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSimpleDto'
+                xml:
+                  name: AccountRestoreSimpleDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSimpleDto'
+                xml:
+                  name: AccountRestoreSimpleDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSimpleDto'
+                xml:
+                  name: AccountRestoreSimpleDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSimpleDto'
+                xml:
+                  name: AccountRestoreSimpleDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSimpleDto'
+                xml:
+                  name: AccountRestoreSimpleDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSimpleDto'
+                xml:
+                  name: AccountRestoreSimpleDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.RestoreAccountDto'
+              xml:
+                name: RestoreAccountDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.RestoreAccountDto'
+              xml:
+                name: RestoreAccountDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.RestoreAccountDto'
+              xml:
+                name: RestoreAccountDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.RestoreAccountDto'
+              xml:
+                name: RestoreAccountDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AccountRestore.RestoreAccountDto'
+              xml:
+                name: RestoreAccountDto
+                wrapped: true
+              type: array
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Confirm.AccountRestore.RestoreAccountDto:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+      xml:
+        name: RestoreAccountDto
+      type: object
+    OAS.WebApi.DTO.Confirm.AccountRestore.AccountRestoreSimpleDto:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        name:
+          type: string
+        accountType:
+          type: string
+        fundFamily:
+          type: string
+        currentValue:
+          type: number
+          format: double
+        downloadSource:
+          type: string
+        effectiveDate:
+          type: string
+          format: date-time
+        isCancelled:
+          type: boolean
+        restoreData:
+          type: boolean
+        lastPositionDate:
+          type: string
+          format: date-time
+        inBalance:
+          type: boolean
+        validationMessage:
+          type: string
+        validationMessageType:
+          type: integer
+          format: int32
+        accountRestoreId:
+          type: integer
+          format: int32
+      xml:
+        name: AccountRestoreSimpleDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

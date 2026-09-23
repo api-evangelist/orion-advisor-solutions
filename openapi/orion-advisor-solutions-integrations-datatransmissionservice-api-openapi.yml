@@ -1,0 +1,627 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Data Transmission Service API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/DataTransmissionService
+paths:
+  /v1/Integrations/DataTransmissionService/{vendorCode}/documents/{documentCategory}:
+    get:
+      tags:
+      - Integrations/DataTransmissionService
+      summary: Gets a paged list of documents for a vendor
+      operationId: DataTransmissionService_GetDocumentsPagedAsync
+      parameters:
+      - name: vendorCode
+        in: path
+        description: Vendor code (e.g., Arch, GoldmanSachs)
+        required: true
+        schema:
+          type: string
+      - name: documentCategory
+        in: path
+        description: 'Document category - possible values: Activity, Holding, TaxDocument'
+        required: true
+        schema:
+          type: string
+      - name: holdingId
+        in: query
+        description: Filter by holding ID (applicable for Activity category)
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: after
+        in: query
+        description: Filter activities after this date (applicable for Activity category)
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: before
+        in: query
+        description: Filter activities before this date (applicable for Activity category)
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: afterStatementDate
+        in: query
+        description: Filter activities after statement date (applicable for Arch Activity category)
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: beforeStatementDate
+        in: query
+        description: Filter activities before statement date (applicable for Arch Activity category)
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: accountIds
+        in: query
+        description: Comma-separated account IDs (applicable for Arch Activity category)
+        required: false
+        schema:
+          type: string
+      - name: types
+        in: query
+        description: Comma-separated activity types (applicable for Arch Activity category)
+        required: false
+        schema:
+          type: string
+      - name: year
+        in: query
+        description: Filter by tax year (applicable for TaxDocument category)
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: 'Page size (default: 25)'
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 25
+      - name: offset
+        in: query
+        description: 'Page offset (default: 0)'
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: ct
+        in: header
+        description: Cancellation token
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/DataTransmissionService/{vendorCode}/documents/{documentCategory}/{entityId}/Files:
+    get:
+      tags:
+      - Integrations/DataTransmissionService
+      summary: Gets files for a specific document entity
+      operationId: DataTransmissionService_GetDocumentFilesAsync
+      parameters:
+      - name: vendorCode
+        in: path
+        description: Vendor code (e.g., Arch, GoldmanSachs)
+        required: true
+        schema:
+          type: string
+      - name: documentCategory
+        in: path
+        description: 'Document category - possible values: Activity, Holding, TaxDocument'
+        required: true
+        schema:
+          type: string
+      - name: entityId
+        in: path
+        description: Entity ID
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        description: Cancellation token
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/DataTransmissionService/{vendorCode}/documents/{documentCategory}/{entityId}/Files/{fileId}/Download:
+    get:
+      tags:
+      - Integrations/DataTransmissionService
+      summary: Downloads a file for a specific document entity
+      operationId: DataTransmissionService_DownloadDocumentFileAsync
+      parameters:
+      - name: vendorCode
+        in: path
+        description: Vendor code (e.g., Arch, GoldmanSachs)
+        required: true
+        schema:
+          type: string
+      - name: documentCategory
+        in: path
+        description: 'Document category - possible values: Activity, Holding, TaxDocument'
+        required: true
+        schema:
+          type: string
+      - name: entityId
+        in: path
+        description: Entity ID
+        required: true
+        schema:
+          type: string
+      - name: fileId
+        in: path
+        description: File ID
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        description: Cancellation token
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/DataTransmissionService/CurrentUser:
+    get:
+      tags:
+      - Integrations/DataTransmissionService
+      operationId: DataTransmissionService_GetCurrentUserAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Data transmission service get current user async
+      x-summary-source: derived
+  /v1/Integrations/DataTransmissionService/FirmVendor/{vendorCode}:
+    get:
+      tags:
+      - Integrations/DataTransmissionService
+      summary: Gets firm vendor configuration for the specified vendor code
+      operationId: DataTransmissionServiceFirmVendor_GetFirmVendorAsync
+      parameters:
+      - name: vendorCode
+        in: path
+        description: The vendor code (e.g., "GoldmanSachs")
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        description: Cancellation token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+    delete:
+      tags:
+      - Integrations/DataTransmissionService
+      summary: Deletes firm vendor configuration for the specified vendor
+      operationId: DataTransmissionServiceFirmVendor_DeleteFirmVendorAsync
+      parameters:
+      - name: vendorCode
+        in: path
+        description: The vendor code (e.g., "GoldmanSachs")
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        description: Cancellation token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/DataTransmissionService/FirmVendor/{vendorCode}/credentials:
+    post:
+      tags:
+      - Integrations/DataTransmissionService
+      summary: Creates or updates firm vendor credentials for the specified vendor
+      operationId: DataTransmissionServiceFirmVendor_CreateOrUpdateFirmVendorCredentialsAsync
+      parameters:
+      - name: vendorCode
+        in: path
+        description: The vendor code (e.g., "GoldmanSachs")
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        description: Cancellation token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.DataTransmissionService.DTOs.FirmVendorInputDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.DataTransmissionService.DTOs.FirmVendorInputDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.DataTransmissionService.DTOs.FirmVendorInputDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.DataTransmissionService.DTOs.FirmVendorInputDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.DataTransmissionService.DTOs.FirmVendorInputDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.DataTransmissionService.DTOs.FirmVendorInputDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.DataTransmissionService.DTOs.FirmVendorInputDto'
+        description: The firm vendor credentials
+        required: true
+  /v1/Integrations/DataTransmissionService/FirmVendor/{vendorCode}/established:
+    get:
+      tags:
+      - Integrations/DataTransmissionService
+      summary: Checks if firm vendor credentials are established for the specified vendor
+      operationId: DataTransmissionServiceFirmVendor_GetFirmVendorIsEstablishedAsync
+      parameters:
+      - name: vendorCode
+        in: path
+        description: The vendor code (e.g., "GoldmanSachs")
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        description: Cancellation token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/DataTransmissionService/GoldmanSachs/Beneficiaries:
+    get:
+      tags:
+      - Integrations/DataTransmissionService
+      operationId: DataTransmissionService_GetBeneficiariesAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Data transmission service get beneficiaries async
+      x-summary-source: derived
+  /v1/Integrations/DataTransmissionService/GoldmanSachs/RMD:
+    get:
+      tags:
+      - Integrations/DataTransmissionService
+      operationId: DataTransmissionService_GetRmdAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Data transmission service get rmd async
+      x-summary-source: derived
+  /v1/Integrations/DataTransmissionService/GoldmanSachs/SsoSignInUrl:
+    get:
+      tags:
+      - Integrations/DataTransmissionService
+      summary: Gets the vendor sign-in URL for Inbound SSO (Part B).
+      operationId: DataTransmissionService_GetGoldmanSachsSsoSignInUrlAsync
+      parameters:
+      - name: landingPage
+        in: query
+        description: Optional landing page for deep links
+        required: false
+        schema:
+          type: string
+          enum:
+          - None
+          - Home
+          - Accounts
+          - AccountOpening
+          - AwaitingClientAction
+          - ClientOverview
+          - AccountPositions
+          - ActivityAndOrders
+          - LinkedBankAccounts
+          - AccountProfile
+      - name: ct
+        in: header
+        required: false
+      - name: context.memberId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: context.accountId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: context.accountNumber
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/DataTransmissionService/GoldmanSachs/SsoUrl:
+    get:
+      tags:
+      - Integrations/DataTransmissionService
+      summary: Gets the URL to initiate Goldman Sachs SSO (Part A - Authorize).
+      operationId: DataTransmissionService_GetGoldmanSachsSsoUrlAsync
+      parameters:
+      - name: landingPage
+        in: query
+        description: Landing page after auth. Defaults to Home. Use None for Ok("Success!") response.
+        required: false
+        schema:
+          type: string
+          enum:
+          - None
+          - Home
+          - Accounts
+          - AccountOpening
+          - AwaitingClientAction
+          - ClientOverview
+          - AccountPositions
+          - ActivityAndOrders
+          - LinkedBankAccounts
+          - AccountProfile
+          default: 1
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/DataTransmissionService/GoldmanSachs/TokenEstablished:
+    get:
+      tags:
+      - Integrations/DataTransmissionService
+      summary: Checks if the current user has completed Goldman Sachs OAuth and has a token…
+      operationId: DataTransmissionService_IsGoldmanSachsTokenEstablishedAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.Integrations.DataTransmissionService.DTOs.FirmVendorInputDto:
+      properties:
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        username:
+          type: string
+        isFirmUser:
+          type: boolean
+      xml:
+        name: FirmVendorInputDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

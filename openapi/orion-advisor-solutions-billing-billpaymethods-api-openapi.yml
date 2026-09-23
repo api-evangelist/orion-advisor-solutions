@@ -1,0 +1,190 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Bill Pay Methods API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/BillPayMethods
+paths:
+  /v1/Billing/BillPayMethods:
+    get:
+      tags:
+      - Billing/BillPayMethods
+      summary: Get list of pay methods in database
+      operationId: BillPayMethods_GetList
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+                xml:
+                  name: BillPayMethodDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+                xml:
+                  name: BillPayMethodDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+                xml:
+                  name: BillPayMethodDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+                xml:
+                  name: BillPayMethodDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+                xml:
+                  name: BillPayMethodDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+                xml:
+                  name: BillPayMethodDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/BillPayMethods/{key}:
+    get:
+      tags:
+      - Billing/BillPayMethods
+      summary: Get a bill pay method by Id
+      operationId: BillPayMethods_GetByIdAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+      security:
+      - Authorization: []
+  /v1/Billing/BillPayMethods/Update:
+    put:
+      tags:
+      - Billing/BillPayMethods
+      summary: Update bill pay method
+      operationId: BillPayMethods_UpdateAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodDto'
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.BillPayMethodDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        payInstruction:
+          type: string
+        payDescription:
+          type: string
+        invoiceText:
+          type: string
+      xml:
+        name: BillPayMethodDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

@@ -1,0 +1,160 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Public/Partners API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Public/Partners
+paths:
+  /v1/Public/Partners/{partnerId}:
+    get:
+      tags:
+      - Public/Partners
+      summary: Gets public information of partner application, such as partner name, and…
+      operationId: Public_GetPartnerInfoAsync
+      parameters:
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Security.PartnerAppInfo'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Security.PartnerAppInfo'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Security.PartnerAppInfo'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Security.PartnerAppInfo'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Security.PartnerAppInfo'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Security.PartnerAppInfo'
+      security:
+      - Authorization: []
+  /v1/Public/Partners/{partnerId}/Image:
+    get:
+      tags:
+      - Public/Partners
+      summary: Gets the partner application image
+      operationId: Public_GetPartnerImageAsync
+      parameters:
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Public/Partners/{partnerId}/SmallImage:
+    get:
+      tags:
+      - Public/Partners
+      summary: Gets the partner application image
+      operationId: Public_GetPartnerSmallImageAsync
+      parameters:
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.DataModel.Security.PartnerAppInfo:
+      properties:
+        id:
+          type: integer
+          format: int32
+        partnerName:
+          type: string
+        productName:
+          type: string
+        productDescription:
+          type: string
+        enabled:
+          type: boolean
+        supportName:
+          type: string
+        supportPhone:
+          type: string
+        supportEmail:
+          type: string
+        homePageURL:
+          type: string
+        hasProductLogo:
+          readOnly: true
+          type: boolean
+        termsOfService:
+          type: string
+        partnerAppType:
+          type: integer
+          format: int32
+        productShortDescription:
+          type: string
+      xml:
+        name: PartnerAppInfo
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

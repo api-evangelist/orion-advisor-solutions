@@ -1,0 +1,195 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Trade Definition API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/TradeDefinition
+paths:
+  /v1/Trading/TradeDefinition:
+    get:
+      tags:
+      - Trading/TradeDefinition
+      summary: This generates a generic trade definition loaded with the database default…
+      operationId: Trading_GetTradeDefinitionAsync
+      parameters:
+      - name: routine
+        in: query
+        description: Required. The kind of trade definition to return
+        required: true
+        schema:
+          type: string
+          enum:
+          - Undefined
+          - Rebalance
+          - GlobalTrades
+          - BuySell
+          - SellAll
+          - TargetPercent
+          - ProRated
+          - QuickTrade
+          - QuickTradeBlock
+          - Distribution
+          - OptionTrade
+      - name: resetCache
+        in: query
+        description: 'Optional. Default: false. The result is cached for fifteen minutes. To force the cache to refresh call with resetCache = true.'
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.Remote.Trading.TradeDefinition'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Remote.Trading.TradeDefinition'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Remote.Trading.TradeDefinition'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Remote.Trading.TradeDefinition'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Remote.Trading.TradeDefinition'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.Remote.Trading.TradeDefinition'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.Remote.Trading.TradeDefinition:
+      properties:
+        routine:
+          type: string
+          enum:
+          - Undefined
+          - Rebalance
+          - GlobalTrades
+          - BuySell
+          - SellAll
+          - TargetPercent
+          - ProRated
+          - QuickTrade
+          - QuickTradeBlock
+          - Distribution
+          - OptionTrade
+        scheduled:
+          type: boolean
+        recalcInstance:
+          type: boolean
+        scheduledRunTime:
+          type: object
+        description:
+          type: string
+        nsccTransactionType:
+          type: string
+          enum:
+          - UseDefault
+          - NormalPurchase
+          - Nav
+          - Roa
+          - Loi
+        assetValues:
+          type: string
+          enum:
+          - UseDefault
+          - Current
+          - Pending
+          - PendingTransactionsAndOrders
+        minTradeAmount:
+          type: number
+          format: double
+        postProcess:
+          type: string
+          enum:
+          - Run
+          - Skip
+        useProductSubstitution:
+          type: string
+          enum:
+          - UseDefault
+          - Use
+          - Ignore
+        stfWarningDays:
+          type: integer
+          format: int32
+        tradeInstanceID:
+          type: integer
+          format: int32
+        includeCustodialCash:
+          type: boolean
+        notes:
+          type: string
+        inboxAlert:
+          type: boolean
+        disableRealTimePrices:
+          type: boolean
+        sessionID:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        caption:
+          type: string
+        filename:
+          type: string
+        runDisconnected:
+          type: boolean
+        instanceType:
+          type: string
+          enum:
+          - Undefined
+          - GlobalTrade
+          - Modeling
+          - CheckReq
+          - FeeReq
+          - BuySell
+          - ACHReq
+          - EligibleTrades
+          - All
+          - CashFundADV
+          - CashFundSWD
+          - SWPDCA
+          - SysPurchTrade
+          - Distribution
+          - Contribution
+        securityTicket:
+          type: string
+          format: byte
+        commonSecurityTicket:
+          type: string
+          format: byte
+        authToken:
+          type: string
+        commonServer:
+          type: string
+        databaseID:
+          type: integer
+          format: int32
+        correlationId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        a_UserDetailId:
+          type: integer
+          format: int32
+        i_UserDetailId:
+          type: integer
+          format: int32
+      xml:
+        name: TradeDefinition
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

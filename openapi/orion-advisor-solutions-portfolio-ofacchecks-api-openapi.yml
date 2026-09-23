@@ -1,0 +1,272 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Portfolio/Ofac Checks API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Portfolio/OfacChecks
+paths:
+  /v1/Portfolio/OfacChecks:
+    get:
+      tags:
+      - Portfolio/OfacChecks
+      summary: Gets a list of OFAC check records that the logged in user has access to
+      operationId: OfacChecks_Get
+      parameters:
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - NeedsReview
+          - NoMatch
+          - Match
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.OfacCheckDto'
+                xml:
+                  name: OfacCheckDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.OfacCheckDto'
+                xml:
+                  name: OfacCheckDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.OfacCheckDto'
+                xml:
+                  name: OfacCheckDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.OfacCheckDto'
+                xml:
+                  name: OfacCheckDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.OfacCheckDto'
+                xml:
+                  name: OfacCheckDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.OfacCheckDto'
+                xml:
+                  name: OfacCheckDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Portfolio/OfacChecks/{key}:
+    get:
+      tags:
+      - Portfolio/OfacChecks
+      summary: Gets the ofac check that has the provided key.
+      operationId: OfacChecks_GetEntityByKeyAsync
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.OfacCheckDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.OfacCheckDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.OfacCheckDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.OfacCheckDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.OfacCheckDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.OfacCheckDto'
+      security:
+      - Authorization: []
+  /v1/Portfolio/OfacChecks/Actions/SetStatus:
+    put:
+      tags:
+      - Portfolio/OfacChecks
+      operationId: OfacChecks_SetStatusAsync
+      parameters:
+      - name: status
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - NeedsReview
+          - NoMatch
+          - Match
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Ofac checks set status async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Portfolio.OfacCheckDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        status:
+          readOnly: true
+          type: string
+          enum:
+          - NeedsReview
+          - NoMatch
+          - Match
+        registrationId:
+          type: integer
+          format: int32
+        householdName:
+          type: string
+        householdAddress:
+          type: string
+        ofacId:
+          type: integer
+          format: int32
+        ofacName:
+          type: string
+        ofacAddress:
+          type: string
+        ofacAltName:
+          type: string
+        dateChecked:
+          type: string
+          format: date-time
+        notes:
+          type: string
+      xml:
+        name: OfacCheckDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

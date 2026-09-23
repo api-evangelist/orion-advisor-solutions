@@ -1,0 +1,176 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Sync Cashto Eclipse API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/SyncCashtoEclipse
+paths:
+  /v1/Billing/SyncCashtoEclipse:
+    post:
+      tags:
+      - Billing/SyncCashtoEclipse
+      summary: Draft method to sync cash between receivables and Eclipse.
+      operationId: Billing_BillingSyncCashToEclipse
+      parameters:
+      - name: ct
+        in: header
+        description: CancellationToken
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseCashFundingResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseCashFundingResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseCashFundingResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseCashFundingResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseCashFundingResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseCashFundingResponse'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ReceiveableSummaryDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ReceiveableSummaryDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ReceiveableSummaryDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ReceiveableSummaryDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ReceiveableSummaryDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ReceiveableSummaryDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ReceiveableSummaryDto'
+        required: true
+components:
+  schemas:
+    OAS.Integrations.Eclipse.Model.EclipseCashFundingResponse:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        createdBy:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedOn:
+          type: string
+          format: date-time
+        id:
+          type: integer
+          format: int32
+        isDeleted:
+          type: integer
+          format: int32
+        isExpired:
+          type: boolean
+        toleranceValue:
+          type: integer
+          format: int32
+        cashAmount:
+          type: number
+          format: double
+        cashAmountTypeId:
+          type: integer
+          format: int32
+        description:
+          type: string
+        expirationTypeId:
+          type: integer
+          format: int32
+        expirationValue:
+          type: string
+        minCashAmount:
+          type: number
+          format: double
+      xml:
+        name: EclipseCashFundingResponse
+      type: object
+    OAS.WebApi.DTO.Billing.ReceiveableSummaryDto:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        fundFamily:
+          type: string
+        productName:
+          type: string
+        moneyMarketBalance:
+          type: number
+          format: double
+        balanceDue:
+          type: number
+          format: double
+        difference:
+          type: number
+          format: double
+        payMethod:
+          type: string
+        clientId:
+          type: integer
+          format: int32
+        clientLastName:
+          type: string
+        clientName:
+          type: string
+        accountType:
+          type: string
+        accountNumber:
+          type: string
+        managementStyle:
+          type: string
+        accountIsActive:
+          type: boolean
+        representativeName:
+          type: string
+        feeReqSrc:
+          type: string
+          enum:
+          - Invalid
+          - HighValueFund
+          - CashAccount
+          - ProRata
+        instanceType:
+          type: string
+      xml:
+        name: ReceiveableSummaryDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

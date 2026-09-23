@@ -1,0 +1,144 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Aggregator/Token API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Aggregator/Token
+paths:
+  /v1/Aggregator/Token:
+    get:
+      tags:
+      - Aggregator/Token
+      summary: 'Gets All Idtokens for a single credentialId (aka: applinkdtlId)'
+      description: 'Sample Request
+
+        GET /Aggregator/Token
+
+        {
+
+        "credentialId": 1234,
+
+        "aggregatorId": 1060
+
+        }'
+      operationId: ConfirmAggregator_GetIdToken
+      parameters:
+      - name: credentialId
+        in: query
+        description: The ApplinkDtl Id
+        required: true
+        schema:
+          type: string
+      - name: aggregatorId
+        in: query
+        description: 'The aggregator Id (aka: applinkId)'
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AggregatorIdTokenDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AggregatorIdTokenDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AggregatorIdTokenDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AggregatorIdTokenDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AggregatorIdTokenDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.AggregatorIdTokenDto'
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Aggregator/Token
+      summary: Update refresh token of an akoya user
+      description: 'Sample Request
+
+        PUT /Aggregator/Token
+
+        {
+
+        "credentialId": 1234,
+
+        "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjFjNmXXXTZhZGVmODU2YzXXXzM2ZjVlZTgzM2ViODg2MzRhNzY4XXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+
+        "aggregatorId":1060
+
+        }'
+      operationId: ConfirmAggregator_UpdateTokenAsync
+      parameters:
+      - name: credentialId
+        in: query
+        description: 'The credential ID (aka: appLinkDtlId)'
+        required: true
+        schema:
+          type: string
+      - name: idToken
+        in: query
+        description: The idToken of an akoya user
+        required: true
+        schema:
+          type: string
+      - name: aggregatorId
+        in: query
+        description: 'The Aggregator ID (aka: appLinkId'
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Confirm.AggregatorIdTokenDto:
+      properties:
+        id_Token:
+          type: string
+        credentialId:
+          type: string
+      xml:
+        name: AggregatorIdTokenDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

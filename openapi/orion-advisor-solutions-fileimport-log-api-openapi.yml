@@ -1,0 +1,48 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect File Import/Log API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: FileImport/Log
+paths:
+  /v1/FileImport/Log/{filename}:
+    get:
+      tags:
+      - FileImport/Log
+      summary: Used to download a previously generated log export
+      operationId: FileImport_RunReportAsync
+      parameters:
+      - name: filename
+        in: path
+        description: The filename provided by the generate endpoint.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

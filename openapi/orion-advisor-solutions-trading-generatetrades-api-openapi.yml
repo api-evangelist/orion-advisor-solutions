@@ -1,0 +1,478 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Generate Trades API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/GenerateTrades
+paths:
+  /v1/Trading/GenerateTrades:
+    post:
+      tags:
+      - Trading/GenerateTrades
+      summary: Generates trades of any type based on the instructions in the tradeDefinition…
+      operationId: Trading_GenerateTradesAsync
+      parameters:
+      - name: sendNow
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: wait
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.TradeDefinition'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.TradeDefinition'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.TradeDefinition'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.TradeDefinition'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.TradeDefinition'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.TradeDefinition'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.TradeDefinition'
+        required: true
+  /v1/Trading/GenerateTrades/Buy:
+    post:
+      tags:
+      - Trading/GenerateTrades
+      summary: This is used when buying a product from cash, it handles setting the sell side…
+      operationId: Trading_GenerateTradesBuyAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.BuySells'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.BuySells'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.BuySells'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.BuySells'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.BuySells'
+        required: true
+  /v1/Trading/GenerateTrades/Sell:
+    post:
+      tags:
+      - Trading/GenerateTrades
+      summary: This is used when selling a product to cash, it handles setting the buy side of…
+      operationId: Trading_GenerateTradesSellAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.BuySells'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.BuySells'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.BuySells'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.BuySells'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.Remote.Trading.BuySells'
+        required: true
+components:
+  schemas:
+    OAS.Remote.Trading.BuySells:
+      properties:
+        trades:
+          items:
+            $ref: '#/components/schemas/OAS.Remote.Trading.BuySell'
+          readOnly: true
+          xml:
+            name: BuySell
+            wrapped: true
+          type: array
+        routine:
+          type: string
+          enum:
+          - Undefined
+          - Rebalance
+          - GlobalTrades
+          - BuySell
+          - SellAll
+          - TargetPercent
+          - ProRated
+          - QuickTrade
+          - QuickTradeBlock
+          - Distribution
+          - OptionTrade
+        scheduled:
+          type: boolean
+        recalcInstance:
+          type: boolean
+        scheduledRunTime:
+          type: object
+        description:
+          type: string
+        nsccTransactionType:
+          type: string
+          enum:
+          - UseDefault
+          - NormalPurchase
+          - Nav
+          - Roa
+          - Loi
+        assetValues:
+          type: string
+          enum:
+          - UseDefault
+          - Current
+          - Pending
+          - PendingTransactionsAndOrders
+        minTradeAmount:
+          type: number
+          format: double
+        postProcess:
+          type: string
+          enum:
+          - Run
+          - Skip
+        useProductSubstitution:
+          type: string
+          enum:
+          - UseDefault
+          - Use
+          - Ignore
+        stfWarningDays:
+          type: integer
+          format: int32
+        tradeInstanceID:
+          type: integer
+          format: int32
+        includeCustodialCash:
+          type: boolean
+        notes:
+          type: string
+        inboxAlert:
+          type: boolean
+        disableRealTimePrices:
+          type: boolean
+        sessionID:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        caption:
+          type: string
+        filename:
+          type: string
+        runDisconnected:
+          type: boolean
+        instanceType:
+          type: string
+          enum:
+          - Undefined
+          - GlobalTrade
+          - Modeling
+          - CheckReq
+          - FeeReq
+          - BuySell
+          - ACHReq
+          - EligibleTrades
+          - All
+          - CashFundADV
+          - CashFundSWD
+          - SWPDCA
+          - SysPurchTrade
+          - Distribution
+          - Contribution
+        securityTicket:
+          type: string
+          format: byte
+        commonSecurityTicket:
+          type: string
+          format: byte
+        authToken:
+          type: string
+        commonServer:
+          type: string
+        databaseID:
+          type: integer
+          format: int32
+        correlationId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        a_UserDetailId:
+          type: integer
+          format: int32
+        i_UserDetailId:
+          type: integer
+          format: int32
+      xml:
+        name: BuySells
+      type: object
+    OAS.Remote.Trading.BuySell:
+      properties:
+        accountID:
+          type: integer
+          format: int32
+        assetIDFrom:
+          type: integer
+          format: int32
+        assetIDTo:
+          type: integer
+          format: int32
+        productIDFrom:
+          type: integer
+          format: int32
+        productIDTo:
+          type: integer
+          format: int32
+        amount:
+          type: number
+          format: double
+        tradeType:
+          type: string
+          enum:
+          - Undefined
+          - Shares
+          - Dollars
+          - Percent
+      xml:
+        name: BuySell
+      type: object
+    OAS.Remote.Trading.TradeDefinition:
+      properties:
+        routine:
+          type: string
+          enum:
+          - Undefined
+          - Rebalance
+          - GlobalTrades
+          - BuySell
+          - SellAll
+          - TargetPercent
+          - ProRated
+          - QuickTrade
+          - QuickTradeBlock
+          - Distribution
+          - OptionTrade
+        scheduled:
+          type: boolean
+        recalcInstance:
+          type: boolean
+        scheduledRunTime:
+          type: object
+        description:
+          type: string
+        nsccTransactionType:
+          type: string
+          enum:
+          - UseDefault
+          - NormalPurchase
+          - Nav
+          - Roa
+          - Loi
+        assetValues:
+          type: string
+          enum:
+          - UseDefault
+          - Current
+          - Pending
+          - PendingTransactionsAndOrders
+        minTradeAmount:
+          type: number
+          format: double
+        postProcess:
+          type: string
+          enum:
+          - Run
+          - Skip
+        useProductSubstitution:
+          type: string
+          enum:
+          - UseDefault
+          - Use
+          - Ignore
+        stfWarningDays:
+          type: integer
+          format: int32
+        tradeInstanceID:
+          type: integer
+          format: int32
+        includeCustodialCash:
+          type: boolean
+        notes:
+          type: string
+        inboxAlert:
+          type: boolean
+        disableRealTimePrices:
+          type: boolean
+        sessionID:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        caption:
+          type: string
+        filename:
+          type: string
+        runDisconnected:
+          type: boolean
+        instanceType:
+          type: string
+          enum:
+          - Undefined
+          - GlobalTrade
+          - Modeling
+          - CheckReq
+          - FeeReq
+          - BuySell
+          - ACHReq
+          - EligibleTrades
+          - All
+          - CashFundADV
+          - CashFundSWD
+          - SWPDCA
+          - SysPurchTrade
+          - Distribution
+          - Contribution
+        securityTicket:
+          type: string
+          format: byte
+        commonSecurityTicket:
+          type: string
+          format: byte
+        authToken:
+          type: string
+        commonServer:
+          type: string
+        databaseID:
+          type: integer
+          format: int32
+        correlationId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        a_UserDetailId:
+          type: integer
+          format: int32
+        i_UserDetailId:
+          type: integer
+          format: int32
+      xml:
+        name: TradeDefinition
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

@@ -1,0 +1,265 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Utility/Slick Grid Export API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Utility/SlickGridExport
+paths:
+  /v1/Utility/SlickGridExport:
+    post:
+      tags:
+      - Utility/SlickGridExport
+      summary: Gets a data file representation of the slick grid json data provided via Form[…
+      operationId: SlickGridToExcel_MakeExcelFileAsync
+      parameters:
+      - name: utcOffsetMinutes
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: downloadName
+        in: query
+        required: false
+        schema:
+          type: string
+          default: SlickGridExport
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Utility/SlickGridExport/AGxlsxEncryptedExport:
+    post:
+      tags:
+      - Utility/SlickGridExport
+      summary: Used to generate a slickgridexport xlsx.
+      operationId: SlickGridToExcel_MakeXlsxEncryptedFileAsync
+      parameters:
+      - name: utcOffsetMinutes
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: downloadName
+        in: query
+        required: false
+        schema:
+          type: string
+          default: SlickGridExport
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      deprecated: true
+      security:
+      - Authorization: []
+  /v1/Utility/SlickGridExport/csv:
+    post:
+      tags:
+      - Utility/SlickGridExport
+      summary: Used to generate a slickgridexport csv.
+      operationId: SlickGridToExcel_MakeCsvFileAsync
+      parameters:
+      - name: utcOffsetMinutes
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: downloadName
+        in: query
+        required: false
+        schema:
+          type: string
+          default: SlickGridExport
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Utility/SlickGridExport/Run/{filename}:
+    get:
+      tags:
+      - Utility/SlickGridExport
+      summary: Used to download a previously generated SlickGridExport
+      operationId: SlickGridToExcel_RunReportAsync
+      parameters:
+      - name: filename
+        in: path
+        description: The filename provided by the generate endpoint.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Utility/SlickGridExport/xls:
+    post:
+      tags:
+      - Utility/SlickGridExport
+      summary: Used to generate a slickgridexport xls.
+      operationId: SlickGridToExcel_MakeXlsFileAsync
+      parameters:
+      - name: utcOffsetMinutes
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: downloadName
+        in: query
+        required: false
+        schema:
+          type: string
+          default: SlickGridExport
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Utility/SlickGridExport/xlsx:
+    post:
+      tags:
+      - Utility/SlickGridExport
+      summary: Used to generate a slickgridexport xlsx.
+      operationId: SlickGridToExcel_MakeXlsxFileAsync
+      parameters:
+      - name: utcOffsetMinutes
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: downloadName
+        in: query
+        required: false
+        schema:
+          type: string
+          default: SlickGridExport
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Utility/SlickGridExport/zip:
+    post:
+      tags:
+      - Utility/SlickGridExport
+      summary: Used to generate a slickgridexport csv.
+      operationId: SlickGridToExcel_MakeZipFileAsync
+      parameters:
+      - name: downloadName
+        in: query
+        required: false
+        schema:
+          type: string
+          default: SlickGridExport
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

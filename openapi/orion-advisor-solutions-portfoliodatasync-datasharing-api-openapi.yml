@@ -1,0 +1,2024 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Portfolio Data Sync/Data Sharing API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: PortfolioDataSync/DataSharing
+paths:
+  /v1/PortfolioDataSync/DataSharing/Sources:
+    get:
+      tags:
+      - PortfolioDataSync/DataSharing
+      summary: Returns all DataSharingSource rows that match our current logged in identity as…
+      description: 'Sample Request
+
+        Get /DataMaintenance/DataSharing/Sources
+
+        [
+
+        {
+
+        "id": 2,
+
+        "alClientSourceId": 245,
+
+        "alClientDestinationId": 1379,
+
+        "alClientSourceName": null,
+
+        "alClientDestinationName": null,
+
+        "sourceDescription": "test2",
+
+        "isActive": true,
+
+        "isAccepted": false,
+
+        "lastProcessedSource": "2023-12-30T12:27:09.87+00:00",
+
+        "lastProcessedDestination": "2024-01-18T12:27:09.87+00:00",
+
+        "syncStatus": 2,
+
+        "syncErrors": "somany",
+
+        "createdBy": "ryan.michel - LT1800-ORION - Microsoft SQL Server Management Studio - Query",
+
+        "createdDate": "2024-01-19T12:27:09.8728687-06:00",
+
+        "auditedByDisplay": "ryan.michel - LT1800-ORION - Microsoft SQL Server Management Studio - Query",
+
+        "auditedBy": null,
+
+        "auditedDate": null
+
+        },
+
+        {
+
+        "id": 3,
+
+        "alClientSourceId": 1379,
+
+        "alClientDestinationId": 245,
+
+        "alClientSourceName": null,
+
+        "alClientDestinationName": null,
+
+        "sourceDescription": "test1",
+
+        "isActive": false,
+
+        "isAccepted": true,
+
+        "lastProcessedSource": "2024-01-04T12:27:09.87+00:00",
+
+        "lastProcessedDestination": "2024-01-09T12:27:09.87+00:00",
+
+        "syncStatus": 1,
+
+        "syncErrors": null,
+
+        "createdBy": "ryan.michel - LT1800-ORION - Microsoft SQL Server Management Studio - Query",
+
+        "createdDate": "2024-01-19T12:27:09.8728687-06:00",
+
+        "auditedByDisplay": "ryan.michel - LT1800-ORION - Microsoft SQL Server Management Studio - Query",
+
+        "auditedBy": null,
+
+        "auditedDate": null
+
+        },
+
+        ]'
+      operationId: DataSharing_GetAllByCurrentIdentityAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+    post:
+      tags:
+      - PortfolioDataSync/DataSharing
+      summary: Creates a new row and adds it to the datasharingsource table
+      description: 'Sample Request
+
+        HttpPut /DataMaintenance/DataSharing/Sources
+
+        {
+
+        "id": 6,
+
+        "alClientSourceId": 1379,
+
+        "alClientDestinationId": 986,
+
+        "alClientSourceName": null,
+
+        "alClientDestinationName": null,
+
+        "sourceDescription": "dfgsdfg",
+
+        "isActive": false,
+
+        "isAccepted": false,
+
+        "lastProcessedSource": null,
+
+        "lastProcessedDestination": null,
+
+        "syncStatus": 0,
+
+        "syncErrors": "",
+
+        "createdBy": "Ryan.Michel",
+
+        "createdDate": "2024-01-23T11:49:39.5457063-06:00",
+
+        "auditedByDisplay": "Ryan.Michel",
+
+        "auditedBy": null,
+
+        "auditedDate": null
+
+        }'
+      operationId: DataSharing_AddRowAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto'
+        required: true
+  /v1/PortfolioDataSync/DataSharing/Sources/{dataSharingSourceId}:
+    get:
+      tags:
+      - PortfolioDataSync/DataSharing
+      summary: Gets all DataSharingSources filtered by the DataSharingSourceId
+      description: 'Sample Request
+
+        Get /DataMaintenance/DataSharing/Sources/1379
+
+        [
+
+        {
+
+        "id": 1,
+
+        "alClientSourceId": 90,
+
+        "alClientDestinationId": 108,
+
+        "alClientSourceName": null,
+
+        "alClientDestinationName": null,
+
+        "sourceDescription": "random alclients",
+
+        "isActive": false,
+
+        "isAccepted": false,
+
+        "lastProcessedSource": null,
+
+        "lastProcessedDestination": null,
+
+        "syncStatus": 1,
+
+        "syncErrors": null,
+
+        "createdBy": "ryan.michel - LT1800-ORION - Microsoft SQL Server Management Studio - Query",
+
+        "createdDate": "2024-01-19T12:27:09.8728687-06:00",
+
+        "auditedByDisplay": "ryan.michel - LT1800-ORION - Microsoft SQL Server Management Studio - Query",
+
+        "auditedBy": null,
+
+        "auditedDate": null
+
+        },
+
+        {
+
+        "id": 2,
+
+        "alClientSourceId": 245,
+
+        "alClientDestinationId": 1379,
+
+        "alClientSourceName": null,
+
+        "alClientDestinationName": null,
+
+        "sourceDescription": "test2",
+
+        "isActive": true,
+
+        "isAccepted": false,
+
+        "lastProcessedSource": "2023-12-30T12:27:09.87+00:00",
+
+        "lastProcessedDestination": "2024-01-18T12:27:09.87+00:00",
+
+        "syncStatus": 2,
+
+        "syncErrors": "somany",
+
+        "createdBy": "ryan.michel - LT1800-ORION - Microsoft SQL Server Management Studio - Query",
+
+        "createdDate": "2024-01-19T12:27:09.8728687-06:00",
+
+        "auditedByDisplay": "ryan.michel - LT1800-ORION - Microsoft SQL Server Management Studio - Query",
+
+        "auditedBy": null,
+
+        "auditedDate": null
+
+        }
+
+        ]'
+      operationId: DataSharing_GetByKeyAsync
+      parameters:
+      - name: dataSharingSourceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/PortfolioDataSync/DataSharing/Sources/{dataSharingSourceId}/Action/Deactivate:
+    put:
+      tags:
+      - PortfolioDataSync/DataSharing
+      summary: Marks a source as inactive (active = false)
+      description: 'Sample Request
+
+        HttpPut /DataMaintenance/DataSharing/Sources/1456/Action/Deactivate'
+      operationId: DataSharing_DeactivateSourceAsync
+      parameters:
+      - name: dataSharingSourceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: token
+        in: header
+        description: Cancellation Token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/PortfolioDataSync/DataSharing/Sources/{dataSharingSourceId}/Action/Description:
+    put:
+      tags:
+      - PortfolioDataSync/DataSharing
+      summary: Sets the description
+      description: 'Sample Request
+
+        HttpPut /DataMaintenance/DataSharing/Sources/3453452/Action/Description'
+      operationId: DataSharing_UpdateDescriptionAsync
+      parameters:
+      - name: dataSharingSourceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto'
+        required: true
+  /v1/PortfolioDataSync/DataSharing/Sources/{dataSharingSourceId}/Action/Reactivate:
+    put:
+      tags:
+      - PortfolioDataSync/DataSharing
+      summary: Activates a source
+      description: 'Sample Request
+
+        HttpPut /DataMaintenance/DataSharing/Sources/1456/Action/Reactivate'
+      operationId: DataSharing_ReactivateSourceAsync
+      parameters:
+      - name: dataSharingSourceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: token
+        in: header
+        description: Cancellation Token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/PortfolioDataSync/DataSharing/Sources/{dataSharingSourceId}/Action/UpdateFromSourceKeyAsync:
+    put:
+      tags:
+      - PortfolioDataSync/DataSharing
+      summary: Updates an existing row from a sourcekey
+      description: 'Sample Request
+
+        Put /DataMaintenance/DataSharing/Sources/36/Action/UpdateFromSourceKeyAsync
+
+        {
+
+        alClientDestinationId:1379
+
+        alClientDestinationName:null
+
+        alClientSourceId:245
+
+        alClientSourceName:"OrionService (test)"
+
+        auditedByDisplay:"Ryan.Michel"
+
+        auditedDate:null
+
+        createdBy:"Ryan.Michel"
+
+        createdDate:"2024-03-12T14:25:08.2912727-05:00"
+
+        dataSharingSourceUID:"e0f3b6ad-ecc9-406b-b2ff-87d2fe431c8b"
+
+        id:36
+
+        isActive:true
+
+        isActiveDestination:true
+
+        isActiveSource:true
+
+        lastProcessedDestination:null
+
+        lastProcessedSource:null
+
+        sourceDescription:"give me a key"
+
+        syncErrors:""
+
+        syncStatus:0
+
+        {'
+      operationId: DataSharing_UpdateFromSourceKeyAsync
+      parameters:
+      - name: dataSharingSourceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto'
+        required: true
+  /v1/PortfolioDataSync/DataSharing/Sources/{dataSharingSourceId}/Entities:
+    get:
+      tags:
+      - PortfolioDataSync/DataSharing
+      summary: Returns all DataSharingSource rows that match our current logged in identity as…
+      description: 'Sample Request
+
+        Get /DataMaintenance/DataSharing/Sources/23478/Entities
+
+        [
+
+        {
+
+        "id": 2,
+
+        "alClientSourceId": 245,
+
+        "alClientDestinationId": 1379,
+
+        "alClientSourceName": null,
+
+        "alClientDestinationName": null,
+
+        "sourceDescription": "test2",
+
+        "isActive": true,
+
+        "isAccepted": false,
+
+        "lastProcessedSource": "2023-12-30T12:27:09.87+00:00",
+
+        "lastProcessedDestination": "2024-01-18T12:27:09.87+00:00",
+
+        "syncStatus": 2,
+
+        "syncErrors": "somany",
+
+        "createdBy": "ryan.michel - LT1800-ORION - Microsoft SQL Server Management Studio - Query",
+
+        "createdDate": "2024-01-19T12:27:09.8728687-06:00",
+
+        "auditedByDisplay": "ryan.michel - LT1800-ORION - Microsoft SQL Server Management Studio - Query",
+
+        "auditedBy": null,
+
+        "auditedDate": null
+
+        },
+
+        {
+
+        "id": 3,
+
+        "alClientSourceId": 1379,
+
+        "alClientDestinationId": 245,
+
+        "alClientSourceName": null,
+
+        "alClientDestinationName": null,
+
+        "sourceDescription": "test1",
+
+        "isActive": false,
+
+        "isAccepted": true,
+
+        "lastProcessedSource": "2024-01-04T12:27:09.87+00:00",
+
+        "lastProcessedDestination": "2024-01-09T12:27:09.87+00:00",
+
+        "syncStatus": 1,
+
+        "syncErrors": null,
+
+        "createdBy": "ryan.michel - LT1800-ORION - Microsoft SQL Server Management Studio - Query",
+
+        "createdDate": "2024-01-19T12:27:09.8728687-06:00",
+
+        "auditedByDisplay": "ryan.michel - LT1800-ORION - Microsoft SQL Server Management Studio - Query",
+
+        "auditedBy": null,
+
+        "auditedDate": null
+
+        },
+
+        ]'
+      operationId: DataSharing_GetAllEntitiesForCurrentIdentityAsync
+      parameters:
+      - name: dataSharingSourceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/PortfolioDataSync/DataSharing/Sources/{dataSharingSourceId}/Entities/Import:
+    post:
+      tags:
+      - PortfolioDataSync/DataSharing
+      summary: Inserts records based on imported file
+      description: 'Sample Request
+
+        POST /DataMaintenance/DataSharing/Source/32457/Entities/Import
+
+        BODY
+
+        File:binary'
+      operationId: DataSharing_CreateEntitiesAsync
+      parameters:
+      - name: dataSharingSourceId
+        in: path
+        description: The data sharing source Id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto'
+        description: the import file
+        required: true
+  /v1/PortfolioDataSync/DataSharing/Sources/{dataSharingSourceId}/Entities/Upsert:
+    put:
+      tags:
+      - PortfolioDataSync/DataSharing
+      operationId: DataSharing_UpdateEntitiesAsync
+      parameters:
+      - name: dataSharingSourceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntitySelectionDto'
+              xml:
+                name: DataSharingEntitySelectionDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntitySelectionDto'
+              xml:
+                name: DataSharingEntitySelectionDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntitySelectionDto'
+              xml:
+                name: DataSharingEntitySelectionDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntitySelectionDto'
+              xml:
+                name: DataSharingEntitySelectionDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntitySelectionDto'
+              xml:
+                name: DataSharingEntitySelectionDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntitySelectionDto'
+              xml:
+                name: DataSharingEntitySelectionDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntitySelectionDto'
+              xml:
+                name: DataSharingEntitySelectionDto
+                wrapped: true
+              type: array
+        required: true
+      summary: Data sharing update entities async
+      x-summary-source: derived
+  /v1/PortfolioDataSync/DataSharing/Sources/{dataSharingSourceId}/Entities/Upsert/Hypothetical:
+    put:
+      tags:
+      - PortfolioDataSync/DataSharing
+      operationId: DataSharing_PreviewUpdateEntitiesAsync
+      parameters:
+      - name: dataSharingSourceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntitySelectionDto'
+              xml:
+                name: DataSharingEntitySelectionDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntitySelectionDto'
+              xml:
+                name: DataSharingEntitySelectionDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntitySelectionDto'
+              xml:
+                name: DataSharingEntitySelectionDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntitySelectionDto'
+              xml:
+                name: DataSharingEntitySelectionDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntitySelectionDto'
+              xml:
+                name: DataSharingEntitySelectionDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntitySelectionDto'
+              xml:
+                name: DataSharingEntitySelectionDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntitySelectionDto'
+              xml:
+                name: DataSharingEntitySelectionDto
+                wrapped: true
+              type: array
+        required: true
+      summary: Data sharing preview update entities async
+      x-summary-source: derived
+  /v1/PortfolioDataSync/DataSharing/Sources/{dataSharingSourceId}/EntityMapOverrides:
+    get:
+      tags:
+      - PortfolioDataSync/DataSharing
+      operationId: DataSharing_GetEntityMapOverridesAsync
+      parameters:
+      - name: dataSharingSourceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Data sharing get entity map overrides async
+      x-summary-source: derived
+    put:
+      tags:
+      - PortfolioDataSync/DataSharing
+      operationId: DataSharing_SaveEntityMapOverridesAsync
+      parameters:
+      - name: dataSharingSourceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+          application/json:
+            schema:
+              type: string
+          text/json:
+            schema:
+              type: string
+          application/xml:
+            schema:
+              type: string
+          text/xml:
+            schema:
+              type: string
+          application/x-www-form-urlencoded:
+            schema:
+              type: string
+          multipart/form-data:
+            schema:
+              type: string
+        required: true
+      summary: Data sharing save entity map overrides async
+      x-summary-source: derived
+  /v1/PortfolioDataSync/DataSharing/Sources/{dataSharingSourceId}/EntityMaps:
+    get:
+      tags:
+      - PortfolioDataSync/DataSharing
+      summary: Retrieves All entity maps for the current alclientid
+      description: 'Sample Request
+
+        Get /DataMaintenance/DataSharing/Source/2/EntityMaps
+
+        [
+
+        {
+
+        "dataSharingSourceId": 2,
+
+        "entityEnum": 4,
+
+        "entitySource": 14,
+
+        "entityDescriptionSource": "mapping rep recon to service",
+
+        "entityInfoSourceJSON": null,
+
+        "entityDestination": 27,
+
+        "entityDescriptionDestination": "RepNo: 123, RepName: Kala1 Wylie"
+
+        },
+
+        {
+
+        "dataSharingSourceId": 2,
+
+        "entityEnum": 4,
+
+        "entitySource": 15,
+
+        "entityDescriptionSource": "this destination does not exist",
+
+        "entityInfoSourceJSON": null,
+
+        "entityDestination": -11324,
+
+        "entityDescriptionDestination": null
+
+        }
+
+        ]'
+      operationId: DataSharing_GetAllEntityMapsForCurrentIdentityAsync
+      parameters:
+      - name: dataSharingSourceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - PortfolioDataSync/DataSharing
+      operationId: DataSharing_UpdateAllEntityMapsForCurrentIdentityAsync
+      parameters:
+      - name: dataSharingSourceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntityMapDto'
+              xml:
+                name: DataSharingEntityMapDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntityMapDto'
+              xml:
+                name: DataSharingEntityMapDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntityMapDto'
+              xml:
+                name: DataSharingEntityMapDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntityMapDto'
+              xml:
+                name: DataSharingEntityMapDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntityMapDto'
+              xml:
+                name: DataSharingEntityMapDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntityMapDto'
+              xml:
+                name: DataSharingEntityMapDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntityMapDto'
+              xml:
+                name: DataSharingEntityMapDto
+                wrapped: true
+              type: array
+        required: true
+      summary: Data sharing update all entity maps for current identity async
+      x-summary-source: derived
+  /v1/PortfolioDataSync/DataSharing/Sources/{dataSharingSourceId}/NotificationSetting:
+    get:
+      tags:
+      - PortfolioDataSync/DataSharing
+      operationId: DataSharingNotification_GetDataSharingNotificationAsync
+      parameters:
+      - name: dataSharingSourceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Data sharing notification get data sharing notification async
+      x-summary-source: derived
+    post:
+      tags:
+      - PortfolioDataSync/DataSharing
+      operationId: DataSharingNotification_UpsertDataSharingNotificationAsync
+      parameters:
+      - name: ct
+        in: header
+        required: false
+      - name: dataSharingSourceId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingNotificationDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingNotificationDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingNotificationDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingNotificationDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingNotificationDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingNotificationDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.PortfolioDataSync.DataSharingNotificationDto'
+        required: true
+      summary: Data sharing notification upsert data sharing notification async
+      x-summary-source: derived
+    delete:
+      tags:
+      - PortfolioDataSync/DataSharing
+      operationId: DataSharingNotification_DeleteDataSharingNotificationAsync
+      parameters:
+      - name: dataSharingSourceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Data sharing notification delete data sharing notification async
+      x-summary-source: derived
+  /v1/PortfolioDataSync/DataSharing/Sources/alClientId/{alClientId}:
+    get:
+      tags:
+      - PortfolioDataSync/DataSharing
+      summary: Gets all DataSharingSources filtered where the client or destination source…
+      description: 'Sample Request
+
+        Get /DataMaintenance/DataSharing/Sources/AlClientId/1379
+
+        [
+
+        {
+
+        "id": 1,
+
+        "alClientSourceId": 90,
+
+        "alClientDestinationId": 108,
+
+        "alClientSourceName": null,
+
+        "alClientDestinationName": null,
+
+        "sourceDescription": "random alclients",
+
+        "isActive": false,
+
+        "isAccepted": false,
+
+        "lastProcessedSource": null,
+
+        "lastProcessedDestination": null,
+
+        "syncStatus": 1,
+
+        "syncErrors": null,
+
+        "createdBy": "ryan.michel - LT1800-ORION - Microsoft SQL Server Management Studio - Query",
+
+        "createdDate": "2024-01-19T12:27:09.8728687-06:00",
+
+        "auditedByDisplay": "ryan.michel - LT1800-ORION - Microsoft SQL Server Management Studio - Query",
+
+        "auditedBy": null,
+
+        "auditedDate": null
+
+        },
+
+        {
+
+        "id": 2,
+
+        "alClientSourceId": 245,
+
+        "alClientDestinationId": 1379,
+
+        "alClientSourceName": null,
+
+        "alClientDestinationName": null,
+
+        "sourceDescription": "test2",
+
+        "isActive": true,
+
+        "isAccepted": false,
+
+        "lastProcessedSource": "2023-12-30T12:27:09.87+00:00",
+
+        "lastProcessedDestination": "2024-01-18T12:27:09.87+00:00",
+
+        "syncStatus": 2,
+
+        "syncErrors": "somany",
+
+        "createdBy": "ryan.michel - LT1800-ORION - Microsoft SQL Server Management Studio - Query",
+
+        "createdDate": "2024-01-19T12:27:09.8728687-06:00",
+
+        "auditedByDisplay": "ryan.michel - LT1800-ORION - Microsoft SQL Server Management Studio - Query",
+
+        "auditedBy": null,
+
+        "auditedDate": null
+
+        }
+
+        ]'
+      operationId: DataSharing_GetByAlClientIdAsync
+      parameters:
+      - name: alClientId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/PortfolioDataSync/DataSharing/Sources/AllData:
+    get:
+      tags:
+      - PortfolioDataSync/DataSharing
+      summary: Get all rows unfilered for DataSharingSource
+      description: 'Sample Request
+
+        Get /DataMaintenance/DataSharing/Source/AllData
+
+        [
+
+        {
+
+        "id": 1,
+
+        "alClientSourceId": 90,
+
+        "alClientDestinationId": 108,
+
+        "alClientSourceName": null,
+
+        "alClientDestinationName": null,
+
+        "sourceDescription": "random alclients",
+
+        "isActive": false,
+
+        "isAccepted": false,
+
+        "lastProcessedSource": null,
+
+        "lastProcessedDestination": null,
+
+        "syncStatus": 1,
+
+        "syncErrors": null,
+
+        "createdBy": "ryan.michel - LT1800-ORION - Microsoft SQL Server Management Studio - Query",
+
+        "createdDate": "2024-01-19T12:27:09.8728687-06:00",
+
+        "auditedByDisplay": "ryan.michel - LT1800-ORION - Microsoft SQL Server Management Studio - Query",
+
+        "auditedBy": null,
+
+        "auditedDate": null
+
+        },
+
+        {
+
+        "id": 2,
+
+        "alClientSourceId": 245,
+
+        "alClientDestinationId": 1379,
+
+        "alClientSourceName": null,
+
+        "alClientDestinationName": null,
+
+        "sourceDescription": "test2",
+
+        "isActive": true,
+
+        "isAccepted": false,
+
+        "lastProcessedSource": "2023-12-30T12:27:09.87+00:00",
+
+        "lastProcessedDestination": "2024-01-18T12:27:09.87+00:00",
+
+        "syncStatus": 2,
+
+        "syncErrors": "somany",
+
+        "createdBy": "ryan.michel - LT1800-ORION - Microsoft SQL Server Management Studio - Query",
+
+        "createdDate": "2024-01-19T12:27:09.8728687-06:00",
+
+        "auditedByDisplay": "ryan.michel - LT1800-ORION - Microsoft SQL Server Management Studio - Query",
+
+        "auditedBy": null,
+
+        "auditedDate": null
+
+        }
+
+        ]'
+      operationId: DataSharing_GetAllAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/PortfolioDataSync/DataSharing/Sources/dataSharingSourceUID/{dataSharingSourceUID}:
+    get:
+      tags:
+      - PortfolioDataSync/DataSharing
+      summary: Gets all DataSharingSources filtered by the dataSharingSourceUid or "sourcekey"
+      description: 'Sample Request
+
+        Get /DataMaintenance/DataSharing/Sources/dataSharingSourceUID/E0F3B6AD-ECC9-406B-B2FF-87D2FE431C8B
+
+        {
+
+        "id": 36,
+
+        "alClientSourceId": null,
+
+        "alClientDestinationId": 1379,
+
+        "alClientSourceName": null,
+
+        "alClientDestinationName": null,
+
+        "sourceDescription": "give me a key",
+
+        "isActive": false,
+
+        "dataSharingSourceUID": "e0f3b6ad-ecc9-406b-b2ff-87d2fe431c8b",
+
+        "isActiveSource": true,
+
+        "isActiveDestination": true,
+
+        "lastProcessedSource": null,
+
+        "lastProcessedDestination": null,
+
+        "syncStatus": 0,
+
+        "syncErrors": "",
+
+        "createdBy": "Ryan.Michel",
+
+        "createdDate": "2024-03-12T14:25:08.2912727-05:00",
+
+        "auditedByDisplay": "Ryan.Michel",
+
+        "auditedDate": null
+
+        }'
+      operationId: DataSharing_GetBySourceKey
+      parameters:
+      - name: dataSharingSourceUID
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/PortfolioDataSync/DataSharing/Sources/EntityLink/IsActive:
+    get:
+      tags:
+      - PortfolioDataSync/DataSharing
+      operationId: DataSharing_IsEntityDataSharedAsync
+      parameters:
+      - name: entityId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: entityType
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Data sharing is entity data shared async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        alClientSourceId:
+          type: integer
+          format: int32
+        alClientDestinationId:
+          type: integer
+          format: int32
+        alClientSourceName:
+          type: string
+        alClientDestinationName:
+          type: string
+        sourceDescription:
+          type: string
+        isActive:
+          type: boolean
+        dataSharingSourceUID:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        firstErroredMapping:
+          type: string
+          format: date-time
+        firstErroredDestination:
+          type: string
+          format: date-time
+        firstErroredSource:
+          type: string
+          format: date-time
+        lastProcessedSource:
+          type: string
+          format: date-time
+        lastProcessedDestination:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+      xml:
+        name: DataSharingSourceDto
+      type: object
+    OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
+      description: import file DTO for validating imports
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+          description: the imported file
+      xml:
+        name: ValidateFileImportDto
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntityMapDto:
+      properties:
+        dataSharingSourceId:
+          type: integer
+          format: int32
+        entityEnum:
+          type: integer
+          format: int32
+        entitySource:
+          type: integer
+          format: int32
+        entityDescriptionSource:
+          type: string
+        entityInfoSourceJSON:
+          type: string
+        entityDestination:
+          type: integer
+          format: int32
+        entityDescriptionDestination:
+          type: string
+      xml:
+        name: DataSharingEntityMapDto
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    OAS.WebApi.DTO.PortfolioDataSync.DataSharingNotificationDto:
+      properties:
+        dataSharingSourceId:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        isAlertSource:
+          type: boolean
+        isAlertDestination:
+          type: boolean
+        isAlertMapping:
+          type: boolean
+        isEmailAlert:
+          type: boolean
+        isNotificationCenterAlert:
+          type: boolean
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+      xml:
+        name: DataSharingNotificationDto
+      type: object
+    OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntitySelectionDto:
+      properties:
+        dataSharingSourceId:
+          type: integer
+          format: int32
+        entityEnum:
+          type: integer
+          format: int32
+        entityId:
+          type: integer
+          format: int32
+        doesEntityExist:
+          type: boolean
+        entityDescription:
+          type: string
+        isInclude:
+          type: boolean
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+      xml:
+        name: DataSharingEntitySelectionDto
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

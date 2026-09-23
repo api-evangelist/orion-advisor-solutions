@@ -1,0 +1,55 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Ping API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/Ping
+paths:
+  /v1/Trading/Ping:
+    get:
+      tags:
+      - Trading/Ping
+      summary: Used to test access to the batch data service
+      operationId: Trading_PingAsync
+      parameters:
+      - name: wait
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

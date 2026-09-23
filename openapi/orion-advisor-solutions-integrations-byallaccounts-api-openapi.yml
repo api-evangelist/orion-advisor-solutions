@@ -1,0 +1,1055 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/By All Accounts API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/ByAllAccounts
+paths:
+  /v1/Integrations/ByAllAccounts/Configuration:
+    get:
+      tags:
+      - Integrations/ByAllAccounts
+      summary: Retrieves ByAllAccounts Integration details
+      operationId: ByAllAccounts_GetConfiguration
+      parameters:
+      - name: firm
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: balanceOnly
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.IntegrationConfig'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.IntegrationConfig'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.IntegrationConfig'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.IntegrationConfig'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.IntegrationConfig'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.IntegrationConfig'
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Integrations/ByAllAccounts
+      summary: Saves ByAllAccounts integration settings
+      operationId: ByAllAccounts_UpdateConfiguration
+      parameters:
+      - name: firm
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: balanceOnly
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.IntegrationConfig'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.IntegrationConfig'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.IntegrationConfig'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.IntegrationConfig'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.IntegrationConfig'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.IntegrationConfig'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.IntegrationConfig'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.IntegrationConfig'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.IntegrationConfig'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.IntegrationConfig'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.IntegrationConfig'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.IntegrationConfig'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.IntegrationConfig'
+        required: true
+  /v1/Integrations/ByAllAccounts/CreateAdvisorCreds:
+    get:
+      tags:
+      - Integrations/ByAllAccounts
+      summary: Creates new advisor level creds
+      description: 'Sample Request
+
+        GET /Integrations/ByAllAccounts/CreateAdvisorCreds
+
+        {
+
+        baaFirmId=1
+
+        }'
+      operationId: ByAllAccounts_CreateAdvisorCreds
+      parameters:
+      - name: baaFirmID
+        in: query
+        description: the baa firmID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/ByAllAccounts/CreateInvestorCreds:
+    get:
+      tags:
+      - Integrations/ByAllAccounts
+      summary: Creates new investor level creds
+      description: 'Sample Request
+
+        GET /Integrations/ByAllAccounts/CreateInvestorCreds
+
+        {
+
+        baaFirmId=1
+
+        }'
+      operationId: ByAllAccounts_CreateInvestorCreds
+      parameters:
+      - name: baaFirmID
+        in: query
+        description: the baa firmID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/ByAllAccounts/Delete/{baaId}/Account/{baaAccountId}:
+    delete:
+      tags:
+      - Integrations/ByAllAccounts
+      summary: Delete Account from the UI without using the IFrame
+      operationId: ByAllAccounts_DeleteAccount
+      parameters:
+      - name: baaId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: baaAccountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.DeleteAccountResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.DeleteAccountResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.DeleteAccountResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.DeleteAccountResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.DeleteAccountResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.DeleteAccountResponse'
+      security:
+      - Authorization: []
+  /v1/Integrations/ByAllAccounts/GetAccountsAndHoldings:
+    get:
+      tags:
+      - Integrations/ByAllAccounts
+      summary: Get the Account and Holdings for the User
+      operationId: ByAllAccounts_GetAccountsAndHoldings
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.DataGetResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.DataGetResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.DataGetResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.DataGetResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.DataGetResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.DataGetResponse'
+      security:
+      - Authorization: []
+  /v1/Integrations/ByAllAccounts/GetAggregatedAccountData:
+    get:
+      tags:
+      - Integrations/ByAllAccounts
+      summary: Get the Account and Holdings for the User
+      operationId: ByAllAccounts_GetAggregatedAccountData
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.ByAllAggregatedAccountDto'
+                xml:
+                  name: ByAllAggregatedAccountDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.ByAllAggregatedAccountDto'
+                xml:
+                  name: ByAllAggregatedAccountDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.ByAllAggregatedAccountDto'
+                xml:
+                  name: ByAllAggregatedAccountDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.ByAllAggregatedAccountDto'
+                xml:
+                  name: ByAllAggregatedAccountDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.ByAllAggregatedAccountDto'
+                xml:
+                  name: ByAllAggregatedAccountDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.ByAllAggregatedAccountDto'
+                xml:
+                  name: ByAllAggregatedAccountDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Integrations/ByAllAccounts/Holding/Investor/{key}:
+    get:
+      tags:
+      - Integrations/ByAllAccounts
+      operationId: ByAllAccounts_GetHoldingForInvestor
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: By all accounts get holding for investor
+      x-summary-source: derived
+  /v1/Integrations/ByAllAccounts/SSO:
+    get:
+      tags:
+      - Integrations/ByAllAccounts
+      operationId: ByAllAccounts_GetAsync
+      parameters:
+      - name: balanceOnly
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: By all accounts get async
+      x-summary-source: derived
+  /v1/Integrations/ByAllAccounts/SSOToken:
+    get:
+      tags:
+      - Integrations/ByAllAccounts
+      summary: Get the SSO Token. Do not create advisor or investor creds
+      description: 'Sample Request
+
+        GET /Integrations/ByAllAccounts/GetSSOToken
+
+        {
+
+        baaFirmId=1
+
+        }'
+      operationId: ByAllAccounts_GetSSOToken
+      parameters:
+      - name: baaFirmID
+        in: query
+        description: the baa firmID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.SSOResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.SSOResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.SSOResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.SSOResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.SSOResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.SSOResponse'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAT.Integrations.ByAllAccounts.InvestmentOption:
+      properties:
+        fpId:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        accountId:
+          type: integer
+          format: int64
+        unitPrice:
+          type: number
+          format: double
+        priceDataAsOf:
+          type: string
+        lastUpdated:
+          type: string
+        name:
+          type: string
+        cusip:
+          type: string
+        ticker:
+          type: string
+        morningStarFundID:
+          type: string
+        security:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Security'
+      xml:
+        name: InvestmentOption
+      type: object
+    OAT.Integrations.ByAllAccounts.Security:
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        secruityType:
+          type: string
+        ticker:
+          type: string
+        cusip:
+          type: string
+        assetClass:
+          type: string
+        assetSubClass:
+          type: string
+        closePrice:
+          type: number
+          format: double
+        bondMaturity:
+          type: string
+        bondCoupon:
+          type: number
+          format: double
+        morningStarSECID:
+          type: string
+        morningSTartPERFID:
+          type: string
+      xml:
+        name: Security
+      type: object
+    OAT.Integrations.ByAllAccounts.Account:
+      properties:
+        fpId:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        portfolioId:
+          type: integer
+          format: int64
+        accountType:
+          type: string
+        onlineAccessEnabled:
+          type: string
+        lastUpdated:
+          type: string
+        accountNumber:
+          type: string
+        updateStatusErrcode:
+          type: string
+        lastUpdateAttempt:
+          type: string
+        acId:
+          type: integer
+          format: int64
+        dataBasis:
+          type: string
+        gatherLots:
+          type: string
+        fI_Supplied_Rep_ID:
+          type: string
+        fI_Supplied_Firm_ID:
+          type: string
+        fI_Supplied_Account_Tax_ID:
+          type: string
+        fI_Supplied_Account_Name:
+          type: string
+        fI_Supplied_Account_Title:
+          type: string
+        fI_Supplied_Client_First:
+          type: string
+        fI_Supplied_Client_Middle:
+          type: string
+        fI_Supplied_Client_Last:
+          type: string
+        fI_Supplied_Client_Address_Street:
+          type: string
+        fI_Supplied_Client_Address_Line2:
+          type: string
+        fI_Supplied_Client_Address_Line3:
+          type: string
+        fI_Supplied_Client_Address_Line4:
+          type: string
+        fI_Supplied_Client_Address_Line5:
+          type: string
+        fI_Supplied_Client_Address_Line6:
+          type: string
+        fI_Supplied_Client_Address_City:
+          type: string
+        fI_Supplied_Client_Address_State:
+          type: string
+        fI_Supplied_Client_Address_ZipCode:
+          type: string
+        fI_Supplied_Client_Phone:
+          type: string
+        fI_Supplied_Client_DOB:
+          type: string
+        fI_Supplied_Client_EMail:
+          type: string
+        fI_Supplied_Account_Type:
+          type: string
+        fI_Supplied_Custodian_Code:
+          type: string
+        fI_Supplied_Custodian_Name:
+          type: string
+        planName:
+          type: string
+        marketValue:
+          type: string
+        externalServiceLevel:
+          type: string
+        holdings:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Holding'
+          readOnly: true
+          xml:
+            name: Holding
+            wrapped: true
+          type: array
+        accountCredential:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.AccountCredential'
+        financialInstitution:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.FinancialInstitution'
+      xml:
+        name: Account
+      type: object
+    OAT.Integrations.ByAllAccounts.UserList:
+      properties:
+        user:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.UserItem'
+          xml:
+            name: UserItem
+            wrapped: true
+          type: array
+      xml:
+        name: UserList
+      type: object
+    OAT.Integrations.ByAllAccounts.ProfileAccess:
+      properties:
+        personId:
+          type: integer
+          format: int64
+        profileId:
+          type: integer
+          format: int64
+        role:
+          type: string
+        access:
+          type: string
+      xml:
+        name: ProfileAccess
+      type: object
+    OAT.Integrations.ByAllAccounts.SecurityList:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Security'
+          xml:
+            name: Security
+            wrapped: true
+          type: array
+      xml:
+        name: SecurityList
+      type: object
+    OAT.Integrations.ByAllAccounts.FiList:
+      properties:
+        fi:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.FinancialInstitution'
+          xml:
+            name: FinancialInstitution
+            wrapped: true
+          type: array
+      xml:
+        name: FiList
+      type: object
+    OAT.Integrations.ByAllAccounts.FinancialInstitution:
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        serviceCategory:
+          type: string
+      xml:
+        name: FinancialInstitution
+      type: object
+    OAT.Integrations.ByAllAccounts.IntegrationConfig:
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        personId:
+          type: string
+        financialProfileId:
+          type: string
+      xml:
+        name: IntegrationConfig
+      type: object
+    OAT.Integrations.ByAllAccounts.Status:
+      properties:
+        errorCode:
+          type: integer
+          format: int32
+        errorMessage:
+          type: string
+      xml:
+        name: Status
+      type: object
+    OAT.Integrations.ByAllAccounts.SSOResponse:
+      properties:
+        version:
+          type: string
+        loginResponse:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.LoginResponse'
+        sessionAuthResponse:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.SessionAuthResponse'
+      xml:
+        name: SSOResponse
+      type: object
+    OAT.Integrations.ByAllAccounts.Person:
+      properties:
+        firmTag1:
+          type: string
+        firmTag2:
+          type: string
+        firmTag3:
+          type: string
+        role:
+          type: string
+        firstName:
+          type: string
+        middleName:
+          type: string
+        lastName:
+          type: string
+        emailAddress:
+          type: string
+        phone:
+          type: string
+        taxId:
+          type: string
+        isSso:
+          type: string
+      xml:
+        name: Person
+      type: object
+    OAT.Integrations.ByAllAccounts.AccountCredential:
+      properties:
+        profileId:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        financialInstitutionId:
+          type: integer
+          format: int64
+        accountLogin:
+          type: string
+        credComplete:
+          type: boolean
+        lastAuthenticationAttempt:
+          type: string
+        authStatusErrCode:
+          type: string
+        autoManage:
+          type: boolean
+        gatherLots:
+          type: boolean
+        authType:
+          type: string
+      xml:
+        name: AccountCredential
+      type: object
+    OAT.Integrations.ByAllAccounts.DeleteAccountResponse:
+      properties:
+        version:
+          type: string
+        loginResponse:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.LoginResponse'
+        body:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.DeleteAccountResponseBody'
+      xml:
+        name: DeleteAccountResponse
+      type: object
+    OAT.Integrations.ByAllAccounts.FinancialProfile:
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      xml:
+        name: FinancialProfile
+      type: object
+    OAT.Integrations.ByAllAccounts.Data:
+      properties:
+        financialProfiles:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.FinancialProfile'
+          xml:
+            name: FinancialProfile
+            wrapped: true
+          type: array
+        portfolios:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Portfolio'
+          xml:
+            name: Portfolio
+            wrapped: true
+          type: array
+        accountCredentials:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.AccountCredential'
+          xml:
+            name: AccountCredential
+            wrapped: true
+          type: array
+        accounts:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Account'
+          xml:
+            name: Account
+            wrapped: true
+          type: array
+        holdings:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Holding'
+          xml:
+            name: Holding
+            wrapped: true
+          type: array
+        transactions:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Transaction'
+          xml:
+            name: Transaction
+            wrapped: true
+          type: array
+        investmentOptions:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.InvestmentOption'
+          xml:
+            name: InvestmentOption
+            wrapped: true
+          type: array
+      xml:
+        name: Data
+      type: object
+    OAT.Integrations.ByAllAccounts.Portfolio:
+      properties:
+        fpId:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      xml:
+        name: Portfolio
+      type: object
+    OAT.Integrations.ByAllAccounts.DeleteAccountResponseBody:
+      properties:
+        status:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Status'
+        fpId:
+          type: string
+        id:
+          type: string
+      xml:
+        name: DeleteAccountResponseBody
+      type: object
+    OAT.Integrations.ByAllAccounts.DataGetResponse:
+      properties:
+        version:
+          type: string
+        loginResponse:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.LoginResponse'
+        body:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.DataGetResponseBody'
+      xml:
+        name: DataGetResponse
+      type: object
+    OAT.Integrations.ByAllAccounts.SessionAuthResponse:
+      properties:
+        status:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Status'
+        applicationUrl:
+          type: string
+        sessionId:
+          type: string
+        csrfToken:
+          type: string
+      xml:
+        name: SessionAuthResponse
+      type: object
+    OAT.Integrations.ByAllAccounts.UserItem:
+      properties:
+        person:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Person'
+        login:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.LoginItems'
+        profileAccessList:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.ProfileAccess'
+          xml:
+            name: ProfileAccess
+            wrapped: true
+          type: array
+      xml:
+        name: UserItem
+      type: object
+    OAT.Integrations.ByAllAccounts.DataGetResponseBody:
+      properties:
+        status:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Status'
+        securityList:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.SecurityList'
+        fiList:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.FiList'
+        userList:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.UserList'
+        data:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Data'
+          xml:
+            name: Data
+            wrapped: true
+          type: array
+      xml:
+        name: DataGetResponseBody
+      type: object
+    OAT.Integrations.ByAllAccounts.LoginResponse:
+      properties:
+        status:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Status'
+      xml:
+        name: LoginResponse
+      type: object
+    OAT.Integrations.ByAllAccounts.Holding:
+      properties:
+        fpId:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        accountId:
+          type: integer
+          format: int64
+        securityId:
+          type: integer
+          format: int64
+        units:
+          type: number
+          format: double
+        costBasis:
+          type: number
+          format: double
+        marketValue:
+          type: number
+          format: double
+        unitPrice:
+          type: number
+          format: double
+        priceDataAsOf:
+          type: string
+        lastUpdated:
+          type: string
+        name:
+          type: string
+        cusip:
+          type: string
+        ticker:
+          type: string
+        valueSource:
+          type: string
+        secType:
+          type: string
+        security:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Security'
+      xml:
+        name: Holding
+      type: object
+    OAS.WebApi.DTO.Integrations.ByAllAggregatedAccountDto:
+      properties:
+        baaId:
+          type: integer
+          format: int64
+        baaAccountId:
+          type: integer
+          format: int64
+        clientId:
+          type: integer
+          format: int32
+        isLiability:
+          type: integer
+          format: int32
+        accountName:
+          type: string
+        accountValue:
+          type: number
+          format: double
+      xml:
+        name: ByAllAggregatedAccountDto
+      type: object
+    OAT.Integrations.ByAllAccounts.LoginItems:
+      properties:
+        username:
+          type: string
+        personId:
+          type: string
+        lastLoginDate:
+          type: string
+      xml:
+        name: LoginItems
+      type: object
+    OAT.Integrations.ByAllAccounts.Transaction:
+      properties:
+        fpId:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        accountId:
+          type: integer
+          format: int64
+        holdingId:
+          type: integer
+          format: int64
+        securityId:
+          type: integer
+          format: int64
+        txType:
+          type: string
+        totalAmount:
+          type: number
+          format: double
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+          format: double
+        flowAmount:
+          type: number
+          format: double
+        flowUnits:
+          type: number
+          format: double
+        cusip:
+          type: string
+        ticker:
+          type: string
+        security:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Security'
+      xml:
+        name: Transaction
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

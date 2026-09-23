@@ -1,0 +1,494 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Confirm/Interface Syncs API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Confirm/InterfaceSyncs
+paths:
+  /v1/Confirm/InterfaceSyncs:
+    get:
+      tags:
+      - Confirm/InterfaceSyncs
+      summary: Returns a list of recon interface syncs
+      operationId: InterfaceSyncs_Get
+      parameters:
+      - name: startDate
+        in: query
+        description: 'Optional. Default: null. If provided returns only recon interface syncss with a process start date greater than date provided.'
+        required: false
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        description: 'Optional. Default: null. If provided returns only recon interface syncs with a process start date less than date provided.'
+        required: false
+        schema:
+          type: string
+      - name: syncType
+        in: query
+        description: 'Optional. Default: null  If provided, the return will be filter to only the syncTypes requested.'
+        required: false
+        schema:
+          type: string
+          enum:
+          - Daily
+          - Weekly
+          - Exclusion
+          - Price
+      - name: userTeamOnly
+        in: query
+        description: 'Optional. Default: false  If provided, the return will be limited to just the admin''s service team.'
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: serviceTeamId
+        in: query
+        description: 'Optional. Default: null  If provided, the return will be limited to the service team Id given.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: serviceTeamUserManagerId
+        in: query
+        description: 'Optional. Default: null  If provided, the return will be limited to the service teams assigned the the given Id.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: downloadFileId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: userAnalystId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: databaseId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncDto'
+                xml:
+                  name: InterfaceSyncDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncDto'
+                xml:
+                  name: InterfaceSyncDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncDto'
+                xml:
+                  name: InterfaceSyncDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncDto'
+                xml:
+                  name: InterfaceSyncDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncDto'
+                xml:
+                  name: InterfaceSyncDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncDto'
+                xml:
+                  name: InterfaceSyncDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Confirm/InterfaceSyncs/{key}:
+    get:
+      tags:
+      - Confirm/InterfaceSyncs
+      summary: Get interface Sync by key
+      operationId: InterfaceSyncs_GetByKey
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncDto'
+      security:
+      - Authorization: []
+  /v1/Confirm/InterfaceSyncs/Action/SignOff:
+    put:
+      tags:
+      - Confirm/InterfaceSyncs
+      summary: Sign off InterfaceSyncs
+      operationId: InterfaceSyncs_InterfaceSyncSignOffAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncDto'
+                xml:
+                  name: InterfaceSyncDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncDto'
+                xml:
+                  name: InterfaceSyncDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncDto'
+                xml:
+                  name: InterfaceSyncDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncDto'
+                xml:
+                  name: InterfaceSyncDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncDto'
+                xml:
+                  name: InterfaceSyncDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncDto'
+                xml:
+                  name: InterfaceSyncDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncSignOffsDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncSignOffsDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncSignOffsDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncSignOffsDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncSignOffsDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncSignOffsDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncSignOffsDto'
+        required: true
+  /v1/Confirm/InterfaceSyncs/Files:
+    get:
+      tags:
+      - Confirm/InterfaceSyncs
+      summary: Interface syncs get interface syncs by file
+      operationId: InterfaceSyncs_GetInterfaceSyncsByFile
+      parameters:
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: userAnalystId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncsByFileDto'
+                xml:
+                  name: InterfaceSyncsByFileDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncsByFileDto'
+                xml:
+                  name: InterfaceSyncsByFileDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncsByFileDto'
+                xml:
+                  name: InterfaceSyncsByFileDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncsByFileDto'
+                xml:
+                  name: InterfaceSyncsByFileDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncsByFileDto'
+                xml:
+                  name: InterfaceSyncsByFileDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncsByFileDto'
+                xml:
+                  name: InterfaceSyncsByFileDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Confirm.Recon.SyncSignOffsDto:
+      properties:
+        syncIds:
+          items:
+            type: integer
+            format: int64
+          type: array
+        syncType:
+          type: string
+          enum:
+          - Daily
+          - Weekly
+          - Exclusion
+          - Price
+        managerSignOff:
+          type: boolean
+        syncNote:
+          type: string
+        priceNote:
+          type: string
+      xml:
+        name: SyncSignOffsDto
+      type: object
+    OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncsByFileDto:
+      properties:
+        downloadFileId:
+          type: integer
+          format: int32
+        databaseName:
+          type: string
+        alClientId:
+          type: integer
+          format: int32
+        downloadFileType:
+          type: string
+        downloadSourceName:
+          type: string
+        notConfirmedCount:
+          type: integer
+          format: int32
+        serviceTeamName:
+          type: string
+        analystUserId:
+          type: string
+        analystSignOffDate:
+          type: string
+          format: date-time
+        analystSignOffNotes:
+          type: string
+        managerUserId:
+          type: string
+        managerSignOffNotes:
+          type: string
+        managerSignOffDate:
+          type: string
+          format: date-time
+        downloadFileDate:
+          type: string
+          format: date-time
+        notesSummary:
+          type: string
+        userAnalystId:
+          type: integer
+          format: int32
+        userManagerId:
+          type: integer
+          format: int32
+      xml:
+        name: InterfaceSyncsByFileDto
+      type: object
+    OAS.WebApi.DTO.Confirm.Recon.InterfaceSyncDto:
+      properties:
+        statusIcon:
+          readOnly: true
+          type: string
+        id:
+          type: integer
+          format: int64
+        syncBeginDate:
+          type: string
+          format: date-time
+        syncEndDate:
+          type: string
+          format: date-time
+        downloadRecordId:
+          type: integer
+          format: int32
+        alClientId:
+          type: integer
+          format: int32
+        downloadFileType:
+          type: string
+        downloadFileDate:
+          type: string
+          format: date-time
+        clientName:
+          type: string
+        serviceTeamName:
+          type: string
+        analystLoginUserId:
+          type: string
+        managerLoginUserId:
+          type: string
+        downloadSourceName:
+          type: string
+        downloadFileID:
+          type: integer
+          format: int32
+        downloadRecordStatus:
+          type: string
+        exclusionMessage:
+          type: string
+        syncSignOffId:
+          type: integer
+          format: int64
+        ruleId:
+          type: integer
+          format: int32
+        lastAlertDate:
+          type: string
+          format: date-time
+        auditedDate:
+          type: string
+          format: date-time
+        syncSignOffDisplay:
+          type: string
+        syncSignOffNote:
+          type: string
+        managerSyncSignOffDisplay:
+          type: string
+        managerSignOffNote:
+          type: string
+        statusReason:
+          type: string
+        cusip:
+          type: string
+        ticker:
+          type: string
+        accountCode:
+          type: string
+        lineNumber:
+          type: integer
+          format: int32
+        transactionType:
+          type: string
+        householdName:
+          type: string
+        productName:
+          type: string
+        notesSummary:
+          type: string
+      xml:
+        name: InterfaceSyncDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

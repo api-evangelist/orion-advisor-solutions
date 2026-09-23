@@ -1,0 +1,308 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Household Summary API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/HouseholdSummary
+paths:
+  /v1/Billing/HouseholdSummary/{key}:
+    get:
+      tags:
+      - Billing/HouseholdSummary
+      summary: Get household billing summary
+      operationId: Billing_HouseholdSummary
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired returned object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillHouseholdSummaryDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillHouseholdSummaryDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillHouseholdSummaryDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillHouseholdSummaryDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillHouseholdSummaryDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillHouseholdSummaryDto'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.BillScheduleSummaryDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        feeSchedule:
+          type: string
+        clientId:
+          type: integer
+          format: int32
+      xml:
+        name: BillScheduleSummaryDto
+      type: object
+    OAS.WebApi.DTO.Billing.BillFrequencySummaryDto:
+      properties:
+        frequency:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+      xml:
+        name: BillFrequencySummaryDto
+      type: object
+    OAS.WebApi.DTO.Billing.BillPayoutScheduleSummaryDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        payoutSchedule:
+          type: string
+        clientId:
+          type: integer
+          format: int32
+      xml:
+        name: BillPayoutScheduleSummaryDto
+      type: object
+    OAS.WebApi.DTO.Billing.HouseholdAccountSummaryDto:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        accountType:
+          type: string
+        billingStartDate:
+          type: string
+          format: date-time
+        feeSchedule:
+          type: string
+        payoutSchedule:
+          type: string
+        payMethod:
+          type: string
+        frequency:
+          type: string
+          enum:
+          - Undefined
+          - Monthly
+          - Quarterly
+          - Triannual
+          - Semiannually
+          - Annually
+          - AtMaturity
+        balanceDue:
+          type: number
+          format: double
+        creditRemaining:
+          type: number
+          format: double
+        repId:
+          type: integer
+          format: int32
+        repName:
+          type: string
+        paidByAccount:
+          readOnly: true
+          type: string
+        percentPaidByAccount:
+          readOnly: true
+          type: string
+        valuationMethod:
+          type: string
+          enum:
+          - PeriodEndingValue
+          - AvgDailyBalance
+          - AvgMonthlyBalance
+        isActive:
+          type: boolean
+      xml:
+        name: HouseholdAccountSummaryDto
+      type: object
+    OAS.WebApi.DTO.Billing.BillHouseholdSummaryDto:
+      properties:
+        value:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.HouseholdSummaryValueDto'
+        billSchedules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillScheduleSummaryDto'
+          xml:
+            name: BillScheduleSummaryDto
+            wrapped: true
+          type: array
+        payoutSchedules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayoutScheduleSummaryDto'
+          xml:
+            name: BillPayoutScheduleSummaryDto
+            wrapped: true
+          type: array
+        billFrequencies:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillFrequencySummaryDto'
+          xml:
+            name: BillFrequencySummaryDto
+            wrapped: true
+          type: array
+        billPayMethods:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillPayMethodSummaryDto'
+          xml:
+            name: BillPayMethodSummaryDto
+            wrapped: true
+          type: array
+        accountSummaries:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.HouseholdAccountSummaryDto'
+          xml:
+            name: HouseholdAccountSummaryDto
+            wrapped: true
+          type: array
+        billPaidForAccounts:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PaidByAccountSummaryDto'
+          xml:
+            name: PaidByAccountSummaryDto
+            wrapped: true
+          type: array
+        historicalBills:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillHistoryDto'
+          xml:
+            name: BillHistoryDto
+            wrapped: true
+          type: array
+        relatedHouseholdSummaries:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.RelatedClientSummaryDto'
+          xml:
+            name: RelatedClientSummaryDto
+            wrapped: true
+          type: array
+      xml:
+        name: BillHouseholdSummaryDto
+      type: object
+    OAS.WebApi.DTO.Billing.BillPayMethodSummaryDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        payInstruction:
+          type: string
+        clientId:
+          type: integer
+          format: int32
+      xml:
+        name: BillPayMethodSummaryDto
+      type: object
+    OAS.WebApi.DTO.Billing.PaidByAccountSummaryDto:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        paidByAccountId:
+          type: integer
+          format: int32
+        percent:
+          type: number
+          format: double
+        fundName:
+          type: string
+      xml:
+        name: PaidByAccountSummaryDto
+      type: object
+    OAS.WebApi.DTO.Billing.HouseholdSummaryValueDto:
+      properties:
+        value:
+          type: number
+          format: double
+        excludedAssetValue:
+          type: number
+          format: double
+        billableValue:
+          readOnly: true
+          type: number
+          format: double
+      xml:
+        name: HouseholdSummaryValueDto
+      type: object
+    OAS.WebApi.DTO.Billing.BillHistoryDto:
+      properties:
+        billId:
+          type: integer
+          format: int32
+        householdId:
+          type: integer
+          format: int32
+        billInstanceId:
+          type: integer
+          format: int32
+        marketValueAtGeneration:
+          type: number
+          format: double
+        asOfDate:
+          type: string
+          format: date-time
+        billAmount:
+          type: number
+          format: double
+        balanceDue:
+          type: number
+          format: double
+        creditsToBill:
+          type: number
+          format: double
+        billPeriod:
+          readOnly: true
+          type: string
+      xml:
+        name: BillHistoryDto
+      type: object
+    OAS.WebApi.DTO.Billing.RelatedClientSummaryDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        clientName:
+          type: string
+        currentValue:
+          type: number
+          format: double
+        excludedValue:
+          type: number
+          format: double
+        billableValue:
+          readOnly: true
+          type: number
+          format: double
+      xml:
+        name: RelatedClientSummaryDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

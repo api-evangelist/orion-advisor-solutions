@@ -1,0 +1,401 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Portfolio/Benchmarks API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Portfolio/Benchmarks
+paths:
+  /v1/Portfolio/Benchmarks:
+    get:
+      tags:
+      - Portfolio/Benchmarks
+      summary: Gets a list of benchmarks that the logged in user has access to.
+      operationId: Benchmarks_Get
+      parameters:
+      - name: bmType
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BenchmarkDto'
+                xml:
+                  name: BenchmarkDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BenchmarkDto'
+                xml:
+                  name: BenchmarkDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BenchmarkDto'
+                xml:
+                  name: BenchmarkDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BenchmarkDto'
+                xml:
+                  name: BenchmarkDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BenchmarkDto'
+                xml:
+                  name: BenchmarkDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BenchmarkDto'
+                xml:
+                  name: BenchmarkDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Portfolio/Benchmarks/{key}/{bmType}:
+    get:
+      tags:
+      - Portfolio/Benchmarks
+      summary: Gets the benchmark that has the provided key.
+      operationId: Benchmarks_GetByKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: bmType
+        in: path
+        description: Either B for Benchmark or P for Product.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BenchmarkDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BenchmarkDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BenchmarkDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BenchmarkDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BenchmarkDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BenchmarkDto'
+      security:
+      - Authorization: []
+  /v1/Portfolio/Benchmarks/Simple:
+    get:
+      tags:
+      - Portfolio/Benchmarks
+      summary: Gets a simple list of benchmarks that the logged in user has access to
+      operationId: Benchmarks_GetSimple
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimpleBenchmarkDto'
+                xml:
+                  name: SimpleBenchmarkDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimpleBenchmarkDto'
+                xml:
+                  name: SimpleBenchmarkDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimpleBenchmarkDto'
+                xml:
+                  name: SimpleBenchmarkDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimpleBenchmarkDto'
+                xml:
+                  name: SimpleBenchmarkDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimpleBenchmarkDto'
+                xml:
+                  name: SimpleBenchmarkDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimpleBenchmarkDto'
+                xml:
+                  name: SimpleBenchmarkDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Portfolio/Benchmarks/Simple/Search:
+    get:
+      tags:
+      - Portfolio/Benchmarks
+      summary: Gets a simple list of benchmarks that the logged in user has access to where…
+      operationId: Benchmarks_GetBenchmarkSearch
+      parameters:
+      - name: search
+        in: query
+        description: Benchmark Id, partial Benchmark name, or partial outside Id to search for.
+        required: true
+        schema:
+          type: string
+      - name: top
+        in: query
+        description: 'Optional. Default: null. The maximum number of products to return. If null returns all.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: skip
+        in: query
+        description: 'Optional. Default: 0. Defines number of items to skip.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimpleBenchmarkDto'
+                xml:
+                  name: SimpleBenchmarkDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimpleBenchmarkDto'
+                xml:
+                  name: SimpleBenchmarkDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimpleBenchmarkDto'
+                xml:
+                  name: SimpleBenchmarkDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimpleBenchmarkDto'
+                xml:
+                  name: SimpleBenchmarkDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimpleBenchmarkDto'
+                xml:
+                  name: SimpleBenchmarkDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimpleBenchmarkDto'
+                xml:
+                  name: SimpleBenchmarkDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Portfolio/Benchmarks/Simple/Search/{search}:
+    get:
+      tags:
+      - Portfolio/Benchmarks
+      summary: Gets a simple list of benchmarks that the logged in user has access to where…
+      operationId: Benchmarks_GetV1PortfolioBenchmarksSimpleSearchBySearch
+      parameters:
+      - name: search
+        in: path
+        description: Benchmark Id, partial Benchmark name, or partial outside Id to search for.
+        required: true
+        schema:
+          type: string
+      - name: top
+        in: query
+        description: 'Optional. Default: null. The maximum number of products to return. If null returns all.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: skip
+        in: query
+        description: 'Optional. Default: 0. Defines number of items to skip.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimpleBenchmarkDto'
+                xml:
+                  name: SimpleBenchmarkDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimpleBenchmarkDto'
+                xml:
+                  name: SimpleBenchmarkDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimpleBenchmarkDto'
+                xml:
+                  name: SimpleBenchmarkDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimpleBenchmarkDto'
+                xml:
+                  name: SimpleBenchmarkDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimpleBenchmarkDto'
+                xml:
+                  name: SimpleBenchmarkDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SimpleBenchmarkDto'
+                xml:
+                  name: SimpleBenchmarkDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Portfolio.BenchmarkDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        type:
+          type: string
+        key:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+      xml:
+        name: BenchmarkDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SimpleBenchmarkDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        type:
+          type: string
+        key:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        dynamicBenchmarkType:
+          type: string
+          enum:
+          - None
+          - AssetClass
+          - AssetCategory
+          - ManagementStyle
+          - AggregateModel
+          - RiskCategory
+      xml:
+        name: SimpleBenchmarkDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

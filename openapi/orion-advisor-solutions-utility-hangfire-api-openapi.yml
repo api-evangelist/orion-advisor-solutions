@@ -1,0 +1,83 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Utility/Hangfire API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Utility/Hangfire
+paths:
+  /v1/Utility/Hangfire/Servers:
+    get:
+      tags:
+      - Utility/Hangfire
+      operationId: Utility_HangfireServers
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Hangfire.Storage.Monitoring.ServerDto'
+                xml:
+                  name: ServerDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Hangfire.Storage.Monitoring.ServerDto'
+                xml:
+                  name: ServerDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Hangfire.Storage.Monitoring.ServerDto'
+                xml:
+                  name: ServerDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Hangfire.Storage.Monitoring.ServerDto'
+                xml:
+                  name: ServerDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Utility hangfire servers
+      x-summary-source: derived
+components:
+  schemas:
+    Hangfire.Storage.Monitoring.ServerDto:
+      properties:
+        name:
+          type: string
+        workersCount:
+          type: integer
+          format: int32
+        startedAt:
+          type: string
+          format: date-time
+        queues:
+          items:
+            type: string
+          type: array
+        heartbeat:
+          type: string
+          format: date-time
+      xml:
+        name: ServerDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

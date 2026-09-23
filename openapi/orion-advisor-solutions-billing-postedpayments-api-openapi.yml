@@ -1,0 +1,713 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Posted Payments API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/PostedPayments
+paths:
+  /v1/Billing/PostedPayments:
+    get:
+      tags:
+      - Billing/PostedPayments
+      summary: 'Get a list of posted payments. Note: At least one filter is required'
+      operationId: PostedPayments_GetPostedPayments
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: paymentDate
+        in: query
+        description: Optional. Date the payment occurred.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: accountId
+        in: query
+        description: Optional. Account ID
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: clientId
+        in: query
+        description: Optional. Client/Household ID
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: batchNumber
+        in: query
+        description: Optional. Batch number used when payments were created.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of bill account item adjustments. Returns only items with bill payment IDs.
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentDto'
+                xml:
+                  name: PostedPaymentDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentDto'
+                xml:
+                  name: PostedPaymentDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentDto'
+                xml:
+                  name: PostedPaymentDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentDto'
+                xml:
+                  name: PostedPaymentDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentDto'
+                xml:
+                  name: PostedPaymentDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentDto'
+                xml:
+                  name: PostedPaymentDto
+                  wrapped: true
+                type: array
+        '400':
+          description: "Validation error:\n            Please provide a filter to view posted payments"
+      security:
+      - Authorization: []
+  /v1/Billing/PostedPayments/{billPaymentId}/Action/Undo:
+    put:
+      tags:
+      - Billing/PostedPayments
+      summary: Undo posted payments
+      operationId: PostedPayments_UndoPostedPaymentsAsync
+      parameters:
+      - name: billPaymentId
+        in: path
+        description: ID of bill payment associated with the payments
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        description: Optional. A cancellation token
+        required: true
+      responses:
+        '200':
+          description: IDs of payments that were undone
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+            multipart/form-data:
+              schema:
+                type: boolean
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: IDs of bill account item adjstments (payments) to delete
+        required: true
+  /v1/Billing/PostedPayments/Action/Delete:
+    put:
+      tags:
+      - Billing/PostedPayments
+      operationId: PostedPayments_PostedPaymentsBatchDelete
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Posted payments posted payments batch delete
+      x-summary-source: derived
+  /v1/Billing/PostedPayments/Action/Reverse:
+    put:
+      tags:
+      - Billing/PostedPayments
+      summary: Reverse selected postedpayment ids
+      operationId: PostedPayments_ReversePostedPayments
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentDto'
+                xml:
+                  name: PostedPaymentDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentDto'
+                xml:
+                  name: PostedPaymentDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentDto'
+                xml:
+                  name: PostedPaymentDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentDto'
+                xml:
+                  name: PostedPaymentDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentDto'
+                xml:
+                  name: PostedPaymentDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentDto'
+                xml:
+                  name: PostedPaymentDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentDto'
+              xml:
+                name: PostedPaymentDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentDto'
+              xml:
+                name: PostedPaymentDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentDto'
+              xml:
+                name: PostedPaymentDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentDto'
+              xml:
+                name: PostedPaymentDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentDto'
+              xml:
+                name: PostedPaymentDto
+                wrapped: true
+              type: array
+        description: payments to reverse with amounts
+        required: true
+  /v1/Billing/PostedPayments/Action/UndoMultiple:
+    put:
+      tags:
+      - Billing/PostedPayments
+      summary: Undo posted payments for multiple bill payments in a single request
+      operationId: PostedPayments_UndoPostedPaymentsBatchAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        description: Optional cancellation token
+        required: true
+      responses:
+        '200':
+          description: IDs of payments that were undone
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+            multipart/form-data:
+              schema:
+                type: boolean
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.UndoPostedPaymentRequestDto'
+              xml:
+                name: UndoPostedPaymentRequestDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.UndoPostedPaymentRequestDto'
+              xml:
+                name: UndoPostedPaymentRequestDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.UndoPostedPaymentRequestDto'
+              xml:
+                name: UndoPostedPaymentRequestDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.UndoPostedPaymentRequestDto'
+              xml:
+                name: UndoPostedPaymentRequestDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.UndoPostedPaymentRequestDto'
+              xml:
+                name: UndoPostedPaymentRequestDto
+                wrapped: true
+              type: array
+        description: List of billPaymentIds with their corresponding adjustment ids.
+        required: true
+  /v1/Billing/PostedPayments/reports:
+    get:
+      tags:
+      - Billing/PostedPayments
+      summary: 'Get List of posted payments: returns only items with billPaymentIds'
+      description: 'Sample Request
+
+        GET v1/Billing/PostedPayments/reports?startDate=01/01/2024&endDate=02/01/2024'
+      operationId: PostedPayments_ConsolidationPostedPayments
+      parameters:
+      - name: startDate
+        in: query
+        description: Start Date to filter from
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: End Date to filter to
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentReportDTO'
+                xml:
+                  name: PostedPaymentReportDTO
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentReportDTO'
+                xml:
+                  name: PostedPaymentReportDTO
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentReportDTO'
+                xml:
+                  name: PostedPaymentReportDTO
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentReportDTO'
+                xml:
+                  name: PostedPaymentReportDTO
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentReportDTO'
+                xml:
+                  name: PostedPaymentReportDTO
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentReportDTO'
+                xml:
+                  name: PostedPaymentReportDTO
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/PostedPayments/reportsByBatch/{batchId}:
+    get:
+      tags:
+      - Billing/PostedPayments
+      summary: 'Get List of posted payments by batch number: returns only items with…'
+      description: 'Sample Request
+
+        GET v1/Billing/PostedPayments/reports/19'
+      operationId: PostedPayments_ConsolidationPostedPaymentsByBatchAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentReportDTO'
+                xml:
+                  name: PostedPaymentReportDTO
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentReportDTO'
+                xml:
+                  name: PostedPaymentReportDTO
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentReportDTO'
+                xml:
+                  name: PostedPaymentReportDTO
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentReportDTO'
+                xml:
+                  name: PostedPaymentReportDTO
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentReportDTO'
+                xml:
+                  name: PostedPaymentReportDTO
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostedPaymentReportDTO'
+                xml:
+                  name: PostedPaymentReportDTO
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.PostedPaymentReportDTO:
+      properties:
+        batchNumber:
+          type: string
+        postedDate:
+          type: string
+          format: date-time
+        accountNumber:
+          type: string
+        active:
+          type: boolean
+        paymentCreatedDate:
+          type: string
+          format: date-time
+        paymentCreatedBy:
+          type: string
+        amount:
+          type: number
+          format: double
+        clientName:
+          type: string
+      xml:
+        name: PostedPaymentReportDTO
+      type: object
+    OAS.WebApi.DTO.Billing.UndoPostedPaymentRequestDto:
+      properties:
+        billPaymentId:
+          type: integer
+          format: int32
+        ids:
+          items:
+            type: integer
+            format: int32
+          type: array
+      xml:
+        name: UndoPostedPaymentRequestDto
+      type: object
+    OAS.WebApi.DTO.Billing.PostedPaymentDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        billInstanceId:
+          type: integer
+          format: int32
+        billId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        active:
+          type: boolean
+        accountNumber:
+          type: string
+        accountName:
+          type: string
+        previousBalance:
+          type: number
+          format: double
+        currentBalance:
+          type: number
+          format: double
+        changeAmt:
+          type: number
+          format: double
+        adjustmentType:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        dateOccured:
+          type: string
+          format: date-time
+        batchNumber:
+          type: string
+        originalDateOccured:
+          type: string
+          format: date-time
+        billPaymentId:
+          type: integer
+          format: int32
+        originalAmount:
+          type: number
+          format: double
+      xml:
+        name: PostedPaymentDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

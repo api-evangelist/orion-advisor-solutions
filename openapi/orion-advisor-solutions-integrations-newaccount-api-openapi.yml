@@ -1,0 +1,760 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/New Account API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/NewAccount
+paths:
+  /v1/Integrations/NewAccount:
+    post:
+      tags:
+      - Integrations/NewAccount
+      operationId: NewAccount_CustodianNewAccountAsync
+      parameters:
+      - name: accountGlobalId
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: householdGlobalId
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uuid
+      - name: workflowGlobalId
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uuid
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: New account custodian new account async
+      x-summary-source: derived
+  /v1/Integrations/NewAccount/{accountId}/StreetScape:
+    get:
+      tags:
+      - Integrations/NewAccount
+      operationId: NewAccount_StreetScapeNewAccountAsync
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: New account street scape new account async
+      x-summary-source: derived
+  /v1/Integrations/NewAccount/{accountId}/WealthScape:
+    get:
+      tags:
+      - Integrations/NewAccount
+      operationId: NewAccount_WealthScapeNewAccountAsync
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: New account wealth scape new account async
+      x-summary-source: derived
+  /v1/Integrations/NewAccount/Custodians/{custodianGuid}/UploadDocuments:
+    post:
+      tags:
+      - Integrations/NewAccount
+      operationId: NewAccount_UploadDocumentsAsync
+      parameters:
+      - name: custodianGuid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.FormSessionUpload'
+              xml:
+                name: FormSessionUpload
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.FormSessionUpload'
+              xml:
+                name: FormSessionUpload
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.FormSessionUpload'
+              xml:
+                name: FormSessionUpload
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.FormSessionUpload'
+              xml:
+                name: FormSessionUpload
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.FormSessionUpload'
+              xml:
+                name: FormSessionUpload
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.FormSessionUpload'
+              xml:
+                name: FormSessionUpload
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.FormSessionUpload'
+              xml:
+                name: FormSessionUpload
+                wrapped: true
+              type: array
+        required: true
+      summary: New account upload documents async
+      x-summary-source: derived
+  /v1/Integrations/NewAccount/DocumentTypes:
+    get:
+      tags:
+      - Integrations/NewAccount
+      operationId: NewAccount_GetDocumentTypesAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: New account get document types async
+      x-summary-source: derived
+  /v1/Integrations/NewAccount/Fidelity/{accountId}/{location}:
+    get:
+      tags:
+      - Integrations/NewAccount
+      operationId: NewAccount_FidelityNewAccountAsync
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: location
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/System.ValueTupleOfSystem.StringAndSystem.Boolean'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/System.ValueTupleOfSystem.StringAndSystem.Boolean'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/System.ValueTupleOfSystem.StringAndSystem.Boolean'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/System.ValueTupleOfSystem.StringAndSystem.Boolean'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/System.ValueTupleOfSystem.StringAndSystem.Boolean'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/System.ValueTupleOfSystem.StringAndSystem.Boolean'
+      security:
+      - Authorization: []
+      summary: New account fidelity new account async
+      x-summary-source: derived
+  /v1/Integrations/NewAccount/FormsData:
+    post:
+      tags:
+      - Integrations/NewAccount
+      operationId: NewAccount_SubmitWorkflowDataAsync
+      parameters:
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.WorkflowDataDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.WorkflowDataDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.WorkflowDataDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.WorkflowDataDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.WorkflowDataDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.WorkflowDataDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.WorkflowDataDto'
+        required: true
+      summary: New account submit workflow data async
+      x-summary-source: derived
+  /v1/Integrations/NewAccount/FormsData/{accountGlobalId}:
+    get:
+      tags:
+      - Integrations/NewAccount
+      operationId: NewAccount_GetFlattenFormsDataAsync
+      parameters:
+      - name: accountGlobalId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: householdGlobalId
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uuid
+      - name: workflowGlobalId
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uuid
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: New account get flatten forms data async
+      x-summary-source: derived
+  /v1/Integrations/NewAccount/Pershing/{accountNumber}:
+    get:
+      tags:
+      - Integrations/NewAccount
+      operationId: NewAccount_GetAccountAsync
+      parameters:
+      - name: accountNumber
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: New account get account async
+      x-summary-source: derived
+  /v1/Integrations/NewAccount/Schwab:
+    post:
+      tags:
+      - Integrations/NewAccount
+      operationId: NewAccount_SchwabNewAccountAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+            multipart/form-data:
+              schema:
+                type: boolean
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: New account schwab new account async
+      x-summary-source: derived
+  /v1/Integrations/NewAccount/UploadPershingDocuments:
+    post:
+      tags:
+      - Integrations/NewAccount
+      operationId: NewAccount_UploadPershingDocumentsAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.FormSessionUpload'
+              xml:
+                name: FormSessionUpload
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.FormSessionUpload'
+              xml:
+                name: FormSessionUpload
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.FormSessionUpload'
+              xml:
+                name: FormSessionUpload
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.FormSessionUpload'
+              xml:
+                name: FormSessionUpload
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.FormSessionUpload'
+              xml:
+                name: FormSessionUpload
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.FormSessionUpload'
+              xml:
+                name: FormSessionUpload
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.FormSessionUpload'
+              xml:
+                name: FormSessionUpload
+                wrapped: true
+              type: array
+        required: true
+      summary: New account upload pershing documents async
+      x-summary-source: derived
+components:
+  schemas:
+    System.ValueTupleOfSystem.StringAndSystem.Boolean:
+      properties:
+        item1:
+          type: string
+        item2:
+          type: boolean
+      xml:
+        name: ValueTuple`2
+      type: object
+    OAS.Integrations.Element.DTOs.WorkflowDataDto:
+      properties:
+        _id:
+          type: integer
+          format: int32
+        householdId:
+          type: integer
+          format: int32
+        id:
+          type: string
+        name:
+          type: string
+        custodianId:
+          type: string
+        registrationTypeId:
+          type: string
+        contacts:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.Contact'
+          xml:
+            name: Contact
+            wrapped: true
+          type: array
+        data:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.Datum'
+          xml:
+            name: Datum
+            wrapped: true
+          type: array
+        uploads:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.FormSessionUpload'
+          xml:
+            name: FormSessionUpload
+            wrapped: true
+          type: array
+        additionalInfo:
+          type: object
+      xml:
+        name: WorkflowDataDto
+      type: object
+    OAS.Integrations.Element.DTOs.Datum:
+      properties:
+        category:
+          type: string
+        key:
+          type: string
+        value:
+          type: object
+      xml:
+        name: Datum
+      type: object
+    OAS.Integrations.Element.DTOs.Contact:
+      properties:
+        _id:
+          type: integer
+          format: int32
+        id:
+          type: string
+        firstName:
+          type: string
+        middleInitial:
+          type: object
+        lastOrEntityName:
+          type: string
+        dob:
+          type: object
+        email:
+          type: string
+        type:
+          type: string
+        data:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.Datum'
+          xml:
+            name: Datum
+            wrapped: true
+          type: array
+      xml:
+        name: Contact
+      type: object
+    OAS.Integrations.Element.DTOs.FormSessionUpload:
+      properties:
+        id:
+          type: string
+        size:
+          type: integer
+          format: int32
+        fileType:
+          type: string
+        fileBase64:
+          type: string
+        fileName:
+          type: string
+        parentFolderPath:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        markForDelete:
+          type: boolean
+        entityType:
+          type: integer
+          format: int32
+        entityId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        uploadId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        formCollectionId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        formSessionId:
+          type: string
+        accountNumber:
+          type: string
+        documentType:
+          type: string
+        indexValues:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.UserFormData'
+          xml:
+            name: UserFormData
+            wrapped: true
+          type: array
+      xml:
+        name: FormSessionUpload
+      type: object
+    OAS.Integrations.Element.DTOs.UserFormData:
+      properties:
+        syncType:
+          type: integer
+          format: int32
+        key:
+          type: string
+        value:
+          type: object
+      xml:
+        name: UserFormData
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

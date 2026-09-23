@@ -1,0 +1,78 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Payouts API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/Payouts
+paths:
+  /v1/Billing/Payouts/Summary/Header:
+    get:
+      tags:
+      - Billing/Payouts
+      summary: Gets a sum of all payouts for the given timeframe for each billing status
+      description: 'Sample Request
+
+        GET /Billing/Payouts/Summary/Header?startDate=04/01/2024&endDate=04/30/2024&payeeId=1'
+      operationId: Payouts_GetSummaryHeaderAsync
+      parameters:
+      - name: startDate
+        in: query
+        description: Optional. Start date for the search. Filters on the calculated (or paid for paid status) date.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional. End date for the search. Filters on the calculated (or paid for paid status) date.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: payeeId
+        in: query
+        description: Optional. The ID of the payee.  Must be an exact match.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                additionalProperties:
+                  type: number
+                  format: double
+                type: object
+            application/json:
+              schema:
+                additionalProperties:
+                  type: number
+                  format: double
+                type: object
+            text/json:
+              schema:
+                additionalProperties:
+                  type: number
+                  format: double
+                type: object
+            multipart/form-data:
+              schema:
+                additionalProperties:
+                  type: number
+                  format: double
+                type: object
+      security:
+      - Authorization: []
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

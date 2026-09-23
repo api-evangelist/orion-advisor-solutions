@@ -1,0 +1,178 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Fuse/Slack API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Fuse/Slack
+paths:
+  /v1/Fuse/Slack/OutgoingWebhook/Users/{userIntegrationGuid}/Notifications:
+    post:
+      tags:
+      - Fuse/Slack
+      operationId: FusePublicNotification_SlackOutgoingWebhook
+      parameters:
+      - name: userIntegrationGuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.SlackOutgoingWebhookDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.SlackOutgoingWebhookDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.SlackOutgoingWebhookDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.SlackOutgoingWebhookDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.SlackOutgoingWebhookDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.SlackOutgoingWebhookDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.SlackOutgoingWebhookDto'
+        required: true
+      summary: Fuse public notification slack outgoing webhook
+      x-summary-source: derived
+  /v1/Fuse/Slack/Slash/Users/{userIntegrationGuid}/Notifications:
+    post:
+      tags:
+      - Fuse/Slack
+      operationId: FusePublicNotification_SlackSlashNotifications
+      parameters:
+      - name: userIntegrationGuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.SlackSlashDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.SlackSlashDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.SlackSlashDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.SlackSlashDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.SlackSlashDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.SlackSlashDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.SlackSlashDto'
+        required: true
+      summary: Fuse public notification slack slash notifications
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Fuse.SlackSlashDto:
+      properties:
+        token:
+          type: string
+        team_id:
+          type: string
+        team_domain:
+          type: string
+        channel_id:
+          type: string
+        channel_name:
+          type: string
+        user_id:
+          type: string
+        user_name:
+          type: string
+        command:
+          type: string
+        text:
+          type: string
+        response_url:
+          type: string
+      xml:
+        name: SlackSlashDto
+      type: object
+    OAS.WebApi.DTO.Fuse.SlackOutgoingWebhookDto:
+      properties:
+        token:
+          type: string
+        team_id:
+          type: string
+        team_domain:
+          type: string
+        channel_id:
+          type: string
+        channel_name:
+          type: string
+        timestamp:
+          type: string
+        user_id:
+          type: string
+        user_name:
+          type: string
+        text:
+          type: string
+        trigger_word:
+          type: string
+      xml:
+        name: SlackOutgoingWebhookDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

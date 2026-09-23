@@ -1,0 +1,101 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Transaction Sub Types API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/TransactionSubTypes
+paths:
+  /v1/Trading/TransactionSubTypes:
+    get:
+      tags:
+      - Trading/TransactionSubTypes
+      summary: Returns a list of all the transaction sub types that the logged in user has…
+      operationId: TransactionSubTypes_Get
+      parameters:
+      - name: transTypeCommonId
+        in: query
+        description: Optional. Default null. Used to limit return to only those transaction sub types that are match the common id.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionSubTypeDto'
+                xml:
+                  name: TransactionSubTypeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionSubTypeDto'
+                xml:
+                  name: TransactionSubTypeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionSubTypeDto'
+                xml:
+                  name: TransactionSubTypeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionSubTypeDto'
+                xml:
+                  name: TransactionSubTypeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionSubTypeDto'
+                xml:
+                  name: TransactionSubTypeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionSubTypeDto'
+                xml:
+                  name: TransactionSubTypeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Trading.TransactionSubTypeDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        description:
+          type: string
+        transTypeCommonId:
+          type: integer
+          format: int32
+      xml:
+        name: TransactionSubTypeDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

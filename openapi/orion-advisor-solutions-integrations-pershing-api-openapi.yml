@@ -1,0 +1,648 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Pershing API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/Pershing
+paths:
+  /v1/Integrations/Pershing/Action/SAML:
+    get:
+      tags:
+      - Integrations/Pershing
+      operationId: Pershing_StartSSOAsync
+      parameters:
+      - name: deepLink
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - None
+          - Alerts
+          - Balances
+          - AccountServices
+          - OrderStatus
+          - AccountSummary
+          - ReportCenter
+      - name: accountNumber
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Pershing start SSO async
+      x-summary-source: derived
+  /v1/Integrations/Pershing/HistoricalActivities:
+    get:
+      tags:
+      - Integrations/Pershing
+      operationId: Pershing_GetHistoricalActivitiesAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: dto.activityTypeName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.securityIdentifierTypeCode
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.securityIdentifier
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.asOfDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: dto.endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: dto.recordReturnCount
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: dto.scrollKey
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.accountIdentifier
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.multiTenantAuthenticationClientIdentifier
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Pershing get historical activities async
+      x-summary-source: derived
+  /v1/Integrations/Pershing/IntradayActivities:
+    get:
+      tags:
+      - Integrations/Pershing
+      operationId: Pershing_GetIntradayActivitiesAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: dto.activityTypeName
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - ALL
+          - TRADE_ONLY
+          - DIVIDEND_INTEREST
+          - CASH_WITHDRAWAL_OR_DEPOSIT
+          - COMMON_STOCK
+          - PREFERRED_STOCK
+          - OPTION
+          - MUTUAL_FUND
+          - BOND
+          - CD
+          - OTHER
+          - ACH_TRANSACTIONS
+          - JOURNAL_TRANSACTIONS
+          - CHECK_TRANSACTIONS
+      - name: dto.securityIdentifierTypeCode
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - ALL
+          - CUSIP
+          - SYMBOL
+          - ISIN
+          - SEDOL
+      - name: dto.securityIdentifier
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.recordReturnCount
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: dto.scrollKey
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.accountIdentifier
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.multiTenantAuthenticationClientIdentifier
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Pershing get intraday activities async
+      x-summary-source: derived
+  /v1/Integrations/Pershing/IntradayHoldings:
+    get:
+      tags:
+      - Integrations/Pershing
+      operationId: Pershing_GetIntradayHoldingsAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: dto.viewingCurrency
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.requestIdentifier
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: dto.recordReturnCount
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: dto.scrollKey
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.accountIdentifier
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.multiTenantAuthenticationClientIdentifier
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Pershing get intraday holdings async
+      x-summary-source: derived
+  /v1/Integrations/Pershing/NetX360User:
+    get:
+      tags:
+      - Integrations/Pershing
+      operationId: Pershing_GetV1IntegrationsPershingNetX360User
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Integration.Pershing.netXuser'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Integration.Pershing.netXuser'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Integration.Pershing.netXuser'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Integration.Pershing.netXuser'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Integration.Pershing.netXuser'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Integration.Pershing.netXuser'
+      security:
+      - Authorization: []
+      summary: Pershing get V1 integrations pershing net X360 user
+      x-summary-source: derived
+    put:
+      tags:
+      - Integrations/Pershing
+      operationId: Pershing_NetX360UserAsync
+      parameters:
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Integration.Pershing.netXuser'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Integration.Pershing.netXuser'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Integration.Pershing.netXuser'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Integration.Pershing.netXuser'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Integration.Pershing.netXuser'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Integration.Pershing.netXuser'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Integration.Pershing.netXuser'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Integration.Pershing.netXuser'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Integration.Pershing.netXuser'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Integration.Pershing.netXuser'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Integration.Pershing.netXuser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Integration.Pershing.netXuser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Integration.Pershing.netXuser'
+        required: true
+      summary: Pershing net X360 user async
+      x-summary-source: derived
+  /v1/Integrations/Pershing/PershingClientPortalDocuments:
+    get:
+      tags:
+      - Integrations/Pershing
+      operationId: Pershing_CheckForPershingClientPortalDocumentsAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Pershing check for pershing client portal documents async
+      x-summary-source: derived
+  /v1/Integrations/Pershing/PriorDayBalances:
+    get:
+      tags:
+      - Integrations/Pershing
+      operationId: Pershing_GetPriorDayBalancesAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: dto.viewingCurrency
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.accountIdentifier
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.multiTenantAuthenticationClientIdentifier
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Pershing get prior day balances async
+      x-summary-source: derived
+  /v1/Integrations/Pershing/PriorDayHoldings:
+    get:
+      tags:
+      - Integrations/Pershing
+      operationId: Pershing_GetPriorDayHoldingsAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: dto.viewingCurrency
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.recordReturnCount
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: dto.scrollKey
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.accountIdentifier
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.multiTenantAuthenticationClientIdentifier
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Pershing get prior day holdings async
+      x-summary-source: derived
+  /v1/Integrations/Pershing/RegistrationTypes:
+    get:
+      tags:
+      - Integrations/Pershing
+      operationId: Pershing_GetRegistrationTypes
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Pershing get registration types
+      x-summary-source: derived
+  /v1/Integrations/Pershing/TransferableHoldings:
+    get:
+      tags:
+      - Integrations/Pershing
+      operationId: Pershing_GetTransferableHoldingsAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: dto.holdingsRequestTypeCode
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.journalAccountProcessingTypeCode
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.scrollDirectionCode
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.scrollKey
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.accountTransferAssetTypeFilter
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.recordReturnCount
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: dto.symbols
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
+      - name: dto.accountIdentifier
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dto.multiTenantAuthenticationClientIdentifier
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Pershing get transferable holdings async
+      x-summary-source: derived
+  /v1/Integrations/Pershing/UploadPDFDocument:
+    post:
+      tags:
+      - Integrations/Pershing
+      summary: This operation uploads a document to Pershing NetX360 or to Albridge Document…
+      operationId: Pershing_UploadDocumentAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.DataModel.Integration.Pershing.netXuser:
+      properties:
+        username:
+          type: string
+      xml:
+        name: netXuser
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

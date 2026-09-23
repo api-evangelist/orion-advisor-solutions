@@ -1,0 +1,848 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Assets API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/Assets
+paths:
+  /v1/Billing/Assets:
+    get:
+      tags:
+      - Billing/Assets
+      summary: Get a list of bill assets that the logged in user has access to see.
+      operationId: BillingAsset_Get
+      parameters:
+      - name: status
+        in: query
+        description: 'Optional. Default: null. When provided limits the return to only those bill assets included in the status provided.'
+        required: false
+        schema:
+          type: string
+          enum:
+          - Excluded
+          - PartiallyExcluded
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+                xml:
+                  name: BillAssetDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+                xml:
+                  name: BillAssetDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+                xml:
+                  name: BillAssetDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+                xml:
+                  name: BillAssetDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+                xml:
+                  name: BillAssetDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+                xml:
+                  name: BillAssetDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Assets/{key}:
+    get:
+      tags:
+      - Billing/Assets
+      summary: Gets the bill asset that has the provided key.
+      operationId: BillingAsset_GetEntityByKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+      security:
+      - Authorization: []
+  /v1/Billing/Assets/ExcludeandPartially:
+    get:
+      tags:
+      - Billing/Assets
+      summary: Get a list of excluded & partially excluded bill assets that the logged in user…
+      operationId: BillingAsset_GetExcludandPartiallyExcluded
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Billing/Assets/HouseholdExclusions:
+    get:
+      tags:
+      - Billing/Assets
+      summary: Get all assets that have been excluded at the household level The return is…
+      operationId: BillingAsset_GetHouseholdExcludedAssetsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.HouseholdExclusionDto'
+                xml:
+                  name: HouseholdExclusionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.HouseholdExclusionDto'
+                xml:
+                  name: HouseholdExclusionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.HouseholdExclusionDto'
+                xml:
+                  name: HouseholdExclusionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.HouseholdExclusionDto'
+                xml:
+                  name: HouseholdExclusionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.HouseholdExclusionDto'
+                xml:
+                  name: HouseholdExclusionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.HouseholdExclusionDto'
+                xml:
+                  name: HouseholdExclusionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Assets/HouseholdExclusionsAll:
+    get:
+      tags:
+      - Billing/Assets
+      summary: Get all assets that have been excluded enable and disabled at the household…
+      operationId: BillingAsset_GetHouseholdExcludedAssetsAllAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.HouseholdExclusionDto'
+                xml:
+                  name: HouseholdExclusionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.HouseholdExclusionDto'
+                xml:
+                  name: HouseholdExclusionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.HouseholdExclusionDto'
+                xml:
+                  name: HouseholdExclusionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.HouseholdExclusionDto'
+                xml:
+                  name: HouseholdExclusionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.HouseholdExclusionDto'
+                xml:
+                  name: HouseholdExclusionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.HouseholdExclusionDto'
+                xml:
+                  name: HouseholdExclusionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Assets/List:
+    post:
+      tags:
+      - Billing/Assets
+      summary: Gets a list of bill assets that match one of the keys in the provided list
+      operationId: BillingAsset_GetListById
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+                xml:
+                  name: BillAssetDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+                xml:
+                  name: BillAssetDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+                xml:
+                  name: BillAssetDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+                xml:
+                  name: BillAssetDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+                xml:
+                  name: BillAssetDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+                xml:
+                  name: BillAssetDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: List of keys of the desired return objects.
+        required: true
+  /v1/Billing/Assets/List/Id:
+    post:
+      tags:
+      - Billing/Assets
+      summary: Gets a list of bill assets that match one of the keys in the provided list
+      operationId: BillingAsset_PostV1BillingAssetsListId
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+                xml:
+                  name: BillAssetDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+                xml:
+                  name: BillAssetDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+                xml:
+                  name: BillAssetDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+                xml:
+                  name: BillAssetDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+                xml:
+                  name: BillAssetDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillAssetDto'
+                xml:
+                  name: BillAssetDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: List of keys of the desired return objects.
+        required: true
+  /v1/Billing/Assets/SecurityClassificationExclusions:
+    get:
+      tags:
+      - Billing/Assets
+      summary: Get all security class exclusions for the Exclusions page.
+      operationId: BillingAsset_GetSecurityClassificationExclusionsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.SecurityClassExclusionDto'
+                xml:
+                  name: SecurityClassExclusionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.SecurityClassExclusionDto'
+                xml:
+                  name: SecurityClassExclusionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.SecurityClassExclusionDto'
+                xml:
+                  name: SecurityClassExclusionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.SecurityClassExclusionDto'
+                xml:
+                  name: SecurityClassExclusionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.SecurityClassExclusionDto'
+                xml:
+                  name: SecurityClassExclusionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.SecurityClassExclusionDto'
+                xml:
+                  name: SecurityClassExclusionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.BillAssetDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        lastName:
+          type: string
+        fundFamily:
+          type: string
+        accountNumber:
+          type: string
+        productName:
+          type: string
+        value:
+          type: number
+          format: double
+        isFeeExcluded:
+          type: boolean
+        isPayingFee:
+          type: boolean
+        active:
+          type: boolean
+        ticker:
+          type: string
+        assetClass:
+          type: string
+        excludeAmount:
+          type: number
+          format: double
+        excludeAmountType:
+          type: string
+          enum:
+          - Percent
+          - Dollars
+          - Shares
+        excludePercentOf:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        billAssetId:
+          type: integer
+          format: int32
+        excludeEndDate:
+          type: string
+          format: date-time
+        excludeStartDate:
+          type: string
+          format: date-time
+        businessLine:
+          type: string
+        representativeName:
+          type: string
+        representativeNumber:
+          type: string
+        cycleMonth:
+          type: integer
+          format: int32
+        fundFamilyId:
+          type: integer
+          format: int32
+        excludeFromMargin:
+          type: boolean
+        feeBillExclusionMode:
+          type: string
+          enum:
+          - 'No'
+          - YesAll
+          - SelectBillEntities
+        excludedBillEntities:
+          type: string
+        productId:
+          type: integer
+          format: int32
+      xml:
+        name: BillAssetDto
+      type: object
+    OAS.WebApi.DTO.Billing.HouseholdExclusionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        lastName:
+          type: string
+        assignmentType:
+          readOnly: true
+          type: string
+        classificationMethod:
+          type: string
+        categoryClass:
+          type: string
+        representativeName:
+          type: string
+        representativeNumber:
+          type: string
+        excluded:
+          type: boolean
+        active:
+          type: boolean
+      xml:
+        name: HouseholdExclusionDto
+      type: object
+    OAS.WebApi.DTO.Billing.SecurityClassExclusionDto:
+      description: DTO for security class exclusions displayed on the Exclusions page.
+      properties:
+        id:
+          type: integer
+          format: int32
+        classificationMethod:
+          type: string
+        securityClass:
+          type: string
+        securityClassificationMethodId:
+          type: integer
+          format: int32
+      xml:
+        name: SecurityClassExclusionDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

@@ -1,0 +1,5623 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Reporting/Element API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Reporting/Element
+paths:
+  /v1/Reporting/Element/FactSheets/Analytical/Rep/{orionRepId}:
+    post:
+      tags:
+      - Reporting/Element
+      operationId: FactSheets_GetAnalyticalFactSheetAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: orionRepId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Element.FactSheetParametersDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Element.FactSheetParametersDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Element.FactSheetParametersDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Element.FactSheetParametersDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Element.FactSheetParametersDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Element.FactSheetParametersDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Element.FactSheetParametersDto'
+        required: true
+      summary: Fact sheets get analytical fact sheet async
+      x-summary-source: derived
+  /v1/Reporting/Element/FactSheets/Analytical/Rep/{orionRepId}/{modelAggId}:
+    get:
+      tags:
+      - Reporting/Element
+      operationId: FactSheets_GetAnalyticalFactSheetForModelAggAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: orionRepId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: modelAggId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Fact sheets get analytical fact sheet for model agg async
+      x-summary-source: derived
+  /v1/Reporting/Element/FactSheets/Blended/{prospectId}/account/{accountId}/rep/{repId}/{isOatTenant}:
+    post:
+      tags:
+      - Reporting/Element
+      operationId: FactSheets_GetBlendedFactsheetAsync
+      parameters:
+      - name: prospectId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: repId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: isOatTenant
+        in: path
+        required: true
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Fact sheets get blended factsheet async
+      x-summary-source: derived
+  /v1/Reporting/Element/FactSheets/Cloud/Blended/{prospectId}/{accountId}/{fragmentGuid}:
+    get:
+      tags:
+      - Reporting/Element
+      operationId: CloudFactSheets_GenerateProposalAsync
+      parameters:
+      - name: prospectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: fragmentGuid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.ProposalResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.ProposalResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.ProposalResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.ProposalResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.ProposalResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.ProposalResponse'
+      security:
+      - Authorization: []
+      summary: Cloud fact sheets generate proposal async
+      x-summary-source: derived
+  /v1/Reporting/Element/FactSheets/Cloud/ModelAgg:
+    post:
+      tags:
+      - Reporting/Element
+      operationId: CloudFactSheets_GenerateFactSheetAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: fragmentGuid
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.FactSheetResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.FactSheetResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.FactSheetResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.FactSheetResponse'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/Element.Proposal.Dto.FactSheet.FactSheetDataDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Element.Proposal.Dto.FactSheet.FactSheetDataDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Element.Proposal.Dto.FactSheet.FactSheetDataDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Element.Proposal.Dto.FactSheet.FactSheetDataDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Element.Proposal.Dto.FactSheet.FactSheetDataDto'
+        required: true
+      summary: Cloud fact sheets generate fact sheet async
+      x-summary-source: derived
+  /v1/Reporting/Element/FactSheets/Cloud/ModelAgg/{modelAggId}:
+    get:
+      tags:
+      - Reporting/Element
+      operationId: CloudFactSheets_GenerateFactSheetByModelAggIdAsync
+      parameters:
+      - name: modelAggId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: fragmentGuid
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.FactSheetResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.FactSheetResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.FactSheetResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.FactSheetResponse'
+      security:
+      - Authorization: []
+      summary: Cloud fact sheets generate fact sheet by model agg id async
+      x-summary-source: derived
+  /v1/Reporting/Element/Proposals:
+    post:
+      tags:
+      - Reporting/Element
+      operationId: Proposals_CreateNewProposalAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Element.ProposalParametersDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Element.ProposalParametersDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Element.ProposalParametersDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Element.ProposalParametersDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Element.ProposalParametersDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Element.ProposalParametersDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Element.ProposalParametersDto'
+        required: true
+      summary: Proposals create new proposal async
+      x-summary-source: derived
+  /v1/Reporting/Element/Proposals/Cloud:
+    post:
+      tags:
+      - Reporting/Element
+      operationId: CloudProposals_GenerateProposal
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.ProposalResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.ProposalResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.ProposalResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.ProposalResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.ProposalResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.ProposalResponse'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/Element.Proposal.Dto.Requests.ProposalRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Element.Proposal.Dto.Requests.ProposalRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Element.Proposal.Dto.Requests.ProposalRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Element.Proposal.Dto.Requests.ProposalRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/Element.Proposal.Dto.Requests.ProposalRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Element.Proposal.Dto.Requests.ProposalRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Element.Proposal.Dto.Requests.ProposalRequest'
+        required: true
+      summary: Cloud proposals generate proposal
+      x-summary-source: derived
+  /v1/Reporting/Element/Proposals/Cloud/blob:
+    post:
+      tags:
+      - Reporting/Element
+      operationId: CloudProposals_GenerateProposalBlob
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: byte
+            application/json:
+              schema:
+                type: string
+                format: byte
+            text/json:
+              schema:
+                type: string
+                format: byte
+            application/xml:
+              schema:
+                type: string
+                format: byte
+            text/xml:
+              schema:
+                type: string
+                format: byte
+            multipart/form-data:
+              schema:
+                type: string
+                format: byte
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/Element.Proposal.Dto.Requests.ProposalRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Element.Proposal.Dto.Requests.ProposalRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Element.Proposal.Dto.Requests.ProposalRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Element.Proposal.Dto.Requests.ProposalRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/Element.Proposal.Dto.Requests.ProposalRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Element.Proposal.Dto.Requests.ProposalRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Element.Proposal.Dto.Requests.ProposalRequest'
+        required: true
+      summary: Cloud proposals generate proposal blob
+      x-summary-source: derived
+  /v1/Reporting/Element/Proposals/Cloud/CustomIndex/{key}:
+    get:
+      tags:
+      - Reporting/Element
+      operationId: CloudProposals_GenerateProposalForCustomIndexingKey
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.ProposalResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.ProposalResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.ProposalResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.ProposalResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.ProposalResponse'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Responses.ProposalResponse'
+      security:
+      - Authorization: []
+      summary: Cloud proposals generate proposal for custom indexing key
+      x-summary-source: derived
+  /v1/Reporting/Element/Proposals/Cloud/CustomIndex/{key}/blob:
+    get:
+      tags:
+      - Reporting/Element
+      operationId: CloudProposals_GenerateProposalForCustomIndexingKeyBlob
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: byte
+            application/json:
+              schema:
+                type: string
+                format: byte
+            text/json:
+              schema:
+                type: string
+                format: byte
+            application/xml:
+              schema:
+                type: string
+                format: byte
+            text/xml:
+              schema:
+                type: string
+                format: byte
+            multipart/form-data:
+              schema:
+                type: string
+                format: byte
+      security:
+      - Authorization: []
+      summary: Cloud proposals generate proposal for custom indexing key blob
+      x-summary-source: derived
+  /v1/Reporting/Element/Proposals/Cloud/Templates:
+    get:
+      tags:
+      - Reporting/Element
+      operationId: CloudProposals_GetProposalTemplates
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleGuidKeyEntity'
+                xml:
+                  name: SimpleGuidKeyEntity
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleGuidKeyEntity'
+                xml:
+                  name: SimpleGuidKeyEntity
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleGuidKeyEntity'
+                xml:
+                  name: SimpleGuidKeyEntity
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleGuidKeyEntity'
+                xml:
+                  name: SimpleGuidKeyEntity
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleGuidKeyEntity'
+                xml:
+                  name: SimpleGuidKeyEntity
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleGuidKeyEntity'
+                xml:
+                  name: SimpleGuidKeyEntity
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Cloud proposals get proposal templates
+      x-summary-source: derived
+  /v1/Reporting/Element/Proposals/Cloud/Themes:
+    get:
+      tags:
+      - Reporting/Element
+      operationId: CloudProposals_GetProposalThemes
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleGuidKeyEntity'
+                xml:
+                  name: SimpleGuidKeyEntity
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleGuidKeyEntity'
+                xml:
+                  name: SimpleGuidKeyEntity
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleGuidKeyEntity'
+                xml:
+                  name: SimpleGuidKeyEntity
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleGuidKeyEntity'
+                xml:
+                  name: SimpleGuidKeyEntity
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleGuidKeyEntity'
+                xml:
+                  name: SimpleGuidKeyEntity
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleGuidKeyEntity'
+                xml:
+                  name: SimpleGuidKeyEntity
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Cloud proposals get proposal themes
+      x-summary-source: derived
+  /v1/Reporting/Element/Proposals/data/{newHouseholdId}:
+    get:
+      tags:
+      - Reporting/Element
+      operationId: Proposals_GetPreGenProposalData
+      parameters:
+      - name: newHouseholdId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Proposals get pre gen proposal data
+      x-summary-source: derived
+  /v1/Reporting/Element/Proposals/FlushCache:
+    get:
+      tags:
+      - Reporting/Element
+      operationId: Proposals_FlushCache
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Proposals flush cache
+      x-summary-source: derived
+  /v1/Reporting/Element/Proposals/Fragments:
+    get:
+      tags:
+      - Reporting/Element
+      operationId: Proposals_GetProposalFragmentsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.FragmentVerboseDto'
+                xml:
+                  name: FragmentVerboseDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.FragmentVerboseDto'
+                xml:
+                  name: FragmentVerboseDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.FragmentVerboseDto'
+                xml:
+                  name: FragmentVerboseDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.FragmentVerboseDto'
+                xml:
+                  name: FragmentVerboseDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.FragmentVerboseDto'
+                xml:
+                  name: FragmentVerboseDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.FragmentVerboseDto'
+                xml:
+                  name: FragmentVerboseDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Proposals get proposal fragments async
+      x-summary-source: derived
+  /v1/Reporting/Element/Proposals/PerformanceData:
+    get:
+      tags:
+      - Reporting/Element
+      operationId: Proposals_GetRiskStatistics
+      parameters:
+      - name: entityIds
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Performance.PerformancePortfolio'
+                xml:
+                  name: PerformancePortfolio
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Performance.PerformancePortfolio'
+                xml:
+                  name: PerformancePortfolio
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Performance.PerformancePortfolio'
+                xml:
+                  name: PerformancePortfolio
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Performance.PerformancePortfolio'
+                xml:
+                  name: PerformancePortfolio
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Performance.PerformancePortfolio'
+                xml:
+                  name: PerformancePortfolio
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Performance.PerformancePortfolio'
+                xml:
+                  name: PerformancePortfolio
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Proposals get risk statistics
+      x-summary-source: derived
+  /v1/Reporting/Element/Prospects:
+    get:
+      tags:
+      - Reporting/Element
+      operationId: Prospects_GetProspectsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Prospects.ProspectDto'
+                xml:
+                  name: ProspectDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Prospects.ProspectDto'
+                xml:
+                  name: ProspectDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Prospects.ProspectDto'
+                xml:
+                  name: ProspectDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Prospects.ProspectDto'
+                xml:
+                  name: ProspectDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Prospects.ProspectDto'
+                xml:
+                  name: ProspectDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Prospects.ProspectDto'
+                xml:
+                  name: ProspectDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Prospects get prospects async
+      x-summary-source: derived
+  /v1/Reporting/Element/Prospects/{id}:
+    get:
+      tags:
+      - Reporting/Element
+      operationId: Prospects_GetProposalDataByProspectIdAsync
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalProspectDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalProspectDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalProspectDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalProspectDto'
+      security:
+      - Authorization: []
+      summary: Prospects get proposal data by prospect id async
+      x-summary-source: derived
+  /v1/Reporting/Element/Prospects/{id}/Accounts:
+    get:
+      tags:
+      - Reporting/Element
+      operationId: Prospects_GetProposalAccountDataByProspectIdAsync
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalAccountDto'
+                xml:
+                  name: ProposalAccountDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalAccountDto'
+                xml:
+                  name: ProposalAccountDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalAccountDto'
+                xml:
+                  name: ProposalAccountDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalAccountDto'
+                xml:
+                  name: ProposalAccountDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Prospects get proposal account data by prospect id async
+      x-summary-source: derived
+  /v1/Reporting/Element/Prospects/{id}/CustomIndexing:
+    get:
+      tags:
+      - Reporting/Element
+      operationId: Prospects_GetCustomIndexingForProspectAsync
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.TaxOptimizationDataDto'
+                xml:
+                  name: TaxOptimizationDataDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.TaxOptimizationDataDto'
+                xml:
+                  name: TaxOptimizationDataDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.TaxOptimizationDataDto'
+                xml:
+                  name: TaxOptimizationDataDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.TaxOptimizationDataDto'
+                xml:
+                  name: TaxOptimizationDataDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Prospects get custom indexing for prospect async
+      x-summary-source: derived
+  /v1/Reporting/Element/Prospects/Search:
+    get:
+      tags:
+      - Reporting/Element
+      operationId: Prospects_GetV1ReportingElementProspectsSearch
+      parameters:
+      - name: search
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Prospects.ProspectDto'
+                xml:
+                  name: ProspectDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Prospects.ProspectDto'
+                xml:
+                  name: ProspectDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Prospects.ProspectDto'
+                xml:
+                  name: ProspectDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Prospects.ProspectDto'
+                xml:
+                  name: ProspectDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Prospects.ProspectDto'
+                xml:
+                  name: ProspectDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Prospects.ProspectDto'
+                xml:
+                  name: ProspectDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Prospects get V1 reporting element prospects search
+      x-summary-source: derived
+  /v1/Reporting/Element/Prospects/Search/{search}:
+    get:
+      tags:
+      - Reporting/Element
+      operationId: Prospects_GetV1ReportingElementProspectsSearchBySearch
+      parameters:
+      - name: search
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Prospects.ProspectDto'
+                xml:
+                  name: ProspectDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Prospects.ProspectDto'
+                xml:
+                  name: ProspectDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Prospects.ProspectDto'
+                xml:
+                  name: ProspectDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Prospects.ProspectDto'
+                xml:
+                  name: ProspectDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Prospects.ProspectDto'
+                xml:
+                  name: ProspectDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Element.Proposal.Dto.Prospects.ProspectDto'
+                xml:
+                  name: ProspectDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Prospects get V1 reporting element prospects search by search
+      x-summary-source: derived
+components:
+  schemas:
+    OrionRiskIntelligence.Dto.RiskProfile.CorrelationDto:
+      properties:
+        ticker1:
+          type: string
+        correlation:
+          type: number
+          format: double
+        pvalue:
+          type: number
+          format: double
+        ticker2:
+          type: string
+        name2:
+          type: string
+        name1:
+          type: string
+      xml:
+        name: CorrelationDto
+      type: object
+    WebComponent.Dto.CustomIndexing.TaxOptimizationDataDto:
+      properties:
+        advisor:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.Advisor'
+        client:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.Client'
+        meta:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.Meta'
+        styleSettings:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.StyleSettings'
+        accounts:
+          items:
+            $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.Account'
+          xml:
+            name: Account
+            wrapped: true
+          type: array
+        addSecurityHoldings:
+          type: boolean
+        cashAmount:
+          type: number
+          format: double
+        investorPreferences:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.InvestorPreferences'
+        optimizationStyle:
+          type: string
+        optimizerData:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.OptimizerData'
+        detailedResultsData:
+          items:
+            $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.DetailedResultsDatum'
+          xml:
+            name: DetailedResultsDatum
+            wrapped: true
+          type: array
+      xml:
+        name: TaxOptimizationDataDto
+      type: object
+    Element.Proposal.Dto.FactSheet.FactSheetPerformanceChartSeriesDataDto:
+      properties:
+        performanceDate:
+          type: string
+          format: date-time
+        allocationPercent:
+          type: number
+          format: double
+        allocationAmount:
+          type: number
+          format: double
+      xml:
+        name: FactSheetPerformanceChartSeriesDataDto
+      type: object
+    WebComponent.Dto.CustomIndexing.OptimizerData:
+      properties:
+        optimizationStatus:
+          type: string
+        processKey:
+          type: string
+        scenarios:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.Scenarios'
+      xml:
+        name: OptimizerData
+      type: object
+    WebComponent.Dto.CustomIndexing.CapitalGainsTaxRates:
+      properties:
+        longTerm:
+          type: number
+          format: double
+        shortTerm:
+          type: number
+          format: double
+      xml:
+        name: CapitalGainsTaxRates
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.AssetClassesDto:
+      properties:
+        detailed:
+          items:
+            $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.DetailDto'
+          xml:
+            name: DetailDto
+            wrapped: true
+          type: array
+        industry:
+          items:
+            $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.DetailDto'
+          xml:
+            name: DetailDto
+            wrapped: true
+          type: array
+        basic:
+          items:
+            $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.DetailDto'
+          xml:
+            name: DetailDto
+            wrapped: true
+          type: array
+      xml:
+        name: AssetClassesDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportRepresentativesClientsAccessRuleDto:
+      properties:
+        representativeId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        canRun:
+          type: boolean
+      xml:
+        name: ReportRepresentativesClientsAccessRuleDto
+      type: object
+    Element.Proposal.Dto.FactSheet.CalendarYearPerformanceGroupDto:
+      properties:
+        name:
+          type: string
+        calendarYearPerformances:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.FactSheet.CalendarYearPerformanceDto'
+          xml:
+            name: CalendarYearPerformanceDto
+            wrapped: true
+          type: array
+      xml:
+        name: CalendarYearPerformanceGroupDto
+      type: object
+    OAS.DataModel.Reporting.ReportOption:
+      required:
+      - id
+      - $type
+      properties:
+        id:
+          type: string
+        $type:
+          readOnly: true
+          type: string
+        optionGuid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        optionId:
+          type: integer
+          format: int32
+        isDisabled:
+          type: boolean
+        isGlobal:
+          type: boolean
+        isIgnored:
+          type: boolean
+        name:
+          type: string
+        useInception:
+          type: boolean
+        prompt:
+          type: string
+          enum:
+          - Never
+          - Always
+      xml:
+        name: ReportOption
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.FiCouponDetailsDto:
+      properties:
+        4-6%:
+          type: number
+          format: double
+        10-12%:
+          type: number
+          format: double
+        Over 12%:
+          type: number
+          format: double
+        0%:
+          type: number
+          format: double
+        0-4%:
+          type: number
+          format: double
+        8-10%:
+          type: number
+          format: double
+        6-8%:
+          type: number
+          format: double
+      xml:
+        name: FiCouponDetailsDto
+      type: object
+    WebComponent.Dto.CustomIndexing.Category:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: Category
+      type: object
+    Element.Proposal.Dto.FactSheet.FactSheetReturnDto:
+      properties:
+        timeFrame:
+          type: string
+          enum:
+          - Inception
+          - OneMonth
+          - ThreeMonth
+          - YearToDate
+          - OneYear
+          - ThreeYear
+          - FiveYear
+          - TenYear
+          - Period
+          - Year2000
+          - Year2001
+          - Year2002
+          - Year2003
+          - Year2004
+          - Year2005
+          - Year2006
+          - Year2007
+          - Year2008
+          - Year2009
+          - Year2010
+          - Year2011
+          - Year2012
+          - Year2013
+          - Year2014
+          - Year2015
+          - Year2016
+          - Year2017
+          - Year2018
+          - Year2019
+          - Year2020
+          - Year2021
+          - Year2022
+          - Year2023
+          - Year2024
+          - Year2025
+          - Year2026
+          - Year2027
+          - Year2028
+          - Year2029
+          - Year2030
+        fieldValue:
+          type: number
+          format: double
+        isAnnualized:
+          type: boolean
+        ticker:
+          type: string
+      xml:
+        name: FactSheetReturnDto
+      type: object
+    Element.Proposal.Dto.FactSheet.FactSheetPerformanceDto:
+      properties:
+        timeFrame:
+          type: string
+          enum:
+          - Inception
+          - OneMonth
+          - ThreeMonth
+          - YearToDate
+          - OneYear
+          - ThreeYear
+          - FiveYear
+          - TenYear
+          - Period
+          - Year2000
+          - Year2001
+          - Year2002
+          - Year2003
+          - Year2004
+          - Year2005
+          - Year2006
+          - Year2007
+          - Year2008
+          - Year2009
+          - Year2010
+          - Year2011
+          - Year2012
+          - Year2013
+          - Year2014
+          - Year2015
+          - Year2016
+          - Year2017
+          - Year2018
+          - Year2019
+          - Year2020
+          - Year2021
+          - Year2022
+          - Year2023
+          - Year2024
+          - Year2025
+          - Year2026
+          - Year2027
+          - Year2028
+          - Year2029
+          - Year2030
+        bestPeriod:
+          type: string
+          format: date-time
+        bestReturn:
+          type: number
+          format: double
+        worstPeriod:
+          type: string
+          format: date-time
+        worstReturn:
+          type: number
+          format: double
+      xml:
+        name: FactSheetPerformanceDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Element.ModelAggAllocations:
+      properties:
+        modelAggId:
+          type: integer
+          format: int32
+        allocation:
+          type: integer
+          format: int32
+      xml:
+        name: ModelAggAllocations
+      type: object
+    Element.Proposal.Dto.Requests.ProposalRequest:
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        fragmentGuids:
+          items:
+            example: 00000000-0000-0000-0000-000000000000
+            type: string
+            format: uuid
+          type: array
+        prospectId:
+          type: string
+      xml:
+        name: ProposalRequest
+      type: object
+    WebComponent.Dto.CustomIndexing.Statistics:
+      properties:
+        numberOfHoldings:
+          type: integer
+          format: int32
+        trackingDifference:
+          type: number
+          format: double
+        annualReturn:
+          type: number
+          format: double
+        volatility:
+          type: number
+          format: double
+        sharpeRatio:
+          type: number
+          format: double
+        yield:
+          type: number
+          format: double
+        performance:
+          type: number
+          format: double
+        estimatedCapitalGains:
+          type: number
+          format: double
+        estimatedTaxSavings:
+          type: number
+          format: double
+        proposedTurnover:
+          type: number
+          format: double
+        taxTransitionLiability:
+          type: number
+          format: double
+      xml:
+        name: Statistics
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.EconBreakdownDto:
+      properties:
+        US Stock:
+          type: number
+          format: double
+        International Developed Markets:
+          type: number
+          format: double
+        Emerging Markets:
+          type: number
+          format: double
+      xml:
+        name: EconBreakdownDto
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.JsonInfoDto:
+      properties:
+        thirtyDayYield:
+          type: number
+          format: double
+        ttmYield:
+          type: number
+          format: double
+        avgCreditRating:
+          type: number
+          format: double
+        avgMaturity:
+          type: number
+          format: double
+        avgWeightedCoupon:
+          type: number
+          format: double
+        lastDivDate:
+          type: string
+      xml:
+        name: JsonInfoDto
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProposalAssetClassDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        allocation:
+          type: number
+          format: double
+        investmentAmount:
+          type: number
+          format: double
+        color:
+          type: string
+      xml:
+        name: ProposalAssetClassDto
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.PositionDto:
+      properties:
+        pricedatemap:
+          type: string
+        industry:
+          type: string
+        liquidity:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.LiquidityDto'
+        volatility:
+          type: number
+          format: double
+        type:
+          type: string
+        firstHistory:
+          type: string
+          format: date-time
+        indDesc:
+          type: string
+        price:
+          type: number
+          format: double
+        yield:
+          type: number
+          format: double
+        lastGoodPrice:
+          type: number
+          format: double
+        pctAllocation:
+          type: number
+          format: double
+        marketCap:
+          type: number
+          format: double
+        ticker:
+          type: string
+        mgrStartDate:
+          type: string
+        quantity:
+          type: number
+          format: double
+        pricedate:
+          type: string
+        mddstart:
+          type: string
+        trueYield:
+          type: number
+          format: double
+        tradedcurrencyid:
+          type: integer
+          format: int32
+        expenseRatio:
+          type: number
+          format: double
+        name:
+          type: string
+        orionProductId:
+          type: integer
+          format: int32
+        mddend:
+          type: string
+        bookValuePerShare:
+          type: number
+          format: double
+        priceToEarnings:
+          type: number
+          format: double
+        tempdata:
+          type: string
+        priceStartDate:
+          type: string
+        id:
+          type: integer
+          format: int32
+        tickerid:
+          type: integer
+          format: int32
+        avgVolume:
+          type: number
+          format: double
+        mdd:
+          type: number
+          format: double
+        tags:
+          type: string
+        industryid:
+          type: integer
+          format: int32
+        52wkChange:
+          type: number
+          format: double
+        locationid:
+          type: integer
+          format: int32
+        currencyid:
+          type: integer
+          format: int32
+        totalReturn:
+          type: number
+          format: double
+        worstImpact:
+          type: number
+          format: double
+        expectedReturn5Yr:
+          type: number
+          format: double
+        expectedReturn:
+          type: number
+          format: double
+        jsonInfo:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.JsonInfoDto'
+        feeStdDevBelow:
+          type: number
+          format: double
+        feeStdDevAbove:
+          type: number
+          format: double
+      xml:
+        name: PositionDto
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.LiquidityDto:
+      properties:
+        5y:
+          type: number
+          format: double
+        3y:
+          type: number
+          format: double
+        now:
+          type: number
+          format: double
+        1y:
+          type: number
+          format: double
+        3m:
+          type: number
+          format: double
+        10y:
+          type: number
+          format: double
+      xml:
+        name: LiquidityDto
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.PortfolioDto:
+      properties:
+        ccrScore:
+          type: number
+          format: double
+        expectedReturn:
+          type: number
+          format: double
+        expectedReturn5Yr:
+          type: number
+          format: double
+        liquidity:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.LiquidityDto'
+        strategyFee:
+          type: number
+          format: double
+        usePctAllocation:
+          type: string
+        timeframe:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.TimeFrameDto'
+        portStartDate:
+          type: string
+          format: date-time
+        jsonPositions:
+          items:
+            $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.PositionDto'
+          xml:
+            name: PositionDto
+            wrapped: true
+          type: array
+        value:
+          type: number
+          format: double
+        feeAnalysis:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.FeeAnalysisDto'
+        timeframesp500Beta:
+          type: number
+          format: double
+        pvh:
+          items:
+            type: object
+          type: array
+        leversToWatch:
+          items:
+            $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.LeversToWatchDto'
+          xml:
+            name: LeversToWatchDto
+            wrapped: true
+          type: array
+        insigLevers:
+          items:
+            $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.LeversToWatchDto'
+          xml:
+            name: LeversToWatchDto
+            wrapped: true
+          type: array
+        riskMeasures:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.RiskMeasureDto'
+        mddstart:
+          type: string
+          format: date-time
+        worstScenarioImpact:
+          type: number
+          format: double
+        excludedSymbols:
+          items:
+            type: object
+          type: array
+        mpt:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.MptDto'
+        pctLiquid:
+          type: number
+          format: double
+        famaFactors:
+          items:
+            type: object
+          type: array
+        analyzableValue:
+          type: number
+          format: double
+        assetClasses:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.AssetClassesDto'
+        mddend:
+          type: string
+          format: date-time
+        averageYield:
+          type: number
+          format: double
+        averageDuration:
+          type: number
+          format: double
+        isTickerWrapper:
+          type: boolean
+        dividendYield:
+          readOnly: true
+          type: number
+          format: double
+        marketCap:
+          readOnly: true
+          type: number
+          format: double
+        priceToEarnings:
+          readOnly: true
+          type: number
+          format: double
+      xml:
+        name: PortfolioDto
+      type: object
+    WebComponent.Dto.CustomIndexing.Advanced:
+      properties:
+        maxNumberOfAssets:
+          type: integer
+          format: int32
+        maxTrackingError:
+          type: number
+          format: double
+        minTrackingError:
+          type: number
+          format: double
+        capitalGainsTaxRates:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.CapitalGainsTaxRates'
+        capitalGainsBudget:
+          type: integer
+          format: int32
+      xml:
+        name: Advanced
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.FiSectorDetailsDto:
+      properties:
+        Convertible:
+          type: number
+          format: double
+        Commercial MBS:
+          type: number
+          format: double
+        Bank Loan:
+          type: number
+          format: double
+        Non-Agency MBS:
+          type: number
+          format: double
+        Cash Equivalent:
+          type: number
+          format: double
+        Agency MBS:
+          type: number
+          format: double
+        Asset-Backed:
+          type: number
+          format: double
+        US Treasury:
+          type: number
+          format: double
+        Corporate Bond:
+          type: number
+          format: double
+        Foreign Govt:
+          type: number
+          format: double
+        Other:
+          type: number
+          format: double
+        Municipal:
+          type: number
+          format: double
+      xml:
+        name: FiSectorDetailsDto
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.RiskMeasureDto:
+      properties:
+        sp500Beta:
+          type: number
+          format: double
+        aumfee:
+          type: number
+          format: double
+        annualizedReturn:
+          type: number
+          format: double
+        totalReturn:
+          type: number
+          format: double
+        yield:
+          type: number
+          format: double
+        expenseRatio:
+          type: number
+          format: double
+        volatility:
+          type: number
+          format: double
+        mdd:
+          type: number
+          format: double
+        sharperatio:
+          type: number
+          format: double
+        sortinoRatio:
+          type: number
+          format: double
+      xml:
+        name: RiskMeasureDto
+      type: object
+    WebComponent.Dto.CustomIndexing.Advisor:
+      properties:
+        orionConnectToken:
+          type: string
+        representativeId:
+          type: string
+        connectId:
+          type: string
+        firmId:
+          type: string
+        name:
+          type: string
+      xml:
+        name: Advisor
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.FiMaturityDetailDto:
+      properties:
+        <1 Yr:
+          type: number
+          format: double
+        1-3 Yrs:
+          type: number
+          format: double
+        3-5 Yrs:
+          type: number
+          format: double
+        5-7 Yrs:
+          type: number
+          format: double
+        7-10 Yrs:
+          type: number
+          format: double
+        10-15 Yrs:
+          type: number
+          format: double
+        15-20 Yrs:
+          type: number
+          format: double
+        20-30 Yrs:
+          type: number
+          format: double
+        30+ Yrs:
+          type: number
+          format: double
+      xml:
+        name: FiMaturityDetailDto
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProposalSsaModelSelectionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        mandate:
+          type: string
+        assetClass:
+          type: string
+        allocation:
+          type: number
+          format: double
+        investmentAmount:
+          type: number
+          format: double
+        riskScore:
+          type: integer
+          format: int32
+      xml:
+        name: ProposalSsaModelSelectionDto
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProposalProspectDto:
+      properties:
+        weightedAssetClassAllocations:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalAssetClassDto'
+          xml:
+            name: ProposalAssetClassDto
+            wrapped: true
+          type: array
+        prospectId:
+          type: string
+        name:
+          type: string
+        brokerDealerId:
+          type: integer
+          format: int32
+        brokerDealerName:
+          type: string
+        repId:
+          type: integer
+          format: int32
+        targetRiskScore:
+          type: integer
+          format: int32
+        calculatedRiskScore:
+          type: integer
+          format: int32
+        investmentAmount:
+          type: number
+          format: double
+        proposalId:
+          type: string
+        targetInvestmentObjective:
+          type: string
+        calculatedInvestmentObjective:
+          type: string
+        proposedRetirementExpenseRatio:
+          type: number
+          format: double
+        proposedRetirementObjective:
+          type: string
+        isWeathAdvisory:
+          type: boolean
+        additionalRepNames:
+          type: string
+        rep:
+          $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalProspectRepDto'
+        fees:
+          $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Fees.FeesDto'
+        newHouseholdFees:
+          $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Fees.NewHouseholdFees'
+        newHouseholdPaperworkFees:
+          $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Fees.NewHouseholdPaperworkFees'
+        riskProfile:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.RiskProfileDto'
+        holdings:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalHoldingDto'
+          xml:
+            name: ProposalHoldingDto
+            wrapped: true
+          type: array
+        stressTestGroups:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Integrations.OrionRiskIntelligence.StressTestsGroupedDto'
+          xml:
+            name: StressTestsGroupedDto
+            wrapped: true
+          type: array
+        proposalRiskQuestionnaireAnswers:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalRiskQuestionnaireAnswerDto'
+          xml:
+            name: ProposalRiskQuestionnaireAnswerDto
+            wrapped: true
+          type: array
+        householdMembers:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProspectHouseholdMemberDto'
+          xml:
+            name: ProspectHouseholdMemberDto
+            wrapped: true
+          type: array
+        riskIntelligenceSectors:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalSectorDto'
+          xml:
+            name: ProposalSectorDto
+            wrapped: true
+          type: array
+        riskIntelligenceGeographies:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalGeographyDto'
+          xml:
+            name: ProposalGeographyDto
+            wrapped: true
+          type: array
+        investmentObjectives:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalInvestmentObjectiveDto'
+          xml:
+            name: ProposalInvestmentObjectiveDto
+            wrapped: true
+          type: array
+        mandates:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalMandateDto'
+          xml:
+            name: ProposalMandateDto
+            wrapped: true
+          type: array
+        prospectAssetClassAllocations:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalAssetClassDto'
+          xml:
+            name: ProposalAssetClassDto
+            wrapped: true
+          type: array
+        prospectAssetCategoryAllocations:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalAssetCategoryDto'
+          xml:
+            name: ProposalAssetCategoryDto
+            wrapped: true
+          type: array
+        prospectModelAggAllocations:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalModelAggDto'
+          xml:
+            name: ProposalModelAggDto
+            wrapped: true
+          type: array
+        comparisonHousehold:
+          $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalComparisonHousehold'
+      xml:
+        name: ProposalProspectDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.FragmentVerboseReferencedOptionDto:
+      properties:
+        optionGuid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        option:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+      xml:
+        name: FragmentVerboseReferencedOptionDto
+      type: object
+    WebComponent.Dto.CustomIndexing.Scenarios:
+      properties:
+        currentHoldings:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.CurrentHoldings'
+        sellAllHoldings:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.SellAllHoldings'
+        capitalGainsScenarios:
+          items:
+            $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.CapitalGainsScenario'
+          xml:
+            name: CapitalGainsScenario
+            wrapped: true
+          type: array
+      xml:
+        name: Scenarios
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProposalRiskQuestionnairePossibleAnswerDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        mappedId:
+          type: integer
+          format: int32
+        text:
+          type: string
+        value:
+          type: integer
+          format: int32
+        isSelected:
+          type: boolean
+      xml:
+        name: ProposalRiskQuestionnairePossibleAnswerDto
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProposalAssetCategoryDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        allocation:
+          type: number
+          format: double
+        investmentAmount:
+          type: number
+          format: double
+        color:
+          type: string
+        categoryAssetClasses:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalAssetClassDto'
+          xml:
+            name: ProposalAssetClassDto
+            wrapped: true
+          type: array
+      xml:
+        name: ProposalAssetCategoryDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Performance.PerformancePortfolio:
+      properties:
+        pkGroup:
+          type: integer
+          format: int32
+        fkParentGroup:
+          type: integer
+          format: int32
+        fkBucket:
+          type: integer
+          format: int32
+        fkEntity:
+          type: integer
+          format: int32
+        grouping:
+          type: string
+          enum:
+          - Undefined
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - AssetClass
+          - ProductType
+          - Platform
+          - RiskCategory
+          - Product
+          - IndexBlend
+          - AssetCategory
+          - AssetLevelStrategy
+          - AggregateModel
+          - AccountType
+          - PortfolioGroup
+        fkGroupEntity:
+          type: integer
+          format: int32
+        name:
+          type: string
+        inceptionDate:
+          type: string
+          format: date-time
+        calcFirstDayPerformance:
+          type: boolean
+        calcGrossOfFees:
+          type: string
+          enum:
+          - NetOfFees
+          - GrossOfFees
+          - Both
+        includeAccruedInt:
+          type: boolean
+        portfolios:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Performance.PerformancePortfolio'
+          xml:
+            name: PerformancePortfolio
+            wrapped: true
+          type: array
+        summaries:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Performance.PerformancePortfolioSummary'
+          xml:
+            name: PerformancePortfolioSummary
+            wrapped: true
+          type: array
+        details:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Performance.PerformancePortfolioDetail'
+          xml:
+            name: PerformancePortfolioDetail
+            wrapped: true
+          type: array
+        benchmarks:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Performance.PerformanceBenchmark'
+          xml:
+            name: PerformanceBenchmark
+            wrapped: true
+          type: array
+        assetGroupAssignments:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Performance.PerformanceAssetGroupAssignment'
+          xml:
+            name: PerformanceAssetGroupAssignment
+            wrapped: true
+          type: array
+        statistics:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Performance.PerformanceStatistic'
+          xml:
+            name: PerformanceStatistic
+            wrapped: true
+          type: array
+      xml:
+        name: PerformancePortfolio
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseGroupAccessRuleDto:
+      properties:
+        databaseGroupId:
+          type: integer
+          format: int32
+        loginEntityId:
+          type: string
+          enum:
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - RIA
+          - Administrator
+          - SubAdvisor
+          - ThirdPartyAdministrator
+          - Custodian
+          - PlanSponsor
+          - ThirdParty
+          - ServiceAccount
+          - Participant
+          - RepAccountManager
+          - Payee
+          - RIATable
+          - Cotenant
+        name:
+          type: string
+        canRun:
+          type: boolean
+        canEdit:
+          type: boolean
+      xml:
+        name: ReportDatabaseGroupAccessRuleDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Performance.PerformanceAssetGroupAssignment:
+      properties:
+        pkGroup:
+          type: integer
+          format: int32
+        fkAsset:
+          type: integer
+          format: int32
+        weight:
+          type: number
+          format: double
+        performance:
+          type: boolean
+        activitySummary:
+          type: boolean
+        allocation:
+          type: boolean
+        portfolioDetail:
+          type: boolean
+        taxDetail:
+          type: boolean
+      xml:
+        name: PerformanceAssetGroupAssignment
+      type: object
+    Element.Proposal.Dto.FactSheet.FactSheetDataDto:
+      properties:
+        title:
+          type: string
+        entityName:
+          type: string
+        secondaryEntityId:
+          type: integer
+          format: int32
+        secondaryEntityName:
+          type: string
+        sleeveStrategyAggregateId:
+          type: integer
+          format: int32
+        riskScore:
+          type: integer
+          format: int32
+        expenseRatio:
+          type: number
+          format: double
+        historicalPerformanceChartHeader:
+          type: string
+        historicalPerformanceChartHtml:
+          type: string
+        riskReturnChartHtml:
+          type: string
+        isWeathAdvisory:
+          type: boolean
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        lastCalendarYearPerformanceDate:
+          type: string
+          format: date-time
+        performanceChartData:
+          $ref: '#/components/schemas/Element.Proposal.Dto.FactSheet.FactSheetPerformanceChartDto'
+        benchmark:
+          $ref: '#/components/schemas/Element.Proposal.Dto.FactSheet.FactSheetBenchmarkDto'
+        threeMonthRiskProfile:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.RiskProfileDto'
+        oneYearRiskProfile:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.RiskProfileDto'
+        threeYearRiskProfile:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.RiskProfileDto'
+        fiveYearRiskProfile:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.RiskProfileDto'
+        tenYearRiskProfile:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.RiskProfileDto'
+        inceptionRiskProfile:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.RiskProfileDto'
+        messages:
+          items:
+            type: string
+          type: array
+        returns:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.FactSheet.FactSheetReturnDto'
+          xml:
+            name: FactSheetReturnDto
+            wrapped: true
+          type: array
+        performances:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.FactSheet.FactSheetPerformanceDto'
+          xml:
+            name: FactSheetPerformanceDto
+            wrapped: true
+          type: array
+        riskStatistics:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.FactSheet.FactSheetRiskStatisticsDto'
+          xml:
+            name: FactSheetRiskStatisticsDto
+            wrapped: true
+          type: array
+        riskGrossStatistics:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.FactSheet.FactSheetRiskStatisticsDto'
+          xml:
+            name: FactSheetRiskStatisticsDto
+            wrapped: true
+          type: array
+        assetClasses:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalAssetClassDto'
+          xml:
+            name: ProposalAssetClassDto
+            wrapped: true
+          type: array
+        assetCategories:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalAssetCategoryDto'
+          xml:
+            name: ProposalAssetCategoryDto
+            wrapped: true
+          type: array
+        modelAggAssetClass:
+          $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalAssetClassDto'
+        modelAggAssetCategory:
+          $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalAssetCategoryDto'
+        calendarYearPerformanceGroups:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.FactSheet.CalendarYearPerformanceGroupDto'
+          xml:
+            name: CalendarYearPerformanceGroupDto
+            wrapped: true
+          type: array
+        portfolioOverview:
+          type: string
+        portfolioManagementTeam:
+          type: string
+        wealthAdvisoryAccount:
+          type: boolean
+        wealthAdvisoryBenchmarks:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.FactSheet.FactSheetBenchmarkDto'
+          xml:
+            name: FactSheetBenchmarkDto
+            wrapped: true
+          type: array
+        entityId:
+          type: integer
+          format: int32
+        factSheetType:
+          type: string
+          enum:
+          - NoData
+          - Composite
+          - FinMason
+          - Product
+          - Blended
+        factSheetDataGenerationId:
+          readOnly: true
+          type: string
+        loggingId:
+          readOnly: true
+          type: string
+        tenantCode:
+          type: string
+        createDate:
+          type: string
+          format: date-time
+      xml:
+        name: FactSheetDataDto
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProposalRiskQuestionnaireDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        answers:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalRiskQuestionnaireAnswerDto'
+          xml:
+            name: ProposalRiskQuestionnaireAnswerDto
+            wrapped: true
+          type: array
+      xml:
+        name: ProposalRiskQuestionnaireDto
+      type: object
+    Element.Proposal.Dto.Proposal.Fees.FeesDto:
+      properties:
+        adminFee:
+          $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Fees.FeeDto'
+        strategistFee:
+          $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Fees.FeeDto'
+        advisoryFee:
+          $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Fees.FeeDto'
+        totalFee:
+          $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Fees.FeeDto'
+        totalFeeValue:
+          type: number
+          format: double
+      xml:
+        name: FeesDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.FragmentPortfolioDto:
+      properties:
+        category:
+          type: string
+        parentCategory:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        canEdit:
+          type: boolean
+        canDelete:
+          type: boolean
+        auditedBy:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        isDynamic:
+          type: boolean
+      xml:
+        name: FragmentPortfolioDto
+      type: object
+    OAS.DataModel.SimpleGuidKeyEntity:
+      properties:
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        name:
+          type: string
+      xml:
+        name: SimpleGuidKeyEntity
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.FiCreditBreakdownDto:
+      properties:
+        aaa:
+          type: number
+          format: double
+        aa:
+          type: number
+          format: double
+        a:
+          type: number
+          format: double
+        bbb:
+          type: number
+          format: double
+        bb:
+          type: number
+          format: double
+        b:
+          type: number
+          format: double
+        Below B / Unrated:
+          type: number
+          format: double
+      xml:
+        name: FiCreditBreakdownDto
+      type: object
+    WebComponent.Dto.CustomIndexing.DepositCash:
+      properties:
+        capitalGainsTarget:
+          type: number
+          format: double
+      xml:
+        name: DepositCash
+      type: object
+    WebComponent.Dto.CustomIndexing.Meta:
+      properties:
+        compositeKey:
+          type: string
+      xml:
+        name: Meta
+      type: object
+    WebComponent.Dto.CustomIndexing.SectorIndustryConstraint:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        minimumValue:
+          type: number
+          format: double
+        maximumValue:
+          type: number
+          format: double
+      xml:
+        name: SectorIndustryConstraint
+      type: object
+    WebComponent.Dto.CustomIndexing.PreferenceDisplay:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        type:
+          type: string
+      xml:
+        name: PreferenceDisplay
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProposalManualAccount:
+      properties:
+        manualAccountId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        accountValue:
+          type: number
+          format: double
+        positions:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalManualAccountPosition'
+          xml:
+            name: ProposalManualAccountPosition
+            wrapped: true
+          type: array
+      xml:
+        name: ProposalManualAccount
+      type: object
+    WebComponent.Dto.CustomIndexing.Holding:
+      properties:
+        purchaseDate:
+          type: string
+          format: date-time
+        purchasePrice:
+          type: number
+          format: double
+        shares:
+          type: number
+          format: double
+        ticker:
+          type: string
+        productId:
+          type: string
+        productName:
+          type: string
+        holdingWeight:
+          type: number
+          format: double
+        allocationPercent:
+          type: number
+          format: double
+        orionProductId:
+          type: integer
+          format: int32
+      xml:
+        name: Holding
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseAccessRuleDto:
+      properties:
+        alClientId:
+          type: integer
+          format: int32
+        loginEntityId:
+          type: string
+          enum:
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - RIA
+          - Administrator
+          - SubAdvisor
+          - ThirdPartyAdministrator
+          - Custodian
+          - PlanSponsor
+          - ThirdParty
+          - ServiceAccount
+          - Participant
+          - RepAccountManager
+          - Payee
+          - RIATable
+          - Cotenant
+        name:
+          type: string
+        canRun:
+          type: boolean
+        canEdit:
+          type: boolean
+      xml:
+        name: ReportDatabaseAccessRuleDto
+      type: object
+    Element.Proposal.Dto.Responses.ProposalResponse:
+      properties:
+        status:
+          type: string
+          enum:
+          - New
+          - InProgress
+          - Completed
+          - CompletedWithErrors
+          - MaximumProcessingAttemptsReached
+          - Error
+          - NoDataFound
+          - Unknown
+        pdfBytes:
+          type: string
+          format: byte
+        prospectId:
+          type: string
+        messages:
+          items:
+            type: string
+          type: array
+        proposalName:
+          type: string
+        proposalError:
+          type: string
+      xml:
+        name: ProposalResponse
+      type: object
+    OAS.WebApi.DTO.Reporting.Performance.PerformanceBenchmarkSummary:
+      properties:
+        pkGroup:
+          type: integer
+          format: int32
+        fkKey:
+          type: integer
+          format: int32
+        bmType:
+          type: string
+        pkDateRange:
+          type: integer
+          format: int32
+        dateRangeName:
+          type: string
+        performance:
+          type: number
+          format: double
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        error:
+          type: integer
+          format: int32
+        annualize:
+          type: boolean
+        overflow:
+          type: boolean
+        daysInPeriod:
+          type: integer
+          format: int32
+      xml:
+        name: PerformanceBenchmarkSummary
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.FiRegionsDto:
+      properties:
+        Europe:
+          type: number
+          format: double
+        North America:
+          type: number
+          format: double
+        Asia + Pacific:
+          type: number
+          format: double
+      xml:
+        name: FiRegionsDto
+      type: object
+    Element.Proposal.Dto.Integrations.OrionRiskIntelligence.StressTestsGroupedDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        parentid:
+          type: integer
+          format: int32
+        name:
+          type: string
+        description:
+          type: string
+        image:
+          type: string
+        stressTestScenarios:
+          items:
+            $ref: '#/components/schemas/OrionRiskIntelligence.Dto.StressTest.StressTestScenarioDto'
+          xml:
+            name: StressTestScenarioDto
+            wrapped: true
+          type: array
+      xml:
+        name: StressTestsGroupedDto
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProspectHouseholdMemberDto:
+      properties:
+        fullName:
+          type: string
+        age:
+          type: integer
+          format: int32
+      xml:
+        name: ProspectHouseholdMemberDto
+      type: object
+    Element.Proposal.Dto.Responses.FactSheetResponse:
+      properties:
+        modelAggId:
+          type: integer
+          format: int32
+        tenantCode:
+          type: string
+        status:
+          type: string
+          enum:
+          - New
+          - InProgress
+          - Completed
+          - CompletedWithErrors
+          - MaximumProcessingAttemptsReached
+          - Error
+          - NoDataFound
+          - Unknown
+        pdfBytes:
+          type: string
+          format: byte
+        prospectId:
+          type: string
+        messages:
+          items:
+            type: string
+          type: array
+        proposalName:
+          type: string
+        proposalError:
+          type: string
+      xml:
+        name: FactSheetResponse
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProposalAccountPrimaryRepDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        address1:
+          type: string
+        address2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+      xml:
+        name: ProposalAccountPrimaryRepDto
+      type: object
+    WebComponent.Dto.CustomIndexing.SellAllHoldings:
+      properties:
+        statistics:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.Statistics'
+      xml:
+        name: SellAllHoldings
+      type: object
+    WebComponent.Dto.CustomIndexing.CurrentHoldings:
+      properties:
+        name:
+          type: string
+        statistics:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.Statistics'
+      xml:
+        name: CurrentHoldings
+      type: object
+    WebComponent.Dto.CustomIndexing.SecurityRestriction:
+      properties:
+        ticker:
+          type: string
+        minPercentWeight:
+          type: number
+          format: double
+        maxPercentWeight:
+          type: number
+          format: double
+        restrictionType:
+          type: string
+          enum:
+          - none
+          - sellAllShares
+          - doNotTrade
+          - doNotBuy
+          - doNotSell
+          - percent
+          - bringWeightTo
+      xml:
+        name: SecurityRestriction
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProposalHoldingDto:
+      properties:
+        newAccountId:
+          type: integer
+          format: int32
+        ticker:
+          type: string
+        productName:
+          type: string
+        assetCategoryId:
+          type: integer
+          format: int32
+        assetCategory:
+          type: string
+        assetCategoryColor:
+          type: string
+        assetClassId:
+          type: integer
+          format: int32
+        assetClass:
+          type: string
+        assetClassColor:
+          type: string
+        riskScore:
+          type: integer
+          format: int32
+        expenseRatio:
+          type: number
+          format: double
+        percent:
+          type: number
+          format: double
+        modelAggAccountWeight:
+          type: number
+          format: double
+        modelProductWeight:
+          type: number
+          format: double
+        allocation:
+          type: number
+          format: double
+        orionModelId:
+          type: integer
+          format: int32
+        modelAggId:
+          type: integer
+          format: int32
+        isSelfDirected:
+          type: boolean
+        productId:
+          type: integer
+          format: int32
+        investmentAmount:
+          type: number
+          format: double
+        inceptionDate:
+          type: string
+          format: date-time
+        tickerAndInceptionDate:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.TickerAndInceptionDate'
+          xml:
+            name: TickerAndInceptionDate
+            wrapped: true
+          type: array
+      xml:
+        name: ProposalHoldingDto
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProposalManualAccountPosition:
+      properties:
+        manualAccountPositionId:
+          type: integer
+          format: int32
+        manualAccountId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        ticker:
+          type: string
+        quantity:
+          type: integer
+          format: int32
+        marketValue:
+          type: number
+          format: double
+        orionProductId:
+          type: integer
+          format: int32
+        riskScore:
+          type: integer
+          format: int32
+      xml:
+        name: ProposalManualAccountPosition
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.FiCountryDto:
+      properties:
+        country:
+          type: string
+        value:
+          type: number
+          format: double
+      xml:
+        name: FiCountryDto
+      type: object
+    Element.Proposal.Dto.FactSheet.FactSheetBenchmarkDto:
+      properties:
+        name:
+          type: string
+        returns:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.FactSheet.FactSheetReturnDto'
+          xml:
+            name: FactSheetReturnDto
+            wrapped: true
+          type: array
+        indexes:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.FactSheet.FactSheetBenchmarkIndexDto'
+          xml:
+            name: FactSheetBenchmarkIndexDto
+            wrapped: true
+          type: array
+        riskStatistics:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.FactSheet.FactSheetRiskStatisticsDto'
+          xml:
+            name: FactSheetRiskStatisticsDto
+            wrapped: true
+          type: array
+      xml:
+        name: FactSheetBenchmarkDto
+      type: object
+    Element.Proposal.Dto.FactSheet.FactSheetRiskStatisticsDto:
+      properties:
+        timeFrame:
+          type: string
+          enum:
+          - Inception
+          - OneMonth
+          - ThreeMonth
+          - YearToDate
+          - OneYear
+          - ThreeYear
+          - FiveYear
+          - TenYear
+          - Period
+          - Year2000
+          - Year2001
+          - Year2002
+          - Year2003
+          - Year2004
+          - Year2005
+          - Year2006
+          - Year2007
+          - Year2008
+          - Year2009
+          - Year2010
+          - Year2011
+          - Year2012
+          - Year2013
+          - Year2014
+          - Year2015
+          - Year2016
+          - Year2017
+          - Year2018
+          - Year2019
+          - Year2020
+          - Year2021
+          - Year2022
+          - Year2023
+          - Year2024
+          - Year2025
+          - Year2026
+          - Year2027
+          - Year2028
+          - Year2029
+          - Year2030
+        standardDeviation:
+          type: number
+          format: double
+        sharpeRatio:
+          type: number
+          format: double
+        sortinoRatio:
+          type: number
+          format: double
+        beta:
+          type: number
+          format: double
+        maxDrawdown:
+          type: number
+          format: double
+        covariance:
+          type: number
+          format: double
+        relativeRiskScore:
+          type: number
+          format: double
+        annualizedReturn:
+          type: number
+          format: double
+        cumulativeReturn:
+          type: number
+          format: double
+        alpha:
+          type: number
+          format: double
+        rSquared:
+          type: number
+          format: double
+      xml:
+        name: FactSheetRiskStatisticsDto
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProposalGeographyDto:
+      properties:
+        name:
+          type: string
+        allocation:
+          type: number
+          format: double
+        investmentAmount:
+          type: number
+          format: double
+      xml:
+        name: ProposalGeographyDto
+      type: object
+    WebComponent.Dto.CustomIndexing.TargetStrategy:
+      properties:
+        benchmarkName:
+          type: string
+        numberOfHoldings:
+          type: integer
+          format: int32
+        holdings:
+          items:
+            $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.Holding'
+          xml:
+            name: Holding
+            wrapped: true
+          type: array
+        riskProfile:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.RiskProfileDto'
+      xml:
+        name: TargetStrategy
+      type: object
+    WebComponent.Dto.CustomIndexing.NetGainsAndLosses:
+      properties:
+        shortTerm:
+          type: number
+          format: double
+        longTerm:
+          type: number
+          format: double
+        netUnrealizedGainsAndLosses:
+          readOnly: true
+          type: number
+          format: double
+      xml:
+        name: NetGainsAndLosses
+      type: object
+    OAS.WebApi.DTO.Reporting.Performance.PerformancePortfolioDetail:
+      properties:
+        pkGroup:
+          type: integer
+          format: int32
+        calcGrossOfFees:
+          type: boolean
+        asOfDate:
+          type: string
+          format: date-time
+        factor:
+          type: number
+          format: double
+      xml:
+        name: PerformancePortfolioDetail
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.MptDto:
+      properties:
+        econBreakdown:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.EconBreakdownDto'
+        regionBreakdown:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.RegionBreakdownDto'
+        sectorBreakdown:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.SectorBreakdownDto'
+        styleRawBreakdown:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.StyleRawBreakdownDto'
+        avgCreditRating:
+          type: string
+        fiCountries:
+          items:
+            $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.FiCountryDto'
+          xml:
+            name: FiCountryDto
+            wrapped: true
+          type: array
+        fiCouponDetails:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.FiCouponDetailsDto'
+        fiMaturityBreakdown:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.FiMaturityBreakdownDto'
+        fiSectorDetails:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.FiSectorDetailsDto'
+        fiRegions:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.FiRegionsDto'
+        mktCapBreakdown:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.MktCapBreakdownDto'
+        styleBoxBreakdown:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.StyleBoxBreakdownDto'
+        fiSectorBreakdown:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.FiSectorBreakdownDto'
+        fiCreditBreakdown:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.FiCreditBreakdownDto'
+        fiMaturityDetails:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.FiMaturityDetailDto'
+        avgCreditQuality:
+          type: number
+          format: double
+        avgWeightedCoupon:
+          type: number
+          format: double
+        avgMaturity:
+          type: number
+          format: double
+      xml:
+        name: MptDto
+      type: object
+    WebComponent.Dto.CustomIndexing.CapitalGainsScenario:
+      properties:
+        name:
+          type: string
+        statistics:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.Statistics'
+        holdings:
+          items:
+            $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.Holding'
+          xml:
+            name: Holding
+            wrapped: true
+          type: array
+        transactions:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.Transactions'
+      xml:
+        name: CapitalGainsScenario
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProposalRiskQuestionnaireAnswerDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        questionId:
+          type: integer
+          format: int32
+        answerId:
+          type: integer
+          format: int32
+        question:
+          $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalRiskQuestionnaireQuestionDto'
+        possibleAnswers:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalRiskQuestionnairePossibleAnswerDto'
+          xml:
+            name: ProposalRiskQuestionnairePossibleAnswerDto
+            wrapped: true
+          type: array
+      xml:
+        name: ProposalRiskQuestionnaireAnswerDto
+      type: object
+    OrionRiskIntelligence.Dto.StressTest.StressTestScenarioDto:
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        id:
+          type: integer
+          format: int32
+        totalImpact:
+          type: number
+          format: double
+        outcome:
+          type: string
+        parentid:
+          type: integer
+          format: int32
+        index:
+          type: integer
+          format: int32
+        positions:
+          items:
+            $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.PositionDto'
+          xml:
+            name: PositionDto
+            wrapped: true
+          type: array
+      xml:
+        name: StressTestScenarioDto
+      type: object
+    WebComponent.Dto.CustomIndexing.Account:
+      properties:
+        accountId:
+          type: string
+        accountName:
+          type: string
+        accountTitle:
+          type: string
+        lastSynchronized:
+          type: string
+          format: date-time
+        type:
+          type: string
+        name:
+          type: string
+        prospectGuid:
+          type: string
+        value:
+          type: number
+          format: double
+        cashValue:
+          type: number
+          format: double
+        holdings:
+          items:
+            $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.Holding'
+          xml:
+            name: Holding
+            wrapped: true
+          type: array
+        modifiedHoldingsForOptimization:
+          items:
+            $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.Holding'
+          xml:
+            name: Holding
+            wrapped: true
+          type: array
+        riskProfile:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.RiskProfileDto'
+        netGainsLosses:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.NetGainsAndLosses'
+      xml:
+        name: Account
+      type: object
+    Element.Proposal.Dto.Proposal.Core.TickerAndInceptionDate:
+      properties:
+        tickerName:
+          type: string
+        inceptionDate:
+          type: string
+          format: date-time
+      xml:
+        name: TickerAndInceptionDate
+      type: object
+    Element.Proposal.Dto.Proposal.Fees.NewHouseholdFees:
+      properties:
+        householdTotalFee:
+          type: number
+          format: double
+        billEntityFees:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Fees.BillEntityFeeInfo'
+          xml:
+            name: BillEntityFeeInfo
+            wrapped: true
+          type: array
+        accountFees:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Fees.AccountFeeInfo'
+          xml:
+            name: AccountFeeInfo
+            wrapped: true
+          type: array
+      xml:
+        name: NewHouseholdFees
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.FragmentVerboseDto:
+      properties:
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        name:
+          type: string
+        type:
+          readOnly: true
+          type: string
+        portfolio:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.FragmentPortfolioDto'
+        schema:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
+        requiredOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+        additionalOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOptionCategory'
+          xml:
+            name: ReportOptionCategory
+            wrapped: true
+          type: array
+        referencedOptions:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.FragmentVerboseReferencedOptionDto'
+          xml:
+            name: FragmentVerboseReferencedOptionDto
+            wrapped: true
+          type: array
+        loginAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportLoginAccessRuleDto'
+          xml:
+            name: ReportLoginAccessRuleDto
+            wrapped: true
+          type: array
+        databaseGroupAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseGroupAccessRuleDto'
+          xml:
+            name: ReportDatabaseGroupAccessRuleDto
+            wrapped: true
+          type: array
+        databaseAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseAccessRuleDto'
+          xml:
+            name: ReportDatabaseAccessRuleDto
+            wrapped: true
+          type: array
+        roleAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportRoleAccessRuleDto'
+          xml:
+            name: ReportRoleAccessRuleDto
+            wrapped: true
+          type: array
+        userAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportUserAccessRuleDto'
+          xml:
+            name: ReportUserAccessRuleDto
+            wrapped: true
+          type: array
+        representativeAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportRepresentativeAccessRuleDto'
+          xml:
+            name: ReportRepresentativeAccessRuleDto
+            wrapped: true
+          type: array
+        representativesClientsAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportRepresentativesClientsAccessRuleDto'
+          xml:
+            name: ReportRepresentativesClientsAccessRuleDto
+            wrapped: true
+          type: array
+        clientAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportClientAccessRuleDto'
+          xml:
+            name: ReportClientAccessRuleDto
+            wrapped: true
+          type: array
+        brokerDealerAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportBrokerDealerAccessRuleDto'
+          xml:
+            name: ReportBrokerDealerAccessRuleDto
+            wrapped: true
+          type: array
+        brokerDealersRepresentativesAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportBrokerDealersRepresentativesAccessRuleDto'
+          xml:
+            name: ReportBrokerDealersRepresentativesAccessRuleDto
+            wrapped: true
+          type: array
+      xml:
+        name: FragmentVerboseDto
+      type: object
+    Element.Proposal.Dto.Proposal.Fees.BillEntityFeeInfo:
+      properties:
+        billEntityId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        description:
+          type: string
+        totalFee:
+          type: number
+          format: double
+      xml:
+        name: BillEntityFeeInfo
+      type: object
+    OAS.DataModel.Reporting.ControlBase:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        width:
+          type: string
+      xml:
+        name: ControlBase
+      type: object
+    WebComponent.Dto.CustomIndexing.DetailedHolding:
+      properties:
+        projectName:
+          type: string
+        ticker:
+          type: string
+        securityId:
+          type: integer
+          format: int32
+        securityName:
+          type: string
+        marketValue:
+          type: number
+          format: double
+        costBasis:
+          type: number
+          format: double
+        acquiredDate:
+          type: string
+          format: date-time
+        initialShares:
+          type: number
+          format: double
+        finalShares:
+          type: number
+          format: double
+        changeShare:
+          type: number
+          format: double
+        initialPercentOfPortfolio:
+          type: number
+          format: double
+        finalPercentOfPortfolio:
+          type: number
+          format: double
+        transactionValue:
+          type: number
+          format: double
+        tax:
+          type: number
+          format: double
+        realizedGainLoss:
+          type: number
+          format: double
+      xml:
+        name: DetailedHolding
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.LeversToWatchDto:
+      properties:
+        monthAgoValue:
+          type: number
+          format: double
+        priceToEarnings:
+          type: number
+          format: double
+        range:
+          type: number
+          format: double
+        industry:
+          type: string
+        volatility:
+          type: number
+          format: double
+        type:
+          type: string
+        leverid:
+          type: integer
+          format: int32
+        priceStartDate:
+          type: string
+          format: date-time
+        price:
+          type: number
+          format: double
+        yield:
+          type: number
+          format: double
+        id:
+          type: integer
+          format: int32
+        tickerid:
+          type: integer
+          format: int32
+        value:
+          type: number
+          format: double
+        impact2yr:
+          type: number
+          format: double
+        marketCap:
+          type: object
+        ticker:
+          type: string
+        portfolioImpact:
+          type: number
+          format: double
+        mgrStartDate:
+          type: string
+          format: date-time
+        pricedate:
+          type: string
+          format: date-time
+        yearAgoValue:
+          type: number
+          format: double
+        stderror:
+          type: number
+          format: double
+        avgVolume:
+          type: number
+          format: double
+        impact:
+          type: number
+          format: double
+        mddstart:
+          type: string
+          format: date-time
+        mdd:
+          type: number
+          format: double
+        trueYield:
+          type: number
+          format: double
+        tags:
+          type: string
+        unit:
+          type: string
+        industryid:
+          type: integer
+          format: int32
+        52wkChange:
+          type: number
+          format: double
+        locationid:
+          type: integer
+          format: int32
+        expenseRatio:
+          type: number
+          format: double
+        name:
+          type: string
+        leverdesc:
+          type: string
+        levername:
+          type: string
+        orionProductId:
+          type: integer
+          format: int32
+        mddend:
+          type: string
+          format: date-time
+        litype:
+          type: string
+        operatingMargin:
+          type: number
+          format: double
+        bookValuePerShare:
+          type: number
+          format: double
+        revenue:
+          type: integer
+          format: int64
+        eps:
+          type: number
+          format: double
+        cashPerShare:
+          type: number
+          format: double
+        payoutRatio:
+          type: number
+          format: double
+        pegRatio:
+          type: number
+          format: double
+        profitMargin:
+          type: number
+          format: double
+        sharesOutstanding:
+          type: integer
+          format: int64
+        returnOnAssets:
+          type: number
+          format: double
+        debtToEquity:
+          type: number
+          format: double
+        priceToSales:
+          type: number
+          format: double
+        returnOnEquity:
+          type: number
+          format: double
+        rsquared:
+          type: number
+          format: double
+        priceToBook:
+          type: number
+          format: double
+        jsonInfo:
+          type: string
+        jsonInfoDto:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.JsonInfoDto'
+          readOnly: true
+      xml:
+        name: LeversToWatchDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportBrokerDealersRepresentativesAccessRuleDto:
+      properties:
+        brokerDealerId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        canRun:
+          type: boolean
+      xml:
+        name: ReportBrokerDealersRepresentativesAccessRuleDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Performance.PerformanceBenchmarkDetail:
+      properties:
+        pkGroup:
+          type: integer
+          format: int32
+        fkKey:
+          type: integer
+          format: int32
+        bmType:
+          type: string
+        asOfDate:
+          type: string
+          format: date-time
+        factor:
+          type: number
+          format: double
+      xml:
+        name: PerformanceBenchmarkDetail
+      type: object
+    Element.Proposal.Dto.Prospects.ProspectDto:
+      properties:
+        prospectId:
+          type: string
+        orionPlanningHouseholdId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        repId:
+          type: integer
+          format: int32
+      xml:
+        name: ProspectDto
+      type: object
+    WebComponent.Dto.CustomIndexing.SimpleTargetStrategy:
+      properties:
+        description:
+          type: string
+        displayStrategyName:
+          type: string
+        benchmarkDisplayName:
+          type: string
+        firmId:
+          type: string
+        strategyName:
+          type: string
+      xml:
+        name: SimpleTargetStrategy
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.RiskProfileDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        portfolio:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.PortfolioDto'
+        benchmark:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.BenchmarkDto'
+        correlations:
+          items:
+            $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.CorrelationDto'
+          xml:
+            name: CorrelationDto
+            wrapped: true
+          type: array
+      xml:
+        name: RiskProfileDto
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.BenchmarkDto:
+      properties:
+        expectedReturn:
+          type: number
+          format: double
+        expectedReturn5Yr:
+          type: number
+          format: double
+        liquidity:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.LiquidityDto'
+        strategyFee:
+          type: number
+          format: double
+        usePctAllocation:
+          type: string
+        timeframe:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.TimeFrameDto'
+        portStartDate:
+          type: string
+          format: date-time
+        jsonPositions:
+          items:
+            $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.PositionDto'
+          xml:
+            name: PositionDto
+            wrapped: true
+          type: array
+        id:
+          type: string
+        value:
+          type: number
+          format: double
+        feeAnalysis:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.FeeAnalysisDto'
+        timeframesp500Beta:
+          type: number
+          format: double
+        pvh:
+          items:
+            type: object
+          type: array
+        leversToWatch:
+          items:
+            $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.LeversToWatchDto'
+          xml:
+            name: LeversToWatchDto
+            wrapped: true
+          type: array
+        riskMeasures:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.RiskMeasureDto'
+        isTickerWrapper:
+          type: string
+        mddstart:
+          type: string
+          format: date-time
+        worstScenarioImpact:
+          type: number
+          format: double
+        excludedSymbols:
+          items:
+            type: object
+          type: array
+        assetType:
+          type: string
+        mpt:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.MptDto'
+        industryid:
+          type: string
+        name:
+          type: string
+        pctLiquid:
+          type: number
+          format: double
+        famaFactors:
+          items:
+            type: object
+          type: array
+        analyzableValue:
+          type: number
+          format: double
+        assetClasses:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.AssetClassesDto'
+        mddend:
+          type: string
+          format: date-time
+      xml:
+        name: BenchmarkDto
+      type: object
+    Element.Proposal.Dto.Proposal.Fees.FeeDetail:
+      properties:
+        minAmount:
+          type: number
+          format: double
+        maxAmount:
+          type: number
+          format: double
+        rate:
+          type: number
+          format: double
+        assignedFee:
+          type: number
+          format: double
+        points:
+          type: number
+          format: double
+      xml:
+        name: FeeDetail
+      type: object
+    OAS.WebApi.DTO.Reporting.Element.ProposalParametersDto:
+      properties:
+        newHouseholdId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        advizrHouseholdId:
+          type: integer
+          format: int32
+        rationaleText:
+          type: string
+        proposalFragments:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.SimpleGuidKeyEntity'
+          xml:
+            name: SimpleGuidKeyEntity
+            wrapped: true
+          type: array
+        isOatTenant:
+          type: boolean
+        isCommunitiesAvailable:
+          type: boolean
+      xml:
+        name: ProposalParametersDto
+      type: object
+    WebComponent.Dto.CustomIndexing.StyleSettings:
+      properties:
+        quantityType:
+          type: string
+        depositCash:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.DepositCash'
+        fundPortfolio:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.FundPortfolio'
+        multiYear:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.MultiYear'
+        oneYear:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.OneYear'
+        withdrawCash:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.WithdrawCash'
+      xml:
+        name: StyleSettings
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProposalModelAggDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        sleeveStrategyId:
+          type: integer
+          format: int32
+        sleeveStrategyAggId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        customIndexingKey:
+          type: string
+        mandate:
+          type: string
+        allocation:
+          type: number
+          format: double
+        investmentAmount:
+          type: number
+          format: double
+        riskScore:
+          type: integer
+          format: int32
+        managementStyle:
+          type: string
+        modelAggAssetClass:
+          type: string
+        isOptimized:
+          type: boolean
+        index:
+          type: integer
+          format: int32
+        subAdvisor:
+          type: string
+        subAdvisorId:
+          type: integer
+          format: int32
+        objective:
+          type: string
+        communityModelId:
+          type: integer
+          format: int64
+        fees:
+          $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Fees.FeesDto'
+        benchmark:
+          $ref: '#/components/schemas/Element.Proposal.Dto.FactSheet.FactSheetBenchmarkDto'
+        investmentObjectives:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalInvestmentObjectiveDto'
+          xml:
+            name: ProposalInvestmentObjectiveDto
+            wrapped: true
+          type: array
+        assetClasses:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalAssetClassDto'
+          xml:
+            name: ProposalAssetClassDto
+            wrapped: true
+          type: array
+        assetCategories:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalAssetCategoryDto'
+          xml:
+            name: ProposalAssetCategoryDto
+            wrapped: true
+          type: array
+        returns:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.FactSheet.FactSheetReturnDto'
+          xml:
+            name: FactSheetReturnDto
+            wrapped: true
+          type: array
+      xml:
+        name: ProposalModelAggDto
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProposalInvestmentObjectiveDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        description:
+          type: string
+        sequenceNumber:
+          type: integer
+          format: int32
+        riskRangeLow:
+          type: integer
+          format: int32
+        riskRangeHigh:
+          type: integer
+          format: int32
+        driftRangeLow:
+          type: integer
+          format: int32
+        driftRangeHigh:
+          type: integer
+          format: int32
+        riskScore:
+          type: integer
+          format: int32
+        detail:
+          type: string
+      xml:
+        name: ProposalInvestmentObjectiveDto
+      type: object
+    WebComponent.Dto.CustomIndexing.Esg:
+      properties:
+        preset:
+          type: string
+        categories:
+          items:
+            $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.Category'
+          xml:
+            name: Category
+            wrapped: true
+          type: array
+      xml:
+        name: Esg
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportUserAccessRuleDto:
+      properties:
+        userId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        canRun:
+          type: boolean
+        canEdit:
+          type: boolean
+        canDelete:
+          type: boolean
+      xml:
+        name: ReportUserAccessRuleDto
+      type: object
+    WebComponent.Dto.CustomIndexing.InvestorPreferences:
+      properties:
+        capitalGainsTaxRates:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.CapitalGainsTaxRates'
+        esg:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.Esg'
+        targetStrategy:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.TargetStrategy'
+        simpleTargetStrategy:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.SimpleTargetStrategy'
+        advanced:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.Advanced'
+        topThreeScenarios:
+          items:
+            type: integer
+            format: int32
+          type: array
+        securityRestrictions:
+          items:
+            $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.SecurityRestriction'
+          xml:
+            name: SecurityRestriction
+            wrapped: true
+          type: array
+        sectorIndustryConstraints:
+          items:
+            $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.SectorIndustryConstraint'
+          xml:
+            name: SectorIndustryConstraint
+            wrapped: true
+          type: array
+        preferenceDisplays:
+          items:
+            $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.PreferenceDisplay'
+          xml:
+            name: PreferenceDisplay
+            wrapped: true
+          type: array
+      xml:
+        name: InvestorPreferences
+      type: object
+    WebComponent.Dto.CustomIndexing.TaxAssessment:
+      properties:
+        unRealizedGainsShortTerm:
+          type: number
+          format: double
+        unRealizedGainsLongTerm:
+          type: number
+          format: double
+        proposedRealizedGainsShortTerm:
+          type: number
+          format: double
+        proposedRealizedGainsLongTerm:
+          type: number
+          format: double
+        unRealizedLossesShortTerm:
+          type: number
+          format: double
+        unRealizedLossesLongTerm:
+          type: number
+          format: double
+        netUnRealizedGainsAndLosses:
+          readOnly: true
+          type: number
+          format: double
+        proposedRealizedLossesShortTerm:
+          type: number
+          format: double
+        proposedRealizedLossesLongTerm:
+          type: number
+          format: double
+        numOfSecuritiesSold:
+          type: integer
+          format: int32
+        numOfSecuritiesBought:
+          type: integer
+          format: int32
+        proposedTurnOverBuys:
+          type: number
+          format: double
+        proposedTurnOverSells:
+          type: number
+          format: double
+        fullLiquidationTaxCost:
+          type: number
+          format: double
+        transitionTaxCost:
+          type: number
+          format: double
+        proposedTurnover:
+          type: number
+          format: double
+        proposedUnRealizedGainsShortTerm:
+          type: number
+          format: double
+        proposedUnRealizedGainsLongTerm:
+          type: number
+          format: double
+        proposedUnRealizedLossesShortTerm:
+          type: number
+          format: double
+        proposedUnRealizedLossesLongTerm:
+          type: number
+          format: double
+        netUnrealizedGainLoss:
+          type: number
+          format: double
+      xml:
+        name: TaxAssessment
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportBrokerDealerAccessRuleDto:
+      properties:
+        brokerDealerId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        canRun:
+          type: boolean
+      xml:
+        name: ReportBrokerDealerAccessRuleDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportRepresentativeAccessRuleDto:
+      properties:
+        representativeId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        canRun:
+          type: boolean
+      xml:
+        name: ReportRepresentativeAccessRuleDto
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.FiMaturityBreakdownDto:
+      properties:
+        Intermediate:
+          type: number
+          format: double
+        Long:
+          type: number
+          format: double
+        Less than 1 Year:
+          type: number
+          format: double
+        Short:
+          type: number
+          format: double
+      xml:
+        name: FiMaturityBreakdownDto
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.TimeFrameDto:
+      properties:
+        endDate:
+          type: string
+          format: date-time
+        timeString:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+      xml:
+        name: TimeFrameDto
+      type: object
+    WebComponent.Dto.CustomIndexing.OneYear:
+      properties:
+        capitalGainsTarget:
+          type: number
+          format: double
+      xml:
+        name: OneYear
+      type: object
+    WebComponent.Dto.CustomIndexing.Sell:
+      properties:
+        ticker:
+          type: string
+        value:
+          type: number
+          format: double
+      xml:
+        name: Sell
+      type: object
+    WebComponent.Dto.CustomIndexing.FundPortfolio:
+      properties:
+        capitalGainsTarget:
+          type: number
+          format: double
+      xml:
+        name: FundPortfolio
+      type: object
+    Element.Proposal.Dto.Proposal.Fees.FeeDto:
+      properties:
+        name:
+          type: string
+        value:
+          type: number
+          format: double
+        investmentAmount:
+          type: number
+          format: double
+        howBilled:
+          type: integer
+          format: int32
+        points:
+          type: number
+          format: double
+        dollarAmount:
+          type: number
+          format: double
+      xml:
+        name: FeeDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Element.FactSheetParametersDto:
+      properties:
+        repId:
+          type: integer
+          format: int32
+        orionRepId:
+          type: integer
+          format: int32
+        modelAggId:
+          type: integer
+          format: int32
+        modelId:
+          type: integer
+          format: int32
+        modelName:
+          type: string
+        overlayModelName:
+          type: string
+        modelAggAllocations:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Element.ModelAggAllocations'
+          xml:
+            name: ModelAggAllocations
+            wrapped: true
+          type: array
+        targetRiskScore:
+          type: integer
+          format: int32
+        isOatTenant:
+          type: boolean
+      xml:
+        name: FactSheetParametersDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Performance.PerformanceBenchmark:
+      properties:
+        pkGroup:
+          type: integer
+          format: int32
+        fkKey:
+          type: integer
+          format: int32
+        bmType:
+          type: string
+        name:
+          type: string
+        inceptionDate:
+          type: string
+          format: date-time
+        rebalanceFrequency:
+          type: string
+          enum:
+          - Daily
+          - Monthly
+          - Quarterly
+          - Semiannually
+          - Annually
+          - BuyAndHold
+          - Default
+        rebalanceBasedOn:
+          type: string
+          enum:
+          - CalendarPeriodEnd
+          - RollingPeriod
+        sortOrder:
+          type: integer
+          format: int32
+        color:
+          type: string
+        summaries:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Performance.PerformanceBenchmarkSummary'
+          xml:
+            name: PerformanceBenchmarkSummary
+            wrapped: true
+          type: array
+        details:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Performance.PerformanceBenchmarkDetail'
+          xml:
+            name: PerformanceBenchmarkDetail
+            wrapped: true
+          type: array
+        statistics:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Performance.PerformanceStatistic'
+          xml:
+            name: PerformanceStatistic
+            wrapped: true
+          type: array
+      xml:
+        name: PerformanceBenchmark
+      type: object
+    Element.Proposal.Dto.Proposal.Fees.AccountFeeInfo:
+      properties:
+        newAccountId:
+          type: integer
+          format: int32
+        accountValue:
+          type: number
+          format: double
+        accountPercentOfHousehold:
+          type: number
+          format: double
+        accountBillEntityFees:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Fees.BillEntityFeeInfo'
+          xml:
+            name: BillEntityFeeInfo
+            wrapped: true
+          type: array
+        accountModelAggFees:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Fees.ModelAggFeeInfo'
+          xml:
+            name: ModelAggFeeInfo
+            wrapped: true
+          type: array
+        name:
+          type: string
+        description:
+          type: string
+        totalFee:
+          type: number
+          format: double
+      xml:
+        name: AccountFeeInfo
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProposalProspectRepDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        advisorBiography:
+          type: string
+      xml:
+        name: ProposalProspectRepDto
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.RegionBreakdownDto:
+      properties:
+        Middle East + Africa:
+          type: number
+          format: double
+        Europe:
+          type: number
+          format: double
+        North America:
+          type: number
+          format: double
+        Asia + Pacific:
+          type: number
+          format: double
+        Latin America:
+          type: number
+          format: double
+      xml:
+        name: RegionBreakdownDto
+      type: object
+    WebComponent.Dto.CustomIndexing.Sectors:
+      properties:
+        initialEnergy:
+          type: number
+          format: double
+        targetEnergy:
+          type: number
+          format: double
+        optimizedEnergy:
+          type: number
+          format: double
+        initialFinancial:
+          type: number
+          format: double
+        targetFinancial:
+          type: number
+          format: double
+        optimizedFinancial:
+          type: number
+          format: double
+        initialHealthCare:
+          type: number
+          format: double
+        targetHealthCare:
+          type: number
+          format: double
+        optimizedHealthCare:
+          type: number
+          format: double
+        initialMaterials:
+          type: number
+          format: double
+        targetMaterials:
+          type: number
+          format: double
+        optimizedMaterials:
+          type: number
+          format: double
+        initialIndustrial:
+          type: number
+          format: double
+        targetIndustrial:
+          type: number
+          format: double
+        optimizedIndustrial:
+          type: number
+          format: double
+        initialIT:
+          type: number
+          format: double
+        targetIT:
+          type: number
+          format: double
+        optimizedIT:
+          type: number
+          format: double
+        initialCommunication:
+          type: number
+          format: double
+        targetCommunication:
+          type: number
+          format: double
+        optimizedCommunication:
+          type: number
+          format: double
+        initialUtilities:
+          type: number
+          format: double
+        targetUtilities:
+          type: number
+          format: double
+        optimizedUtilities:
+          type: number
+          format: double
+        initialRealEstate:
+          type: number
+          format: double
+        targetRealEstate:
+          type: number
+          format: double
+        optimizedRealEstate:
+          type: number
+          format: double
+        initialConsumerCyclical:
+          type: number
+          format: double
+        targetConsumerCyclical:
+          type: number
+          format: double
+        optimizedConsumerCyclical:
+          type: number
+          format: double
+        initialConsumerDefensive:
+          type: number
+          format: double
+        optimizedConsumerDefensive:
+          type: number
+          format: double
+        targetConsumerDefensive:
+          type: number
+          format: double
+      xml:
+        name: Sectors
+      type: object
+    WebComponent.Dto.CustomIndexing.WithdrawCash:
+      properties:
+        capitalGainsTarget:
+          type: number
+          format: double
+      xml:
+        name: WithdrawCash
+      type: object
+    WebComponent.Dto.CustomIndexing.MultiYear:
+      properties:
+        customCapitalGainsTargets:
+          type: boolean
+        dateTargetSettings:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.DateTargetSettings'
+      xml:
+        name: MultiYear
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportClientAccessRuleDto:
+      properties:
+        clientId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        canRun:
+          type: boolean
+      xml:
+        name: ReportClientAccessRuleDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Performance.PerformanceStatistic:
+      properties:
+        pkDateRange:
+          type: integer
+          format: int32
+        pkGroup:
+          type: integer
+          format: int32
+        calcGrossOfFees:
+          type: boolean
+        fkKey:
+          type: integer
+          format: int32
+        bmType:
+          type: string
+        fkStatistic:
+          type: integer
+          format: int32
+        value:
+          type: number
+          format: double
+      xml:
+        name: PerformanceStatistic
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportRoleAccessRuleDto:
+      properties:
+        roleId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        canRun:
+          type: boolean
+        canEdit:
+          type: boolean
+        canDelete:
+          type: boolean
+      xml:
+        name: ReportRoleAccessRuleDto
+      type: object
+    Element.Proposal.Dto.FactSheet.CalendarYearPerformanceDto:
+      properties:
+        year:
+          type: integer
+          format: int32
+        returnPercent:
+          type: number
+          format: double
+      xml:
+        name: CalendarYearPerformanceDto
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProposalMandateDto:
+      properties:
+        name:
+          type: string
+        allocation:
+          type: number
+          format: double
+        investmentAmount:
+          type: number
+          format: double
+      xml:
+        name: ProposalMandateDto
+      type: object
+    WebComponent.Dto.CustomIndexing.DateTargetSettings:
+      properties:
+        range:
+          type: string
+        chosenNumberOfYears:
+          type: integer
+          format: int32
+        totalCapitalGainsBudget:
+          type: number
+          format: double
+        capitalGainsTargetSettings:
+          items:
+            $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.CapitalGainsTargetSetting'
+          xml:
+            name: CapitalGainsTargetSetting
+            wrapped: true
+          type: array
+      xml:
+        name: DateTargetSettings
+      type: object
+    WebComponent.Dto.CustomIndexing.DetailedResultsDatum:
+      properties:
+        scenarioName:
+          type: string
+        scenarioLabel:
+          type: string
+        portfolioCharacteristics:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.PortfolioCharacteristics'
+        sectors:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.Sectors'
+        taxAssessment:
+          $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.TaxAssessment'
+        riskProfile:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.RiskProfileDto'
+        holdings:
+          items:
+            $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.DetailedHolding'
+          xml:
+            name: DetailedHolding
+            wrapped: true
+          type: array
+        allBuys:
+          items:
+            $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.DetailedHolding'
+          xml:
+            name: DetailedHolding
+            wrapped: true
+          type: array
+        allSells:
+          items:
+            $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.DetailedHolding'
+          xml:
+            name: DetailedHolding
+            wrapped: true
+          type: array
+      xml:
+        name: DetailedResultsDatum
+      type: object
+    WebComponent.Dto.CustomIndexing.PortfolioCharacteristics:
+      properties:
+        proposedCashValue:
+          type: number
+          format: double
+        costBasis:
+          type: number
+          format: double
+        numOfSecurities:
+          type: integer
+          format: int32
+        dividendYield:
+          type: number
+          format: double
+        proposedActiveWeight:
+          type: number
+          format: double
+        projectedBeta:
+          type: number
+          format: double
+        trackingDifference:
+          type: number
+          format: double
+        netRealizedGainsLosses:
+          type: number
+          format: double
+        initialActiveWeight:
+          type: number
+          format: double
+        currentRisk:
+          type: number
+          format: double
+        proposedRisk:
+          type: number
+          format: double
+        targetRisk:
+          type: number
+          format: double
+        proposedTrackingError:
+          type: number
+          format: double
+        initialBeta:
+          type: number
+          format: double
+        proposedNumOfSecurities:
+          type: integer
+          format: int32
+        totalPortFolio:
+          type: number
+          format: double
+        securitiesValue:
+          type: number
+          format: double
+        initialCashValue:
+          type: number
+          format: double
+        proposedCostBasis:
+          type: number
+          format: double
+      xml:
+        name: PortfolioCharacteristics
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProposalSectorDto:
+      properties:
+        name:
+          type: string
+        allocation:
+          type: number
+          format: double
+        investmentAmount:
+          type: number
+          format: double
+      xml:
+        name: ProposalSectorDto
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.FeeAnalysisDto:
+      properties:
+        totalPctFee:
+          type: number
+          format: double
+        aumFee:
+          type: number
+          format: double
+        expenseRatio:
+          type: number
+          format: double
+        name:
+          type: string
+        currency:
+          type: string
+      xml:
+        name: FeeAnalysisDto
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.FiSectorBreakdownDto:
+      properties:
+        Government:
+          type: number
+          format: double
+        Cash Equivalent:
+          type: number
+          format: double
+        Corporate:
+          type: number
+          format: double
+        Securitized:
+          type: number
+          format: double
+        Other:
+          type: number
+          format: double
+        Municipal:
+          type: number
+          format: double
+      xml:
+        name: FiSectorBreakdownDto
+      type: object
+    OAS.DataModel.Reporting.ReportOptionCategory:
+      required:
+      - category
+      - options
+      properties:
+        category:
+          type: string
+        options:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+      xml:
+        name: ReportOptionCategory
+      type: object
+    Element.Proposal.Dto.Proposal.Fees.NewHouseholdPaperworkFees:
+      properties:
+        newHouseholdId:
+          type: integer
+          format: int32
+        householdValue:
+          type: number
+          format: double
+        billEntityId:
+          type: integer
+          format: int32
+        billEntityName:
+          type: string
+        billEntityDesc:
+          type: string
+        foundInLevel:
+          type: string
+        billScheduleId:
+          type: integer
+          format: int32
+        billScheduleType:
+          type: string
+        billScheduleName:
+          type: string
+        billScheduleDescription:
+          type: string
+        billEntityFee:
+          type: number
+          format: double
+        calculatedFeePoints:
+          type: number
+          format: double
+        calcMethod:
+          type: string
+        feeDetails:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Fees.FeeDetail'
+          xml:
+            name: FeeDetail
+            wrapped: true
+          type: array
+      xml:
+        name: NewHouseholdPaperworkFees
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.SectorBreakdownDto:
+      properties:
+        Utilities:
+          type: number
+          format: double
+        Energy:
+          type: number
+          format: double
+        Consumer Staples:
+          type: number
+          format: double
+        Technology:
+          type: number
+          format: double
+        Real Estate:
+          type: number
+          format: double
+        Materials:
+          type: number
+          format: double
+        Financials:
+          type: number
+          format: double
+        Communications:
+          type: number
+          format: double
+        Healthcare:
+          type: number
+          format: double
+        Industrials:
+          type: number
+          format: double
+        Consumer Discretionary:
+          type: number
+          format: double
+      xml:
+        name: SectorBreakdownDto
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.StyleBoxBreakdownDto:
+      properties:
+        Blend:
+          type: number
+          format: double
+        Growth:
+          type: number
+          format: double
+        Value:
+          type: number
+          format: double
+      xml:
+        name: StyleBoxBreakdownDto
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.StyleRawBreakdownDto:
+      properties:
+        large-value:
+          type: number
+          format: double
+        mid-blend:
+          type: number
+          format: double
+        large-blend:
+          type: number
+          format: double
+        small-growth:
+          type: number
+          format: double
+        mid-value:
+          type: number
+          format: double
+        small-blend:
+          type: number
+          format: double
+        large-growth:
+          type: number
+          format: double
+        small-value:
+          type: number
+          format: double
+        mid-growth:
+          type: number
+          format: double
+      xml:
+        name: StyleRawBreakdownDto
+      type: object
+    Element.Proposal.Dto.FactSheet.FactSheetPerformanceChartDto:
+      properties:
+        rangeBeginDate:
+          type: string
+          format: date-time
+        rangeEndDate:
+          type: string
+          format: date-time
+        performanceChartSeriesData:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.FactSheet.FactSheetPerformanceChartSeriesDataDto'
+          xml:
+            name: FactSheetPerformanceChartSeriesDataDto
+            wrapped: true
+          type: array
+      xml:
+        name: FactSheetPerformanceChartDto
+      type: object
+    WebComponent.Dto.CustomIndexing.Client:
+      properties:
+        entityId:
+          type: string
+        entityIdentifier:
+          type: string
+        entitySource:
+          type: string
+        entityType:
+          type: string
+        name:
+          type: string
+        clientType:
+          type: string
+      xml:
+        name: Client
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.DetailDto:
+      properties:
+        pct:
+          type: number
+          format: double
+        ticker:
+          type: string
+        quantity:
+          type: number
+          format: double
+        price:
+          type: number
+          format: double
+        name:
+          type: string
+      xml:
+        name: DetailDto
+      type: object
+    WebComponent.Dto.CustomIndexing.CapitalGainsTargetSetting:
+      properties:
+        year:
+          type: integer
+          format: int32
+        shortTermTaxRate:
+          type: number
+          format: double
+        longTermTaxRate:
+          type: number
+          format: double
+      xml:
+        name: CapitalGainsTargetSetting
+      type: object
+    WebComponent.Dto.CustomIndexing.Transactions:
+      properties:
+        buys:
+          items:
+            $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.Buy'
+          xml:
+            name: Buy
+            wrapped: true
+          type: array
+        sells:
+          items:
+            $ref: '#/components/schemas/WebComponent.Dto.CustomIndexing.Sell'
+          xml:
+            name: Sell
+            wrapped: true
+          type: array
+      xml:
+        name: Transactions
+      type: object
+    Element.Proposal.Dto.Proposal.Fees.ModelAggFeeInfo:
+      properties:
+        modelAggId:
+          type: integer
+          format: int32
+        percentOfAccount:
+          type: number
+          format: double
+        percentOfHousehold:
+          type: number
+          format: double
+        value:
+          type: number
+          format: double
+        calcMethod:
+          type: string
+        aggregateByHousehold:
+          type: boolean
+        modelAggBillScheduleEntityFees:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Fees.BillEntityScheduleFeeInfo'
+          xml:
+            name: BillEntityScheduleFeeInfo
+            wrapped: true
+          type: array
+        name:
+          type: string
+        description:
+          type: string
+        totalFee:
+          type: number
+          format: double
+      xml:
+        name: ModelAggFeeInfo
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProposalComparisonHousehold:
+      properties:
+        name:
+          type: string
+        accounts:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalManualAccount'
+          xml:
+            name: ProposalManualAccount
+            wrapped: true
+          type: array
+        holdings:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalHoldingDto'
+          xml:
+            name: ProposalHoldingDto
+            wrapped: true
+          type: array
+        riskProfile:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.RiskProfileDto'
+        assetCategoryAllocations:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalAssetCategoryDto'
+          xml:
+            name: ProposalAssetCategoryDto
+            wrapped: true
+          type: array
+      xml:
+        name: ProposalComparisonHousehold
+      type: object
+    WebComponent.Dto.CustomIndexing.Buy:
+      properties:
+        ticker:
+          type: string
+        value:
+          type: number
+          format: double
+      xml:
+        name: Buy
+      type: object
+    Element.Proposal.Dto.FactSheet.FactSheetBenchmarkIndexDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        code:
+          type: string
+        value:
+          type: number
+          format: double
+        riskStatistics:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.FactSheet.FactSheetRiskStatisticsDto'
+          xml:
+            name: FactSheetRiskStatisticsDto
+            wrapped: true
+          type: array
+      xml:
+        name: FactSheetBenchmarkIndexDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Performance.PerformancePortfolioSummary:
+      properties:
+        pkGroup:
+          type: integer
+          format: int32
+        calcGrossOfFees:
+          type: boolean
+        pkDateRange:
+          type: integer
+          format: int32
+        dateRangeName:
+          type: string
+        performance:
+          type: number
+          format: double
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        error:
+          type: integer
+          format: int32
+        annualize:
+          type: boolean
+        overflow:
+          type: boolean
+        daysInPeriod:
+          type: integer
+          format: int32
+      xml:
+        name: PerformancePortfolioSummary
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProposalAccountDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        nickname:
+          type: string
+        primaryOwnerName:
+          type: string
+        jointOwnerName:
+          type: string
+        objective:
+          type: string
+        registrationType:
+          type: string
+        primaryRepName:
+          type: string
+        hasSsaSelectedAllocation:
+          type: boolean
+        advisoryFeeSplitReps:
+          type: string
+        investmentAmount:
+          type: number
+          format: double
+        riskScore:
+          type: integer
+          format: int32
+        targetRiskScore:
+          type: integer
+          format: int32
+        targetRiskObjective:
+          type: string
+        isWeathAdvisory:
+          type: boolean
+        custodian:
+          $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalCustodianDto'
+        fees:
+          $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Fees.FeesDto'
+        newHouseholdFees:
+          $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Fees.NewHouseholdFees'
+        newHouseholdPaperworkFees:
+          $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Fees.NewHouseholdPaperworkFees'
+        comparisonAccount:
+          $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalAccountDto'
+        riskProfile:
+          $ref: '#/components/schemas/OrionRiskIntelligence.Dto.RiskProfile.RiskProfileDto'
+        ssaSelection:
+          $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalSsaModelSelectionDto'
+        primaryRep:
+          $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalAccountPrimaryRepDto'
+        riskQuestionnaire:
+          $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalRiskQuestionnaireDto'
+        modelAggs:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalModelAggDto'
+          xml:
+            name: ProposalModelAggDto
+            wrapped: true
+          type: array
+        mandates:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalMandateDto'
+          xml:
+            name: ProposalMandateDto
+            wrapped: true
+          type: array
+        assetClasses:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalAssetClassDto'
+          xml:
+            name: ProposalAssetClassDto
+            wrapped: true
+          type: array
+        assetCategories:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalAssetCategoryDto'
+          xml:
+            name: ProposalAssetCategoryDto
+            wrapped: true
+          type: array
+        holdings:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalHoldingDto'
+          xml:
+            name: ProposalHoldingDto
+            wrapped: true
+          type: array
+        stressTestGroups:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Integrations.OrionRiskIntelligence.StressTestsGroupedDto'
+          xml:
+            name: StressTestsGroupedDto
+            wrapped: true
+          type: array
+        riskIntelligenceSectors:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalSectorDto'
+          xml:
+            name: ProposalSectorDto
+            wrapped: true
+          type: array
+        riskIntelligenceGeographies:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalGeographyDto'
+          xml:
+            name: ProposalGeographyDto
+            wrapped: true
+          type: array
+        investmentObjectives:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalInvestmentObjectiveDto'
+          xml:
+            name: ProposalInvestmentObjectiveDto
+            wrapped: true
+          type: array
+        weightedAssetClassAllocations:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Core.ProposalAssetClassDto'
+          xml:
+            name: ProposalAssetClassDto
+            wrapped: true
+          type: array
+        accountAssetClassHoldings:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Product.AssetClassHoldingDto'
+          xml:
+            name: AssetClassHoldingDto
+            wrapped: true
+          type: array
+      xml:
+        name: ProposalAccountDto
+      type: object
+    Element.Proposal.Dto.Product.AssetClassHoldingDto:
+      properties:
+        assetClassName:
+          type: string
+        assetClassAllocation:
+          type: number
+          format: double
+        modelAggHoldings:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Product.ModelAggHoldingDto'
+          xml:
+            name: ModelAggHoldingDto
+            wrapped: true
+          type: array
+      xml:
+        name: AssetClassHoldingDto
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProposalCustodianDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        description:
+          type: string
+      xml:
+        name: ProposalCustodianDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportLoginAccessRuleDto:
+      properties:
+        loginEntityId:
+          type: string
+          enum:
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - RIA
+          - Administrator
+          - SubAdvisor
+          - ThirdPartyAdministrator
+          - Custodian
+          - PlanSponsor
+          - ThirdParty
+          - ServiceAccount
+          - Participant
+          - RepAccountManager
+          - Payee
+          - RIATable
+          - Cotenant
+        canRun:
+          type: boolean
+      xml:
+        name: ReportLoginAccessRuleDto
+      type: object
+    Element.Proposal.Dto.Proposal.Fees.BillEntityScheduleFeeInfo:
+      properties:
+        billScheduleId:
+          type: integer
+          format: int32
+        billScheduleType:
+          type: string
+        billScheduleName:
+          type: string
+        foundInLevel:
+          type: string
+        feeDetails:
+          items:
+            $ref: '#/components/schemas/Element.Proposal.Dto.Proposal.Fees.FeeDetail'
+          xml:
+            name: FeeDetail
+            wrapped: true
+          type: array
+        billEntityId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        description:
+          type: string
+        totalFee:
+          type: number
+          format: double
+      xml:
+        name: BillEntityScheduleFeeInfo
+      type: object
+    OrionRiskIntelligence.Dto.RiskProfile.MktCapBreakdownDto:
+      properties:
+        small:
+          type: number
+          format: double
+        large:
+          type: number
+          format: double
+        mid:
+          type: number
+          format: double
+      xml:
+        name: MktCapBreakdownDto
+      type: object
+    Element.Proposal.Dto.Proposal.Core.ProposalRiskQuestionnaireQuestionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        mappedId:
+          type: integer
+          format: int32
+        text:
+          type: string
+        questionKey:
+          type: string
+      xml:
+        name: ProposalRiskQuestionnaireQuestionDto
+      type: object
+    Element.Proposal.Dto.Product.ModelAggHoldingDto:
+      properties:
+        modelAggName:
+          type: string
+        modelAggAllocation:
+          type: number
+          format: double
+        investmentAmount:
+          type: number
+          format: double
+        estimatedIncome:
+          type: number
+          format: double
+      xml:
+        name: ModelAggHoldingDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

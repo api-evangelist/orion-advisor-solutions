@@ -1,0 +1,106 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Reporting/Proto API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Reporting/Proto
+paths:
+  /v1/Reporting/Proto/Controls:
+    get:
+      tags:
+      - Reporting/Proto
+      operationId: ReportProto_GetReportControls
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportControlDto'
+                xml:
+                  name: ReportControlDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportControlDto'
+                xml:
+                  name: ReportControlDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportControlDto'
+                xml:
+                  name: ReportControlDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportControlDto'
+                xml:
+                  name: ReportControlDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportControlDto'
+                xml:
+                  name: ReportControlDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.ReportControlDto'
+                xml:
+                  name: ReportControlDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Report proto get report controls
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Reporting.ReportControlDto:
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        control:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
+      xml:
+        name: ReportControlDto
+      type: object
+    OAS.DataModel.Reporting.ControlBase:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        width:
+          type: string
+      xml:
+        name: ControlBase
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

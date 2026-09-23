@@ -1,0 +1,166 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Confirm/Database Backup File Restore API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Confirm/DatabaseBackupFileRestore
+paths:
+  /v1/Confirm/DatabaseBackupFileRestore:
+    get:
+      tags:
+      - Confirm/DatabaseBackupFileRestore
+      operationId: DatabaseBackupFileRestore_GetAllDatabaseBackupFileRestoreHistoryAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DatabaseBackupFileRestoreHistoryDto'
+                xml:
+                  name: DatabaseBackupFileRestoreHistoryDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DatabaseBackupFileRestoreHistoryDto'
+                xml:
+                  name: DatabaseBackupFileRestoreHistoryDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DatabaseBackupFileRestoreHistoryDto'
+                xml:
+                  name: DatabaseBackupFileRestoreHistoryDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DatabaseBackupFileRestoreHistoryDto'
+                xml:
+                  name: DatabaseBackupFileRestoreHistoryDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DatabaseBackupFileRestoreHistoryDto'
+                xml:
+                  name: DatabaseBackupFileRestoreHistoryDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DatabaseBackupFileRestoreHistoryDto'
+                xml:
+                  name: DatabaseBackupFileRestoreHistoryDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Database backup file restore get all database backup file restore history async
+      x-summary-source: derived
+    post:
+      tags:
+      - Confirm/DatabaseBackupFileRestore
+      operationId: DatabaseBackupFileRestore_ExecuteDatabaseBackupFileRestoreHistoryAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DatabaseBackupFileRestoreHistoryDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DatabaseBackupFileRestoreHistoryDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DatabaseBackupFileRestoreHistoryDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DatabaseBackupFileRestoreHistoryDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DatabaseBackupFileRestoreHistoryDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DatabaseBackupFileRestoreHistoryDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DatabaseBackupFileRestoreHistoryDto'
+        required: true
+      summary: Database backup file restore execute database backup file restore history async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Confirm.DatabaseBackupFileRestoreHistoryDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        pkDatabaseBackupFileRestoreHistory:
+          type: integer
+          format: int32
+        directory:
+          type: string
+        fileName:
+          type: string
+        databaseName:
+          type: string
+        relatedDatabaseName:
+          type: string
+        startExecutionTime:
+          type: string
+          format: date-time
+        endExecutionTime:
+          type: string
+          format: date-time
+        totalExecutionTimeInMinutes:
+          type: integer
+          format: int32
+        restoreMessage:
+          type: string
+        databaseBackupFileRestoreStatus:
+          type: string
+          enum:
+          - Queued
+          - Restoring
+          - Error
+          - Restored
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        createdByDisplay:
+          type: string
+      xml:
+        name: DatabaseBackupFileRestoreHistoryDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

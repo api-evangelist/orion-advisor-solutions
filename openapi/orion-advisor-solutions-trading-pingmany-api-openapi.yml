@@ -1,0 +1,121 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Ping Many API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/PingMany
+paths:
+  /v1/Trading/PingMany:
+    get:
+      tags:
+      - Trading/PingMany
+      summary: Used to test access to the batch data service
+      operationId: Trading_PingManyAsync
+      parameters:
+      - name: cancelationToken
+        in: header
+        required: true
+      - name: count
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      - name: dop
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 32
+      - name: wait
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.PingDto'
+                xml:
+                  name: PingDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.PingDto'
+                xml:
+                  name: PingDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.PingDto'
+                xml:
+                  name: PingDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.PingDto'
+                xml:
+                  name: PingDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.PingDto'
+                xml:
+                  name: PingDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.PingDto'
+                xml:
+                  name: PingDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Utility.PingDto:
+      properties:
+        start:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
+        duration:
+          readOnly: true
+          type: string
+        messages:
+          items:
+            type: string
+          type: array
+      xml:
+        name: PingDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

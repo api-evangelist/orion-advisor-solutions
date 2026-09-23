@@ -1,0 +1,398 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Reporting/Static Files API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Reporting/StaticFiles
+paths:
+  /v1/Reporting/StaticFiles:
+    post:
+      tags:
+      - Reporting/StaticFiles
+      operationId: StaticFiles_PostV1ReportingStaticFiles
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BlobBaseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BlobBaseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BlobBaseDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BlobBaseDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BlobBaseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BlobBaseDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ClientPortalStaticFileDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ClientPortalStaticFileDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ClientPortalStaticFileDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ClientPortalStaticFileDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ClientPortalStaticFileDto'
+        required: true
+      summary: Static files post V1 reporting static files
+      x-summary-source: derived
+  /v1/Reporting/StaticFiles/{fileType}:
+    get:
+      tags:
+      - Reporting/StaticFiles
+      summary: Gets a list of specific static documents
+      operationId: StaticFiles_GetBlobs
+      parameters:
+      - name: fileType
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - ClientPortalStatic
+          - RmdDashboard
+          - RmdMailMerge
+          - RmdMailMergeTemplate
+          - BillingAuditFile
+          - InsightDocument
+      - name: startDate
+        in: query
+        description: Optional. Default null. If provided only documents that come after the start date will be returned.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional. Default null. If provided only documents that come before the end date will be returned.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BlobBaseDto'
+                xml:
+                  name: BlobBaseDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BlobBaseDto'
+                xml:
+                  name: BlobBaseDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BlobBaseDto'
+                xml:
+                  name: BlobBaseDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BlobBaseDto'
+                xml:
+                  name: BlobBaseDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BlobBaseDto'
+                xml:
+                  name: BlobBaseDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BlobBaseDto'
+                xml:
+                  name: BlobBaseDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+    post:
+      tags:
+      - Reporting/StaticFiles
+      summary: Adds a new advisor file
+      operationId: StaticFiles_CreateBlobAsync
+      parameters:
+      - name: fileType
+        in: path
+        description: "The type of file to add. Can be set to any of the following:\n            ClientPortalStatic"
+        required: true
+        schema:
+          type: string
+          enum:
+          - ClientPortalStatic
+          - RmdDashboard
+          - RmdMailMerge
+          - RmdMailMergeTemplate
+          - BillingAuditFile
+          - InsightDocument
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Reporting/StaticFiles/{fileType}/{fileId}:
+    get:
+      tags:
+      - Reporting/StaticFiles
+      summary: Gets the raw data of the specific file with the blobId provided which is an…
+      operationId: StaticFiles_GetBlob
+      parameters:
+      - name: fileType
+        in: path
+        description: "The type of file to return. Can be set to any of the following:\n            ClientPortalStatic"
+        required: true
+        schema:
+          type: string
+          enum:
+          - ClientPortalStatic
+          - RmdDashboard
+          - RmdMailMerge
+          - RmdMailMergeTemplate
+          - BillingAuditFile
+          - InsightDocument
+      - name: fileId
+        in: path
+        description: Key of the file to be downloaded.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+    delete:
+      tags:
+      - Reporting/StaticFiles
+      summary: Deletes the specific file with the blobId provided which is an advisor file
+      operationId: StaticFiles_DeleteBlob
+      parameters:
+      - name: fileType
+        in: path
+        description: "The type of file to delete. Can be set to any of the following:\n            ClientPortalStatic"
+        required: true
+        schema:
+          type: string
+          enum:
+          - ClientPortalStatic
+          - RmdDashboard
+          - RmdMailMerge
+          - RmdMailMergeTemplate
+          - BillingAuditFile
+          - InsightDocument
+      - name: fileId
+        in: path
+        description: Key of the file to be deleted.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Reporting/StaticFiles/{key}:
+    get:
+      tags:
+      - Reporting/StaticFiles
+      operationId: StaticFiles_GetBlobDto
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BlobBaseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BlobBaseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BlobBaseDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BlobBaseDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BlobBaseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BlobBaseDto'
+      security:
+      - Authorization: []
+      summary: Static files get blob dto
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Portfolio.ClientPortalStaticFileDto:
+      properties:
+        blobType:
+          type: string
+          enum:
+          - ClientPortalStatic
+          - RmdDashboard
+          - RmdMailMerge
+          - RmdMailMergeTemplate
+          - BillingAuditFile
+          - InsightDocument
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+        openWith:
+          type: string
+        blobDesc:
+          type: string
+      xml:
+        name: ClientPortalStaticFileDto
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    OAS.WebApi.DTO.Portfolio.BlobBaseDto:
+      properties:
+        createdDate:
+          type: string
+          format: date-time
+        id:
+          type: integer
+          format: int32
+        openWith:
+          type: string
+        fileName:
+          type: string
+        blobDesc:
+          type: string
+        blobText:
+          type: string
+        category:
+          type: string
+        isZip:
+          type: boolean
+      xml:
+        name: BlobBaseDto
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

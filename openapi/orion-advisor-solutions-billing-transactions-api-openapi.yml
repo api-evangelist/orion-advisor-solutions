@@ -1,0 +1,1836 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Transactions API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/Transactions
+paths:
+  /v1/Billing/Transactions:
+    get:
+      tags:
+      - Billing/Transactions
+      operationId: BillTransaction_GetAll
+      parameters:
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: transTypeId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: custodianId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: representativeId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: fundFamilyId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Bill transaction get all
+      x-summary-source: derived
+  /v1/Billing/Transactions/{key}:
+    get:
+      tags:
+      - Billing/Transactions
+      summary: Gets the client that has the provided key.
+      description: 'GET: v1/Billing/Transactions/123
+
+        Returns:
+
+        {
+
+        "id": 123,
+
+        "registrationName": "First Last",
+
+        "accountId": 1234,
+
+        "accountNumber": "ACCT_CODE",
+
+        "brokerDealerName": "Broker Dealer",
+
+        "representativeName": "Last, First",
+
+        "representativeNumber": "123",
+
+        "productName": "Product Name",
+
+        "transactionDate": "2024-01-01",
+
+        "transactionTime": null,
+
+        "transactionAmount": 123.45,
+
+        "isFeeExcluded": false,
+
+        "isCashFlow": false,
+
+        "isNMReady": false,
+
+        "isBilled": false,
+
+        "billedDate": null,
+
+        "isAdvanceBilled": false,
+
+        "transactionDescription": "Description of the Trans",
+
+        "managementStyle": "Style",
+
+        "fundFamily": "Fund Family",
+
+        "cycleMonth": 1,
+
+        "billStyle": "Arrear",
+
+        "valuationMethod": "Period End Value",
+
+        "clientId": 1234,
+
+        "feeSchedule": "Schedule Name",
+
+        "startDate": "2024-01-01",
+
+        "billStartDate": "2024-01-01",
+
+        "notes": "notes",
+
+        "businessLine": "Business Line",
+
+        "billFrequency": "Quarterly",
+
+        "outsideId": null,
+
+        "accountCreatedDate": "2024-01-01",
+
+        "subAdvisor": " Sub Advisor",
+
+        "productId": 123,
+
+        "ticker": "TICKER",
+
+        "performanceFeeBreak": true,
+
+        "householdName": "First Last"
+
+        }'
+      operationId: BillTransaction_GetEntityByKeyAsync
+      parameters:
+      - name: key
+        in: path
+        description: Required. Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: token
+        in: header
+        description: Cancellation Token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+      security:
+      - Authorization: []
+  /v1/Billing/Transactions/AutomateCashflows/Process:
+    put:
+      tags:
+      - Billing/Transactions
+      summary: Process Cashflow Automation on demand
+      description: 'Sample Request
+
+        PUT v1/Billing/Transactions/AutomateCashflows/Process?startDate=01/01/2024&endDate=01/31/2024'
+      operationId: BillTransaction_AutomateCashflowsProcess
+      parameters:
+      - name: startDate
+        in: query
+        description: Transaction Start Date
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Transaction End Date
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Billing/Transactions/AutomateCashflowSettings:
+    get:
+      tags:
+      - Billing/Transactions
+      summary: Get Automated Casfhlow Settings
+      description: 'GET: v1/Billing/Transactions/AutomateCashflowSettings
+
+        Returns:
+
+        [
+
+        {
+
+        "id": 1,
+
+        "isEnabled": false,
+
+        "minimumThreshold": null,
+
+        "selectAll": true,
+
+        "groupByDay": true,
+
+        "transactionTypes": []
+
+        }
+
+        ]'
+      operationId: BillTransaction_GetAutomateCashflowSettingsAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AutomateCashflowSettingDto'
+                xml:
+                  name: AutomateCashflowSettingDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AutomateCashflowSettingDto'
+                xml:
+                  name: AutomateCashflowSettingDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AutomateCashflowSettingDto'
+                xml:
+                  name: AutomateCashflowSettingDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AutomateCashflowSettingDto'
+                xml:
+                  name: AutomateCashflowSettingDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Billing/Transactions
+      summary: Update Automated Cashflow Settings
+      description: 'PUT: v1/Billing/Transactions/AutomateCashflowSettings
+
+        Returns: 200'
+      operationId: BillTransaction_UpdateAutomateCashflowSettingsAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AutomateCashflowSettingDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AutomateCashflowSettingDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AutomateCashflowSettingDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AutomateCashflowSettingDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.AutomateCashflowSettingDto'
+        description: Required
+        required: true
+  /v1/Billing/Transactions/Consolidated:
+    get:
+      tags:
+      - Billing/Transactions
+      summary: Gets a list of transactions that the logged in user has access to.
+      description: 'Sample Request
+
+        GET /Billing/Transactions/Consolidated?startDate=10/01/2023&endDate=10/15/2023&$top=100000
+
+        Returns:
+
+        [
+
+        {
+
+        "id": 1,
+
+        "registrationName": "Test",
+
+        "accountId": 12,
+
+        "accountNumber": "Test",
+
+        "representativeName": "Test",
+
+        "productName": "Test product",
+
+        "transactionDate": "2023-10-01",
+
+        "transactionAmount": 123,
+
+        "isFeeExcluded": false,
+
+        "isCashFlow": false,
+
+        "isNMReady": false,
+
+        "isBilled": false,
+
+        "billedDate": null,
+
+        "isAdvanceBilled": false,
+
+        "transactionDescription": "Test desc",
+
+        "managementStyle": "Test style",
+
+        "clientId": 123,
+
+        "outsideId": null
+
+        }
+
+        ]'
+      operationId: BillTransaction_GetV1BillingTransactionsConsolidated
+      parameters:
+      - name: startDate
+        in: query
+        description: Optional. Default null. If provided only transactions with a transdate on or after the date provided will be returned.
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional. Default null. If provided only transactions with a transdate on or before the date provided will be returned.
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: manipulator
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Transactions/FeeExcludedAssets:
+    get:
+      tags:
+      - Billing/Transactions
+      summary: Gets a list of transactions of buys or sells to/from fee excluded assets that…
+      description: 'GET: v1/Billing/Transactions/FeeExcludedAssets
+
+        Returns:
+
+        [
+
+        {
+
+        "id": 1,
+
+        "registrationName": "First Last",
+
+        "accountId": 1234,
+
+        "accountNumber": "ACCT_CODE",
+
+        "brokerDealerName": "Broker Dealer",
+
+        "representativeName": "Last, First",
+
+        "representativeNumber": "123",
+
+        "productName": "Product Name",
+
+        "transactionDate": "2024-01-01",
+
+        "transactionTime": null,
+
+        "transactionAmount": 123.45,
+
+        "isFeeExcluded": false,
+
+        "isCashFlow": false,
+
+        "isNMReady": false,
+
+        "isBilled": false,
+
+        "billedDate": null,
+
+        "isAdvanceBilled": false,
+
+        "transactionDescription": "Description of the Trans",
+
+        "managementStyle": "Style",
+
+        "fundFamily": "Fund Family",
+
+        "cycleMonth": 1,
+
+        "billStyle": "Arrear",
+
+        "valuationMethod": "Period End Value",
+
+        "clientId": 1234,
+
+        "feeSchedule": "Schedule Name",
+
+        "startDate": "2024-01-01",
+
+        "billStartDate": "2024-01-01",
+
+        "notes": "notes",
+
+        "businessLine": "Business Line",
+
+        "billFrequency": "Quarterly",
+
+        "outsideId": null,
+
+        "accountCreatedDate": "2024-01-01",
+
+        "subAdvisor": " Sub Advisor",
+
+        "productId": 123,
+
+        "ticker": "TICKER",
+
+        "performanceFeeBreak": true,
+
+        "householdName": "First Last"
+
+        }
+
+        ]'
+      operationId: BillTransaction_GetFeeExcludedTransactionsAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      - name: startDate
+        in: query
+        description: Optional. Default startQTD. If provided only transactions that have matched start date will be returned.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional. Default now. If provided only transactions that have matched end date will be returned.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Transactions/FeeExcludedAssets/Test:
+    get:
+      tags:
+      - Billing/Transactions
+      summary: Testing endpoint for FeeExcludedAssets. Do not use outside of testing purposes
+      description: 'Sample Request
+
+        GET v1/Billing/Transactions/FeeExcludedAssets/Test'
+      operationId: BillTransaction_GetFeeExcludedAssetsTestAsync
+      parameters:
+      - name: ct
+        in: header
+        description: CancellationToken of the request
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Trading.FeeExcludedAsset'
+                xml:
+                  name: FeeExcludedAsset
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Trading.FeeExcludedAsset'
+                xml:
+                  name: FeeExcludedAsset
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Trading.FeeExcludedAsset'
+                xml:
+                  name: FeeExcludedAsset
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Trading.FeeExcludedAsset'
+                xml:
+                  name: FeeExcludedAsset
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Transactions/Grid:
+    get:
+      tags:
+      - Billing/Transactions
+      operationId: BillTransaction_GetAllGrid
+      parameters:
+      - name: manipulator
+        in: header
+        required: false
+      - name: skip
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: top
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: transTypeId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: custodianId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: representativeId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: fundFamilyId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Bill transaction get all grid
+      x-summary-source: derived
+  /v1/Billing/Transactions/List:
+    post:
+      tags:
+      - Billing/Transactions
+      summary: Gets a list of bill transactions that match one of the keys in the provided list
+      description: 'GET: v1/Billing/Transactions/List OR v1/Billing/Transactions/List/Id
+
+        [ 1 ]
+
+        Returns:
+
+        [
+
+        {
+
+        "id": 1,
+
+        "registrationName": "First Last",
+
+        "accountId": 1234,
+
+        "accountNumber": "ACCT_CODE",
+
+        "brokerDealerName": "Broker Dealer",
+
+        "representativeName": "Last, First",
+
+        "representativeNumber": "123",
+
+        "productName": "Product Name",
+
+        "transactionDate": "2024-01-01",
+
+        "transactionTime": null,
+
+        "transactionAmount": 123.45,
+
+        "isFeeExcluded": false,
+
+        "isCashFlow": false,
+
+        "isNMReady": false,
+
+        "isBilled": false,
+
+        "billedDate": null,
+
+        "isAdvanceBilled": false,
+
+        "transactionDescription": "Description of the Trans",
+
+        "managementStyle": "Style",
+
+        "fundFamily": "Fund Family",
+
+        "cycleMonth": 1,
+
+        "billStyle": "Arrear",
+
+        "valuationMethod": "Period End Value",
+
+        "clientId": 1234,
+
+        "feeSchedule": "Schedule Name",
+
+        "startDate": "2024-01-01",
+
+        "billStartDate": "2024-01-01",
+
+        "notes": "notes",
+
+        "businessLine": "Business Line",
+
+        "billFrequency": "Quarterly",
+
+        "outsideId": null,
+
+        "accountCreatedDate": "2024-01-01",
+
+        "subAdvisor": " Sub Advisor",
+
+        "productId": 123,
+
+        "ticker": "TICKER",
+
+        "performanceFeeBreak": true,
+
+        "householdName": "First Last"
+
+        }
+
+        ]'
+      operationId: BillTransaction_GetListByIdAsync
+      parameters:
+      - name: token
+        in: header
+        description: Cancellation Token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: List of keys of the desired return objects.
+        required: true
+  /v1/Billing/Transactions/List/Id:
+    post:
+      tags:
+      - Billing/Transactions
+      summary: Gets a list of bill transactions that match one of the keys in the provided list
+      description: 'GET: v1/Billing/Transactions/List OR v1/Billing/Transactions/List/Id
+
+        [ 1 ]
+
+        Returns:
+
+        [
+
+        {
+
+        "id": 1,
+
+        "registrationName": "First Last",
+
+        "accountId": 1234,
+
+        "accountNumber": "ACCT_CODE",
+
+        "brokerDealerName": "Broker Dealer",
+
+        "representativeName": "Last, First",
+
+        "representativeNumber": "123",
+
+        "productName": "Product Name",
+
+        "transactionDate": "2024-01-01",
+
+        "transactionTime": null,
+
+        "transactionAmount": 123.45,
+
+        "isFeeExcluded": false,
+
+        "isCashFlow": false,
+
+        "isNMReady": false,
+
+        "isBilled": false,
+
+        "billedDate": null,
+
+        "isAdvanceBilled": false,
+
+        "transactionDescription": "Description of the Trans",
+
+        "managementStyle": "Style",
+
+        "fundFamily": "Fund Family",
+
+        "cycleMonth": 1,
+
+        "billStyle": "Arrear",
+
+        "valuationMethod": "Period End Value",
+
+        "clientId": 1234,
+
+        "feeSchedule": "Schedule Name",
+
+        "startDate": "2024-01-01",
+
+        "billStartDate": "2024-01-01",
+
+        "notes": "notes",
+
+        "businessLine": "Business Line",
+
+        "billFrequency": "Quarterly",
+
+        "outsideId": null,
+
+        "accountCreatedDate": "2024-01-01",
+
+        "subAdvisor": " Sub Advisor",
+
+        "productId": 123,
+
+        "ticker": "TICKER",
+
+        "performanceFeeBreak": true,
+
+        "householdName": "First Last"
+
+        }
+
+        ]'
+      operationId: BillTransaction_PostV1BillingTransactionsListId
+      parameters:
+      - name: token
+        in: header
+        description: Cancellation Token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: List of keys of the desired return objects.
+        required: true
+  /v1/Billing/Transactions/SleeveTransfers:
+    get:
+      tags:
+      - Billing/Transactions
+      summary: Gets a list of bill transactions that match one of the keys in the provided list
+      description: 'GET: v1/Billing/Transactions/SleeveTransfers?transferType=1
+
+        Returns:
+
+        [
+
+        {
+
+        "id": 1,
+
+        "registrationName": "First Last",
+
+        "accountId": 1234,
+
+        "accountNumber": "ACCT_CODE",
+
+        "brokerDealerName": "Broker Dealer",
+
+        "representativeName": "Last, First",
+
+        "representativeNumber": "123",
+
+        "productName": "Product Name",
+
+        "transactionDate": "2024-01-01",
+
+        "transactionTime": null,
+
+        "transactionAmount": 123.45,
+
+        "isFeeExcluded": false,
+
+        "isCashFlow": false,
+
+        "isNMReady": false,
+
+        "isBilled": false,
+
+        "billedDate": null,
+
+        "isAdvanceBilled": false,
+
+        "transactionDescription": "Description of the Trans",
+
+        "managementStyle": "Style",
+
+        "fundFamily": "Fund Family",
+
+        "cycleMonth": 1,
+
+        "billStyle": "Arrear",
+
+        "valuationMethod": "Period End Value",
+
+        "clientId": 1234,
+
+        "feeSchedule": "Schedule Name",
+
+        "startDate": "2024-01-01",
+
+        "billStartDate": "2024-01-01",
+
+        "notes": "notes",
+
+        "businessLine": "Business Line",
+
+        "billFrequency": "Quarterly",
+
+        "outsideId": null,
+
+        "accountCreatedDate": "2024-01-01",
+
+        "subAdvisor": " Sub Advisor",
+
+        "productId": 123,
+
+        "ticker": "TICKER",
+
+        "performanceFeeBreak": true,
+
+        "householdName": "First Last"
+
+        }
+
+        ]'
+      operationId: BillTransaction_GetSleeveTransfersAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      - name: transferType
+        in: query
+        description: Optional. Both = 0, CashFlowOnly = 1, RebalanceOnly = 2
+        required: false
+        schema:
+          type: string
+          enum:
+          - Both
+          - CashFlowOnly
+          - RebalanceOnly
+          default: 0
+      - name: startDate
+        in: query
+        description: Optional. Default startQTD. If provided only transactions that have matched start date will be returned.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional. Default now. If provided only transactions that have matched end date will be returned.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransactionDto'
+                xml:
+                  name: BillTransactionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Transactions/TransactionSleeveCashflows/Test:
+    get:
+      tags:
+      - Billing/Transactions
+      summary: Testing endpoint for TransactionSleeveCashflows.
+      description: 'Sample Request
+
+        GET v1/Billing/Transactions/TransactionSleeveCashflows/Test'
+      operationId: BillTransaction_TransactionSleeveCashflowsTestAsync
+      parameters:
+      - name: ct
+        in: header
+        description: CancellationToken of the request
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Trading.TransactionSleeveCashflow'
+                xml:
+                  name: TransactionSleeveCashflow
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Trading.TransactionSleeveCashflow'
+                xml:
+                  name: TransactionSleeveCashflow
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Trading.TransactionSleeveCashflow'
+                xml:
+                  name: TransactionSleeveCashflow
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Trading.TransactionSleeveCashflow'
+                xml:
+                  name: TransactionSleeveCashflow
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/Transactions/TransType:
+    get:
+      tags:
+      - Billing/Transactions
+      summary: Returns list of Transaction Types for Billing
+      description: 'GET: v1/Billing/Transactions/TransType
+
+        Returns:
+
+        [
+
+        {
+
+        "financialType": "typeName",
+
+        "description": "Type Description",
+
+        "id": 1,
+
+        "name": "Name"
+
+        },
+
+        {
+
+        "financialType": "typeName",
+
+        "description": "Type Description",
+
+        "id": 2,
+
+        "name": "Name"
+
+        }
+
+        ]'
+      operationId: BillTransaction_GetAllTransTypeAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionTypeDto'
+                xml:
+                  name: TransactionTypeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionTypeDto'
+                xml:
+                  name: TransactionTypeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionTypeDto'
+                xml:
+                  name: TransactionTypeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionTypeDto'
+                xml:
+                  name: TransactionTypeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionTypeDto'
+                xml:
+                  name: TransactionTypeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TransactionTypeDto'
+                xml:
+                  name: TransactionTypeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.BillTransactionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        accountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        brokerDealerName:
+          type: string
+        representativeName:
+          type: string
+        representativeNumber:
+          type: string
+        productName:
+          type: string
+        transactionDate:
+          type: string
+          format: date-time
+        transactionTime:
+          type: string
+          format: date-time
+        transactionAmount:
+          type: number
+          format: double
+        isFeeExcluded:
+          type: boolean
+        isCashFlow:
+          type: boolean
+        isNMReady:
+          type: boolean
+        isBilled:
+          type: boolean
+        billedDate:
+          type: string
+          format: date-time
+        isAdvanceBilled:
+          type: boolean
+        transactionDescription:
+          type: string
+        managementStyle:
+          type: string
+        fundFamily:
+          type: string
+        cycleMonth:
+          type: integer
+          format: int32
+        billStyle:
+          type: string
+          enum:
+          - Advance
+          - Arrears
+        valuationMethod:
+          type: string
+          enum:
+          - PeriodEndingValue
+          - AvgDailyBalance
+          - AvgMonthlyBalance
+        clientId:
+          type: integer
+          format: int32
+        feeSchedule:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        billStartDate:
+          type: string
+          format: date-time
+        notes:
+          type: string
+        businessLine:
+          type: string
+        billFrequency:
+          type: string
+          enum:
+          - Undefined
+          - Monthly
+          - Quarterly
+          - Triannual
+          - Semiannually
+          - Annually
+          - AtMaturity
+        outsideId:
+          type: string
+        accountCreatedDate:
+          type: string
+          format: date-time
+        subAdvisor:
+          type: string
+        productId:
+          type: integer
+          format: int32
+        ticker:
+          type: string
+        performanceFeeBreak:
+          type: boolean
+        householdName:
+          type: string
+      xml:
+        name: BillTransactionDto
+      type: object
+    OAS.WebApi.DTO.Trading.TransactionTypeDto:
+      properties:
+        financialType:
+          type: string
+          enum:
+          - None
+          - Contribution
+          - Distribution
+          - Exchange
+          - DivReinvest
+          - MgmntFees
+          - DivCash
+          - MiscFees
+          - Journal
+          - Merges
+        description:
+          type: string
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: TransactionTypeDto
+      type: object
+    OAS.DataModel.Billing.AutomateCashflowTransactionType:
+      properties:
+        id:
+          type: integer
+          format: int32
+        automateCashflowSettingId:
+          type: integer
+          format: int32
+        transactionId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        description:
+          type: string
+        financialType:
+          type: string
+          enum:
+          - None
+          - Contribution
+          - Distribution
+          - Exchange
+          - DivReinvest
+          - MgmntFees
+          - DivCash
+          - MiscFees
+          - Journal
+          - Merges
+        automateCashflowSetting:
+          $ref: '#/components/schemas/OAS.DataModel.Billing.AutomateCashflowSetting'
+      xml:
+        name: AutomateCashflowTransactionType
+      type: object
+    OAS.WebApi.DTO.Billing.AutomateCashflowSettingDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        isEnabled:
+          type: boolean
+        minimumThreshold:
+          type: number
+          format: double
+        selectAll:
+          type: boolean
+        groupByDay:
+          type: boolean
+        transactionTypes:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Billing.AutomateCashflowTransactionType'
+          xml:
+            name: AutomateCashflowTransactionType
+            wrapped: true
+          type: array
+      xml:
+        name: AutomateCashflowSettingDto
+      type: object
+    OAS.DataModel.Billing.AutomateCashflowSetting:
+      properties:
+        id:
+          type: integer
+          format: int32
+        isEnabled:
+          type: boolean
+        minimumThreshold:
+          type: number
+          format: double
+        selectAll:
+          type: boolean
+        groupByDay:
+          type: boolean
+        transactionTypes:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Billing.AutomateCashflowTransactionType'
+          xml:
+            name: AutomateCashflowTransactionType
+            wrapped: true
+          type: array
+      xml:
+        name: AutomateCashflowSetting
+      type: object
+    OAS.DataModel.Trading.TransactionSleeveCashflow:
+      required:
+      - sleeveTransactionId
+      - custodialTransactionId
+      - transDate
+      - transTypeId
+      - tradeStatus
+      properties:
+        sleeveTransactionId:
+          type: integer
+          format: int32
+        custodialTransactionId:
+          type: integer
+          format: int32
+        transDate:
+          type: string
+          format: date-time
+        transTypeId:
+          type: integer
+          format: int32
+        tradeStatus:
+          type: integer
+          format: int32
+      xml:
+        name: TransactionSleeveCashflow
+      type: object
+    OAS.DataModel.Trading.FeeExcludedAsset:
+      required:
+      - transactionId
+      - feeExcludedTransactionId
+      properties:
+        transactionId:
+          type: integer
+          format: int32
+        feeExcludedTransactionId:
+          type: integer
+          format: int32
+        transDate:
+          type: string
+          format: date-time
+      xml:
+        name: FeeExcludedAsset
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

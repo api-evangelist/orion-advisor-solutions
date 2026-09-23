@@ -1,0 +1,89 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Generate Mock Bills API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/GenerateMockBills
+paths:
+  /v1/Billing/GenerateMockBills:
+    post:
+      tags:
+      - Billing/GenerateMockBills
+      summary: Generate Mock Bills for a date, renewals for pre-billing review
+      operationId: BillGenerator_GenerateMockBillsAsync
+      parameters:
+      - name: token
+        in: header
+        required: true
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.MockBillInfoDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.MockBillInfoDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.MockBillInfoDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.MockBillInfoDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.MockBillInfoDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.MockBillInfoDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.MockBillInfoDto'
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.MockBillInfoDto:
+      properties:
+        asOfDate:
+          type: string
+          format: date-time
+        billType:
+          type: string
+          enum:
+          - Unknown
+          - Renewal
+          - NewMoney
+          - NewAccount
+          - FinancialPlanningFee
+          - Performance
+          - AdvanceCreditDebit
+        vHint:
+          type: integer
+          format: int32
+        pkKey:
+          type: integer
+          format: int32
+        endDateOveride:
+          type: string
+          format: date-time
+        acctList:
+          type: string
+        valueAsOfOveride:
+          type: string
+          format: date-time
+      xml:
+        name: MockBillInfoDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

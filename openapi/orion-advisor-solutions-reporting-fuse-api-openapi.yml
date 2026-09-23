@@ -1,0 +1,479 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Reporting/Fuse API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Reporting/Fuse
+paths:
+  /v1/Reporting/Fuse/Notifications:
+    get:
+      tags:
+      - Reporting/Fuse
+      operationId: FuseNotification_GetNotificationsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - Unread
+            - Read
+            - Deleted
+      - name: currentFirmOnly
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: byLastDays
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 14
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationDto'
+                xml:
+                  name: NotificationDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationDto'
+                xml:
+                  name: NotificationDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationDto'
+                xml:
+                  name: NotificationDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationDto'
+                xml:
+                  name: NotificationDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationDto'
+                xml:
+                  name: NotificationDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationDto'
+                xml:
+                  name: NotificationDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Fuse notification get notifications async
+      x-summary-source: derived
+  /v1/Reporting/Fuse/Notifications/{notificationId}:
+    get:
+      tags:
+      - Reporting/Fuse
+      operationId: FuseNotification_GetNotificationByIdAsync
+      parameters:
+      - name: notificationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationDto'
+      security:
+      - Authorization: []
+      summary: Fuse notification get notification by id async
+      x-summary-source: derived
+  /v1/Reporting/Fuse/Notifications/Subscriptions:
+    get:
+      tags:
+      - Reporting/Fuse
+      operationId: FuseNotification_GetSubscriptionsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: canSubscribe
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationTypeSubscriptionDto'
+                xml:
+                  name: NotificationTypeSubscriptionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationTypeSubscriptionDto'
+                xml:
+                  name: NotificationTypeSubscriptionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationTypeSubscriptionDto'
+                xml:
+                  name: NotificationTypeSubscriptionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationTypeSubscriptionDto'
+                xml:
+                  name: NotificationTypeSubscriptionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationTypeSubscriptionDto'
+                xml:
+                  name: NotificationTypeSubscriptionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationTypeSubscriptionDto'
+                xml:
+                  name: NotificationTypeSubscriptionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Fuse notification get subscriptions async
+      x-summary-source: derived
+    put:
+      tags:
+      - Reporting/Fuse
+      operationId: FuseNotification_UpdateSubscriptionsAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationTypeSubscriptionDto'
+                xml:
+                  name: NotificationTypeSubscriptionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationTypeSubscriptionDto'
+                xml:
+                  name: NotificationTypeSubscriptionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationTypeSubscriptionDto'
+                xml:
+                  name: NotificationTypeSubscriptionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationTypeSubscriptionDto'
+                xml:
+                  name: NotificationTypeSubscriptionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationTypeSubscriptionDto'
+                xml:
+                  name: NotificationTypeSubscriptionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationTypeSubscriptionDto'
+                xml:
+                  name: NotificationTypeSubscriptionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationTypeSubscriptionDto'
+              xml:
+                name: NotificationTypeSubscriptionDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationTypeSubscriptionDto'
+              xml:
+                name: NotificationTypeSubscriptionDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationTypeSubscriptionDto'
+              xml:
+                name: NotificationTypeSubscriptionDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationTypeSubscriptionDto'
+              xml:
+                name: NotificationTypeSubscriptionDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationTypeSubscriptionDto'
+              xml:
+                name: NotificationTypeSubscriptionDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationTypeSubscriptionDto'
+              xml:
+                name: NotificationTypeSubscriptionDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationTypeSubscriptionDto'
+              xml:
+                name: NotificationTypeSubscriptionDto
+                wrapped: true
+              type: array
+        required: true
+      summary: Fuse notification update subscriptions async
+      x-summary-source: derived
+  /v1/Reporting/Fuse/Notifications/SummaryCount:
+    get:
+      tags:
+      - Reporting/Fuse
+      operationId: FuseNotification_GetSummaryCountAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Notification.NotificationCountSummaryDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Notification.NotificationCountSummaryDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Notification.NotificationCountSummaryDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Notification.NotificationCountSummaryDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Notification.NotificationCountSummaryDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Notification.NotificationCountSummaryDto'
+      security:
+      - Authorization: []
+      summary: Fuse notification get summary count async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Reporting.Notification.NotificationCountSummaryDto:
+      properties:
+        unreadInboxNotifications:
+          type: integer
+          format: int32
+        lastUpdate:
+          type: string
+          format: date-time
+      xml:
+        name: NotificationCountSummaryDto
+      type: object
+    OAS.WebApi.DTO.Fuse.NotificationDto:
+      description: 'A notification that is pushed to users.
+
+
+        Can be viewed (Read Only) in a slick grid.'
+      properties:
+        id:
+          type: integer
+          format: int32
+        firmId:
+          type: integer
+          format: int32
+        partnerUserName:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        subject:
+          type: string
+        body:
+          type: string
+        url:
+          type: string
+        status:
+          type: string
+          enum:
+          - Unread
+          - Read
+          - Deleted
+        partnerAppName:
+          type: string
+        categoryName:
+          type: string
+        integrationId:
+          type: integer
+          format: int32
+        actionName:
+          type: string
+          enum:
+          - Undefined
+          - Download
+          - Link
+          - Share
+          - DownloadShare
+          - LinkToRedtail
+        partnerAppId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        commandBody:
+          type: string
+        clientId:
+          type: integer
+          format: int32
+      xml:
+        name: NotificationDto
+      type: object
+    OAS.WebApi.DTO.Fuse.NotificationTypeSubscriptionDto:
+      properties:
+        categoryId:
+          type: integer
+          format: int32
+        categoryName:
+          type: string
+        categoryDescription:
+          type: string
+        notificationName:
+          type: string
+        notificationDescription:
+          type: string
+        canBeDisabled:
+          type: boolean
+        subscriptionId:
+          type: integer
+          format: int32
+        enabled:
+          type: boolean
+        email:
+          type: boolean
+        disablePopup:
+          type: boolean
+        notificationTypeId:
+          type: integer
+          format: int32
+      xml:
+        name: NotificationTypeSubscriptionDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

@@ -1,0 +1,225 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Confirm/AB Compare API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Confirm/ABCompare
+paths:
+  /v1/Confirm/ABCompare:
+    get:
+      tags:
+      - Confirm/ABCompare
+      summary: Gets the differences in AB format comparison for a specified date range.
+      operationId: ConfirmABFormatCompare_GetABFormatComparisonDifferencesAsync
+      parameters:
+      - name: startDate
+        in: query
+        description: The Start date to filter records from
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: The End date to filter records to
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: ct
+        in: header
+        description: Cancellation Token
+        required: true
+      - name: isSignedOff
+        in: query
+        description: Determines whether to filter to signed off records or not signed off records if present
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Confirm/ABCompare
+      operationId: ConfirmABFormatCompare_UpdateSignOffOnDifferencesAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.ABConfirmCompareDifferenceDto'
+              xml:
+                name: ABConfirmCompareDifferenceDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.ABConfirmCompareDifferenceDto'
+              xml:
+                name: ABConfirmCompareDifferenceDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.ABConfirmCompareDifferenceDto'
+              xml:
+                name: ABConfirmCompareDifferenceDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.ABConfirmCompareDifferenceDto'
+              xml:
+                name: ABConfirmCompareDifferenceDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.ABConfirmCompareDifferenceDto'
+              xml:
+                name: ABConfirmCompareDifferenceDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.ABConfirmCompareDifferenceDto'
+              xml:
+                name: ABConfirmCompareDifferenceDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.ABConfirmCompareDifferenceDto'
+              xml:
+                name: ABConfirmCompareDifferenceDto
+                wrapped: true
+              type: array
+        required: true
+      summary: Confirm AB format compare update sign off on differences async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Confirm.ABConfirmCompareDifferenceDto:
+      properties:
+        id:
+          type: string
+        recordType:
+          type: string
+          enum:
+          - Name
+          - Position
+          - Transaction
+          - Price
+          - Dividend
+          - Product
+          - NotImported
+          - Header
+          - Security
+          - CorpAction
+          - TranDetail
+          - Generic
+          - CostBasis
+          - Beneficiary
+          - StoredPerformance
+          - Systematic
+          - RMD
+          - Banking
+        downloadFileKeyId:
+          type: integer
+          format: int32
+        downloadRecordKeyId:
+          type: integer
+          format: int32
+        downloadSourceId:
+          type: integer
+          format: int32
+        downloadFileLastId:
+          type: integer
+          format: int32
+        downloadFileNextId:
+          type: integer
+          format: int32
+        downloadRecordLastId:
+          type: integer
+          format: int32
+        downloadRecordNextId:
+          type: integer
+          format: int32
+        checksumDifferenceType:
+          type: string
+          enum:
+          - Unknown
+          - RecordAndCustomInfoDoesNotMatch
+          - RecordInfoDoesNotMatch
+          - CustomInfoDoesNotMatch
+          - RecordExistsInLastFileOnly
+          - RecordExistsInNextFileOnly
+        signOffDate:
+          type: string
+          format: date-time
+        signOffBy:
+          type: string
+        detectedDate:
+          type: string
+          format: date-time
+        signOffNotes:
+          type: string
+        isSignedOff:
+          readOnly: true
+          type: boolean
+      xml:
+        name: ABConfirmCompareDifferenceDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

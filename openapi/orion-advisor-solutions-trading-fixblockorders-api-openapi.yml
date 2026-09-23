@@ -1,0 +1,2750 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Fix Block Orders API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/FixBlockOrders
+paths:
+  /v1/Trading/FixBlockOrders:
+    get:
+      tags:
+      - Trading/FixBlockOrders
+      summary: Gets a list of fix block orders that the logged in user has access to.
+      operationId: FixBlockOrders_Get
+      parameters:
+      - name: startDate
+        in: query
+        description: Optional. The start of the range to report.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional. The end of the range to report.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: status
+        in: query
+        description: "Optional. Default null. If provided the block orders will be filtered as follows:\n            open: to return only non-filled block orders\n            closed: to return only filled block orders\n            unallocated: to return only block orders that have unsent, or unconfirmed allocations\n            pending: to return only block orders that have pending transactions"
+        required: false
+        schema:
+          type: string
+      - name: alike
+        in: query
+        description: "Optional. Default null. If provided only block orders that are like the block with the provided id will be returned. The will have\n            the same Ticker, Action, OrdType, Transaction Date, Master Account #, and Executing Broker."
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+    post:
+      tags:
+      - Trading/FixBlockOrders
+      operationId: FixBlockOrders_CreateEntity
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+        required: true
+      summary: Fix block orders create entity
+      x-summary-source: derived
+  /v1/Trading/FixBlockOrders/{blockId}/Fees:
+    get:
+      tags:
+      - Trading/FixBlockOrders
+      summary: Gets a list of FixBlockOrderCommissions that the logged in user has access to.
+      operationId: FixBlockOrdersFees_Get
+      parameters:
+      - name: blockId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDto'
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Trading/FixBlockOrders
+      summary: Takes a Fees/Commissions object, and saves the fee and commission detail to the…
+      operationId: FixBlockOrdersFees_PutUpdateEntity
+      parameters:
+      - name: blockId
+        in: path
+        description: Id of the FixBlockOrder that will be updated
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDto'
+        description: Fee detail
+        required: true
+  /v1/Trading/FixBlockOrders/{blockId}/FixLogs:
+    get:
+      tags:
+      - Trading/FixBlockOrders
+      summary: Returns Fix Log Message for a block order
+      operationId: FixBlockOrders_GetFixLogsAsync
+      parameters:
+      - name: blockId
+        in: path
+        description: The fix block order id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderLogDto'
+                xml:
+                  name: FixBlockOrderLogDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderLogDto'
+                xml:
+                  name: FixBlockOrderLogDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderLogDto'
+                xml:
+                  name: FixBlockOrderLogDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderLogDto'
+                xml:
+                  name: FixBlockOrderLogDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderLogDto'
+                xml:
+                  name: FixBlockOrderLogDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderLogDto'
+                xml:
+                  name: FixBlockOrderLogDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/FixBlockOrders/{blockId}/Orders:
+    get:
+      tags:
+      - Trading/FixBlockOrders
+      summary: Gets a list of orders that fall within the specified block
+      operationId: FixBlockOrders_GetOrdersForBlock
+      parameters:
+      - name: blockId
+        in: path
+        description: The fix block order id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/FixBlockOrders/{blockId}/Transactions:
+    get:
+      tags:
+      - Trading/FixBlockOrders
+      summary: Gets a list of transactions that fall within the specified block.
+      operationId: FixBlockOrders_GetTransactionsForBlock
+      parameters:
+      - name: blockId
+        in: path
+        description: The fix block order id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: "Optional. Default null. If provided will limit the transactions that are returned to just those with the provided status. Available statuses are\n            complete, pending, rejected, reversed, and inactive."
+        required: false
+        schema:
+          type: string
+          enum:
+          - Complete
+          - Pending
+          - Rejected
+          - Reversed
+          - Inactive
+          - PendingCorpAction
+          - FutureAip
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradingTransactionDto'
+                xml:
+                  name: TradingTransactionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/FixBlockOrders/{key}:
+    get:
+      tags:
+      - Trading/FixBlockOrders
+      summary: Gets the fix block order that has the provided key.
+      operationId: FixBlockOrders_GetV1TradingFixBlockOrdersByKey
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Trading/FixBlockOrders
+      summary: Save a fix block order
+      operationId: FixBlockOrders_UpdateEntityAsync
+      parameters:
+      - name: key
+        in: path
+        description: FixBlockOrderId to be updated.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: execute
+        in: query
+        description: Optional.  Default is False.  If True, the block order will be executed (Transmitted).
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: autoAllocate
+        in: query
+        description: Optional.  Indicates if the blocks should be auto allocated or not.  If left blank, The auto allocate will be left as they were when the block was created.  This is only used when executeBlock=true
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+        description: FixBlockOrderDto object.
+        required: true
+    delete:
+      tags:
+      - Trading/FixBlockOrders
+      operationId: FixBlockOrders_Delete
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      summary: Fix block orders delete
+      x-summary-source: derived
+  /v1/Trading/FixBlockOrders/{key}/ImportAllocations:
+    post:
+      tags:
+      - Trading/FixBlockOrders
+      summary: Takes an xlsx, xls, or csv file as multipart content.
+      operationId: FixBlockOrders_ImportOrdersPostAsMultipartStream
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto'
+        required: true
+  /v1/Trading/FixBlockOrders/{key}/RealtimePrice:
+    get:
+      tags:
+      - Trading/FixBlockOrders
+      summary: Gets the price to use for the order that has the provided key.
+      operationId: FixBlockOrders_GetRealtimePriceAsync
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: includeDetails
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+      security:
+      - Authorization: []
+  /v1/Trading/FixBlockOrders/Action/Allocate:
+    put:
+      tags:
+      - Trading/FixBlockOrders
+      operationId: FixBlockOrders_ActionAllocateAsync
+      parameters:
+      - name: markComplete
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Fix block orders action allocate async
+      x-summary-source: derived
+  /v1/Trading/FixBlockOrders/Action/AllocateAutoAdjust:
+    put:
+      tags:
+      - Trading/FixBlockOrders
+      summary: Update order qty to match the block orders filled CumQty adjusting the order…
+      operationId: FixBlockOrders_ActionAllocateAutoAdjustAsync
+      parameters:
+      - name: blockId
+        in: query
+        description: Block ID to update the underlying order quantities.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: allocateAutoAdjustType
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - ProRata
+          - Random
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UnallocatedOrderDto'
+                xml:
+                  name: UnallocatedOrderDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UnallocatedOrderDto'
+                xml:
+                  name: UnallocatedOrderDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UnallocatedOrderDto'
+                xml:
+                  name: UnallocatedOrderDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UnallocatedOrderDto'
+                xml:
+                  name: UnallocatedOrderDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UnallocatedOrderDto'
+                xml:
+                  name: UnallocatedOrderDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UnallocatedOrderDto'
+                xml:
+                  name: UnallocatedOrderDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/FixBlockOrders/Action/Cancel:
+    put:
+      tags:
+      - Trading/FixBlockOrders
+      operationId: FixBlockOrders_ActionCancelAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Fix block orders action cancel async
+      x-summary-source: derived
+  /v1/Trading/FixBlockOrders/Action/Delete:
+    put:
+      tags:
+      - Trading/FixBlockOrders
+      operationId: FixBlockOrders_ActionDelete
+      parameters:
+      - name: ignoreSent
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Fix block orders action delete
+      x-summary-source: derived
+  /v1/Trading/FixBlockOrders/Action/Execute:
+    put:
+      tags:
+      - Trading/FixBlockOrders
+      operationId: FixBlockOrders_ActionExecuteAsync
+      parameters:
+      - name: autoAllocate
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Fix block orders action execute async
+      x-summary-source: derived
+  /v1/Trading/FixBlockOrders/Filter/Orders:
+    get:
+      tags:
+      - Trading/FixBlockOrders
+      summary: Gets a list of orders that the logged in user has access to which fall within…
+      operationId: FixBlockOrders_GetOrdersForFilteredBlocks
+      parameters:
+      - name: startDate
+        in: query
+        description: Optional. The start of the range to report.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional. The end of the range to report.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: status
+        in: query
+        description: "Optional. Default null. If provided the block orders will be filtered as follows:\n            open: to return only non-filled block orders\n            closed: to return only filled block orders\n            unallocated: to return only block orders that have unsent, or unconfirmed allocations\n            pending: to return only block orders that have pending transactions"
+        required: false
+        schema:
+          type: string
+      - name: alike
+        in: query
+        description: "Optional. Default null. If provided only block orders that are like the block with the provided id will be returned. The will have\n            the same Ticker, Action, OrdType, Transaction Date, Master Account #, and Executing Broker."
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+                xml:
+                  name: OrderDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/FixBlockOrders/Filter/UnallocatedOrders:
+    get:
+      tags:
+      - Trading/FixBlockOrders
+      summary: Gets a list of unallocated orders that the logged in user has access to which…
+      operationId: FixBlockOrders_GetUnallocatedOrdersForFilteredBlocks
+      parameters:
+      - name: startDate
+        in: query
+        description: Optional. The start of the range to report.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional. The end of the range to report.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: status
+        in: query
+        description: "Optional. Default null. If provided the block orders will be filtered as follows:\n            open: to return only non-filled block orders\n            closed: to return only filled block orders\n            unallocated: to return only block orders that have unsent, or unconfirmed allocations\n            pending: to return only block orders that have pending transactions"
+        required: false
+        schema:
+          type: string
+      - name: alike
+        in: query
+        description: "Optional. Default null. If provided only block orders that are like the block with the provided id will be returned. The will have\n            the same Ticker, Action, OrdType, Transaction Date, Master Account #, and Executing Broker."
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UnallocatedOrderDto'
+                xml:
+                  name: UnallocatedOrderDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UnallocatedOrderDto'
+                xml:
+                  name: UnallocatedOrderDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UnallocatedOrderDto'
+                xml:
+                  name: UnallocatedOrderDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UnallocatedOrderDto'
+                xml:
+                  name: UnallocatedOrderDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UnallocatedOrderDto'
+                xml:
+                  name: UnallocatedOrderDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UnallocatedOrderDto'
+                xml:
+                  name: UnallocatedOrderDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/FixBlockOrders/UpdateEnMasse:
+    put:
+      tags:
+      - Trading/FixBlockOrders
+      summary: Updates every block provided in the list of ids
+      operationId: FixBlockOrders_UpdateInMassAsync
+      parameters:
+      - name: autoAllocate
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+            application/json:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+            text/json:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+            multipart/form-data:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UpdateBlocksInMassDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UpdateBlocksInMassDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UpdateBlocksInMassDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UpdateBlocksInMassDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UpdateBlocksInMassDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UpdateBlocksInMassDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UpdateBlocksInMassDto'
+        description: Optional. The ids of the blocks to delete.  If left blank, all blocks that have not been sent will be deleted.
+        required: true
+  /v1/Trading/FixBlockOrders/UpdateInMass:
+    put:
+      tags:
+      - Trading/FixBlockOrders
+      summary: Updates every block provided in the list of ids
+      operationId: FixBlockOrders_UpdateInMass
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderDto'
+                xml:
+                  name: FixBlockOrderDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UpdateBlocksInMassDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UpdateBlocksInMassDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UpdateBlocksInMassDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UpdateBlocksInMassDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UpdateBlocksInMassDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UpdateBlocksInMassDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.UpdateBlocksInMassDto'
+        description: Optional. The ids of the blocks to delete.  If left blank, all blocks that have not been sent will be deleted.
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Trading.OrderDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        tradeIt:
+          type: boolean
+        productId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        assetId:
+          type: integer
+          format: int32
+        transactionId:
+          type: integer
+          format: int32
+        registrationId:
+          type: integer
+          format: int32
+        fixBlockOrderId:
+          type: integer
+          format: int32
+        hasBlock:
+          readOnly: true
+          type: boolean
+        trInstanceId:
+          type: integer
+          format: int32
+        handlInst:
+          type: string
+        execInst:
+          type: string
+        side:
+          type: string
+        optionTradeType:
+          type: string
+          enum:
+          - None
+          - CoveredCall
+        optionDwnldMgrId:
+          type: integer
+          format: int32
+        optionTRInterfaceId:
+          type: integer
+          format: int32
+        locateReqd:
+          type: boolean
+        ordType:
+          type: string
+        assetClassName:
+          type: string
+        representativeName:
+          type: string
+        limitPrice:
+          type: number
+          format: double
+        stopPrice:
+          type: number
+          format: double
+        timeInForce:
+          type: string
+        expireTime:
+          type: string
+          format: date-time
+        warningMessage:
+          type: string
+        orderQty:
+          type: number
+          format: double
+        originalOrderQty:
+          type: number
+          format: double
+        orderAmt:
+          type: number
+          format: double
+        orderPct:
+          type: number
+          format: double
+        sharesOwned:
+          type: number
+          format: double
+        mktValue:
+          type: number
+          format: double
+        navPrice:
+          type: number
+          format: double
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        notes:
+          type: string
+        instanceNotes:
+          type: string
+        tradeReason:
+          type: string
+        isDiscretionary:
+          type: boolean
+        settlmntTyp:
+          type: string
+        futSettDate:
+          type: string
+          format: date-time
+        rowVersion:
+          type: string
+          format: byte
+        productName:
+          type: string
+        ticker:
+          type: string
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        cusip:
+          type: string
+        accountNumber:
+          type: string
+        batchName:
+          type: string
+        allocStatus:
+          type: string
+        ordStatus:
+          type: string
+        registrationName:
+          type: string
+        accountType:
+          type: string
+        accountValueCurrent:
+          type: number
+          format: double
+        cashValueCurrent:
+          type: number
+          format: double
+        cashValuePostTrade:
+          type: number
+          format: double
+        assetUnitsCurrent:
+          type: number
+          format: double
+        cashValuePreTradePerc:
+          type: number
+          format: double
+        cashValuePostTradePerc:
+          type: number
+          format: double
+        shortTermGain:
+          type: number
+          format: double
+        longTermGain:
+          type: number
+          format: double
+        totalGain:
+          readOnly: true
+          type: number
+          format: double
+        daysUntilLongTerm:
+          type: integer
+          format: int32
+        washAmount:
+          type: number
+          format: double
+        washUnits:
+          type: number
+          format: double
+        calculationMethod:
+          type: string
+        gainLossMessage:
+          readOnly: true
+          type: string
+        blockName:
+          readOnly: true
+          type: string
+        custodian:
+          type: string
+        custodianId:
+          type: integer
+          format: int32
+        fixRouting:
+          type: string
+        tradeToAcctPerc:
+          readOnly: true
+          type: number
+          format: double
+        application:
+          type: string
+          enum:
+          - Undefined
+          - GlobalTrade
+          - Modeling
+          - CheckReq
+          - FeeReq
+          - BuySell
+          - ACHReq
+          - EligibleTrades
+          - All
+          - CashFundADV
+          - CashFundSWD
+          - SWPDCA
+          - SysPurchTrade
+          - Distribution
+          - Contribution
+        tradingInstructions:
+          type: string
+        repNotes:
+          type: string
+        clientDirected:
+          type: boolean
+        subAdvisor:
+          type: string
+        reinvestDividends:
+          type: boolean
+        reinvestLTCapGains:
+          type: boolean
+        reinvestSTCapGains:
+          type: boolean
+        instanceDescription:
+          type: string
+        currentModelName:
+          description: This is the model currently assigned to the account. Previously was returned by the {OAS.WebApi.DTO.Trading.OrderDto.ModelName} property.
+          type: string
+        modelName:
+          description: This is the model assigned to the account at the time the trade was created, starting with the 8/2014 build.
+          type: string
+        masterAccountNumber:
+          type: string
+        managementStyle:
+          type: string
+        groupNum:
+          type: string
+        qualified:
+          type: boolean
+        minCashBalanceType:
+          type: string
+          enum:
+          - Dollars
+          - Percent
+        minCashBalance:
+          type: number
+          format: double
+        replenishMinCash:
+          type: boolean
+        swpAmount:
+          type: number
+          format: double
+        swpFrequency:
+          type: string
+          enum:
+          - Monthly
+          - Quarterly
+          - Semiannually
+          - Annually
+        nextSwpDate:
+          type: string
+          format: date-time
+        cashNeededNext4Months:
+          type: number
+          format: double
+        targetCashPerc:
+          type: number
+          format: double
+        targetCash:
+          readOnly: true
+          type: number
+          format: double
+        dollarModelAmount:
+          type: number
+          format: double
+        totalCashNeed:
+          readOnly: true
+          type: number
+          format: double
+        approvalStatus:
+          type: string
+          enum:
+          - Approved
+          - PendingApproval
+          - NotApproved
+        nsccTradeType:
+          type: string
+          enum:
+          - UseDefault
+          - NormalPurchase
+          - Nav
+          - Roa
+          - Loi
+        exchangeId:
+          type: integer
+          format: int32
+        exchangeTicker:
+          type: string
+        rebalanceLevel:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        solicited:
+          type: boolean
+        vspDate:
+          type: string
+          format: date-time
+        vspPrice:
+          type: number
+          format: double
+        sellPriority:
+          type: integer
+          format: int32
+        roaAmount:
+          type: number
+          format: double
+        trustType:
+          type: string
+          enum:
+          - None
+          - CTC
+          - EAS
+        assetCostCustodianId:
+          type: integer
+          format: int32
+        cashValuePostTradeExecution:
+          type: number
+          format: double
+        riskBudget:
+          type: integer
+          format: int32
+        registrationSleeveStrategyName:
+          type: string
+        hasFixLog:
+          type: boolean
+        eclipseOrderId:
+          type: integer
+          format: int32
+      xml:
+        name: OrderDto
+      type: object
+    OAS.WebApi.DTO.Trading.FixBlockOrderDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        fixBatchId:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        custodianId:
+          type: integer
+          format: int32
+        custodianName:
+          type: string
+        fixVersion:
+          type: string
+        execBroker:
+          type: string
+        clOrdId:
+          type: string
+        handlInst:
+          type: string
+        execInst:
+          type: string
+        side:
+          type: string
+        locateReqd:
+          type: boolean
+        orderQty:
+          type: number
+          format: double
+        orderAmt:
+          type: number
+          format: double
+        ordType:
+          type: string
+        limitPrice:
+          type: number
+          format: double
+        stopPrice:
+          type: number
+          format: double
+        timeInForce:
+          type: string
+        expireTime:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        tradedBy:
+          type: string
+        transactTime:
+          type: string
+          format: date-time
+        orderId:
+          type: string
+        ordStatus:
+          type: string
+        cumQty:
+          type: number
+          format: double
+        avgPrice:
+          type: number
+          format: double
+        leavesQty:
+          type: number
+          format: double
+        ordRejReason:
+          type: string
+        cxlRejReason:
+          type: string
+        allocRejCode:
+          type: string
+        lastShares:
+          type: number
+          format: double
+        msgSequenceNumber:
+          type: integer
+          format: int32
+        allocId:
+          type: string
+        refAllocId:
+          type: string
+        allocStatus:
+          type: string
+        lastText:
+          type: string
+        lastTextType:
+          type: integer
+          format: int32
+        autoAllocate:
+          type: boolean
+        pendingOrdStatus:
+          type: string
+        settlmntTyp:
+          type: string
+        futSettDate:
+          type: string
+          format: date-time
+        masterAccountNumber:
+          type: string
+        ticker:
+          type: string
+        cusip:
+          type: string
+        batchName:
+          type: string
+        shortTermGain:
+          type: number
+          format: double
+        longTermGain:
+          type: number
+          format: double
+        gainLossMessage:
+          type: string
+        tradesGainLossNotCalcedCount:
+          type: integer
+          format: int32
+        blockName:
+          readOnly: true
+          type: string
+        productName:
+          type: string
+        needsAttention:
+          type: string
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        tradeType:
+          type: integer
+          format: int32
+        strikePrice:
+          type: number
+          format: double
+        cfiCode:
+          type: string
+        orderCapacity:
+          type: string
+        positionEffect:
+          type: string
+        maturityDate:
+          type: string
+          format: date-time
+        solicited:
+          type: boolean
+        reportBlockStatus:
+          type: string
+        algorithmTag:
+          type: string
+        isOpen:
+          type: boolean
+        isClosed:
+          type: boolean
+      xml:
+        name: FixBlockOrderDto
+      type: object
+    OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
+      description: import file DTO for validating imports
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+          description: the imported file
+      xml:
+        name: ValidateFileImportDto
+      type: object
+    OAS.WebApi.DTO.Trading.TradingTransactionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        assetId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        ticker:
+          type: string
+        accountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        registrationCode:
+          type: string
+        householdId:
+          type: integer
+          format: int32
+        fundFamilyName:
+          type: string
+        custodianName:
+          type: string
+        status:
+          type: string
+          enum:
+          - Complete
+          - Pending
+          - Rejected
+          - Reversed
+          - Inactive
+          - PendingCorpAction
+          - FutureAip
+        transDate:
+          type: string
+          format: date-time
+        transactionDescription:
+          type: string
+        transAmount:
+          type: number
+          format: double
+        navPrice:
+          type: number
+          format: double
+        noUnits:
+          type: number
+          format: double
+        notes:
+          type: string
+        orderId:
+          type: string
+        blockId:
+          type: integer
+          format: int32
+        orderCreatedBy:
+          type: string
+        avgPrice:
+          type: number
+          format: double
+        executionTime:
+          type: string
+          format: date-time
+        transTypeId:
+          type: integer
+          format: int32
+        contributionCodeId:
+          type: integer
+          format: int32
+        distributionCodeId:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        registrationSleeveStrategyName:
+          type: string
+        tradeOrderId:
+          type: integer
+          format: int32
+      xml:
+        name: TradingTransactionDto
+      type: object
+    OAS.WebApi.DTO.Trading.UpdateBlocksInMassDto:
+      properties:
+        blockIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        custodianInfos:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.CustodianAlgorithmTagDto'
+          xml:
+            name: CustodianAlgorithmTagDto
+            wrapped: true
+          type: array
+        ordType:
+          type: string
+        settlmntTyp:
+          type: string
+        timeInForce:
+          type: string
+        editedBy:
+          type: string
+        isDiscretionary:
+          type: boolean
+        stopPrice:
+          type: number
+          format: double
+        limitPrice:
+          type: number
+          format: double
+        algorithmTag:
+          type: string
+        execInst:
+          type: string
+      xml:
+        name: UpdateBlocksInMassDto
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    OAS.WebApi.DTO.Trading.CustodianAlgorithmTagDto:
+      properties:
+        custodianId:
+          type: integer
+          format: int32
+        algorithmTag:
+          type: string
+      xml:
+        name: CustodianAlgorithmTagDto
+      type: object
+    OAS.WebApi.DTO.Trading.FixBlockOrderLogDetailDto:
+      properties:
+        tagId:
+          type: integer
+          format: int32
+        fixName:
+          type: string
+        value:
+          type: string
+      xml:
+        name: FixBlockOrderLogDetailDto
+      type: object
+    OAS.WebApi.DTO.Trading.FixFeeDto:
+      properties:
+        fixBlockOrderId:
+          type: integer
+          format: int32
+        orderQty:
+          type: number
+          format: double
+        regulatory:
+          type: number
+          format: double
+        tax:
+          type: number
+          format: double
+        localCommission:
+          type: number
+          format: double
+        exchange:
+          type: number
+          format: double
+        stamp:
+          type: number
+          format: double
+        levy:
+          type: number
+          format: double
+        other:
+          type: number
+          format: double
+        details:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDetailDto'
+          xml:
+            name: FixFeeDetailDto
+            wrapped: true
+          type: array
+      xml:
+        name: FixFeeDto
+      type: object
+    OAS.WebApi.DTO.Trading.UnallocatedOrderDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        fixBlockOrderId:
+          type: integer
+          format: int32
+        orderQty:
+          type: number
+          format: double
+        originalOrderQty:
+          type: number
+          format: double
+        orderAmt:
+          type: number
+          format: double
+        sharesOwned:
+          type: number
+          format: double
+        mktValue:
+          type: number
+          format: double
+        rowVersion:
+          type: string
+          format: byte
+        accountNumber:
+          type: string
+        registrationName:
+          type: string
+        accountType:
+          type: string
+        cashValue:
+          type: number
+          format: double
+        cashValuePending:
+          type: number
+          format: double
+        assetUnits:
+          type: number
+          format: double
+        assetUnitsPending:
+          type: number
+          format: double
+      xml:
+        name: UnallocatedOrderDto
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    OAS.WebApi.DTO.Trading.RealtimePriceDto:
+      properties:
+        date:
+          type: string
+          format: date-time
+        last:
+          type: number
+          format: double
+        isRealTimeQuote:
+          type: boolean
+        isDelayedQuote:
+          type: boolean
+        changeFromLastClose:
+          type: number
+          format: double
+        changeFromLastMarketClose:
+          type: number
+          format: double
+        changeFromMarketClose:
+          type: number
+          format: double
+        changeFromMarketOpen:
+          type: number
+          format: double
+        changeFromPrev:
+          type: number
+          format: double
+        lastClosePrice:
+          type: number
+          format: double
+        lastMarketClosePrice:
+          type: number
+          format: double
+        marketClosePrice:
+          type: number
+          format: double
+        marketOpenPrice:
+          type: number
+          format: double
+        percentChangeFromLastClose:
+          type: number
+          format: double
+        percentChangeFromLastMarketClose:
+          type: number
+          format: double
+        percentChangeFromMarketClose:
+          type: number
+          format: double
+        percentChangeFromMarketOpen:
+          type: number
+          format: double
+        percentChangeFromOpen:
+          type: number
+          format: double
+        percentChangeFromPrev:
+          type: number
+          format: double
+        ask:
+          type: number
+          format: double
+        askQuantity:
+          type: number
+          format: double
+        bid:
+          type: number
+          format: double
+        bidQuantity:
+          type: number
+          format: double
+        changeFromOpen:
+          type: number
+          format: double
+        changeFromPrevious:
+          type: number
+          format: double
+        cusip:
+          type: string
+        delay:
+          type: number
+          format: double
+        high:
+          type: number
+          format: double
+        low:
+          type: number
+          format: double
+        name:
+          type: string
+        outcome:
+          type: string
+        percentageChangeFromOpen:
+          type: number
+          format: double
+        percentageChangeFromPrevious:
+          type: number
+          format: double
+        quantity:
+          type: number
+          format: double
+        volume:
+          type: number
+          format: double
+        open:
+          type: number
+          format: double
+        priceSource:
+          type: string
+        symbol:
+          type: string
+      xml:
+        name: RealtimePriceDto
+      type: object
+    OAS.WebApi.DTO.Trading.FixFeeDetailDto:
+      properties:
+        orderId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        registrationName:
+          type: string
+        accountType:
+          type: string
+        orderQty:
+          type: number
+          format: double
+        regulatory:
+          type: number
+          format: double
+        tax:
+          type: number
+          format: double
+        localCommission:
+          type: number
+          format: double
+        exchange:
+          type: number
+          format: double
+        stamp:
+          type: number
+          format: double
+        levy:
+          type: number
+          format: double
+        other:
+          type: number
+          format: double
+        commission:
+          type: number
+          format: double
+        custodian:
+          type: string
+      xml:
+        name: FixFeeDetailDto
+      type: object
+    OAS.WebApi.DTO.Trading.FixBlockOrderLogDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        fixBlockOrderId:
+          type: integer
+          format: int32
+        msgType:
+          type: string
+        logType:
+          type: integer
+          format: int32
+        createdDate:
+          type: string
+          format: date-time
+        blockName:
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderLogDetailDto'
+          xml:
+            name: FixBlockOrderLogDetailDto
+            wrapped: true
+          type: array
+        logText:
+          type: string
+      xml:
+        name: FixBlockOrderLogDto
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

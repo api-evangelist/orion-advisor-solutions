@@ -1,0 +1,5561 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Reporting/Deliver API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Reporting/Deliver
+paths:
+  /v1/Reporting/Deliver:
+    get:
+      tags:
+      - Reporting/Deliver
+      summary: Gets a list of Deliver templates that the logged in user has access to
+      operationId: Deliver_GetAll
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.DeliverDto'
+                xml:
+                  name: DeliverDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.DeliverDto'
+                xml:
+                  name: DeliverDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.DeliverDto'
+                xml:
+                  name: DeliverDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.DeliverDto'
+                xml:
+                  name: DeliverDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.DeliverDto'
+                xml:
+                  name: DeliverDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.DeliverDto'
+                xml:
+                  name: DeliverDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Reporting/Deliver/{databaseName}/AdvisorEmail/{filepath}:
+    get:
+      tags:
+      - Reporting/Deliver
+      operationId: Deliver_GetAdvisorEmailImageAsync
+      parameters:
+      - name: databaseName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: filepath
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: preview
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Deliver get advisor email image async
+      x-summary-source: derived
+  /v1/Reporting/Deliver/{key}:
+    get:
+      tags:
+      - Reporting/Deliver
+      summary: Gets the Deliver template with the provided key.
+      operationId: Deliver_GetByKey
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.DeliverDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.DeliverDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.DeliverDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.DeliverDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.DeliverDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.DeliverDto'
+      security:
+      - Authorization: []
+  /v1/Reporting/Deliver/{key}/Action/Download/{sentEmailId}:
+    get:
+      tags:
+      - Reporting/Deliver
+      operationId: Deliver_DownloadSentEmailAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: sentEmailId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: preview
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Deliver download sent email async
+      x-summary-source: derived
+  /v1/Reporting/Deliver/{key}/Action/Render/{entityId}:
+    get:
+      tags:
+      - Reporting/Deliver
+      operationId: Deliver_RenderTemplateForEntityAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: entityId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: preview
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.AdvisorRenderedEmailDto'
+            application/xhtml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.AdvisorRenderedEmailDto'
+            application/xhtml+xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.AdvisorRenderedEmailDto'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.AdvisorRenderedEmailDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.AdvisorRenderedEmailDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.AdvisorRenderedEmailDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.AdvisorRenderedEmailDto'
+      security:
+      - Authorization: []
+      summary: Deliver render template for entity async
+      x-summary-source: derived
+  /v1/Reporting/Deliver/{key}/Action/SendTestEmail/{entityId}:
+    post:
+      tags:
+      - Reporting/Deliver
+      operationId: Deliver_SendTestEmailAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: entityId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+          application/json:
+            schema:
+              type: string
+          text/json:
+            schema:
+              type: string
+          application/xml:
+            schema:
+              type: string
+          text/xml:
+            schema:
+              type: string
+          application/x-www-form-urlencoded:
+            schema:
+              type: string
+          multipart/form-data:
+            schema:
+              type: string
+        required: true
+      summary: Deliver send test email async
+      x-summary-source: derived
+  /v1/Reporting/Deliver/Email/{blobId}:
+    get:
+      tags:
+      - Reporting/Deliver
+      operationId: DeliverEmail_GetEmailSent
+      parameters:
+      - name: blobId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Deliver email get email sent
+      x-summary-source: derived
+  /v1/Reporting/Deliver/Email/{dateSent}/ByDate:
+    get:
+      tags:
+      - Reporting/Deliver
+      operationId: DeliverEmail_GetSendEmailsByDate
+      parameters:
+      - name: dateSent
+        in: path
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: object
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: object
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: object
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: object
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: object
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: object
+                type: array
+      security:
+      - Authorization: []
+      summary: Deliver email get send emails by date
+      x-summary-source: derived
+  /v1/Reporting/Deliver/Email/{emailId}/Sent:
+    get:
+      tags:
+      - Reporting/Deliver
+      summary: Get all emails that have been sent given an emailId
+      operationId: DeliverEmail_GetSentEmails
+      parameters:
+      - name: emailId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.AdvisorEmailSentDto'
+                xml:
+                  name: AdvisorEmailSentDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.AdvisorEmailSentDto'
+                xml:
+                  name: AdvisorEmailSentDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.AdvisorEmailSentDto'
+                xml:
+                  name: AdvisorEmailSentDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.AdvisorEmailSentDto'
+                xml:
+                  name: AdvisorEmailSentDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.AdvisorEmailSentDto'
+                xml:
+                  name: AdvisorEmailSentDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.AdvisorEmailSentDto'
+                xml:
+                  name: AdvisorEmailSentDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Reporting/Deliver/Email/ByDate:
+    get:
+      tags:
+      - Reporting/Deliver
+      summary: Deliver email get sent emails grouped by date
+      operationId: DeliverEmail_GetSentEmailsGroupedByDate
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: object
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: object
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: object
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: object
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: object
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: object
+                type: array
+      security:
+      - Authorization: []
+      x-summary-source: derived
+  /v1/Reporting/Deliver/Email/Groups:
+    get:
+      tags:
+      - Reporting/Deliver
+      operationId: DeliverEmailGroups_GetEmailGroups
+      parameters:
+      - name: entity
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+                xml:
+                  name: WebEntityGroupDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+                xml:
+                  name: WebEntityGroupDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+                xml:
+                  name: WebEntityGroupDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+                xml:
+                  name: WebEntityGroupDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Deliver email groups get email groups
+      x-summary-source: derived
+    post:
+      tags:
+      - Reporting/Deliver
+      operationId: DeliverEmailGroups_AddEmailGroup
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+        required: true
+      summary: Deliver email groups add email group
+      x-summary-source: derived
+  /v1/Reporting/Deliver/Email/Groups/{key}:
+    get:
+      tags:
+      - Reporting/Deliver
+      operationId: DeliverEmailGroups_GetEmailGroupById
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+      security:
+      - Authorization: []
+      summary: Deliver email groups get email group by id
+      x-summary-source: derived
+    put:
+      tags:
+      - Reporting/Deliver
+      operationId: DeliverEmailGroups_UpdateEmailGroup
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.WebEntityGroupDto'
+        required: true
+      summary: Deliver email groups update email group
+      x-summary-source: derived
+    delete:
+      tags:
+      - Reporting/Deliver
+      operationId: DeliverEmailGroups_DeleteEmailGroup
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+      summary: Deliver email groups delete email group
+      x-summary-source: derived
+  /v1/Reporting/Deliver/Email/Groups/{key}/Selected:
+    get:
+      tags:
+      - Reporting/Deliver
+      operationId: DeliverEmailGroups_GetSelectedEmails
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: object
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: object
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: object
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: object
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: object
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: object
+                type: array
+      security:
+      - Authorization: []
+      summary: Deliver email groups get selected emails
+      x-summary-source: derived
+  /v1/Reporting/Deliver/Emails:
+    get:
+      tags:
+      - Reporting/Deliver
+      summary: Get all Deliver Sents
+      operationId: DeliverInstanceEmails_GetAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: deliverId
+        in: query
+        description: Optional. Default is null.  When specified, the results will be filtered by deliverId
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: triggerId
+        in: query
+        description: Optional. Default is null.  When specified, the results will be filtered by triggerId
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+                xml:
+                  name: DeliverEmailDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+                xml:
+                  name: DeliverEmailDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+                xml:
+                  name: DeliverEmailDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+                xml:
+                  name: DeliverEmailDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+                xml:
+                  name: DeliverEmailDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+                xml:
+                  name: DeliverEmailDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Reporting/Deliver/Emails/{key}:
+    get:
+      tags:
+      - Reporting/Deliver
+      summary: Gets the Deliver Sent that has the provided key.
+      operationId: DeliverInstanceEmails_GetEntityByKeyAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+      security:
+      - Authorization: []
+  /v1/Reporting/Deliver/Emails/{key}/Action/Download/Html:
+    get:
+      tags:
+      - Reporting/Deliver
+      operationId: DeliverInstanceEmails_DownloadEmailHtmlAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Deliver instance emails download email html async
+      x-summary-source: derived
+  /v1/Reporting/Deliver/Emails/{key}/Action/Download/Pdf:
+    get:
+      tags:
+      - Reporting/Deliver
+      operationId: DeliverInstanceEmails_DownloadEmailPdfAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Deliver instance emails download email pdf async
+      x-summary-source: derived
+  /v1/Reporting/Deliver/Emails/Action/Download:
+    post:
+      tags:
+      - Reporting/Deliver
+      summary: Used to set up a download request to get the stored deliver sent items…
+      operationId: DeliverInstanceEmails_PrepareDownloadSentsAsync
+      parameters:
+      - name: ct
+        in: header
+        description: Cancellation token
+        required: true
+      - name: format
+        in: query
+        description: 'Optional. Default: PDF. Whether the download should contain Pdf or Html files.'
+        required: false
+        schema:
+          type: string
+          enum:
+          - Xml
+          - 'Null'
+          - Csv
+          - Image
+          - PDF
+          - Html
+          - Html40
+          - Html32
+          - Mhtml
+          - Excel
+          - ExcelX
+          - HtmlOwc
+          - Json
+          - CustomImport
+          default: 4
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: Only the deliver sent items included will be prepared for download.
+        required: true
+  /v1/Reporting/Deliver/Emails/Action/Download/{sessionId}:
+    get:
+      tags:
+      - Reporting/Deliver
+      summary: Used to actually download the group of deliver sent items (as a zip file) that…
+      operationId: DeliverInstanceEmails_DownloadReportsAsync
+      parameters:
+      - name: sessionId
+        in: path
+        description: The identifier for a specific deliver sent download session.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: ct
+        in: header
+        description: Cancellation token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Reporting/Deliver/Emails/Action/Regenerate:
+    post:
+      tags:
+      - Reporting/Deliver
+      summary: Used to regenerate [successfully generated], [not generated], and [errored]…
+      operationId: DeliverInstanceEmails_RegenerateAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: The deliver sent items included will be updated.
+        required: true
+  /v1/Reporting/Deliver/Emails/Action/Resend:
+    post:
+      tags:
+      - Reporting/Deliver
+      summary: Used to resend any email that previosly failed when it attempted to send
+      operationId: DeliverInstanceEmails_ResendAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: The deliver sent items included will be updated.
+        required: true
+  /v1/Reporting/Deliver/Emails/Action/Reviewed:
+    post:
+      tags:
+      - Reporting/Deliver
+      summary: Used to update a set of emails in pending review status to either allow them to…
+      operationId: DeliverInstanceEmails_ReviewedAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: allowSend
+        in: query
+        description: Whether the items should be allowed to send or not.
+        required: true
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: The deliver sent items included will be updated.
+        required: true
+  /v1/Reporting/Deliver/Emails/List:
+    post:
+      tags:
+      - Reporting/Deliver
+      summary: Returns a list of Deliver Sents that are found for the list of Id's posted in…
+      operationId: DeliverInstanceEmails_GetListByIdAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+                xml:
+                  name: DeliverEmailDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+                xml:
+                  name: DeliverEmailDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+                xml:
+                  name: DeliverEmailDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+                xml:
+                  name: DeliverEmailDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+                xml:
+                  name: DeliverEmailDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+                xml:
+                  name: DeliverEmailDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: Array of Deliver Sent ID's
+        required: true
+  /v1/Reporting/Deliver/Emails/List/Id:
+    post:
+      tags:
+      - Reporting/Deliver
+      summary: Returns a list of Deliver Sents that are found for the list of Id's posted in…
+      operationId: DeliverInstanceEmails_PostV1ReportingDeliverEmailsListId
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+                xml:
+                  name: DeliverEmailDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+                xml:
+                  name: DeliverEmailDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+                xml:
+                  name: DeliverEmailDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+                xml:
+                  name: DeliverEmailDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+                xml:
+                  name: DeliverEmailDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto'
+                xml:
+                  name: DeliverEmailDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: Array of Deliver Sent ID's
+        required: true
+  /v1/Reporting/Deliver/Instances:
+    get:
+      tags:
+      - Reporting/Deliver
+      summary: Get all Deliver Templates
+      operationId: DeliverInstances_GetAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: isActive
+        in: query
+        description: Optional. Default is null.  When specified, the results will be filtered be isActive
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+                xml:
+                  name: DeliverInstanceDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+                xml:
+                  name: DeliverInstanceDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+                xml:
+                  name: DeliverInstanceDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+                xml:
+                  name: DeliverInstanceDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+                xml:
+                  name: DeliverInstanceDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+                xml:
+                  name: DeliverInstanceDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Reporting/Deliver/Instances/{key}:
+    get:
+      tags:
+      - Reporting/Deliver
+      summary: Gets the Deliver Template that has the provided key.
+      operationId: DeliverInstances_GetEntityByKeyAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+      security:
+      - Authorization: []
+  /v1/Reporting/Deliver/Instances/{key}/Action/EmailPreview:
+    post:
+      tags:
+      - Reporting/Deliver
+      summary: Used to preview an email version of a report based on the selected Deliver…
+      operationId: DeliverInstances_GetReportEmailPreviewAsync
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired Deliver instance.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        description: CancellationToken for async
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.DeliverTestPayload'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.DeliverTestPayload'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.DeliverTestPayload'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.DeliverTestPayload'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.DeliverTestPayload'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.DeliverTestPayload'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.DeliverTestPayload'
+        description: A payload used to generate the test report.
+        required: true
+  /v1/Reporting/Deliver/Instances/{key}/Action/EmailTestSend:
+    post:
+      tags:
+      - Reporting/Deliver
+      summary: Used to send a test email of a report based on the selected Deliver instance
+      operationId: DeliverInstances_SendReportTestEmailAsync
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired Deliver instance.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        description: CancellationToken for async
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.DeliverTestPayload'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.DeliverTestPayload'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.DeliverTestPayload'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.DeliverTestPayload'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.DeliverTestPayload'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.DeliverTestPayload'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.DeliverTestPayload'
+        description: A payload used to generate the test report.
+        required: true
+  /v1/Reporting/Deliver/Instances/List:
+    post:
+      tags:
+      - Reporting/Deliver
+      summary: Returns a list of Deliver Templates that are found for the list of Id's posted…
+      operationId: DeliverInstances_GetListByIdAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+                xml:
+                  name: DeliverInstanceDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+                xml:
+                  name: DeliverInstanceDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+                xml:
+                  name: DeliverInstanceDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+                xml:
+                  name: DeliverInstanceDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+                xml:
+                  name: DeliverInstanceDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+                xml:
+                  name: DeliverInstanceDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: Array of Deliver Template ID's
+        required: true
+  /v1/Reporting/Deliver/Instances/List/Id:
+    post:
+      tags:
+      - Reporting/Deliver
+      summary: Returns a list of Deliver Templates that are found for the list of Id's posted…
+      operationId: DeliverInstances_PostV1ReportingDeliverInstancesListId
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+                xml:
+                  name: DeliverInstanceDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+                xml:
+                  name: DeliverInstanceDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+                xml:
+                  name: DeliverInstanceDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+                xml:
+                  name: DeliverInstanceDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+                xml:
+                  name: DeliverInstanceDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto'
+                xml:
+                  name: DeliverInstanceDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: Array of Deliver Template ID's
+        required: true
+  /v1/Reporting/Deliver/Instances/Verbose:
+    get:
+      tags:
+      - Reporting/Deliver
+      operationId: DeliverInstances_GetVerboseAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: isActive
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: expand
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - None
+            - Template
+            - Email
+            - ReportOptions
+            - Triggers
+            - Groups
+            - All
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+                xml:
+                  name: DeliverInstanceVerboseDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+                xml:
+                  name: DeliverInstanceVerboseDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+                xml:
+                  name: DeliverInstanceVerboseDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+                xml:
+                  name: DeliverInstanceVerboseDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+                xml:
+                  name: DeliverInstanceVerboseDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+                xml:
+                  name: DeliverInstanceVerboseDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Deliver instances get verbose async
+      x-summary-source: derived
+    post:
+      tags:
+      - Reporting/Deliver
+      summary: Inserts a Deliver template
+      operationId: DeliverInstances_CreateVerboseDeliverInstanceAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+        required: true
+  /v1/Reporting/Deliver/Instances/Verbose/{key}:
+    get:
+      tags:
+      - Reporting/Deliver
+      operationId: DeliverInstances_GetVerboseByKeyAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: expand
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - None
+            - Template
+            - Email
+            - ReportOptions
+            - Triggers
+            - Groups
+            - All
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+      security:
+      - Authorization: []
+      summary: Deliver instances get verbose by key async
+      x-summary-source: derived
+    put:
+      tags:
+      - Reporting/Deliver
+      summary: Updates a Deliver template
+      operationId: DeliverInstances_UpdateVerboseDeliverInstanceAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+        required: true
+    delete:
+      tags:
+      - Reporting/Deliver
+      summary: Deletes an existing Deliver Instance
+      operationId: DeliverInstances_DeleteAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Reporting/Deliver/Instances/Verbose/New:
+    get:
+      tags:
+      - Reporting/Deliver
+      summary: Returns a blank Deliver template
+      operationId: DeliverInstances_GetNewVerboseAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto'
+      security:
+      - Authorization: []
+  /v1/Reporting/Deliver/Sections:
+    get:
+      tags:
+      - Reporting/Deliver
+      operationId: Deliver_GetAvailableSections
+      parameters:
+      - name: entity
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.AdvisorEmailSectionDto'
+                xml:
+                  name: AdvisorEmailSectionDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.AdvisorEmailSectionDto'
+                xml:
+                  name: AdvisorEmailSectionDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.AdvisorEmailSectionDto'
+                xml:
+                  name: AdvisorEmailSectionDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.AdvisorEmailSectionDto'
+                xml:
+                  name: AdvisorEmailSectionDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.AdvisorEmailSectionDto'
+                xml:
+                  name: AdvisorEmailSectionDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.AdvisorEmailSectionDto'
+                xml:
+                  name: AdvisorEmailSectionDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Deliver get available sections
+      x-summary-source: derived
+  /v1/Reporting/Deliver/Triggers:
+    get:
+      tags:
+      - Reporting/Deliver
+      summary: Get all Deliver Triggers
+      operationId: DeliverTriggers_GetAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: isActive
+        in: query
+        description: Optional. Default is null.  When specified, the results will be filtered by isActive
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+                xml:
+                  name: DeliverTriggerDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+                xml:
+                  name: DeliverTriggerDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+                xml:
+                  name: DeliverTriggerDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+                xml:
+                  name: DeliverTriggerDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+                xml:
+                  name: DeliverTriggerDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+                xml:
+                  name: DeliverTriggerDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Reporting/Deliver/Triggers/{key}:
+    get:
+      tags:
+      - Reporting/Deliver
+      summary: Gets the Deliver Trigger that has the provided key.
+      operationId: DeliverTriggers_GetEntityByKeyAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+      security:
+      - Authorization: []
+  /v1/Reporting/Deliver/Triggers/Display:
+    get:
+      tags:
+      - Reporting/Deliver
+      summary: Get all Deliver Triggers
+      operationId: DeliverTriggers_GetTriggersAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: isActive
+        in: query
+        description: Optional. Default is null.  When specified, the results will be filtered by isActive
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggersDisplayDto'
+                xml:
+                  name: DeliverTriggersDisplayDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggersDisplayDto'
+                xml:
+                  name: DeliverTriggersDisplayDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggersDisplayDto'
+                xml:
+                  name: DeliverTriggersDisplayDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggersDisplayDto'
+                xml:
+                  name: DeliverTriggersDisplayDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggersDisplayDto'
+                xml:
+                  name: DeliverTriggersDisplayDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggersDisplayDto'
+                xml:
+                  name: DeliverTriggersDisplayDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Reporting/Deliver/Triggers/List:
+    post:
+      tags:
+      - Reporting/Deliver
+      summary: Returns a list of Deliver Triggers that are found for the list of Id's posted…
+      operationId: DeliverTriggers_GetListByIdAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+                xml:
+                  name: DeliverTriggerDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+                xml:
+                  name: DeliverTriggerDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+                xml:
+                  name: DeliverTriggerDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+                xml:
+                  name: DeliverTriggerDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+                xml:
+                  name: DeliverTriggerDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+                xml:
+                  name: DeliverTriggerDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: Array of Deliver Trigger ID's
+        required: true
+  /v1/Reporting/Deliver/Triggers/List/Id:
+    post:
+      tags:
+      - Reporting/Deliver
+      summary: Returns a list of Deliver Triggers that are found for the list of Id's posted…
+      operationId: DeliverTriggers_PostV1ReportingDeliverTriggersListId
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+                xml:
+                  name: DeliverTriggerDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+                xml:
+                  name: DeliverTriggerDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+                xml:
+                  name: DeliverTriggerDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+                xml:
+                  name: DeliverTriggerDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+                xml:
+                  name: DeliverTriggerDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto'
+                xml:
+                  name: DeliverTriggerDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: Array of Deliver Trigger ID's
+        required: true
+  /v1/Reporting/Deliver/Verbose:
+    get:
+      tags:
+      - Reporting/Deliver
+      operationId: Deliver_GetVerbose
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - None
+            - Template
+            - Sections
+            - EmailSent
+            - All
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+                xml:
+                  name: AdvisorEmailVerboseDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+                xml:
+                  name: AdvisorEmailVerboseDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+                xml:
+                  name: AdvisorEmailVerboseDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+                xml:
+                  name: AdvisorEmailVerboseDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+                xml:
+                  name: AdvisorEmailVerboseDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+                xml:
+                  name: AdvisorEmailVerboseDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Deliver get verbose
+      x-summary-source: derived
+    post:
+      tags:
+      - Reporting/Deliver
+      summary: Creates a new Deliver template
+      operationId: Deliver_CreateVerboseAdvisorEmail
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+        required: true
+  /v1/Reporting/Deliver/Verbose/{key}:
+    get:
+      tags:
+      - Reporting/Deliver
+      operationId: Deliver_GetVerboseByKey
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: expand
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - None
+            - Template
+            - Sections
+            - EmailSent
+            - All
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+      security:
+      - Authorization: []
+      summary: Deliver get verbose by key
+      x-summary-source: derived
+    put:
+      tags:
+      - Reporting/Deliver
+      summary: Updates a Deliver template
+      operationId: Deliver_UpdateVerboseAdvisorEmail
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto'
+        required: true
+    delete:
+      tags:
+      - Reporting/Deliver
+      operationId: Deliver_DeleteVerboseAdvisorEmail
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+      summary: Deliver delete verbose advisor email
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.DataModel.Reporting.Deliver.AdvisorRenderedSectionDto:
+      properties:
+        sectionName:
+          type: string
+        col:
+          type: integer
+          format: int32
+        row:
+          type: integer
+          format: int32
+        control:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+      xml:
+        name: AdvisorRenderedSectionDto
+      type: object
+    OAS.WebApi.DTO.Reporting.AdvisorEmailAssignedSectionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        advisorEmailId:
+          type: integer
+          format: int32
+        advisorEmailSectionId:
+          type: integer
+          format: int32
+        row:
+          type: integer
+          format: int32
+        column:
+          type: integer
+          format: int32
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        modifiedBy:
+          type: string
+        modifiedDate:
+          type: string
+          format: date-time
+        optionValues:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailSectionOptionValueDto'
+          xml:
+            name: AdvisorEmailSectionOptionValueDto
+            wrapped: true
+          type: array
+      xml:
+        name: AdvisorEmailAssignedSectionDto
+      type: object
+    OAS.WebApi.DTO.Reporting.AdvisorEmailSectionOptionValueDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        advisorEmailId:
+          type: integer
+          format: int32
+        advisorEmailSectionId:
+          type: integer
+          format: int32
+        advisorEmailSectionOptionId:
+          type: integer
+          format: int32
+        assignedSectionId:
+          type: integer
+          format: int32
+        optionValue:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        modifiedBy:
+          type: string
+        modifiedDate:
+          type: string
+          format: date-time
+      xml:
+        name: AdvisorEmailSectionOptionValueDto
+      type: object
+    OAS.WebApi.DTO.Reporting.AdvisorEmailVerboseDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        template:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailTemplateDto'
+        assignedSections:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.AdvisorEmailAssignedSectionDto'
+          xml:
+            name: AdvisorEmailAssignedSectionDto
+            wrapped: true
+          type: array
+        sentEmails:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.AdvisorEmailSentDto'
+          xml:
+            name: AdvisorEmailSentDto
+            wrapped: true
+          type: array
+      xml:
+        name: AdvisorEmailVerboseDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseEmailDto:
+      properties:
+        subject:
+          type: string
+        from:
+          type: string
+        bcc:
+          type: string
+      xml:
+        name: DeliverInstanceVerboseEmailDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggerDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        deliverId:
+          type: integer
+          format: int32
+        triggerOption:
+          $ref: '#/components/schemas/OAS.DataAccess.Domains.Reporting.TriggerOption'
+        deliverText:
+          type: string
+        nextSendDate:
+          type: string
+          format: date-time
+      xml:
+        name: DeliverTriggerDto
+      type: object
+    OAS.WebApi.DTO.Reporting.WebEntityGroupDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        groupName:
+          type: string
+        groupEntity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        groupType:
+          type: integer
+          format: int32
+        createdBy:
+          type: string
+        includeAll:
+          type: boolean
+        includeExcludeCount:
+          type: integer
+          format: int32
+        selectedItems:
+          description: Field to allow UI to send down selected items
+          items:
+            type: integer
+            format: int32
+          type: array
+      xml:
+        name: WebEntityGroupDto
+      type: object
+    OAS.DataModel.Reporting.ReportOption:
+      required:
+      - id
+      - $type
+      properties:
+        id:
+          type: string
+        $type:
+          readOnly: true
+          type: string
+        optionGuid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        optionId:
+          type: integer
+          format: int32
+        isDisabled:
+          type: boolean
+        isGlobal:
+          type: boolean
+        isIgnored:
+          type: boolean
+        name:
+          type: string
+        useInception:
+          type: boolean
+        prompt:
+          type: string
+          enum:
+          - Never
+          - Always
+      xml:
+        name: ReportOption
+      type: object
+    OAS.WebApi.DTO.Reporting.Deliver.DeliverTriggersDisplayDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        deliverId:
+          type: integer
+          format: int32
+        deliverName:
+          type: string
+        nextSendDate:
+          type: string
+          format: date-time
+        isActive:
+          type: boolean
+        sentItemsCount:
+          type: integer
+          format: int32
+      xml:
+        name: DeliverTriggersDisplayDto
+      type: object
+    OAS.DataModel.Reporting.Deliver.DeliverTestPayload:
+      properties:
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        entityIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        emailAddresses:
+          items:
+            type: string
+          type: array
+      xml:
+        name: DeliverTestPayload
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IGetRendered:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IGetRendered
+      type: object
+    OAS.DataModel.Reporting.Deliver.AdvisorRenderedEmailDto:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        id:
+          type: integer
+          format: int32
+        title:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        faceBookLink:
+          type: string
+        linkedInLink:
+          type: string
+        twitterLink:
+          type: string
+        loginLink:
+          type: boolean
+        sections:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Deliver.AdvisorRenderedSectionDto'
+          xml:
+            name: AdvisorRenderedSectionDto
+            wrapped: true
+          type: array
+      xml:
+        name: AdvisorRenderedEmailDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Deliver.AdvisorEmailSentDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        advisorEmailId:
+          type: integer
+          format: int32
+        entityEnum:
+          type: integer
+          format: int32
+        entityId:
+          type: integer
+          format: int32
+        blobId:
+          type: integer
+          format: int32
+        entityName:
+          type: string
+        email:
+          type: string
+        errorsText:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        dateSent:
+          readOnly: true
+          type: string
+        modifiedBy:
+          type: string
+        modifiedDate:
+          type: string
+          format: date-time
+      xml:
+        name: AdvisorEmailSentDto
+      type: object
+    OAS.DataAccess.Domains.Reporting.TriggerOption:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+      xml:
+        name: TriggerOption
+      type: object
+    OAS.WebApi.DTO.Reporting.DeliverDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        scheduleActive:
+          type: boolean
+        name:
+          type: string
+        templateBy:
+          type: string
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        nextSend:
+          type: string
+          format: date-time
+        fromEmail:
+          type: string
+        bccEmail:
+          type: string
+        groupSendTo:
+          type: string
+        groupSendToId:
+          type: integer
+          format: int32
+        subject:
+          type: string
+        scheduleStartDate:
+          type: string
+          format: date-time
+        scheduleType:
+          type: string
+          enum:
+          - Weekly
+          - Monthly
+          - Quarterly
+          - Yearly
+          - OnDemand
+        period:
+          type: string
+          enum:
+          - Period
+          - LastWeek
+          - LastMonth
+          - LastQtd
+          - LastYear
+          - MTD
+          - QTD
+          - YTD
+          - OneYear
+          - ThreeYear
+          - FiveYear
+          - TenYear
+          - Inception
+        periodStartDate:
+          type: string
+          format: date-time
+        periodEndDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        modifiedBy:
+          type: string
+        modifiedDate:
+          type: string
+          format: date-time
+        emailsSent:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        twitterId:
+          type: string
+        facebookUrl:
+          type: string
+        linkedInUrl:
+          type: string
+      xml:
+        name: DeliverDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Deliver.AdvisorEmailSectionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        category:
+          type: string
+        categoryIcon:
+          type: string
+        userControlUrl:
+          type: string
+        screenshotUrl:
+          type: string
+        columnSpan:
+          type: integer
+          format: int32
+        optionType:
+          type: integer
+          format: int32
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        modifiedBy:
+          type: string
+        modifiedDate:
+          type: string
+          format: date-time
+        options:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.AdvisorEmailSectionOptionDto'
+          xml:
+            name: AdvisorEmailSectionOptionDto
+            wrapped: true
+          type: array
+      xml:
+        name: AdvisorEmailSectionDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        reportName:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        isActive:
+          type: boolean
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        messageType:
+          type: string
+          enum:
+          - Email
+          - Text
+        triggerType:
+          readOnly: true
+          type: string
+        lastSent:
+          type: string
+          format: date-time
+        nextSend:
+          type: string
+          format: date-time
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+        canBeDeleted:
+          type: boolean
+      xml:
+        name: DeliverInstanceDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseTriggerDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        triggerOption:
+          $ref: '#/components/schemas/OAS.DataAccess.Domains.Reporting.TriggerOption'
+        deliverText:
+          type: string
+        nextSendDate:
+          type: string
+          format: date-time
+      xml:
+        name: DeliverInstanceVerboseTriggerDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Deliver.DeliverEmailDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        deliverId:
+          type: integer
+          format: int32
+        deliverTriggerId:
+          type: integer
+          format: int32
+        hasFile:
+          type: boolean
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        entityId:
+          type: integer
+          format: int32
+        generateStatus:
+          type: string
+          enum:
+          - NotGenerated
+          - Errored
+          - Generated
+          - PendingGeneration
+        generateStatusTimestamp:
+          type: string
+          format: date-time
+        emailStatus:
+          type: string
+          enum:
+          - HasNotBeenSent
+          - Error
+          - PendingReview
+          - SuccessfullySent
+          - PendingSend
+          - WillNotBeSent
+        emailStatusTimestamp:
+          type: string
+          format: date-time
+        sendTo:
+          type: string
+        errorText:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+        messageType:
+          type: string
+          enum:
+          - Email
+          - Text
+      xml:
+        name: DeliverEmailDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseTemplateDto:
+      properties:
+        reportId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        isActive:
+          type: boolean
+        messageType:
+          type: string
+          enum:
+          - Email
+          - Text
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+      xml:
+        name: DeliverInstanceVerboseTemplateDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseGroupDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: DeliverInstanceVerboseGroupDto
+      type: object
+    OAS.WebApi.DTO.Reporting.AdvisorEmailTemplateDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        groupSendToId:
+          type: integer
+          format: int32
+        public:
+          type: boolean
+        name:
+          type: string
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        fromEmail:
+          type: string
+        bccEmail:
+          type: string
+        subject:
+          type: string
+        twitterId:
+          type: string
+        facebookUrl:
+          type: string
+        linkedInUrl:
+          type: string
+        showLoginLink:
+          type: boolean
+        period:
+          type: string
+          enum:
+          - Period
+          - LastWeek
+          - LastMonth
+          - LastQtd
+          - LastYear
+          - MTD
+          - QTD
+          - YTD
+          - OneYear
+          - ThreeYear
+          - FiveYear
+          - TenYear
+          - Inception
+        periodStartDate:
+          type: string
+          format: date-time
+        periodEndDate:
+          type: string
+          format: date-time
+        scheduleActive:
+          type: boolean
+        scheduleStartDate:
+          type: string
+          format: date-time
+        scheduleType:
+          type: string
+          enum:
+          - Weekly
+          - Monthly
+          - Quarterly
+          - Yearly
+          - OnDemand
+        scheduleWeekDay:
+          type: string
+          enum:
+          - Sunday
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+        scheduleMonthDay:
+          type: integer
+          format: int32
+        scheduleQuarterOnMonth:
+          type: integer
+          format: int32
+        scheduleQuarterOnDay:
+          type: integer
+          format: int32
+        scheduleYearOnMonth:
+          type: integer
+          format: int32
+        scheduleYearOnDay:
+          type: integer
+          format: int32
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        modifiedBy:
+          type: string
+        modifiedDate:
+          type: string
+          format: date-time
+      xml:
+        name: AdvisorEmailTemplateDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Deliver.AdvisorEmailSectionOptionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        advisorEmailSectionId:
+          type: integer
+          format: int32
+        displayName:
+          type: string
+        optionName:
+          type: string
+        dataType:
+          type: string
+          enum:
+          - Boolean
+          - Integer
+          - Decimal
+          - String
+          - List
+          - Multiselect
+        defaultValue:
+          type: string
+        availableValues:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        modifiedBy:
+          type: string
+        modifiedDate:
+          type: string
+          format: date-time
+      xml:
+        name: AdvisorEmailSectionOptionDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        reportOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+        template:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseTemplateDto'
+        extensionEmail:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseEmailDto'
+        triggers:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseTriggerDto'
+          xml:
+            name: DeliverInstanceVerboseTriggerDto
+            wrapped: true
+          type: array
+        groups:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Deliver.DeliverInstanceVerboseGroupDto'
+          xml:
+            name: DeliverInstanceVerboseGroupDto
+            wrapped: true
+          type: array
+      xml:
+        name: DeliverInstanceVerboseDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

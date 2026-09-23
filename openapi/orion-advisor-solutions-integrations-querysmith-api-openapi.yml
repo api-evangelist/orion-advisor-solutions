@@ -1,0 +1,225 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/querysmith API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: integrations/querysmith
+paths:
+  /v1/integrations/querysmith/columns/search:
+    get:
+      tags:
+      - integrations/querysmith
+      operationId: QuerySmith_SearchColumnsAsync
+      parameters:
+      - name: searchTerm
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Query smith search columns async
+      x-summary-source: derived
+  /v1/integrations/querysmith/queries/{queryId}:
+    get:
+      tags:
+      - integrations/querysmith
+      operationId: QuerySmith_GetQueryAsync
+      parameters:
+      - name: queryId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Query smith get query async
+      x-summary-source: derived
+  /v1/integrations/querysmith/queries/{queryId}/register:
+    post:
+      tags:
+      - integrations/querysmith
+      operationId: QuerySmith_RegisterRecipeAsync
+      parameters:
+      - name: queryId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Query smith register recipe async
+      x-summary-source: derived
+  /v1/integrations/querysmith/queries/modify/interrupt:
+    post:
+      tags:
+      - integrations/querysmith
+      operationId: QuerySmith_InterruptModifyQueryAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Query smith interrupt modify query async
+      x-summary-source: derived
+  /v1/integrations/querysmith/queries/modify/stream:
+    post:
+      tags:
+      - integrations/querysmith
+      operationId: QuerySmith_StreamModifyQueryAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.QuerySmith.ModifyRequestDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.QuerySmith.ModifyRequestDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.QuerySmith.ModifyRequestDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.QuerySmith.ModifyRequestDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.QuerySmith.ModifyRequestDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.QuerySmith.ModifyRequestDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.QuerySmith.ModifyRequestDto'
+        required: true
+      summary: Query smith stream modify query async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Integrations.QuerySmith.ClarificationResponseDto:
+      properties:
+        option_id:
+          type: string
+        text_input:
+          type: string
+      xml:
+        name: ClarificationResponseDto
+      type: object
+    OAS.WebApi.DTO.Integrations.QuerySmith.ModifyRequestDto:
+      properties:
+        queryId:
+          type: integer
+          format: int32
+        prompt:
+          type: string
+        clarificationResponse:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.QuerySmith.ClarificationResponseDto'
+      xml:
+        name: ModifyRequestDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

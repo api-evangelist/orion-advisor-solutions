@@ -1,0 +1,250 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Settings/Owner API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Settings/Owner
+paths:
+  /v1/Settings/Owner:
+    get:
+      tags:
+      - Settings/Owner
+      summary: Gets the Owner info
+      operationId: Owners_GetAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OwnerDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OwnerDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OwnerDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OwnerDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OwnerDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OwnerDto'
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Settings/Owner
+      summary: Used to update existing owner record
+      operationId: Owners_UpdateOwnerAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OwnerDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OwnerDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OwnerDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OwnerDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OwnerDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OwnerDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OwnerDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OwnerDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OwnerDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OwnerDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OwnerDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OwnerDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OwnerDto'
+        description: The owner dto being updated.
+        required: true
+  /v1/Settings/Owner/Code:
+    get:
+      tags:
+      - Settings/Owner
+      summary: Gets the Owner code
+      operationId: Owners_GetOwnerCodeAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+  /v1/Settings/Owner/ReportImage:
+    get:
+      tags:
+      - Settings/Owner
+      summary: Gets the owner's report image if one exists. If none exists a 404 will be thrown
+      operationId: Owners_GetImageAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Settings.OwnerDto:
+      properties:
+        payeeId:
+          type: integer
+          format: int32
+        billStyle:
+          type: string
+          enum:
+          - Advance
+          - Arrears
+        billValueMethod:
+          type: string
+          enum:
+          - PeriodEndingValue
+          - AvgDailyBalance
+          - AvgMonthlyBalance
+        code:
+          type: string
+        fullName:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        addressLine3:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        workPhoneNumber:
+          type: string
+        email:
+          type: string
+        faxNumber:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        ownerImage:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.OwnerImageDto'
+        legalName:
+          description: Firm Legal Name
+          type: string
+      xml:
+        name: OwnerDto
+      type: object
+    OAS.WebApi.DTO.Settings.OwnerImageDto:
+      properties:
+        image:
+          type: string
+          format: byte
+        height:
+          type: number
+          format: double
+        width:
+          type: number
+          format: double
+        barColor:
+          type: string
+          maxLength: 50
+          minLength: 0
+      xml:
+        name: OwnerImageDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

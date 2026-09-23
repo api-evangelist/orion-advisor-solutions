@@ -1,0 +1,214 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Bill Transmit Methods API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/BillTransmitMethods
+paths:
+  /v1/Billing/BillTransmitMethods:
+    get:
+      tags:
+      - Billing/BillTransmitMethods
+      summary: Get a list of BillTransmitMethods that the logged in user has access to see
+      operationId: BillTransmitMethods_Get
+      parameters:
+      - name: statementDelivery
+        in: query
+        description: Optional. If provided the result will be limit to include only statement methods, or only not statement methods.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransmitMethodDto'
+                xml:
+                  name: BillTransmitMethodDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransmitMethodDto'
+                xml:
+                  name: BillTransmitMethodDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransmitMethodDto'
+                xml:
+                  name: BillTransmitMethodDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransmitMethodDto'
+                xml:
+                  name: BillTransmitMethodDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransmitMethodDto'
+                xml:
+                  name: BillTransmitMethodDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransmitMethodDto'
+                xml:
+                  name: BillTransmitMethodDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Billing/BillTransmitMethods/{key}:
+    get:
+      tags:
+      - Billing/BillTransmitMethods
+      summary: Gets the BillTransmitMethod that has the provided key.
+      operationId: BillTransmitMethods_GetEntityByKey
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransmitMethodDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransmitMethodDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransmitMethodDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransmitMethodDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransmitMethodDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillTransmitMethodDto'
+      security:
+      - Authorization: []
+  /v1/Billing/BillTransmitMethods/Simple:
+    get:
+      tags:
+      - Billing/BillTransmitMethods
+      summary: Get a simple list of BillTransmitMethods that the logged in user has access to…
+      operationId: BillTransmitMethods_GetSimple
+      parameters:
+      - name: statementDelivery
+        in: query
+        description: Optional. If provided the result will be limit to include only statement methods, or only not statement methods.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+                xml:
+                  name: SimpleEntity
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.BillTransmitMethodDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        transmitMethod:
+          type: string
+        transmitDesc:
+          type: string
+        statementDelivery:
+          type: boolean
+      xml:
+        name: BillTransmitMethodDto
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

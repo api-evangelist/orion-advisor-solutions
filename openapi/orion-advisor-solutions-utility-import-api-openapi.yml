@@ -1,0 +1,1923 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Utility/Import API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Utility/Import
+paths:
+  /v1/Utility/Import:
+    get:
+      tags:
+      - Utility/Import
+      summary: Gets a list view of Imports for the Custom Import process
+      operationId: Import_GetImportsWithoutDataAsync
+      parameters:
+      - name: importTypeId
+        in: query
+        description: Optional. Default null. If provided, will only pull imports of the given ImportType
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: importId
+        in: query
+        description: Optional. Default null. If provided, will only pull imports of the given Id
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: importSource
+        in: query
+        description: Optional. Default null. If provided, will only pull imports of the given source
+        required: false
+        schema:
+          type: string
+          enum:
+          - None
+          - OrionVision
+          - DataQuery
+      - name: imported
+        in: query
+        description: Optional. Default null. If provided, will only pull imports that have been imported
+        required: false
+        schema:
+          type: boolean
+      - name: startDate
+        in: query
+        description: Optional. Default null. If provided, will only pull imports with a start date on/after the given date
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional. Default null. If provided, will only pull imports wiht a start date on/before the given date
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: ct
+        in: header
+        description: Cancellation Token of the request
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportWithoutDataDto'
+                xml:
+                  name: ImportWithoutDataDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportWithoutDataDto'
+                xml:
+                  name: ImportWithoutDataDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportWithoutDataDto'
+                xml:
+                  name: ImportWithoutDataDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportWithoutDataDto'
+                xml:
+                  name: ImportWithoutDataDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Utility/Import/{state}:
+    post:
+      tags:
+      - Utility/Import
+      summary: Genericized endpoint to process the provided import object, for the provided…
+      operationId: Import_ProcessImportsByStateAsync
+      parameters:
+      - name: state
+        in: path
+        description: The processing state to be used in this processing
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      - name: userId
+        in: query
+        description: Optional.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportModifyDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportModifyDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportModifyDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportModifyDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportModifyDto'
+        description: The Import object to process.
+        required: true
+  /v1/Utility/Import/Common/{id}/{alClientId}/Apply:
+    put:
+      tags:
+      - Utility/Import
+      summary: Applies a single client's data in a multi-db custom import
+      operationId: ImportCommon_ApplyMultiDbImportAsync
+      parameters:
+      - name: id
+        in: path
+        description: The import common ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: alClientId
+        in: path
+        description: The client ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        description: A cancellation token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+        description: An ImportCommonActionDto specifying the action, import common ID, client ID, and user ID for the action
+        required: true
+  /v1/Utility/Import/Common/{id}/{alClientId}/Create:
+    put:
+      tags:
+      - Utility/Import
+      summary: Creates a single client's import for a multi-db custom import
+      operationId: ImportCommon_CreateMultiDbImportAsync
+      parameters:
+      - name: id
+        in: path
+        description: The import common ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: alClientId
+        in: path
+        description: The client ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        description: The Cancellation Token of the request
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+        description: An ImportCommonActionDto specifying the action, import common ID, client ID and user ID for the action
+        required: true
+  /v1/Utility/Import/Common/{id}/{alClientId}/Delete:
+    put:
+      tags:
+      - Utility/Import
+      summary: Reverses a single client's data in a multi-db custom import
+      operationId: ImportCommon_DeleteImportExtAsync
+      parameters:
+      - name: id
+        in: path
+        description: The import common ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: alClientId
+        in: path
+        description: The client ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        description: A cancellation token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+        description: An ImportCommonActionDto specifying the action, import common ID, client ID, and user ID for the action
+        required: true
+  /v1/Utility/Import/Common/{id}/{alClientId}/ExcludeErrors:
+    put:
+      tags:
+      - Utility/Import
+      summary: Excludes Errors for a single client's data in a multi-db custom import
+      description: 'Sample Request
+
+        # Example To Exlude single ext record for a given import common
+
+        POST /Utility/Import/Common/524/ExcludeErrors
+
+        [
+
+        {
+
+        "ALClientId":1,
+
+        "IsReversal":false,
+
+        "ImportCommonId":524
+
+        }
+
+        ]
+
+
+        # Example to exlude errors for all EXT Records
+
+        POST /Utility/Import/Common/524/ExcludeErrors
+
+        []'
+      operationId: ImportCommon_ExcludeErrorsMultiDbImportAsync
+      parameters:
+      - name: id
+        in: path
+        description: The import common ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: alClientId
+        in: path
+        description: The client ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        description: A cancellation token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+        description: An ImportCommonActionDto specifying the action, import common ID, client ID, and user ID for the action
+        required: true
+  /v1/Utility/Import/Common/{id}/{alClientId}/Reset:
+    put:
+      tags:
+      - Utility/Import
+      summary: Resets a single client's data in a multi-db custom import
+      operationId: ImportCommon_ResetMultiDbImportAsync
+      parameters:
+      - name: id
+        in: path
+        description: The import common ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: alClientId
+        in: path
+        description: The client ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        description: A cancellation token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+        description: An ImportCommonActionDto specifying the action, import common ID, client ID, and user ID for the action
+        required: true
+  /v1/Utility/Import/Common/{id}/{alClientId}/Reverse:
+    put:
+      tags:
+      - Utility/Import
+      summary: Reverses a single client's data in a multi-db custom import
+      operationId: ImportCommon_ReverseMultiDbImportAsync
+      parameters:
+      - name: id
+        in: path
+        description: The import common ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: alClientId
+        in: path
+        description: The client ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        description: A cancellation token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+        description: An ImportCommonActionDto specifying the action, import common ID, client ID, and user ID for the action
+        required: true
+  /v1/Utility/Import/Common/{id}/{alClientId}/Status:
+    put:
+      tags:
+      - Utility/Import
+      summary: Updates the status for a ImportCommon
+      operationId: ImportCommon_UpdateStatusAsync
+      parameters:
+      - name: id
+        in: path
+        description: The import common ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: alClientId
+        in: path
+        description: The client ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        description: The cancellation token of the request
+        required: true
+      - name: isReversal
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+          application/json:
+            schema:
+              type: string
+          text/json:
+            schema:
+              type: string
+          application/xml:
+            schema:
+              type: string
+          text/xml:
+            schema:
+              type: string
+          application/x-www-form-urlencoded:
+            schema:
+              type: string
+          multipart/form-data:
+            schema:
+              type: string
+        description: The status string
+        required: true
+  /v1/Utility/Import/Common/{id}/{alClientId}/Validate:
+    put:
+      tags:
+      - Utility/Import
+      summary: Validates a single client's data in a multi-db custom import
+      operationId: ImportCommon_ValidateMultiDbImportAsync
+      parameters:
+      - name: id
+        in: path
+        description: The import common ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: alClientId
+        in: path
+        description: The client ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        description: A cancellation token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonActionDto'
+        description: An ImportCommonActionDto specifying the action, import common ID, client ID, and user ID for the action
+        required: true
+  /v1/Utility/Import/Common/{key}:
+    get:
+      tags:
+      - Utility/Import
+      summary: Gets a Common Import by Id
+      operationId: ImportCommon_GetByKeyAsync
+      parameters:
+      - name: key
+        in: path
+        description: Id of the Common Import
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        description: Cancellation Token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonDto'
+      security:
+      - Authorization: []
+  /v1/Utility/Import/Common/{key}/{importAction}:
+    put:
+      tags:
+      - Utility/Import
+      summary: Requeue's common import ext records for update
+      operationId: ImportCommon_UpdateManyAsync
+      parameters:
+      - name: key
+        in: path
+        description: Id of the Common Import
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: importAction
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - Create
+          - Validate
+          - Apply
+          - Reset
+          - Reverse
+          - Delete
+          - ExcludeErrors
+      - name: ct
+        in: header
+        description: Cancellation Token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonExtDto'
+              xml:
+                name: ImportCommonExtDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonExtDto'
+              xml:
+                name: ImportCommonExtDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonExtDto'
+              xml:
+                name: ImportCommonExtDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonExtDto'
+              xml:
+                name: ImportCommonExtDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonExtDto'
+              xml:
+                name: ImportCommonExtDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonExtDto'
+              xml:
+                name: ImportCommonExtDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonExtDto'
+              xml:
+                name: ImportCommonExtDto
+                wrapped: true
+              type: array
+        required: true
+  /v1/Utility/Import/Common/CreateFromFile:
+    post:
+      tags:
+      - Utility/Import
+      summary: Creates a new import based on the provided object for multi database imports
+      operationId: ImportCommon_CreateMutliDBImportAsync
+      parameters:
+      - name: ct
+        in: header
+        description: Cancellation Token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCreateFromFileDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCreateFromFileDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCreateFromFileDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCreateFromFileDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCreateFromFileDto'
+        description: Object that containts the file to create the import with, the import name, and the ID of the import type
+        required: true
+  /v1/Utility/Import/Common/Detail:
+    get:
+      tags:
+      - Utility/Import
+      summary: Get a list of ImportCommonExtImportCommonDto for MultiDB Custom Imports
+      operationId: ImportCommon_Detail
+      parameters:
+      - name: startDate
+        in: query
+        description: Filters where AuditedDate is after this
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Filters where AuditedDate is before this
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonExtImportCommonDto'
+                xml:
+                  name: ImportCommonExtImportCommonDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonExtImportCommonDto'
+                xml:
+                  name: ImportCommonExtImportCommonDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonExtImportCommonDto'
+                xml:
+                  name: ImportCommonExtImportCommonDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonExtImportCommonDto'
+                xml:
+                  name: ImportCommonExtImportCommonDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonExtImportCommonDto'
+                xml:
+                  name: ImportCommonExtImportCommonDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonExtImportCommonDto'
+                xml:
+                  name: ImportCommonExtImportCommonDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Utility/Import/Common/Details/{importCommonId}:
+    get:
+      tags:
+      - Utility/Import
+      operationId: ImportCommon_GetMultiDbDetails
+      parameters:
+      - name: importCommonId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonExtDetailsDto'
+                xml:
+                  name: ImportCommonExtDetailsDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonExtDetailsDto'
+                xml:
+                  name: ImportCommonExtDetailsDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonExtDetailsDto'
+                xml:
+                  name: ImportCommonExtDetailsDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonExtDetailsDto'
+                xml:
+                  name: ImportCommonExtDetailsDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Import common get multi db details
+      x-summary-source: derived
+  /v1/Utility/Import/Common/GetFile/{key}:
+    get:
+      tags:
+      - Utility/Import
+      summary: Gets a Common Import by Id
+      operationId: ImportCommon_GetFileAsync
+      parameters:
+      - name: key
+        in: path
+        description: Id of the Common Import
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        description: Cancellation Token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Utility/Import/Common/Summary/{importCommonId}:
+    get:
+      tags:
+      - Utility/Import
+      operationId: ImportCommon_GetImportCommonSummaryAsync
+      parameters:
+      - name: importCommonId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonSummaryDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonSummaryDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonSummaryDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonSummaryDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonSummaryDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCommonSummaryDto'
+      security:
+      - Authorization: []
+      summary: Import common get import common summary async
+      x-summary-source: derived
+  /v1/Utility/Import/Common/UserDatabases:
+    get:
+      tags:
+      - Utility/Import
+      summary: Return a list of Databases for the user
+      operationId: ImportCommon_UserAlClients
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.UserDatabasesDto'
+                xml:
+                  name: UserDatabasesDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.UserDatabasesDto'
+                xml:
+                  name: UserDatabasesDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.UserDatabasesDto'
+                xml:
+                  name: UserDatabasesDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.UserDatabasesDto'
+                xml:
+                  name: UserDatabasesDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.UserDatabasesDto'
+                xml:
+                  name: UserDatabasesDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.UserDatabasesDto'
+                xml:
+                  name: UserDatabasesDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Utility/Import/Create:
+    post:
+      tags:
+      - Utility/Import
+      summary: Creates a new import based on the provided object
+      operationId: Import_CreateNewImportAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: userId
+        in: query
+        description: Optional.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportModifyDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportModifyDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportModifyDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportModifyDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportModifyDto'
+        description: The import to create, based on it's ImportType and WorkingData objects.
+        required: true
+  /v1/Utility/Import/CreateFromFile:
+    post:
+      tags:
+      - Utility/Import
+      summary: Creates a new import based on the provided object
+      operationId: Import_CreateNewImportFromFileAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCreateFromFileDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCreateFromFileDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCreateFromFileDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCreateFromFileDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportCreateFromFileDto'
+        description: Object that containts the file to create the import with, the import name, and the ID of the import type
+        required: true
+  /v1/Utility/Import/DeleteMany:
+    put:
+      tags:
+      - Utility/Import
+      operationId: Import_DeleteManyAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Import delete many async
+      x-summary-source: derived
+  /v1/Utility/Import/PostImport/{key}:
+    get:
+      tags:
+      - Utility/Import
+      operationId: Import_GetPostDataImportAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+      security:
+      - Authorization: []
+      summary: Import get post data import async
+      x-summary-source: derived
+  /v1/Utility/Import/PreImport/{key}:
+    get:
+      tags:
+      - Utility/Import
+      operationId: Import_GetPreDataImportAsync
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportEditableDto'
+      security:
+      - Authorization: []
+      summary: Import get pre data import async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Utility.ImportEditableDto:
+      properties:
+        importId:
+          type: integer
+          format: int32
+        importTypeId:
+          type: integer
+          format: int32
+        importMetadata:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.ImportMetadataDto'
+        workingData:
+          type: object
+        importName:
+          type: string
+      xml:
+        name: ImportEditableDto
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+    OAS.WebApi.DTO.Utility.ImportCommonExtDetailsDto:
+      properties:
+        id:
+          readOnly: true
+          type: string
+        masterId:
+          type: integer
+          format: int32
+        alClientId:
+          type: integer
+          format: int32
+        databaseName:
+          type: string
+        importId:
+          type: integer
+          format: int32
+        importStatus:
+          type: string
+          enum:
+          - Unknown
+          - ValidationErrors
+          - Validated
+          - ReverseGenerated
+          - Imported
+          - PendingImport
+          - PendingValidation
+          - PendingApply
+          - PendingReversal
+          - Failed
+          - PendingReset
+          - PendingDelete
+        importTypeId:
+          type: integer
+          format: int32
+        importTypeReverseId:
+          type: integer
+          format: int32
+        numberOfRows:
+          readOnly: true
+          type: integer
+          format: int32
+        rowsWithErrors:
+          readOnly: true
+          type: integer
+          format: int32
+        isReversal:
+          type: boolean
+        canDelete:
+          readOnly: true
+          type: boolean
+        canValidate:
+          readOnly: true
+          type: boolean
+        canApply:
+          readOnly: true
+          type: boolean
+        canReset:
+          readOnly: true
+          type: boolean
+        canReverse:
+          readOnly: true
+          type: boolean
+        canExcludeErrors:
+          readOnly: true
+          type: boolean
+      xml:
+        name: ImportCommonExtDetailsDto
+      type: object
+    OAS.WebApi.DTO.Code.SlickPercentCompleteFraction:
+      properties:
+        type:
+          readOnly: true
+          type: string
+        numerator:
+          type: integer
+          format: int32
+        denominator:
+          type: integer
+          format: int32
+      xml:
+        name: SlickPercentCompleteFraction
+      type: object
+    OAS.WebApi.DTO.Utility.ImportCreateFromFileDto:
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+        importTypeId:
+          type: integer
+          format: int32
+        importName:
+          type: string
+        source:
+          type: string
+          enum:
+          - None
+          - OrionVision
+          - DataQuery
+      xml:
+        name: ImportCreateFromFileDto
+      type: object
+    OAS.WebApi.DTO.Utility.ImportCommonSummaryDto:
+      properties:
+        importCommonId:
+          type: integer
+          format: int32
+        importType:
+          type: string
+        importTypeId:
+          type: integer
+          format: int32
+        importName:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        numberOfDbErrors:
+          type: integer
+          format: int32
+        numberOfDatabases:
+          type: integer
+          format: int32
+        canReverseImport:
+          type: boolean
+      xml:
+        name: ImportCommonSummaryDto
+      type: object
+    OAS.WebApi.DTO.Utility.ImportCommonExtDto:
+      properties:
+        importCommonId:
+          type: integer
+          format: int32
+        alClientId:
+          type: integer
+          format: int32
+        rowCountsJSON:
+          type: string
+        status:
+          type: string
+          enum:
+          - Unknown
+          - ValidationErrors
+          - Validated
+          - ReverseGenerated
+          - Imported
+          - PendingImport
+          - PendingValidation
+          - PendingApply
+          - PendingReversal
+          - Failed
+          - PendingReset
+          - PendingDelete
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+        canDelete:
+          type: boolean
+        isReversal:
+          type: boolean
+      xml:
+        name: ImportCommonExtDto
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    OAS.WebApi.DTO.Utility.ImportCommonExtImportCommonDto:
+      properties:
+        id:
+          readOnly: true
+          type: string
+        groupedName:
+          readOnly: true
+          type: string
+        masterId:
+          type: integer
+          format: int32
+        importId:
+          type: integer
+          format: int32
+        importName:
+          type: string
+        importStatus:
+          type: string
+          enum:
+          - Unknown
+          - ValidationErrors
+          - Validated
+          - ReverseGenerated
+          - Imported
+          - PendingImport
+          - PendingValidation
+          - PendingApply
+          - PendingReversal
+          - Failed
+          - PendingReset
+          - PendingDelete
+        importType:
+          type: string
+        importTypeId:
+          type: integer
+          format: int32
+        importTypeReverseId:
+          type: integer
+          format: int32
+        numberOfDatasets:
+          type: integer
+          format: int32
+        databaseName:
+          type: string
+        isReversal:
+          type: boolean
+        alClientId:
+          type: integer
+          format: int32
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        canDelete:
+          readOnly: true
+          type: boolean
+        canExcludeErrors:
+          readOnly: true
+          type: boolean
+      xml:
+        name: ImportCommonExtImportCommonDto
+      type: object
+    OAS.WebApi.DTO.Utility.ImportModifyDto:
+      properties:
+        importId:
+          type: integer
+          format: int32
+        importTypeId:
+          type: integer
+          format: int32
+        workingData:
+          type: object
+        importName:
+          type: string
+        source:
+          type: string
+          enum:
+          - None
+          - OrionVision
+          - DataQuery
+        importCommonId:
+          type: integer
+          format: int32
+      xml:
+        name: ImportModifyDto
+      type: object
+    OAS.WebApi.DTO.Utility.ImportCommonActionDto:
+      properties:
+        alClientId:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        action:
+          type: string
+        importCommonId:
+          type: integer
+          format: int32
+        isReversal:
+          type: boolean
+        importSource:
+          type: string
+          enum:
+          - None
+          - OrionVision
+          - DataQuery
+      xml:
+        name: ImportCommonActionDto
+      type: object
+    OAS.WebApi.DTO.Utility.ImportMetadataDto:
+      properties:
+        validationMessage:
+          type: string
+        validated:
+          type: boolean
+        imported:
+          type: boolean
+        reversed:
+          type: boolean
+        importReverseId:
+          type: integer
+          format: int32
+        importTypeReverseId:
+          type: integer
+          format: int32
+        preImportDataIsNull:
+          type: boolean
+        postImportDataIsNull:
+          type: boolean
+        rowCounts:
+          type: object
+        importCommonId:
+          type: integer
+          format: int32
+      xml:
+        name: ImportMetadataDto
+      type: object
+    OAS.WebApi.DTO.Utility.ImportCommonDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        importTypeId:
+          type: integer
+          format: int32
+        importName:
+          type: string
+        originalFileName:
+          type: string
+        numberOfDatasets:
+          type: integer
+          format: int32
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+        canDelete:
+          type: boolean
+      xml:
+        name: ImportCommonDto
+      type: object
+    OAS.WebApi.DTO.Utility.ImportWithoutDataDto:
+      properties:
+        importId:
+          type: integer
+          format: int32
+        importStatusIcon:
+          readOnly: true
+          type: string
+        importName:
+          type: string
+        importStatus:
+          type: string
+        importType:
+          type: string
+        importTypeId:
+          type: integer
+          format: int32
+        startedByDisplay:
+          type: string
+        startedDate:
+          type: string
+          format: date-time
+        importedByDisplay:
+          type: string
+        importedDate:
+          type: string
+          format: date-time
+        auditInfoDisplay:
+          type: string
+        validated:
+          type: boolean
+        imported:
+          type: boolean
+        reversed:
+          type: boolean
+        validationPercentComplete:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Code.SlickPercentCompleteFraction'
+          readOnly: true
+        importParentId:
+          type: integer
+          format: int32
+        preImportDataIsNull:
+          type: boolean
+        postImportDataIsNull:
+          type: boolean
+        source:
+          type: string
+        importCommonId:
+          type: integer
+          format: int32
+      xml:
+        name: ImportWithoutDataDto
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    OAS.WebApi.DTO.Utility.UserDatabasesDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        databaseName:
+          type: string
+        clientName:
+          type: string
+        advisorNumber:
+          type: integer
+          format: int32
+      xml:
+        name: UserDatabasesDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

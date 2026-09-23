@@ -1,0 +1,84 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Summary Count API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/SummaryCount
+paths:
+  /v1/Trading/SummaryCount:
+    get:
+      tags:
+      - Trading/SummaryCount
+      summary: Returns the number of open orders, pending transactions, and allocation orders…
+      operationId: Trading_GetSummaryCountAsync
+      parameters:
+      - name: resetCache
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeCountSummaryDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeCountSummaryDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeCountSummaryDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeCountSummaryDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeCountSummaryDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeCountSummaryDto'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Trading.TradeCountSummaryDto:
+      properties:
+        orders:
+          type: integer
+          format: int32
+        pending:
+          type: integer
+          format: int32
+        allocations:
+          type: integer
+          format: int32
+        blocks:
+          type: integer
+          format: int32
+        closed:
+          type: integer
+          format: int32
+        tradeFiles:
+          type: integer
+          format: int32
+        strategistModelRebalance:
+          type: integer
+          format: int32
+        lastUpdate:
+          type: string
+          format: date-time
+      xml:
+        name: TradeCountSummaryDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

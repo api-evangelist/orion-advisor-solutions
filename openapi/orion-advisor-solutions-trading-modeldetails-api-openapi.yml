@@ -1,0 +1,206 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Model Details API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/ModelDetails
+paths:
+  /v1/Trading/ModelDetails/{communityModelId}:
+    get:
+      tags:
+      - Trading/ModelDetails
+      summary: Returns model stats by community model id
+      operationId: ModelDetails_GetDetails
+      parameters:
+      - name: communityModelId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelDetailsDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelDetailsDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelDetailsDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelDetailsDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelDetailsDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelDetailsDto'
+      security:
+      - Authorization: []
+  /v1/Trading/ModelDetails/List:
+    post:
+      tags:
+      - Trading/ModelDetails
+      summary: Returns a list of model stats based on a list of supplied community strategist…
+      operationId: ModelDetails_GetByListOfId
+      parameters:
+      - name: repId
+        in: query
+        description: ID of the logged in rep that will be used to filter models available to them
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: token
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: integer
+                  format: int32
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        description: List of community strategist ids to return
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Trading.ModelDetailsDto:
+      properties:
+        modelId:
+          type: integer
+          format: int32
+        communityModelId:
+          type: integer
+          format: int64
+        ytdPerformance:
+          type: number
+          format: double
+        riskScore:
+          type: number
+          format: double
+        indexBlendId:
+          type: integer
+          format: int32
+        modelAccounts:
+          type: integer
+          format: int32
+        prevDayPerformance:
+          type: number
+          format: double
+        modelName:
+          type: string
+        strategist:
+          type: string
+        strategistId:
+          type: integer
+          format: int32
+        advisorFee:
+          type: number
+          format: double
+        aum:
+          type: number
+          format: double
+        aggregateModelId:
+          type: integer
+          format: int32
+        riskCategory:
+          type: string
+        assetClass:
+          type: string
+      xml:
+        name: ModelDetailsDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

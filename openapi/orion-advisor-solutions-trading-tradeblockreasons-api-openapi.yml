@@ -1,0 +1,140 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Trade Block Reasons API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/TradeBlockReasons
+paths:
+  /v1/Trading/TradeBlockReasons:
+    put:
+      tags:
+      - Trading/TradeBlockReasons
+      operationId: TradeBlockReason_UpdateTradeBlockReasonAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBlockReasonDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBlockReasonDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBlockReasonDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBlockReasonDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBlockReasonDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBlockReasonDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBlockReasonDto'
+        required: true
+      summary: Trade block reason update trade block reason async
+      x-summary-source: derived
+  /v1/Trading/TradeBlockReasons/{tradeBlockReasonGlobalId}:
+    delete:
+      tags:
+      - Trading/TradeBlockReasons
+      operationId: TradeBlockReason_DeleteTradeBlockReasonAsync
+      parameters:
+      - name: tradeBlockReasonGlobalId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Trade block reason delete trade block reason async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Trading.TradeBlockReasonDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          description: The name of the trade block reason.
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        globalId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        eclipseFirmId:
+          type: integer
+          format: int32
+        isSystemMaintained:
+          type: boolean
+        allowDetailAssignment:
+          type: boolean
+        syncToEclipse:
+          type: boolean
+      xml:
+        name: TradeBlockReasonDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

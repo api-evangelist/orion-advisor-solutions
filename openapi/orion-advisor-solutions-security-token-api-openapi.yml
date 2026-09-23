@@ -1,0 +1,315 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Security/Token API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Security/Token
+paths:
+  /v1/Security/Token:
+    get:
+      tags:
+      - Security/Token
+      summary: Authorizes Credentials, and returns a token
+      operationId: Token_GetTokenAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: useCurrentProfile
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+    post:
+      tags:
+      - Security/Token
+      summary: Authorizes Credentials, and returns a token
+      operationId: Token_GetTokenForOAuthAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Security.TokenController.JwtToken'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Security.TokenController.JwtToken'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Security.TokenController.JwtToken'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Security.TokenController.JwtToken'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Security.TokenController.JwtToken'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.Domains.Security.TokenController.JwtToken'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Security.TokenController.OauthBody'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Security.TokenController.OauthBody'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Security.TokenController.OauthBody'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Security.TokenController.OauthBody'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Security.TokenController.OauthBody'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Security.TokenController.OauthBody'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Security.TokenController.OauthBody'
+        required: true
+    delete:
+      tags:
+      - Security/Token
+      operationId: Token_Delete
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Token delete
+      x-summary-source: derived
+  /v1/Security/Token/CheckPassword:
+    post:
+      tags:
+      - Security/Token
+      summary: Checks whether the provided string is known to be a compromised password
+      operationId: Token_CheckPasswordAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+          application/json:
+            schema:
+              type: string
+          text/json:
+            schema:
+              type: string
+          application/xml:
+            schema:
+              type: string
+          text/xml:
+            schema:
+              type: string
+          application/x-www-form-urlencoded:
+            schema:
+              type: string
+          multipart/form-data:
+            schema:
+              type: string
+        required: true
+  /v1/Security/Token/element:
+    get:
+      tags:
+      - Security/Token
+      summary: Authorizes Credentials, and returns a token
+      operationId: Token_GetElementTokenAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: useCurrentProfile
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Security/Token/SendTwoFactorCode:
+    post:
+      tags:
+      - Security/Token
+      summary: Sends a registration code to email or sms
+      operationId: Token_SendTwoFactorCode
+      parameters:
+      - name: deliveryType
+        in: query
+        description: Specify if the code should be sent to email or sms
+        required: true
+        schema:
+          type: string
+          enum:
+          - Email
+          - Sms
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.Domains.Security.TokenController.JwtToken:
+      properties:
+        access_token:
+          type: string
+        expires_in:
+          type: integer
+          format: int32
+        refresh_token:
+          type: string
+        error:
+          type: string
+        two_factor_opts:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.Domains.Security.TokenController.TwoFactorCodeDeliveryOption'
+          xml:
+            name: TwoFactorCodeDeliveryOption
+            wrapped: true
+          type: array
+      xml:
+        name: JwtToken
+      type: object
+    OAS.WebApi.Domains.Security.TokenController.TwoFactorCodeDeliveryOption:
+      properties:
+        type:
+          type: string
+          enum:
+          - Email
+          - Sms
+        value:
+          type: string
+      xml:
+        name: TwoFactorCodeDeliveryOption
+      type: object
+    OAS.WebApi.Domains.Security.TokenController.OauthBody:
+      properties:
+        grant_type:
+          type: string
+        code:
+          type: string
+        redirect_uri:
+          type: string
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        useCurrentProfile:
+          type: boolean
+        authorization:
+          type: string
+        refresh_token:
+          type: string
+      xml:
+        name: OauthBody
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

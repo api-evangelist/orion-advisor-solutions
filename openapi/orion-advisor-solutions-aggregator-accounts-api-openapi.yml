@@ -1,0 +1,185 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Aggregator/Accounts API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Aggregator/Accounts
+paths:
+  /v1/Aggregator/Accounts:
+    get:
+      tags:
+      - Aggregator/Accounts
+      summary: Gets All Akoya Accounts with balances
+      description: 'Sample Request
+
+        GET /Aggregator/Accounts
+
+        {
+
+        "credentialId": 1234,
+
+        "aggregatorId":1060
+
+        }'
+      operationId: ConfirmAggregator_GetAllAccountsWithBalances
+      parameters:
+      - name: credentialId
+        in: query
+        description: 'The credential ID (aka: appLinkDtlId)'
+        required: true
+        schema:
+          type: string
+      - name: aggregatorId
+        in: query
+        description: 'The Aggregator ID (aka: appLinkId'
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Confirm.PlanningName'
+                xml:
+                  name: PlanningName
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Confirm.PlanningName'
+                xml:
+                  name: PlanningName
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Confirm.PlanningName'
+                xml:
+                  name: PlanningName
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Confirm.PlanningName'
+                xml:
+                  name: PlanningName
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Confirm.PlanningName'
+                xml:
+                  name: PlanningName
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.DataModel.Confirm.PlanningName'
+                xml:
+                  name: PlanningName
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.DataModel.Confirm.PlanningName:
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int32
+        acctCode:
+          type: string
+          maxLength: 500
+          minLength: 0
+        accountType:
+          type: string
+          maxLength: 50
+          minLength: 0
+        accountNumberDisplay:
+          type: string
+          maxLength: 50
+          minLength: 0
+        description:
+          type: string
+          maxLength: 500
+          minLength: 0
+        nickname:
+          type: string
+          maxLength: 500
+          minLength: 0
+        productName:
+          type: string
+          maxLength: 500
+          minLength: 0
+        status:
+          type: string
+          maxLength: 50
+          minLength: 0
+        lineOfBusiness:
+          type: string
+          maxLength: 500
+          minLength: 0
+        balanceType:
+          type: string
+          maxLength: 50
+          minLength: 0
+        interestRate:
+          type: number
+          format: double
+        interestRateType:
+          type: string
+          maxLength: 50
+          minLength: 0
+        interstRateAsOf:
+          type: string
+          format: date-time
+        lastActivityDate:
+          type: string
+          format: date-time
+        currentBalance:
+          type: number
+          format: double
+        availableBalance:
+          type: number
+          format: double
+        balanceAsOf:
+          type: string
+          format: date-time
+        fiAttributes:
+          type: string
+        currencyCode:
+          type: string
+          maxLength: 50
+          minLength: 0
+        ocAccountNum:
+          type: string
+          maxLength: 64
+          minLength: 0
+        credentialId:
+          type: string
+          maxLength: 100
+          minLength: 0
+      xml:
+        name: PlanningName
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

@@ -1,0 +1,398 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Blaze API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/Blaze
+paths:
+  /v1/Integrations/Blaze/Configuration:
+    get:
+      tags:
+      - Integrations/Blaze
+      summary: Gets the configuration data for Blaze for the current user
+      operationId: Blaze_GetConfigurationAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+      security:
+      - Authorization: []
+  /v1/Integrations/Blaze/Remove:
+    post:
+      tags:
+      - Integrations/Blaze
+      summary: Removes the Blaze integration for the current user
+      description: The user must have the necessary privileges to setup the integration.
+      operationId: Blaze_RemoveServiceAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+            multipart/form-data:
+              schema:
+                type: boolean
+      security:
+      - Authorization: []
+  /v1/Integrations/Blaze/RescheduleJob:
+    post:
+      tags:
+      - Integrations/Blaze
+      summary: Update a job schedule for Blaze for the current user
+      operationId: Blaze_ChangeJobScheduleRunTimeAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Scheduler.JobScheduleUpdateRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Scheduler.JobScheduleUpdateRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Scheduler.JobScheduleUpdateRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Scheduler.JobScheduleUpdateRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Scheduler.JobScheduleUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Scheduler.JobScheduleUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Scheduler.JobScheduleUpdateRequest'
+        description: "A {OAS.WebApi.DTO.Scheduler.JobScheduleUpdateRequest} containing the time of day the job should run. \n            The date portion of the run time parameter is ignored."
+        required: true
+  /v1/Integrations/Blaze/RunJobNow:
+    post:
+      tags:
+      - Integrations/Blaze
+      summary: Runs the job schedule for Blaze for the current user
+      operationId: Blaze_RunJobScheduleNowAsync
+      parameters:
+      - name: jobScheduleId
+        in: query
+        description: The ID of an existing Job Schedule.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+      security:
+      - Authorization: []
+  /v1/Integrations/Blaze/ScheduleJob:
+    post:
+      tags:
+      - Integrations/Blaze
+      summary: Schedules a job schedule for Blaze for the current user
+      operationId: Blaze_CreateNewJobScheduleAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+        description: A {OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto} with the job schedule's desired run time and weekendsOnly values set.
+        required: true
+  /v1/Integrations/Blaze/Setup:
+    post:
+      tags:
+      - Integrations/Blaze
+      summary: Sets up Blaze integration for the current user
+      description: The user must have the necessary privileges to setup the integration.
+      operationId: Blaze_SetupServiceAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+        description: A {OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto} containing the properties of the integration.
+        required: true
+  /v1/Integrations/Blaze/UnscheduleJob:
+    post:
+      tags:
+      - Integrations/Blaze
+      summary: Removes the job schedule for Blaze for the current user
+      operationId: Blaze_RemoveJobScheduleAsync
+      parameters:
+      - name: jobScheduleId
+        in: query
+        description: The ID of an existing Job Schedule.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto:
+      properties:
+        key:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        termsAccepted:
+          type: boolean
+      xml:
+        name: IntegrationSetupRequestDto
+      type: object
+    OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto:
+      properties:
+        partnerAppId:
+          description: The unique ID of the partner app.
+          type: integer
+          format: int32
+        productName:
+          description: The unique name of the partner app product.
+          type: string
+        jobScheduleDescription:
+          description: The description of the scheduled job.
+          type: string
+        jobScheduleId:
+          description: An optional ID of the Job scheduled for the current integration and firm. Defaults to zero if no Job is scheduled.
+          type: integer
+          format: int32
+        lastRun:
+          type: string
+          format: date-time
+        runOn:
+          description: The date and time of the next run of the scheduled jobs.
+          type: string
+          format: date-time
+        status:
+          description: Gets or sets a JobStatus description of the last run.
+          type: string
+        weekdaysOnly:
+          description: Indicates whether the job is run on weekdays only or everyday.
+          type: boolean
+        routePrefix:
+          description: The prefix for this controller. Used by clients to determine the correct endpoints to call.
+          type: string
+      xml:
+        name: PartnerAppConfigurationDto
+      type: object
+    OAS.WebApi.DTO.Scheduler.JobScheduleUpdateRequest:
+      properties:
+        jobRunTime:
+          type: string
+          format: date-time
+        weekdaysOnly:
+          type: boolean
+      xml:
+        name: JobScheduleUpdateRequest
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

@@ -1,0 +1,264 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Trade Generation Status API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/TradeGenerationStatus
+paths:
+  /v1/Trading/TradeGenerationStatus/{batchId}:
+    get:
+      tags:
+      - Trading/TradeGenerationStatus
+      summary: Gets the status of trade generation for the batchId provided
+      operationId: Trading_TradeGenerationStatus
+      parameters:
+      - name: batchId
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: includeErrors
+        in: query
+        description: Default is True.  When true, the Errors collection will be populated with Errors, Warnings, and Informational Messages
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: waitSeconds
+        in: query
+        description: Default is 0.  If specified, the endpoint will re-check in the specified amount of time before returning.  This is to help reduce polling chatter.
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.BatchProcessingDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.BatchProcessingDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.BatchProcessingDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.BatchProcessingDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.BatchProcessingDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.BatchProcessingDto'
+      security:
+      - Authorization: []
+  /v1/Trading/TradeGenerationStatus/{batchId}/Message:
+    get:
+      tags:
+      - Trading/TradeGenerationStatus
+      summary: Returns a message formatted for the users inbox based on a trade batch id
+      operationId: Trading_TradeGenerationStatusMessage
+      parameters:
+      - name: batchId
+        in: path
+        description: Id from tblBatchProcessing
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.MessageDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.MessageDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.MessageDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.MessageDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.MessageDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.MessageDto'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Utility.MessageDetailDto:
+      properties:
+        severityCode:
+          type: integer
+          format: int32
+        severity:
+          type: string
+        message:
+          type: string
+        entityEnum:
+          type: string
+        entityId:
+          type: integer
+          format: int32
+      xml:
+        name: MessageDetailDto
+      type: object
+    OAS.WebApi.DTO.Utility.BatchProcessingErrorDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        batchId:
+          type: integer
+          format: int32
+        errorMessage:
+          type: string
+        details:
+          type: string
+        severityCode:
+          type: integer
+          format: int32
+        severity:
+          type: string
+          enum:
+          - Error
+          - Warning
+          - Information
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+      xml:
+        name: BatchProcessingErrorDto
+      type: object
+    OAS.WebApi.DTO.Utility.MessageDto:
+      properties:
+        entityId:
+          type: integer
+          format: int32
+        entityEnum:
+          type: string
+        severity:
+          type: string
+        severityCode:
+          type: integer
+          format: int32
+        receivedDate:
+          type: string
+          format: date-time
+        subject:
+          type: string
+        message:
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.MessageDetailDto'
+          xml:
+            name: MessageDetailDto
+            wrapped: true
+          type: array
+      xml:
+        name: MessageDto
+      type: object
+    OAS.WebApi.DTO.Utility.BatchProcessingDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        correlationId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        alClientName:
+          type: string
+        status:
+          type: string
+          enum:
+          - New
+          - Processing
+          - Failed
+          - PartiallyComplete
+          - Complete
+          - Canceled
+        message:
+          readOnly: true
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedDate:
+          type: string
+          format: date-time
+        elapsed:
+          readOnly: true
+          type: string
+        parentId:
+          type: integer
+          format: int32
+        isDone:
+          type: boolean
+        totalItems:
+          type: integer
+          format: int32
+        itemsCompleted:
+          type: integer
+          format: int32
+        processingType:
+          type: string
+          enum:
+          - Undefined
+          - Trading
+          - PendingTransactions
+          - CheckForWashTrades
+          - CustomImport
+          - CostBasis
+          - Composites
+          - TradeExecution
+          - ConvertToSleeves
+          - Confirmation
+          - DataQueries
+          - Notifications
+          - Export
+          - Maintenance
+          - ConfirmationUndo
+        errorCount:
+          readOnly: true
+          type: integer
+          format: int32
+        warningCount:
+          type: integer
+          format: int32
+        details:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.BatchProcessingErrorDto'
+          xml:
+            name: BatchProcessingErrorDto
+            wrapped: true
+          type: array
+      xml:
+        name: BatchProcessingDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

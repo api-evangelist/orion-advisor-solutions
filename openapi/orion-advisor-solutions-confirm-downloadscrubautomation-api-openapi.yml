@@ -1,0 +1,118 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Confirm/Download Scrub Automation API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Confirm/DownloadScrubAutomation
+paths:
+  /v1/Confirm/DownloadScrubAutomation:
+    get:
+      tags:
+      - Confirm/DownloadScrubAutomation
+      summary: Gets all the sleeve rules from tblDownloadSleeveRules
+      operationId: DownloadScrubAutomation_GetScrubAutomationSettings
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+            multipart/form-data:
+              schema:
+                type: string
+      security:
+      - Authorization: []
+  /v1/Confirm/DownloadScrubAutomation/Save:
+    put:
+      tags:
+      - Confirm/DownloadScrubAutomation
+      summary: Saves the sleeve json arrays to userDefinedData
+      operationId: DownloadScrubAutomation_SavePositionProcesses
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.ScrubAutomationRulesDTO'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.ScrubAutomationRulesDTO'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.ScrubAutomationRulesDTO'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.ScrubAutomationRulesDTO'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.ScrubAutomationRulesDTO'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.ScrubAutomationRulesDTO'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.ScrubAutomationRulesDTO'
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Confirm.ScrubAutomationRulesDTO:
+      properties:
+        scrubAutomationRules:
+          type: string
+        scrubAutomationUserDefinedDataID:
+          type: integer
+          format: int32
+      xml:
+        name: ScrubAutomationRulesDTO
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

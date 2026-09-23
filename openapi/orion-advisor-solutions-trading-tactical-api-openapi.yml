@@ -1,0 +1,3154 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Tactical API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/Tactical
+paths:
+  /v1/Trading/Tactical:
+    put:
+      tags:
+      - Trading/Tactical
+      summary: Recalculate trade shares, trade and post trade amounts
+      operationId: TradingTactical_UpdateTacticalAsync
+      parameters:
+      - name: tradeType
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - Undefined
+          - Shares
+          - Dollars
+          - Percent
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: commitToDb
+        in: query
+        description: 'Optional. Default: True.'
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: executeTrade
+        in: query
+        description: 'Optional. Default: True.'
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBatchDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBatchDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBatchDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBatchDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBatchDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TradeBatchDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+        required: true
+    post:
+      tags:
+      - Trading/Tactical
+      summary: Endpoint to create new trade
+      operationId: TradingTactical_CreateTradeAsync
+      parameters:
+      - name: usePendingValue
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: clientId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: modelAggId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: resetCache
+        in: query
+        description: 'Optional. Default: false. The result is cached for fifteen minutes. To force the cache to refresh call with resetCache = true.'
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+        required: true
+  /v1/Trading/Tactical/{accountId}/{productId}:
+    put:
+      tags:
+      - Trading/Tactical
+      summary: Recalculate trade shares, trade and post trade amounts without saving to db
+      operationId: TradingTactical_UpdateTradeAndPostTradeValuesAsync
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: productId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+        required: true
+  /v1/Trading/Tactical/Account/{accountId}:
+    get:
+      tags:
+      - Trading/Tactical
+      summary: Gets a list of tactical trades by account
+      operationId: TradingTactical_GetTacticalTradesByAccountKeyAsync
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: usePendingValue
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: includeCash
+        in: query
+        description: If cash is in the model, this is ignored.  When False, cash is excluded from values.
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: ignoreDollarModel
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: modelId
+        in: query
+        description: If passed in, the assigned model will be overriden by this model.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: cashValue
+        in: query
+        description: If Passed in, the cash in the account will be updated with this value.  This is useful if you are adding, or withdrawaling money from the account.
+        required: false
+        schema:
+          type: number
+          format: float
+      - name: calculateCosts
+        in: query
+        description: If passed in, it will populate costs fields. However, enabling it will have heavy performance impact.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: accountType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: resetCache
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: defaultAction
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/Tactical/AccountList:
+    get:
+      tags:
+      - Trading/Tactical
+      summary: Gets a list of tactical trades by list of account ids
+      operationId: TradingTactical_GetTacticalTradesByAccountListAsync
+      parameters:
+      - name: ids
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: usePendingValue
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: includeCash
+        in: query
+        description: If cash is in the model, this is ignored.  When False, cash is excluded from values.
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: ignoreDollarModel
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: modelId
+        in: query
+        description: If passed in, the assigned model will be overriden by this model.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: cashValue
+        in: query
+        description: If Passed in, the cash in the account will be updated with this value.  This is useful if you are adding, or withdrawaling money from the account.
+        required: false
+        schema:
+          type: number
+          format: float
+      - name: calculateCosts
+        in: query
+        description: If passed in, it will populate costs fields. However, enabling it will have heavy performance impact.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: accountType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: resetCache
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: defaultAction
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+      deprecated: true
+      security:
+      - Authorization: []
+    post:
+      tags:
+      - Trading/Tactical
+      summary: Gets a list of tactical trades by list of account ids
+      operationId: TradingTactical_PostTacticalTradesByAccountListAsync
+      parameters:
+      - name: cancelToken
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Trading.Dto.AccountListRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Trading.Dto.AccountListRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Trading.Dto.AccountListRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Trading.Dto.AccountListRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.Domains.Trading.Dto.AccountListRequest'
+        required: true
+  /v1/Trading/Tactical/Action/Balance:
+    put:
+      tags:
+      - Trading/Tactical
+      summary: Balance rows in memory
+      operationId: TradingTactical_Balance
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+        required: true
+  /v1/Trading/Tactical/Action/BuyProportionately:
+    put:
+      tags:
+      - Trading/Tactical
+      summary: Spend available cash pro rata to the model
+      operationId: TradingTactical_BuyProportionatelyAsync
+      parameters:
+      - name: usePendingValue
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: populateCosts
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: amount
+        in: query
+        required: true
+        schema:
+          type: number
+          format: double
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+        required: true
+  /v1/Trading/Tactical/Action/BuyRebalance:
+    put:
+      tags:
+      - Trading/Tactical
+      summary: Buy all underweight products up their model targets
+      operationId: TradingTactical_BuyRebalanceAsync
+      parameters:
+      - name: usePendingValue
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: populateCosts
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: amount
+        in: query
+        required: true
+        schema:
+          type: number
+          format: double
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+        required: true
+  /v1/Trading/Tactical/Action/SellProportionately:
+    put:
+      tags:
+      - Trading/Tactical
+      summary: Sell positions in proportion to the model target % to raise specified amount
+      operationId: TradingTactical_SellProportionatelyAsync
+      parameters:
+      - name: usePendingValue
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: populateCosts
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: amount
+        in: query
+        required: true
+        schema:
+          type: number
+          format: double
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+        required: true
+  /v1/Trading/Tactical/Action/SellRebalance:
+    put:
+      tags:
+      - Trading/Tactical
+      summary: Sell all overweight positions to their target percents
+      operationId: TradingTactical_SellRebalanceAsync
+      parameters:
+      - name: usePendingValue
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: populateCosts
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: amount
+        in: query
+        required: true
+        schema:
+          type: number
+          format: double
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+        required: true
+  /v1/Trading/Tactical/Action/TargetAmount:
+    put:
+      tags:
+      - Trading/Tactical
+      summary: Assign target percent to specified rows and update update rows
+      operationId: TradingTactical_TargetAmount
+      parameters:
+      - name: targetAmount
+        in: query
+        description: The end $ Dollar Amount to target.
+        required: true
+        schema:
+          type: number
+          format: double
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+        required: true
+  /v1/Trading/Tactical/Action/TargetPercent:
+    put:
+      tags:
+      - Trading/Tactical
+      summary: Assign target percent to specified rows and update update rows
+      operationId: TradingTactical_TargetPercent
+      parameters:
+      - name: targetPercent
+        in: query
+        required: true
+        schema:
+          type: number
+          format: double
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+        required: true
+  /v1/Trading/Tactical/Action/TradingRebalance:
+    put:
+      tags:
+      - Trading/Tactical
+      summary: Generate trades to balance account
+      operationId: TradingTactical_RebalanceTradeToolAsync
+      parameters:
+      - name: usePendingValue
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: populateCosts
+        in: query
+        required: true
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+        required: true
+  /v1/Trading/Tactical/Client/{clientId}:
+    get:
+      tags:
+      - Trading/Tactical
+      summary: Gets a list of tactical trades by household
+      operationId: TradingTactical_TacticalTradesByHouseholdAsync
+      parameters:
+      - name: clientId
+        in: path
+        description: Household/ClientId
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: usePendingValue
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: includeCash
+        in: query
+        description: If cash is in the model, this is ignored.  When False, cash is excluded from values.
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: ignoreDollarModel
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: modelId
+        in: query
+        description: If passed in, the assigned model will be overridden by this model.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: cashValue
+        in: query
+        description: If Passed in, the cash in the account will be updated with this value.  This is useful if you are adding, or withdrawing money from the account.
+        required: false
+        schema:
+          type: number
+          format: float
+      - name: calculateCosts
+        in: query
+        description: If passed in, it will populate costs fields. However, enabling it will have heavy performance impact.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: modelAggIdFilter
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: resetCache
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: defaultAction
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/Tactical/ClosedOrders:
+    put:
+      tags:
+      - Trading/Tactical
+      summary: Gets a list of tactical trades by list of account ids
+      operationId: TradingTactical_TacticalTradesFromClosedOrdersAsync
+      parameters:
+      - name: usePendingValue
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: includeCash
+        in: query
+        description: If cash is in the model, this is ignored.  When False, cash is excluded from values.
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: ignoreDollarModel
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: modelId
+        in: query
+        description: If passed in, the assigned model will be overriden by this model.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: cashValue
+        in: query
+        description: If Passed in, the cash in the account will be updated with this value.  This is useful if you are adding, or withdrawaling money from the account.
+        required: false
+        schema:
+          type: number
+          format: float
+      - name: calculateCosts
+        in: query
+        description: If passed in, it will populate costs fields. However, enabling it will have heavy performance impact.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: accountType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: resetCache
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: defaultAction
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+              xml:
+                name: OrderDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+              xml:
+                name: OrderDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+              xml:
+                name: OrderDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+              xml:
+                name: OrderDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+              xml:
+                name: OrderDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+              xml:
+                name: OrderDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+              xml:
+                name: OrderDto
+                wrapped: true
+              type: array
+        description: List of order dtos.
+        required: true
+  /v1/Trading/Tactical/Product/{productId}:
+    get:
+      tags:
+      - Trading/Tactical
+      summary: Gets a list of tactical trades by product
+      operationId: TradingTactical_TacticalTradesByProductAsync
+      parameters:
+      - name: productId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: usePendingValue
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: includeCash
+        in: query
+        description: If cash is in the model, this is ignored.  When False, cash is excluded from values.
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: ignoreDollarModel
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: modelId
+        in: query
+        description: If passed in, the assigned model will be overriden by this model.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: cashValue
+        in: query
+        description: If Passed in, the cash in the account will be updated with this value.  This is useful if you are adding, or withdrawaling money from the account.
+        required: false
+        schema:
+          type: number
+          format: float
+      - name: calculateCosts
+        in: query
+        description: If passed in, it will populate costs fields. However, enabling it will have heavy performance impact.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: resetCache
+        in: query
+        description: 'Optional. Default: false. The result is cached for fifteen minutes. To force the cache to refresh call with resetCache = true.'
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: defaultAction
+        in: query
+        description: 'Optional. Default: null  The user is able to select buy, sell, or nothing when opening tactical trade editor.  The action will then be populated for all of the trades.'
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/Tactical/Registration/{registrationId}:
+    get:
+      tags:
+      - Trading/Tactical
+      summary: Gets a list of tactical trades by registration
+      operationId: TradingTactical_TacticalTradesByRegistrationAsync
+      parameters:
+      - name: registrationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: usePendingValue
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: includeCash
+        in: query
+        description: If cash is in the model, this is ignored.  When False, cash is excluded from values.
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: ignoreDollarModel
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: modelId
+        in: query
+        description: If passed in, the assigned model will be overridden by this model.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: cashValue
+        in: query
+        description: If Passed in, the cash in the account will be updated with this value.  This is useful if you are adding, or withdrawing money from the account.
+        required: false
+        schema:
+          type: number
+          format: float
+      - name: calculateCosts
+        in: query
+        description: If passed in, it will populate costs fields. However, enabling it will have heavy performance impact.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: resetCache
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: defaultAction
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/Tactical/TradingTool:
+    put:
+      tags:
+      - Trading/Tactical
+      summary: Endpoint to run trading tools
+      operationId: TradingTactical_TacticalTradeToolAsync
+      parameters:
+      - name: routine
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - Rebalance
+          - SellProportionately
+          - SellRebalance
+          - BuyProportionately
+          - BuyRebalance
+      - name: usePendingValue
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: populateCosts
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: amount
+        in: query
+        required: false
+        schema:
+          type: number
+          format: double
+          default: 0.0
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+                xml:
+                  name: TacticalTradeDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+              xml:
+                name: TacticalTradeDto
+                wrapped: true
+              type: array
+        required: true
+components:
+  schemas:
+    OAS.WebApi.DTO.Trading.OrderDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        tradeIt:
+          type: boolean
+        productId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        assetId:
+          type: integer
+          format: int32
+        transactionId:
+          type: integer
+          format: int32
+        registrationId:
+          type: integer
+          format: int32
+        fixBlockOrderId:
+          type: integer
+          format: int32
+        hasBlock:
+          readOnly: true
+          type: boolean
+        trInstanceId:
+          type: integer
+          format: int32
+        handlInst:
+          type: string
+        execInst:
+          type: string
+        side:
+          type: string
+        optionTradeType:
+          type: string
+          enum:
+          - None
+          - CoveredCall
+        optionDwnldMgrId:
+          type: integer
+          format: int32
+        optionTRInterfaceId:
+          type: integer
+          format: int32
+        locateReqd:
+          type: boolean
+        ordType:
+          type: string
+        assetClassName:
+          type: string
+        representativeName:
+          type: string
+        limitPrice:
+          type: number
+          format: double
+        stopPrice:
+          type: number
+          format: double
+        timeInForce:
+          type: string
+        expireTime:
+          type: string
+          format: date-time
+        warningMessage:
+          type: string
+        orderQty:
+          type: number
+          format: double
+        originalOrderQty:
+          type: number
+          format: double
+        orderAmt:
+          type: number
+          format: double
+        orderPct:
+          type: number
+          format: double
+        sharesOwned:
+          type: number
+          format: double
+        mktValue:
+          type: number
+          format: double
+        navPrice:
+          type: number
+          format: double
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        notes:
+          type: string
+        instanceNotes:
+          type: string
+        tradeReason:
+          type: string
+        isDiscretionary:
+          type: boolean
+        settlmntTyp:
+          type: string
+        futSettDate:
+          type: string
+          format: date-time
+        rowVersion:
+          type: string
+          format: byte
+        productName:
+          type: string
+        ticker:
+          type: string
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        cusip:
+          type: string
+        accountNumber:
+          type: string
+        batchName:
+          type: string
+        allocStatus:
+          type: string
+        ordStatus:
+          type: string
+        registrationName:
+          type: string
+        accountType:
+          type: string
+        accountValueCurrent:
+          type: number
+          format: double
+        cashValueCurrent:
+          type: number
+          format: double
+        cashValuePostTrade:
+          type: number
+          format: double
+        assetUnitsCurrent:
+          type: number
+          format: double
+        cashValuePreTradePerc:
+          type: number
+          format: double
+        cashValuePostTradePerc:
+          type: number
+          format: double
+        shortTermGain:
+          type: number
+          format: double
+        longTermGain:
+          type: number
+          format: double
+        totalGain:
+          readOnly: true
+          type: number
+          format: double
+        daysUntilLongTerm:
+          type: integer
+          format: int32
+        washAmount:
+          type: number
+          format: double
+        washUnits:
+          type: number
+          format: double
+        calculationMethod:
+          type: string
+        gainLossMessage:
+          readOnly: true
+          type: string
+        blockName:
+          readOnly: true
+          type: string
+        custodian:
+          type: string
+        custodianId:
+          type: integer
+          format: int32
+        fixRouting:
+          type: string
+        tradeToAcctPerc:
+          readOnly: true
+          type: number
+          format: double
+        application:
+          type: string
+          enum:
+          - Undefined
+          - GlobalTrade
+          - Modeling
+          - CheckReq
+          - FeeReq
+          - BuySell
+          - ACHReq
+          - EligibleTrades
+          - All
+          - CashFundADV
+          - CashFundSWD
+          - SWPDCA
+          - SysPurchTrade
+          - Distribution
+          - Contribution
+        tradingInstructions:
+          type: string
+        repNotes:
+          type: string
+        clientDirected:
+          type: boolean
+        subAdvisor:
+          type: string
+        reinvestDividends:
+          type: boolean
+        reinvestLTCapGains:
+          type: boolean
+        reinvestSTCapGains:
+          type: boolean
+        instanceDescription:
+          type: string
+        currentModelName:
+          description: This is the model currently assigned to the account. Previously was returned by the {OAS.WebApi.DTO.Trading.OrderDto.ModelName} property.
+          type: string
+        modelName:
+          description: This is the model assigned to the account at the time the trade was created, starting with the 8/2014 build.
+          type: string
+        masterAccountNumber:
+          type: string
+        managementStyle:
+          type: string
+        groupNum:
+          type: string
+        qualified:
+          type: boolean
+        minCashBalanceType:
+          type: string
+          enum:
+          - Dollars
+          - Percent
+        minCashBalance:
+          type: number
+          format: double
+        replenishMinCash:
+          type: boolean
+        swpAmount:
+          type: number
+          format: double
+        swpFrequency:
+          type: string
+          enum:
+          - Monthly
+          - Quarterly
+          - Semiannually
+          - Annually
+        nextSwpDate:
+          type: string
+          format: date-time
+        cashNeededNext4Months:
+          type: number
+          format: double
+        targetCashPerc:
+          type: number
+          format: double
+        targetCash:
+          readOnly: true
+          type: number
+          format: double
+        dollarModelAmount:
+          type: number
+          format: double
+        totalCashNeed:
+          readOnly: true
+          type: number
+          format: double
+        approvalStatus:
+          type: string
+          enum:
+          - Approved
+          - PendingApproval
+          - NotApproved
+        nsccTradeType:
+          type: string
+          enum:
+          - UseDefault
+          - NormalPurchase
+          - Nav
+          - Roa
+          - Loi
+        exchangeId:
+          type: integer
+          format: int32
+        exchangeTicker:
+          type: string
+        rebalanceLevel:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        solicited:
+          type: boolean
+        vspDate:
+          type: string
+          format: date-time
+        vspPrice:
+          type: number
+          format: double
+        sellPriority:
+          type: integer
+          format: int32
+        roaAmount:
+          type: number
+          format: double
+        trustType:
+          type: string
+          enum:
+          - None
+          - CTC
+          - EAS
+        assetCostCustodianId:
+          type: integer
+          format: int32
+        cashValuePostTradeExecution:
+          type: number
+          format: double
+        riskBudget:
+          type: integer
+          format: int32
+        registrationSleeveStrategyName:
+          type: string
+        hasFixLog:
+          type: boolean
+        eclipseOrderId:
+          type: integer
+          format: int32
+      xml:
+        name: OrderDto
+      type: object
+    OAS.WebApi.Domains.Trading.Dto.AccountListRequest:
+      properties:
+        usePendingValue:
+          type: boolean
+        modelId:
+          type: integer
+          format: int32
+        includeCash:
+          type: boolean
+        ignoreDollarModel:
+          type: boolean
+        cashValue:
+          type: number
+          format: float
+        accountType:
+          type: string
+        calculateCosts:
+          type: boolean
+        resetCache:
+          type: boolean
+        defaultAction:
+          type: string
+        ids:
+          items:
+            type: integer
+            format: int32
+          type: array
+      xml:
+        name: AccountListRequest
+      type: object
+    OAS.WebApi.DTO.Trading.TacticalTradeDto:
+      properties:
+        outOfTolerance:
+          readOnly: true
+          type: string
+        accountNumber:
+          type: string
+        action:
+          type: string
+        ticker:
+          type: string
+        isExcluded:
+          type: boolean
+        tradeShares:
+          type: number
+          format: double
+        price:
+          type: number
+          format: double
+        tradeAmount:
+          type: number
+          format: double
+        postTradeValue:
+          readOnly: true
+          type: number
+          format: double
+        postTradeShares:
+          readOnly: true
+          type: number
+          format: double
+        postTradePercentage:
+          readOnly: true
+          type: number
+          format: double
+        postTradeDifferenceValue:
+          readOnly: true
+          type: number
+          format: double
+        postTradeDifferenceShares:
+          readOnly: true
+          type: number
+          format: double
+        postTradeDifferencePercentage:
+          readOnly: true
+          type: number
+          format: double
+        targetValue:
+          readOnly: true
+          type: number
+          format: double
+        targetShares:
+          readOnly: true
+          type: number
+          format: double
+        targetPercentage:
+          type: number
+          format: double
+        differenceValue:
+          readOnly: true
+          type: number
+          format: double
+        differenceShares:
+          readOnly: true
+          type: number
+          format: double
+        differencePercentage:
+          readOnly: true
+          type: number
+          format: double
+        currentValue:
+          readOnly: true
+          type: number
+          format: double
+        currentShares:
+          type: number
+          format: double
+        currentPercentage:
+          readOnly: true
+          type: number
+          format: double
+        unrealizedCostBasisShortTerm:
+          type: number
+          format: double
+        unrealizedCostBasisLongTerm:
+          type: number
+          format: double
+        unrealizedGainAmount:
+          readOnly: true
+          type: number
+          format: double
+        unrealizedGainPercent:
+          readOnly: true
+          type: number
+          format: double
+        realizedTradeGain:
+          type: number
+          format: double
+        tradeReason:
+          type: string
+        message:
+          type: string
+        accountDescription:
+          readOnly: true
+          type: string
+        targetCashPercentage:
+          type: number
+          format: double
+        lowerTolerance:
+          type: number
+          format: double
+        upperTolerance:
+          type: number
+          format: double
+        orders:
+          items:
+            type: integer
+            format: int32
+          type: array
+        assetId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        account:
+          type: string
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        modelName:
+          type: string
+        cashValue:
+          type: number
+          format: double
+        accountValue:
+          type: number
+          format: double
+        specialInstructions:
+          type: string
+        previousTradeShares:
+          type: number
+          format: double
+        previousTradeAmount:
+          type: number
+          format: double
+        previousTradeAction:
+          type: string
+        assetClass:
+          type: string
+        assetCategory:
+          type: string
+        riskCategory:
+          type: string
+        isTradingBlocked:
+          type: boolean
+        areOrdersSent:
+          type: boolean
+        areOrdersApproved:
+          type: boolean
+        isRepLevelTrading:
+          type: boolean
+        cashLowerTolerance:
+          type: number
+          format: double
+        cashUpperTolerance:
+          type: number
+          format: double
+        minCashBalance:
+          type: number
+          format: double
+        minimumCashBalanceType:
+          type: string
+          enum:
+          - Dollars
+          - Percent
+        unitBalanceScale:
+          type: string
+        priceScale:
+          type: integer
+          format: int32
+        isAccountActive:
+          type: boolean
+        isEditable:
+          readOnly: true
+          type: boolean
+        amortizationAmount:
+          type: number
+          format: double
+        isCustodialCash:
+          type: boolean
+        groupValue:
+          type: number
+          format: double
+        groupCashValue:
+          type: number
+          format: double
+        originalTargetPercentage:
+          type: number
+          format: double
+        originalTargetCashPercentage:
+          type: number
+          format: double
+        groupId:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+      xml:
+        name: TacticalTradeDto
+      type: object
+    OAS.WebApi.DTO.Trading.TradeBatchDto:
+      properties:
+        batchId:
+          type: integer
+          format: int32
+        trades:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+          xml:
+            name: TacticalTradeDto
+            wrapped: true
+          type: array
+      xml:
+        name: TradeBatchDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

@@ -1,0 +1,212 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/FP Alpha API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/FPAlpha
+paths:
+  /v1/Integrations/FPAlpha/GetToken:
+    get:
+      tags:
+      - Integrations/FPAlpha
+      summary: This is called from fp-alpha-credentials.html after initial OAuth redirect from…
+      operationId: FPAlpha_GetTokenAsync
+      parameters:
+      - name: code
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.FPAlpha.FPAlphaToken'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.FPAlpha.FPAlphaToken'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.FPAlpha.FPAlphaToken'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.FPAlpha.FPAlphaToken'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.FPAlpha.FPAlphaToken'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.FPAlpha.FPAlphaToken'
+      security:
+      - Authorization: []
+  /v1/Integrations/FPAlpha/Redirect:
+    get:
+      tags:
+      - Integrations/FPAlpha
+      operationId: FPAlpha_GetRedirectUrlAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: FP alpha get redirect url async
+      x-summary-source: derived
+  /v1/Integrations/FPAlpha/RefreshToken:
+    get:
+      tags:
+      - Integrations/FPAlpha
+      operationId: FPAlpha_RefreshTokenAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.FPAlpha.FPAlphaToken'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.FPAlpha.FPAlphaToken'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.FPAlpha.FPAlphaToken'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.FPAlpha.FPAlphaToken'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.FPAlpha.FPAlphaToken'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.FPAlpha.FPAlphaToken'
+      security:
+      - Authorization: []
+      summary: FP alpha refresh token async
+      x-summary-source: derived
+  /v1/Integrations/FPAlpha/SyncClient/{clientId}:
+    get:
+      tags:
+      - Integrations/FPAlpha
+      summary: Add FPAlpha Client FP Alpha hanldes update or add process
+      operationId: FPAlpha_UpdateOrCreateClientAsync
+      parameters:
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Integrations/FPAlpha/UserToken:
+    get:
+      tags:
+      - Integrations/FPAlpha
+      operationId: FPAlpha_UserTokenAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.FPAlpha.FPAlphaToken'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.FPAlpha.FPAlphaToken'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.FPAlpha.FPAlphaToken'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.FPAlpha.FPAlphaToken'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.FPAlpha.FPAlphaToken'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAT.Integrations.FPAlpha.FPAlphaToken'
+      security:
+      - Authorization: []
+      summary: FP alpha user token async
+      x-summary-source: derived
+components:
+  schemas:
+    OAT.Integrations.FPAlpha.FPAlphaToken:
+      properties:
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        scope:
+          type: string
+        token_type:
+          type: string
+        expires_in:
+          type: integer
+          format: int32
+        expires_datetime:
+          type: string
+          format: date-time
+        created_at:
+          type: integer
+          format: int64
+      xml:
+        name: FPAlphaToken
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

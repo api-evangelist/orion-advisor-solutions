@@ -1,0 +1,206 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Reporting/Implementation API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Reporting/Implementation
+paths:
+  /v1/Reporting/Implementation:
+    get:
+      tags:
+      - Reporting/Implementation
+      operationId: ImplementationPlan_Get
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+      security:
+      - Authorization: []
+      summary: Implementation plan get
+      x-summary-source: derived
+  /v1/Reporting/Implementation/{key}:
+    put:
+      tags:
+      - Reporting/Implementation
+      operationId: ImplementationPlan_UpdateEntity
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: signOff
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+        required: true
+      summary: Implementation plan update entity
+      x-summary-source: derived
+  /v1/Reporting/Implementation/GenerateNew:
+    post:
+      tags:
+      - Reporting/Implementation
+      summary: Generate a new dashboard
+      operationId: ImplementationPlan_GenerateNew
+      parameters:
+      - name: asOfDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Reporting.Implementation.ImplementationStepDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        implementationPlanId:
+          type: integer
+          format: int32
+        title:
+          type: string
+        description:
+          type: string
+        note:
+          type: string
+        offsetDays:
+          type: integer
+          format: int32
+        completedDate:
+          type: string
+          format: date-time
+        targetDate:
+          type: string
+          format: date-time
+      xml:
+        name: ImplementationStepDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Implementation.ImplementationPlanDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        signedOffBy:
+          type: string
+        signedOffDate:
+          type: string
+          format: date-time
+        implementationSteps:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Implementation.ImplementationStepDto'
+          xml:
+            name: ImplementationStepDto
+            wrapped: true
+          type: array
+      xml:
+        name: ImplementationPlanDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

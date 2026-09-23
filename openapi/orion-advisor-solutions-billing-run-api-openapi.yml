@@ -1,0 +1,166 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Run API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/Run
+paths:
+  /v1/Billing/Run/IndirectManagementFeeAdjScript:
+    post:
+      tags:
+      - Billing/Run
+      summary: Run the Indirect Management Fee Adjustment Script for a given date range
+      description: 'Sample Request
+
+        GET /v1/Billing/Run/IndirectManagementFeeAdjScript?startDate=7/1/2024&endDate=9/16/2024
+
+        Sample Response
+
+        [
+
+        {
+
+        "clientId": 1,
+
+        "clientName": "Test Client",
+
+        "billId": 123,
+
+        "payingFeeAccountId": 444,
+
+        "paidAccountId": 134,
+
+        "receivableId": 155,
+
+        "processingMessage": "Error: No indirect fee receivable found."
+
+        },
+
+        {
+
+        "clientId": 2,
+
+        "clientName": "Test Client 2",
+
+        "billId": 555,
+
+        "payingFeeAccountId": 987,
+
+        "paidAccountId": 4234,
+
+        "receivableId": 71818,
+
+        "processingMessage": "Error: Sleeve account"
+
+        }
+
+        ]'
+      operationId: Billing_RunIndirectManagementFeeAdjScript
+      parameters:
+      - name: startDate
+        in: query
+        description: Start Date for the adjustment range
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        description: End Date for the adjustment range
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns the list of processed adjustments
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.IndirectManagementFeeAdjustmentDto'
+                xml:
+                  name: IndirectManagementFeeAdjustmentDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.IndirectManagementFeeAdjustmentDto'
+                xml:
+                  name: IndirectManagementFeeAdjustmentDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.IndirectManagementFeeAdjustmentDto'
+                xml:
+                  name: IndirectManagementFeeAdjustmentDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.IndirectManagementFeeAdjustmentDto'
+                xml:
+                  name: IndirectManagementFeeAdjustmentDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.IndirectManagementFeeAdjustmentDto'
+                xml:
+                  name: IndirectManagementFeeAdjustmentDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.IndirectManagementFeeAdjustmentDto'
+                xml:
+                  name: IndirectManagementFeeAdjustmentDto
+                  wrapped: true
+                type: array
+        '400':
+          description: If start date or end date is missing or invalid
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.IndirectManagementFeeAdjustmentDto:
+      properties:
+        clientId:
+          type: integer
+          format: int32
+        clientName:
+          type: string
+        billId:
+          type: integer
+          format: int32
+        receivableId:
+          type: integer
+          format: int32
+        payingFeeAccountId:
+          type: integer
+          format: int32
+        payingFeeAccountActive:
+          type: boolean
+        paidAccountId:
+          type: integer
+          format: int32
+        paidAccountActive:
+          type: boolean
+        processingMessage:
+          type: string
+      xml:
+        name: IndirectManagementFeeAdjustmentDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

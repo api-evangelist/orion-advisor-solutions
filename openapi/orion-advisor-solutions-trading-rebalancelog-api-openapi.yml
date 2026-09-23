@@ -1,0 +1,235 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Rebalance Log API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/RebalanceLog
+paths:
+  /v1/Trading/RebalanceLog/{key}:
+    get:
+      tags:
+      - Trading/RebalanceLog
+      summary: Returns the Rebalance Log for the given key
+      operationId: RebalanceLogs_GetByKey
+      parameters:
+      - name: key
+        in: path
+        description: Id for the Rebalance Log.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RebalanceLogDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RebalanceLogDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RebalanceLogDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RebalanceLogDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RebalanceLogDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RebalanceLogDto'
+      security:
+      - Authorization: []
+  /v1/Trading/RebalanceLog/Account/Simple/{accountId}:
+    get:
+      tags:
+      - Trading/RebalanceLog
+      summary: Returns simple details for all the Rebalance Logs for the given account
+      operationId: RebalanceLogs_GetByAccountId
+      parameters:
+      - name: accountId
+        in: path
+        description: Account Id for the Rebalance Logs requested.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SimpleRebalanceLogDto'
+                xml:
+                  name: SimpleRebalanceLogDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SimpleRebalanceLogDto'
+                xml:
+                  name: SimpleRebalanceLogDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SimpleRebalanceLogDto'
+                xml:
+                  name: SimpleRebalanceLogDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SimpleRebalanceLogDto'
+                xml:
+                  name: SimpleRebalanceLogDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SimpleRebalanceLogDto'
+                xml:
+                  name: SimpleRebalanceLogDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SimpleRebalanceLogDto'
+                xml:
+                  name: SimpleRebalanceLogDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/RebalanceLog/Instance/Simple/{instanceId}:
+    get:
+      tags:
+      - Trading/RebalanceLog
+      summary: Returns simple details for all the Rebalance Logs for the given instance
+      operationId: RebalanceLogs_GetByInstanceId
+      parameters:
+      - name: instanceId
+        in: path
+        description: Instance Id for the Rebalance Logs requested.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SimpleRebalanceLogDto'
+                xml:
+                  name: SimpleRebalanceLogDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SimpleRebalanceLogDto'
+                xml:
+                  name: SimpleRebalanceLogDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SimpleRebalanceLogDto'
+                xml:
+                  name: SimpleRebalanceLogDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SimpleRebalanceLogDto'
+                xml:
+                  name: SimpleRebalanceLogDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SimpleRebalanceLogDto'
+                xml:
+                  name: SimpleRebalanceLogDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SimpleRebalanceLogDto'
+                xml:
+                  name: SimpleRebalanceLogDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Trading.SimpleRebalanceLogDto:
+      properties:
+        createdDate:
+          type: string
+          format: date-time
+        accountId:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleRebalanceLogDto
+      type: object
+    OAS.WebApi.DTO.Trading.RebalanceLogDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        trInstanceId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        logText:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        correlationId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        machineName:
+          type: string
+        duration:
+          type: string
+      xml:
+        name: RebalanceLogDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

@@ -1,0 +1,199 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Confirm/Sync Dashboard API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Confirm/SyncDashboard
+paths:
+  /v1/Confirm/SyncDashboard:
+    get:
+      tags:
+      - Confirm/SyncDashboard
+      summary: Gets all of the sync types
+      operationId: SyncDashboard_GetAsync
+      parameters:
+      - name: date
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: userTeamOnly
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncDashboardDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncDashboardDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncDashboardDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncDashboardDto'
+      security:
+      - Authorization: []
+  /v1/Confirm/SyncDashboard/Counts:
+    get:
+      tags:
+      - Confirm/SyncDashboard
+      summary: Gets all of the sync error counts for each day
+      operationId: SyncDashboard_GetCountsAsync
+      parameters:
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: userTeamOnly
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncCountsDto'
+                xml:
+                  name: SyncCountsDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncCountsDto'
+                xml:
+                  name: SyncCountsDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncCountsDto'
+                xml:
+                  name: SyncCountsDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncCountsDto'
+                xml:
+                  name: SyncCountsDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncCountsDto'
+                xml:
+                  name: SyncCountsDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncCountsDto'
+                xml:
+                  name: SyncCountsDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Confirm.Recon.SyncCountsDto:
+      properties:
+        summaryDate:
+          type: string
+          format: date-time
+        dateErrorCount:
+          type: integer
+          format: int32
+        dailySyncErrorCount:
+          type: integer
+          format: int32
+        weeklySyncErrorCount:
+          type: integer
+          format: int32
+        exclusionSyncErrorCount:
+          type: integer
+          format: int32
+        priceSyncErrorCount:
+          type: integer
+          format: int32
+      xml:
+        name: SyncCountsDto
+      type: object
+    OAS.WebApi.DTO.Confirm.Recon.SyncDashboardDto:
+      properties:
+        summaryDate:
+          type: string
+          format: date-time
+        groups:
+          additionalProperties:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncDashboardGroupDto'
+          type: object
+      xml:
+        name: SyncDashboardDto
+      type: object
+    OAS.WebApi.DTO.Confirm.Recon.SyncDashboardGroupDto:
+      properties:
+        description:
+          type: string
+        errorCount:
+          type: integer
+          format: int32
+        details:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncDashboardDetailDto'
+          xml:
+            name: SyncDashboardDetailDto
+            wrapped: true
+          type: array
+      xml:
+        name: SyncDashboardGroupDto
+      type: object
+    OAS.WebApi.DTO.Confirm.Recon.SyncDashboardDetailDto:
+      properties:
+        analystLoginUserId:
+          type: string
+        serviceTeamName:
+          type: string
+        databaseName:
+          type: string
+        downloadSourceName:
+          type: string
+        groupErrorCount:
+          type: integer
+          format: int32
+      xml:
+        name: SyncDashboardDetailDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

@@ -1,0 +1,120 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Post Management Fees API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/PostManagementFees
+paths:
+  /v1/Billing/PostManagementFees:
+    post:
+      tags:
+      - Billing/PostManagementFees
+      summary: Billing post payments
+      operationId: Billing_PostPayments
+      parameters:
+      - name: batchNumber
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: billId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ManagementFeesNotPostedDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ManagementFeesNotPostedDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ManagementFeesNotPostedDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ManagementFeesNotPostedDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ManagementFeesNotPostedDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ManagementFeesNotPostedDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ManagementFeesNotPostedDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ManagementFeesNotPostedDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ManagementFeesNotPostedDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ManagementFeesNotPostedDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ManagementFeesNotPostedDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ManagementFeesNotPostedDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.ManagementFeesNotPostedDto'
+        required: true
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.ManagementFeesNotPostedDto:
+      properties:
+        transactionID:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        accountID:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        transactionDate:
+          type: string
+          format: date-time
+        transactionAmount:
+          type: number
+          format: double
+        transactionDescription:
+          type: string
+        isActive:
+          type: boolean
+        outstandingReceivable:
+          type: boolean
+        transCreatedDate:
+          type: string
+          format: date-time
+        transCreatedBy:
+          type: string
+        clientID:
+          type: integer
+          format: int32
+      xml:
+        name: ManagementFeesNotPostedDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

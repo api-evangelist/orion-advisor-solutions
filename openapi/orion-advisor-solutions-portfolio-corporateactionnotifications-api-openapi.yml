@@ -1,0 +1,290 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Portfolio/Corporate Action Notifications API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Portfolio/CorporateActionNotifications
+paths:
+  /v1/Portfolio/CorporateActionNotifications:
+    get:
+      tags:
+      - Portfolio/CorporateActionNotifications
+      operationId: CorporateActionsNotifications_GetListAsync
+      parameters:
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CorpActionNotificationDTO'
+                xml:
+                  name: CorpActionNotificationDTO
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CorpActionNotificationDTO'
+                xml:
+                  name: CorpActionNotificationDTO
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CorpActionNotificationDTO'
+                xml:
+                  name: CorpActionNotificationDTO
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CorpActionNotificationDTO'
+                xml:
+                  name: CorpActionNotificationDTO
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CorpActionNotificationDTO'
+                xml:
+                  name: CorpActionNotificationDTO
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CorpActionNotificationDTO'
+                xml:
+                  name: CorpActionNotificationDTO
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Corporate actions notifications get list async
+      x-summary-source: derived
+  /v1/Portfolio/CorporateActionNotifications/{corpActionProcessId}/accounts:
+    get:
+      tags:
+      - Portfolio/CorporateActionNotifications
+      operationId: CorporateActionsNotifications_GetAccountsAsync
+      parameters:
+      - name: corpActionProcessId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CorpActionNotificationAccountDTO'
+                xml:
+                  name: CorpActionNotificationAccountDTO
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CorpActionNotificationAccountDTO'
+                xml:
+                  name: CorpActionNotificationAccountDTO
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CorpActionNotificationAccountDTO'
+                xml:
+                  name: CorpActionNotificationAccountDTO
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CorpActionNotificationAccountDTO'
+                xml:
+                  name: CorpActionNotificationAccountDTO
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CorpActionNotificationAccountDTO'
+                xml:
+                  name: CorpActionNotificationAccountDTO
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CorpActionNotificationAccountDTO'
+                xml:
+                  name: CorpActionNotificationAccountDTO
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Corporate actions notifications get accounts async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Portfolio.CorpActionNotificationAccountDTO:
+      properties:
+        productID:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        ticker:
+          type: string
+        cusip:
+          type: string
+        productType:
+          type: integer
+          format: int32
+        accountID:
+          type: integer
+          format: int32
+        assetID:
+          type: integer
+          format: int32
+        acctCode:
+          type: string
+        fundFamilyName:
+          type: string
+        fundFamilyID:
+          type: integer
+          format: int32
+        custodianName:
+          type: string
+        preActionUnitBalance:
+          type: number
+          format: double
+        currentUnitBalance:
+          type: number
+          format: double
+        pendingCorpActionShares:
+          type: number
+          format: double
+        corpActionStatus:
+          type: string
+        assetStatus:
+          type: string
+        houseHoldID:
+          type: integer
+          format: int32
+        houseHoldName:
+          type: string
+        registrationID:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        registrationType:
+          type: string
+        repID:
+          type: integer
+          format: int32
+        repName:
+          type: string
+        currentValue:
+          type: number
+          format: double
+        currentPrice:
+          type: number
+          format: double
+        processingType:
+          type: string
+        corpActionID:
+          type: integer
+          format: int32
+        corpActionProcessingID:
+          type: integer
+          format: int32
+      xml:
+        name: CorpActionNotificationAccountDTO
+      type: object
+    OAS.WebApi.DTO.Portfolio.CorpActionNotificationDTO:
+      properties:
+        beginningOfDay:
+          type: boolean
+        costBasisFactor:
+          type: number
+          format: double
+        corporateActionId:
+          type: integer
+          format: int32
+        corporateActionProcessingId:
+          type: integer
+          format: int32
+        corporateActionStatus:
+          type: string
+        corporateActionStatusId:
+          type: integer
+          format: int32
+        corporateActionStatusDescription:
+          type: string
+        effectiveDate:
+          type: string
+          format: date-time
+        expectedClose:
+          type: string
+          format: date-time
+        moreInfoURL:
+          type: string
+        numberOfAccountHeld:
+          type: integer
+          format: int32
+        price:
+          type: number
+          format: double
+        processingType:
+          type: string
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        ticker:
+          type: string
+        roundingType:
+          type: string
+      xml:
+        name: CorpActionNotificationDTO
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

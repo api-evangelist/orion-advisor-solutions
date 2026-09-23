@@ -1,0 +1,689 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Products API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/Products
+paths:
+  /v1/Trading/Products/{ticker}/RealtimePrice:
+    get:
+      tags:
+      - Trading/Products
+      summary: Returns the real-time price of the product requested if the logged in user has…
+      operationId: TradingProducts_GetRealtimePriceAsync
+      parameters:
+      - name: ticker
+        in: path
+        description: The ticker of the product whose price should be looked up.
+        required: true
+        schema:
+          type: string
+      - name: custodianCommonIdList
+        in: query
+        description: 'Optional. Default: 1 /*Orion*/. The list of custodians to concider when returning prices.'
+        required: false
+        schema:
+          type: string
+          default: '1'
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+      security:
+      - Authorization: []
+  /v1/Trading/Products/FundFamilyOverride/{key}:
+    get:
+      tags:
+      - Trading/Products
+      operationId: TradingProducts_GetFundFamilyOverride
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FundFamilyOverrideDTO'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FundFamilyOverrideDTO'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FundFamilyOverrideDTO'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FundFamilyOverrideDTO'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FundFamilyOverrideDTO'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FundFamilyOverrideDTO'
+      security:
+      - Authorization: []
+      summary: Trading products get fund family override
+      x-summary-source: derived
+  /v1/Trading/Products/FundFamilyOverrideSave:
+    post:
+      tags:
+      - Trading/Products
+      operationId: TradingProducts_SetFundFamilyOverride
+      responses:
+        '204':
+          description: No Content
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FundFamilyOverrideDTO'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FundFamilyOverrideDTO'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FundFamilyOverrideDTO'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FundFamilyOverrideDTO'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FundFamilyOverrideDTO'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FundFamilyOverrideDTO'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FundFamilyOverrideDTO'
+        required: true
+      summary: Trading products set fund family override
+      x-summary-source: derived
+  /v1/Trading/Products/RealtimePrices:
+    post:
+      tags:
+      - Trading/Products
+      operationId: TradingProducts_GetRealtimePricesAsync
+      parameters:
+      - name: includeDetails
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: custodianCommonIdList
+        in: query
+        required: false
+        schema:
+          type: string
+          default: '1'
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+                xml:
+                  name: RealtimePriceDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+                xml:
+                  name: RealtimePriceDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+                xml:
+                  name: RealtimePriceDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+                xml:
+                  name: RealtimePriceDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+                xml:
+                  name: RealtimePriceDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.RealtimePriceDto'
+                xml:
+                  name: RealtimePriceDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: string
+              type: array
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+          text/json:
+            schema:
+              items:
+                type: string
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: string
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: string
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: string
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: string
+              type: array
+        required: true
+      summary: Trading products get realtime prices async
+      x-summary-source: derived
+  /v1/Trading/Products/Search:
+    get:
+      tags:
+      - Trading/Products
+      summary: Gets a simple list of products that the logged in user has access to where the…
+      operationId: TradingProducts_GetAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: search
+        in: query
+        description: Partial product name or ticker to search for.
+        required: true
+        schema:
+          type: string
+      - name: top
+        in: query
+        description: 'Optional. Default: 25. The maximum number of products to return.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 25
+      - name: fundFamilyId
+        in: query
+        description: 'Optional. Default: null. Return any product that falls within the specified fund family.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: usedProductsOnly
+        in: query
+        description: 'Optional. Default: false. Return any product that matches the criteria (false) or only those that are used (true).'
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: accountId
+        in: query
+        description: 'Optional. Default: null. Return any product that has not been excluded for the provided account.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: useParentProductsOnly
+        in: query
+        description: if set to true [use parent products only].
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: includeIndexes
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Search.SearchProductDto'
+                xml:
+                  name: SearchProductDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Search.SearchProductDto'
+                xml:
+                  name: SearchProductDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Search.SearchProductDto'
+                xml:
+                  name: SearchProductDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Search.SearchProductDto'
+                xml:
+                  name: SearchProductDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Search.SearchProductDto'
+                xml:
+                  name: SearchProductDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Search.SearchProductDto'
+                xml:
+                  name: SearchProductDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/Products/Search/{search}:
+    get:
+      tags:
+      - Trading/Products
+      summary: Gets a simple list of products that the logged in user has access to where the…
+      operationId: TradingProducts_GetV1TradingProductsSearchBySearch
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: search
+        in: path
+        description: Partial product name or ticker to search for.
+        required: true
+        schema:
+          type: string
+      - name: top
+        in: query
+        description: 'Optional. Default: 25. The maximum number of products to return.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 25
+      - name: fundFamilyId
+        in: query
+        description: 'Optional. Default: null. Return any product that falls within the specified fund family.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: usedProductsOnly
+        in: query
+        description: 'Optional. Default: false. Return any product that matches the criteria (false) or only those that are used (true).'
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: accountId
+        in: query
+        description: 'Optional. Default: null. Return any product that has not been excluded for the provided account.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: useParentProductsOnly
+        in: query
+        description: if set to true [use parent products only].
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: includeIndexes
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Search.SearchProductDto'
+                xml:
+                  name: SearchProductDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Search.SearchProductDto'
+                xml:
+                  name: SearchProductDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Search.SearchProductDto'
+                xml:
+                  name: SearchProductDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Search.SearchProductDto'
+                xml:
+                  name: SearchProductDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Search.SearchProductDto'
+                xml:
+                  name: SearchProductDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Search.SearchProductDto'
+                xml:
+                  name: SearchProductDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Trading.RealtimePriceDto:
+      properties:
+        date:
+          type: string
+          format: date-time
+        last:
+          type: number
+          format: double
+        isRealTimeQuote:
+          type: boolean
+        isDelayedQuote:
+          type: boolean
+        changeFromLastClose:
+          type: number
+          format: double
+        changeFromLastMarketClose:
+          type: number
+          format: double
+        changeFromMarketClose:
+          type: number
+          format: double
+        changeFromMarketOpen:
+          type: number
+          format: double
+        changeFromPrev:
+          type: number
+          format: double
+        lastClosePrice:
+          type: number
+          format: double
+        lastMarketClosePrice:
+          type: number
+          format: double
+        marketClosePrice:
+          type: number
+          format: double
+        marketOpenPrice:
+          type: number
+          format: double
+        percentChangeFromLastClose:
+          type: number
+          format: double
+        percentChangeFromLastMarketClose:
+          type: number
+          format: double
+        percentChangeFromMarketClose:
+          type: number
+          format: double
+        percentChangeFromMarketOpen:
+          type: number
+          format: double
+        percentChangeFromOpen:
+          type: number
+          format: double
+        percentChangeFromPrev:
+          type: number
+          format: double
+        ask:
+          type: number
+          format: double
+        askQuantity:
+          type: number
+          format: double
+        bid:
+          type: number
+          format: double
+        bidQuantity:
+          type: number
+          format: double
+        changeFromOpen:
+          type: number
+          format: double
+        changeFromPrevious:
+          type: number
+          format: double
+        cusip:
+          type: string
+        delay:
+          type: number
+          format: double
+        high:
+          type: number
+          format: double
+        low:
+          type: number
+          format: double
+        name:
+          type: string
+        outcome:
+          type: string
+        percentageChangeFromOpen:
+          type: number
+          format: double
+        percentageChangeFromPrevious:
+          type: number
+          format: double
+        quantity:
+          type: number
+          format: double
+        volume:
+          type: number
+          format: double
+        open:
+          type: number
+          format: double
+        priceSource:
+          type: string
+        symbol:
+          type: string
+      xml:
+        name: RealtimePriceDto
+      type: object
+    OAS.WebApi.DTO.Trading.FundFamilyOverrideDTO:
+      properties:
+        fundFamiliesOverriden:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FundFamilyOverride'
+          xml:
+            name: FundFamilyOverride
+            wrapped: true
+          type: array
+        isAlternativeSymColumnShown:
+          type: boolean
+      xml:
+        name: FundFamilyOverrideDTO
+      type: object
+    OAS.DataModel.Portfolio.ShareClass:
+      required:
+      - id
+      - class
+      properties:
+        id:
+          type: integer
+          format: int32
+        class:
+          type: string
+          maxLength: 10
+          minLength: 0
+        description:
+          type: string
+          maxLength: 255
+          minLength: 0
+        oldFundId:
+          type: integer
+          format: int32
+        loadType:
+          type: string
+          maxLength: 1
+          minLength: 0
+        isDefault:
+          type: boolean
+      xml:
+        name: ShareClass
+      type: object
+    OAS.WebApi.DTO.Trading.FundFamilyOverride:
+      properties:
+        fundFamilyId:
+          type: integer
+          format: int32
+        fundFamilyName:
+          type: string
+        productId:
+          type: integer
+          format: int32
+        tradeTicker:
+          type: string
+        altProductId:
+          type: integer
+          format: int32
+        altProductName:
+          type: string
+        altTicker:
+          type: string
+      xml:
+        name: FundFamilyOverride
+      type: object
+    OAS.WebApi.DTO.Search.SearchProductDto:
+      properties:
+        ticker:
+          type: string
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        productType:
+          type: integer
+          format: int32
+        productTypeName:
+          type: string
+        price:
+          type: number
+          format: double
+        shareClass:
+          $ref: '#/components/schemas/OAS.DataModel.Portfolio.ShareClass'
+        externalId:
+          type: integer
+          format: int32
+        productRiskScore:
+          type: integer
+          format: int32
+        productClass:
+          type: string
+        productCategory:
+          type: string
+        riskScore:
+          type: integer
+          format: int32
+      xml:
+        name: SearchProductDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

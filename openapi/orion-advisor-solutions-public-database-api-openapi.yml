@@ -1,0 +1,99 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Public/Database API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Public/Database
+paths:
+  /v1/Public/Database/{dbKey}/ReportImage/{imageKey}:
+    get:
+      tags:
+      - Public/Database
+      operationId: Public_GetReportImageAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: dbKey
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: imageKey
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Public get report image async
+      x-summary-source: derived
+  /v1/Public/Database/{dbKey}/ReportPdf/{pdfKey}:
+    get:
+      tags:
+      - Public/Database
+      operationId: Public_GetReportPdfAsync
+      parameters:
+      - name: cancellationToken
+        in: header
+        required: true
+      - name: dbKey
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: pdfKey
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      summary: Public get report pdf async
+      x-summary-source: derived
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

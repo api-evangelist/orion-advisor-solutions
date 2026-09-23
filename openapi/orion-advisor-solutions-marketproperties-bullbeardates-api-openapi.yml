@@ -1,0 +1,141 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Market Properties/Bull Bear Dates API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: MarketProperties/BullBearDates
+paths:
+  /v1/MarketProperties/BullBearDates:
+    get:
+      tags:
+      - MarketProperties/BullBearDates
+      summary: Get a list of Bull Bear Dates that the logged in user has access to see.
+      operationId: BullBearDates_GetAll
+      parameters:
+      - name: marketType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Bull
+          - Bear
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.MarketProperties.BullBearDateDto'
+                xml:
+                  name: BullBearDateDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.MarketProperties.BullBearDateDto'
+                xml:
+                  name: BullBearDateDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.MarketProperties.BullBearDateDto'
+                xml:
+                  name: BullBearDateDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.MarketProperties.BullBearDateDto'
+                xml:
+                  name: BullBearDateDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.MarketProperties.BullBearDateDto'
+                xml:
+                  name: BullBearDateDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.MarketProperties.BullBearDateDto'
+                xml:
+                  name: BullBearDateDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+  /v1/MarketProperties/BullBearDates/{key}:
+    get:
+      tags:
+      - MarketProperties/BullBearDates
+      summary: Gets the Bull Bear Dates that has the provided key.
+      operationId: BullBearDates_GetById
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.MarketProperties.BullBearDateDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.MarketProperties.BullBearDateDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.MarketProperties.BullBearDateDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.MarketProperties.BullBearDateDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.MarketProperties.BullBearDateDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.MarketProperties.BullBearDateDto'
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.MarketProperties.BullBearDateDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        isBear:
+          type: boolean
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+      xml:
+        name: BullBearDateDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

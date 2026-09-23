@@ -1,0 +1,189 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Billing/Products API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Billing/Products
+paths:
+  /v1/Billing/Products:
+    get:
+      tags:
+      - Billing/Products
+      summary: Get a list of bill Products that the logged in user has access to see.
+      operationId: BillingProduct_Get
+      parameters:
+      - name: feeExcluded
+        in: query
+        description: Optional
+        required: false
+        schema:
+          type: boolean
+      - name: returnStyle
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Standard
+          - FeeExcluded
+          default: 0
+      - name: cancellationToken
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Billing/Products/{key}:
+    get:
+      tags:
+      - Billing/Products
+      summary: Gets the bill product that has the provided key.
+      operationId: BillingProduct_GetEntityByKeyAsync
+      parameters:
+      - name: key
+        in: path
+        description: Key of the desired return object.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillProductDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillProductDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillProductDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillProductDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillProductDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillProductDto'
+      security:
+      - Authorization: []
+    post:
+      tags:
+      - Billing/Products
+      operationId: BillingProduct_CreateEntityAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillProductDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillProductDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillProductDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillProductDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillProductDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillProductDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillProductDto'
+        required: true
+      summary: Billing product create entity async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Billing.BillProductDto:
+      properties:
+        feeExcluded:
+          type: boolean
+        includeByDefault:
+          type: boolean
+        editedDate:
+          type: string
+          format: date-time
+        editedby:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        feeBillExclusionMode:
+          type: integer
+          format: int32
+        excludedBillEntityIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        id:
+          type: integer
+          format: int32
+      xml:
+        name: BillProductDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

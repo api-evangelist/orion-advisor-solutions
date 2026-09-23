@@ -1,0 +1,107 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Portfolio/Product Expense Ratio API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Portfolio/ProductExpenseRatio
+paths:
+  /v1/Portfolio/ProductExpenseRatio:
+    get:
+      tags:
+      - Portfolio/ProductExpenseRatio
+      summary: Gets a list of Product Expense Ratios
+      operationId: ProductExpenseRatio_GetAllItems
+      parameters:
+      - name: asOfDate
+        in: query
+        description: Optional. If provided, returns only the most recent value by the asOfDate. Use today's date to retrieve only the latest values
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: productId
+        in: query
+        description: Optional. If provided, returns only values for the provided productId
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductExpenseRatioDto'
+                xml:
+                  name: ProductExpenseRatioDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductExpenseRatioDto'
+                xml:
+                  name: ProductExpenseRatioDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductExpenseRatioDto'
+                xml:
+                  name: ProductExpenseRatioDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductExpenseRatioDto'
+                xml:
+                  name: ProductExpenseRatioDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductExpenseRatioDto'
+                xml:
+                  name: ProductExpenseRatioDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductExpenseRatioDto'
+                xml:
+                  name: ProductExpenseRatioDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Portfolio.ProductExpenseRatioDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        asOfDate:
+          type: string
+          format: date-time
+        netExpenseRatio:
+          type: number
+          format: double
+      xml:
+        name: ProductExpenseRatioDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

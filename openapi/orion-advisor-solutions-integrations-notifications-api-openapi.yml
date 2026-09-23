@@ -1,0 +1,196 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Notifications API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/Notifications
+paths:
+  /v1/Integrations/Notifications/Action/UpdateStatus:
+    put:
+      tags:
+      - Integrations/Notifications
+      operationId: Notification_UpdateStatusAsync
+      parameters:
+      - name: status
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - Unread
+          - Read
+          - Deleted
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationDto'
+                xml:
+                  name: NotificationDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationDto'
+                xml:
+                  name: NotificationDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationDto'
+                xml:
+                  name: NotificationDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationDto'
+                xml:
+                  name: NotificationDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationDto'
+                xml:
+                  name: NotificationDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Fuse.NotificationDto'
+                xml:
+                  name: NotificationDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/json:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          text/xml:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                type: integer
+                format: int32
+              type: array
+        required: true
+      summary: Notification update status async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Fuse.NotificationDto:
+      description: 'A notification that is pushed to users.
+
+
+        Can be viewed (Read Only) in a slick grid.'
+      properties:
+        id:
+          type: integer
+          format: int32
+        firmId:
+          type: integer
+          format: int32
+        partnerUserName:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        subject:
+          type: string
+        body:
+          type: string
+        url:
+          type: string
+        status:
+          type: string
+          enum:
+          - Unread
+          - Read
+          - Deleted
+        partnerAppName:
+          type: string
+        categoryName:
+          type: string
+        integrationId:
+          type: integer
+          format: int32
+        actionName:
+          type: string
+          enum:
+          - Undefined
+          - Download
+          - Link
+          - Share
+          - DownloadShare
+          - LinkToRedtail
+        partnerAppId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        commandBody:
+          type: string
+        clientId:
+          type: integer
+          format: int32
+      xml:
+        name: NotificationDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

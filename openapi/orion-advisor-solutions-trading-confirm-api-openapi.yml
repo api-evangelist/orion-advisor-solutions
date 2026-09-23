@@ -1,0 +1,347 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Confirm API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/Confirm
+paths:
+  /v1/Trading/Confirm:
+    get:
+      tags:
+      - Trading/Confirm
+      summary: Get all trade confirmations
+      operationId: TradeConfirmations_GetAll
+      parameters:
+      - name: confirmType
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: confirmDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: clientId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: accountId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: object
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: object
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: object
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: object
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: object
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: object
+                type: array
+      security:
+      - Authorization: []
+  /v1/Trading/Confirm/{key}:
+    get:
+      tags:
+      - Trading/Confirm
+      summary: Get trade confirmation by key
+      operationId: TradeConfirmations_GetItemByKey
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Trading/Confirm/{key}/Details:
+    get:
+      tags:
+      - Trading/Confirm
+      summary: Get trade confirmation by key and parse XML
+      operationId: TradeConfirmations_GetItemDetailsByKey
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Trading/Confirm/Accounts/{accountId}/{confirmDate}/{confirmType}:
+    get:
+      tags:
+      - Trading/Confirm
+      summary: Get trade confirmation by account, confirmation date and confirmation type
+      operationId: TradeConfirmations_GetItemForAccountConfirmDateAndType
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: confirmDate
+        in: path
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: confirmType
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Trading/Confirm/Clients/{clientId}/{confirmDate}/{confirmType}:
+    get:
+      tags:
+      - Trading/Confirm
+      summary: Get trade confirmation for client at specified date
+      operationId: TradeConfirmations_GetItemForClientAndConfirmDate
+      parameters:
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: confirmDate
+        in: path
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: confirmType
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Trading/Confirm/Dates:
+    get:
+      tags:
+      - Trading/Confirm
+      summary: Get the list of all confirmation dates
+      operationId: TradeConfirmations_GetAllDates
+      parameters:
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: confirmType
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: clientId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: accountId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  type: string
+                xml:
+                  name: DateOnly
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  type: string
+                xml:
+                  name: DateOnly
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                xml:
+                  name: DateOnly
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: string
+                xml:
+                  name: DateOnly
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: string
+                xml:
+                  name: DateOnly
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  type: string
+                xml:
+                  name: DateOnly
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

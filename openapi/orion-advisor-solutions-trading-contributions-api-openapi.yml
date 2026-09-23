@@ -1,0 +1,130 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Contributions API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/Contributions
+paths:
+  /v1/Trading/Contributions:
+    post:
+      tags:
+      - Trading/Contributions
+      summary: Saves contributions
+      operationId: Trading_CalcAndSaveContributionsAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+            text/xml:
+              schema:
+                type: integer
+                format: int32
+            multipart/form-data:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.Remote.Trading.ContributionDto'
+              xml:
+                name: ContributionDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.Remote.Trading.ContributionDto'
+              xml:
+                name: ContributionDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.Remote.Trading.ContributionDto'
+              xml:
+                name: ContributionDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.Remote.Trading.ContributionDto'
+              xml:
+                name: ContributionDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.Remote.Trading.ContributionDto'
+              xml:
+                name: ContributionDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.Remote.Trading.ContributionDto'
+              xml:
+                name: ContributionDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.Remote.Trading.ContributionDto'
+              xml:
+                name: ContributionDto
+                wrapped: true
+              type: array
+        description: Required. List of Contributions to be saved
+        required: true
+components:
+  schemas:
+    OAS.Remote.Trading.ContributionDto:
+      properties:
+        pkAccount:
+          type: integer
+          format: int32
+        amount:
+          type: number
+          format: double
+        contribCode:
+          type: string
+        fkContribCode:
+          type: integer
+          format: int32
+      xml:
+        name: ContributionDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

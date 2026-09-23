@@ -1,0 +1,1407 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Integrations/Lexis Nexis API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Integrations/LexisNexis
+paths:
+  /v1/Integrations/LexisNexis/Actions/Approve:
+    put:
+      tags:
+      - Integrations/LexisNexis
+      summary: Approves a list of Search Results matching a set of IDs, with the provided…
+      operationId: LexisNexis_ApproveResultsAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.SearchResultDto'
+                xml:
+                  name: SearchResultDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.SearchResultDto'
+                xml:
+                  name: SearchResultDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.SearchResultDto'
+                xml:
+                  name: SearchResultDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.SearchResultDto'
+                xml:
+                  name: SearchResultDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.SearchResultDto'
+                xml:
+                  name: SearchResultDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.SearchResultDto'
+                xml:
+                  name: SearchResultDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.ApprovalDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.ApprovalDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.ApprovalDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.ApprovalDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.ApprovalDto'
+        description: A list of search result ids to approve, and the approval reason.
+        required: true
+  /v1/Integrations/LexisNexis/Actions/Remove:
+    post:
+      tags:
+      - Integrations/LexisNexis
+      summary: Disconnects the integration for the firm
+      operationId: LexisNexis_RemoveServiceAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+            multipart/form-data:
+              schema:
+                type: boolean
+      security:
+      - Authorization: []
+  /v1/Integrations/LexisNexis/Actions/RunNow:
+    post:
+      tags:
+      - Integrations/LexisNexis
+      summary: Runs an on-demand query of all active accounts and sends the data to the…
+      description: 'This endpoint is limited to scanning all accounts, but it will use the SearchDetail defined in
+
+        the SearchSchedule table row.
+
+        The firm will have only one record in the SearchSchedules table, which will be used to populate the
+
+        LexisNexis configuration instance for the firm. Since the SearchSchedule properties in the configuration
+
+        may not match what this endpoint does, the only configuration value used is the level of detail
+
+        for the batch process(Basic or Premium / Strict ).The level of detail specifies how well false positives are
+
+        screened out, and determines the per - account charges for the scans.
+
+        Levels of detail can be viewed or defined in the LexisNexis Bridger web application by the Compliance team.'
+      operationId: LexisNexis_RunNowAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+      security:
+      - Authorization: []
+  /v1/Integrations/LexisNexis/Actions/Setup:
+    post:
+      tags:
+      - Integrations/LexisNexis
+      summary: Connects the integration for the firm
+      operationId: LexisNexis_SetupServiceAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto'
+        description: The parameters required to setup the partner app.
+        required: true
+  /v1/Integrations/LexisNexis/Configuration:
+    get:
+      tags:
+      - Integrations/LexisNexis
+      summary: Get the configuration of the LexisNexis integration partner app
+      operationId: LexisNexis_GetLexisNexisConfiguration
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+      security:
+      - Authorization: []
+    put:
+      tags:
+      - Integrations/LexisNexis
+      operationId: LexisNexis_UpdateLexisNexisConfigurationAsync
+      parameters:
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto'
+        required: true
+      summary: Lexis nexis update lexis nexis configuration async
+      x-summary-source: derived
+  /v1/Integrations/LexisNexis/Results:
+    get:
+      tags:
+      - Integrations/LexisNexis
+      summary: Get all of the searches that the authorized user can read
+      operationId: LexisNexis_GetAllSearchResultsAsync
+      parameters:
+      - name: open
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.SearchResultDto'
+                xml:
+                  name: SearchResultDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.SearchResultDto'
+                xml:
+                  name: SearchResultDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.SearchResultDto'
+                xml:
+                  name: SearchResultDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.SearchResultDto'
+                xml:
+                  name: SearchResultDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.SearchResultDto'
+                xml:
+                  name: SearchResultDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.SearchResultDto'
+                xml:
+                  name: SearchResultDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Compliance.ComplianceFilterDto'
+              xml:
+                name: ComplianceFilterDto
+                wrapped: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Compliance.ComplianceFilterDto'
+              xml:
+                name: ComplianceFilterDto
+                wrapped: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Compliance.ComplianceFilterDto'
+              xml:
+                name: ComplianceFilterDto
+                wrapped: true
+              type: array
+          application/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Compliance.ComplianceFilterDto'
+              xml:
+                name: ComplianceFilterDto
+                wrapped: true
+              type: array
+          text/xml:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Compliance.ComplianceFilterDto'
+              xml:
+                name: ComplianceFilterDto
+                wrapped: true
+              type: array
+          application/x-www-form-urlencoded:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Compliance.ComplianceFilterDto'
+              xml:
+                name: ComplianceFilterDto
+                wrapped: true
+              type: array
+          multipart/form-data:
+            schema:
+              items:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Compliance.ComplianceFilterDto'
+              xml:
+                name: ComplianceFilterDto
+                wrapped: true
+              type: array
+        required: true
+  /v1/Integrations/LexisNexis/Results/Details/{searchResultId}:
+    get:
+      tags:
+      - Integrations/LexisNexis
+      operationId: LexisNexis_GetResultDetailsAsync
+      parameters:
+      - name: searchResultId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.SearchResultDetailsDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.SearchResultDetailsDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.SearchResultDetailsDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.SearchResultDetailsDto'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.SearchResultDetailsDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.SearchResultDetailsDto'
+      security:
+      - Authorization: []
+      summary: Lexis nexis get result details async
+      x-summary-source: derived
+  /v1/Integrations/LexisNexis/Searches:
+    get:
+      tags:
+      - Integrations/LexisNexis
+      summary: Get all of the search results that the authorized user can read.
+      operationId: LexisNexis_GetAllSearchesAsync
+      parameters:
+      - name: searchId
+        in: query
+        description: The search result unique id.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.SearchScheduleDto'
+                xml:
+                  name: SearchScheduleDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.SearchScheduleDto'
+                xml:
+                  name: SearchScheduleDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.SearchScheduleDto'
+                xml:
+                  name: SearchScheduleDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.SearchScheduleDto'
+                xml:
+                  name: SearchScheduleDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.SearchScheduleDto'
+                xml:
+                  name: SearchScheduleDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.LexisNexis.SearchScheduleDto'
+                xml:
+                  name: SearchScheduleDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+components:
+  schemas:
+    OAS.WebApi.DTO.Integrations.LexisNexis.SearchResultDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        issueStatusIcon:
+          readOnly: true
+          type: string
+        issueStatus:
+          readOnly: true
+          type: string
+        hasIssue:
+          type: boolean
+        lexisNexisSearchId:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        registrationType:
+          type: string
+        registrationCreated:
+          type: string
+          format: date-time
+        clientId:
+          type: integer
+          format: int32
+        message:
+          type: string
+        dbName:
+          type: string
+        ria:
+          type: string
+        brokerDealer:
+          type: string
+        representative:
+          type: string
+        approvedBy:
+          type: string
+        approvedId:
+          type: integer
+          format: int32
+        approvedDate:
+          type: string
+          format: date-time
+        approvalReason:
+          type: string
+        alClientId:
+          type: integer
+          format: int32
+      xml:
+        name: SearchResultDto
+      type: object
+    OAS.WebApi.DTO.Compliance.ComplianceFilterDto:
+      properties:
+        label:
+          type: string
+        entity:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        selected:
+          items:
+            type: object
+          type: array
+        selectedIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        hideSection:
+          type: boolean
+        exclude:
+          type: boolean
+      xml:
+        name: ComplianceFilterDto
+      type: object
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityId:
+      properties:
+        label:
+          type: string
+        number:
+          type: string
+        issuer:
+          type: string
+        issueDate:
+          type: string
+        expDate:
+          type: string
+        notes:
+          type: string
+        id:
+          type: integer
+          format: int32
+        idSpecified:
+          type: boolean
+        type:
+          type: integer
+          format: int32
+        typeSpecified:
+          type: boolean
+      xml:
+        name: MatchEntityId
+      type: object
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.BasicInputList:
+      properties:
+        input:
+          type: string
+        list:
+          type: string
+      xml:
+        name: BasicInputList
+      type: object
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityDescription:
+      properties:
+        value:
+          type: string
+        notes:
+          type: string
+        id:
+          type: integer
+          format: int32
+        idSpecified:
+          type: boolean
+        type:
+          type: integer
+          format: int32
+        typeSpecified:
+          type: boolean
+      xml:
+        name: MatchEntityDescription
+      type: object
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityAddress:
+      properties:
+        full:
+          type: string
+        street_1:
+          type: string
+        street_2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+        notes:
+          type: string
+        id:
+          type: integer
+          format: int32
+        idSpecified:
+          type: boolean
+        type:
+          type: integer
+          format: int32
+        typeSpecified:
+          type: boolean
+      xml:
+        name: MatchEntityAddress
+      type: object
+    OAS.DataProcess.DTO.Integration.LexisNexis.SearchResultDetailsDto:
+      properties:
+        registrationId:
+          type: integer
+          format: int32
+        address1:
+          type: string
+        address2:
+          type: string
+        address3:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+        firstName:
+          type: string
+        fullName:
+          type: string
+        lastName:
+          type: string
+        businessPhone:
+          type: string
+        homePhone:
+          type: string
+        mobilePhone:
+          type: string
+        ssn:
+          type: string
+        match:
+          $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.Results.WatchListMatch'
+      xml:
+        name: SearchResultDetailsDto
+      type: object
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityNamedItem:
+      properties:
+        id:
+          type: integer
+          format: int32
+        idSpecified:
+          type: boolean
+        type:
+          type: integer
+          format: int32
+        typeSpecified:
+          type: boolean
+        text:
+          type: string
+      xml:
+        name: MatchEntityNamedItem
+      type: object
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityName:
+      properties:
+        title:
+          type: string
+        full:
+          type: string
+        first:
+          type: string
+        middle:
+          type: string
+        last:
+          type: string
+        generation:
+          type: string
+      xml:
+        name: MatchEntityName
+      type: object
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.WatchListMatch:
+      properties:
+        entityName:
+          type: string
+        entityScore:
+          type: string
+        gatewayOFACScreeningIndicator:
+          type: string
+        secondaryOFACScreeningIndicator:
+          type: string
+        bestCountry:
+          type: string
+        bestCountryScore:
+          type: string
+        bestName:
+          type: string
+        bestNameScore:
+          type: string
+        fileName:
+          type: string
+        sourceDate:
+          type: string
+        distributionDate:
+          type: string
+        resultDate:
+          type: string
+        entityUniqueID:
+          type: string
+        gatewayOFACScreeningIndicatorMatch:
+          type: string
+        secondaryOFACScreeningIndicatorMatch:
+          type: string
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+        matchSummary:
+          $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchSummary'
+        matchDetails:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntity'
+          xml:
+            name: MatchEntity
+            wrapped: true
+          type: array
+        id:
+          type: integer
+          format: int32
+        idSpecified:
+          type: boolean
+        xmlString:
+          type: string
+      xml:
+        name: WatchListMatch
+      type: object
+    OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto:
+      description: The configuration details for the Lexis Nexis integration.
+      properties:
+        lastRun:
+          description: The date and time of the last completed run; null if not run.
+          type: string
+          format: date-time
+        enabled:
+          description: 'True if a watchlist search is enabled.
+
+
+            If the user is scanning all registrations manually, this value is ignored.'
+          type: boolean
+        installed:
+          description: 'True if the integration is installed for the firm.
+
+
+            If the user is scanning all registrations manually, this value is ignored.'
+          type: boolean
+        selectedFrequency:
+          description: The SearchFrequency that has been selected by the user.
+          type: string
+          enum:
+          - OnDemand
+          - DailyNewAccounts
+          - Monthly
+          - Quarterly
+        selectedDetailLevel:
+          description: The SearchDetailLevel that has been selected by the user.
+          type: string
+          enum:
+          - Basic
+          - Premium
+        lastSearch:
+          description: The DateTime of the last attempted search to Lexis Nexis.
+          type: string
+          format: date-time
+        searchStatus:
+          description: The Search Status of the last attempted search to Lexis Nexis.
+          type: string
+          enum:
+          - NoRuns
+          - Success
+          - Error
+        lastError:
+          description: The error message of the last attempted search to Lexis Nexis, if an error occurred.
+          type: string
+        isProcessing:
+          description: Flag indicating whether the search is currently being processed.
+          type: boolean
+        lastQuery:
+          description: Nullable date and time of the last query for data for the search.
+          type: string
+          format: date-time
+        lastSent:
+          description: Nullable date and time the data was sent to LexisNexis for the search.
+          type: string
+          format: date-time
+        lastFetched:
+          description: Nullable date and time the result file was fetched from LexisNexis.
+          type: string
+          format: date-time
+        partnerAppId:
+          description: The unique ID of the partner app.
+          type: integer
+          format: int32
+        productName:
+          description: The unique name of the partner app product.
+          type: string
+      xml:
+        name: IntegrationConfigDto
+      type: object
+    OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto:
+      properties:
+        key:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        termsAccepted:
+          type: boolean
+      xml:
+        name: IntegrationSetupRequestDto
+      type: object
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityAka:
+      properties:
+        title:
+          type: string
+        full:
+          type: string
+        first:
+          type: string
+        middle:
+          type: string
+        last:
+          type: string
+        generation:
+          type: string
+        notes:
+          type: string
+        id:
+          type: integer
+          format: int32
+        idSpecified:
+          type: boolean
+        type:
+          type: integer
+          format: int32
+        typeSpecified:
+          type: boolean
+        category:
+          type: integer
+          format: int32
+        categorySpecified:
+          type: boolean
+      xml:
+        name: MatchEntityAka
+      type: object
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.BasicScoredInputList:
+      properties:
+        score:
+          type: integer
+          format: int32
+        scoreSpecified:
+          type: boolean
+        input:
+          type: string
+        list:
+          type: string
+      xml:
+        name: BasicScoredInputList
+      type: object
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchSummary:
+      properties:
+        gender:
+          $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.Results.BasicInputList'
+        addressMatches:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.Results.BasicScoredTypeInputList'
+          xml:
+            name: BasicScoredTypeInputList
+            wrapped: true
+          type: array
+        dobMatches:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.Results.BasicScoredInputList'
+          xml:
+            name: BasicScoredInputList
+            wrapped: true
+          type: array
+        idMatches:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.Results.BasicScoredTypeInputList'
+          xml:
+            name: BasicScoredTypeInputList
+            wrapped: true
+          type: array
+        phoneMatches:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.Results.BasicScoredTypeInputList'
+          xml:
+            name: BasicScoredTypeInputList
+            wrapped: true
+          type: array
+      xml:
+        name: MatchSummary
+      type: object
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.BasicScoredTypeInputList:
+      properties:
+        type:
+          type: integer
+          format: int32
+        typeSpecified:
+          type: boolean
+        score:
+          type: integer
+          format: int32
+        scoreSpecified:
+          type: boolean
+        input:
+          type: string
+        list:
+          type: string
+      xml:
+        name: BasicScoredTypeInputList
+      type: object
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntity:
+      properties:
+        country:
+          type: string
+        number:
+          type: string
+        date:
+          type: string
+        reason:
+          type: string
+        checkSum:
+          type: string
+        gender:
+          type: string
+        name:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityName'
+          xml:
+            name: MatchEntityName
+            wrapped: true
+          type: array
+        notes:
+          type: string
+        altNames:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityNamedItem'
+          xml:
+            name: MatchEntityNamedItem
+            wrapped: true
+          type: array
+        codes:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityNamedItem'
+          xml:
+            name: MatchEntityNamedItem
+            wrapped: true
+          type: array
+        terms:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityNamedItem'
+          xml:
+            name: MatchEntityNamedItem
+            wrapped: true
+          type: array
+        cities:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityNamedItem'
+          xml:
+            name: MatchEntityNamedItem
+            wrapped: true
+          type: array
+        ports:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityNamedItem'
+          xml:
+            name: MatchEntityNamedItem
+            wrapped: true
+          type: array
+        akas:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityAka'
+          xml:
+            name: MatchEntityAka
+            wrapped: true
+          type: array
+        addresses:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityAddress'
+          xml:
+            name: MatchEntityAddress
+            wrapped: true
+          type: array
+        phones:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityPhone'
+          xml:
+            name: MatchEntityPhone
+            wrapped: true
+          type: array
+        ids:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityId'
+          xml:
+            name: MatchEntityId
+            wrapped: true
+          type: array
+        descriptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityDescription'
+          xml:
+            name: MatchEntityDescription
+            wrapped: true
+          type: array
+        type:
+          type: string
+      xml:
+        name: MatchEntity
+      type: object
+    OAS.WebApi.DTO.Integrations.LexisNexis.ApprovalDto:
+      properties:
+        ids:
+          description: The collection of Search Result Ids to apply the reason to.
+          items:
+            type: integer
+            format: int32
+          type: array
+        reason:
+          description: The reason to apply to the search results with the above ids.
+          type: string
+        hasIssue:
+          description: Whether the issue is valid or not.
+          type: boolean
+      xml:
+        name: ApprovalDto
+      type: object
+    OAS.WebApi.DTO.Integrations.LexisNexis.SearchScheduleDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        enabled:
+          type: boolean
+        searchFrequency:
+          type: string
+          enum:
+          - OnDemand
+          - DailyNewAccounts
+          - Monthly
+          - Quarterly
+        uploadTargetId:
+          type: integer
+          format: int32
+        isProcessing:
+          type: boolean
+        lastQuery:
+          type: string
+          format: date-time
+        lastSent:
+          type: string
+          format: date-time
+        lastFetched:
+          type: string
+          format: date-time
+        lastSearch:
+          type: string
+          format: date-time
+        lastError:
+          type: string
+        searchSelection:
+          type: string
+          enum:
+          - ALL
+          - NEW
+      xml:
+        name: SearchScheduleDto
+      type: object
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityPhone:
+      properties:
+        number:
+          type: string
+        notes:
+          type: string
+        id:
+          type: integer
+          format: int32
+        idSpecified:
+          type: boolean
+        type:
+          type: integer
+          format: int32
+        typeSpecified:
+          type: boolean
+      xml:
+        name: MatchEntityPhone
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

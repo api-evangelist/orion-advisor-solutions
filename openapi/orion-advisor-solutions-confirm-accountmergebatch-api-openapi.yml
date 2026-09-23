@@ -1,0 +1,168 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Confirm/Account Merge Batch API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Confirm/AccountMergeBatch
+paths:
+  /v1/Confirm/AccountMergeBatch:
+    get:
+      tags:
+      - Confirm/AccountMergeBatch
+      summary: Gets the list of Account Merge Batches
+      operationId: AccountMergeBatch_GetAccountMergeBatchSummaryListAsync
+      parameters:
+      - name: startDate
+        in: query
+        description: Optional start date filter on CreatedDate.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Optional end date filter on CreatedDate.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: ct
+        in: header
+        description: Cancellation token.
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Confirm/AccountMergeBatch/{id}:
+    get:
+      tags:
+      - Confirm/AccountMergeBatch
+      summary: Gets an Account Merge Batch by id
+      operationId: AccountMergeBatch_GetAccountMergeBatchByIdAsync
+      parameters:
+      - name: id
+        in: path
+        description: Account merge batch id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        description: Cancellation token.
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Confirm/AccountMergeBatch/{id}/Cancel:
+    put:
+      tags:
+      - Confirm/AccountMergeBatch
+      summary: Cancels all pending and errored account merge batch detail rows for a batch
+      operationId: AccountMergeBatch_CancelAccountMergeBatchAsync
+      parameters:
+      - name: id
+        in: path
+        description: Account merge batch id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        description: Cancellation token.
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+  /v1/Confirm/AccountMergeBatch/{id}/Retry:
+    put:
+      tags:
+      - Confirm/AccountMergeBatch
+      summary: Retries all errored account merge batch detail rows for a batch
+      operationId: AccountMergeBatch_RetryAccountMergeBatchAsync
+      parameters:
+      - name: id
+        in: path
+        description: Account merge batch id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        description: Cancellation token.
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

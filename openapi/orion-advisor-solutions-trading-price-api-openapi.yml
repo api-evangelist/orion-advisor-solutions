@@ -1,0 +1,56 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Trading/Price API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Trading/Price
+paths:
+  /v1/Trading/Price/ReviewPrices:
+    get:
+      tags:
+      - Trading/Price
+      summary: Orions the price service review prices asynchronous
+      description: 'Sample Request
+
+        GET Trading/Price/ReviewPrices?alClientId=1379'
+      operationId: Price_OrionPriceServiceReviewPricesAsync
+      parameters:
+      - name: alClientId
+        in: query
+        description: The al client identifier.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: cancellationToken
+        in: header
+        description: The cancellation token.
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: object
+      security:
+      - Authorization: []
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header

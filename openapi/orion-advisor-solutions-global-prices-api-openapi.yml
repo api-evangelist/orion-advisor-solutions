@@ -1,0 +1,259 @@
+openapi: 3.2.0
+info:
+  version: V1
+  title: Orion Connect Global/Prices API
+  x-swagger-net-version: 8.4.12.001
+servers:
+- url: https://api.orionadvisor.com/api
+tags:
+- name: Global/Prices
+paths:
+  /v1/Global/Prices/Review/{productId}:
+    get:
+      tags:
+      - Global/Prices
+      operationId: GlobalProductsPricesReview_ListByProductAsync
+      parameters:
+      - name: productId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalAuditReviewDto'
+                xml:
+                  name: PriceGlobalAuditReviewDto
+                  wrapped: true
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalAuditReviewDto'
+                xml:
+                  name: PriceGlobalAuditReviewDto
+                  wrapped: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalAuditReviewDto'
+                xml:
+                  name: PriceGlobalAuditReviewDto
+                  wrapped: true
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalAuditReviewDto'
+                xml:
+                  name: PriceGlobalAuditReviewDto
+                  wrapped: true
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalAuditReviewDto'
+                xml:
+                  name: PriceGlobalAuditReviewDto
+                  wrapped: true
+                type: array
+            multipart/form-data:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalAuditReviewDto'
+                xml:
+                  name: PriceGlobalAuditReviewDto
+                  wrapped: true
+                type: array
+      security:
+      - Authorization: []
+      summary: Global products prices review list by product async
+      x-summary-source: derived
+  /v1/Global/Prices/Review/{productId}/Statistics:
+    get:
+      tags:
+      - Global/Prices
+      operationId: GlobalProductsPricesReview_PriceStatisticsByProductAsync
+      parameters:
+      - name: productId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: ct
+        in: header
+        required: true
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalAuditReviewStatisticsDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalAuditReviewStatisticsDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalAuditReviewStatisticsDto'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalAuditReviewStatisticsDto'
+      security:
+      - Authorization: []
+      summary: Global products prices review price statistics by product async
+      x-summary-source: derived
+components:
+  schemas:
+    OAS.WebApi.DTO.Portfolio.PriceGlobalAuditReviewLaggingPriceSourceDto:
+      properties:
+        custodianCommonId:
+          type: integer
+          format: int32
+        custodianCommon:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+      xml:
+        name: PriceGlobalAuditReviewLaggingPriceSourceDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.PriceGlobalAuditReviewStatisticsDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        custodianCountRange:
+          type: integer
+          format: int32
+        custodianCountAllTime:
+          type: integer
+          format: int32
+        priceHigh:
+          type: number
+          format: double
+        priceLow:
+          type: number
+          format: double
+        prevTwoYearHigh:
+          type: number
+          format: double
+        prevTwoYearLow:
+          type: number
+          format: double
+        priceGapStart:
+          type: string
+          format: date-time
+        priceGapEnd:
+          type: string
+          format: date-time
+        potentiallyStalePrices:
+          type: boolean
+        priceBeforeInception:
+          type: boolean
+        symbolReview:
+          type: boolean
+        sameSymbolLargePriceDiff:
+          type: boolean
+        inUse:
+          type: boolean
+        laggingPriceSources:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PriceGlobalAuditReviewLaggingPriceSourceDto'
+          xml:
+            name: PriceGlobalAuditReviewLaggingPriceSourceDto
+            wrapped: true
+          type: array
+      xml:
+        name: PriceGlobalAuditReviewStatisticsDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.PriceGlobalAuditReviewDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        custodianCommonId:
+          type: integer
+          format: int32
+        custodianCommonName:
+          type: string
+        priceDate:
+          type: string
+          format: date-time
+        navPrice:
+          type: number
+          format: double
+        firstPriceSymbol:
+          type: string
+        currentPriceSymbol:
+          type: string
+        priceSwingNextDay:
+          type: boolean
+        priceSwingPrevDay:
+          type: integer
+          format: int32
+        priceVariance:
+          type: boolean
+        priceStale:
+          type: boolean
+        dividendType:
+          type: integer
+          format: int32
+        totalDividendRate:
+          type: number
+          format: double
+        inUse:
+          type: boolean
+        splitFactor:
+          type: number
+          format: double
+        zScore:
+          type: number
+          format: double
+      xml:
+        name: PriceGlobalAuditReviewDto
+      type: object
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: 'JWT Authorization header using the Session scheme. Example: "Authorization: Session {token}"'
+      name: Authorization
+      in: header
