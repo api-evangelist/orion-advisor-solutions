@@ -2008,6 +2008,21 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAS.WebApi.DTO.Reporting.RunReport.ReportBaseDto:
+      properties:
+        reportName:
+          type: string
+        reportDescription:
+          type: string
+        parentCategory:
+          type: string
+        category:
+          type: string
+        runAssignedVersion:
+          type: boolean
+      xml:
+        name: ReportBaseDto
+      type: object
     OAS.DataModel.Reporting.Interfaces.IReportFeatureFlagOverrider:
       properties:
         dynamicBenchmarkProcessType:
@@ -2094,65 +2109,128 @@ components:
       xml:
         name: IReportFeatureFlagOverrider
       type: object
-    OAS.WebApi.DTO.Reporting.RunReport.RunReportOptionDto:
+    OAS.WebApi.DTO.Reporting.RunReport.BatchReportGenerationStatus:
       properties:
-        id:
-          type: integer
-          format: int32
-        childParameter:
-          type: string
-        name:
-          type: string
-        value:
-          type: string
-        display:
-          type: string
-        order:
-          type: integer
-          format: int32
-        description:
-          type: string
-        input:
-          type: string
-        options:
-          type: object
-      xml:
-        name: RunReportOptionDto
-      type: object
-    OAS.DataModel.Reporting.ReportOption:
-      required:
-      - id
-      - $type
-      properties:
-        id:
-          type: string
-        $type:
-          readOnly: true
-          type: string
-        optionGuid:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        optionId:
-          type: integer
-          format: int32
-        isDisabled:
-          type: boolean
-        isGlobal:
-          type: boolean
-        isIgnored:
-          type: boolean
-        name:
-          type: string
-        useInception:
-          type: boolean
-        prompt:
+        status:
           type: string
           enum:
-          - Never
-          - Always
+          - NotGenerated
+          - ErroredReport
+          - OnHold
+          - Generated
+          - PendingGeneration
+          - WillNotBeGenerated
+        reports:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.ReportGenerationStatus'
+          xml:
+            name: ReportGenerationStatus
+            wrapped: true
+          type: array
+        totalReports:
+          type: integer
+          format: int32
       xml:
-        name: ReportOption
+        name: BatchReportGenerationStatus
+      type: object
+    OAS.WebApi.DTO.Reporting.RunReport.RunReportDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        disclaimer:
+          type: string
+        hasStorableParameters:
+          type: boolean
+        hasReportDefaults:
+          type: boolean
+        hasUserDefaults:
+          type: boolean
+        hasEntityDefaults:
+          type: boolean
+        showInternalOnlyWarning:
+          type: boolean
+        layoutType:
+          type: string
+          enum:
+          - Standard
+          - Advanced
+        defaultsType:
+          readOnly: true
+          type: string
+        lastRunDate:
+          type: string
+          format: date-time
+        storable:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.RunReportCategoryDto'
+          xml:
+            name: RunReportCategoryDto
+            wrapped: true
+          type: array
+        unstorable:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.RunReportCategoryDto'
+          xml:
+            name: RunReportCategoryDto
+            wrapped: true
+          type: array
+        runTo:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.RunToDto'
+        entities:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.RunForDto'
+          xml:
+            name: RunForDto
+            wrapped: true
+          type: array
+        reportName:
+          type: string
+        reportDescription:
+          type: string
+        parentCategory:
+          type: string
+        category:
+          type: string
+        runAssignedVersion:
+          type: boolean
+      xml:
+        name: RunReportDto
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
+    OAS.WebApi.DTO.Reporting.RunReport.InceptionDateDto:
+      properties:
+        inceptionDate:
+          type: string
+          format: date-time
+      xml:
+        name: InceptionDateDto
+      type: object
+    OAS.DataModel.Reporting.ReportOptionCategory:
+      required:
+      - category
+      - options
+      properties:
+        category:
+          type: string
+        options:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+      xml:
+        name: ReportOptionCategory
       type: object
     OAS.WebApi.DTO.Reporting.RunReport.RunReportCategoryDto:
       properties:
@@ -2167,69 +2245,6 @@ components:
           type: array
       xml:
         name: RunReportCategoryDto
-      type: object
-    OAS.WebApi.DTO.Reporting.RunReport.RunToDto:
-      properties:
-        reportFormat:
-          type: string
-          enum:
-          - Xml
-          - 'Null'
-          - Csv
-          - Image
-          - PDF
-          - Html
-          - Html40
-          - Html32
-          - Mhtml
-          - Excel
-          - ExcelX
-          - HtmlOwc
-          - Json
-          - CustomImport
-        storageType:
-          type: string
-        provider:
-          type: string
-        folderPath:
-          type: string
-        combinationMethod:
-          type: string
-          enum:
-          - None
-          - Aggregate
-          - Zip
-          - Merge
-          - MergeSimplex
-          - MergeDuplex
-          - TarGzip
-        userIdList:
-          items:
-            type: integer
-            format: int32
-          type: array
-        archiveReport:
-          type: boolean
-        uploadTargetId:
-          type: integer
-          format: int32
-        source:
-          type: string
-          enum:
-          - OnDemandUI
-          - OnDemandAPI
-          - QueryTester
-          - Scheduled
-          - AuditRequestOnDemand
-          - AuditTestOnDemand
-          - AuditTestSchedule
-          - SubscriptionNotification
-          - ReportBatchSyncDynamicGroupEntities
-          - ReconCompleteNotification
-          - DashboardDataAuditProcess
-          - DashboardDataAuditProcessCountOnly
-      xml:
-        name: RunToDto
       type: object
     OAS.DataModel.Reporting.Engine.IGroupingOptionOverrider:
       properties:
@@ -2453,18 +2468,73 @@ components:
       xml:
         name: RunForDto
       type: object
-    OAS.DataModel.SimpleEntity:
+    OAS.WebApi.DTO.Reporting.RunReport.RunToDto:
       properties:
-        id:
+        reportFormat:
+          type: string
+          enum:
+          - Xml
+          - 'Null'
+          - Csv
+          - Image
+          - PDF
+          - Html
+          - Html40
+          - Html32
+          - Mhtml
+          - Excel
+          - ExcelX
+          - HtmlOwc
+          - Json
+          - CustomImport
+        storageType:
+          type: string
+        provider:
+          type: string
+        folderPath:
+          type: string
+        combinationMethod:
+          type: string
+          enum:
+          - None
+          - Aggregate
+          - Zip
+          - Merge
+          - MergeSimplex
+          - MergeDuplex
+          - TarGzip
+        userIdList:
+          items:
+            type: integer
+            format: int32
+          type: array
+        archiveReport:
+          type: boolean
+        uploadTargetId:
           type: integer
           format: int32
-        name:
+        source:
           type: string
+          enum:
+          - OnDemandUI
+          - OnDemandAPI
+          - QueryTester
+          - Scheduled
+          - AuditRequestOnDemand
+          - AuditTestOnDemand
+          - AuditTestSchedule
+          - SubscriptionNotification
+          - ReportBatchSyncDynamicGroupEntities
+          - ReconCompleteNotification
+          - DashboardDataAuditProcess
+          - DashboardDataAuditProcessCountOnly
       xml:
-        name: SimpleEntity
+        name: RunToDto
       type: object
-    OAS.WebApi.DTO.Reporting.RunReport.BatchReportGenerationStatus:
+    OAS.WebApi.DTO.Reporting.RunReport.ReportGenerationStatus:
       properties:
+        runFor:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.RunForDto'
         status:
           type: string
           enum:
@@ -2474,105 +2544,35 @@ components:
           - Generated
           - PendingGeneration
           - WillNotBeGenerated
-        reports:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.ReportGenerationStatus'
-          xml:
-            name: ReportGenerationStatus
-            wrapped: true
-          type: array
-        totalReports:
-          type: integer
-          format: int32
+        location:
+          type: string
       xml:
-        name: BatchReportGenerationStatus
+        name: ReportGenerationStatus
       type: object
-    OAS.WebApi.DTO.Reporting.RunReport.ReportBaseDto:
-      properties:
-        reportName:
-          type: string
-        reportDescription:
-          type: string
-        parentCategory:
-          type: string
-        category:
-          type: string
-        runAssignedVersion:
-          type: boolean
-      xml:
-        name: ReportBaseDto
-      type: object
-    OAS.WebApi.DTO.Reporting.RunReport.RunReportDto:
+    OAS.WebApi.DTO.Reporting.RunReport.RunReportOptionDto:
       properties:
         id:
           type: integer
           format: int32
-        disclaimer:
+        childParameter:
           type: string
-        hasStorableParameters:
-          type: boolean
-        hasReportDefaults:
-          type: boolean
-        hasUserDefaults:
-          type: boolean
-        hasEntityDefaults:
-          type: boolean
-        showInternalOnlyWarning:
-          type: boolean
-        layoutType:
+        name:
           type: string
-          enum:
-          - Standard
-          - Advanced
-        defaultsType:
-          readOnly: true
+        value:
           type: string
-        lastRunDate:
+        display:
           type: string
-          format: date-time
-        storable:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.RunReportCategoryDto'
-          xml:
-            name: RunReportCategoryDto
-            wrapped: true
-          type: array
-        unstorable:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.RunReportCategoryDto'
-          xml:
-            name: RunReportCategoryDto
-            wrapped: true
-          type: array
-        runTo:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.RunToDto'
-        entities:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.RunForDto'
-          xml:
-            name: RunForDto
-            wrapped: true
-          type: array
-        reportName:
+        order:
+          type: integer
+          format: int32
+        description:
           type: string
-        reportDescription:
+        input:
           type: string
-        parentCategory:
-          type: string
-        category:
-          type: string
-        runAssignedVersion:
-          type: boolean
+        options:
+          type: object
       xml:
-        name: RunReportDto
-      type: object
-    OAS.WebApi.DTO.Reporting.RunReport.InceptionDateDto:
-      properties:
-        inceptionDate:
-          type: string
-          format: date-time
-      xml:
-        name: InceptionDateDto
+        name: RunReportOptionDto
       type: object
     OAS.WebApi.DTO.Reporting.Envision.EnvisionReportDto:
       properties:
@@ -2622,47 +2622,47 @@ components:
       xml:
         name: EnvisionReportDto
       type: object
-    OAS.DataModel.Reporting.ReportOptionCategory:
-      required:
-      - category
-      - options
-      properties:
-        category:
-          type: string
-        options:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
-          xml:
-            name: ReportOption
-            wrapped: true
-          type: array
-      xml:
-        name: ReportOptionCategory
-      type: object
-    OAS.WebApi.DTO.Reporting.RunReport.ReportGenerationStatus:
-      properties:
-        runFor:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.RunForDto'
-        status:
-          type: string
-          enum:
-          - NotGenerated
-          - ErroredReport
-          - OnHold
-          - Generated
-          - PendingGeneration
-          - WillNotBeGenerated
-        location:
-          type: string
-      xml:
-        name: ReportGenerationStatus
-      type: object
     OAS.DataModel.SimpleEntityBase:
       properties:
         name:
           type: string
       xml:
         name: SimpleEntityBase
+      type: object
+    OAS.DataModel.Reporting.ReportOption:
+      required:
+      - id
+      - $type
+      properties:
+        id:
+          type: string
+        $type:
+          readOnly: true
+          type: string
+        optionGuid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        optionId:
+          type: integer
+          format: int32
+        isDisabled:
+          type: boolean
+        isGlobal:
+          type: boolean
+        isIgnored:
+          type: boolean
+        name:
+          type: string
+        useInception:
+          type: boolean
+        prompt:
+          type: string
+          enum:
+          - Never
+          - Always
+      xml:
+        name: ReportOption
       type: object
   securitySchemes:
     Authorization:

@@ -489,6 +489,29 @@ paths:
       - Authorization: []
 components:
   schemas:
+    OAS.WebApi.DTO.Authorization.ALClientDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        clientName:
+          type: string
+        selected:
+          type: boolean
+        lockDown:
+          type: string
+          enum:
+          - None
+          - Billing
+        ops:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Security.AlClientOpsDto'
+        guid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+      xml:
+        name: ALClientDto
+      type: object
     OAS.WebApi.DTO.Authorization.ServiceTeamMemberDto:
       properties:
         id:
@@ -523,29 +546,6 @@ components:
       xml:
         name: ServiceTeamMemberDto
       type: object
-    OAS.WebApi.DTO.Authorization.ALClientDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        clientName:
-          type: string
-        selected:
-          type: boolean
-        lockDown:
-          type: string
-          enum:
-          - None
-          - Billing
-        ops:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Security.AlClientOpsDto'
-        guid:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-      xml:
-        name: ALClientDto
-      type: object
     OAS.WebApi.DTO.Authorization.SimpleServiceTeamMemberUserManagerDto:
       properties:
         id:
@@ -555,6 +555,24 @@ components:
           type: string
       xml:
         name: SimpleServiceTeamMemberUserManagerDto
+      type: object
+    OAS.WebApi.DTO.Authorization.ServiceTeamMemberAlClientDto:
+      properties:
+        serviceTeamMemberId:
+          type: integer
+          format: int32
+        alClientId:
+          type: integer
+          format: int32
+        databaseName:
+          type: string
+        userName:
+          type: string
+        userId:
+          type: integer
+          format: int32
+      xml:
+        name: ServiceTeamMemberAlClientDto
       type: object
     OAS.WebApi.DTO.Security.AlClientOpsDto:
       properties:
@@ -584,24 +602,6 @@ components:
           type: string
       xml:
         name: AlClientOpsDto
-      type: object
-    OAS.WebApi.DTO.Authorization.ServiceTeamMemberAlClientDto:
-      properties:
-        serviceTeamMemberId:
-          type: integer
-          format: int32
-        alClientId:
-          type: integer
-          format: int32
-        databaseName:
-          type: string
-        userName:
-          type: string
-        userId:
-          type: integer
-          format: int32
-      xml:
-        name: ServiceTeamMemberAlClientDto
       type: object
   securitySchemes:
     Authorization:

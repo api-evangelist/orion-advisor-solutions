@@ -254,25 +254,37 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.DTO.HomepageDashboard.RoleDashboardDto:
+    OAS.WebApi.DTO.HomepageDashboard.UserHomepageDashboardSimpleDto:
       properties:
-        roleId:
+        isShared:
+          type: boolean
+        isVisible:
+          type: boolean
+        isDefault:
+          type: boolean
+        isGlobal:
+          type: boolean
+        isPortfolioView:
+          type: boolean
+        userId:
           type: integer
           format: int32
-        roleName:
+        dashboardType:
           type: string
-        defaultDashboardId:
+          enum:
+          - Homepage
+          - View
+          - Tool
+        id:
           type: integer
           format: int32
-        dashboards:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.SharedDashboardDto'
-          xml:
-            name: SharedDashboardDto
-            wrapped: true
-          type: array
+        dashboardName:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
       xml:
-        name: RoleDashboardDto
+        name: UserHomepageDashboardSimpleDto
       type: object
     OAS.WebApi.DTO.HomepageDashboard.SharedDashboardDto:
       properties:
@@ -308,37 +320,25 @@ components:
       xml:
         name: SharedDashboardDto
       type: object
-    OAS.WebApi.DTO.HomepageDashboard.UserHomepageDashboardSimpleDto:
+    OAS.WebApi.DTO.HomepageDashboard.RoleDashboardDto:
       properties:
-        isShared:
-          type: boolean
-        isVisible:
-          type: boolean
-        isDefault:
-          type: boolean
-        isGlobal:
-          type: boolean
-        isPortfolioView:
-          type: boolean
-        userId:
+        roleId:
           type: integer
           format: int32
-        dashboardType:
+        roleName:
           type: string
-          enum:
-          - Homepage
-          - View
-          - Tool
-        id:
+        defaultDashboardId:
           type: integer
           format: int32
-        dashboardName:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
+        dashboards:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.SharedDashboardDto'
+          xml:
+            name: SharedDashboardDto
+            wrapped: true
+          type: array
       xml:
-        name: UserHomepageDashboardSimpleDto
+        name: RoleDashboardDto
       type: object
   securitySchemes:
     Authorization:

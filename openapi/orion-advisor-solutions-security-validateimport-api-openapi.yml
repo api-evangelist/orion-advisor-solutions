@@ -122,14 +122,18 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
-      description: import file DTO for validating imports
+    System.Net.Http.StreamContent:
       properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-          description: the imported file
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
       xml:
-        name: ValidateFileImportDto
+        name: StreamContent
       type: object
     System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
       properties:
@@ -143,6 +147,84 @@ components:
           type: array
       xml:
         name: KeyValuePair`2
+      type: object
+    OAS.WebApi.DTO.Security.UserInfoDetailsValidationDto:
+      properties:
+        isValid:
+          type: boolean
+        validationMessage:
+          type: string
+        warningMessage:
+          type: string
+        profiles:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Security.ProfileDto'
+          xml:
+            name: ProfileDto
+            wrapped: true
+          type: array
+        password:
+          type: string
+        isSecureExchangeRecipient:
+          type: boolean
+        partnerAppId:
+          type: integer
+          format: int32
+        twoFactor:
+          type: boolean
+        errorMessage:
+          type: string
+        id:
+          type: integer
+          format: int32
+        userId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        isActive:
+          type: boolean
+        activeDate:
+          type: string
+          format: date-time
+        inactiveDate:
+          type: string
+          format: date-time
+        lastLogin:
+          type: string
+          format: date-time
+        lastPasswordChange:
+          type: string
+          format: date-time
+        isReset:
+          type: boolean
+        mobilePhone:
+          type: string
+        businessPhone:
+          type: string
+        businessPhoneExtension:
+          type: string
+        company:
+          type: string
+        jobTitle:
+          type: string
+        entityName:
+          type: string
+        contactType:
+          type: string
+          enum:
+          - NotApproved
+          - Approved
+          - MainContact
+          - NoLongerWithFirm
+        createdDate:
+          type: string
+          format: date-time
+      xml:
+        name: UserInfoDetailsValidationDto
       type: object
     OAS.WebApi.DTO.Security.ProfileDto:
       properties:
@@ -362,96 +444,14 @@ components:
       xml:
         name: ProfileDto
       type: object
-    System.Net.Http.StreamContent:
+    OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
+      description: import file DTO for validating imports
       properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+          description: the imported file
       xml:
-        name: StreamContent
-      type: object
-    OAS.WebApi.DTO.Security.UserInfoDetailsValidationDto:
-      properties:
-        isValid:
-          type: boolean
-        validationMessage:
-          type: string
-        warningMessage:
-          type: string
-        profiles:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Security.ProfileDto'
-          xml:
-            name: ProfileDto
-            wrapped: true
-          type: array
-        password:
-          type: string
-        isSecureExchangeRecipient:
-          type: boolean
-        partnerAppId:
-          type: integer
-          format: int32
-        twoFactor:
-          type: boolean
-        errorMessage:
-          type: string
-        id:
-          type: integer
-          format: int32
-        userId:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-        isActive:
-          type: boolean
-        activeDate:
-          type: string
-          format: date-time
-        inactiveDate:
-          type: string
-          format: date-time
-        lastLogin:
-          type: string
-          format: date-time
-        lastPasswordChange:
-          type: string
-          format: date-time
-        isReset:
-          type: boolean
-        mobilePhone:
-          type: string
-        businessPhone:
-          type: string
-        businessPhoneExtension:
-          type: string
-        company:
-          type: string
-        jobTitle:
-          type: string
-        entityName:
-          type: string
-        contactType:
-          type: string
-          enum:
-          - NotApproved
-          - Approved
-          - MainContact
-          - NoLongerWithFirm
-        createdDate:
-          type: string
-          format: date-time
-      xml:
-        name: UserInfoDetailsValidationDto
+        name: ValidateFileImportDto
       type: object
     MultipartDataMediaFormatter.Infrastructure.HttpFile:
       properties:

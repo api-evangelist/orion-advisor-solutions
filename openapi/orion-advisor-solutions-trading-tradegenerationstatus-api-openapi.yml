@@ -101,22 +101,34 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.WebApi.DTO.Utility.MessageDetailDto:
+    OAS.WebApi.DTO.Utility.MessageDto:
       properties:
-        severityCode:
-          type: integer
-          format: int32
-        severity:
-          type: string
-        message:
-          type: string
-        entityEnum:
-          type: string
         entityId:
           type: integer
           format: int32
+        entityEnum:
+          type: string
+        severity:
+          type: string
+        severityCode:
+          type: integer
+          format: int32
+        receivedDate:
+          type: string
+          format: date-time
+        subject:
+          type: string
+        message:
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.MessageDetailDto'
+          xml:
+            name: MessageDetailDto
+            wrapped: true
+          type: array
       xml:
-        name: MessageDetailDto
+        name: MessageDto
       type: object
     OAS.WebApi.DTO.Utility.BatchProcessingErrorDto:
       properties:
@@ -146,35 +158,6 @@ components:
           format: date-time
       xml:
         name: BatchProcessingErrorDto
-      type: object
-    OAS.WebApi.DTO.Utility.MessageDto:
-      properties:
-        entityId:
-          type: integer
-          format: int32
-        entityEnum:
-          type: string
-        severity:
-          type: string
-        severityCode:
-          type: integer
-          format: int32
-        receivedDate:
-          type: string
-          format: date-time
-        subject:
-          type: string
-        message:
-          type: string
-        details:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.MessageDetailDto'
-          xml:
-            name: MessageDetailDto
-            wrapped: true
-          type: array
-      xml:
-        name: MessageDto
       type: object
     OAS.WebApi.DTO.Utility.BatchProcessingDto:
       properties:
@@ -255,6 +238,23 @@ components:
           type: array
       xml:
         name: BatchProcessingDto
+      type: object
+    OAS.WebApi.DTO.Utility.MessageDetailDto:
+      properties:
+        severityCode:
+          type: integer
+          format: int32
+        severity:
+          type: string
+        message:
+          type: string
+        entityEnum:
+          type: string
+        entityId:
+          type: integer
+          format: int32
+      xml:
+        name: MessageDetailDto
       type: object
   securitySchemes:
     Authorization:

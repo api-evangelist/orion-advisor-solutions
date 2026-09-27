@@ -2120,6 +2120,90 @@ paths:
         required: true
 components:
   schemas:
+    OAS.WebApi.DTO.Billing.BillInstanceClientDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        billInstanceId:
+          type: integer
+          format: int32
+        billType:
+          type: string
+          enum:
+          - Unknown
+          - Renewal
+          - NewMoney
+          - NewAccount
+          - FinancialPlanningFee
+          - Performance
+          - AdvanceCreditDebit
+        clientId:
+          type: integer
+          format: int32
+        clientName:
+          type: string
+        status:
+          type: string
+          enum:
+          - NotGenerated
+          - Generated
+          - Errored
+          - PendingGeneration
+          - OnHold
+          - Warning
+          - FeeFileError
+          - ReconError
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        initialAmt:
+          type: number
+          format: double
+        adjAmt:
+          type: number
+          format: double
+        balanceDue:
+          type: number
+          format: double
+        marketValue:
+          type: number
+          format: double
+        feeAmount:
+          type: number
+          format: double
+        feeFileGenerated:
+          type: boolean
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        updatedBy:
+          type: string
+        billId:
+          type: integer
+          format: int32
+        errorMessage:
+          type: string
+        repName:
+          type: string
+        repID:
+          type: integer
+          format: int32
+        repNumber:
+          type: string
+        relatedHouseholds:
+          readOnly: true
+          type: string
+        isValid:
+          type: boolean
+      xml:
+        name: BillInstanceClientDto
+      type: object
     OAS.WebApi.DTO.Billing.BillInstanceDto:
       properties:
         id:
@@ -2228,89 +2312,29 @@ components:
       xml:
         name: SimpleEntity
       type: object
-    OAS.WebApi.DTO.Billing.BillInstanceClientDto:
+    OAS.WebApi.DTO.Billing.BillingEngineStatusDto:
+      description: Bill-generator execution status for a bill instance (from Billing API Gateway).
       properties:
-        id:
-          type: integer
-          format: int32
         billInstanceId:
           type: integer
           format: int32
-        billType:
-          type: string
-          enum:
-          - Unknown
-          - Renewal
-          - NewMoney
-          - NewAccount
-          - FinancialPlanningFee
-          - Performance
-          - AdvanceCreditDebit
-        clientId:
-          type: integer
-          format: int32
-        clientName:
+        executionName:
           type: string
         status:
+          description: RUNNING, SUCCEEDED, FAILED, TIMED_OUT, or ABORTED.
           type: string
-          enum:
-          - NotGenerated
-          - Generated
-          - Errored
-          - PendingGeneration
-          - OnHold
-          - Warning
-          - FeeFileError
-          - ReconError
+        error:
+          type: string
+        cause:
+          type: string
         startDate:
           type: string
           format: date-time
-        endDate:
+        stopDate:
           type: string
           format: date-time
-        initialAmt:
-          type: number
-          format: double
-        adjAmt:
-          type: number
-          format: double
-        balanceDue:
-          type: number
-          format: double
-        marketValue:
-          type: number
-          format: double
-        feeAmount:
-          type: number
-          format: double
-        feeFileGenerated:
-          type: boolean
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        updatedBy:
-          type: string
-        billId:
-          type: integer
-          format: int32
-        errorMessage:
-          type: string
-        repName:
-          type: string
-        repID:
-          type: integer
-          format: int32
-        repNumber:
-          type: string
-        relatedHouseholds:
-          readOnly: true
-          type: string
-        isValid:
-          type: boolean
       xml:
-        name: BillInstanceClientDto
+        name: BillingEngineStatusDto
       type: object
     OAS.WebApi.DTO.Billing.CreateBillFeeFilesDto:
       properties:
@@ -2341,30 +2365,6 @@ components:
           format: date-time
       xml:
         name: CreateBillFeeFilesDto
-      type: object
-    OAS.WebApi.DTO.Billing.BillingEngineStatusDto:
-      description: Bill-generator execution status for a bill instance (from Billing API Gateway).
-      properties:
-        billInstanceId:
-          type: integer
-          format: int32
-        executionName:
-          type: string
-        status:
-          description: RUNNING, SUCCEEDED, FAILED, TIMED_OUT, or ABORTED.
-          type: string
-        error:
-          type: string
-        cause:
-          type: string
-        startDate:
-          type: string
-          format: date-time
-        stopDate:
-          type: string
-          format: date-time
-      xml:
-        name: BillingEngineStatusDto
       type: object
   securitySchemes:
     Authorization:

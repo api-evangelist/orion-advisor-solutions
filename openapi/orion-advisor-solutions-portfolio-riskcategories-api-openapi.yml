@@ -1194,53 +1194,16 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.DTO.Portfolio.RiskCategoryDto:
+    OAS.Validation.IValidationError:
       properties:
-        id:
-          type: integer
-          format: int32
-        abbreviation:
+        propertyName:
+          readOnly: true
           type: string
-        fullName:
+        errorMessage:
+          readOnly: true
           type: string
-        color:
-          type: string
-        symbol:
-          type: string
-        rank:
-          type: integer
-          format: int32
-        productDescriptionProviderId:
-          type: integer
-          format: int32
-        productDescriptionProvider:
-          type: string
-        value:
-          type: number
-          format: double
-        isCategoryExcluded:
-          type: boolean
       xml:
-        name: RiskCategoryDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.RiskCategoryVerboseDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        portfolio:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.RiskCategoryPortfolioDto'
-        entityOptions:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
-          xml:
-            name: EntityOptionDto
-            wrapped: true
-          type: array
-      xml:
-        name: RiskCategoryVerboseDto
+        name: IValidationError
       type: object
     OAS.DataModel.SimpleEntity:
       properties:
@@ -1252,16 +1215,18 @@ components:
       xml:
         name: SimpleEntity
       type: object
-    OAS.Validation.IValidationError:
+    OAS.WebApi.DTO.Simple.SimpleValueDto:
       properties:
-        propertyName:
-          readOnly: true
-          type: string
-        errorMessage:
-          readOnly: true
+        value:
+          type: number
+          format: double
+        id:
+          type: integer
+          format: int32
+        name:
           type: string
       xml:
-        name: IValidationError
+        name: SimpleValueDto
       type: object
     OAS.DataModel.Portfolio.SimpleRiskCategory:
       properties:
@@ -1305,6 +1270,25 @@ components:
           type: boolean
       xml:
         name: RiskCategoryPortfolioDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.RiskCategoryVerboseDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        portfolio:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.RiskCategoryPortfolioDto'
+        entityOptions:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+          xml:
+            name: EntityOptionDto
+            wrapped: true
+          type: array
+      xml:
+        name: RiskCategoryVerboseDto
       type: object
     OAS.WebApi.DTO.Settings.EntityOptionDto:
       properties:
@@ -1551,18 +1535,34 @@ components:
       xml:
         name: EntityOptionDto
       type: object
-    OAS.WebApi.DTO.Simple.SimpleValueDto:
+    OAS.WebApi.DTO.Portfolio.RiskCategoryDto:
       properties:
-        value:
-          type: number
-          format: double
         id:
           type: integer
           format: int32
-        name:
+        abbreviation:
           type: string
+        fullName:
+          type: string
+        color:
+          type: string
+        symbol:
+          type: string
+        rank:
+          type: integer
+          format: int32
+        productDescriptionProviderId:
+          type: integer
+          format: int32
+        productDescriptionProvider:
+          type: string
+        value:
+          type: number
+          format: double
+        isCategoryExcluded:
+          type: boolean
       xml:
-        name: SimpleValueDto
+        name: RiskCategoryDto
       type: object
   securitySchemes:
     Authorization:

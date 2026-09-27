@@ -80,61 +80,6 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.WebApi.DTO.Trading.ModelAnalyzerProductDto:
-      properties:
-        ticker:
-          type: string
-        productName:
-          type: string
-        productId:
-          type: integer
-          format: int32
-        currentShares:
-          type: number
-          format: double
-        postTradeShares:
-          type: number
-          format: double
-        tradeShares:
-          type: number
-          format: double
-        costBasis:
-          type: number
-          format: double
-        currentValue:
-          type: number
-          format: double
-        postTradeValue:
-          type: number
-          format: double
-        lastPrice:
-          type: number
-          format: double
-        targetPercent:
-          type: number
-          format: double
-        percentDifference:
-          type: number
-          format: double
-        toleranceBand:
-          type: number
-          format: double
-        currentPercent:
-          type: number
-          format: double
-        postTradePercent:
-          type: number
-          format: double
-        assetSummary:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelAnalyzerAssetDto'
-          xml:
-            name: ModelAnalyzerAssetDto
-            wrapped: true
-          type: array
-      xml:
-        name: ModelAnalyzerProductDto
-      type: object
     OAS.WebApi.DTO.Trading.ModelAnalyzerAssetDto:
       properties:
         accountId:
@@ -249,6 +194,29 @@ components:
       xml:
         name: ModelAnalyzerAssetDto
       type: object
+    OAS.WebApi.DTO.Trading.ModelAnalyzerExcludedDto:
+      properties:
+        ticker:
+          type: string
+        status:
+          type: string
+          enum:
+          - Open
+          - SoftClose
+          - HardClose
+          - SellOnly
+          - PurchaseOnly
+          - Exclude
+        assetSummary:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelAnalyzerAssetDto'
+          xml:
+            name: ModelAnalyzerAssetDto
+            wrapped: true
+          type: array
+      xml:
+        name: ModelAnalyzerExcludedDto
+      type: object
     OAS.WebApi.DTO.Trading.ModelAnalyzerResultDto:
       properties:
         modelAggId:
@@ -289,19 +257,51 @@ components:
       xml:
         name: ModelAnalyzerResultDto
       type: object
-    OAS.WebApi.DTO.Trading.ModelAnalyzerExcludedDto:
+    OAS.WebApi.DTO.Trading.ModelAnalyzerProductDto:
       properties:
         ticker:
           type: string
-        status:
+        productName:
           type: string
-          enum:
-          - Open
-          - SoftClose
-          - HardClose
-          - SellOnly
-          - PurchaseOnly
-          - Exclude
+        productId:
+          type: integer
+          format: int32
+        currentShares:
+          type: number
+          format: double
+        postTradeShares:
+          type: number
+          format: double
+        tradeShares:
+          type: number
+          format: double
+        costBasis:
+          type: number
+          format: double
+        currentValue:
+          type: number
+          format: double
+        postTradeValue:
+          type: number
+          format: double
+        lastPrice:
+          type: number
+          format: double
+        targetPercent:
+          type: number
+          format: double
+        percentDifference:
+          type: number
+          format: double
+        toleranceBand:
+          type: number
+          format: double
+        currentPercent:
+          type: number
+          format: double
+        postTradePercent:
+          type: number
+          format: double
         assetSummary:
           items:
             $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelAnalyzerAssetDto'
@@ -310,7 +310,7 @@ components:
             wrapped: true
           type: array
       xml:
-        name: ModelAnalyzerExcludedDto
+        name: ModelAnalyzerProductDto
       type: object
   securitySchemes:
     Authorization:

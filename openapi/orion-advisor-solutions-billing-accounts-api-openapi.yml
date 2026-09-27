@@ -1951,6 +1951,19 @@ paths:
       - Authorization: []
 components:
   schemas:
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
     OAS.WebApi.DTO.Billing.HouseholdRecurringAdjustmentDto:
       properties:
         id:
@@ -1975,178 +1988,6 @@ components:
       xml:
         name: HouseholdRecurringAdjustmentDto
       type: object
-    OAS.WebApi.DTO.Billing.BillAccountGridDto:
-      properties:
-        paysForAccountsActive:
-          type: boolean
-        additionalColumns:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Interface.AdditionalColumnDefinition'
-          xml:
-            name: AdditionalColumnDefinition
-            wrapped: true
-          type: array
-        id:
-          type: integer
-          format: int32
-        clientId:
-          type: integer
-          format: int32
-        accountType:
-          type: string
-        registrationName:
-          type: string
-        registrationId:
-          type: integer
-          format: int32
-        fundName:
-          type: string
-        accountNumber:
-          type: string
-        accountName:
-          type: string
-        remainingAmount:
-          type: number
-          format: double
-        managementStyle:
-          type: string
-        subAdvisorName:
-          type: string
-        feeSchedule:
-          type: string
-        masterPayoutSchedule:
-          type: string
-        payMethod:
-          type: string
-        billFrequency:
-          type: string
-          enum:
-          - Undefined
-          - Monthly
-          - Quarterly
-          - Triannual
-          - Semiannually
-          - Annually
-          - AtMaturity
-        billStyle:
-          type: string
-          enum:
-          - Advance
-          - Arrears
-        billAccountStatus:
-          type: string
-          enum:
-          - Ready
-          - NotReady
-          - ReportingOnly
-          - FinancialPlanningFeeOnly
-        billingStatus:
-          type: string
-          enum:
-          - ReadyToBill
-          - Hold
-          - PendingReview
-        valuationMethod:
-          type: string
-          enum:
-          - PeriodEndingValue
-          - AvgDailyBalance
-          - AvgMonthlyBalance
-        accountValue:
-          type: number
-          format: double
-        accountStartDate:
-          type: string
-          format: date-time
-        clientName:
-          type: string
-        billStartDate:
-          type: string
-          format: date-time
-        lastBilledThroughDate:
-          type: string
-          format: date-time
-        custodialAccountNumber:
-          type: string
-        isPerformanceBilled:
-          type: boolean
-        lastPerfBillDate:
-          type: string
-          format: date-time
-        includeInAggregate:
-          type: boolean
-        useFeeHierarchy:
-          type: boolean
-        cycleMonth:
-          type: integer
-          format: int32
-        performanceMasterPayoutSchedule:
-          type: string
-        performanceFeeSchedule:
-          type: string
-        representativeName:
-          type: string
-        representativeNumber:
-          type: string
-        isActive:
-          type: boolean
-        lastTransactionDate:
-          type: string
-          format: date-time
-        custodian:
-          type: string
-        lastName:
-          type: string
-        businessLine:
-          type: string
-        outsideId:
-          type: string
-        modelName:
-          type: string
-        noFeeAggregate:
-          type: string
-        status:
-          type: string
-          enum:
-          - Ready
-          - NotReady
-          - ReportingOnly
-          - FinancialPlanningFeeOnly
-        paysForAccountNumbers:
-          type: string
-        prevAmountApplied:
-          type: number
-          format: double
-        accountIdThatDoesPaying:
-          type: integer
-          format: int32
-      xml:
-        name: BillAccountGridDto
-      type: object
-    OAS.WebApi.DTO.ValidateImport.ImportFileFilterDto:
-      required:
-      - columnName
-      properties:
-        columnName:
-          type: string
-          pattern: ^(Household ID|Account ID|Account Number|Representative Name|Representative Number|Product ID|Download Symbol)$
-        filterType:
-          type: string
-          enum:
-          - Include
-          - Exclude
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-          description: the imported file
-      xml:
-        name: ImportFileFilterDto
-      type: object
     System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
       properties:
         key:
@@ -2169,169 +2010,6 @@ components:
       xml:
         name: AdditionalColumnDefinition
       type: object
-    OAS.DataModel.Portfolio.SimpleAccount:
-      properties:
-        number:
-          type: string
-        managementStyle:
-          type: string
-        isActive:
-          type: boolean
-        clientId:
-          type: integer
-          format: int32
-        custodian:
-          type: string
-        registrationId:
-          type: integer
-          format: int32
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleAccount
-      type: object
-    OAS.WebApi.DTO.Billing.BillAccountBaseDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        clientId:
-          type: integer
-          format: int32
-        accountType:
-          type: string
-        registrationName:
-          type: string
-        registrationId:
-          type: integer
-          format: int32
-        fundName:
-          type: string
-        accountNumber:
-          type: string
-        accountName:
-          type: string
-        remainingAmount:
-          type: number
-          format: double
-        managementStyle:
-          type: string
-        subAdvisorName:
-          type: string
-        feeSchedule:
-          type: string
-        masterPayoutSchedule:
-          type: string
-        payMethod:
-          type: string
-        billFrequency:
-          type: string
-          enum:
-          - Undefined
-          - Monthly
-          - Quarterly
-          - Triannual
-          - Semiannually
-          - Annually
-          - AtMaturity
-        billStyle:
-          type: string
-          enum:
-          - Advance
-          - Arrears
-        billAccountStatus:
-          type: string
-          enum:
-          - Ready
-          - NotReady
-          - ReportingOnly
-          - FinancialPlanningFeeOnly
-        billingStatus:
-          type: string
-          enum:
-          - ReadyToBill
-          - Hold
-          - PendingReview
-        valuationMethod:
-          type: string
-          enum:
-          - PeriodEndingValue
-          - AvgDailyBalance
-          - AvgMonthlyBalance
-        accountValue:
-          type: number
-          format: double
-        accountStartDate:
-          type: string
-          format: date-time
-        clientName:
-          type: string
-        billStartDate:
-          type: string
-          format: date-time
-        lastBilledThroughDate:
-          type: string
-          format: date-time
-        custodialAccountNumber:
-          type: string
-        isPerformanceBilled:
-          type: boolean
-        lastPerfBillDate:
-          type: string
-          format: date-time
-        includeInAggregate:
-          type: boolean
-        useFeeHierarchy:
-          type: boolean
-        cycleMonth:
-          type: integer
-          format: int32
-        performanceMasterPayoutSchedule:
-          type: string
-        performanceFeeSchedule:
-          type: string
-        representativeName:
-          type: string
-        representativeNumber:
-          type: string
-        isActive:
-          type: boolean
-        lastTransactionDate:
-          type: string
-          format: date-time
-        custodian:
-          type: string
-        lastName:
-          type: string
-        businessLine:
-          type: string
-        outsideId:
-          type: string
-        modelName:
-          type: string
-        noFeeAggregate:
-          type: string
-        status:
-          type: string
-          enum:
-          - Ready
-          - NotReady
-          - ReportingOnly
-          - FinancialPlanningFeeOnly
-        paysForAccountNumbers:
-          type: string
-        prevAmountApplied:
-          type: number
-          format: double
-        accountIdThatDoesPaying:
-          type: integer
-          format: int32
-      xml:
-        name: BillAccountBaseDto
-      type: object
     OAS.DataModel.SimpleEntity:
       properties:
         id:
@@ -2342,73 +2020,75 @@ components:
       xml:
         name: SimpleEntity
       type: object
-    OAS.WebApi.DTO.Billing.BillAccountSummaryDto:
+    OAS.WebApi.DTO.Billing.BillAccountRecurringAdjustmentDto:
       properties:
         id:
           type: integer
           format: int32
-        accountNumber:
-          type: string
         clientId:
           type: integer
           format: int32
-        registrationId:
-          type: integer
-          format: int32
-        billMarketValue:
-          type: number
-          format: double
+        fundName:
+          type: string
+        accountNumber:
+          type: string
+        managementStyle:
+          type: string
+        subAdvisorName:
+          type: string
         feeSchedule:
           type: string
-        payMethod:
-          type: string
         masterPayoutSchedule:
-          type: string
-        paysForAccountNumbers:
-          readOnly: true
-          type: string
-        balanceDue:
-          type: number
-          format: double
-        creditRemaining:
-          type: number
-          format: double
-        billStartDate:
-          type: string
-          format: date-time
-        valuationMethod:
-          type: string
-          enum:
-          - PeriodEndingValue
-          - AvgDailyBalance
-          - AvgMonthlyBalance
-        billFrequency:
-          type: string
-          enum:
-          - Undefined
-          - Monthly
-          - Quarterly
-          - Triannual
-          - Semiannually
-          - Annually
-          - AtMaturity
-        isActive:
-          type: boolean
-        registrationName:
-          type: string
-        accountType:
-          type: string
-        representativeNumber:
-          type: string
-        representativeName:
           type: string
         accountValue:
           type: number
           format: double
-        model:
+        clientName:
+          type: string
+        clientFirstName:
+          type: string
+        accountId:
+          type: integer
+          format: int32
+        additionalAnnualAmount:
+          type: number
+          format: double
+        adjustmentTypeDescription:
+          type: string
+        entityDescription:
+          type: string
+        billScheduleName:
+          type: string
+        type:
+          type: string
+        billStartDate:
+          type: string
+          format: date-time
+        feeScheduleId:
+          type: integer
+          format: int32
+        representativeName:
+          type: string
+        representativeNumber:
+          type: string
+        businessLine:
+          type: string
+        accountStartDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        adjustmentStartDate:
+          type: string
+          format: date-time
+        adjustmentEndDate:
+          type: string
+          format: date-time
+        outsideId:
           type: string
       xml:
-        name: BillAccountSummaryDto
+        name: BillAccountRecurringAdjustmentDto
       type: object
     OAS.WebApi.DTO.Billing.BillingAccountCountsDto:
       properties:
@@ -2450,50 +2130,6 @@ components:
           format: int32
       xml:
         name: BillingAccountCountsDto
-      type: object
-    OAS.WebApi.DTO.Billing.BillAccountSimpleDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        clientId:
-          type: integer
-          format: int32
-        accountType:
-          type: string
-        registrationName:
-          type: string
-        registrationId:
-          type: integer
-          format: int32
-        accountNumber:
-          type: string
-        accountName:
-          type: string
-        feeSchedule:
-          type: string
-        accountValue:
-          type: number
-          format: double
-        accountStartDate:
-          type: string
-          format: date-time
-        clientName:
-          type: string
-        feeScheduleId:
-          type: integer
-          format: int32
-        isActive:
-          type: boolean
-        custodian:
-          type: string
-        businessLine:
-          type: string
-        billStartDate:
-          type: string
-          format: date-time
-      xml:
-        name: BillAccountSimpleDto
       type: object
     OAS.WebApi.DTO.Billing.BillAccountDto:
       properties:
@@ -2688,20 +2324,7 @@ components:
       xml:
         name: BillAccountDto
       type: object
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
-      type: object
-    OAS.WebApi.DTO.Billing.BillAccountRecurringAdjustmentDto:
+    OAS.WebApi.DTO.Billing.BillAccountSimpleDto:
       properties:
         id:
           type: integer
@@ -2709,10 +2332,123 @@ components:
         clientId:
           type: integer
           format: int32
+        accountType:
+          type: string
+        registrationName:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        accountName:
+          type: string
+        feeSchedule:
+          type: string
+        accountValue:
+          type: number
+          format: double
+        accountStartDate:
+          type: string
+          format: date-time
+        clientName:
+          type: string
+        feeScheduleId:
+          type: integer
+          format: int32
+        isActive:
+          type: boolean
+        custodian:
+          type: string
+        businessLine:
+          type: string
+        billStartDate:
+          type: string
+          format: date-time
+      xml:
+        name: BillAccountSimpleDto
+      type: object
+    OAS.WebApi.DTO.ValidateImport.ImportFileFilterDto:
+      required:
+      - columnName
+      properties:
+        columnName:
+          type: string
+          pattern: ^(Household ID|Account ID|Account Number|Representative Name|Representative Number|Product ID|Download Symbol)$
+        filterType:
+          type: string
+          enum:
+          - Include
+          - Exclude
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+          description: the imported file
+      xml:
+        name: ImportFileFilterDto
+      type: object
+    OAS.DataModel.Portfolio.SimpleAccount:
+      properties:
+        number:
+          type: string
+        managementStyle:
+          type: string
+        isActive:
+          type: boolean
+        clientId:
+          type: integer
+          format: int32
+        custodian:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleAccount
+      type: object
+    OAS.WebApi.DTO.Billing.BillAccountGridDto:
+      properties:
+        paysForAccountsActive:
+          type: boolean
+        additionalColumns:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Interface.AdditionalColumnDefinition'
+          xml:
+            name: AdditionalColumnDefinition
+            wrapped: true
+          type: array
+        id:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        accountType:
+          type: string
+        registrationName:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
         fundName:
           type: string
         accountNumber:
           type: string
+        accountName:
+          type: string
+        remainingAmount:
+          type: number
+          format: double
         managementStyle:
           type: string
         subAdvisorName:
@@ -2721,55 +2457,112 @@ components:
           type: string
         masterPayoutSchedule:
           type: string
+        payMethod:
+          type: string
+        billFrequency:
+          type: string
+          enum:
+          - Undefined
+          - Monthly
+          - Quarterly
+          - Triannual
+          - Semiannually
+          - Annually
+          - AtMaturity
+        billStyle:
+          type: string
+          enum:
+          - Advance
+          - Arrears
+        billAccountStatus:
+          type: string
+          enum:
+          - Ready
+          - NotReady
+          - ReportingOnly
+          - FinancialPlanningFeeOnly
+        billingStatus:
+          type: string
+          enum:
+          - ReadyToBill
+          - Hold
+          - PendingReview
+        valuationMethod:
+          type: string
+          enum:
+          - PeriodEndingValue
+          - AvgDailyBalance
+          - AvgMonthlyBalance
         accountValue:
           type: number
           format: double
+        accountStartDate:
+          type: string
+          format: date-time
         clientName:
-          type: string
-        clientFirstName:
-          type: string
-        accountId:
-          type: integer
-          format: int32
-        additionalAnnualAmount:
-          type: number
-          format: double
-        adjustmentTypeDescription:
-          type: string
-        entityDescription:
-          type: string
-        billScheduleName:
-          type: string
-        type:
           type: string
         billStartDate:
           type: string
           format: date-time
-        feeScheduleId:
+        lastBilledThroughDate:
+          type: string
+          format: date-time
+        custodialAccountNumber:
+          type: string
+        isPerformanceBilled:
+          type: boolean
+        lastPerfBillDate:
+          type: string
+          format: date-time
+        includeInAggregate:
+          type: boolean
+        useFeeHierarchy:
+          type: boolean
+        cycleMonth:
           type: integer
           format: int32
+        performanceMasterPayoutSchedule:
+          type: string
+        performanceFeeSchedule:
+          type: string
         representativeName:
           type: string
         representativeNumber:
           type: string
+        isActive:
+          type: boolean
+        lastTransactionDate:
+          type: string
+          format: date-time
+        custodian:
+          type: string
+        lastName:
+          type: string
         businessLine:
           type: string
-        accountStartDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        adjustmentStartDate:
-          type: string
-          format: date-time
-        adjustmentEndDate:
-          type: string
-          format: date-time
         outsideId:
           type: string
+        modelName:
+          type: string
+        noFeeAggregate:
+          type: string
+        status:
+          type: string
+          enum:
+          - Ready
+          - NotReady
+          - ReportingOnly
+          - FinancialPlanningFeeOnly
+        paysForAccountNumbers:
+          type: string
+        prevAmountApplied:
+          type: number
+          format: double
+        accountIdThatDoesPaying:
+          type: integer
+          format: int32
       xml:
-        name: BillAccountRecurringAdjustmentDto
+        name: BillAccountGridDto
       type: object
     MultipartDataMediaFormatter.Infrastructure.HttpFile:
       properties:
@@ -2781,6 +2574,213 @@ components:
           $ref: '#/components/schemas/System.Net.Http.StreamContent'
       xml:
         name: HttpFile
+      type: object
+    OAS.WebApi.DTO.Billing.BillAccountSummaryDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        clientId:
+          type: integer
+          format: int32
+        registrationId:
+          type: integer
+          format: int32
+        billMarketValue:
+          type: number
+          format: double
+        feeSchedule:
+          type: string
+        payMethod:
+          type: string
+        masterPayoutSchedule:
+          type: string
+        paysForAccountNumbers:
+          readOnly: true
+          type: string
+        balanceDue:
+          type: number
+          format: double
+        creditRemaining:
+          type: number
+          format: double
+        billStartDate:
+          type: string
+          format: date-time
+        valuationMethod:
+          type: string
+          enum:
+          - PeriodEndingValue
+          - AvgDailyBalance
+          - AvgMonthlyBalance
+        billFrequency:
+          type: string
+          enum:
+          - Undefined
+          - Monthly
+          - Quarterly
+          - Triannual
+          - Semiannually
+          - Annually
+          - AtMaturity
+        isActive:
+          type: boolean
+        registrationName:
+          type: string
+        accountType:
+          type: string
+        representativeNumber:
+          type: string
+        representativeName:
+          type: string
+        accountValue:
+          type: number
+          format: double
+        model:
+          type: string
+      xml:
+        name: BillAccountSummaryDto
+      type: object
+    OAS.WebApi.DTO.Billing.BillAccountBaseDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        accountType:
+          type: string
+        registrationName:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        fundName:
+          type: string
+        accountNumber:
+          type: string
+        accountName:
+          type: string
+        remainingAmount:
+          type: number
+          format: double
+        managementStyle:
+          type: string
+        subAdvisorName:
+          type: string
+        feeSchedule:
+          type: string
+        masterPayoutSchedule:
+          type: string
+        payMethod:
+          type: string
+        billFrequency:
+          type: string
+          enum:
+          - Undefined
+          - Monthly
+          - Quarterly
+          - Triannual
+          - Semiannually
+          - Annually
+          - AtMaturity
+        billStyle:
+          type: string
+          enum:
+          - Advance
+          - Arrears
+        billAccountStatus:
+          type: string
+          enum:
+          - Ready
+          - NotReady
+          - ReportingOnly
+          - FinancialPlanningFeeOnly
+        billingStatus:
+          type: string
+          enum:
+          - ReadyToBill
+          - Hold
+          - PendingReview
+        valuationMethod:
+          type: string
+          enum:
+          - PeriodEndingValue
+          - AvgDailyBalance
+          - AvgMonthlyBalance
+        accountValue:
+          type: number
+          format: double
+        accountStartDate:
+          type: string
+          format: date-time
+        clientName:
+          type: string
+        billStartDate:
+          type: string
+          format: date-time
+        lastBilledThroughDate:
+          type: string
+          format: date-time
+        custodialAccountNumber:
+          type: string
+        isPerformanceBilled:
+          type: boolean
+        lastPerfBillDate:
+          type: string
+          format: date-time
+        includeInAggregate:
+          type: boolean
+        useFeeHierarchy:
+          type: boolean
+        cycleMonth:
+          type: integer
+          format: int32
+        performanceMasterPayoutSchedule:
+          type: string
+        performanceFeeSchedule:
+          type: string
+        representativeName:
+          type: string
+        representativeNumber:
+          type: string
+        isActive:
+          type: boolean
+        lastTransactionDate:
+          type: string
+          format: date-time
+        custodian:
+          type: string
+        lastName:
+          type: string
+        businessLine:
+          type: string
+        outsideId:
+          type: string
+        modelName:
+          type: string
+        noFeeAggregate:
+          type: string
+        status:
+          type: string
+          enum:
+          - Ready
+          - NotReady
+          - ReportingOnly
+          - FinancialPlanningFeeOnly
+        paysForAccountNumbers:
+          type: string
+        prevAmountApplied:
+          type: number
+          format: double
+        accountIdThatDoesPaying:
+          type: integer
+          format: int32
+      xml:
+        name: BillAccountBaseDto
       type: object
   securitySchemes:
     Authorization:

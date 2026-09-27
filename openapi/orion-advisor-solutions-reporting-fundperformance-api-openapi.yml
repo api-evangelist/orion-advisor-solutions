@@ -4120,30 +4120,6 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundDivKeyDto:
-      properties:
-        fundKey:
-          type: string
-        divYear:
-          type: integer
-          format: int32
-      xml:
-        name: GeminiFundDivKeyDto
-      type: object
-    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundIndexDto:
-      properties:
-        indexNumber:
-          type: string
-        indexName:
-          type: string
-        productId:
-          type: integer
-          format: int32
-        isBlend:
-          type: boolean
-      xml:
-        name: GeminiFundIndexDto
-      type: object
     OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundCalendarDto:
       properties:
         id:
@@ -4156,85 +4132,18 @@ components:
       xml:
         name: GeminiFundCalendarDto
       type: object
-    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundStartPriceDto:
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
       properties:
-        fundKey:
+        key:
+          readOnly: true
           type: string
-        startPrice:
-          type: number
-          format: double
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
       xml:
-        name: GeminiFundStartPriceDto
-      type: object
-    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundTaxDto:
-      properties:
-        id:
-          type: string
-          format: date-time
-        longTermRate:
-          type: number
-          format: double
-        shortTermRate:
-          type: number
-          format: double
-      xml:
-        name: GeminiFundTaxDto
-      type: object
-    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundDataDto:
-      properties:
-        fundKey:
-          type: string
-        rateDate:
-          type: string
-          format: date-time
-        netAssetValue:
-          type: number
-          format: double
-        offeringPrice:
-          type: number
-          format: double
-        netAssets:
-          type: number
-          format: double
-        sharesOutstanding:
-          type: number
-          format: double
-        distributionFactor:
-          type: string
-        capGainsFactorShort:
-          type: number
-          format: double
-        capGainsFactorLong:
-          type: number
-          format: double
-        returnOfCapital:
-          type: number
-          format: double
-        expensesGross:
-          type: number
-          format: double
-        expensesWaived:
-          type: number
-          format: double
-        userDefinedFields:
-          type: number
-          format: double
-        fundName:
-          type: string
-        volume:
-          type: integer
-          format: int32
-      xml:
-        name: GeminiFundDataDto
-      type: object
-    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundIdentifierDto:
-      properties:
-        fundKey:
-          type: string
-        identifier:
-          type: string
-      xml:
-        name: GeminiFundIdentifierDto
+        name: KeyValuePair`2
       type: object
     OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundBackLoadDto:
       properties:
@@ -4254,32 +4163,60 @@ components:
       xml:
         name: GeminiFundBackLoadDto
       type: object
-    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundGroupDto:
+    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundInceptionDto:
+      properties:
+        fundKey:
+          type: string
+        inceptionDate:
+          type: string
+          format: date-time
+      xml:
+        name: GeminiFundInceptionDto
+      type: object
+    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundFrontLoadKeyDto:
+      properties:
+        fundKey:
+          type: string
+        effectiveDate:
+          type: string
+          format: date-time
+        starting:
+          type: integer
+          format: int32
+      xml:
+        name: GeminiFundFrontLoadKeyDto
+      type: object
+    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundIdentifierDto:
+      properties:
+        fundKey:
+          type: string
+        identifier:
+          type: string
+      xml:
+        name: GeminiFundIdentifierDto
+      type: object
+    OAS.DataModel.SimpleEntity:
       properties:
         id:
           type: integer
           format: int32
-        groupName:
+        name:
           type: string
-        fundKey:
-          type: string
-        fundName:
-          type: string
-        funds:
-          items:
-            type: string
-          type: array
       xml:
-        name: GeminiFundGroupDto
+        name: SimpleEntity
       type: object
-    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundIndexLinkKeyDto:
+    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundBackLoadKeyDto:
       properties:
         fundKey:
           type: string
-        indexNumber:
+        forYear:
+          type: integer
+          format: int32
+        effectiveDate:
           type: string
+          format: date-time
       xml:
-        name: GeminiFundIndexLinkKeyDto
+        name: GeminiFundBackLoadKeyDto
       type: object
     OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundDto:
       properties:
@@ -4346,28 +4283,91 @@ components:
       xml:
         name: GeminiFundDto
       type: object
-    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundLoadDto:
+    OAS.DataModel.SimpleStringKeyEntity:
       properties:
-        load:
-          type: number
-          format: float
-        forYear:
-          type: integer
-          format: int32
-        starting:
-          type: integer
-          format: int32
-        effectiveDate:
+        id:
           type: string
-          format: date-time
-        isBackEnd:
-          type: boolean
-        fundKey:
-          type: string
-        fundName:
+        name:
           type: string
       xml:
-        name: GeminiFundLoadDto
+        name: SimpleStringKeyEntity
+      type: object
+    OAS.DataAccess.Domains.Portfolio.SimpleStringKeyEntityIndex:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        productId:
+          type: integer
+          format: int32
+      xml:
+        name: SimpleStringKeyEntityIndex
+      type: object
+    OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
+      description: import file DTO for validating imports
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+          description: the imported file
+      xml:
+        name: ValidateFileImportDto
+      type: object
+    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundIndexDto:
+      properties:
+        indexNumber:
+          type: string
+        indexName:
+          type: string
+        productId:
+          type: integer
+          format: int32
+        isBlend:
+          type: boolean
+      xml:
+        name: GeminiFundIndexDto
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundPerformanceSummaryDto:
+      properties:
+        period:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        startValue:
+          type: number
+          format: double
+        endValue:
+          type: number
+          format: double
+        stTaxAdjust:
+          type: number
+          format: double
+        ltTaxAdjust:
+          type: number
+          format: double
+        taxAdjust:
+          type: number
+          format: double
+        performance:
+          type: number
+          format: double
+      xml:
+        name: GeminiFundPerformanceSummaryDto
       type: object
     OAS.WebApi.DTO.Reporting.FundPerformance.PerformanceSettingsDto:
       properties:
@@ -4420,18 +4420,38 @@ components:
       xml:
         name: PerformanceSettingsDto
       type: object
-    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundFrontLoadKeyDto:
+    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundIndexLinkDto:
       properties:
         fundKey:
           type: string
-        effectiveDate:
+        indexNumber:
           type: string
-          format: date-time
-        starting:
+        indexName:
+          type: string
+        productId:
           type: integer
           format: int32
+        isPrimary:
+          type: boolean
+        isBlend:
+          type: boolean
+        fundName:
+          type: string
       xml:
-        name: GeminiFundFrontLoadKeyDto
+        name: GeminiFundIndexLinkDto
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
       type: object
     OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundPerformanceDto:
       properties:
@@ -4475,49 +4495,75 @@ components:
       xml:
         name: GeminiFundPerformanceDto
       type: object
-    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundDataKeyDto:
+    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundDataDto:
       properties:
         fundKey:
           type: string
         rateDate:
           type: string
           format: date-time
-      xml:
-        name: GeminiFundDataKeyDto
-      type: object
-    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundBackLoadKeyDto:
-      properties:
-        fundKey:
+        netAssetValue:
+          type: number
+          format: double
+        offeringPrice:
+          type: number
+          format: double
+        netAssets:
+          type: number
+          format: double
+        sharesOutstanding:
+          type: number
+          format: double
+        distributionFactor:
           type: string
+        capGainsFactorShort:
+          type: number
+          format: double
+        capGainsFactorLong:
+          type: number
+          format: double
+        returnOfCapital:
+          type: number
+          format: double
+        expensesGross:
+          type: number
+          format: double
+        expensesWaived:
+          type: number
+          format: double
+        userDefinedFields:
+          type: number
+          format: double
+        fundName:
+          type: string
+        volume:
+          type: integer
+          format: int32
+      xml:
+        name: GeminiFundDataDto
+      type: object
+    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundLoadDto:
+      properties:
+        load:
+          type: number
+          format: float
         forYear:
+          type: integer
+          format: int32
+        starting:
           type: integer
           format: int32
         effectiveDate:
           type: string
           format: date-time
-      xml:
-        name: GeminiFundBackLoadKeyDto
-      type: object
-    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundDivDto:
-      properties:
+        isBackEnd:
+          type: boolean
         fundKey:
           type: string
-        divYear:
-          type: integer
-          format: int32
-        qualifiedRate:
-          type: number
-          format: double
-        taxFreeRate:
-          type: number
-          format: double
-        qualifiedSTPortion:
-          type: number
-          format: double
         fundName:
           type: string
       xml:
-        name: GeminiFundDivDto
+        name: GeminiFundLoadDto
       type: object
     OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundFrontLoadDto:
       properties:
@@ -4537,99 +4583,15 @@ components:
       xml:
         name: GeminiFundFrontLoadDto
       type: object
-    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundPerformanceDetailDto:
-      properties:
-        date:
-          type: string
-          format: date-time
-        startValue:
-          type: number
-          format: double
-        endValue:
-          type: number
-          format: double
-        fundPrice:
-          type: number
-          format: double
-        divRate:
-          type: number
-          format: double
-        stRate:
-          type: number
-          format: double
-        ltRate:
-          type: number
-          format: double
-        qDivRate:
-          type: number
-          format: double
-        qstRate:
-          type: number
-          format: double
-        backLoad:
-          type: number
-          format: double
-        factor:
-          type: number
-          format: double
-        performance:
-          type: number
-          format: double
-      xml:
-        name: GeminiFundPerformanceDetailDto
-      type: object
-    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundIndexLinkDto:
+    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundStartPriceDto:
       properties:
         fundKey:
           type: string
-        indexNumber:
-          type: string
-        indexName:
-          type: string
-        productId:
-          type: integer
-          format: int32
-        isPrimary:
-          type: boolean
-        isBlend:
-          type: boolean
-        fundName:
-          type: string
+        startPrice:
+          type: number
+          format: double
       xml:
-        name: GeminiFundIndexLinkDto
-      type: object
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
-      type: object
-    OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
-      description: import file DTO for validating imports
-      properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-          description: the imported file
-      xml:
-        name: ValidateFileImportDto
-      type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
-      properties:
-        key:
-          readOnly: true
-          type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: KeyValuePair`2
+        name: GeminiFundStartPriceDto
       type: object
     OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundDivDetailDto:
       properties:
@@ -4685,49 +4647,9 @@ components:
       xml:
         name: GeminiFundDivDetailDto
       type: object
-    OAS.DataAccess.Domains.Portfolio.SimpleStringKeyEntityIndex:
+    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundPerformanceDetailDto:
       properties:
-        id:
-          type: string
-        name:
-          type: string
-        productId:
-          type: integer
-          format: int32
-      xml:
-        name: SimpleStringKeyEntityIndex
-      type: object
-    OAS.DataModel.SimpleEntity:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleEntity
-      type: object
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
-      type: object
-    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundPerformanceSummaryDto:
-      properties:
-        period:
-          type: string
-        startDate:
-          type: string
-          format: date-time
-        endDate:
+        date:
           type: string
           format: date-time
         startValue:
@@ -4736,39 +4658,117 @@ components:
         endValue:
           type: number
           format: double
-        stTaxAdjust:
+        fundPrice:
           type: number
           format: double
-        ltTaxAdjust:
+        divRate:
           type: number
           format: double
-        taxAdjust:
+        stRate:
+          type: number
+          format: double
+        ltRate:
+          type: number
+          format: double
+        qDivRate:
+          type: number
+          format: double
+        qstRate:
+          type: number
+          format: double
+        backLoad:
+          type: number
+          format: double
+        factor:
           type: number
           format: double
         performance:
           type: number
           format: double
       xml:
-        name: GeminiFundPerformanceSummaryDto
+        name: GeminiFundPerformanceDetailDto
       type: object
-    OAS.DataModel.SimpleStringKeyEntity:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-      xml:
-        name: SimpleStringKeyEntity
-      type: object
-    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundInceptionDto:
+    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundDataKeyDto:
       properties:
         fundKey:
           type: string
-        inceptionDate:
+        rateDate:
           type: string
           format: date-time
       xml:
-        name: GeminiFundInceptionDto
+        name: GeminiFundDataKeyDto
+      type: object
+    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundIndexLinkKeyDto:
+      properties:
+        fundKey:
+          type: string
+        indexNumber:
+          type: string
+      xml:
+        name: GeminiFundIndexLinkKeyDto
+      type: object
+    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundDivDto:
+      properties:
+        fundKey:
+          type: string
+        divYear:
+          type: integer
+          format: int32
+        qualifiedRate:
+          type: number
+          format: double
+        taxFreeRate:
+          type: number
+          format: double
+        qualifiedSTPortion:
+          type: number
+          format: double
+        fundName:
+          type: string
+      xml:
+        name: GeminiFundDivDto
+      type: object
+    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundDivKeyDto:
+      properties:
+        fundKey:
+          type: string
+        divYear:
+          type: integer
+          format: int32
+      xml:
+        name: GeminiFundDivKeyDto
+      type: object
+    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundTaxDto:
+      properties:
+        id:
+          type: string
+          format: date-time
+        longTermRate:
+          type: number
+          format: double
+        shortTermRate:
+          type: number
+          format: double
+      xml:
+        name: GeminiFundTaxDto
+      type: object
+    OAS.WebApi.DTO.Reporting.FundPerformance.GeminiFundGroupDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        groupName:
+          type: string
+        fundKey:
+          type: string
+        fundName:
+          type: string
+        funds:
+          items:
+            type: string
+          type: array
+      xml:
+        name: GeminiFundGroupDto
       type: object
   securitySchemes:
     Authorization:

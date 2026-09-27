@@ -673,23 +673,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.DTO.Reporting.Qpe.WorkflowItemDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        itemDesc:
-          type: string
-        actions:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Qpe.WorkflowActionDto'
-          xml:
-            name: WorkflowActionDto
-            wrapped: true
-          type: array
-      xml:
-        name: WorkflowItemDto
-      type: object
     OAS.DataProcess.DTO.Reporting.ProcessWorkflowPhaseDto:
       properties:
         id:
@@ -708,6 +691,83 @@ components:
           type: array
       xml:
         name: ProcessWorkflowPhaseDto
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
+    OAS.DataProcess.DTO.Reporting.ProcessManagerDto:
+      properties:
+        reviewTasks:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Reporting.ProcessWorkflowPhaseDto'
+          xml:
+            name: ProcessWorkflowPhaseDto
+            wrapped: true
+          type: array
+        completedPercent:
+          type: number
+          format: double
+        id:
+          type: integer
+          format: int32
+        typeId:
+          type: integer
+          format: int32
+        title:
+          type: string
+        period:
+          type: string
+          enum:
+          - Quarterly
+          - Monthly
+          - TriAnnually
+        startDate:
+          type: string
+          format: date-time
+        targetDate:
+          type: string
+          format: date-time
+        signedOffBy:
+          type: string
+        signedOffDate:
+          type: string
+          format: date-time
+        workflowItemId:
+          type: integer
+          format: int32
+        isLockedDown:
+          type: boolean
+        isLegacy:
+          type: boolean
+        friendlyName:
+          readOnly: true
+          type: string
+      xml:
+        name: ProcessManagerDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Qpe.WorkflowItemDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        itemDesc:
+          type: string
+        actions:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Qpe.WorkflowActionDto'
+          xml:
+            name: WorkflowActionDto
+            wrapped: true
+          type: array
+      xml:
+        name: WorkflowItemDto
       type: object
     OAS.DataProcess.DTO.Reporting.ProcessWorkflowDetailsDto:
       properties:
@@ -940,83 +1000,6 @@ components:
       xml:
         name: ProcessWorkflowDetailsDto
       type: object
-    OAS.DataModel.SimpleEntity:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleEntity
-      type: object
-    OAS.WebApi.DTO.Reporting.Qpe.WorkflowActionDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        actionDesc:
-          type: string
-        completedDate:
-          type: string
-          format: date-time
-        actionComment:
-          type: string
-        runnableClass:
-          type: string
-      xml:
-        name: WorkflowActionDto
-      type: object
-    OAS.DataProcess.DTO.Reporting.ProcessManagerDto:
-      properties:
-        reviewTasks:
-          items:
-            $ref: '#/components/schemas/OAS.DataProcess.DTO.Reporting.ProcessWorkflowPhaseDto'
-          xml:
-            name: ProcessWorkflowPhaseDto
-            wrapped: true
-          type: array
-        completedPercent:
-          type: number
-          format: double
-        id:
-          type: integer
-          format: int32
-        typeId:
-          type: integer
-          format: int32
-        title:
-          type: string
-        period:
-          type: string
-          enum:
-          - Quarterly
-          - Monthly
-          - TriAnnually
-        startDate:
-          type: string
-          format: date-time
-        targetDate:
-          type: string
-          format: date-time
-        signedOffBy:
-          type: string
-        signedOffDate:
-          type: string
-          format: date-time
-        workflowItemId:
-          type: integer
-          format: int32
-        isLockedDown:
-          type: boolean
-        isLegacy:
-          type: boolean
-        friendlyName:
-          readOnly: true
-          type: string
-      xml:
-        name: ProcessManagerDto
-      type: object
     OAS.DataProcess.DTO.Reporting.ProcessManagerSimpleDto:
       properties:
         completedPercent:
@@ -1059,6 +1042,23 @@ components:
           type: string
       xml:
         name: ProcessManagerSimpleDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Qpe.WorkflowActionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        actionDesc:
+          type: string
+        completedDate:
+          type: string
+          format: date-time
+        actionComment:
+          type: string
+        runnableClass:
+          type: string
+      xml:
+        name: WorkflowActionDto
       type: object
   securitySchemes:
     Authorization:

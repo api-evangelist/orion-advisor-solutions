@@ -3241,6 +3241,147 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAS.WebApi.DTO.Portfolio.CorporateActionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        statusIcon:
+          type: string
+          enum:
+          - Pending
+          - Complete
+          - Cancelled
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        entryDate:
+          type: string
+          format: date-time
+        remarks:
+          type: string
+        notifyType:
+          type: string
+        notifyTypeUpdate:
+          type: string
+        recordStatus:
+          type: string
+        numOptions:
+          type: integer
+          format: int32
+        securityType:
+          type: string
+        effectiveDate:
+          type: string
+          format: date-time
+        cusip:
+          type: string
+        oldCusip:
+          type: string
+        ticker:
+          type: string
+        name:
+          type: string
+        oldName:
+          type: string
+        expireDate:
+          type: string
+          format: date-time
+        cash:
+          type: number
+          format: double
+        cashCode:
+          type: string
+        stateCode:
+          type: string
+        tenderAgent:
+          type: string
+        infoAgent:
+          type: string
+        maturityDate:
+          type: string
+          format: date-time
+        rate1:
+          type: number
+          format: double
+        rateCode:
+          type: string
+        rate2:
+          type: number
+          format: double
+        voluntaryMandatory:
+          type: string
+        dtc:
+          type: string
+        prorationRate:
+          type: string
+        prorationDate:
+          type: string
+          format: date-time
+        note:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        textNo:
+          type: integer
+          format: int32
+        dealNo:
+          type: integer
+          format: int32
+        costBasisFactor:
+          type: number
+          format: double
+        textNoUpdate:
+          type: integer
+          format: int32
+        fairMarketValue:
+          type: number
+          format: double
+        fairMarketValueOut:
+          type: number
+          format: double
+        moreInfoUrl:
+          type: string
+      xml:
+        name: CorporateActionDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.ProductGroupItemDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        ticker:
+          type: string
+        productName:
+          type: string
+      xml:
+        name: ProductGroupItemDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SubHoldingDto:
+      properties:
+        asOfDate:
+          type: string
+          format: date-time
+        subHoldingAllocations:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SubHoldingAllocDto'
+          xml:
+            name: SubHoldingAllocDto
+            wrapped: true
+          type: array
+      xml:
+        name: SubHoldingDto
+      type: object
     OAS.WebApi.DTO.Portfolio.BondRateDto:
       properties:
         id:
@@ -3328,21 +3469,203 @@ components:
       xml:
         name: BondRateDto
       type: object
-    OAS.WebApi.DTO.Confirm.Alternative.ExpectedReturnDto:
+    OAS.WebApi.DTO.Portfolio.GlobalProductSearchSimpleDto:
+      properties:
+        searchString:
+          type: string
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        ticker:
+          type: string
+        cusip:
+          type: string
+        isin:
+          type: string
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        productSubTypeName:
+          type: string
+        productSubTypeId:
+          type: integer
+          format: int32
+        defaultPrice:
+          type: number
+          format: double
+        priceStatus:
+          type: string
+          enum:
+          - Normal
+          - Default
+          - Manual
+          - ReceivedMoreThan1Day
+          - InfrequentPricing
+          - SecurityIsWorthless
+          - IndeterminableValue
+          - NotActiveProduct
+        inceptionDate:
+          type: string
+          format: date-time
+      xml:
+        name: GlobalProductSearchSimpleDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.PriceGlobalDto:
       properties:
         productId:
           type: integer
           format: int32
-        startDate:
+        priceDate:
           type: string
           format: date-time
-        high:
+        navPrice:
           type: number
           format: double
-        low:
+        custodianCommonName:
+          type: string
+        custodianCommonId:
+          type: integer
+          format: int32
+      xml:
+        name: PriceGlobalDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        custodianCommonId:
+          type: integer
+          format: int32
+        priceDate:
+          type: string
+          format: date-time
+      xml:
+        name: PriceGlobalKeyDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        portfolio:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductPortfolioDto'
+        downloadSymbols:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.DownloadSymbolFullDto'
+          xml:
+            name: DownloadSymbolFullDto
+            wrapped: true
+          type: array
+        fundFamilies:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.FundFamilyDto'
+          xml:
+            name: FundFamilyDto
+            wrapped: true
+          type: array
+        corporateActions:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CorporateActionDto'
+          xml:
+            name: CorporateActionDto
+            wrapped: true
+          type: array
+        bondRates:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BondRateDto'
+          xml:
+            name: BondRateDto
+            wrapped: true
+          type: array
+        preferredRates:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PreferredRateDto'
+          xml:
+            name: PreferredRateDto
+            wrapped: true
+          type: array
+        alClients:
+          items:
+            type: integer
+            format: int32
+          type: array
+        subHoldings:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SubHoldingDto'
+          xml:
+            name: SubHoldingDto
+            wrapped: true
+          type: array
+        gics:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductGICSMappingDto'
+        localProduct:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.LocalProductVerboseDto'
+      xml:
+        name: GlobalProductVerboseDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.PriceFactorDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        factorDate:
+          type: string
+          format: date-time
+        factor:
           type: number
           format: double
-        comment:
+      xml:
+        name: PriceFactorDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SubHoldingAllocDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        allocationPercent:
+          type: number
+          format: double
+        ticker:
+          type: string
+        productName:
+          type: string
+      xml:
+        name: SubHoldingAllocDto
+      type: object
+    OAS.WebApi.DTO.Settings.EntityOptionTimeValueDto:
+      properties:
+        userDefineTimeDataId:
+          type: integer
+          format: int32
+        effectiveDate:
+          type: string
+          format: date-time
+        value:
+          type: string
+      xml:
+        name: EntityOptionTimeValueDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.ManagerDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
           type: string
         auditedDate:
           type: string
@@ -3350,7 +3673,264 @@ components:
         auditedByDisplay:
           type: string
       xml:
-        name: ExpectedReturnDto
+        name: ManagerDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.FundFamilyDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        isActive:
+          type: boolean
+        isAnnuity:
+          type: boolean
+        unitScale:
+          type: integer
+          format: int32
+        priceScale:
+          type: integer
+          format: int32
+        isShareClassSensitive:
+          type: boolean
+        isAcctNumUnique:
+          type: boolean
+        isDefault:
+          type: boolean
+        isCreateDistribution:
+          type: boolean
+        sungardBrokerId:
+          type: integer
+          format: int32
+        custComplexes:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustComplexDto'
+          xml:
+            name: CustComplexDto
+            wrapped: true
+          type: array
+        custodianTradeFileFormats:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustodianTradeFileFormatDto'
+          xml:
+            name: CustodianTradeFileFormatDto
+            wrapped: true
+          type: array
+        userDefinedFields:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+          xml:
+            name: EntityOptionDto
+            wrapped: true
+          type: array
+        entityOptions:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.FundFamilyEntityOptionDto'
+          xml:
+            name: FundFamilyEntityOptionDto
+            wrapped: true
+          type: array
+      xml:
+        name: FundFamilyDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.LocalProductVerboseDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        portfolio:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.LocalProductPortfolioDto'
+        productGroup:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductGroupDto'
+        entityOptions:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+          xml:
+            name: EntityOptionDto
+            wrapped: true
+          type: array
+        userDefinedFields:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+          xml:
+            name: EntityOptionDto
+            wrapped: true
+          type: array
+        userDefinedTimeFields:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionTimeDto'
+          xml:
+            name: EntityOptionTimeDto
+            wrapped: true
+          type: array
+        alternativeExpectedReturns:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Alternative.ExpectedReturnDto'
+          xml:
+            name: ExpectedReturnDto
+            wrapped: true
+          type: array
+        assumedRates:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AssumedRateDto'
+          xml:
+            name: AssumedRateDto
+            wrapped: true
+          type: array
+        alternative:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AlternativeDto'
+        billing:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillProductDto'
+      xml:
+        name: LocalProductVerboseDto
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
+    OAS.WebApi.DTO.Portfolio.PriceAuditDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        priceDate:
+          type: string
+          format: date-time
+        navPrice:
+          type: number
+          format: double
+        custodianCommonName:
+          type: string
+        custodianCommonId:
+          type: integer
+          format: int32
+        timestamp:
+          type: string
+          format: date-time
+        modifiedBy:
+          type: string
+        modifiedType:
+          type: string
+        reason:
+          type: string
+        notes:
+          type: string
+      xml:
+        name: PriceAuditDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.FundFamilyDefinitionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        type:
+          type: string
+          enum:
+          - MultiLineEditor
+          - DropDownEditor
+          - DropDownList
+          - CheckBox
+          - Currency
+          - Date
+          - DateTime
+          - Integer
+          - String
+          - Double
+          - Time
+          - Long
+          - CustomObject
+          - Email
+        description:
+          type: string
+        mask:
+          type: string
+        defaultValue:
+          type: string
+        sequence:
+          type: integer
+          format: int32
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        code:
+          type: string
+        category:
+          type: string
+        customObject:
+          type: string
+        controlProperties:
+          type: string
+        securityCode:
+          type: string
+        isTimeSensitive:
+          type: boolean
+        options:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.FundFamilyOptionDto'
+          xml:
+            name: FundFamilyOptionDto
+            wrapped: true
+          type: array
+      xml:
+        name: FundFamilyDefinitionDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.FundFamilyEntityOptionDto:
+      properties:
+        entityId:
+          type: integer
+          format: int32
+        userDefineDefinitionId:
+          type: integer
+          format: int32
+        userDefineDataId:
+          type: integer
+          format: int32
+        value:
+          type: string
+        name:
+          type: string
+        code:
+          type: string
+        securityCode:
+          type: string
+        definition:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.FundFamilyDefinitionDto'
+      xml:
+        name: FundFamilyEntityOptionDto
       type: object
     OAS.WebApi.DTO.Portfolio.GlobalProductSymbolExistsResult:
       properties:
@@ -3362,6 +3942,298 @@ components:
           type: boolean
       xml:
         name: GlobalProductSymbolExistsResult
+      type: object
+    OAS.WebApi.DTO.Portfolio.ProductGroupDto:
+      properties:
+        groupCode:
+          type: string
+        isActive:
+          type: boolean
+        items:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductGroupItemDto'
+          xml:
+            name: ProductGroupItemDto
+            wrapped: true
+          type: array
+      xml:
+        name: ProductGroupDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.AlternativeDto:
+      properties:
+        managerId:
+          type: integer
+          format: int32
+        isDirectInvestment:
+          type: boolean
+        vintageYear:
+          type: integer
+          format: int32
+        comment:
+          type: string
+        isK1:
+          type: boolean
+        k1DeliveryDate:
+          type: string
+          format: date-time
+        k1EstimatedDeliveryDate:
+          type: string
+          format: date-time
+        isOrionVisionPending:
+          type: boolean
+        isOrionVision:
+          type: boolean
+        manager:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ManagerDto'
+      xml:
+        name: AlternativeDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.ProductCombineDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        createdByDisplay:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        completedDate:
+          type: string
+          format: date-time
+        combinedObject:
+          type: object
+        isCompleted:
+          readOnly: true
+          type: boolean
+      xml:
+        name: ProductCombineDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.DownloadSymbolFullDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        symbol:
+          type: string
+        isNASDAQPlatformSymbol:
+          type: boolean
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+      xml:
+        name: DownloadSymbolFullDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SubHoldingAllocWithAssetClassDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        allocationPercent:
+          type: number
+          format: double
+        ticker:
+          type: string
+        productName:
+          type: string
+        assetClass:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AssetClassDto'
+      xml:
+        name: SubHoldingAllocWithAssetClassDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.LocalProductPortfolioDto:
+      properties:
+        assetClassId:
+          type: integer
+          format: int32
+        riskCategoryId:
+          type: integer
+          format: int32
+        isDisabled:
+          type: boolean
+        productStatus:
+          type: string
+          enum:
+          - Open
+          - SoftClose
+          - HardClose
+          - SellOnly
+          - PurchaseOnly
+          - Exclude
+        snPRatingId:
+          type: integer
+          format: int32
+        moodyRatingId:
+          type: integer
+          format: int32
+        isAutoAssign:
+          type: boolean
+        isUsed:
+          type: string
+          enum:
+          - UsedInCurrentDB
+          - UsedInOtherDB
+          - NotUsed
+        isCustodialCash:
+          type: boolean
+        isManaged:
+          type: boolean
+        is13fReportable:
+          type: boolean
+        isAdvReportable:
+          type: boolean
+        allowIntraDayPerformance:
+          type: boolean
+        hasFees:
+          type: boolean
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        useGlobalSetting:
+          type: boolean
+        isFederallyTaxable:
+          type: boolean
+        isStateTaxable:
+          type: boolean
+        useLocalPricesOnly:
+          type: boolean
+        color:
+          type: string
+        annualIncomeRate:
+          type: number
+          format: double
+        paymentFrequency:
+          type: string
+          enum:
+          - AtMaturity
+          - Monthly
+          - BiMonthly
+          - Quarterly
+          - Triannually
+          - Semiannually
+          - Annually
+          - Biennially
+        advAssetCategoryId:
+          type: integer
+          format: int32
+        useDailyInterestAccrual:
+          type: boolean
+        excludeBondAccrualFromValuations:
+          type: boolean
+        productNameOverride:
+          type: string
+        isRiskCategoryExcluded:
+          type: boolean
+        paymentCycleDateType:
+          type: string
+          enum:
+          - Normal
+          - NextBusinessDay
+          - PreviousBusinessDay
+      xml:
+        name: LocalProductPortfolioDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.CustodianTradeFileFormatDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        custodianId:
+          type: integer
+          format: int32
+        fundFamilyId:
+          type: integer
+          format: int32
+        registrationTypeId:
+          type: integer
+          format: int32
+        platformId:
+          type: integer
+          format: int32
+        trExFmtId:
+          type: integer
+          format: int32
+        tPlusDays:
+          type: integer
+          format: int32
+        isNAAllowed:
+          type: boolean
+        trExFmtEndResultId:
+          type: integer
+          format: int32
+      xml:
+        name: CustodianTradeFileFormatDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SubHoldingWithAssetClassDto:
+      properties:
+        asOfDate:
+          type: string
+          format: date-time
+        subHoldingAllocations:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SubHoldingAllocWithAssetClassDto'
+          xml:
+            name: SubHoldingAllocWithAssetClassDto
+            wrapped: true
+          type: array
+      xml:
+        name: SubHoldingWithAssetClassDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.CustComplexDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        custodianId:
+          type: integer
+          format: int32
+        custodianName:
+          type: string
+        isDefault:
+          type: boolean
+        fundFamilyId:
+          type: integer
+          format: int32
+        fundFamilyName:
+          type: string
+        collectFormatId:
+          type: integer
+          format: int32
+        collectFormatName:
+          type: string
+        collectMethodName:
+          type: string
+        collectMethodId:
+          type: integer
+          format: int32
+        newAcctFormatId:
+          type: integer
+          format: int32
+        chkReqFormatId:
+          type: integer
+          format: int32
+        swdFormatId:
+          type: integer
+          format: int32
+      xml:
+        name: CustComplexDto
       type: object
     OAS.WebApi.DTO.Settings.EntityOptionTimeDto:
       properties:
@@ -3613,621 +4485,6 @@ components:
       xml:
         name: EntityOptionTimeDto
       type: object
-    OAS.WebApi.DTO.Portfolio.LocalProductPortfolioDto:
-      properties:
-        assetClassId:
-          type: integer
-          format: int32
-        riskCategoryId:
-          type: integer
-          format: int32
-        isDisabled:
-          type: boolean
-        productStatus:
-          type: string
-          enum:
-          - Open
-          - SoftClose
-          - HardClose
-          - SellOnly
-          - PurchaseOnly
-          - Exclude
-        snPRatingId:
-          type: integer
-          format: int32
-        moodyRatingId:
-          type: integer
-          format: int32
-        isAutoAssign:
-          type: boolean
-        isUsed:
-          type: string
-          enum:
-          - UsedInCurrentDB
-          - UsedInOtherDB
-          - NotUsed
-        isCustodialCash:
-          type: boolean
-        isManaged:
-          type: boolean
-        is13fReportable:
-          type: boolean
-        isAdvReportable:
-          type: boolean
-        allowIntraDayPerformance:
-          type: boolean
-        hasFees:
-          type: boolean
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        useGlobalSetting:
-          type: boolean
-        isFederallyTaxable:
-          type: boolean
-        isStateTaxable:
-          type: boolean
-        useLocalPricesOnly:
-          type: boolean
-        color:
-          type: string
-        annualIncomeRate:
-          type: number
-          format: double
-        paymentFrequency:
-          type: string
-          enum:
-          - AtMaturity
-          - Monthly
-          - BiMonthly
-          - Quarterly
-          - Triannually
-          - Semiannually
-          - Annually
-          - Biennially
-        advAssetCategoryId:
-          type: integer
-          format: int32
-        useDailyInterestAccrual:
-          type: boolean
-        excludeBondAccrualFromValuations:
-          type: boolean
-        productNameOverride:
-          type: string
-        isRiskCategoryExcluded:
-          type: boolean
-        paymentCycleDateType:
-          type: string
-          enum:
-          - Normal
-          - NextBusinessDay
-          - PreviousBusinessDay
-      xml:
-        name: LocalProductPortfolioDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.FundFamilyDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        isActive:
-          type: boolean
-        isAnnuity:
-          type: boolean
-        unitScale:
-          type: integer
-          format: int32
-        priceScale:
-          type: integer
-          format: int32
-        isShareClassSensitive:
-          type: boolean
-        isAcctNumUnique:
-          type: boolean
-        isDefault:
-          type: boolean
-        isCreateDistribution:
-          type: boolean
-        sungardBrokerId:
-          type: integer
-          format: int32
-        custComplexes:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustComplexDto'
-          xml:
-            name: CustComplexDto
-            wrapped: true
-          type: array
-        custodianTradeFileFormats:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustodianTradeFileFormatDto'
-          xml:
-            name: CustodianTradeFileFormatDto
-            wrapped: true
-          type: array
-        userDefinedFields:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
-          xml:
-            name: EntityOptionDto
-            wrapped: true
-          type: array
-        entityOptions:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.FundFamilyEntityOptionDto'
-          xml:
-            name: FundFamilyEntityOptionDto
-            wrapped: true
-          type: array
-      xml:
-        name: FundFamilyDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.PreferredRateDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        dividendRate:
-          type: number
-          format: double
-        frequency:
-          type: integer
-          format: int32
-        parValue:
-          type: number
-          format: double
-        isFixedRate:
-          type: boolean
-        isConvertible:
-          type: boolean
-        isVotingRights:
-          type: boolean
-        isCallable:
-          type: boolean
-        isCumulative:
-          type: boolean
-        isParticipating:
-          type: boolean
-        isInDefault:
-          type: boolean
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-      xml:
-        name: PreferredRateDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.SubHoldingWithAssetClassDto:
-      properties:
-        asOfDate:
-          type: string
-          format: date-time
-        subHoldingAllocations:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SubHoldingAllocWithAssetClassDto'
-          xml:
-            name: SubHoldingAllocWithAssetClassDto
-            wrapped: true
-          type: array
-      xml:
-        name: SubHoldingWithAssetClassDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.SubHoldingDto:
-      properties:
-        asOfDate:
-          type: string
-          format: date-time
-        subHoldingAllocations:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SubHoldingAllocDto'
-          xml:
-            name: SubHoldingAllocDto
-            wrapped: true
-          type: array
-      xml:
-        name: SubHoldingDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.CorporateActionDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        statusIcon:
-          type: string
-          enum:
-          - Pending
-          - Complete
-          - Cancelled
-        productId:
-          type: integer
-          format: int32
-        productName:
-          type: string
-        entryDate:
-          type: string
-          format: date-time
-        remarks:
-          type: string
-        notifyType:
-          type: string
-        notifyTypeUpdate:
-          type: string
-        recordStatus:
-          type: string
-        numOptions:
-          type: integer
-          format: int32
-        securityType:
-          type: string
-        effectiveDate:
-          type: string
-          format: date-time
-        cusip:
-          type: string
-        oldCusip:
-          type: string
-        ticker:
-          type: string
-        name:
-          type: string
-        oldName:
-          type: string
-        expireDate:
-          type: string
-          format: date-time
-        cash:
-          type: number
-          format: double
-        cashCode:
-          type: string
-        stateCode:
-          type: string
-        tenderAgent:
-          type: string
-        infoAgent:
-          type: string
-        maturityDate:
-          type: string
-          format: date-time
-        rate1:
-          type: number
-          format: double
-        rateCode:
-          type: string
-        rate2:
-          type: number
-          format: double
-        voluntaryMandatory:
-          type: string
-        dtc:
-          type: string
-        prorationRate:
-          type: string
-        prorationDate:
-          type: string
-          format: date-time
-        note:
-          type: string
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        textNo:
-          type: integer
-          format: int32
-        dealNo:
-          type: integer
-          format: int32
-        costBasisFactor:
-          type: number
-          format: double
-        textNoUpdate:
-          type: integer
-          format: int32
-        fairMarketValue:
-          type: number
-          format: double
-        fairMarketValueOut:
-          type: number
-          format: double
-        moreInfoUrl:
-          type: string
-      xml:
-        name: CorporateActionDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.GlobalProductSearchSimpleDto:
-      properties:
-        searchString:
-          type: string
-        productId:
-          type: integer
-          format: int32
-        productName:
-          type: string
-        ticker:
-          type: string
-        cusip:
-          type: string
-        isin:
-          type: string
-        productType:
-          type: string
-          enum:
-          - None
-          - MutualFund
-          - Annuity
-          - AdvisorOne
-          - StockOrETF
-          - Option
-          - Bond
-          - Unknown
-          - CD
-          - Index
-        productSubTypeName:
-          type: string
-        productSubTypeId:
-          type: integer
-          format: int32
-        defaultPrice:
-          type: number
-          format: double
-        priceStatus:
-          type: string
-          enum:
-          - Normal
-          - Default
-          - Manual
-          - ReceivedMoreThan1Day
-          - InfrequentPricing
-          - SecurityIsWorthless
-          - IndeterminableValue
-          - NotActiveProduct
-        inceptionDate:
-          type: string
-          format: date-time
-      xml:
-        name: GlobalProductSearchSimpleDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.ProductGICSMappingDto:
-      properties:
-        sector:
-          type: string
-        industryGroup:
-          type: string
-        industry:
-          type: string
-        subIndustry:
-          type: string
-      xml:
-        name: ProductGICSMappingDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.SubHoldingAllocWithAssetClassDto:
-      properties:
-        productId:
-          type: integer
-          format: int32
-        allocationPercent:
-          type: number
-          format: double
-        ticker:
-          type: string
-        productName:
-          type: string
-        assetClass:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AssetClassDto'
-      xml:
-        name: SubHoldingAllocWithAssetClassDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.ProductGroupItemDto:
-      properties:
-        productId:
-          type: integer
-          format: int32
-        ticker:
-          type: string
-        productName:
-          type: string
-      xml:
-        name: ProductGroupItemDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.PriceGlobalDto:
-      properties:
-        productId:
-          type: integer
-          format: int32
-        priceDate:
-          type: string
-          format: date-time
-        navPrice:
-          type: number
-          format: double
-        custodianCommonName:
-          type: string
-        custodianCommonId:
-          type: integer
-          format: int32
-      xml:
-        name: PriceGlobalDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.GlobalProductCoreDto:
-      properties:
-        productId:
-          type: integer
-          format: int32
-        productName:
-          type: string
-        ticker:
-          type: string
-        cusip:
-          type: string
-        isin:
-          type: string
-        productType:
-          type: string
-          enum:
-          - None
-          - MutualFund
-          - Annuity
-          - AdvisorOne
-          - StockOrETF
-          - Option
-          - Bond
-          - Unknown
-          - CD
-          - Index
-        productSubTypeName:
-          type: string
-        productSubTypeId:
-          type: integer
-          format: int32
-        defaultPrice:
-          type: number
-          format: double
-        priceStatus:
-          type: string
-          enum:
-          - Normal
-          - Default
-          - Manual
-          - ReceivedMoreThan1Day
-          - InfrequentPricing
-          - SecurityIsWorthless
-          - IndeterminableValue
-          - NotActiveProduct
-        inceptionDate:
-          type: string
-          format: date-time
-      xml:
-        name: GlobalProductCoreDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.ProductGlobalSearchDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        productName:
-          type: string
-        ticker:
-          type: string
-        currentPrice:
-          type: number
-          format: double
-        defaultPrice:
-          type: number
-          format: double
-        currentPriceDate:
-          type: string
-          format: date-time
-        productType:
-          type: integer
-          format: int32
-        isActive:
-          type: boolean
-        isAssignedToModelItem:
-          type: boolean
-      xml:
-        name: ProductGlobalSearchDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.PriceFactorKeyDto:
-      properties:
-        productId:
-          type: integer
-          format: int32
-        factorDate:
-          type: string
-          format: date-time
-      xml:
-        name: PriceFactorKeyDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.GlobalProductVerboseDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        portfolio:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.GlobalProductPortfolioDto'
-        downloadSymbols:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.DownloadSymbolFullDto'
-          xml:
-            name: DownloadSymbolFullDto
-            wrapped: true
-          type: array
-        fundFamilies:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.FundFamilyDto'
-          xml:
-            name: FundFamilyDto
-            wrapped: true
-          type: array
-        corporateActions:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CorporateActionDto'
-          xml:
-            name: CorporateActionDto
-            wrapped: true
-          type: array
-        bondRates:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BondRateDto'
-          xml:
-            name: BondRateDto
-            wrapped: true
-          type: array
-        preferredRates:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PreferredRateDto'
-          xml:
-            name: PreferredRateDto
-            wrapped: true
-          type: array
-        alClients:
-          items:
-            type: integer
-            format: int32
-          type: array
-        subHoldings:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SubHoldingDto'
-          xml:
-            name: SubHoldingDto
-            wrapped: true
-          type: array
-        gics:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductGICSMappingDto'
-        localProduct:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.LocalProductVerboseDto'
-      xml:
-        name: GlobalProductVerboseDto
-      type: object
     OAS.WebApi.DTO.Settings.EntityOptionDto:
       properties:
         userDefineDataId:
@@ -4473,6 +4730,254 @@ components:
       xml:
         name: EntityOptionDto
       type: object
+    OAS.WebApi.DTO.Portfolio.PreferredRateDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        dividendRate:
+          type: number
+          format: double
+        frequency:
+          type: integer
+          format: int32
+        parValue:
+          type: number
+          format: double
+        isFixedRate:
+          type: boolean
+        isConvertible:
+          type: boolean
+        isVotingRights:
+          type: boolean
+        isCallable:
+          type: boolean
+        isCumulative:
+          type: boolean
+        isParticipating:
+          type: boolean
+        isInDefault:
+          type: boolean
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+      xml:
+        name: PreferredRateDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.GlobalProductPortfolioDto:
+      properties:
+        fundFamilyId:
+          type: integer
+          format: int32
+        ticker:
+          type: string
+        cusip:
+          type: string
+        isActive:
+          type: boolean
+        productName:
+          type: string
+        shareClassId:
+          type: integer
+          format: int32
+        apcCode:
+          type: string
+        defaultPrice:
+          type: number
+          format: double
+        convSchSells:
+          type: boolean
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        fundNumber:
+          type: string
+        isUsePriceTime:
+          type: boolean
+        shortTermTradeFeeDays:
+          type: integer
+          format: int32
+        shortTermTradeFeePercent:
+          type: number
+          format: double
+        repurchaseBlockDays:
+          type: integer
+          format: int32
+        productSubTypeId:
+          type: integer
+          format: int32
+        is144A:
+          type: boolean
+        productParentId:
+          type: integer
+          format: int32
+        priceStatus:
+          type: string
+          enum:
+          - Normal
+          - Default
+          - Manual
+          - ReceivedMoreThan1Day
+          - InfrequentPricing
+          - SecurityIsWorthless
+          - IndeterminableValue
+          - NotActiveProduct
+        subHoldingId:
+          type: integer
+          format: int32
+        strikePrice:
+          type: number
+          format: double
+        optionLotSize:
+          type: integer
+          format: int32
+        expirationDate:
+          type: string
+          format: date-time
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        isDerivative:
+          type: boolean
+        includeByDefault:
+          type: boolean
+        allowIncomeOverride:
+          type: boolean
+        isDividendSuspended:
+          type: boolean
+        excludeFromCB:
+          type: boolean
+        riskScore:
+          type: integer
+          format: int32
+        isFederallyTaxable:
+          type: boolean
+        isStateTaxable:
+          type: boolean
+        advAssetCategoryId:
+          type: integer
+          format: int32
+        isin:
+          type: string
+        isMLP:
+          type: boolean
+        isIntervalFund:
+          type: boolean
+        inceptionDate:
+          type: string
+          format: date-time
+        shortTermDiscountObligation:
+          type: boolean
+      xml:
+        name: GlobalProductPortfolioDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.AssetClassDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        description:
+          type: string
+      xml:
+        name: AssetClassDto
+      type: object
+    OAS.WebApi.DTO.Confirm.Alternative.ExpectedReturnDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        startDate:
+          type: string
+          format: date-time
+        high:
+          type: number
+          format: double
+        low:
+          type: number
+          format: double
+        comment:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+      xml:
+        name: ExpectedReturnDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.GlobalProductCoreDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        ticker:
+          type: string
+        cusip:
+          type: string
+        isin:
+          type: string
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        productSubTypeName:
+          type: string
+        productSubTypeId:
+          type: integer
+          format: int32
+        defaultPrice:
+          type: number
+          format: double
+        priceStatus:
+          type: string
+          enum:
+          - Normal
+          - Default
+          - Manual
+          - ReceivedMoreThan1Day
+          - InfrequentPricing
+          - SecurityIsWorthless
+          - IndeterminableValue
+          - NotActiveProduct
+        inceptionDate:
+          type: string
+          format: date-time
+      xml:
+        name: GlobalProductCoreDto
+      type: object
     OAS.WebApi.DTO.Portfolio.AssumedRateDto:
       properties:
         productId:
@@ -4497,58 +5002,46 @@ components:
       xml:
         name: AssumedRateDto
       type: object
-    OAS.WebApi.DTO.Portfolio.CustComplexDto:
+    OAS.WebApi.DTO.Portfolio.FundFamilyOptionDto:
       properties:
         id:
           type: integer
           format: int32
-        custodianId:
+        userDefineDefinitionId:
           type: integer
           format: int32
-        custodianName:
+        listValue:
           type: string
         isDefault:
           type: boolean
-        fundFamilyId:
+        sequence:
           type: integer
           format: int32
-        fundFamilyName:
+        createdBy:
           type: string
-        collectFormatId:
-          type: integer
-          format: int32
-        collectFormatName:
+        createdDate:
           type: string
-        collectMethodName:
+          format: date-time
+        editedBy:
           type: string
-        collectMethodId:
-          type: integer
-          format: int32
-        newAcctFormatId:
-          type: integer
-          format: int32
-        chkReqFormatId:
-          type: integer
-          format: int32
-        swdFormatId:
-          type: integer
-          format: int32
-      xml:
-        name: CustComplexDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.PriceGlobalKeyDto:
-      properties:
-        productId:
-          type: integer
-          format: int32
-        custodianCommonId:
-          type: integer
-          format: int32
-        priceDate:
+        editedDate:
           type: string
           format: date-time
       xml:
-        name: PriceGlobalKeyDto
+        name: FundFamilyOptionDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.ProductGICSMappingDto:
+      properties:
+        sector:
+          type: string
+        industryGroup:
+          type: string
+        industry:
+          type: string
+        subIndustry:
+          type: string
+      xml:
+        name: ProductGICSMappingDto
       type: object
     OAS.WebApi.DTO.Billing.BillProductDto:
       properties:
@@ -4579,107 +5072,6 @@ components:
           format: int32
       xml:
         name: BillProductDto
-      type: object
-    OAS.WebApi.DTO.Settings.EntityOptionTimeValueDto:
-      properties:
-        userDefineTimeDataId:
-          type: integer
-          format: int32
-        effectiveDate:
-          type: string
-          format: date-time
-        value:
-          type: string
-      xml:
-        name: EntityOptionTimeValueDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.DownloadSymbolFullDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        productId:
-          type: integer
-          format: int32
-        symbol:
-          type: string
-        isNASDAQPlatformSymbol:
-          type: boolean
-        editedDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-      xml:
-        name: DownloadSymbolFullDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.FundFamilyDefinitionDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        type:
-          type: string
-          enum:
-          - MultiLineEditor
-          - DropDownEditor
-          - DropDownList
-          - CheckBox
-          - Currency
-          - Date
-          - DateTime
-          - Integer
-          - String
-          - Double
-          - Time
-          - Long
-          - CustomObject
-          - Email
-        description:
-          type: string
-        mask:
-          type: string
-        defaultValue:
-          type: string
-        sequence:
-          type: integer
-          format: int32
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        code:
-          type: string
-        category:
-          type: string
-        customObject:
-          type: string
-        controlProperties:
-          type: string
-        securityCode:
-          type: string
-        isTimeSensitive:
-          type: boolean
-        options:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.FundFamilyOptionDto'
-          xml:
-            name: FundFamilyOptionDto
-            wrapped: true
-          type: array
-      xml:
-        name: FundFamilyDefinitionDto
       type: object
     OAS.WebApi.DTO.Portfolio.GlobalProductDto:
       properties:
@@ -4820,36 +5212,35 @@ components:
       xml:
         name: GlobalProductDto
       type: object
-    OAS.WebApi.DTO.Portfolio.AlternativeDto:
+    OAS.WebApi.DTO.Portfolio.ProductGlobalSearchDto:
       properties:
-        managerId:
+        id:
           type: integer
           format: int32
-        isDirectInvestment:
-          type: boolean
-        vintageYear:
+        productName:
+          type: string
+        ticker:
+          type: string
+        currentPrice:
+          type: number
+          format: double
+        defaultPrice:
+          type: number
+          format: double
+        currentPriceDate:
+          type: string
+          format: date-time
+        productType:
           type: integer
           format: int32
-        comment:
-          type: string
-        isK1:
+        isActive:
           type: boolean
-        k1DeliveryDate:
-          type: string
-          format: date-time
-        k1EstimatedDeliveryDate:
-          type: string
-          format: date-time
-        isOrionVisionPending:
+        isAssignedToModelItem:
           type: boolean
-        isOrionVision:
-          type: boolean
-        manager:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ManagerDto'
       xml:
-        name: AlternativeDto
+        name: ProductGlobalSearchDto
       type: object
-    OAS.WebApi.DTO.Portfolio.PriceFactorDto:
+    OAS.WebApi.DTO.Portfolio.PriceFactorKeyDto:
       properties:
         productId:
           type: integer
@@ -4857,399 +5248,8 @@ components:
         factorDate:
           type: string
           format: date-time
-        factor:
-          type: number
-          format: double
       xml:
-        name: PriceFactorDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.FundFamilyEntityOptionDto:
-      properties:
-        entityId:
-          type: integer
-          format: int32
-        userDefineDefinitionId:
-          type: integer
-          format: int32
-        userDefineDataId:
-          type: integer
-          format: int32
-        value:
-          type: string
-        name:
-          type: string
-        code:
-          type: string
-        securityCode:
-          type: string
-        definition:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.FundFamilyDefinitionDto'
-      xml:
-        name: FundFamilyEntityOptionDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.ManagerDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        auditedDate:
-          type: string
-          format: date-time
-        auditedByDisplay:
-          type: string
-      xml:
-        name: ManagerDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.GlobalProductPortfolioDto:
-      properties:
-        fundFamilyId:
-          type: integer
-          format: int32
-        ticker:
-          type: string
-        cusip:
-          type: string
-        isActive:
-          type: boolean
-        productName:
-          type: string
-        shareClassId:
-          type: integer
-          format: int32
-        apcCode:
-          type: string
-        defaultPrice:
-          type: number
-          format: double
-        convSchSells:
-          type: boolean
-        productType:
-          type: string
-          enum:
-          - None
-          - MutualFund
-          - Annuity
-          - AdvisorOne
-          - StockOrETF
-          - Option
-          - Bond
-          - Unknown
-          - CD
-          - Index
-        fundNumber:
-          type: string
-        isUsePriceTime:
-          type: boolean
-        shortTermTradeFeeDays:
-          type: integer
-          format: int32
-        shortTermTradeFeePercent:
-          type: number
-          format: double
-        repurchaseBlockDays:
-          type: integer
-          format: int32
-        productSubTypeId:
-          type: integer
-          format: int32
-        is144A:
-          type: boolean
-        productParentId:
-          type: integer
-          format: int32
-        priceStatus:
-          type: string
-          enum:
-          - Normal
-          - Default
-          - Manual
-          - ReceivedMoreThan1Day
-          - InfrequentPricing
-          - SecurityIsWorthless
-          - IndeterminableValue
-          - NotActiveProduct
-        subHoldingId:
-          type: integer
-          format: int32
-        strikePrice:
-          type: number
-          format: double
-        optionLotSize:
-          type: integer
-          format: int32
-        expirationDate:
-          type: string
-          format: date-time
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        isDerivative:
-          type: boolean
-        includeByDefault:
-          type: boolean
-        allowIncomeOverride:
-          type: boolean
-        isDividendSuspended:
-          type: boolean
-        excludeFromCB:
-          type: boolean
-        riskScore:
-          type: integer
-          format: int32
-        isFederallyTaxable:
-          type: boolean
-        isStateTaxable:
-          type: boolean
-        advAssetCategoryId:
-          type: integer
-          format: int32
-        isin:
-          type: string
-        isMLP:
-          type: boolean
-        isIntervalFund:
-          type: boolean
-        inceptionDate:
-          type: string
-          format: date-time
-        shortTermDiscountObligation:
-          type: boolean
-      xml:
-        name: GlobalProductPortfolioDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.ProductCombineDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        createdByDisplay:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        completedDate:
-          type: string
-          format: date-time
-        combinedObject:
-          type: object
-        isCompleted:
-          readOnly: true
-          type: boolean
-      xml:
-        name: ProductCombineDto
-      type: object
-    OAS.DataModel.SimpleEntity:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleEntity
-      type: object
-    OAS.WebApi.DTO.Portfolio.SubHoldingAllocDto:
-      properties:
-        productId:
-          type: integer
-          format: int32
-        allocationPercent:
-          type: number
-          format: double
-        ticker:
-          type: string
-        productName:
-          type: string
-      xml:
-        name: SubHoldingAllocDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.AssetClassDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        description:
-          type: string
-      xml:
-        name: AssetClassDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.LocalProductVerboseDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        productType:
-          type: string
-          enum:
-          - None
-          - MutualFund
-          - Annuity
-          - AdvisorOne
-          - StockOrETF
-          - Option
-          - Bond
-          - Unknown
-          - CD
-          - Index
-        portfolio:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.LocalProductPortfolioDto'
-        productGroup:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductGroupDto'
-        entityOptions:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
-          xml:
-            name: EntityOptionDto
-            wrapped: true
-          type: array
-        userDefinedFields:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
-          xml:
-            name: EntityOptionDto
-            wrapped: true
-          type: array
-        userDefinedTimeFields:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionTimeDto'
-          xml:
-            name: EntityOptionTimeDto
-            wrapped: true
-          type: array
-        alternativeExpectedReturns:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Alternative.ExpectedReturnDto'
-          xml:
-            name: ExpectedReturnDto
-            wrapped: true
-          type: array
-        assumedRates:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AssumedRateDto'
-          xml:
-            name: AssumedRateDto
-            wrapped: true
-          type: array
-        alternative:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AlternativeDto'
-        billing:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillProductDto'
-      xml:
-        name: LocalProductVerboseDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.PriceAuditDto:
-      properties:
-        productId:
-          type: integer
-          format: int32
-        priceDate:
-          type: string
-          format: date-time
-        navPrice:
-          type: number
-          format: double
-        custodianCommonName:
-          type: string
-        custodianCommonId:
-          type: integer
-          format: int32
-        timestamp:
-          type: string
-          format: date-time
-        modifiedBy:
-          type: string
-        modifiedType:
-          type: string
-        reason:
-          type: string
-        notes:
-          type: string
-      xml:
-        name: PriceAuditDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.FundFamilyOptionDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        userDefineDefinitionId:
-          type: integer
-          format: int32
-        listValue:
-          type: string
-        isDefault:
-          type: boolean
-        sequence:
-          type: integer
-          format: int32
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-      xml:
-        name: FundFamilyOptionDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.CustodianTradeFileFormatDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        custodianId:
-          type: integer
-          format: int32
-        fundFamilyId:
-          type: integer
-          format: int32
-        registrationTypeId:
-          type: integer
-          format: int32
-        platformId:
-          type: integer
-          format: int32
-        trExFmtId:
-          type: integer
-          format: int32
-        tPlusDays:
-          type: integer
-          format: int32
-        isNAAllowed:
-          type: boolean
-        trExFmtEndResultId:
-          type: integer
-          format: int32
-      xml:
-        name: CustodianTradeFileFormatDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.ProductGroupDto:
-      properties:
-        groupCode:
-          type: string
-        isActive:
-          type: boolean
-        items:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductGroupItemDto'
-          xml:
-            name: ProductGroupItemDto
-            wrapped: true
-          type: array
-      xml:
-        name: ProductGroupDto
+        name: PriceFactorKeyDto
       type: object
   securitySchemes:
     Authorization:

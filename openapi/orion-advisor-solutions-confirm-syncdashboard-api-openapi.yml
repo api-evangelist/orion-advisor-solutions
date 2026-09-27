@@ -123,6 +123,39 @@ paths:
       - Authorization: []
 components:
   schemas:
+    OAS.WebApi.DTO.Confirm.Recon.SyncDashboardDetailDto:
+      properties:
+        analystLoginUserId:
+          type: string
+        serviceTeamName:
+          type: string
+        databaseName:
+          type: string
+        downloadSourceName:
+          type: string
+        groupErrorCount:
+          type: integer
+          format: int32
+      xml:
+        name: SyncDashboardDetailDto
+      type: object
+    OAS.WebApi.DTO.Confirm.Recon.SyncDashboardGroupDto:
+      properties:
+        description:
+          type: string
+        errorCount:
+          type: integer
+          format: int32
+        details:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncDashboardDetailDto'
+          xml:
+            name: SyncDashboardDetailDto
+            wrapped: true
+          type: array
+      xml:
+        name: SyncDashboardGroupDto
+      type: object
     OAS.WebApi.DTO.Confirm.Recon.SyncCountsDto:
       properties:
         summaryDate:
@@ -157,39 +190,6 @@ components:
           type: object
       xml:
         name: SyncDashboardDto
-      type: object
-    OAS.WebApi.DTO.Confirm.Recon.SyncDashboardGroupDto:
-      properties:
-        description:
-          type: string
-        errorCount:
-          type: integer
-          format: int32
-        details:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncDashboardDetailDto'
-          xml:
-            name: SyncDashboardDetailDto
-            wrapped: true
-          type: array
-      xml:
-        name: SyncDashboardGroupDto
-      type: object
-    OAS.WebApi.DTO.Confirm.Recon.SyncDashboardDetailDto:
-      properties:
-        analystLoginUserId:
-          type: string
-        serviceTeamName:
-          type: string
-        databaseName:
-          type: string
-        downloadSourceName:
-          type: string
-        groupErrorCount:
-          type: integer
-          format: int32
-      xml:
-        name: SyncDashboardDetailDto
       type: object
   securitySchemes:
     Authorization:

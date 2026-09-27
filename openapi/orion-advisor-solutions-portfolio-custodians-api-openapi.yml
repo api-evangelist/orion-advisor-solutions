@@ -1596,14 +1596,131 @@ components:
       xml:
         name: SimpleAccountWithValue
       type: object
-    OAS.WebApi.DTO.Portfolio.CustodianPortfolioDto:
+    OAS.DataModel.Portfolio.SimpleCustodian:
+      properties:
+        trustType:
+          type: string
+          enum:
+          - None
+          - CTC
+          - EAS
+        code:
+          type: string
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleCustodian
+      type: object
+    OAS.WebApi.DTO.Interface.AdditionalColumnDefinition:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      xml:
+        name: AdditionalColumnDefinition
+      type: object
+    OAS.WebApi.DTO.Portfolio.CustodianAlgorithmDto:
+      properties:
+        custodianId:
+          type: integer
+          format: int32
+        tag:
+          type: string
+        algorithmCode:
+          type: string
+      xml:
+        name: CustodianAlgorithmDto
+      type: object
+    OAS.WebApi.DTO.Simple.SimpleValueDto:
+      properties:
+        value:
+          type: number
+          format: double
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleValueDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.CustodianFixDto:
+      properties:
+        custodianId:
+          type: integer
+          format: int32
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        fixVersion:
+          type: string
+        fixRouting:
+          type: string
+        blockMethod:
+          type: string
+          enum:
+          - Default
+          - FixEft
+          - OneToOne
+        fkTRInterface:
+          type: integer
+          format: int32
+      xml:
+        name: CustodianFixDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.CustodianVerboseDto:
       properties:
         id:
           type: integer
           format: int32
         name:
           type: string
-        description:
+        portfolio:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustodianPortfolioDto'
+        entityOptions:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+          xml:
+            name: EntityOptionDto
+            wrapped: true
+          type: array
+        fixTradingSettings:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustodianFixDto'
+          xml:
+            name: CustodianFixDto
+            wrapped: true
+          type: array
+        algorithms:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustodianAlgorithmDto'
+          xml:
+            name: CustodianAlgorithmDto
+            wrapped: true
+          type: array
+      xml:
+        name: CustodianVerboseDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.CustodianDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
           type: string
         code:
           type: string
@@ -1692,6 +1809,14 @@ components:
         shareTradeThreshold:
           type: number
           format: double
+        custodianCommonIdList:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        entityName:
+          type: string
         email:
           type: string
         city:
@@ -1728,17 +1853,18 @@ components:
           type: string
         webAddress:
           type: string
-        custodianCommonIdList:
-          type: string
         custodianGlobalId:
           type: integer
           format: int32
-        globalId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
+        custodianFixTradeSettings:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustodianFixDto'
+          xml:
+            name: CustodianFixDto
+            wrapped: true
+          type: array
       xml:
-        name: CustodianPortfolioDto
+        name: CustodianDto
       type: object
     OAS.WebApi.DTO.Portfolio.AccountDto:
       properties:
@@ -2003,229 +2129,6 @@ components:
       xml:
         name: AccountDto
       type: object
-    OAS.WebApi.DTO.Portfolio.CustodianAlgorithmDto:
-      properties:
-        custodianId:
-          type: integer
-          format: int32
-        tag:
-          type: string
-        algorithmCode:
-          type: string
-      xml:
-        name: CustodianAlgorithmDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.CustodianDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        code:
-          type: string
-        sweepLevel:
-          type: string
-          enum:
-          - Invalid
-          - Registration
-          - Account
-        isDirect:
-          type: boolean
-        editedDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        custodialAccountNum:
-          type: string
-        canSweepFeesToCustAcct:
-          type: boolean
-        feeReqSrc:
-          type: string
-          enum:
-          - Invalid
-          - HighValueFund
-          - CashAccount
-          - ProRata
-        isDefault:
-          type: boolean
-        isCreateDistribution:
-          type: boolean
-        custTaxID:
-          type: string
-        masterAccountNumber:
-          type: string
-        sweepProductClassId:
-          type: integer
-          format: int32
-        isQpeTransExcluded:
-          type: boolean
-        isUsingEquityBlockTrades:
-          type: boolean
-        is2PartTrading:
-          type: boolean
-        isUseB50Setup:
-          type: boolean
-        canTransmitAfterHours:
-          type: boolean
-        isSupermarket:
-          type: boolean
-        isManual:
-          type: boolean
-        allowManualOrderAllocate:
-          type: boolean
-        manualOrderAllocationClOrdId:
-          type: string
-        dtcNum:
-          type: string
-        directTrading:
-          type: string
-          enum:
-          - None
-          - Tda
-        communitiesDirectTrading:
-          type: string
-        downloadsCostBasis:
-          type: boolean
-        fixUploadTargetId:
-          type: integer
-          format: int32
-        brokerCommission:
-          type: number
-          format: double
-        aggregateSleeves:
-          type: boolean
-        minCashBalance:
-          type: number
-          format: double
-        replenishMinCash:
-          type: boolean
-        shareTradeThreshold:
-          type: number
-          format: double
-        custodianCommonIdList:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        entityName:
-          type: string
-        email:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        salutation:
-          type: string
-        address1:
-          type: string
-        address2:
-          type: string
-        address3:
-          type: string
-        zip:
-          type: string
-        fax:
-          type: string
-        faxExt:
-          type: string
-        mobilePhone:
-          type: string
-        businessPhone:
-          type: string
-        businessPhoneExt:
-          type: string
-        otherPhone:
-          type: string
-        otherPhoneExt:
-          type: string
-        company:
-          type: string
-        jobTitle:
-          type: string
-        webAddress:
-          type: string
-        custodianGlobalId:
-          type: integer
-          format: int32
-        custodianFixTradeSettings:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustodianFixDto'
-          xml:
-            name: CustodianFixDto
-            wrapped: true
-          type: array
-      xml:
-        name: CustodianDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.CustodianVerboseDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        portfolio:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustodianPortfolioDto'
-        entityOptions:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
-          xml:
-            name: EntityOptionDto
-            wrapped: true
-          type: array
-        fixTradingSettings:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustodianFixDto'
-          xml:
-            name: CustodianFixDto
-            wrapped: true
-          type: array
-        algorithms:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustodianAlgorithmDto'
-          xml:
-            name: CustodianAlgorithmDto
-            wrapped: true
-          type: array
-      xml:
-        name: CustodianVerboseDto
-      type: object
-    OAS.DataModel.Portfolio.SimpleCustodian:
-      properties:
-        trustType:
-          type: string
-          enum:
-          - None
-          - CTC
-          - EAS
-        code:
-          type: string
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleCustodian
-      type: object
-    OAS.WebApi.DTO.Interface.AdditionalColumnDefinition:
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-      xml:
-        name: AdditionalColumnDefinition
-      type: object
     OAS.WebApi.DTO.Portfolio.CustodianCutOffError:
       properties:
         custodian:
@@ -2480,52 +2383,149 @@ components:
       xml:
         name: EntityOptionDto
       type: object
-    OAS.WebApi.DTO.Portfolio.CustodianFixDto:
+    OAS.WebApi.DTO.Portfolio.CustodianPortfolioDto:
       properties:
-        custodianId:
-          type: integer
-          format: int32
-        productType:
-          type: string
-          enum:
-          - None
-          - MutualFund
-          - Annuity
-          - AdvisorOne
-          - StockOrETF
-          - Option
-          - Bond
-          - Unknown
-          - CD
-          - Index
-        fixVersion:
-          type: string
-        fixRouting:
-          type: string
-        blockMethod:
-          type: string
-          enum:
-          - Default
-          - FixEft
-          - OneToOne
-        fkTRInterface:
-          type: integer
-          format: int32
-      xml:
-        name: CustodianFixDto
-      type: object
-    OAS.WebApi.DTO.Simple.SimpleValueDto:
-      properties:
-        value:
-          type: number
-          format: double
         id:
           type: integer
           format: int32
         name:
           type: string
+        description:
+          type: string
+        code:
+          type: string
+        sweepLevel:
+          type: string
+          enum:
+          - Invalid
+          - Registration
+          - Account
+        isDirect:
+          type: boolean
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        custodialAccountNum:
+          type: string
+        canSweepFeesToCustAcct:
+          type: boolean
+        feeReqSrc:
+          type: string
+          enum:
+          - Invalid
+          - HighValueFund
+          - CashAccount
+          - ProRata
+        isDefault:
+          type: boolean
+        isCreateDistribution:
+          type: boolean
+        custTaxID:
+          type: string
+        masterAccountNumber:
+          type: string
+        sweepProductClassId:
+          type: integer
+          format: int32
+        isQpeTransExcluded:
+          type: boolean
+        isUsingEquityBlockTrades:
+          type: boolean
+        is2PartTrading:
+          type: boolean
+        isUseB50Setup:
+          type: boolean
+        canTransmitAfterHours:
+          type: boolean
+        isSupermarket:
+          type: boolean
+        isManual:
+          type: boolean
+        allowManualOrderAllocate:
+          type: boolean
+        manualOrderAllocationClOrdId:
+          type: string
+        dtcNum:
+          type: string
+        directTrading:
+          type: string
+          enum:
+          - None
+          - Tda
+        communitiesDirectTrading:
+          type: string
+        downloadsCostBasis:
+          type: boolean
+        fixUploadTargetId:
+          type: integer
+          format: int32
+        brokerCommission:
+          type: number
+          format: double
+        aggregateSleeves:
+          type: boolean
+        minCashBalance:
+          type: number
+          format: double
+        replenishMinCash:
+          type: boolean
+        shareTradeThreshold:
+          type: number
+          format: double
+        email:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        salutation:
+          type: string
+        address1:
+          type: string
+        address2:
+          type: string
+        address3:
+          type: string
+        zip:
+          type: string
+        fax:
+          type: string
+        faxExt:
+          type: string
+        mobilePhone:
+          type: string
+        businessPhone:
+          type: string
+        businessPhoneExt:
+          type: string
+        otherPhone:
+          type: string
+        otherPhoneExt:
+          type: string
+        company:
+          type: string
+        jobTitle:
+          type: string
+        webAddress:
+          type: string
+        custodianCommonIdList:
+          type: string
+        custodianGlobalId:
+          type: integer
+          format: int32
+        globalId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
       xml:
-        name: SimpleValueDto
+        name: CustodianPortfolioDto
       type: object
   securitySchemes:
     Authorization:

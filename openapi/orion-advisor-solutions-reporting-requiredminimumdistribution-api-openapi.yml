@@ -874,99 +874,77 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.DataAccess.Domains.Reporting.RequiredMinimumDistribution.RmdDetail:
+    OAT.Utilities.Date.IDate:
       properties:
-        accountId:
+        date:
+          readOnly: true
+          type: string
+          format: date-time
+        year:
+          readOnly: true
           type: integer
           format: int32
-        registrationId:
+        month:
+          readOnly: true
           type: integer
           format: int32
-        ssn:
-          type: string
-        registrationType:
+        day:
+          readOnly: true
           type: integer
           format: int32
-        excludeFromRmdAggregation:
-          type: boolean
-        rmdAmount:
-          type: number
-          format: double
-        mtdTotal:
-          type: number
-          format: double
-        qtdTotal:
-          type: number
-          format: double
-        ytdTotal:
-          type: number
-          format: double
-        endOfPreviousYearAccountValue:
-          type: number
-          format: double
-        calculatedEndOfPreviousYearAccountValue:
-          type: number
-          format: double
-        endOfPreviousYearAccountValueIsCalculated:
-          type: boolean
-        amtRemaining:
-          type: number
-          format: double
-        investorAge:
-          type: number
-          format: double
-        primaryBeneficiaryName:
-          type: string
-        primaryBeneficiaryAge:
-          type: number
-          format: double
-        primaryBeneficiaryRelation:
-          type: string
-        remainingWithdrawls:
-          type: number
-          format: double
-        onTrack:
-          type: boolean
-        rmdEligible:
-          type: boolean
-        irsTable:
-          type: string
-          enum:
-          - SingleLife
-          - JointLifeAndLastSurvivor
-          - UniformLife
-        factor:
-          type: number
-          format: double
-        rmdSatisfied:
-          type: boolean
-        rmdSatisfiedIsCalculated:
-          type: boolean
-        isCustodial:
-          type: boolean
-        factorType:
-          type: integer
-          format: int32
-        recalculated:
-          type: boolean
-        secureActRule:
-          type: integer
-          format: int32
-        noData:
-          type: boolean
-        source:
-          type: string
-        asOfDate:
-          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
-        includeCustodialAccount:
-          type: boolean
-        custodialAccountNumber:
-          type: string
-        rmdOriginalAmount:
-          type: number
-          format: double
       xml:
-        name: RmdDetail
+        name: IDate
+      type: object
+    OAS.DataAccess.Reporting.RequiredMinimumDistribution.RmdDashboardYearOverrideColumnAuditDto:
+      properties:
+        editedBy:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedDate:
+          type: string
+          format: date-time
+      xml:
+        name: RmdDashboardYearOverrideColumnAuditDto
+      type: object
+    OAS.DataAccess.Reporting.RequiredMinimumDistribution.RmdDashboardYearOverridesDto:
+      properties:
+        year:
+          type: integer
+          format: int32
+        value:
+          type: number
+          format: double
+        valueAudit:
+          $ref: '#/components/schemas/OAS.DataAccess.Reporting.RequiredMinimumDistribution.RmdDashboardYearOverrideColumnAuditDto'
+        isSatisfied:
+          type: boolean
+        isSatisfiedAudit:
+          $ref: '#/components/schemas/OAS.DataAccess.Reporting.RequiredMinimumDistribution.RmdDashboardYearOverrideColumnAuditDto'
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        rmdNotes:
+          type: string
+        rmdNotesAudit:
+          $ref: '#/components/schemas/OAS.DataAccess.Reporting.RequiredMinimumDistribution.RmdDashboardYearOverrideColumnAuditDto'
+        overrideRmdAmount:
+          type: number
+          format: double
+        overrideRmdAmountAudit:
+          $ref: '#/components/schemas/OAS.DataAccess.Reporting.RequiredMinimumDistribution.RmdDashboardYearOverrideColumnAuditDto'
+      xml:
+        name: RmdDashboardYearOverridesDto
       type: object
     OAS.DataAccess.Reporting.RequiredMinimumDistribution.RmdDashboardBaseDto:
       properties:
@@ -1170,42 +1148,6 @@ components:
           type: array
       xml:
         name: RmdDashboardBaseDto
-      type: object
-    OAT.Utilities.Date.IDate:
-      properties:
-        date:
-          readOnly: true
-          type: string
-          format: date-time
-        year:
-          readOnly: true
-          type: integer
-          format: int32
-        month:
-          readOnly: true
-          type: integer
-          format: int32
-        day:
-          readOnly: true
-          type: integer
-          format: int32
-      xml:
-        name: IDate
-      type: object
-    OAS.DataAccess.Reporting.RequiredMinimumDistribution.RmdDashboardYearOverrideColumnAuditDto:
-      properties:
-        editedBy:
-          type: string
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedDate:
-          type: string
-          format: date-time
-      xml:
-        name: RmdDashboardYearOverrideColumnAuditDto
       type: object
     OAS.DataProcess.Reporting.RequiredMinimumDistribution.CustomFieldColumn:
       properties:
@@ -1411,41 +1353,99 @@ components:
       xml:
         name: CustomFieldColumn
       type: object
-    OAS.DataAccess.Reporting.RequiredMinimumDistribution.RmdDashboardYearOverridesDto:
+    OAS.DataAccess.Domains.Reporting.RequiredMinimumDistribution.RmdDetail:
       properties:
-        year:
+        accountId:
           type: integer
           format: int32
-        value:
-          type: number
-          format: double
-        valueAudit:
-          $ref: '#/components/schemas/OAS.DataAccess.Reporting.RequiredMinimumDistribution.RmdDashboardYearOverrideColumnAuditDto'
-        isSatisfied:
+        registrationId:
+          type: integer
+          format: int32
+        ssn:
+          type: string
+        registrationType:
+          type: integer
+          format: int32
+        excludeFromRmdAggregation:
           type: boolean
-        isSatisfiedAudit:
-          $ref: '#/components/schemas/OAS.DataAccess.Reporting.RequiredMinimumDistribution.RmdDashboardYearOverrideColumnAuditDto'
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        rmdNotes:
-          type: string
-        rmdNotesAudit:
-          $ref: '#/components/schemas/OAS.DataAccess.Reporting.RequiredMinimumDistribution.RmdDashboardYearOverrideColumnAuditDto'
-        overrideRmdAmount:
+        rmdAmount:
           type: number
           format: double
-        overrideRmdAmountAudit:
-          $ref: '#/components/schemas/OAS.DataAccess.Reporting.RequiredMinimumDistribution.RmdDashboardYearOverrideColumnAuditDto'
+        mtdTotal:
+          type: number
+          format: double
+        qtdTotal:
+          type: number
+          format: double
+        ytdTotal:
+          type: number
+          format: double
+        endOfPreviousYearAccountValue:
+          type: number
+          format: double
+        calculatedEndOfPreviousYearAccountValue:
+          type: number
+          format: double
+        endOfPreviousYearAccountValueIsCalculated:
+          type: boolean
+        amtRemaining:
+          type: number
+          format: double
+        investorAge:
+          type: number
+          format: double
+        primaryBeneficiaryName:
+          type: string
+        primaryBeneficiaryAge:
+          type: number
+          format: double
+        primaryBeneficiaryRelation:
+          type: string
+        remainingWithdrawls:
+          type: number
+          format: double
+        onTrack:
+          type: boolean
+        rmdEligible:
+          type: boolean
+        irsTable:
+          type: string
+          enum:
+          - SingleLife
+          - JointLifeAndLastSurvivor
+          - UniformLife
+        factor:
+          type: number
+          format: double
+        rmdSatisfied:
+          type: boolean
+        rmdSatisfiedIsCalculated:
+          type: boolean
+        isCustodial:
+          type: boolean
+        factorType:
+          type: integer
+          format: int32
+        recalculated:
+          type: boolean
+        secureActRule:
+          type: integer
+          format: int32
+        noData:
+          type: boolean
+        source:
+          type: string
+        asOfDate:
+          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
+        includeCustodialAccount:
+          type: boolean
+        custodialAccountNumber:
+          type: string
+        rmdOriginalAmount:
+          type: number
+          format: double
       xml:
-        name: RmdDashboardYearOverridesDto
+        name: RmdDetail
       type: object
   securitySchemes:
     Authorization:

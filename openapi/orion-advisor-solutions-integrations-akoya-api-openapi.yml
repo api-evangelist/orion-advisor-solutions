@@ -1207,6 +1207,28 @@ paths:
         required: true
 components:
   schemas:
+    OAS.WebApi.DTO.Integrations.CustodialIntegrator.AkoyaInstitutionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        fiId:
+          type: string
+        fiName:
+          type: string
+        isExcluded:
+          type: boolean
+        alClientList:
+          type: string
+        logo:
+          type: string
+        logoType:
+          type: string
+        institutionOptionJSON:
+          type: string
+      xml:
+        name: AkoyaInstitutionDto
+      type: object
     OAT.Integrations.Akoya.AkoyaUserDetail:
       properties:
         user:
@@ -1221,6 +1243,29 @@ components:
           format: int32
       xml:
         name: AkoyaUserDetail
+      type: object
+    OAS.WebApi.DTO.Authorization.ALClientDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        clientName:
+          type: string
+        selected:
+          type: boolean
+        lockDown:
+          type: string
+          enum:
+          - None
+          - Billing
+        ops:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Security.AlClientOpsDto'
+        guid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+      xml:
+        name: ALClientDto
       type: object
     OAS.DataProcess.Settings.CustomSettingDto:
       properties:
@@ -1674,29 +1719,6 @@ components:
       xml:
         name: AkoyaUserDtl
       type: object
-    OAS.WebApi.DTO.Authorization.ALClientDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        clientName:
-          type: string
-        selected:
-          type: boolean
-        lockDown:
-          type: string
-          enum:
-          - None
-          - Billing
-        ops:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Security.AlClientOpsDto'
-        guid:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-      xml:
-        name: ALClientDto
-      type: object
     OAT.Integrations.Akoya.AkoyaUser:
       properties:
         akoya_token_id:
@@ -1733,6 +1755,20 @@ components:
       xml:
         name: AkoyaUser
       type: object
+    OAS.WebApi.DTO.Confirm.AkoyaHouseholdUpdateRequestDto:
+      properties:
+        householdId:
+          type: integer
+          format: int32
+        credentialIds:
+          items:
+            type: string
+          type: array
+        token:
+          type: string
+      xml:
+        name: AkoyaHouseholdUpdateRequestDto
+      type: object
     OAS.WebApi.DTO.Security.AlClientOpsDto:
       properties:
         id:
@@ -1762,28 +1798,6 @@ components:
       xml:
         name: AlClientOpsDto
       type: object
-    OAS.WebApi.DTO.Integrations.CustodialIntegrator.AkoyaInstitutionDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        fiId:
-          type: string
-        fiName:
-          type: string
-        isExcluded:
-          type: boolean
-        alClientList:
-          type: string
-        logo:
-          type: string
-        logoType:
-          type: string
-        institutionOptionJSON:
-          type: string
-      xml:
-        name: AkoyaInstitutionDto
-      type: object
     OAT.Integrations.Akoya.DataModel.IntegrationConfig:
       properties:
         secret:
@@ -1792,20 +1806,6 @@ components:
           type: string
       xml:
         name: IntegrationConfig
-      type: object
-    OAS.WebApi.DTO.Confirm.AkoyaHouseholdUpdateRequestDto:
-      properties:
-        householdId:
-          type: integer
-          format: int32
-        credentialIds:
-          items:
-            type: string
-          type: array
-        token:
-          type: string
-      xml:
-        name: AkoyaHouseholdUpdateRequestDto
       type: object
   securitySchemes:
     Authorization:

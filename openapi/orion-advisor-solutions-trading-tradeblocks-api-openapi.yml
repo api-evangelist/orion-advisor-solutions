@@ -684,17 +684,22 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.WebApi.DTO.Trading.TradeBlockEntityScopeRequest:
-      description: 'Registration or account scope: entity enum as int (Registration = 6, Account = 7; see OrionConnect EntityEnum).'
+    OAS.WebApi.DTO.Trading.TradeBlockOriginContextDto:
+      description: 'Factual metadata about where and why a trade block originated in Eclipse.
+
+        Orion Connect uses this to decide its own sync and fan-out behavior.'
       properties:
-        entityEnum:
-          type: integer
-          format: int32
-        entityId:
+        wasPortfolioLevelBlock:
+          description: 'True when the block was created from a portfolio-level action that maps to
+
+            a registration entity in Orion Connect.'
+          type: boolean
+        originatingEclipseFirmId:
+          description: The Eclipse firm where the originating action occurred.
           type: integer
           format: int32
       xml:
-        name: TradeBlockEntityScopeRequest
+        name: TradeBlockOriginContextDto
       type: object
     OAS.WebApi.DTO.Trading.DeleteByReasonForCurrentUserRequest:
       description: Request to soft-delete trade block details for the current user and reason across one or more entity scopes.
@@ -810,22 +815,17 @@ components:
       xml:
         name: TradeBlockDetailDto
       type: object
-    OAS.WebApi.DTO.Trading.TradeBlockOriginContextDto:
-      description: 'Factual metadata about where and why a trade block originated in Eclipse.
-
-        Orion Connect uses this to decide its own sync and fan-out behavior.'
+    OAS.WebApi.DTO.Trading.TradeBlockEntityScopeRequest:
+      description: 'Registration or account scope: entity enum as int (Registration = 6, Account = 7; see OrionConnect EntityEnum).'
       properties:
-        wasPortfolioLevelBlock:
-          description: 'True when the block was created from a portfolio-level action that maps to
-
-            a registration entity in Orion Connect.'
-          type: boolean
-        originatingEclipseFirmId:
-          description: The Eclipse firm where the originating action occurred.
+        entityEnum:
+          type: integer
+          format: int32
+        entityId:
           type: integer
           format: int32
       xml:
-        name: TradeBlockOriginContextDto
+        name: TradeBlockEntityScopeRequest
       type: object
   securitySchemes:
     Authorization:

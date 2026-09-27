@@ -530,77 +530,40 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.DTO.Code.AgGrid.Models.FilterParams:
+    OAS.WebApi.Domains.Settings.PageCodeEntityDto:
       properties:
-        filterOptions:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Code.AgGrid.Models.FilterOptions'
-          xml:
-            name: FilterOptions
-            wrapped: true
-          type: array
+        displayName:
+          type: string
+        pageCodeName:
+          type: string
       xml:
-        name: FilterParams
+        name: PageCodeEntityDto
       type: object
-    OAS.WebApi.DTO.Settings.PageViewDto:
+    OAS.WebApi.DTO.Settings.DynamicGroupingInfo:
       properties:
-        id:
-          type: integer
-          format: int32
+        reporting:
+          type: boolean
+        trading:
+          type: boolean
+        repProfileAssignment:
+          type: boolean
+        compass:
+          type: boolean
+      xml:
+        name: DynamicGroupingInfo
+      type: object
+    OAS.WebApi.DTO.Settings.PageViewFilterDto:
+      properties:
         name:
           type: string
-        pageCode:
+        value:
           type: string
-        filterType:
+        key:
           type: string
-          enum:
-          - All
-          - Any
-        isPrivate:
+        include:
           type: boolean
-        canEdit:
-          type: boolean
-        isUserDefault:
-          type: boolean
-        gridType:
-          type: string
-          enum:
-          - SlickGrid
-          - AgGrid
-        agGrid:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Code.AgGrid.Models.AgGridPageView'
-        slickGridColumnDefs:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Code.SlickGridColumnDef'
-          xml:
-            name: SlickGridColumnDef
-            wrapped: true
-          type: array
-        filters:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.PageViewFilterDto'
-          xml:
-            name: PageViewFilterDto
-            wrapped: true
-          type: array
-        groups:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.PageViewGroupDto'
-          xml:
-            name: PageViewGroupDto
-            wrapped: true
-          type: array
-        sorts:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.PageViewSortDto'
-          xml:
-            name: PageViewSortDto
-            wrapped: true
-          type: array
-        dynamicGroupingInfo:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.DynamicGroupingInfo'
       xml:
-        name: PageViewDto
+        name: PageViewFilterDto
       type: object
     OAS.WebApi.DTO.Code.SlickGridColumnDef:
       properties:
@@ -663,40 +626,91 @@ components:
       xml:
         name: SlickGridColumnDef
       type: object
-    OAS.WebApi.DTO.Settings.PageViewFilterDto:
+    OAS.WebApi.DTO.Code.AgGrid.Models.FilterParams:
       properties:
-        name:
-          type: string
-        value:
-          type: string
-        key:
-          type: string
-        include:
-          type: boolean
-      xml:
-        name: PageViewFilterDto
-      type: object
-    OAS.WebApi.DTO.Code.AgGrid.Models.SortState:
-      properties:
-        colId:
-          type: string
-        sort:
-          type: string
-      xml:
-        name: SortState
-      type: object
-    OAS.WebApi.DTO.Code.SlickGridColumnConditions:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-        select1:
+        filterOptions:
           items:
-            type: string
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Code.AgGrid.Models.FilterOptions'
+          xml:
+            name: FilterOptions
+            wrapped: true
           type: array
       xml:
-        name: SlickGridColumnConditions
+        name: FilterParams
+      type: object
+    OAS.WebApi.DTO.Code.AgGrid.Models.FilterOptions:
+      properties:
+        displayKey:
+          type: string
+        displayName:
+          type: string
+        testFunction:
+          type: string
+        hideFilterInput:
+          readOnly: true
+          type: boolean
+      xml:
+        name: FilterOptions
+      type: object
+    OAS.WebApi.DTO.Settings.PageViewDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        pageCode:
+          type: string
+        filterType:
+          type: string
+          enum:
+          - All
+          - Any
+        isPrivate:
+          type: boolean
+        canEdit:
+          type: boolean
+        isUserDefault:
+          type: boolean
+        gridType:
+          type: string
+          enum:
+          - SlickGrid
+          - AgGrid
+        agGrid:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Code.AgGrid.Models.AgGridPageView'
+        slickGridColumnDefs:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Code.SlickGridColumnDef'
+          xml:
+            name: SlickGridColumnDef
+            wrapped: true
+          type: array
+        filters:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.PageViewFilterDto'
+          xml:
+            name: PageViewFilterDto
+            wrapped: true
+          type: array
+        groups:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.PageViewGroupDto'
+          xml:
+            name: PageViewGroupDto
+            wrapped: true
+          type: array
+        sorts:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.PageViewSortDto'
+          xml:
+            name: PageViewSortDto
+            wrapped: true
+          type: array
+        dynamicGroupingInfo:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.DynamicGroupingInfo'
+      xml:
+        name: PageViewDto
       type: object
     OAS.WebApi.DTO.Code.AgGrid.Models.AgGridPageView:
       properties:
@@ -718,40 +732,6 @@ components:
           type: object
       xml:
         name: AgGridPageView
-      type: object
-    OAS.WebApi.DTO.Settings.PageViewGroupDto:
-      properties:
-        getter:
-          type: string
-        formatter:
-          type: string
-        collapsed:
-          type: boolean
-        comparer:
-          type: string
-        enabled:
-          type: boolean
-        name:
-          type: string
-        aggregators:
-          items:
-            type: string
-          type: array
-        aggregateCollapsed:
-          type: boolean
-      xml:
-        name: PageViewGroupDto
-      type: object
-    OAS.WebApi.DTO.Settings.PageViewSortDto:
-      properties:
-        columnId:
-          type: string
-        field:
-          type: string
-        sortAsc:
-          type: boolean
-      xml:
-        name: PageViewSortDto
       type: object
     OAS.WebApi.DTO.Code.AgGrid.Models.ColState:
       properties:
@@ -795,41 +775,61 @@ components:
       xml:
         name: ColState
       type: object
-    OAS.WebApi.DTO.Code.AgGrid.Models.FilterOptions:
+    OAS.WebApi.DTO.Code.SlickGridColumnConditions:
       properties:
-        displayKey:
+        name:
           type: string
-        displayName:
+        value:
           type: string
-        testFunction:
-          type: string
-        hideFilterInput:
-          readOnly: true
-          type: boolean
+        select1:
+          items:
+            type: string
+          type: array
       xml:
-        name: FilterOptions
+        name: SlickGridColumnConditions
       type: object
-    OAS.WebApi.Domains.Settings.PageCodeEntityDto:
+    OAS.WebApi.DTO.Settings.PageViewGroupDto:
       properties:
-        displayName:
+        getter:
           type: string
-        pageCodeName:
+        formatter:
           type: string
+        collapsed:
+          type: boolean
+        comparer:
+          type: string
+        enabled:
+          type: boolean
+        name:
+          type: string
+        aggregators:
+          items:
+            type: string
+          type: array
+        aggregateCollapsed:
+          type: boolean
       xml:
-        name: PageCodeEntityDto
+        name: PageViewGroupDto
       type: object
-    OAS.WebApi.DTO.Settings.DynamicGroupingInfo:
+    OAS.WebApi.DTO.Settings.PageViewSortDto:
       properties:
-        reporting:
-          type: boolean
-        trading:
-          type: boolean
-        repProfileAssignment:
-          type: boolean
-        compass:
+        columnId:
+          type: string
+        field:
+          type: string
+        sortAsc:
           type: boolean
       xml:
-        name: DynamicGroupingInfo
+        name: PageViewSortDto
+      type: object
+    OAS.WebApi.DTO.Code.AgGrid.Models.SortState:
+      properties:
+        colId:
+          type: string
+        sort:
+          type: string
+      xml:
+        name: SortState
       type: object
   securitySchemes:
     Authorization:

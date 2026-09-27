@@ -722,6 +722,19 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
     System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
       properties:
         key:
@@ -765,22 +778,6 @@ components:
           - AccountId
       xml:
         name: StoredPerformanceColumnMapping
-      type: object
-    OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceImportVerboseOptionsDto:
-      properties:
-        s3FileName:
-          type: string
-        columnMappings:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceColumnMapping'
-          xml:
-            name: StoredPerformanceColumnMapping
-            wrapped: true
-          type: array
-        addDayToStartDate:
-          type: boolean
-      xml:
-        name: StoredPerformanceImportVerboseOptionsDto
       type: object
     OAS.DataModel.Performance.StoredPerformanceImportEntity:
       required:
@@ -1009,18 +1006,21 @@ components:
       xml:
         name: StoredPerformanceImportEntity
       type: object
-    System.Net.Http.StreamContent:
+    OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceImportVerboseOptionsDto:
       properties:
-        headers:
+        s3FileName:
+          type: string
+        columnMappings:
           items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceColumnMapping'
           xml:
-            name: KeyValuePair`2
+            name: StoredPerformanceColumnMapping
             wrapped: true
           type: array
+        addDayToStartDate:
+          type: boolean
       xml:
-        name: StreamContent
+        name: StoredPerformanceImportVerboseOptionsDto
       type: object
     OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceImportVerboseDto:
       properties:

@@ -265,36 +265,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.DataModel.Integration.ResultItemOfOAT.Integrations.Schwab.SII.Dto.SchwabServiceResponseDto:
-      properties:
-        item:
-          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabServiceResponseDto'
-        hasError:
-          type: boolean
-        status:
-          type: string
-      xml:
-        name: ResultItem`1
-      type: object
-    OAT.Integrations.Schwab.SII.Dto.SchwabRequestCenterDTO:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        order:
-          type: integer
-          format: int32
-        subtopics:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRequestCenterDTO.Subtopic'
-          xml:
-            name: Subtopic
-            wrapped: true
-          type: array
-      xml:
-        name: SchwabRequestCenterDTO
-      type: object
     OAS.Integrations.SchwabV2.ServiceRequest.Models.SchwabCreateServiceRequestRequestDto:
       properties:
         files:
@@ -325,49 +295,35 @@ components:
       xml:
         name: SchwabCreateServiceRequestRequestDto
       type: object
-    System.Web.HttpPostedFile:
+    System.IO.Stream:
       properties:
-        fileName:
+        canRead:
           readOnly: true
-          type: string
-        contentType:
+          type: boolean
+        canSeek:
           readOnly: true
-          type: string
-        contentLength:
+          type: boolean
+        canTimeout:
+          readOnly: true
+          type: boolean
+        canWrite:
+          readOnly: true
+          type: boolean
+        length:
           readOnly: true
           type: integer
+          format: int64
+        position:
+          type: integer
+          format: int64
+        readTimeout:
+          type: integer
           format: int32
-        inputStream:
-          $ref: '#/components/schemas/System.IO.Stream'
-          readOnly: true
+        writeTimeout:
+          type: integer
+          format: int32
       xml:
-        name: HttpPostedFile
-      type: object
-    OAT.Integrations.Schwab.SII.Dto.ServiceRequestData:
-      properties:
-        subTopic:
-          type: string
-        topic:
-          type: string
-        subAccount:
-          type: string
-        masterAccount:
-          type: string
-        requestName:
-          type: string
-        requestDescription:
-          type: string
-        clientChannelOverride:
-          type: string
-        files:
-          items:
-            $ref: '#/components/schemas/System.Web.HttpPostedFile'
-          xml:
-            name: HttpPostedFile
-            wrapped: true
-          type: array
-      xml:
-        name: ServiceRequestData
+        name: Stream
       type: object
     OAT.Integrations.Schwab.SII.Dto.SchwabServiceResponseDto:
       properties:
@@ -450,36 +406,6 @@ components:
       xml:
         name: SchwabServiceResponseDto
       type: object
-    System.IO.Stream:
-      properties:
-        canRead:
-          readOnly: true
-          type: boolean
-        canSeek:
-          readOnly: true
-          type: boolean
-        canTimeout:
-          readOnly: true
-          type: boolean
-        canWrite:
-          readOnly: true
-          type: boolean
-        length:
-          readOnly: true
-          type: integer
-          format: int64
-        position:
-          type: integer
-          format: int64
-        readTimeout:
-          type: integer
-          format: int32
-        writeTimeout:
-          type: integer
-          format: int32
-      xml:
-        name: Stream
-      type: object
     OAT.Integrations.Schwab.SII.Dto.Attachmentdata:
       properties:
         location:
@@ -495,6 +421,25 @@ components:
       xml:
         name: Attachmentdata
       type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabRequestCenterDTO:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        subtopics:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRequestCenterDTO.Subtopic'
+          xml:
+            name: Subtopic
+            wrapped: true
+          type: array
+      xml:
+        name: SchwabRequestCenterDTO
+      type: object
     OAT.Integrations.Schwab.SII.Dto.SchwabRequestCenterDTO.Subtopic:
       properties:
         name:
@@ -508,6 +453,61 @@ components:
           format: int32
       xml:
         name: Subtopic
+      type: object
+    System.Web.HttpPostedFile:
+      properties:
+        fileName:
+          readOnly: true
+          type: string
+        contentType:
+          readOnly: true
+          type: string
+        contentLength:
+          readOnly: true
+          type: integer
+          format: int32
+        inputStream:
+          $ref: '#/components/schemas/System.IO.Stream'
+          readOnly: true
+      xml:
+        name: HttpPostedFile
+      type: object
+    OAS.DataModel.Integration.ResultItemOfOAT.Integrations.Schwab.SII.Dto.SchwabServiceResponseDto:
+      properties:
+        item:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabServiceResponseDto'
+        hasError:
+          type: boolean
+        status:
+          type: string
+      xml:
+        name: ResultItem`1
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.ServiceRequestData:
+      properties:
+        subTopic:
+          type: string
+        topic:
+          type: string
+        subAccount:
+          type: string
+        masterAccount:
+          type: string
+        requestName:
+          type: string
+        requestDescription:
+          type: string
+        clientChannelOverride:
+          type: string
+        files:
+          items:
+            $ref: '#/components/schemas/System.Web.HttpPostedFile'
+          xml:
+            name: HttpPostedFile
+            wrapped: true
+          type: array
+      xml:
+        name: ServiceRequestData
       type: object
   securitySchemes:
     Authorization:

@@ -1107,6 +1107,57 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAS.WebApi.DTO.Blogging.EmailDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        subject:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        sender:
+          type: string
+        recipient:
+          type: string
+        messageText:
+          type: string
+        attachments:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Blogging.EmailAttachmentDto'
+          xml:
+            name: EmailAttachmentDto
+            wrapped: true
+          type: array
+      xml:
+        name: EmailDto
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    OAS.WebApi.DTO.Blogging.EmailAttachmentDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        blobDesc:
+          type: string
+        canDownload:
+          type: boolean
+      xml:
+        name: EmailAttachmentDto
+      type: object
     System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
       properties:
         key:
@@ -1120,25 +1171,31 @@ components:
       xml:
         name: KeyValuePair`2
       type: object
-    OAS.WebApi.DTO.Blogging.NewEmailDto:
+    OAS.DataModel.SimpleEntity:
       properties:
-        recipients:
+        id:
+          type: integer
+          format: int32
+        name:
           type: string
+      xml:
+        name: SimpleEntity
+      type: object
+    OAS.WebApi.DTO.Blogging.EmailListDto:
+      properties:
+        id:
+          type: integer
+          format: int32
         subject:
           type: string
-        messageText:
+        createdDate:
           type: string
-        notificationMessage:
-          type: string
-        files:
-          items:
-            $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-          xml:
-            name: HttpFile
-            wrapped: true
-          type: array
+          format: date-time
+        attachmentCount:
+          type: integer
+          format: int32
       xml:
-        name: NewEmailDto
+        name: EmailListDto
       type: object
     OAS.WebApi.DTO.Blogging.RecipientDto:
       properties:
@@ -1355,82 +1412,25 @@ components:
       xml:
         name: RecipientDto
       type: object
-    OAS.WebApi.DTO.Blogging.EmailListDto:
+    OAS.WebApi.DTO.Blogging.NewEmailDto:
       properties:
-        id:
-          type: integer
-          format: int32
+        recipients:
+          type: string
         subject:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        attachmentCount:
-          type: integer
-          format: int32
-      xml:
-        name: EmailListDto
-      type: object
-    OAS.WebApi.DTO.Blogging.EmailDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        subject:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        sender:
-          type: string
-        recipient:
           type: string
         messageText:
           type: string
-        attachments:
+        notificationMessage:
+          type: string
+        files:
           items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Blogging.EmailAttachmentDto'
+            $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
           xml:
-            name: EmailAttachmentDto
+            name: HttpFile
             wrapped: true
           type: array
       xml:
-        name: EmailDto
-      type: object
-    OAS.DataModel.SimpleEntity:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleEntity
-      type: object
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
-      type: object
-    OAS.WebApi.DTO.Blogging.EmailAttachmentDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        blobDesc:
-          type: string
-        canDownload:
-          type: boolean
-      xml:
-        name: EmailAttachmentDto
+        name: NewEmailDto
       type: object
     MultipartDataMediaFormatter.Infrastructure.HttpFile:
       properties:

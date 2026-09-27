@@ -543,165 +543,13 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.DTO.QueryStudio.QueryTagOptionsDto:
-      properties:
-        columnName:
-          type: string
-        dateFormat:
-          type: string
-        decimalPlaces:
-          type: integer
-          format: int32
-        formatAsCurrency:
-          type: boolean
-        useNegativeParenthesis:
-          type: boolean
-        useThousandsSeparator:
-          type: boolean
-        scope:
-          additionalProperties:
-            type: object
-          type: object
-        sourceParameters:
-          additionalProperties:
-            type: object
-          type: object
-      xml:
-        name: QueryTagOptionsDto
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeDateRange:
+    OAS.DataModel.Reporting.Interfaces.IMakeProjectedIncomeOption:
       properties:
         type:
           readOnly: true
           type: string
       xml:
-        name: IMakeDateRange
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeActivityOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeActivityOption
-      type: object
-    OAS.WebApi.DTO.QueryStudio.QueryParameterDto:
-      properties:
-        name:
-          type: string
-        dataType:
-          type: string
-        value:
-          type: object
-      xml:
-        name: QueryParameterDto
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeBillingOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeBillingOption
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeTradingOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeTradingOption
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IReturnStyle:
-      properties:
-        frequency:
-          readOnly: true
-          type: string
-          enum:
-          - Summary
-          - Annually
-          - Quarterly
-          - Monthly
-          - Weekly
-          - Daily
-          - Automatic
-        basedOn:
-          readOnly: true
-          type: string
-          enum:
-          - Calendar
-          - RollingForward
-          - RollingBackward
-        breakBehavior:
-          readOnly: true
-          type: string
-          enum:
-          - AllowPartialPeriods
-          - PartialPeriodsWithBreakPoints
-          - FullPeriodsOnly
-        cumulative:
-          readOnly: true
-          type: boolean
-        cumulativeBasedOn:
-          readOnly: true
-          type: string
-          enum:
-          - ForwardFromStartDate
-          - BackwardFromEndDate
-        context:
-          readOnly: true
-          type: string
-          enum:
-          - Self
-          - Parent
-      xml:
-        name: IReturnStyle
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportRoleAccessRuleDto:
-      properties:
-        roleId:
-          type: integer
-          format: int32
-        name:
-          type: string
-        canRun:
-          type: boolean
-        canEdit:
-          type: boolean
-        canDelete:
-          type: boolean
-      xml:
-        name: ReportRoleAccessRuleDto
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeComparisonOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeComparisonOption
-      type: object
-    OAS.WebApi.DTO.Reporting.Calculate.CalculateBase:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        id:
-          type: string
-        contextChange:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.ContextChange'
-      xml:
-        name: CalculateBase
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeCostBasisOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeCostBasisOption
+        name: IMakeProjectedIncomeOption
       type: object
     OAS.DataProcess.QueryStudio.AccessRules.QueryAccessRuleDto:
       properties:
@@ -761,13 +609,159 @@ components:
       xml:
         name: QueryAccessRuleDto
       type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeMaturityPeriodOption:
+    OAS.WebApi.DTO.Reporting.Envision.ReportRoleAccessRuleDto:
+      properties:
+        roleId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        canRun:
+          type: boolean
+        canEdit:
+          type: boolean
+        canDelete:
+          type: boolean
+      xml:
+        name: ReportRoleAccessRuleDto
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeStatisticalOption:
       properties:
         type:
           readOnly: true
           type: string
       xml:
-        name: IMakeMaturityPeriodOption
+        name: IMakeStatisticalOption
+      type: object
+    OAS.WebApi.DTO.QueryStudio.QueryParameterDto:
+      properties:
+        name:
+          type: string
+        dataType:
+          type: string
+        value:
+          type: object
+      xml:
+        name: QueryParameterDto
+      type: object
+    OAS.WebApi.DTO.QueryStudio.FilterNodeDto:
+      properties:
+        columnId:
+          type: integer
+          format: int32
+        operator:
+          type: string
+          enum:
+          - Equals
+          - DoesNotEqual
+          - Contains
+          - DoesNotContain
+          - StartsWith
+          - EndsWith
+          - IsEmpty
+          - IsNotEmpty
+          - GreaterThan
+          - GreaterThanOrEqualTo
+          - LessThan
+          - LessThanOrEqualTo
+          - Between
+          - In
+          - NotIn
+        values:
+          items:
+            type: object
+          type: array
+        logicalOperator:
+          type: string
+        children:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.FilterNodeDto'
+          xml:
+            name: FilterNodeDto
+            wrapped: true
+          type: array
+        isGroup:
+          readOnly: true
+          type: boolean
+      xml:
+        name: FilterNodeDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseGroupAccessRuleDto:
+      properties:
+        databaseGroupId:
+          type: integer
+          format: int32
+        loginEntityId:
+          type: string
+          enum:
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - RIA
+          - Administrator
+          - SubAdvisor
+          - ThirdPartyAdministrator
+          - Custodian
+          - PlanSponsor
+          - ThirdParty
+          - ServiceAccount
+          - Participant
+          - RepAccountManager
+          - Payee
+          - RIATable
+          - Cotenant
+        name:
+          type: string
+        canRun:
+          type: boolean
+        canEdit:
+          type: boolean
+      xml:
+        name: ReportDatabaseGroupAccessRuleDto
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeActivityOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeActivityOption
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportLoginAccessRuleDto:
+      properties:
+        loginEntityId:
+          type: string
+          enum:
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - RIA
+          - Administrator
+          - SubAdvisor
+          - ThirdPartyAdministrator
+          - Custodian
+          - PlanSponsor
+          - ThirdParty
+          - ServiceAccount
+          - Participant
+          - RepAccountManager
+          - Payee
+          - RIATable
+          - Cotenant
+        canRun:
+          type: boolean
+      xml:
+        name: ReportLoginAccessRuleDto
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeAttributionOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeAttributionOption
       type: object
     OAS.DataModel.Reporting.Calculation.IMakeCalculationOption:
       properties:
@@ -776,6 +770,78 @@ components:
           type: string
       xml:
         name: IMakeCalculationOption
+      type: object
+    OAS.WebApi.DTO.QueryStudio.SourceParameterDto:
+      properties:
+        name:
+          type: string
+        displayName:
+          type: string
+        dataType:
+          type: integer
+          format: int32
+        parameterOrder:
+          type: integer
+          format: int32
+        defaultValue:
+          type: string
+      xml:
+        name: SourceParameterDto
+      type: object
+    OAS.WebApi.DTO.QueryStudio.QueryDto:
+      properties:
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        legacyQueryId:
+          type: integer
+          format: int32
+        queryTags:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryTagDto'
+          xml:
+            name: QueryTagDto
+            wrapped: true
+          type: array
+        filters:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.FilterGroupDto'
+        parameters:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryParameterDto'
+          xml:
+            name: QueryParameterDto
+            wrapped: true
+          type: array
+        sorting:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QuerySortDto'
+          xml:
+            name: QuerySortDto
+            wrapped: true
+          type: array
+        scopeSettings:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Calculate.ScopeSettingsDto'
+        auditedBy:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        queryId:
+          type: integer
+          format: int32
+        canRun:
+          type: boolean
+        canDelete:
+          type: boolean
+        canEdit:
+          type: boolean
+      xml:
+        name: QueryDto
       type: object
     OAS.WebApi.DTO.QueryStudio.QueryTagDto:
       properties:
@@ -835,6 +901,20 @@ components:
       xml:
         name: QueryTagDto
       type: object
+    OAS.WebApi.DTO.Reporting.Envision.AccountManagementOverride:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        isManaged:
+          type: boolean
+        isIncluded:
+          type: boolean
+      xml:
+        name: AccountManagementOverride
+      type: object
     OAS.WebApi.DTO.QueryStudio.QuerySortDto:
       properties:
         queryTagGuid:
@@ -846,204 +926,6 @@ components:
       xml:
         name: QuerySortDto
       type: object
-    OAS.WebApi.DTO.QueryStudio.FilterGroupDto:
-      properties:
-        logicalOperator:
-          type: string
-        children:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.FilterNodeDto'
-          xml:
-            name: FilterNodeDto
-            wrapped: true
-          type: array
-      xml:
-        name: FilterGroupDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseGroupAccessRuleDto:
-      properties:
-        databaseGroupId:
-          type: integer
-          format: int32
-        loginEntityId:
-          type: string
-          enum:
-          - BrokerDealer
-          - Wholesaler
-          - Representative
-          - Client
-          - RIA
-          - Administrator
-          - SubAdvisor
-          - ThirdPartyAdministrator
-          - Custodian
-          - PlanSponsor
-          - ThirdParty
-          - ServiceAccount
-          - Participant
-          - RepAccountManager
-          - Payee
-          - RIATable
-          - Cotenant
-        name:
-          type: string
-        canRun:
-          type: boolean
-        canEdit:
-          type: boolean
-      xml:
-        name: ReportDatabaseGroupAccessRuleDto
-      type: object
-    OAS.WebApi.DTO.QueryStudio.SourceParameterDto:
-      properties:
-        name:
-          type: string
-        displayName:
-          type: string
-        dataType:
-          type: integer
-          format: int32
-        parameterOrder:
-          type: integer
-          format: int32
-        defaultValue:
-          type: string
-      xml:
-        name: SourceParameterDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseAccessRuleDto:
-      properties:
-        alClientId:
-          type: integer
-          format: int32
-        loginEntityId:
-          type: string
-          enum:
-          - BrokerDealer
-          - Wholesaler
-          - Representative
-          - Client
-          - RIA
-          - Administrator
-          - SubAdvisor
-          - ThirdPartyAdministrator
-          - Custodian
-          - PlanSponsor
-          - ThirdParty
-          - ServiceAccount
-          - Participant
-          - RepAccountManager
-          - Payee
-          - RIATable
-          - Cotenant
-        name:
-          type: string
-        canRun:
-          type: boolean
-        canEdit:
-          type: boolean
-      xml:
-        name: ReportDatabaseAccessRuleDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Calculate.ScopeFeatureFlagsDto:
-      properties:
-        dynamicBenchmarkProcessType:
-          type: string
-          enum:
-          - Cloud
-          - LocalService
-        forceAssetGroupingIntraDayPerformance:
-          type: boolean
-        activityProcessType:
-          type: string
-          enum:
-          - Cloud
-          - LocalService
-        costBasisProcessType:
-          type: string
-          enum:
-          - Old
-          - Cloud
-          - LocalService
-        morningstarLevel2Assignment:
-          type: boolean
-        localPriceCutOverDate:
-          type: string
-          format: date-time
-        noScope:
-          type: boolean
-        ensureAssetsUpdated:
-          type: boolean
-        storeReportDataCompressed:
-          type: boolean
-        showEInModelNames:
-          type: boolean
-        performanceProcessType:
-          type: string
-          enum:
-          - Cloud
-          - LocalService
-        forceNonSummaryPerformanceToUseTwr:
-          type: boolean
-        forceNetOfFeesPerformance:
-          type: boolean
-        costBasisStoredSource:
-          type: string
-          enum:
-          - Orion
-          - Custodian
-        tradingWithParentGrouping:
-          type: boolean
-        useGlobalSettingsUniqueIds:
-          type: boolean
-        showEquations:
-          type: boolean
-        isReportCompare:
-          type: boolean
-        useBenchmarksInAccountChangeHistory:
-          type: boolean
-        benchmarkAssignmentOverride:
-          type: string
-        useAsOfDateForAdvizr:
-          type: boolean
-        accountNumbersToShow:
-          type: integer
-          format: int32
-        useBatchSettingsBulkCopy:
-          type: boolean
-        showExcludedFromRebalance:
-          type: boolean
-        useInMemoryForModelVsActual:
-          type: boolean
-        useNewLineChartRenderer:
-          type: boolean
-        useNewScatterPlotChartRenderer:
-          type: boolean
-        useInMemoryIncomeCalculation:
-          type: boolean
-        useModelAllocationHistory:
-          type: boolean
-        useDisclaimerShadowDom:
-          type: boolean
-      xml:
-        name: ScopeFeatureFlagsDto
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakePerformanceOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakePerformanceOption
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeAttributionOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeAttributionOption
-      type: object
     OAS.DataModel.Reporting.Interfaces.IMakeTaxOption:
       properties:
         type:
@@ -1052,68 +934,13 @@ components:
       xml:
         name: IMakeTaxOption
       type: object
-    OAS.WebApi.DTO.QueryStudio.QueryDto:
-      properties:
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        name:
-          type: string
-        description:
-          type: string
-        legacyQueryId:
-          type: integer
-          format: int32
-        queryTags:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryTagDto'
-          xml:
-            name: QueryTagDto
-            wrapped: true
-          type: array
-        filters:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.FilterGroupDto'
-        parameters:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryParameterDto'
-          xml:
-            name: QueryParameterDto
-            wrapped: true
-          type: array
-        sorting:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QuerySortDto'
-          xml:
-            name: QuerySortDto
-            wrapped: true
-          type: array
-        scopeSettings:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Calculate.ScopeSettingsDto'
-        auditedBy:
-          type: string
-        auditedDate:
-          type: string
-          format: date-time
-        queryId:
-          type: integer
-          format: int32
-        canRun:
-          type: boolean
-        canDelete:
-          type: boolean
-        canEdit:
-          type: boolean
-      xml:
-        name: QueryDto
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeIncomeOption:
+    OAS.DataModel.Reporting.Interfaces.IMakeTransactionOption:
       properties:
         type:
           readOnly: true
           type: string
       xml:
-        name: IMakeIncomeOption
+        name: IMakeTransactionOption
       type: object
     OAS.WebApi.DTO.Reporting.Envision.ReportUserAccessRuleDto:
       properties:
@@ -1130,75 +957,6 @@ components:
           type: boolean
       xml:
         name: ReportUserAccessRuleDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.AccountManagementOverride:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        isManaged:
-          type: boolean
-        isIncluded:
-          type: boolean
-      xml:
-        name: AccountManagementOverride
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportLoginAccessRuleDto:
-      properties:
-        loginEntityId:
-          type: string
-          enum:
-          - BrokerDealer
-          - Wholesaler
-          - Representative
-          - Client
-          - RIA
-          - Administrator
-          - SubAdvisor
-          - ThirdPartyAdministrator
-          - Custodian
-          - PlanSponsor
-          - ThirdParty
-          - ServiceAccount
-          - Participant
-          - RepAccountManager
-          - Payee
-          - RIATable
-          - Cotenant
-        canRun:
-          type: boolean
-      xml:
-        name: ReportLoginAccessRuleDto
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeTransactionOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeTransactionOption
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeProjectedIncomeOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeProjectedIncomeOption
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportRepresentativeAccessRuleDto:
-      properties:
-        representativeId:
-          type: integer
-          format: int32
-        name:
-          type: string
-        canRun:
-          type: boolean
-      xml:
-        name: ReportRepresentativeAccessRuleDto
       type: object
     OAS.WebApi.DTO.Reporting.Calculate.ScopeSettingsDto:
       properties:
@@ -1442,6 +1200,177 @@ components:
       xml:
         name: ScopeSettingsDto
       type: object
+    OAS.WebApi.DTO.QueryStudio.FilterGroupDto:
+      properties:
+        logicalOperator:
+          type: string
+        children:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.FilterNodeDto'
+          xml:
+            name: FilterNodeDto
+            wrapped: true
+          type: array
+      xml:
+        name: FilterGroupDto
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeBillingOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeBillingOption
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseAccessRuleDto:
+      properties:
+        alClientId:
+          type: integer
+          format: int32
+        loginEntityId:
+          type: string
+          enum:
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - RIA
+          - Administrator
+          - SubAdvisor
+          - ThirdPartyAdministrator
+          - Custodian
+          - PlanSponsor
+          - ThirdParty
+          - ServiceAccount
+          - Participant
+          - RepAccountManager
+          - Payee
+          - RIATable
+          - Cotenant
+        name:
+          type: string
+        canRun:
+          type: boolean
+        canEdit:
+          type: boolean
+      xml:
+        name: ReportDatabaseAccessRuleDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Calculate.CalculateBase:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        id:
+          type: string
+        contextChange:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.ContextChange'
+      xml:
+        name: CalculateBase
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakePerformanceOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakePerformanceOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeIncomeOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeIncomeOption
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportRepresentativeAccessRuleDto:
+      properties:
+        representativeId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        canRun:
+          type: boolean
+      xml:
+        name: ReportRepresentativeAccessRuleDto
+      type: object
+    OAS.WebApi.DTO.QueryStudio.QueryTagOptionsDto:
+      properties:
+        columnName:
+          type: string
+        dateFormat:
+          type: string
+        decimalPlaces:
+          type: integer
+          format: int32
+        formatAsCurrency:
+          type: boolean
+        useNegativeParenthesis:
+          type: boolean
+        useThousandsSeparator:
+          type: boolean
+        scope:
+          additionalProperties:
+            type: object
+          type: object
+        sourceParameters:
+          additionalProperties:
+            type: object
+          type: object
+      xml:
+        name: QueryTagOptionsDto
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeMaturityPeriodOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeMaturityPeriodOption
+      type: object
+    OAS.DataProcess.QueryStudio.QueryGenerate.QueryStudioQueryExportOptions:
+      properties:
+        limit:
+          type: integer
+          format: int32
+        exportType:
+          type: string
+          enum:
+          - DataTable
+          - Xlsx
+          - Xls
+          - Csv
+          - Psv
+          - Json
+        destination:
+          type: string
+          enum:
+          - DirectDownload
+          - CloudStorage
+          - ReportInbox
+          - FileTransfer
+        parameters:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryParameterDto'
+          xml:
+            name: QueryParameterDto
+            wrapped: true
+          type: array
+      xml:
+        name: QueryStudioQueryExportOptions
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeComparisonOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeComparisonOption
+      type: object
     OAS.DataModel.Reporting.Engine.ContextChange:
       properties:
         activityOption:
@@ -1573,86 +1502,157 @@ components:
       xml:
         name: ContextChange
       type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeStatisticalOption:
+    OAS.DataModel.Reporting.Interfaces.IMakeTradingOption:
       properties:
         type:
           readOnly: true
           type: string
       xml:
-        name: IMakeStatisticalOption
+        name: IMakeTradingOption
       type: object
-    OAS.WebApi.DTO.QueryStudio.FilterNodeDto:
+    OAS.WebApi.DTO.Reporting.Calculate.ScopeFeatureFlagsDto:
       properties:
-        columnId:
-          type: integer
-          format: int32
-        operator:
+        dynamicBenchmarkProcessType:
           type: string
           enum:
-          - Equals
-          - DoesNotEqual
-          - Contains
-          - DoesNotContain
-          - StartsWith
-          - EndsWith
-          - IsEmpty
-          - IsNotEmpty
-          - GreaterThan
-          - GreaterThanOrEqualTo
-          - LessThan
-          - LessThanOrEqualTo
-          - Between
-          - In
-          - NotIn
-        values:
-          items:
-            type: object
-          type: array
-        logicalOperator:
+          - Cloud
+          - LocalService
+        forceAssetGroupingIntraDayPerformance:
+          type: boolean
+        activityProcessType:
           type: string
-        children:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.FilterNodeDto'
-          xml:
-            name: FilterNodeDto
-            wrapped: true
-          type: array
-        isGroup:
-          readOnly: true
+          enum:
+          - Cloud
+          - LocalService
+        costBasisProcessType:
+          type: string
+          enum:
+          - Old
+          - Cloud
+          - LocalService
+        morningstarLevel2Assignment:
+          type: boolean
+        localPriceCutOverDate:
+          type: string
+          format: date-time
+        noScope:
+          type: boolean
+        ensureAssetsUpdated:
+          type: boolean
+        storeReportDataCompressed:
+          type: boolean
+        showEInModelNames:
+          type: boolean
+        performanceProcessType:
+          type: string
+          enum:
+          - Cloud
+          - LocalService
+        forceNonSummaryPerformanceToUseTwr:
+          type: boolean
+        forceNetOfFeesPerformance:
+          type: boolean
+        costBasisStoredSource:
+          type: string
+          enum:
+          - Orion
+          - Custodian
+        tradingWithParentGrouping:
+          type: boolean
+        useGlobalSettingsUniqueIds:
+          type: boolean
+        showEquations:
+          type: boolean
+        isReportCompare:
+          type: boolean
+        useBenchmarksInAccountChangeHistory:
+          type: boolean
+        benchmarkAssignmentOverride:
+          type: string
+        useAsOfDateForAdvizr:
+          type: boolean
+        accountNumbersToShow:
+          type: integer
+          format: int32
+        useBatchSettingsBulkCopy:
+          type: boolean
+        showExcludedFromRebalance:
+          type: boolean
+        useInMemoryForModelVsActual:
+          type: boolean
+        useNewLineChartRenderer:
+          type: boolean
+        useNewScatterPlotChartRenderer:
+          type: boolean
+        useInMemoryIncomeCalculation:
+          type: boolean
+        useModelAllocationHistory:
+          type: boolean
+        useDisclaimerShadowDom:
           type: boolean
       xml:
-        name: FilterNodeDto
+        name: ScopeFeatureFlagsDto
       type: object
-    OAS.DataProcess.QueryStudio.QueryGenerate.QueryStudioQueryExportOptions:
+    OAS.DataModel.Reporting.Interfaces.IReturnStyle:
       properties:
-        limit:
-          type: integer
-          format: int32
-        exportType:
+        frequency:
+          readOnly: true
           type: string
           enum:
-          - DataTable
-          - Xlsx
-          - Xls
-          - Csv
-          - Psv
-          - Json
-        destination:
+          - Summary
+          - Annually
+          - Quarterly
+          - Monthly
+          - Weekly
+          - Daily
+          - Automatic
+        basedOn:
+          readOnly: true
           type: string
           enum:
-          - DirectDownload
-          - CloudStorage
-          - ReportInbox
-          - FileTransfer
-        parameters:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.QueryStudio.QueryParameterDto'
-          xml:
-            name: QueryParameterDto
-            wrapped: true
-          type: array
+          - Calendar
+          - RollingForward
+          - RollingBackward
+        breakBehavior:
+          readOnly: true
+          type: string
+          enum:
+          - AllowPartialPeriods
+          - PartialPeriodsWithBreakPoints
+          - FullPeriodsOnly
+        cumulative:
+          readOnly: true
+          type: boolean
+        cumulativeBasedOn:
+          readOnly: true
+          type: string
+          enum:
+          - ForwardFromStartDate
+          - BackwardFromEndDate
+        context:
+          readOnly: true
+          type: string
+          enum:
+          - Self
+          - Parent
       xml:
-        name: QueryStudioQueryExportOptions
+        name: IReturnStyle
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeDateRange:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeDateRange
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeCostBasisOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeCostBasisOption
       type: object
   securitySchemes:
     Authorization:

@@ -1286,6 +1286,80 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    OAS.WebApi.DTO.Confirm.DownloadSourceQueueLogMessageDto:
+      properties:
+        id:
+          type: string
+        time:
+          type: string
+          format: date-time
+        message:
+          type: string
+      xml:
+        name: DownloadSourceQueueLogMessageDto
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
+    OAS.WebApi.DTO.Portfolio.DownloadSourceVerboseDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        portfolio:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceDto'
+        schedules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceScheduleDto'
+          xml:
+            name: DownloadSourceScheduleDto
+            wrapped: true
+          type: array
+        logs:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceQueueLogDto'
+          xml:
+            name: DownloadSourceQueueLogDto
+            wrapped: true
+          type: array
+        defaults:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceDefaultDto'
+      xml:
+        name: DownloadSourceVerboseDto
+      type: object
     OAS.WebApi.DTO.Confirm.DownloadSourceDefaultDto:
       properties:
         representativeId:
@@ -1346,74 +1420,6 @@ components:
           type: boolean
       xml:
         name: DownloadSourceDefaultDto
-      type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
-      properties:
-        key:
-          readOnly: true
-          type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: KeyValuePair`2
-      type: object
-    OAS.WebApi.DTO.Confirm.SourceFileDto:
-      properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-      xml:
-        name: SourceFileDto
-      type: object
-    OAS.WebApi.DTO.Confirm.DownloadSourceQueueLogDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        downloadSourceId:
-          type: integer
-          format: int32
-        messages:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceQueueLogMessageDto'
-          xml:
-            name: DownloadSourceQueueLogMessageDto
-            wrapped: true
-          type: array
-        jobId:
-          type: string
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        auditedDate:
-          type: string
-          format: date-time
-        auditedByDisplay:
-          type: string
-      xml:
-        name: DownloadSourceQueueLogDto
-      type: object
-    OAS.WebApi.DTO.Confirm.DownloadSourceScheduleDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        downloadSourceId:
-          type: integer
-          format: int32
-        time:
-          type: string
-        skipHolidays:
-          type: boolean
-        scheduleConfiguration:
-          type: string
-      xml:
-        name: DownloadSourceScheduleDto
       type: object
     OAS.WebApi.DTO.Confirm.DownloadSourceDto:
       properties:
@@ -1647,66 +1653,60 @@ components:
       xml:
         name: DownloadSourceDto
       type: object
-    OAS.DataModel.SimpleEntity:
+    OAS.WebApi.DTO.Confirm.SourceFileDto:
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+      xml:
+        name: SourceFileDto
+      type: object
+    OAS.WebApi.DTO.Confirm.DownloadSourceQueueLogDto:
       properties:
         id:
           type: integer
           format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleEntity
-      type: object
-    OAS.WebApi.DTO.Portfolio.DownloadSourceVerboseDto:
-      properties:
-        id:
+        downloadSourceId:
           type: integer
           format: int32
-        portfolio:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceDto'
-        schedules:
+        messages:
           items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceScheduleDto'
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceQueueLogMessageDto'
           xml:
-            name: DownloadSourceScheduleDto
+            name: DownloadSourceQueueLogMessageDto
             wrapped: true
           type: array
-        logs:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceQueueLogDto'
-          xml:
-            name: DownloadSourceQueueLogDto
-            wrapped: true
-          type: array
-        defaults:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadSourceDefaultDto'
-      xml:
-        name: DownloadSourceVerboseDto
-      type: object
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
-      type: object
-    OAS.WebApi.DTO.Confirm.DownloadSourceQueueLogMessageDto:
-      properties:
-        id:
+        jobId:
           type: string
-        time:
+        startDate:
           type: string
           format: date-time
-        message:
+        endDate:
+          type: string
+          format: date-time
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
           type: string
       xml:
-        name: DownloadSourceQueueLogMessageDto
+        name: DownloadSourceQueueLogDto
+      type: object
+    OAS.WebApi.DTO.Confirm.DownloadSourceScheduleDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        downloadSourceId:
+          type: integer
+          format: int32
+        time:
+          type: string
+        skipHolidays:
+          type: boolean
+        scheduleConfiguration:
+          type: string
+      xml:
+        name: DownloadSourceScheduleDto
       type: object
     MultipartDataMediaFormatter.Infrastructure.HttpFile:
       properties:

@@ -598,6 +598,35 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAS.Integrations.Element.DTOs.Contact:
+      properties:
+        _id:
+          type: integer
+          format: int32
+        id:
+          type: string
+        firstName:
+          type: string
+        middleInitial:
+          type: object
+        lastOrEntityName:
+          type: string
+        dob:
+          type: object
+        email:
+          type: string
+        type:
+          type: string
+        data:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.Datum'
+          xml:
+            name: Datum
+            wrapped: true
+          type: array
+      xml:
+        name: Contact
+      type: object
     System.ValueTupleOfSystem.StringAndSystem.Boolean:
       properties:
         item1:
@@ -649,45 +678,17 @@ components:
       xml:
         name: WorkflowDataDto
       type: object
-    OAS.Integrations.Element.DTOs.Datum:
+    OAS.Integrations.Element.DTOs.UserFormData:
       properties:
-        category:
-          type: string
+        syncType:
+          type: integer
+          format: int32
         key:
           type: string
         value:
           type: object
       xml:
-        name: Datum
-      type: object
-    OAS.Integrations.Element.DTOs.Contact:
-      properties:
-        _id:
-          type: integer
-          format: int32
-        id:
-          type: string
-        firstName:
-          type: string
-        middleInitial:
-          type: object
-        lastOrEntityName:
-          type: string
-        dob:
-          type: object
-        email:
-          type: string
-        type:
-          type: string
-        data:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.Datum'
-          xml:
-            name: Datum
-            wrapped: true
-          type: array
-      xml:
-        name: Contact
+        name: UserFormData
       type: object
     OAS.Integrations.Element.DTOs.FormSessionUpload:
       properties:
@@ -740,17 +741,16 @@ components:
       xml:
         name: FormSessionUpload
       type: object
-    OAS.Integrations.Element.DTOs.UserFormData:
+    OAS.Integrations.Element.DTOs.Datum:
       properties:
-        syncType:
-          type: integer
-          format: int32
+        category:
+          type: string
         key:
           type: string
         value:
           type: object
       xml:
-        name: UserFormData
+        name: Datum
       type: object
   securitySchemes:
     Authorization:

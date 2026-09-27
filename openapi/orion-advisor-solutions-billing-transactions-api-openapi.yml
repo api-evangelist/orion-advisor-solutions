@@ -1679,31 +1679,6 @@ components:
       xml:
         name: BillTransactionDto
       type: object
-    OAS.WebApi.DTO.Trading.TransactionTypeDto:
-      properties:
-        financialType:
-          type: string
-          enum:
-          - None
-          - Contribution
-          - Distribution
-          - Exchange
-          - DivReinvest
-          - MgmntFees
-          - DivCash
-          - MiscFees
-          - Journal
-          - Merges
-        description:
-          type: string
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: TransactionTypeDto
-      type: object
     OAS.DataModel.Billing.AutomateCashflowTransactionType:
       properties:
         id:
@@ -1737,30 +1712,6 @@ components:
       xml:
         name: AutomateCashflowTransactionType
       type: object
-    OAS.WebApi.DTO.Billing.AutomateCashflowSettingDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        isEnabled:
-          type: boolean
-        minimumThreshold:
-          type: number
-          format: double
-        selectAll:
-          type: boolean
-        groupByDay:
-          type: boolean
-        transactionTypes:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Billing.AutomateCashflowTransactionType'
-          xml:
-            name: AutomateCashflowTransactionType
-            wrapped: true
-          type: array
-      xml:
-        name: AutomateCashflowSettingDto
-      type: object
     OAS.DataModel.Billing.AutomateCashflowSetting:
       properties:
         id:
@@ -1784,6 +1735,47 @@ components:
           type: array
       xml:
         name: AutomateCashflowSetting
+      type: object
+    OAS.DataModel.Trading.FeeExcludedAsset:
+      required:
+      - transactionId
+      - feeExcludedTransactionId
+      properties:
+        transactionId:
+          type: integer
+          format: int32
+        feeExcludedTransactionId:
+          type: integer
+          format: int32
+        transDate:
+          type: string
+          format: date-time
+      xml:
+        name: FeeExcludedAsset
+      type: object
+    OAS.WebApi.DTO.Billing.AutomateCashflowSettingDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        isEnabled:
+          type: boolean
+        minimumThreshold:
+          type: number
+          format: double
+        selectAll:
+          type: boolean
+        groupByDay:
+          type: boolean
+        transactionTypes:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Billing.AutomateCashflowTransactionType'
+          xml:
+            name: AutomateCashflowTransactionType
+            wrapped: true
+          type: array
+      xml:
+        name: AutomateCashflowSettingDto
       type: object
     OAS.DataModel.Trading.TransactionSleeveCashflow:
       required:
@@ -1811,22 +1803,30 @@ components:
       xml:
         name: TransactionSleeveCashflow
       type: object
-    OAS.DataModel.Trading.FeeExcludedAsset:
-      required:
-      - transactionId
-      - feeExcludedTransactionId
+    OAS.WebApi.DTO.Trading.TransactionTypeDto:
       properties:
-        transactionId:
-          type: integer
-          format: int32
-        feeExcludedTransactionId:
-          type: integer
-          format: int32
-        transDate:
+        financialType:
           type: string
-          format: date-time
+          enum:
+          - None
+          - Contribution
+          - Distribution
+          - Exchange
+          - DivReinvest
+          - MgmntFees
+          - DivCash
+          - MiscFees
+          - Journal
+          - Merges
+        description:
+          type: string
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
       xml:
-        name: FeeExcludedAsset
+        name: TransactionTypeDto
       type: object
   securitySchemes:
     Authorization:

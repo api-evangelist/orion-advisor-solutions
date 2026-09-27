@@ -595,61 +595,66 @@ paths:
         required: true
 components:
   schemas:
-    OAS.WebApi.DTO.Trading.ClientAndCustodiansDto:
+    OAS.WebApi.DTO.Trading.OutsideTradingAdditionalCustodians:
       properties:
-        clientId:
+        householdId:
           type: integer
           format: int32
         custodians:
           items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ClientCustodiansDto'
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingCustodiansDto'
           xml:
-            name: ClientCustodiansDto
+            name: OutsideTradingCustodiansDto
             wrapped: true
           type: array
       xml:
-        name: ClientAndCustodiansDto
+        name: OutsideTradingAdditionalCustodians
       type: object
-    OAS.WebApi.DTO.Trading.OutsideTradingOrdersDto:
+    OAS.WebApi.DTO.Trading.OutsideTradingFirmAndCustodiansDto:
       properties:
-        orderId:
+        firm:
+          type: string
+        custodians:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingCustodiansDto'
+          xml:
+            name: OutsideTradingCustodiansDto
+            wrapped: true
+          type: array
+      xml:
+        name: OutsideTradingFirmAndCustodiansDto
+      type: object
+    OAS.WebApi.DTO.Trading.OutsideTradingTradeFileDto:
+      properties:
+        householdId:
           type: integer
           format: int32
-        side:
+        custodianId:
+          type: integer
+          format: int32
+        tradeFile:
           type: string
-        ticker:
+          format: byte
+        filename:
           type: string
-        shares:
-          type: number
-          format: double
-        dollars:
-          type: number
-          format: double
-        estPositionValuePostTrade:
-          type: number
-          format: double
-        tradeIt:
-          type: boolean
-        warningMessage:
+        displayName:
           type: string
       xml:
-        name: OutsideTradingOrdersDto
+        name: OutsideTradingTradeFileDto
       type: object
-    OAS.DataModel.Trading.OutsideTradingModelAllocations:
+    OAS.WebApi.DTO.Trading.OutsideTradingCustodiansDto:
       properties:
-        ticker:
+        id:
+          type: integer
+          format: int32
+        custodianCode:
           type: string
-        targetPercent:
-          type: number
-          format: double
-        upperTolerance:
-          type: number
-          format: double
-        lowerTolerance:
-          type: number
-          format: double
+        name:
+          type: string
+        blockAcctNumber:
+          type: string
       xml:
-        name: OutsideTradingModelAllocations
+        name: OutsideTradingCustodiansDto
       type: object
     OAS.DataModel.Trading.OutsideTradingPositionsAndAllocations:
       properties:
@@ -691,6 +696,72 @@ components:
       xml:
         name: OutsideTradingPositionsAndAllocations
       type: object
+    OAS.WebApi.DTO.Trading.OutsideTradingOrdersDto:
+      properties:
+        orderId:
+          type: integer
+          format: int32
+        side:
+          type: string
+        ticker:
+          type: string
+        shares:
+          type: number
+          format: double
+        dollars:
+          type: number
+          format: double
+        estPositionValuePostTrade:
+          type: number
+          format: double
+        tradeIt:
+          type: boolean
+        warningMessage:
+          type: string
+      xml:
+        name: OutsideTradingOrdersDto
+      type: object
+    OAS.DataModel.Trading.OutsideTradingPositions:
+      properties:
+        ticker:
+          type: string
+        shares:
+          type: number
+          format: double
+      xml:
+        name: OutsideTradingPositions
+      type: object
+    OAS.DataModel.Trading.OutsideTradingModelAllocations:
+      properties:
+        ticker:
+          type: string
+        targetPercent:
+          type: number
+          format: double
+        upperTolerance:
+          type: number
+          format: double
+        lowerTolerance:
+          type: number
+          format: double
+      xml:
+        name: OutsideTradingModelAllocations
+      type: object
+    OAS.WebApi.DTO.Trading.ClientAndCustodiansDto:
+      properties:
+        clientId:
+          type: integer
+          format: int32
+        custodians:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ClientCustodiansDto'
+          xml:
+            name: ClientCustodiansDto
+            wrapped: true
+          type: array
+      xml:
+        name: ClientAndCustodiansDto
+      type: object
     OAS.WebApi.DTO.Trading.OutsideTradingUpdateBlockAccountNumberDto:
       properties:
         householdId:
@@ -704,58 +775,15 @@ components:
       xml:
         name: OutsideTradingUpdateBlockAccountNumberDto
       type: object
-    OAS.DataModel.Trading.OutsideTradingPositions:
+    OAS.WebApi.DTO.Trading.ClientCustodiansDto:
       properties:
-        ticker:
+        code:
           type: string
-        shares:
-          type: number
-          format: double
-      xml:
-        name: OutsideTradingPositions
-      type: object
-    OAS.WebApi.DTO.Trading.OutsideTradingFirmAndCustodiansDto:
-      properties:
-        firm:
-          type: string
-        custodians:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingCustodiansDto'
-          xml:
-            name: OutsideTradingCustodiansDto
-            wrapped: true
-          type: array
-      xml:
-        name: OutsideTradingFirmAndCustodiansDto
-      type: object
-    OAS.WebApi.DTO.Trading.OutsideTradingAdditionalCustodians:
-      properties:
-        householdId:
+        custodianId:
           type: integer
           format: int32
-        custodians:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OutsideTradingCustodiansDto'
-          xml:
-            name: OutsideTradingCustodiansDto
-            wrapped: true
-          type: array
       xml:
-        name: OutsideTradingAdditionalCustodians
-      type: object
-    OAS.WebApi.DTO.Trading.OutsideTradingCustodiansDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        custodianCode:
-          type: string
-        name:
-          type: string
-        blockAcctNumber:
-          type: string
-      xml:
-        name: OutsideTradingCustodiansDto
+        name: ClientCustodiansDto
       type: object
     OAS.WebApi.DTO.Trading.OutsideTradingRebalancedAccountDto:
       properties:
@@ -782,34 +810,6 @@ components:
           type: array
       xml:
         name: OutsideTradingRebalancedAccountDto
-      type: object
-    OAS.WebApi.DTO.Trading.OutsideTradingTradeFileDto:
-      properties:
-        householdId:
-          type: integer
-          format: int32
-        custodianId:
-          type: integer
-          format: int32
-        tradeFile:
-          type: string
-          format: byte
-        filename:
-          type: string
-        displayName:
-          type: string
-      xml:
-        name: OutsideTradingTradeFileDto
-      type: object
-    OAS.WebApi.DTO.Trading.ClientCustodiansDto:
-      properties:
-        code:
-          type: string
-        custodianId:
-          type: integer
-          format: int32
-      xml:
-        name: ClientCustodiansDto
       type: object
   securitySchemes:
     Authorization:

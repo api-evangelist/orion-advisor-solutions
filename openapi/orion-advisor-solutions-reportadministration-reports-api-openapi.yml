@@ -90,17 +90,42 @@ paths:
         required: true
 components:
   schemas:
-    OAS.WebApi.DTO.ReportAdministration.ReportOptionDateDto:
+    OAS.WebApi.DTO.ReportAdministration.ReportSectionDto:
       properties:
-        value:
-          type: string
-        sign:
-          type: string
-        modifier:
+        id:
           type: integer
           format: int32
+        displayName:
+          type: string
+        description:
+          type: string
+        width:
+          type: string
+          enum:
+          - PortraitFull
+          - LandscapeFull
+          - LandscapeHalf
+        templateType:
+          type: string
+          enum:
+          - All
+          - Standard
+          - FooterImage
+          - Disclaimer
+          - WiderLogo
+          - HeaderSlim
+        parameters:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.ReportAdministration.ReportSectionParameterDto'
+          xml:
+            name: ReportSectionParameterDto
+            wrapped: true
+          type: array
+        createdDate:
+          type: string
+          format: date-time
       xml:
-        name: ReportOptionDateDto
+        name: ReportSectionDto
       type: object
     OAS.WebApi.DTO.ReportAdministration.ReportSectionParameterDto:
       properties:
@@ -461,42 +486,17 @@ components:
       xml:
         name: ReportListFullDto
       type: object
-    OAS.WebApi.DTO.ReportAdministration.ReportSectionDto:
+    OAS.WebApi.DTO.ReportAdministration.ReportOptionDateDto:
       properties:
-        id:
+        value:
+          type: string
+        sign:
+          type: string
+        modifier:
           type: integer
           format: int32
-        displayName:
-          type: string
-        description:
-          type: string
-        width:
-          type: string
-          enum:
-          - PortraitFull
-          - LandscapeFull
-          - LandscapeHalf
-        templateType:
-          type: string
-          enum:
-          - All
-          - Standard
-          - FooterImage
-          - Disclaimer
-          - WiderLogo
-          - HeaderSlim
-        parameters:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.ReportAdministration.ReportSectionParameterDto'
-          xml:
-            name: ReportSectionParameterDto
-            wrapped: true
-          type: array
-        createdDate:
-          type: string
-          format: date-time
       xml:
-        name: ReportSectionDto
+        name: ReportOptionDateDto
       type: object
   securitySchemes:
     Authorization:

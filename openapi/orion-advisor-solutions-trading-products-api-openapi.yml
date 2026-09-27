@@ -470,6 +470,48 @@ paths:
       - Authorization: []
 components:
   schemas:
+    OAS.DataModel.Portfolio.ShareClass:
+      required:
+      - id
+      - class
+      properties:
+        id:
+          type: integer
+          format: int32
+        class:
+          type: string
+          maxLength: 10
+          minLength: 0
+        description:
+          type: string
+          maxLength: 255
+          minLength: 0
+        oldFundId:
+          type: integer
+          format: int32
+        loadType:
+          type: string
+          maxLength: 1
+          minLength: 0
+        isDefault:
+          type: boolean
+      xml:
+        name: ShareClass
+      type: object
+    OAS.WebApi.DTO.Trading.FundFamilyOverrideDTO:
+      properties:
+        fundFamiliesOverriden:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FundFamilyOverride'
+          xml:
+            name: FundFamilyOverride
+            wrapped: true
+          type: array
+        isAlternativeSymColumnShown:
+          type: boolean
+      xml:
+        name: FundFamilyOverrideDTO
+      type: object
     OAS.WebApi.DTO.Trading.RealtimePriceDto:
       properties:
         date:
@@ -581,48 +623,6 @@ components:
           type: string
       xml:
         name: RealtimePriceDto
-      type: object
-    OAS.WebApi.DTO.Trading.FundFamilyOverrideDTO:
-      properties:
-        fundFamiliesOverriden:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FundFamilyOverride'
-          xml:
-            name: FundFamilyOverride
-            wrapped: true
-          type: array
-        isAlternativeSymColumnShown:
-          type: boolean
-      xml:
-        name: FundFamilyOverrideDTO
-      type: object
-    OAS.DataModel.Portfolio.ShareClass:
-      required:
-      - id
-      - class
-      properties:
-        id:
-          type: integer
-          format: int32
-        class:
-          type: string
-          maxLength: 10
-          minLength: 0
-        description:
-          type: string
-          maxLength: 255
-          minLength: 0
-        oldFundId:
-          type: integer
-          format: int32
-        loadType:
-          type: string
-          maxLength: 1
-          minLength: 0
-        isDefault:
-          type: boolean
-      xml:
-        name: ShareClass
       type: object
     OAS.WebApi.DTO.Trading.FundFamilyOverride:
       properties:

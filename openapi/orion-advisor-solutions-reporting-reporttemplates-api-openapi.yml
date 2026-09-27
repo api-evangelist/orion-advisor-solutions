@@ -663,106 +663,43 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.DataModel.Reporting.Interfaces.IMakeDateRange:
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeProjectedIncomeOption:
       properties:
         type:
           readOnly: true
           type: string
       xml:
-        name: IMakeDateRange
+        name: IMakeProjectedIncomeOption
       type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportSchemaDto:
+    OAS.DataModel.Reporting.ReportOptionCategory:
+      required:
+      - category
+      - options
       properties:
-        contextChange:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.ContextChange'
-        firstHeader:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
-        header:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
-        body:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
-        footer:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
-        overlay:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
+        category:
+          type: string
+        options:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
       xml:
-        name: ReportSchemaDto
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeActivityOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeActivityOption
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeBillingOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeBillingOption
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeTradingOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeTradingOption
-      type: object
-    OAS.DataProcess.Reporting.ReportTemplates.ReportThumbnailFileDto:
-      properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-      xml:
-        name: ReportThumbnailFileDto
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IReturnStyle:
-      properties:
-        frequency:
-          readOnly: true
-          type: string
-          enum:
-          - Summary
-          - Annually
-          - Quarterly
-          - Monthly
-          - Weekly
-          - Daily
-          - Automatic
-        basedOn:
-          readOnly: true
-          type: string
-          enum:
-          - Calendar
-          - RollingForward
-          - RollingBackward
-        breakBehavior:
-          readOnly: true
-          type: string
-          enum:
-          - AllowPartialPeriods
-          - PartialPeriodsWithBreakPoints
-          - FullPeriodsOnly
-        cumulative:
-          readOnly: true
-          type: boolean
-        cumulativeBasedOn:
-          readOnly: true
-          type: string
-          enum:
-          - ForwardFromStartDate
-          - BackwardFromEndDate
-        context:
-          readOnly: true
-          type: string
-          enum:
-          - Self
-          - Parent
-      xml:
-        name: IReturnStyle
+        name: ReportOptionCategory
       type: object
     OAS.WebApi.DTO.Reporting.Envision.ReportRoleAccessRuleDto:
       properties:
@@ -780,101 +717,13 @@ components:
       xml:
         name: ReportRoleAccessRuleDto
       type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeComparisonOption:
+    OAS.DataModel.Reporting.Interfaces.IMakeStatisticalOption:
       properties:
         type:
           readOnly: true
           type: string
       xml:
-        name: IMakeComparisonOption
-      type: object
-    OAS.DataProcess.Reporting.ReportTemplates.ReportTemplatePortfolioDto:
-      properties:
-        category:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        isStandardTemplate:
-          type: boolean
-        hasThumbnail:
-          type: boolean
-        canEdit:
-          type: boolean
-        canDelete:
-          type: boolean
-        auditedBy:
-          type: string
-        auditedDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-      xml:
-        name: ReportTemplatePortfolioDto
-      type: object
-    OAS.DataModel.Reporting.ReportOption:
-      required:
-      - id
-      - $type
-      properties:
-        id:
-          type: string
-        $type:
-          readOnly: true
-          type: string
-        optionGuid:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        optionId:
-          type: integer
-          format: int32
-        isDisabled:
-          type: boolean
-        isGlobal:
-          type: boolean
-        isIgnored:
-          type: boolean
-        name:
-          type: string
-        useInception:
-          type: boolean
-        prompt:
-          type: string
-          enum:
-          - Never
-          - Always
-      xml:
-        name: ReportOption
-      type: object
-    OAS.DataModel.Reporting.ControlBase:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        width:
-          type: string
-      xml:
-        name: ControlBase
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeCostBasisOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeCostBasisOption
+        name: IMakeStatisticalOption
       type: object
     OAS.DataProcess.Reporting.ReportTemplates.ReportTemplateVerboseDto:
       properties:
@@ -940,13 +789,82 @@ components:
       xml:
         name: ReportTemplateVerboseDto
       type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeMaturityPeriodOption:
+    OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseGroupAccessRuleDto:
+      properties:
+        databaseGroupId:
+          type: integer
+          format: int32
+        loginEntityId:
+          type: string
+          enum:
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - RIA
+          - Administrator
+          - SubAdvisor
+          - ThirdPartyAdministrator
+          - Custodian
+          - PlanSponsor
+          - ThirdParty
+          - ServiceAccount
+          - Participant
+          - RepAccountManager
+          - Payee
+          - RIATable
+          - Cotenant
+        name:
+          type: string
+        canRun:
+          type: boolean
+        canEdit:
+          type: boolean
+      xml:
+        name: ReportDatabaseGroupAccessRuleDto
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeActivityOption:
       properties:
         type:
           readOnly: true
           type: string
       xml:
-        name: IMakeMaturityPeriodOption
+        name: IMakeActivityOption
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportLoginAccessRuleDto:
+      properties:
+        loginEntityId:
+          type: string
+          enum:
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - RIA
+          - Administrator
+          - SubAdvisor
+          - ThirdPartyAdministrator
+          - Custodian
+          - PlanSponsor
+          - ThirdParty
+          - ServiceAccount
+          - Participant
+          - RepAccountManager
+          - Payee
+          - RIATable
+          - Cotenant
+        canRun:
+          type: boolean
+      xml:
+        name: ReportLoginAccessRuleDto
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeAttributionOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeAttributionOption
       type: object
     OAS.DataModel.Reporting.Calculation.IMakeCalculationOption:
       properties:
@@ -956,22 +874,115 @@ components:
       xml:
         name: IMakeCalculationOption
       type: object
-    OAS.DataModel.Reporting.ReportOptionCategory:
-      required:
-      - category
-      - options
+    OAS.DataProcess.Reporting.ReportTemplates.ReportTemplatePortfolioDto:
       properties:
         category:
           type: string
-        options:
+        name:
+          type: string
+        description:
+          type: string
+        isStandardTemplate:
+          type: boolean
+        hasThumbnail:
+          type: boolean
+        canEdit:
+          type: boolean
+        canDelete:
+          type: boolean
+        auditedBy:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+      xml:
+        name: ReportTemplatePortfolioDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportSchemaDto:
+      properties:
+        contextChange:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.ContextChange'
+        firstHeader:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
+        header:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
+        body:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
+        footer:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
+        overlay:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
+      xml:
+        name: ReportSchemaDto
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeTaxOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeTaxOption
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
           items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
           xml:
-            name: ReportOption
+            name: KeyValuePair`2
             wrapped: true
           type: array
       xml:
-        name: ReportOptionCategory
+        name: StreamContent
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeTransactionOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeTransactionOption
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportUserAccessRuleDto:
+      properties:
+        userId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        canRun:
+          type: boolean
+        canEdit:
+          type: boolean
+        canDelete:
+          type: boolean
+      xml:
+        name: ReportUserAccessRuleDto
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeBillingOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeBillingOption
       type: object
     OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseAccessRuleDto:
       properties:
@@ -1015,33 +1026,6 @@ components:
       xml:
         name: IMakePerformanceOption
       type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeAttributionOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeAttributionOption
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeTaxOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeTaxOption
-      type: object
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
-      type: object
     OAS.DataModel.Reporting.Interfaces.IMakeIncomeOption:
       properties:
         type:
@@ -1050,77 +1034,79 @@ components:
       xml:
         name: IMakeIncomeOption
       type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportUserAccessRuleDto:
+    OAS.DataModel.Reporting.ReportOption:
+      required:
+      - id
+      - $type
       properties:
-        userId:
+        id:
+          type: string
+        $type:
+          readOnly: true
+          type: string
+        optionGuid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        optionId:
           type: integer
           format: int32
+        isDisabled:
+          type: boolean
+        isGlobal:
+          type: boolean
+        isIgnored:
+          type: boolean
         name:
           type: string
-        canRun:
+        useInception:
           type: boolean
-        canEdit:
-          type: boolean
-        canDelete:
-          type: boolean
-      xml:
-        name: ReportUserAccessRuleDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportLoginAccessRuleDto:
-      properties:
-        loginEntityId:
+        prompt:
           type: string
           enum:
-          - BrokerDealer
-          - Wholesaler
-          - Representative
-          - Client
-          - RIA
-          - Administrator
-          - SubAdvisor
-          - ThirdPartyAdministrator
-          - Custodian
-          - PlanSponsor
-          - ThirdParty
-          - ServiceAccount
-          - Participant
-          - RepAccountManager
-          - Payee
-          - RIATable
-          - Cotenant
-        canRun:
-          type: boolean
+          - Never
+          - Always
       xml:
-        name: ReportLoginAccessRuleDto
+        name: ReportOption
       type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeTransactionOption:
+    OAS.DataProcess.Reporting.ReportTemplates.ReportThumbnailFileDto:
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+      xml:
+        name: ReportThumbnailFileDto
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeMaturityPeriodOption:
       properties:
         type:
           readOnly: true
           type: string
       xml:
-        name: IMakeTransactionOption
+        name: IMakeMaturityPeriodOption
       type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+    OAS.DataModel.Reporting.ControlBase:
+      required:
+      - $type
       properties:
-        key:
+        $type:
           readOnly: true
           type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        width:
+          type: string
       xml:
-        name: KeyValuePair`2
+        name: ControlBase
       type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeProjectedIncomeOption:
+    OAS.DataModel.Reporting.Interfaces.IMakeComparisonOption:
       properties:
         type:
           readOnly: true
           type: string
       xml:
-        name: IMakeProjectedIncomeOption
+        name: IMakeComparisonOption
       type: object
     OAS.DataModel.Reporting.Engine.ContextChange:
       properties:
@@ -1253,60 +1239,74 @@ components:
       xml:
         name: ContextChange
       type: object
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeStatisticalOption:
+    OAS.DataModel.Reporting.Interfaces.IMakeTradingOption:
       properties:
         type:
           readOnly: true
           type: string
       xml:
-        name: IMakeStatisticalOption
+        name: IMakeTradingOption
       type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseGroupAccessRuleDto:
+    OAS.DataModel.Reporting.Interfaces.IReturnStyle:
       properties:
-        databaseGroupId:
-          type: integer
-          format: int32
-        loginEntityId:
+        frequency:
+          readOnly: true
           type: string
           enum:
-          - BrokerDealer
-          - Wholesaler
-          - Representative
-          - Client
-          - RIA
-          - Administrator
-          - SubAdvisor
-          - ThirdPartyAdministrator
-          - Custodian
-          - PlanSponsor
-          - ThirdParty
-          - ServiceAccount
-          - Participant
-          - RepAccountManager
-          - Payee
-          - RIATable
-          - Cotenant
-        name:
+          - Summary
+          - Annually
+          - Quarterly
+          - Monthly
+          - Weekly
+          - Daily
+          - Automatic
+        basedOn:
+          readOnly: true
           type: string
-        canRun:
+          enum:
+          - Calendar
+          - RollingForward
+          - RollingBackward
+        breakBehavior:
+          readOnly: true
+          type: string
+          enum:
+          - AllowPartialPeriods
+          - PartialPeriodsWithBreakPoints
+          - FullPeriodsOnly
+        cumulative:
+          readOnly: true
           type: boolean
-        canEdit:
-          type: boolean
+        cumulativeBasedOn:
+          readOnly: true
+          type: string
+          enum:
+          - ForwardFromStartDate
+          - BackwardFromEndDate
+        context:
+          readOnly: true
+          type: string
+          enum:
+          - Self
+          - Parent
       xml:
-        name: ReportDatabaseGroupAccessRuleDto
+        name: IReturnStyle
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeDateRange:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeDateRange
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeCostBasisOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeCostBasisOption
       type: object
   securitySchemes:
     Authorization:

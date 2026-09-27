@@ -1295,6 +1295,157 @@ paths:
         required: true
 components:
   schemas:
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    OAS.WebApi.DTO.Billing.BillPaymentDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        billPayMethod:
+          type: integer
+          format: int32
+        paymentNumber:
+          type: string
+        batchNumber:
+          type: string
+        checkAmt:
+          type: number
+          format: double
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        postedDate:
+          type: string
+          format: date-time
+        transOrigin:
+          type: string
+        balance:
+          type: number
+          format: double
+        oldReceivableID:
+          type: integer
+          format: int32
+        timestamp:
+          type: string
+          format: byte
+      xml:
+        name: BillPaymentDto
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    OAS.WebApi.DTO.Billing.PostPaymentsByFileDto:
+      properties:
+        missingSearchValues:
+          type: string
+        postPayments:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostPaymentsDto'
+          xml:
+            name: PostPaymentsDto
+            wrapped: true
+          type: array
+      xml:
+        name: PostPaymentsByFileDto
+      type: object
+    OAS.WebApi.DTO.Billing.BillingFileUploadDto:
+      properties:
+        columnName:
+          type: string
+          enum:
+          - HouseholdId
+          - AccountId
+          - AccountNumber
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+          description: the imported file
+      xml:
+        name: BillingFileUploadDto
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+    OAS.WebApi.DTO.Billing.PostPaymentBatchDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        batchNumber:
+          type: string
+        amount:
+          type: number
+          format: double
+        processStatus:
+          type: string
+          enum:
+          - Errored
+          - Queued
+          - Processing
+          - Complete
+        completedCount:
+          type: integer
+          format: int32
+        recordCount:
+          type: integer
+          format: int32
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        batchType:
+          type: string
+          enum:
+          - PostPayments
+          - WriteOffs
+        processStatusNote:
+          type: string
+      xml:
+        name: PostPaymentBatchDto
+      type: object
     OAS.WebApi.DTO.Billing.PostPaymentsDto:
       properties:
         statusIcon:
@@ -1368,157 +1519,6 @@ components:
           format: int32
       xml:
         name: PostPaymentsDto
-      type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
-      properties:
-        key:
-          readOnly: true
-          type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: KeyValuePair`2
-      type: object
-    OAS.WebApi.DTO.Billing.BillingFileUploadDto:
-      properties:
-        columnName:
-          type: string
-          enum:
-          - HouseholdId
-          - AccountId
-          - AccountNumber
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-          description: the imported file
-      xml:
-        name: BillingFileUploadDto
-      type: object
-    OAS.WebApi.DTO.Billing.BillPaymentDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        billPayMethod:
-          type: integer
-          format: int32
-        paymentNumber:
-          type: string
-        batchNumber:
-          type: string
-        checkAmt:
-          type: number
-          format: double
-        createdDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        postedDate:
-          type: string
-          format: date-time
-        transOrigin:
-          type: string
-        balance:
-          type: number
-          format: double
-        oldReceivableID:
-          type: integer
-          format: int32
-        timestamp:
-          type: string
-          format: byte
-      xml:
-        name: BillPaymentDto
-      type: object
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
-      type: object
-    OAS.WebApi.DTO.Billing.PostPaymentBatchDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        batchNumber:
-          type: string
-        amount:
-          type: number
-          format: double
-        processStatus:
-          type: string
-          enum:
-          - Errored
-          - Queued
-          - Processing
-          - Complete
-        completedCount:
-          type: integer
-          format: int32
-        recordCount:
-          type: integer
-          format: int32
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        batchType:
-          type: string
-          enum:
-          - PostPayments
-          - WriteOffs
-        processStatusNote:
-          type: string
-      xml:
-        name: PostPaymentBatchDto
-      type: object
-    OAS.WebApi.DTO.Billing.PostPaymentsByFileDto:
-      properties:
-        missingSearchValues:
-          type: string
-        postPayments:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.PostPaymentsDto'
-          xml:
-            name: PostPaymentsDto
-            wrapped: true
-          type: array
-      xml:
-        name: PostPaymentsByFileDto
-      type: object
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
       type: object
   securitySchemes:
     Authorization:

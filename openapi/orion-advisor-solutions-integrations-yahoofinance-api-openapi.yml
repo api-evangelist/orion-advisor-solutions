@@ -96,6 +96,18 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAT.Integrations.YahooFinance.Straddles:
+      properties:
+        strike:
+          type: number
+          format: double
+        call:
+          $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Call'
+        put:
+          $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Put'
+      xml:
+        name: Straddles
+      type: object
     OAT.Integrations.YahooFinance.Options:
       properties:
         expirationDate:
@@ -127,17 +139,108 @@ components:
       xml:
         name: Options
       type: object
-    OAT.Integrations.YahooFinance.Straddles:
+    OAT.Integrations.YahooFinance.Put:
       properties:
+        contractSymbol:
+          type: string
         strike:
           type: number
           format: double
-        call:
-          $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Call'
-        put:
-          $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Put'
+        currency:
+          type: string
+        lastPrice:
+          type: number
+          format: double
+        change:
+          type: number
+          format: double
+        percentChange:
+          type: number
+          format: double
+        volume:
+          type: integer
+          format: int32
+        openInterest:
+          type: number
+          format: double
+        bid:
+          type: number
+          format: double
+        ask:
+          type: number
+          format: double
+        contractSize:
+          type: string
+        expiration:
+          type: integer
+          format: int64
+        lastTradeDate:
+          type: integer
+          format: int64
+        impliedVolatility:
+          type: number
+          format: double
+        inTheMoney:
+          type: boolean
       xml:
-        name: Straddles
+        name: Put
+      type: object
+    OAT.Integrations.YahooFinance.Call:
+      properties:
+        contractSymbol:
+          type: string
+        strike:
+          type: number
+          format: double
+        currency:
+          type: string
+        lastPrice:
+          type: number
+          format: double
+        change:
+          type: number
+          format: double
+        percentChange:
+          type: number
+          format: double
+        volume:
+          type: integer
+          format: int32
+        openInterest:
+          type: number
+          format: double
+        bid:
+          type: number
+          format: double
+        ask:
+          type: number
+          format: double
+        contractSize:
+          type: string
+        expiration:
+          type: integer
+          format: int64
+        lastTradeDate:
+          type: integer
+          format: int64
+        impliedVolatility:
+          type: number
+          format: double
+        inTheMoney:
+          type: boolean
+      xml:
+        name: Call
+      type: object
+    OAS.WebApi.Domains.Integrations.ExpirationDatesDto:
+      properties:
+        value:
+          type: integer
+          format: int64
+        displayValue:
+          type: string
+          format: date-time
+      xml:
+        name: ExpirationDatesDto
       type: object
     OAS.WebApi.Domains.Integrations.CoveredCallOptionsDto:
       properties:
@@ -345,109 +448,6 @@ components:
           format: int64
       xml:
         name: Quote
-      type: object
-    OAS.WebApi.Domains.Integrations.ExpirationDatesDto:
-      properties:
-        value:
-          type: integer
-          format: int64
-        displayValue:
-          type: string
-          format: date-time
-      xml:
-        name: ExpirationDatesDto
-      type: object
-    OAT.Integrations.YahooFinance.Put:
-      properties:
-        contractSymbol:
-          type: string
-        strike:
-          type: number
-          format: double
-        currency:
-          type: string
-        lastPrice:
-          type: number
-          format: double
-        change:
-          type: number
-          format: double
-        percentChange:
-          type: number
-          format: double
-        volume:
-          type: integer
-          format: int32
-        openInterest:
-          type: number
-          format: double
-        bid:
-          type: number
-          format: double
-        ask:
-          type: number
-          format: double
-        contractSize:
-          type: string
-        expiration:
-          type: integer
-          format: int64
-        lastTradeDate:
-          type: integer
-          format: int64
-        impliedVolatility:
-          type: number
-          format: double
-        inTheMoney:
-          type: boolean
-      xml:
-        name: Put
-      type: object
-    OAT.Integrations.YahooFinance.Call:
-      properties:
-        contractSymbol:
-          type: string
-        strike:
-          type: number
-          format: double
-        currency:
-          type: string
-        lastPrice:
-          type: number
-          format: double
-        change:
-          type: number
-          format: double
-        percentChange:
-          type: number
-          format: double
-        volume:
-          type: integer
-          format: int32
-        openInterest:
-          type: number
-          format: double
-        bid:
-          type: number
-          format: double
-        ask:
-          type: number
-          format: double
-        contractSize:
-          type: string
-        expiration:
-          type: integer
-          format: int64
-        lastTradeDate:
-          type: integer
-          format: int64
-        impliedVolatility:
-          type: number
-          format: double
-        inTheMoney:
-          type: boolean
-      xml:
-        name: Call
       type: object
   securitySchemes:
     Authorization:

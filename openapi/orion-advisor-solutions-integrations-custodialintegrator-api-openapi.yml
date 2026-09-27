@@ -3707,22 +3707,34 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.DTO.Integrations.CustodialIntegrator.ByAllTreatmentTypeDto:
+    OAS.WebApi.DTO.Integrations.CustodialIntegrator.ByAllGlobalSymbolDto:
       properties:
         id:
           type: integer
           format: int32
-        treatmentName:
+        securityId:
+          type: integer
+          format: int32
+        ticker:
           type: string
-        treatmentDescription:
+        fiId:
+          type: integer
+          format: int64
+        webName:
           type: string
+        downloadSymbol:
+          type: string
+        isTranslationBlocked:
+          type: boolean
         auditedDate:
           type: string
           format: date-time
         auditedByDisplay:
           type: string
+        institutionName:
+          type: string
       xml:
-        name: ByAllTreatmentTypeDto
+        name: ByAllGlobalSymbolDto
       type: object
     OAS.WebApi.DTO.Portfolio.CustodialIntegrator.BackdateByAllAccountDto:
       properties:
@@ -3738,151 +3750,6 @@ components:
           format: date-time
       xml:
         name: BackdateByAllAccountDto
-      type: object
-    OAS.WebApi.DTO.Integrations.CustodialIntegrator.PlaidNoteMappingDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        financialInstitutionId:
-          type: integer
-          format: int32
-        institutionName:
-          type: string
-        note:
-          type: string
-        fileTransCode:
-          type: string
-        replacementFileTransCode:
-          type: string
-        priority:
-          type: integer
-          format: int32
-        rationale:
-          type: string
-        auditedDate:
-          type: string
-          format: date-time
-        auditedByDisplay:
-          type: string
-      xml:
-        name: PlaidNoteMappingDto
-      type: object
-    OAS.WebApi.DTO.Integrations.CustodialIntegrator.AkoyaLogDto:
-      properties:
-        logId:
-          type: integer
-          format: int32
-        id:
-          type: integer
-          format: int32
-        clientId:
-          type: integer
-          format: int32
-        akoyaAccountId:
-          type: string
-        accountNumber:
-          type: string
-        accountType:
-          type: string
-        displayName:
-          type: string
-        institutionName:
-          type: string
-        logMessage:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        correlationId:
-          type: string
-        credentialId:
-          type: string
-        isNotInSource:
-          type: boolean
-        secondaryAcctCode:
-          type: string
-        auditedDate:
-          type: string
-          format: date-time
-        auditedByDisplay:
-          type: string
-      xml:
-        name: AkoyaLogDto
-      type: object
-    OAS.DataModel.Integration.CustodialIntegrator.AkoyaInstitution:
-      properties:
-        id:
-          type: integer
-          format: int32
-        fiName:
-          type: string
-        fiId:
-          type: string
-        isExcluded:
-          type: boolean
-        alClientList:
-          type: string
-        logo:
-          type: string
-          format: byte
-        logoType:
-          type: string
-        institutionOptionJSON:
-          type: string
-      xml:
-        name: AkoyaInstitution
-      type: object
-    OAS.WebApi.DTO.Integrations.CustodialIntegrator.ByAllOffsetSymbolDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        fI_ID:
-          type: integer
-          format: int64
-        symbol:
-          type: string
-        auditedDate:
-          type: string
-          format: date-time
-        auditedByDisplay:
-          type: string
-      xml:
-        name: ByAllOffsetSymbolDto
-      type: object
-    OAS.WebApi.DTO.Integrations.CustodialIntegrator.ByAllLocalSymbolDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        holdingId:
-          type: integer
-          format: int32
-        securityId:
-          type: integer
-          format: int32
-        ticker:
-          type: string
-        fiId:
-          type: integer
-          format: int64
-        webName:
-          type: string
-        downloadSymbol:
-          type: string
-        unitBalanceOverride:
-          type: number
-          format: double
-        auditedDate:
-          type: string
-          format: date-time
-        auditedByDisplay:
-          type: string
-        institutionName:
-          type: string
-      xml:
-        name: ByAllLocalSymbolDto
       type: object
     OAS.WebApi.DTO.Integrations.CustodialIntegrator.ByAllAccountDto:
       properties:
@@ -3938,6 +3805,47 @@ components:
       xml:
         name: ByAllAccountDto
       type: object
+    OAS.WebApi.DTO.Integrations.CustodialIntegrator.ByAllOffsetSymbolDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        fI_ID:
+          type: integer
+          format: int64
+        symbol:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+      xml:
+        name: ByAllOffsetSymbolDto
+      type: object
+    OAS.WebApi.DTO.Integrations.CustodialIntegrator.ByAllTreatmentDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        fiId:
+          type: integer
+          format: int64
+        byAllTreatmentTypeId:
+          type: integer
+          format: int32
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+        treatmentTypeName:
+          type: string
+        institutionName:
+          type: string
+      xml:
+        name: ByAllTreatmentDto
+      type: object
     OAS.WebApi.DTO.Integrations.CustodialIntegrator.AkoyaGlobalSymbolDto:
       properties:
         id:
@@ -3958,7 +3866,7 @@ components:
       xml:
         name: AkoyaGlobalSymbolDto
       type: object
-    OAS.WebApi.DTO.Integrations.CustodialIntegrator.ByAllGlobalSymbolDto:
+    OAS.WebApi.DTO.Integrations.CustodialIntegrator.PlaidSecurityMappingDto:
       properties:
         id:
           type: integer
@@ -3968,15 +3876,151 @@ components:
           format: int32
         ticker:
           type: string
-        fiId:
+        financialInstitutionId:
           type: integer
-          format: int64
+          format: int32
+        institutionName:
+          type: string
         webName:
           type: string
         downloadSymbol:
           type: string
-        isTranslationBlocked:
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+      xml:
+        name: PlaidSecurityMappingDto
+      type: object
+    OAS.WebApi.DTO.Integrations.CustodialIntegrator.PlaidNoteMappingDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        financialInstitutionId:
+          type: integer
+          format: int32
+        institutionName:
+          type: string
+        note:
+          type: string
+        fileTransCode:
+          type: string
+        replacementFileTransCode:
+          type: string
+        priority:
+          type: integer
+          format: int32
+        rationale:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+      xml:
+        name: PlaidNoteMappingDto
+      type: object
+    OAS.DataModel.Integration.CustodialIntegrator.AkoyaInstitution:
+      properties:
+        id:
+          type: integer
+          format: int32
+        fiName:
+          type: string
+        fiId:
+          type: string
+        isExcluded:
           type: boolean
+        alClientList:
+          type: string
+        logo:
+          type: string
+          format: byte
+        logoType:
+          type: string
+        institutionOptionJSON:
+          type: string
+      xml:
+        name: AkoyaInstitution
+      type: object
+    OAS.WebApi.DTO.Integrations.CustodialIntegrator.PlaidAccountDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        plaidAccountId:
+          type: string
+        secondaryAcctCode:
+          type: string
+        institutionId:
+          type: string
+        institutionName:
+          type: string
+        isDisabled:
+          type: boolean
+        accountName:
+          type: string
+        accountType:
+          type: string
+        isNotInSource:
+          type: boolean
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+      xml:
+        name: PlaidAccountDto
+      type: object
+    OAS.WebApi.DTO.Integrations.CustodialIntegrator.ByAllTreatmentTypeDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        treatmentName:
+          type: string
+        treatmentDescription:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+      xml:
+        name: ByAllTreatmentTypeDto
+      type: object
+    OAS.DataModel.SimpleStringKeyEntity:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      xml:
+        name: SimpleStringKeyEntity
+      type: object
+    OAS.WebApi.DTO.Integrations.CustodialIntegrator.ByAllNoteMappingDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        fiId:
+          type: integer
+          format: int64
+        fileTransCode:
+          type: string
+        note:
+          type: string
+        replacementFileTransCode:
+          type: string
+        rational:
+          type: string
+        priority:
+          type: integer
+          format: int32
         auditedDate:
           type: string
           format: date-time
@@ -3985,7 +4029,81 @@ components:
         institutionName:
           type: string
       xml:
-        name: ByAllGlobalSymbolDto
+        name: ByAllNoteMappingDto
+      type: object
+    OAS.WebApi.DTO.Integrations.CustodialIntegrator.AkoyaAccountDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        akoyaAccountId:
+          type: string
+        accountType:
+          type: string
+        displayName:
+          type: string
+        secondaryAcctCode:
+          type: string
+        accountNumber:
+          type: string
+        isNotInSource:
+          type: boolean
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+        institutionName:
+          type: string
+        credentialId:
+          type: string
+      xml:
+        name: AkoyaAccountDto
+      type: object
+    OAS.WebApi.DTO.Integrations.CustodialIntegrator.AkoyaLogDto:
+      properties:
+        logId:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        akoyaAccountId:
+          type: string
+        accountNumber:
+          type: string
+        accountType:
+          type: string
+        displayName:
+          type: string
+        institutionName:
+          type: string
+        logMessage:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        correlationId:
+          type: string
+        credentialId:
+          type: string
+        isNotInSource:
+          type: boolean
+        secondaryAcctCode:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+      xml:
+        name: AkoyaLogDto
       type: object
     OAS.WebApi.DTO.Integrations.CustodialIntegrator.PlaidUnitBalanceOverrideDto:
       properties:
@@ -4021,40 +4139,12 @@ components:
       xml:
         name: PlaidUnitBalanceOverrideDto
       type: object
-    OAS.WebApi.DTO.Integrations.CustodialIntegrator.PlaidAccountDto:
+    OAS.WebApi.DTO.Integrations.CustodialIntegrator.ByAllLocalSymbolDto:
       properties:
         id:
           type: integer
           format: int32
-        accountNumber:
-          type: string
-        plaidAccountId:
-          type: string
-        secondaryAcctCode:
-          type: string
-        institutionId:
-          type: string
-        institutionName:
-          type: string
-        isDisabled:
-          type: boolean
-        accountName:
-          type: string
-        accountType:
-          type: string
-        isNotInSource:
-          type: boolean
-        auditedDate:
-          type: string
-          format: date-time
-        auditedByDisplay:
-          type: string
-      xml:
-        name: PlaidAccountDto
-      type: object
-    OAS.WebApi.DTO.Integrations.CustodialIntegrator.PlaidSecurityMappingDto:
-      properties:
-        id:
+        holdingId:
           type: integer
           format: int32
         securityId:
@@ -4062,65 +4152,16 @@ components:
           format: int32
         ticker:
           type: string
-        financialInstitutionId:
+        fiId:
           type: integer
-          format: int32
-        institutionName:
-          type: string
+          format: int64
         webName:
           type: string
         downloadSymbol:
           type: string
-        auditedDate:
-          type: string
-          format: date-time
-        auditedByDisplay:
-          type: string
-      xml:
-        name: PlaidSecurityMappingDto
-      type: object
-    OAS.WebApi.DTO.Integrations.CustodialIntegrator.ByAllTreatmentDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        fiId:
-          type: integer
-          format: int64
-        byAllTreatmentTypeId:
-          type: integer
-          format: int32
-        auditedDate:
-          type: string
-          format: date-time
-        auditedByDisplay:
-          type: string
-        treatmentTypeName:
-          type: string
-        institutionName:
-          type: string
-      xml:
-        name: ByAllTreatmentDto
-      type: object
-    OAS.WebApi.DTO.Integrations.CustodialIntegrator.ByAllNoteMappingDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        fiId:
-          type: integer
-          format: int64
-        fileTransCode:
-          type: string
-        note:
-          type: string
-        replacementFileTransCode:
-          type: string
-        rational:
-          type: string
-        priority:
-          type: integer
-          format: int32
+        unitBalanceOverride:
+          type: number
+          format: double
         auditedDate:
           type: string
           format: date-time
@@ -4129,48 +4170,7 @@ components:
         institutionName:
           type: string
       xml:
-        name: ByAllNoteMappingDto
-      type: object
-    OAS.DataModel.SimpleStringKeyEntity:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-      xml:
-        name: SimpleStringKeyEntity
-      type: object
-    OAS.WebApi.DTO.Integrations.CustodialIntegrator.AkoyaAccountDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        clientId:
-          type: integer
-          format: int32
-        akoyaAccountId:
-          type: string
-        accountType:
-          type: string
-        displayName:
-          type: string
-        secondaryAcctCode:
-          type: string
-        accountNumber:
-          type: string
-        isNotInSource:
-          type: boolean
-        auditedDate:
-          type: string
-          format: date-time
-        auditedByDisplay:
-          type: string
-        institutionName:
-          type: string
-        credentialId:
-          type: string
-      xml:
-        name: AkoyaAccountDto
+        name: ByAllLocalSymbolDto
       type: object
   securitySchemes:
     Authorization:

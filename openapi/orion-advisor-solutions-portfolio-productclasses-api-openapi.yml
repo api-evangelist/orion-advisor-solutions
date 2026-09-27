@@ -1621,29 +1621,6 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.WebApi.DTO.Portfolio.ProductClassWeightedDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        representativeId:
-          type: integer
-          format: int32
-        representativeName:
-          type: string
-        productId:
-          type: integer
-          format: int32
-        details:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductClassWeightedDetailDto'
-          xml:
-            name: ProductClassWeightedDetailDto
-            wrapped: true
-          type: array
-      xml:
-        name: ProductClassWeightedDto
-      type: object
     OAS.WebApi.DTO.Portfolio.ProductClassPortfolioDto:
       properties:
         name:
@@ -1704,6 +1681,17 @@ components:
           type: string
       xml:
         name: SimpleEntity
+      type: object
+    OAS.Validation.IValidationError:
+      properties:
+        propertyName:
+          readOnly: true
+          type: string
+        errorMessage:
+          readOnly: true
+          type: string
+      xml:
+        name: IValidationError
       type: object
     OAS.WebApi.DTO.Portfolio.ProductClassDto:
       properties:
@@ -1769,16 +1757,18 @@ components:
       xml:
         name: ProductClassDto
       type: object
-    OAS.Validation.IValidationError:
+    OAS.WebApi.DTO.Portfolio.ProductClassWeightedDetailDto:
       properties:
-        propertyName:
-          readOnly: true
+        productClassId:
+          type: integer
+          format: int32
+        className:
           type: string
-        errorMessage:
-          readOnly: true
-          type: string
+        weight:
+          type: number
+          format: double
       xml:
-        name: IValidationError
+        name: ProductClassWeightedDetailDto
       type: object
     OAS.WebApi.DTO.Portfolio.ProductClassVerboseDto:
       properties:
@@ -2044,19 +2034,6 @@ components:
       xml:
         name: EntityOptionDto
       type: object
-    OAS.WebApi.DTO.Portfolio.ProductClassWeightedDetailDto:
-      properties:
-        productClassId:
-          type: integer
-          format: int32
-        className:
-          type: string
-        weight:
-          type: number
-          format: double
-      xml:
-        name: ProductClassWeightedDetailDto
-      type: object
     OAS.DataModel.Portfolio.SimpleProductClass:
       properties:
         productClassId:
@@ -2073,6 +2050,29 @@ components:
           type: string
       xml:
         name: SimpleProductClass
+      type: object
+    OAS.WebApi.DTO.Portfolio.ProductClassWeightedDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        representativeId:
+          type: integer
+          format: int32
+        representativeName:
+          type: string
+        productId:
+          type: integer
+          format: int32
+        details:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.ProductClassWeightedDetailDto'
+          xml:
+            name: ProductClassWeightedDetailDto
+            wrapped: true
+          type: array
+      xml:
+        name: ProductClassWeightedDto
       type: object
   securitySchemes:
     Authorization:

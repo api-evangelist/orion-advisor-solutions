@@ -909,60 +909,38 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.DTO.Authorization.ServiceTeamDatabaseAssignRequestDto:
-      properties:
-        serviceTeamId:
-          type: integer
-          format: int32
-        teamType:
-          type: string
-          enum:
-          - ServiceTeam
-          - ReconTeam
-          - ApplicationTeam
-          - AlternateApplicationTeam
-          - RemovedServiceTeam
-        alClientIds:
-          items:
-            type: integer
-            format: int32
-          type: array
-      xml:
-        name: ServiceTeamDatabaseAssignRequestDto
-      type: object
-    OAS.WebApi.DTO.Authorization.ServiceTeamDto:
+    OAS.DataModel.SimpleEntity:
       properties:
         id:
           type: integer
           format: int32
-        team:
-          type: string
-        emailAddress:
-          type: string
-        phone:
-          type: string
-        assignedDatabaseCount:
-          type: integer
-          format: int32
-        memberCount:
-          type: integer
-          format: int32
-        teamType:
-          type: string
-          enum:
-          - ServiceTeam
-          - ReconTeam
-          - ApplicationTeam
-          - AlternateApplicationTeam
-          - RemovedServiceTeam
-        chatUrl:
-          type: string
-        firmChatRouteId:
-          type: string
-        chatRouteIntendedRecipient:
+        name:
           type: string
       xml:
-        name: ServiceTeamDto
+        name: SimpleEntity
+      type: object
+    OAS.WebApi.DTO.Authorization.ALClientDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        clientName:
+          type: string
+        selected:
+          type: boolean
+        lockDown:
+          type: string
+          enum:
+          - None
+          - Billing
+        ops:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Security.AlClientOpsDto'
+        guid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+      xml:
+        name: ALClientDto
       type: object
     OAS.WebApi.DTO.Authorization.ServiceTeamMemberDto:
       properties:
@@ -998,38 +976,60 @@ components:
       xml:
         name: ServiceTeamMemberDto
       type: object
-    OAS.WebApi.DTO.Authorization.ALClientDto:
+    OAS.WebApi.DTO.Authorization.ServiceTeamDto:
       properties:
         id:
           type: integer
           format: int32
-        clientName:
+        team:
           type: string
-        selected:
-          type: boolean
-        lockDown:
+        emailAddress:
+          type: string
+        phone:
+          type: string
+        assignedDatabaseCount:
+          type: integer
+          format: int32
+        memberCount:
+          type: integer
+          format: int32
+        teamType:
           type: string
           enum:
-          - None
-          - Billing
-        ops:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Security.AlClientOpsDto'
-        guid:
-          example: 00000000-0000-0000-0000-000000000000
+          - ServiceTeam
+          - ReconTeam
+          - ApplicationTeam
+          - AlternateApplicationTeam
+          - RemovedServiceTeam
+        chatUrl:
           type: string
-          format: uuid
+        firmChatRouteId:
+          type: string
+        chatRouteIntendedRecipient:
+          type: string
       xml:
-        name: ALClientDto
+        name: ServiceTeamDto
       type: object
-    OAS.DataModel.SimpleEntity:
+    OAS.WebApi.DTO.Authorization.ServiceTeamDatabaseAssignRequestDto:
       properties:
-        id:
+        serviceTeamId:
           type: integer
           format: int32
-        name:
+        teamType:
           type: string
+          enum:
+          - ServiceTeam
+          - ReconTeam
+          - ApplicationTeam
+          - AlternateApplicationTeam
+          - RemovedServiceTeam
+        alClientIds:
+          items:
+            type: integer
+            format: int32
+          type: array
       xml:
-        name: SimpleEntity
+        name: ServiceTeamDatabaseAssignRequestDto
       type: object
     OAS.WebApi.DTO.Security.AlClientOpsDto:
       properties:

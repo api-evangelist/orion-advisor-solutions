@@ -1379,127 +1379,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.DTO.Security.ActionPasswordSetRequest:
-      properties:
-        newPassword:
-          type: string
-        resetUser:
-          type: boolean
-      xml:
-        name: ActionPasswordSetRequest
-      type: object
-    OAS.DataModel.Security.UserLogin:
-      required:
-      - id
-      - userId
-      - loginDate
-      - failed
-      - failType
-      properties:
-        id:
-          type: integer
-          format: int32
-        userId:
-          type: integer
-          format: int32
-        loginDate:
-          type: string
-          format: date-time
-        failed:
-          type: boolean
-        failType:
-          type: string
-          enum:
-          - Success
-          - IncorrectPassword
-          - LockedOut
-          - PasswordEpired
-          - InactiveUser
-          - TwoFactorChallenge
-        clientIp:
-          type: string
-        providedUserId:
-          type: string
-        correlationId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        compromisedPwd:
-          type: boolean
-        source:
-          type: string
-          enum:
-          - Engage
-          - OrionPlanning
-          - OrionConnect
-          - LegacyClientPortal
-          - LegacyMobileApp
-          - LegacyLoginPage
-          - ApiTester
-          - AuthService
-          - Element
-          - PartnerApp
-          - LoginActivityImportEndpoint
-          - LoginActivityEndpoint
-          - spimUserLoginAdd
-          - Unknown
-          - OrionPlanningWeb
-          - OrionPlanningMobile
-      xml:
-        name: UserLogin
-      type: object
-    OAS.WebApi.DTO.Security.DeactivationPolicySet:
-      properties:
-        maxUserDeactivationPolicyDays:
-          type: integer
-          format: int32
-        maxUserDeletionPolicyDays:
-          type: integer
-          format: int32
-        policies:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DeactivationPolicy'
-          xml:
-            name: DeactivationPolicy
-            wrapped: true
-          type: array
-      xml:
-        name: DeactivationPolicySet
-      type: object
-    OAS.WebApi.DTO.Security.LoginActivityDto:
-      properties:
-        id:
-          type: string
-        userId:
-          type: integer
-          format: int32
-        loginDate:
-          type: string
-          format: date-time
-        failed:
-          type: boolean
-        failType:
-          type: string
-          enum:
-          - Success
-          - IncorrectPassword
-          - LockedOut
-          - PasswordEpired
-          - InactiveUser
-          - TwoFactorChallenge
-      xml:
-        name: LoginActivityDto
-      type: object
-    OAS.DataModel.SimpleEntity:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleEntity
-      type: object
     OAS.WebApi.DTO.Security.UserInfoDetailsDto:
       properties:
         profiles:
@@ -1571,6 +1450,85 @@ components:
           format: date-time
       xml:
         name: UserInfoDetailsDto
+      type: object
+    OAS.DataModel.Security.UserLogin:
+      required:
+      - id
+      - userId
+      - loginDate
+      - failed
+      - failType
+      properties:
+        id:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        loginDate:
+          type: string
+          format: date-time
+        failed:
+          type: boolean
+        failType:
+          type: string
+          enum:
+          - Success
+          - IncorrectPassword
+          - LockedOut
+          - PasswordEpired
+          - InactiveUser
+          - TwoFactorChallenge
+        clientIp:
+          type: string
+        providedUserId:
+          type: string
+        correlationId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        compromisedPwd:
+          type: boolean
+        source:
+          type: string
+          enum:
+          - Engage
+          - OrionPlanning
+          - OrionConnect
+          - LegacyClientPortal
+          - LegacyMobileApp
+          - LegacyLoginPage
+          - ApiTester
+          - AuthService
+          - Element
+          - PartnerApp
+          - LoginActivityImportEndpoint
+          - LoginActivityEndpoint
+          - spimUserLoginAdd
+          - Unknown
+          - OrionPlanningWeb
+          - OrionPlanningMobile
+      xml:
+        name: UserLogin
+      type: object
+    OAS.WebApi.DTO.Security.ActionPasswordSetRequest:
+      properties:
+        newPassword:
+          type: string
+        resetUser:
+          type: boolean
+      xml:
+        name: ActionPasswordSetRequest
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
       type: object
     OAS.WebApi.DTO.Security.ProfileDto:
       properties:
@@ -1790,45 +1748,6 @@ components:
       xml:
         name: ProfileDto
       type: object
-    OAS.WebApi.DTO.Security.DeactivationPolicy:
-      properties:
-        firmId:
-          type: integer
-          format: int32
-        loginEntity:
-          type: string
-          enum:
-          - BrokerDealer
-          - Wholesaler
-          - Representative
-          - Client
-          - RIA
-          - Administrator
-          - SubAdvisor
-          - ThirdPartyAdministrator
-          - Custodian
-          - PlanSponsor
-          - ThirdParty
-          - ServiceAccount
-          - Participant
-          - RepAccountManager
-          - Payee
-          - RIATable
-          - Cotenant
-        deletion:
-          type: integer
-          format: int32
-        deactivation:
-          type: integer
-          format: int32
-        sortOrder:
-          type: integer
-          format: int32
-        displayName:
-          type: string
-      xml:
-        name: DeactivationPolicy
-      type: object
     OAS.WebApi.DTO.Security.UserInfoDto:
       properties:
         id:
@@ -1882,6 +1801,87 @@ components:
           format: date-time
       xml:
         name: UserInfoDto
+      type: object
+    OAS.WebApi.DTO.Security.LoginActivityDto:
+      properties:
+        id:
+          type: string
+        userId:
+          type: integer
+          format: int32
+        loginDate:
+          type: string
+          format: date-time
+        failed:
+          type: boolean
+        failType:
+          type: string
+          enum:
+          - Success
+          - IncorrectPassword
+          - LockedOut
+          - PasswordEpired
+          - InactiveUser
+          - TwoFactorChallenge
+      xml:
+        name: LoginActivityDto
+      type: object
+    OAS.WebApi.DTO.Security.DeactivationPolicySet:
+      properties:
+        maxUserDeactivationPolicyDays:
+          type: integer
+          format: int32
+        maxUserDeletionPolicyDays:
+          type: integer
+          format: int32
+        policies:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Security.DeactivationPolicy'
+          xml:
+            name: DeactivationPolicy
+            wrapped: true
+          type: array
+      xml:
+        name: DeactivationPolicySet
+      type: object
+    OAS.WebApi.DTO.Security.DeactivationPolicy:
+      properties:
+        firmId:
+          type: integer
+          format: int32
+        loginEntity:
+          type: string
+          enum:
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - RIA
+          - Administrator
+          - SubAdvisor
+          - ThirdPartyAdministrator
+          - Custodian
+          - PlanSponsor
+          - ThirdParty
+          - ServiceAccount
+          - Participant
+          - RepAccountManager
+          - Payee
+          - RIATable
+          - Cotenant
+        deletion:
+          type: integer
+          format: int32
+        deactivation:
+          type: integer
+          format: int32
+        sortOrder:
+          type: integer
+          format: int32
+        displayName:
+          type: string
+      xml:
+        name: DeactivationPolicy
       type: object
   securitySchemes:
     Authorization:

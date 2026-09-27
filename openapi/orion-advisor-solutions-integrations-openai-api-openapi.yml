@@ -217,51 +217,22 @@ components:
       xml:
         name: IReportFeatureFlagOverrider
       type: object
-    OAS.DataModel.Reporting.ReportOption:
+    OAS.DataModel.Reporting.ReportOptionCategory:
       required:
-      - id
-      - $type
+      - category
+      - options
       properties:
-        id:
+        category:
           type: string
-        $type:
-          readOnly: true
-          type: string
-        optionGuid:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        optionId:
-          type: integer
-          format: int32
-        isDisabled:
-          type: boolean
-        isGlobal:
-          type: boolean
-        isIgnored:
-          type: boolean
-        name:
-          type: string
-        useInception:
-          type: boolean
-        prompt:
-          type: string
-          enum:
-          - Never
-          - Always
+        options:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
       xml:
-        name: ReportOption
-      type: object
-    OpenAI_API.Chat.ChatMessage:
-      properties:
-        role:
-          type: string
-        content:
-          type: string
-        name:
-          type: string
-      xml:
-        name: ChatMessage
+        name: ReportOptionCategory
       type: object
     OAS.DataModel.Reporting.Engine.IGroupingOptionOverrider:
       properties:
@@ -285,6 +256,17 @@ components:
           type: string
       xml:
         name: IGroupingOptionOverrider
+      type: object
+    OpenAI_API.Chat.ChatMessage:
+      properties:
+        role:
+          type: string
+        content:
+          type: string
+        name:
+          type: string
+      xml:
+        name: ChatMessage
       type: object
     OAS.WebApi.DTO.Reporting.Envision.EnvisionReportDto:
       properties:
@@ -334,22 +316,40 @@ components:
       xml:
         name: EnvisionReportDto
       type: object
-    OAS.DataModel.Reporting.ReportOptionCategory:
+    OAS.DataModel.Reporting.ReportOption:
       required:
-      - category
-      - options
+      - id
+      - $type
       properties:
-        category:
+        id:
           type: string
-        options:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
-          xml:
-            name: ReportOption
-            wrapped: true
-          type: array
+        $type:
+          readOnly: true
+          type: string
+        optionGuid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        optionId:
+          type: integer
+          format: int32
+        isDisabled:
+          type: boolean
+        isGlobal:
+          type: boolean
+        isIgnored:
+          type: boolean
+        name:
+          type: string
+        useInception:
+          type: boolean
+        prompt:
+          type: string
+          enum:
+          - Never
+          - Always
       xml:
-        name: ReportOptionCategory
+        name: ReportOption
       type: object
   securitySchemes:
     Authorization:

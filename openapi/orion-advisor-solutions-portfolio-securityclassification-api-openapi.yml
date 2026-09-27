@@ -8387,7 +8387,147 @@ paths:
         required: true
 components:
   schemas:
-    OAS.WebApi.DTO.Portfolio.SecurityClassification.MethodRuleLocalDto:
+    OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassificationGlobalAssignmentBySymbolResponseDto:
+      properties:
+        symbol:
+          description: Gets or sets the original symbol sent in request payload.
+          type: string
+        securityClassificationMethodId:
+          description: Gets or sets the ID of the security classification method.
+          type: integer
+          format: int32
+        productId:
+          description: Gets or sets the ID of the product.
+          type: integer
+          format: int32
+        securityClassId:
+          description: Gets or sets the ID of the security class.
+          type: integer
+          format: int32
+        weighting:
+          description: Gets or sets the weighting value.
+          type: number
+          format: double
+        securityClass:
+          description: Gets or sets the name of the security class.
+          type: string
+        securityClassCode:
+          description: Gets or sets the code of the security class.
+          type: string
+      xml:
+        name: SecurityClassificationGlobalAssignmentBySymbolResponseDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SecurityClassification.MigrateSecurityClassificationRequestDto:
+      properties:
+        codes:
+          items:
+            type: string
+          type: array
+      xml:
+        name: MigrateSecurityClassificationRequestDto
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassificationAssignmentResponseDto:
+      properties:
+        requestId:
+          description: Gets or sets the ID of the request.
+          type: integer
+          format: int32
+        securityClassificationMethodId:
+          description: Gets or sets the ID of the security classification method.
+          type: integer
+          format: int32
+        reportGroupingEntityEnum:
+          description: Gets or sets the report grouping entity enumeration value.
+          type: integer
+          format: int32
+        productId:
+          description: Gets or sets the ID of the product.
+          type: integer
+          format: int32
+        securityClassId:
+          description: Gets or sets the ID of the security class.
+          type: integer
+          format: int32
+        weighting:
+          description: Gets or sets the weighting value.
+          type: number
+          format: double
+        overrideEntityEnum:
+          description: Gets or sets the override entity enumeration value.
+          type: integer
+          format: int32
+        overrideEntityId:
+          description: Gets or sets the ID of the override entity.
+          type: integer
+          format: int32
+        securityClass:
+          description: Gets or sets the name of the security class.
+          type: string
+        securityClassCode:
+          description: Gets or sets the code of the security class.
+          type: string
+      xml:
+        name: SecurityClassificationAssignmentResponseDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassificationGlobalAssignmentResponseDto:
+      properties:
+        requestId:
+          description: Gets or sets the ID of the request.
+          type: integer
+          format: int32
+        securityClassificationMethodId:
+          description: Gets or sets the ID of the security classification method.
+          type: integer
+          format: int32
+        productId:
+          description: Gets or sets the ID of the product.
+          type: integer
+          format: int32
+        securityClassId:
+          description: Gets or sets the ID of the security class.
+          type: integer
+          format: int32
+        weighting:
+          description: Gets or sets the weighting value.
+          type: number
+          format: double
+        securityClass:
+          description: Gets or sets the name of the security class.
+          type: string
+        securityClassCode:
+          description: Gets or sets the code of the security class.
+          type: string
+      xml:
+        name: SecurityClassificationGlobalAssignmentResponseDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SecurityClassification.MethodLocalAssociationCountsDto:
+      properties:
+        securityClasssesCount:
+          type: integer
+          format: int32
+        securityClassificationRulesCount:
+          type: integer
+          format: int32
+        securityClassificationProductsCount:
+          type: integer
+          format: int32
+      xml:
+        name: MethodLocalAssociationCountsDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SecurityClassification.MethodRuleGlobalDto:
       required:
       - classificationMethodId
       - ruleConfiguration
@@ -8423,35 +8563,44 @@ components:
           - Security Class
           - Classification Method
       xml:
-        name: MethodRuleLocalDto
+        name: MethodRuleGlobalDto
       type: object
-    OAS.WebApi.DTO.Portfolio.SecurityClassification.ClassificationMethodGlobalVerboseDto:
+    OAS.WebApi.DTO.Portfolio.SecurityClassification.DerivationGlobalDto:
+      required:
+      - securityClassificationMethodId
+      - baseSecurityClassId
       properties:
-        methodGlobal:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SecurityClassification.MethodGlobalDto'
-        securityClassesGlobal:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassGlobalDto'
-          xml:
-            name: SecurityClassGlobalDto
-            wrapped: true
-          type: array
-        derivationsGlobal:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SecurityClassification.DerivationGlobalDto'
-          xml:
-            name: DerivationGlobalDto
-            wrapped: true
-          type: array
-        methodRulesGlobal:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SecurityClassification.MethodRuleGlobalDto'
-          xml:
-            name: MethodRuleGlobalDto
-            wrapped: true
-          type: array
+        securityClassificationMethodId:
+          type: integer
+          format: int32
+        securityClassificationMethod:
+          type: string
+        baseSecurityClassId:
+          type: integer
+          format: int32
+        baseSecurityClass:
+          type: string
+        baseSecurityClassCode:
+          type: string
+        baseClassificationMethod:
+          type: string
+        baseClassificationMethodId:
+          type: integer
+          format: int32
+        derivedSecurityClassId:
+          type: integer
+          format: int32
+        derivedSecurityClass:
+          type: string
+        derivedSecurityClassCode:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        auditedBy:
+          type: string
       xml:
-        name: ClassificationMethodGlobalVerboseDto
+        name: DerivationGlobalDto
       type: object
     OAS.WebApi.DTO.Portfolio.SecurityClassification.DerivationLocalDto:
       required:
@@ -8491,30 +8640,475 @@ components:
       xml:
         name: DerivationLocalDto
       type: object
-    OAS.WebApi.DTO.Portfolio.SecurityClassification.MethodRuleDataSetDto:
+    OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassificationProductLocalDto:
+      required:
+      - securityClassId
+      - securityClassificationMethodId
+      - productId
       properties:
-        fieldEnum:
+        securityClassId:
           type: integer
           format: int32
-        fieldName:
+        securityClass:
           type: string
-        fieldTypeEnum:
+        securityClassCode:
+          type: string
+        securityClassificationMethodId:
           type: integer
           format: int32
-        fieldType:
-          readOnly: true
+        securityClassificationMethod:
           type: string
-        dataSourceJSON:
+        productId:
+          type: integer
+          format: int32
+        productName:
           type: string
-        isWeighted:
-          type: boolean
-        placeholder:
+        ticker:
+          type: string
+        cusip:
+          type: string
+        productType:
           type: string
           enum:
-          - Years
-          - Decimal
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        productSubTypeName:
+          type: string
+        classificationWeight:
+          type: number
+          format: double
+        assignmentType:
+          type: boolean
+        isRemoved:
+          type: boolean
+        isImplicit:
+          type: boolean
+        downloadSymbols:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.DownloadSymbolSimpleDto'
+          xml:
+            name: DownloadSymbolSimpleDto
+            wrapped: true
+          type: array
+        canReadCusip:
+          type: boolean
       xml:
-        name: MethodRuleDataSetDto
+        name: SecurityClassificationProductLocalDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SecurityClassification.MethodAlClientGlobalDto:
+      required:
+      - securityClassificationMethodId
+      - alClientId
+      properties:
+        securityClassificationMethod:
+          type: string
+        securityClassificationMethodId:
+          type: integer
+          format: int32
+        productDescriptionProvider:
+          type: string
+        baseSecurityClassificationMethod:
+          type: string
+        baseSecurityClassificationMethodId:
+          type: integer
+          format: int32
+        alClientId:
+          type: integer
+          format: int32
+        clientName:
+          type: string
+        dbName:
+          type: string
+        advisorNumber:
+          type: integer
+          format: int32
+        dbIsActive:
+          type: boolean
+        dbActiveDate:
+          type: string
+          format: date-time
+        dbInActiveDate:
+          type: string
+          format: date-time
+        masterGroup:
+          type: string
+        isDemo:
+          type: boolean
+        firmType:
+          type: string
+          enum:
+          - None
+          - Foundations
+          - Essentials
+          - Advantage
+          - OrionTradingOnly
+          - OrionRiskOnly
+          - OrionComplianceOnly
+          - OrionPlanningOnly
+          - OasLegacy
+        auditedByDisplay:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+      xml:
+        name: MethodAlClientGlobalDto
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
+    OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassificationProductGlobalDto:
+      required:
+      - securityClassId
+      - securityClassificationMethodId
+      - productId
+      properties:
+        securityClassId:
+          type: integer
+          format: int32
+        securityClassificationMethodId:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        ticker:
+          type: string
+        cusip:
+          type: string
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        productSubTypeName:
+          type: string
+        classificationWeight:
+          type: number
+          format: double
+        isRemoved:
+          type: boolean
+        assignmentType:
+          type: boolean
+      xml:
+        name: SecurityClassificationProductGlobalDto
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+    OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassificationGlobalAssignmentRequestDto:
+      properties:
+        requestId:
+          description: Gets or sets the unique identifier for the request. Required when more than one request is made.
+          type: integer
+          format: int32
+        securityClassificationMethodId:
+          description: Gets or sets the identifier for the security classification method.
+          type: integer
+          format: int32
+        productIds:
+          description: Gets or sets the list of product identifiers associated with the request.
+          items:
+            type: integer
+            format: int32
+          type: array
+      xml:
+        name: SecurityClassificationGlobalAssignmentRequestDto
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassLocalDto:
+      required:
+      - securityClassificationMethodId
+      - securityClass
+      - securityClassCode
+      properties:
+        id:
+          type: integer
+          format: int32
+        securityClassificationMethodId:
+          type: integer
+          format: int32
+        securityClassificationMethod:
+          type: string
+        securityClass:
+          type: string
+          maxLength: 1000
+          minLength: 0
+        securityClassCode:
+          type: string
+          maxLength: 1000
+          minLength: 0
+        securityClassGlobalId:
+          type: integer
+          format: int32
+        securityClassificationMethodGlobalId:
+          type: integer
+          format: int32
+        securityClassificationMethodGlobal:
+          type: string
+        excludeFromFeesAndPayouts:
+          type: boolean
+        color:
+          type: string
+        sortOrder:
+          type: integer
+          format: int32
+        riskScore:
+          type: number
+          format: double
+        productDescriptionProviderId:
+          type: integer
+          format: int32
+        auditedDate:
+          type: string
+          format: date-time
+        auditedBy:
+          type: string
+        securityClassificationMethodType:
+          type: string
+          enum:
+          - Rules / Assigned
+          - Inherited
+          - Global
+          - Global Inherited
+          - Compounding
+          - GICS
+          - Product Description
+          - Product Description Weighted
+          - Product Exchange
+          - Global Weighted
+      xml:
+        name: SecurityClassLocalDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassificationAssignmentRequestDto:
+      properties:
+        requestId:
+          description: Gets or sets the unique identifier for the request. Required when more than one request is made. Optional for single requests.
+          type: integer
+          format: int32
+        securityClassificationMethodId:
+          description: Gets or sets the identifier for the security classification method.
+          type: integer
+          format: int32
+        reportGroupingEntityEnum:
+          description: Gets or sets the report grouping entity enumeration value.
+          type: integer
+          format: int32
+        productIds:
+          description: Gets or sets the list of product identifiers associated with the request.
+          items:
+            type: integer
+            format: int32
+          type: array
+        entityEnumOverride:
+          description: Gets or sets the entity enumeration override value.
+          type: integer
+          format: int32
+        entityEnumOverrideIds:
+          description: Gets or sets the list of entity enumeration override identifiers.
+          items:
+            type: integer
+            format: int32
+          type: array
+      xml:
+        name: SecurityClassificationAssignmentRequestDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SecurityClassification.ClassificationMethodLocalVerboseDto:
+      properties:
+        methodLocal:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SecurityClassification.MethodLocalDto'
+        derivationsLocal:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SecurityClassification.DerivationLocalDto'
+          xml:
+            name: DerivationLocalDto
+            wrapped: true
+          type: array
+        securityClassesLocal:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassLocalDto'
+          xml:
+            name: SecurityClassLocalDto
+            wrapped: true
+          type: array
+        methodRulesLocal:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SecurityClassification.MethodRuleLocalDto'
+          xml:
+            name: MethodRuleLocalDto
+            wrapped: true
+          type: array
+      xml:
+        name: ClassificationMethodLocalVerboseDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.DownloadSymbolSimpleDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        symbol:
+          type: string
+        isNASDAQPlatformSymbol:
+          type: boolean
+      xml:
+        name: DownloadSymbolSimpleDto
+      type: object
+    OAS.WebApi.DTO.ValidateImport.ImportFileFilterDto:
+      required:
+      - columnName
+      properties:
+        columnName:
+          type: string
+          pattern: ^(Household ID|Account ID|Account Number|Representative Name|Representative Number|Product ID|Download Symbol)$
+        filterType:
+          type: string
+          enum:
+          - Include
+          - Exclude
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+          description: the imported file
+      xml:
+        name: ImportFileFilterDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SecurityClassification.MethodGlobalDto:
+      required:
+      - classificationMethod
+      - classificationMethodDescription
+      - isRestricted
+      - securityClassificationType
+      properties:
+        id:
+          type: integer
+          format: int32
+        auditedBy:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        classificationMethod:
+          type: string
+        classificationMethodDescription:
+          type: string
+        isActive:
+          type: boolean
+        isRestricted:
+          type: boolean
+        lastCalculated:
+          type: string
+          format: date-time
+        securityClassDefault:
+          type: string
+        securityClassDefaultId:
+          type: integer
+          format: int32
+        securityClassificationMethodBase:
+          type: string
+        securityClassificationMethodBaseId:
+          type: integer
+          format: int32
+        securityClassificationType:
+          type: string
+          pattern: ^(RulesAssigned|Inherited|Global|GlobalInherited|Compounding|GICS|ProductDescription|ProductDescriptionWeighted|ProductExchange)$
+          enum:
+          - Rules / Assigned
+          - Inherited
+          - Global
+          - Global Inherited
+          - Compounding
+          - GICS
+          - Product Description
+          - Product Description Weighted
+          - Product Exchange
+          - Global Weighted
+        recalculationSchedule:
+          type: string
+          enum:
+          - On Demand
+          - Daily
+          - Weekly
+          - Monthly
+        recalculationHour:
+          type: integer
+          format: int32
+        productDescriptionProviderId:
+          type: integer
+          format: int32
+        productExchangeEnum:
+          type: string
+          enum:
+          - Stock Status
+          - Company Name
+          - Company Status
+          - Status Type
+          - Is MLP
+          - Is BDC
+          - Country
+          - Business Country
+          - Domicile Country
+          - Place Of Incorporation
+          - Is REIT
+          - Is Limited Partnership
+          - Is Limited Liability Company
+          - Stock Type
+          - Is Shell
+          - Is SPAC
+      xml:
+        name: MethodGlobalDto
       type: object
     OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassGlobalDto:
       required:
@@ -8823,51 +9417,75 @@ components:
       xml:
         name: MethodLocalDto
       type: object
-    OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassificationProductGlobalDto:
-      required:
-      - securityClassId
-      - securityClassificationMethodId
-      - productId
+    OAS.WebApi.DTO.Portfolio.SecurityClassification.ClassificationMethodGlobalVerboseDto:
       properties:
-        securityClassId:
+        methodGlobal:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SecurityClassification.MethodGlobalDto'
+        securityClassesGlobal:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassGlobalDto'
+          xml:
+            name: SecurityClassGlobalDto
+            wrapped: true
+          type: array
+        derivationsGlobal:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SecurityClassification.DerivationGlobalDto'
+          xml:
+            name: DerivationGlobalDto
+            wrapped: true
+          type: array
+        methodRulesGlobal:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SecurityClassification.MethodRuleGlobalDto'
+          xml:
+            name: MethodRuleGlobalDto
+            wrapped: true
+          type: array
+      xml:
+        name: ClassificationMethodGlobalVerboseDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassAssociationCountsDto:
+      properties:
+        methodCount:
           type: integer
           format: int32
-        securityClassificationMethodId:
+        methodRuleCount:
           type: integer
           format: int32
-        productId:
+        assignedSecurityClassesCount:
           type: integer
           format: int32
-        productName:
+        securityClassificationProductCount:
+          type: integer
+          format: int32
+      xml:
+        name: SecurityClassAssociationCountsDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SecurityClassification.MethodRuleDataSetDto:
+      properties:
+        fieldEnum:
+          type: integer
+          format: int32
+        fieldName:
           type: string
-        ticker:
+        fieldTypeEnum:
+          type: integer
+          format: int32
+        fieldType:
+          readOnly: true
           type: string
-        cusip:
+        dataSourceJSON:
           type: string
-        productType:
+        isWeighted:
+          type: boolean
+        placeholder:
           type: string
           enum:
-          - None
-          - MutualFund
-          - Annuity
-          - AdvisorOne
-          - StockOrETF
-          - Option
-          - Bond
-          - Unknown
-          - CD
-          - Index
-        productSubTypeName:
-          type: string
-        classificationWeight:
-          type: number
-          format: double
-        isRemoved:
-          type: boolean
-        assignmentType:
-          type: boolean
+          - Years
+          - Decimal
       xml:
-        name: SecurityClassificationProductGlobalDto
+        name: MethodRuleDataSetDto
       type: object
     OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassificationProductOverrideLocalDto:
       required:
@@ -9118,35 +9736,7 @@ components:
       xml:
         name: SecurityClassificationProductOverrideLocalDto
       type: object
-    OAS.WebApi.DTO.Portfolio.SecurityClassification.ClassificationMethodLocalVerboseDto:
-      properties:
-        methodLocal:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SecurityClassification.MethodLocalDto'
-        derivationsLocal:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SecurityClassification.DerivationLocalDto'
-          xml:
-            name: DerivationLocalDto
-            wrapped: true
-          type: array
-        securityClassesLocal:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassLocalDto'
-          xml:
-            name: SecurityClassLocalDto
-            wrapped: true
-          type: array
-        methodRulesLocal:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SecurityClassification.MethodRuleLocalDto'
-          xml:
-            name: MethodRuleLocalDto
-            wrapped: true
-          type: array
-      xml:
-        name: ClassificationMethodLocalVerboseDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.SecurityClassification.MethodRuleGlobalDto:
+    OAS.WebApi.DTO.Portfolio.SecurityClassification.MethodRuleLocalDto:
       required:
       - classificationMethodId
       - ruleConfiguration
@@ -9182,597 +9772,7 @@ components:
           - Security Class
           - Classification Method
       xml:
-        name: MethodRuleGlobalDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassLocalDto:
-      required:
-      - securityClassificationMethodId
-      - securityClass
-      - securityClassCode
-      properties:
-        id:
-          type: integer
-          format: int32
-        securityClassificationMethodId:
-          type: integer
-          format: int32
-        securityClassificationMethod:
-          type: string
-        securityClass:
-          type: string
-          maxLength: 1000
-          minLength: 0
-        securityClassCode:
-          type: string
-          maxLength: 1000
-          minLength: 0
-        securityClassGlobalId:
-          type: integer
-          format: int32
-        securityClassificationMethodGlobalId:
-          type: integer
-          format: int32
-        securityClassificationMethodGlobal:
-          type: string
-        excludeFromFeesAndPayouts:
-          type: boolean
-        color:
-          type: string
-        sortOrder:
-          type: integer
-          format: int32
-        riskScore:
-          type: number
-          format: double
-        productDescriptionProviderId:
-          type: integer
-          format: int32
-        auditedDate:
-          type: string
-          format: date-time
-        auditedBy:
-          type: string
-        securityClassificationMethodType:
-          type: string
-          enum:
-          - Rules / Assigned
-          - Inherited
-          - Global
-          - Global Inherited
-          - Compounding
-          - GICS
-          - Product Description
-          - Product Description Weighted
-          - Product Exchange
-          - Global Weighted
-      xml:
-        name: SecurityClassLocalDto
-      type: object
-    OAS.WebApi.DTO.ValidateImport.ImportFileFilterDto:
-      required:
-      - columnName
-      properties:
-        columnName:
-          type: string
-          pattern: ^(Household ID|Account ID|Account Number|Representative Name|Representative Number|Product ID|Download Symbol)$
-        filterType:
-          type: string
-          enum:
-          - Include
-          - Exclude
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-          description: the imported file
-      xml:
-        name: ImportFileFilterDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.SecurityClassification.MigrateSecurityClassificationRequestDto:
-      properties:
-        codes:
-          items:
-            type: string
-          type: array
-      xml:
-        name: MigrateSecurityClassificationRequestDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassAssociationCountsDto:
-      properties:
-        methodCount:
-          type: integer
-          format: int32
-        methodRuleCount:
-          type: integer
-          format: int32
-        assignedSecurityClassesCount:
-          type: integer
-          format: int32
-        securityClassificationProductCount:
-          type: integer
-          format: int32
-      xml:
-        name: SecurityClassAssociationCountsDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassificationAssignmentRequestDto:
-      properties:
-        requestId:
-          description: Gets or sets the unique identifier for the request. Required when more than one request is made. Optional for single requests.
-          type: integer
-          format: int32
-        securityClassificationMethodId:
-          description: Gets or sets the identifier for the security classification method.
-          type: integer
-          format: int32
-        reportGroupingEntityEnum:
-          description: Gets or sets the report grouping entity enumeration value.
-          type: integer
-          format: int32
-        productIds:
-          description: Gets or sets the list of product identifiers associated with the request.
-          items:
-            type: integer
-            format: int32
-          type: array
-        entityEnumOverride:
-          description: Gets or sets the entity enumeration override value.
-          type: integer
-          format: int32
-        entityEnumOverrideIds:
-          description: Gets or sets the list of entity enumeration override identifiers.
-          items:
-            type: integer
-            format: int32
-          type: array
-      xml:
-        name: SecurityClassificationAssignmentRequestDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassificationAssignmentResponseDto:
-      properties:
-        requestId:
-          description: Gets or sets the ID of the request.
-          type: integer
-          format: int32
-        securityClassificationMethodId:
-          description: Gets or sets the ID of the security classification method.
-          type: integer
-          format: int32
-        reportGroupingEntityEnum:
-          description: Gets or sets the report grouping entity enumeration value.
-          type: integer
-          format: int32
-        productId:
-          description: Gets or sets the ID of the product.
-          type: integer
-          format: int32
-        securityClassId:
-          description: Gets or sets the ID of the security class.
-          type: integer
-          format: int32
-        weighting:
-          description: Gets or sets the weighting value.
-          type: number
-          format: double
-        overrideEntityEnum:
-          description: Gets or sets the override entity enumeration value.
-          type: integer
-          format: int32
-        overrideEntityId:
-          description: Gets or sets the ID of the override entity.
-          type: integer
-          format: int32
-        securityClass:
-          description: Gets or sets the name of the security class.
-          type: string
-        securityClassCode:
-          description: Gets or sets the code of the security class.
-          type: string
-      xml:
-        name: SecurityClassificationAssignmentResponseDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.SecurityClassification.MethodAlClientGlobalDto:
-      required:
-      - securityClassificationMethodId
-      - alClientId
-      properties:
-        securityClassificationMethod:
-          type: string
-        securityClassificationMethodId:
-          type: integer
-          format: int32
-        productDescriptionProvider:
-          type: string
-        baseSecurityClassificationMethod:
-          type: string
-        baseSecurityClassificationMethodId:
-          type: integer
-          format: int32
-        alClientId:
-          type: integer
-          format: int32
-        clientName:
-          type: string
-        dbName:
-          type: string
-        advisorNumber:
-          type: integer
-          format: int32
-        dbIsActive:
-          type: boolean
-        dbActiveDate:
-          type: string
-          format: date-time
-        dbInActiveDate:
-          type: string
-          format: date-time
-        masterGroup:
-          type: string
-        isDemo:
-          type: boolean
-        firmType:
-          type: string
-          enum:
-          - None
-          - Foundations
-          - Essentials
-          - Advantage
-          - OrionTradingOnly
-          - OrionRiskOnly
-          - OrionComplianceOnly
-          - OrionPlanningOnly
-          - OasLegacy
-        auditedByDisplay:
-          type: string
-        auditedDate:
-          type: string
-          format: date-time
-      xml:
-        name: MethodAlClientGlobalDto
-      type: object
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
-      type: object
-    OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassificationGlobalAssignmentBySymbolResponseDto:
-      properties:
-        symbol:
-          description: Gets or sets the original symbol sent in request payload.
-          type: string
-        securityClassificationMethodId:
-          description: Gets or sets the ID of the security classification method.
-          type: integer
-          format: int32
-        productId:
-          description: Gets or sets the ID of the product.
-          type: integer
-          format: int32
-        securityClassId:
-          description: Gets or sets the ID of the security class.
-          type: integer
-          format: int32
-        weighting:
-          description: Gets or sets the weighting value.
-          type: number
-          format: double
-        securityClass:
-          description: Gets or sets the name of the security class.
-          type: string
-        securityClassCode:
-          description: Gets or sets the code of the security class.
-          type: string
-      xml:
-        name: SecurityClassificationGlobalAssignmentBySymbolResponseDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.SecurityClassification.MethodLocalAssociationCountsDto:
-      properties:
-        securityClasssesCount:
-          type: integer
-          format: int32
-        securityClassificationRulesCount:
-          type: integer
-          format: int32
-        securityClassificationProductsCount:
-          type: integer
-          format: int32
-      xml:
-        name: MethodLocalAssociationCountsDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassificationGlobalAssignmentRequestDto:
-      properties:
-        requestId:
-          description: Gets or sets the unique identifier for the request. Required when more than one request is made.
-          type: integer
-          format: int32
-        securityClassificationMethodId:
-          description: Gets or sets the identifier for the security classification method.
-          type: integer
-          format: int32
-        productIds:
-          description: Gets or sets the list of product identifiers associated with the request.
-          items:
-            type: integer
-            format: int32
-          type: array
-      xml:
-        name: SecurityClassificationGlobalAssignmentRequestDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassificationProductLocalDto:
-      required:
-      - securityClassId
-      - securityClassificationMethodId
-      - productId
-      properties:
-        securityClassId:
-          type: integer
-          format: int32
-        securityClass:
-          type: string
-        securityClassCode:
-          type: string
-        securityClassificationMethodId:
-          type: integer
-          format: int32
-        securityClassificationMethod:
-          type: string
-        productId:
-          type: integer
-          format: int32
-        productName:
-          type: string
-        ticker:
-          type: string
-        cusip:
-          type: string
-        productType:
-          type: string
-          enum:
-          - None
-          - MutualFund
-          - Annuity
-          - AdvisorOne
-          - StockOrETF
-          - Option
-          - Bond
-          - Unknown
-          - CD
-          - Index
-        productSubTypeName:
-          type: string
-        classificationWeight:
-          type: number
-          format: double
-        assignmentType:
-          type: boolean
-        isRemoved:
-          type: boolean
-        isImplicit:
-          type: boolean
-        downloadSymbols:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.DownloadSymbolSimpleDto'
-          xml:
-            name: DownloadSymbolSimpleDto
-            wrapped: true
-          type: array
-        canReadCusip:
-          type: boolean
-      xml:
-        name: SecurityClassificationProductLocalDto
-      type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
-      properties:
-        key:
-          readOnly: true
-          type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: KeyValuePair`2
-      type: object
-    OAS.DataModel.SimpleEntity:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleEntity
-      type: object
-    OAS.WebApi.DTO.Portfolio.SecurityClassification.MethodGlobalDto:
-      required:
-      - classificationMethod
-      - classificationMethodDescription
-      - isRestricted
-      - securityClassificationType
-      properties:
-        id:
-          type: integer
-          format: int32
-        auditedBy:
-          type: string
-        auditedDate:
-          type: string
-          format: date-time
-        classificationMethod:
-          type: string
-        classificationMethodDescription:
-          type: string
-        isActive:
-          type: boolean
-        isRestricted:
-          type: boolean
-        lastCalculated:
-          type: string
-          format: date-time
-        securityClassDefault:
-          type: string
-        securityClassDefaultId:
-          type: integer
-          format: int32
-        securityClassificationMethodBase:
-          type: string
-        securityClassificationMethodBaseId:
-          type: integer
-          format: int32
-        securityClassificationType:
-          type: string
-          pattern: ^(RulesAssigned|Inherited|Global|GlobalInherited|Compounding|GICS|ProductDescription|ProductDescriptionWeighted|ProductExchange)$
-          enum:
-          - Rules / Assigned
-          - Inherited
-          - Global
-          - Global Inherited
-          - Compounding
-          - GICS
-          - Product Description
-          - Product Description Weighted
-          - Product Exchange
-          - Global Weighted
-        recalculationSchedule:
-          type: string
-          enum:
-          - On Demand
-          - Daily
-          - Weekly
-          - Monthly
-        recalculationHour:
-          type: integer
-          format: int32
-        productDescriptionProviderId:
-          type: integer
-          format: int32
-        productExchangeEnum:
-          type: string
-          enum:
-          - Stock Status
-          - Company Name
-          - Company Status
-          - Status Type
-          - Is MLP
-          - Is BDC
-          - Country
-          - Business Country
-          - Domicile Country
-          - Place Of Incorporation
-          - Is REIT
-          - Is Limited Partnership
-          - Is Limited Liability Company
-          - Stock Type
-          - Is Shell
-          - Is SPAC
-      xml:
-        name: MethodGlobalDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.SecurityClassification.SecurityClassificationGlobalAssignmentResponseDto:
-      properties:
-        requestId:
-          description: Gets or sets the ID of the request.
-          type: integer
-          format: int32
-        securityClassificationMethodId:
-          description: Gets or sets the ID of the security classification method.
-          type: integer
-          format: int32
-        productId:
-          description: Gets or sets the ID of the product.
-          type: integer
-          format: int32
-        securityClassId:
-          description: Gets or sets the ID of the security class.
-          type: integer
-          format: int32
-        weighting:
-          description: Gets or sets the weighting value.
-          type: number
-          format: double
-        securityClass:
-          description: Gets or sets the name of the security class.
-          type: string
-        securityClassCode:
-          description: Gets or sets the code of the security class.
-          type: string
-      xml:
-        name: SecurityClassificationGlobalAssignmentResponseDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.DownloadSymbolSimpleDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        productId:
-          type: integer
-          format: int32
-        symbol:
-          type: string
-        isNASDAQPlatformSymbol:
-          type: boolean
-      xml:
-        name: DownloadSymbolSimpleDto
-      type: object
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
-      type: object
-    OAS.WebApi.DTO.Portfolio.SecurityClassification.DerivationGlobalDto:
-      required:
-      - securityClassificationMethodId
-      - baseSecurityClassId
-      properties:
-        securityClassificationMethodId:
-          type: integer
-          format: int32
-        securityClassificationMethod:
-          type: string
-        baseSecurityClassId:
-          type: integer
-          format: int32
-        baseSecurityClass:
-          type: string
-        baseSecurityClassCode:
-          type: string
-        baseClassificationMethod:
-          type: string
-        baseClassificationMethodId:
-          type: integer
-          format: int32
-        derivedSecurityClassId:
-          type: integer
-          format: int32
-        derivedSecurityClass:
-          type: string
-        derivedSecurityClassCode:
-          type: string
-        auditedDate:
-          type: string
-          format: date-time
-        auditedBy:
-          type: string
-      xml:
-        name: DerivationGlobalDto
+        name: MethodRuleLocalDto
       type: object
   securitySchemes:
     Authorization:

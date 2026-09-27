@@ -206,37 +206,23 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.WebApi.DTO.Billing.AuditFileBlobDto:
+    OAS.DataModel.Billing.PostAuditEntity:
       properties:
-        instanceId:
-          type: integer
-          format: int32
-        startDate:
+        entity:
           type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        createdDate:
-          type: string
-          format: date-time
-        id:
-          type: integer
-          format: int32
-        openWith:
-          type: string
-        fileName:
-          type: string
-        blobDesc:
-          type: string
-        blobText:
-          type: string
-        category:
-          type: string
-        isZip:
+          enum:
+          - FundFamily
+          - Custodian
+          - BusinessLine
+        ids:
+          items:
+            type: integer
+            format: int32
+          type: array
+        selected:
           type: boolean
       xml:
-        name: AuditFileBlobDto
+        name: PostAuditEntity
       type: object
     OAS.WebApi.DTO.Billing.CashFundingGridDto:
       properties:
@@ -292,23 +278,37 @@ components:
       xml:
         name: CashFundingGridDto
       type: object
-    OAS.DataModel.Billing.PostAuditEntity:
+    OAS.WebApi.DTO.Billing.AuditFileBlobDto:
       properties:
-        entity:
+        instanceId:
+          type: integer
+          format: int32
+        startDate:
           type: string
-          enum:
-          - FundFamily
-          - Custodian
-          - BusinessLine
-        ids:
-          items:
-            type: integer
-            format: int32
-          type: array
-        selected:
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        createdDate:
+          type: string
+          format: date-time
+        id:
+          type: integer
+          format: int32
+        openWith:
+          type: string
+        fileName:
+          type: string
+        blobDesc:
+          type: string
+        blobText:
+          type: string
+        category:
+          type: string
+        isZip:
           type: boolean
       xml:
-        name: PostAuditEntity
+        name: AuditFileBlobDto
       type: object
     OAS.WebApi.DTO.Billing.PostAuditDataDto:
       properties:

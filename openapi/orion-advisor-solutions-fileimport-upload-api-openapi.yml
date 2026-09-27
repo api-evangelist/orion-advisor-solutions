@@ -394,53 +394,6 @@ components:
       xml:
         name: FileImportRequestDto
       type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
-      properties:
-        key:
-          readOnly: true
-          type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: KeyValuePair`2
-      type: object
-    OAS.WebApi.DTO.Utility.FileImportDto:
-      properties:
-        pkBlob:
-          type: integer
-          format: int32
-        fkParent:
-          type: integer
-          format: int32
-        fileName:
-          type: string
-        blobDesc:
-          type: string
-        blobText:
-          type: string
-        emailsSent:
-          type: integer
-          format: int32
-        invalidEmail:
-          type: integer
-          format: int32
-        message:
-          type: string
-      xml:
-        name: FileImportDto
-      type: object
-    OAS.WebApi.DTO.Utility.FileImportUploadDto:
-      required:
-      - file
-      properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-      xml:
-        name: FileImportUploadDto
-      type: object
     System.Net.Http.StreamContent:
       properties:
         headers:
@@ -454,66 +407,32 @@ components:
       xml:
         name: StreamContent
       type: object
-    OAS.WebApi.DTO.Utility.FileImportSettingDto:
-      required:
-      - blobDescription
-      - blobText
-      - fileExtension
-      - fileType
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
       properties:
-        sessionId:
-          example: 00000000-0000-0000-0000-000000000000
+        key:
+          readOnly: true
           type: string
-          format: uuid
-        fileNameConvention:
-          type: string
-        method:
-          type: string
-          enum:
-          - Only Import Existing Files
-          - Import All Overwriting Existing
-          - Import All Skip Exising
-        sendEmail:
-          type: boolean
-        ignoreDash:
-          type: boolean
-        ignoreLeadingZero:
-          type: boolean
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        blobDescription:
-          type: string
-          maxLength: 200
-          minLength: 0
-        blobText:
-          type: string
-        fileExtension:
-          type: string
-        fileType:
-          type: string
-        postLevel:
-          type: string
-          enum:
-          - Client
-          - Registration
-          - Account
-        createdDate:
-          type: string
-          format: date-time
-        totalNumberOfFile:
-          type: integer
-          format: int32
-        instanceName:
-          type: string
-        fileImportInstanceId:
-          type: integer
-          format: int32
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
       xml:
-        name: FileImportSettingDto
+        name: KeyValuePair`2
+      type: object
+    OAS.WebApi.DTO.Utility.FileImportDownloadLogsRequestDto:
+      properties:
+        files:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FileImportDto'
+          xml:
+            name: FileImportDto
+            wrapped: true
+          type: array
+        settings:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FileImportSettingDto'
+      xml:
+        name: FileImportDownloadLogsRequestDto
       type: object
     OAS.WebApi.DTO.Utility.FileImportSettingUploadDto:
       required:
@@ -579,20 +498,6 @@ components:
       xml:
         name: FileImportSettingUploadDto
       type: object
-    OAS.WebApi.DTO.Utility.FileImportDownloadLogsRequestDto:
-      properties:
-        files:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FileImportDto'
-          xml:
-            name: FileImportDto
-            wrapped: true
-          type: array
-        settings:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Utility.FileImportSettingDto'
-      xml:
-        name: FileImportDownloadLogsRequestDto
-      type: object
     MultipartDataMediaFormatter.Infrastructure.HttpFile:
       properties:
         fileName:
@@ -603,6 +508,101 @@ components:
           $ref: '#/components/schemas/System.Net.Http.StreamContent'
       xml:
         name: HttpFile
+      type: object
+    OAS.WebApi.DTO.Utility.FileImportUploadDto:
+      required:
+      - file
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+      xml:
+        name: FileImportUploadDto
+      type: object
+    OAS.WebApi.DTO.Utility.FileImportDto:
+      properties:
+        pkBlob:
+          type: integer
+          format: int32
+        fkParent:
+          type: integer
+          format: int32
+        fileName:
+          type: string
+        blobDesc:
+          type: string
+        blobText:
+          type: string
+        emailsSent:
+          type: integer
+          format: int32
+        invalidEmail:
+          type: integer
+          format: int32
+        message:
+          type: string
+      xml:
+        name: FileImportDto
+      type: object
+    OAS.WebApi.DTO.Utility.FileImportSettingDto:
+      required:
+      - blobDescription
+      - blobText
+      - fileExtension
+      - fileType
+      properties:
+        sessionId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        fileNameConvention:
+          type: string
+        method:
+          type: string
+          enum:
+          - Only Import Existing Files
+          - Import All Overwriting Existing
+          - Import All Skip Exising
+        sendEmail:
+          type: boolean
+        ignoreDash:
+          type: boolean
+        ignoreLeadingZero:
+          type: boolean
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        blobDescription:
+          type: string
+          maxLength: 200
+          minLength: 0
+        blobText:
+          type: string
+        fileExtension:
+          type: string
+        fileType:
+          type: string
+        postLevel:
+          type: string
+          enum:
+          - Client
+          - Registration
+          - Account
+        createdDate:
+          type: string
+          format: date-time
+        totalNumberOfFile:
+          type: integer
+          format: int32
+        instanceName:
+          type: string
+        fileImportInstanceId:
+          type: integer
+          format: int32
+      xml:
+        name: FileImportSettingDto
       type: object
   securitySchemes:
     Authorization:

@@ -685,6 +685,59 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAS.WebApi.DTO.Reporting.Notification.DaysOfWeekBool:
+      properties:
+        monday:
+          type: boolean
+        tuesday:
+          type: boolean
+        wednesday:
+          type: boolean
+        thursday:
+          type: boolean
+        friday:
+          type: boolean
+        saturday:
+          type: boolean
+        sunday:
+          type: boolean
+        toEnumArray:
+          items:
+            type: string
+            enum:
+            - Sunday
+            - Monday
+            - Tuesday
+            - Wednesday
+            - Thursday
+            - Friday
+            - Saturday
+          readOnly: true
+          type: array
+      xml:
+        name: DaysOfWeekBool
+      type: object
+    OAS.WebApi.DTO.Reporting.Notification.NotificationSchedule:
+      properties:
+        frequency:
+          type: string
+          enum:
+          - Daily
+          - Weekly
+          - Monthly
+          - Once
+        weekly:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Notification.DaysOfWeekBool'
+        monthly:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Notification.MonthsOfYearBool'
+        dayOfMonth:
+          type: integer
+          format: int32
+        timeOfDay:
+          type: string
+      xml:
+        name: NotificationSchedule
+      type: object
     OAS.WebApi.DTO.Reporting.Notification.NotificationSubscriptionWithDestinationDto:
       properties:
         id:
@@ -759,38 +812,6 @@ components:
       xml:
         name: NotificationSubscriptionWithDestinationDto
       type: object
-    OAS.WebApi.DTO.Reporting.Notification.NotificationSubscriptionsForUserDto:
-      properties:
-        notificationTypeId:
-          type: integer
-          format: int32
-        type:
-          type: string
-        destinations:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Notification.UserDestinationDto'
-          xml:
-            name: UserDestinationDto
-            wrapped: true
-          type: array
-        schedule:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Notification.NotificationSchedule'
-        category:
-          type: string
-      xml:
-        name: NotificationSubscriptionsForUserDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Notification.NotificationCountSummaryDto:
-      properties:
-        unreadInboxNotifications:
-          type: integer
-          format: int32
-        lastUpdate:
-          type: string
-          format: date-time
-      xml:
-        name: NotificationCountSummaryDto
-      type: object
     OAS.WebApi.DTO.Reporting.Notification.MonthsOfYearBool:
       properties:
         january:
@@ -841,6 +862,17 @@ components:
           type: array
       xml:
         name: MonthsOfYearBool
+      type: object
+    OAS.WebApi.DTO.Reporting.Notification.NotificationCountSummaryDto:
+      properties:
+        unreadInboxNotifications:
+          type: integer
+          format: int32
+        lastUpdate:
+          type: string
+          format: date-time
+      xml:
+        name: NotificationCountSummaryDto
       type: object
     OAS.WebApi.DTO.Reporting.Notification.NotificationDto:
       properties:
@@ -898,37 +930,26 @@ components:
       xml:
         name: NotificationDto
       type: object
-    OAS.WebApi.DTO.Reporting.Notification.DaysOfWeekBool:
+    OAS.WebApi.DTO.Reporting.Notification.NotificationSubscriptionsForUserDto:
       properties:
-        monday:
-          type: boolean
-        tuesday:
-          type: boolean
-        wednesday:
-          type: boolean
-        thursday:
-          type: boolean
-        friday:
-          type: boolean
-        saturday:
-          type: boolean
-        sunday:
-          type: boolean
-        toEnumArray:
+        notificationTypeId:
+          type: integer
+          format: int32
+        type:
+          type: string
+        destinations:
           items:
-            type: string
-            enum:
-            - Sunday
-            - Monday
-            - Tuesday
-            - Wednesday
-            - Thursday
-            - Friday
-            - Saturday
-          readOnly: true
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Notification.UserDestinationDto'
+          xml:
+            name: UserDestinationDto
+            wrapped: true
           type: array
+        schedule:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Notification.NotificationSchedule'
+        category:
+          type: string
       xml:
-        name: DaysOfWeekBool
+        name: NotificationSubscriptionsForUserDto
       type: object
     OAS.WebApi.DTO.Reporting.Notification.UserDestinationDto:
       properties:
@@ -954,27 +975,6 @@ components:
           format: int32
       xml:
         name: UserDestinationDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Notification.NotificationSchedule:
-      properties:
-        frequency:
-          type: string
-          enum:
-          - Daily
-          - Weekly
-          - Monthly
-          - Once
-        weekly:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Notification.DaysOfWeekBool'
-        monthly:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Notification.MonthsOfYearBool'
-        dayOfMonth:
-          type: integer
-          format: int32
-        timeOfDay:
-          type: string
-      xml:
-        name: NotificationSchedule
       type: object
   securitySchemes:
     Authorization:

@@ -241,20 +241,20 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.DataModel.Reporting.Calculate.DateRangeGroupInfoOptionCalculated:
+    OAS.WebApi.DTO.Reporting.VerboseCalculationComparisonDto:
       properties:
-        dateRangeId:
+        id:
           type: integer
           format: int32
-        groupInfoId:
-          type: integer
-          format: int32
-        value:
+        name:
           type: string
-        error:
-          type: string
+        benchmarks:
+          items:
+            type: integer
+            format: int32
+          type: array
       xml:
-        name: DateRangeGroupInfoOptionCalculated
+        name: VerboseCalculationComparisonDto
       type: object
     OAS.DataModel.Reporting.Calculate.DateRangeCostBasisOptionCalculated:
       properties:
@@ -286,6 +286,84 @@ components:
           - LotDetail
       xml:
         name: DateRangeCostBasisOptionCalculated
+      type: object
+    OAS.DataModel.Reporting.Calculate.DateRangeGroupInfoOptionCalculated:
+      properties:
+        dateRangeId:
+          type: integer
+          format: int32
+        groupInfoId:
+          type: integer
+          format: int32
+        value:
+          type: string
+        error:
+          type: string
+      xml:
+        name: DateRangeGroupInfoOptionCalculated
+      type: object
+    OAS.WebApi.DTO.Reporting.VerboseCalculationDateRangePerformanceOptionDto:
+      properties:
+        reportCategoryId:
+          type: integer
+          format: int32
+        dateRangeId:
+          type: integer
+          format: int32
+        performanceOptionId:
+          type: integer
+          format: int32
+        comparisonId:
+          type: integer
+          format: int32
+        statisticalOptionId:
+          type: integer
+          format: int32
+        returnType:
+          type: string
+          enum:
+          - Aggregated
+          - Breakdown
+        returnStyle:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.VerboseCalculationReturnStyleDto'
+      xml:
+        name: VerboseCalculationDateRangePerformanceOptionDto
+      type: object
+    OAT.Utilities.Date.IDate:
+      properties:
+        date:
+          readOnly: true
+          type: string
+          format: date-time
+        year:
+          readOnly: true
+          type: integer
+          format: int32
+        month:
+          readOnly: true
+          type: integer
+          format: int32
+        day:
+          readOnly: true
+          type: integer
+          format: int32
+      xml:
+        name: IDate
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IStandardOption:
+      properties:
+        name:
+          readOnly: true
+          type: string
+        type:
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+          format: int32
+      xml:
+        name: IStandardOption
       type: object
     OAS.WebApi.DTO.Reporting.VerboseCalculationGroupInfoOptionDto:
       properties:
@@ -485,70 +563,113 @@ components:
       xml:
         name: VerboseCalculationGroupInfoOptionDto
       type: object
-    OAS.WebApi.DTO.Reporting.VerboseCalculationDateRangeCostBasisOptionDto:
+    OAS.WebApi.DTO.Reporting.VerboseCalculationCostBasisOptionDto:
       properties:
-        reportCategoryId:
+        id:
           type: integer
           format: int32
+        source:
+          type: string
+          enum:
+          - Orion
+          - Custodian
+        realizationType:
+          type: string
+          enum:
+          - Realized
+          - Unrealized
+        includeAmortization:
+          type: boolean
+        includeDividends:
+          type: boolean
+        includeMoneyMarkets:
+          type: boolean
+        includeQualifiedAccounts:
+          type: boolean
+        includeUnknownCostBasis:
+          type: boolean
+        useInceptionCostBasis:
+          type: boolean
+        preserveNegativeUnrealizedCostBasis:
+          type: boolean
+        displayGainsOrLosses:
+          type: string
+          enum:
+          - Both
+          - Gains
+          - Losses
+      xml:
+        name: VerboseCalculationCostBasisOptionDto
+      type: object
+    OAS.DataModel.Reporting.Calculate.DateRangePerformanceOptionCalculated:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
         dateRangeId:
           type: integer
           format: int32
-        costBasisOptionId:
+        performanceOptionId:
+          type: integer
+          format: int32
+        calculatedPerformanceOptionId:
+          type: integer
+          format: int32
+        benchmarkId:
+          type: integer
+          format: int32
+        statisticalOptionId:
           type: integer
           format: int32
         returnStyle:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.VerboseCalculationReturnStyleDto'
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IReturnStyle'
         returnType:
           type: string
           enum:
-          - AggregatedValue
-          - LotDetail
+          - Aggregated
+          - Breakdown
+        returns:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.PerformanceReturnCalculatedBase'
+          xml:
+            name: PerformanceReturnCalculatedBase
+            wrapped: true
+          type: array
       xml:
-        name: VerboseCalculationDateRangeCostBasisOptionDto
+        name: DateRangePerformanceOptionCalculated
       type: object
-    OAS.WebApi.DTO.Reporting.VerboseCalculationPerformanceOptionDto:
+    OAS.DataModel.Reporting.Calculate.DateRangeCalculated:
       properties:
+        type:
+          readOnly: true
+          type: string
         id:
           type: integer
           format: int32
         name:
           type: string
-        calculationMethod:
+        displayName:
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+        dataMustExistOnRangeStartDate:
+          type: boolean
+        dataMustExistOnRangeEndDate:
+          type: boolean
+        allowStartDateAdjustment:
+          type: boolean
+        startDateMethod:
           type: string
           enum:
-          - TWR
-          - Simple
-          - IRR
-        includeAccruedInterest:
-          type: boolean
-        calcGrossOfFees:
-          type: boolean
-        calcFirstDayPerformance:
-          type: boolean
-        calcIntraDayPerformance:
-          type: boolean
-        annualize:
-          type: boolean
-        annualizeIncludeDaysWithoutValue:
-          type: boolean
-        flipSignForShort:
-          type: boolean
-        suppressMixedRanges:
-          type: boolean
-        suppressMixedAssetLevelGroups:
-          type: boolean
-        includeAIPLedger:
-          type: boolean
-        calcAfterTax:
-          type: boolean
-        intradayCalculationMethod:
-          type: string
-          enum:
-          - Standard
-          - Enhanced
-          - MarginEnhanced
+          - Inception
+          - HoldingPeriod
+          - AIPLedger
       xml:
-        name: VerboseCalculationPerformanceOptionDto
+        name: DateRangeCalculated
       type: object
     OAS.WebApi.DTO.Reporting.VerboseCalculationSettingsDto:
       properties:
@@ -705,118 +826,6 @@ components:
           type: array
       xml:
         name: VerboseCalculationSettingsDto
-      type: object
-    OAS.DataModel.Reporting.Calculate.AttributionReturnCalculated:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        startDate:
-          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
-        endDate:
-          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
-        benchmarkId:
-          type: integer
-          format: int32
-        portfolioWeight:
-          type: number
-          format: double
-        portfolioReturn:
-          type: number
-          format: double
-        benchmarkWeight:
-          type: number
-          format: double
-        benchmarkReturn:
-          type: number
-          format: double
-        allocationEffect:
-          type: number
-          format: double
-        selectionEffect:
-          type: number
-          format: double
-        interactionEffect:
-          type: number
-          format: double
-        totalEffect:
-          type: number
-          format: double
-      xml:
-        name: AttributionReturnCalculated
-      type: object
-    OAS.DataModel.Reporting.Calculate.DateRangeBillingOptionCalculated:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        dateRangeId:
-          type: integer
-          format: int32
-        billingOptionId:
-          type: integer
-          format: int32
-        calculatedBillingOptionId:
-          type: integer
-          format: int32
-        returnStyle:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IReturnStyle'
-        returnType:
-          type: string
-          enum:
-          - Disclaimers
-          - FeeSchedules
-          - DescriptiveData
-          - PayInstructions
-          - SpecialInstructions
-          - PaysFor
-          - RelatedAccounts
-          - BillingRule
-        returns:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.BillingReturnCalculatedBase'
-          xml:
-            name: BillingReturnCalculatedBase
-            wrapped: true
-          type: array
-      xml:
-        name: DateRangeBillingOptionCalculated
-      type: object
-    OAS.DataModel.Reporting.Calculate.ActivityOption:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        displayName:
-          type: string
-        inceptionValueMethod:
-          type: string
-          enum:
-          - NewMoney
-          - Zero
-          - DayAfter
-        includeUnmanagedJournals:
-          type: boolean
-        details:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.ActivityDetailBase'
-          xml:
-            name: ActivityDetailBase
-            wrapped: true
-          type: array
-      xml:
-        name: ActivityOption
       type: object
     OAS.DataModel.Reporting.Calculate.GroupCalculated:
       properties:
@@ -984,204 +993,32 @@ components:
       xml:
         name: GroupCalculated
       type: object
-    OAS.WebApi.DTO.Reporting.VerboseCalculationReturnStyleDto:
+    OAS.DataModel.Reporting.Calculate.DateRangeComparisonBenchmarkCalculated:
       properties:
-        context:
-          type: string
-          enum:
-          - Self
-          - Parent
-        frequency:
-          type: string
-          enum:
-          - Summary
-          - Annually
-          - Quarterly
-          - Monthly
-          - Weekly
-          - Daily
-          - Automatic
-        basedOn:
-          type: string
-          enum:
-          - Calendar
-          - RollingForward
-          - RollingBackward
-        breakBehavior:
-          type: string
-          enum:
-          - AllowPartialPeriods
-          - PartialPeriodsWithBreakPoints
-          - FullPeriodsOnly
-        cumulative:
-          type: boolean
-        cumulativeBasedOn:
-          type: string
-          enum:
-          - ForwardFromStartDate
-          - BackwardFromEndDate
-      xml:
-        name: VerboseCalculationReturnStyleDto
-      type: object
-    OAS.DataModel.Reporting.Calculate.CostBasisOption:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        source:
-          type: string
-          enum:
-          - Orion
-          - Custodian
-        realizationType:
-          type: string
-          enum:
-          - Realized
-          - Unrealized
-        includeAmortization:
-          type: boolean
-        includeDividends:
-          type: boolean
-        includeMoneyMarkets:
-          type: boolean
-        includeQualifiedAccounts:
-          type: boolean
-        includeUnknownCostBasis:
-          type: boolean
-        useInceptionCostBasis:
-          type: boolean
-        preserveNegativeUnrealizedCostBasis:
-          type: boolean
-        displayGainsOrLosses:
-          type: string
-          enum:
-          - Both
-          - Gains
-          - Losses
-      xml:
-        name: CostBasisOption
-      type: object
-    OAS.WebApi.DTO.Reporting.VerboseCalculationActivityOptionDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        inceptionValueMethod:
-          type: string
-          enum:
-          - NewMoney
-          - Zero
-          - DayAfter
-        details:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.ActivityDetailBase'
-          xml:
-            name: ActivityDetailBase
-            wrapped: true
-          type: array
-      xml:
-        name: VerboseCalculationActivityOptionDto
-      type: object
-    OAS.DataModel.Reporting.Calculate.PerformanceReturnCalculatedBase:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        startDate:
-          type: string
-        endDate:
-          type: string
-      xml:
-        name: PerformanceReturnCalculatedBase
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IReturnStyle:
-      properties:
-        frequency:
-          readOnly: true
-          type: string
-          enum:
-          - Summary
-          - Annually
-          - Quarterly
-          - Monthly
-          - Weekly
-          - Daily
-          - Automatic
-        basedOn:
-          readOnly: true
-          type: string
-          enum:
-          - Calendar
-          - RollingForward
-          - RollingBackward
-        breakBehavior:
-          readOnly: true
-          type: string
-          enum:
-          - AllowPartialPeriods
-          - PartialPeriodsWithBreakPoints
-          - FullPeriodsOnly
-        cumulative:
-          readOnly: true
-          type: boolean
-        cumulativeBasedOn:
-          readOnly: true
-          type: string
-          enum:
-          - ForwardFromStartDate
-          - BackwardFromEndDate
-        context:
-          readOnly: true
-          type: string
-          enum:
-          - Self
-          - Parent
-      xml:
-        name: IReturnStyle
-      type: object
-    OAS.DataModel.Reporting.Calculate.ActivityReturnCalculated:
-      properties:
-        type:
-          readOnly: true
-          type: string
-        startDate:
-          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
-        endDate:
-          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
-      xml:
-        name: ActivityReturnCalculated
-      type: object
-    OAS.DataModel.Reporting.Calculate.DateRangePerformanceOptionCalculated:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        dateRangeId:
-          type: integer
-          format: int32
-        performanceOptionId:
-          type: integer
-          format: int32
-        calculatedPerformanceOptionId:
+        comparisonId:
           type: integer
           format: int32
         benchmarkId:
           type: integer
           format: int32
-        statisticalOptionId:
+        sortOrder:
+          type: integer
+          format: int32
+      xml:
+        name: DateRangeComparisonBenchmarkCalculated
+      type: object
+    OAS.DataModel.Reporting.Calculate.DateRangeActivityOptionCalculated:
+      properties:
+        type:
+          readOnly: true
+          type: string
+        dateRangeId:
+          type: integer
+          format: int32
+        activityOptionId:
+          type: integer
+          format: int32
+        calculatedActivityOptionId:
           type: integer
           format: int32
         returnStyle:
@@ -1189,33 +1026,19 @@ components:
         returnType:
           type: string
           enum:
-          - Aggregated
-          - Breakdown
+          - AggregatedValue
+          - TransactionBreakdown
         returns:
           items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.PerformanceReturnCalculatedBase'
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.ActivityReturnCalculated'
           xml:
-            name: PerformanceReturnCalculatedBase
+            name: ActivityReturnCalculated
             wrapped: true
           type: array
       xml:
-        name: DateRangePerformanceOptionCalculated
+        name: DateRangeActivityOptionCalculated
       type: object
-    OAS.DataModel.Reporting.Calculate.IncomeReturnCalculatedBase:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        startDate:
-          type: string
-        endDate:
-          type: string
-      xml:
-        name: IncomeReturnCalculatedBase
-      type: object
-    OAS.DataModel.Reporting.Calculate.StatisticalOption:
+    OAS.DataModel.Reporting.Calculate.BillingOption:
       required:
       - $type
       properties:
@@ -1227,35 +1050,195 @@ components:
           format: int32
         name:
           type: string
-        riskFreeBenchmarkId:
-          type: integer
-          format: int32
-        marketBenchmarkId:
-          type: integer
-          format: int32
-        options:
+        billsToReturn:
+          type: string
+          enum:
+          - AllBills
+          - LastBill
+          - MockBills
+          - LastMockBill
+        includedBillPayMethods:
           items:
             type: string
             enum:
-            - StandardDeviation
-            - Mean
-            - Variance
-            - Drawdown
-            - SharpeRatio
-            - SortinoRatio
-            - Covariance
-            - RSquared
-            - BetaCoefficient
-            - TreynorRatio
-            - JensensAlpha
-            - UpsideCaptureRatio
-            - DownsideCaptureRatio
+            - ACH
+            - Check
+            - CreditCard
+            - Direct
+            - Indirect
+            - NoFee
+            - NonManaged
+            - SpecialInstructions
           xml:
-            name: StatisticType
+            name: BillPayMethod
+            wrapped: true
+          type: array
+        includeOnlyRelevantFeeSchedules:
+          type: boolean
+        includeDollarFlatFeeSchedules:
+          type: boolean
+        useAsOfDateOverride:
+          type: boolean
+        cashflowRollup:
+          type: boolean
+        includedBillTypes:
+          items:
+            type: string
+            enum:
+            - Unknown
+            - Renewal
+            - NewMoney
+            - NewAccount
+            - FinancialPlanningFee
+            - Performance
+            - AdvanceCreditDebit
+          xml:
+            name: BillTypeEnum
+            wrapped: true
+          type: array
+        includedBillAdjustmentTypes:
+          items:
+            type: integer
+            format: int32
+          type: array
+        includedBillEntities:
+          items:
+            type: integer
+            format: int32
+          type: array
+      xml:
+        name: BillingOption
+      type: object
+    OAS.DataModel.Reporting.Calculate.BillingReturnCalculatedBase:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+      xml:
+        name: BillingReturnCalculatedBase
+      type: object
+    OAS.WebApi.DTO.Reporting.VerboseCalculationDateRangeGroupInfoOptionDto:
+      properties:
+        reportCategoryId:
+          type: integer
+          format: int32
+        dateRangeId:
+          type: integer
+          format: int32
+        groupInfoOptionId:
+          type: integer
+          format: int32
+      xml:
+        name: VerboseCalculationDateRangeGroupInfoOptionDto
+      type: object
+    OAS.DataModel.Reporting.Calculate.BatchCalculated:
+      properties:
+        sessionId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        expirationDate:
+          type: string
+          format: date-time
+        groups:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.GroupCalculated'
+          xml:
+            name: GroupCalculated
+            wrapped: true
+          type: array
+        buckets:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.BucketCalculated'
+          xml:
+            name: BucketCalculated
+            wrapped: true
+          type: array
+        benchmarks:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.BenchmarkCalculated'
+          xml:
+            name: BenchmarkCalculated
+            wrapped: true
+          type: array
+        comparisons:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.ComparisonCalculated'
+          xml:
+            name: ComparisonCalculated
+            wrapped: true
+          type: array
+        dateRanges:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.DateRangeCalculated'
+          xml:
+            name: DateRangeCalculated
+            wrapped: true
+          type: array
+        activityOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.ActivityOption'
+          xml:
+            name: ActivityOption
+            wrapped: true
+          type: array
+        attributionOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.AttributionOption'
+          xml:
+            name: AttributionOption
+            wrapped: true
+          type: array
+        billingOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.BillingOption'
+          xml:
+            name: BillingOption
+            wrapped: true
+          type: array
+        costBasisOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.CostBasisOption'
+          xml:
+            name: CostBasisOption
+            wrapped: true
+          type: array
+        groupInfoOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.GroupInfoCalculated'
+          xml:
+            name: GroupInfoCalculated
+            wrapped: true
+          type: array
+        performanceOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.PerformanceOption'
+          xml:
+            name: PerformanceOption
+            wrapped: true
+          type: array
+        statisticalOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.StatisticalOption'
+          xml:
+            name: StatisticalOption
+            wrapped: true
+          type: array
+        tradingOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.TradingOption'
+          xml:
+            name: TradingOption
             wrapped: true
           type: array
       xml:
-        name: StatisticalOption
+        name: BatchCalculated
       type: object
     OAS.DataModel.Reporting.Calculate.BenchmarkCalculated:
       properties:
@@ -1289,113 +1272,6 @@ components:
           type: string
       xml:
         name: BenchmarkCalculated
-      type: object
-    OAS.WebApi.DTO.Reporting.VerboseCalculationDateRangeDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        displayName:
-          type: string
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        dataMustExistOnRangeStartDate:
-          type: boolean
-        dataMustExistOnRangeEndDate:
-          type: boolean
-        allowStartDateAdjustment:
-          type: boolean
-        startDateMethod:
-          type: string
-          enum:
-          - Inception
-          - HoldingPeriod
-          - AIPLedger
-      xml:
-        name: VerboseCalculationDateRangeDto
-      type: object
-    OAS.DataModel.Reporting.Calculate.TradingReturn:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        startDate:
-          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
-        endDate:
-          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
-        groupBy:
-          type: string
-          enum:
-          - None
-          - IncludedInModel
-          - NotInModelRebalance
-          - NotInModel
-        actualPercent:
-          type: number
-          format: double
-        actualValue:
-          type: number
-          format: double
-        modelPercent:
-          type: number
-          format: double
-        modelValue:
-          type: number
-          format: double
-        percentOutOfBalance:
-          type: number
-          format: double
-        valueOutOfBalance:
-          type: number
-          format: double
-        itemTolLower:
-          type: number
-          format: double
-        itemTolUpper:
-          type: number
-          format: double
-        isExcluded:
-          type: boolean
-        hasCashAsset:
-          type: boolean
-        isOutOfTolerance:
-          type: boolean
-      xml:
-        name: TradingReturn
-      type: object
-    OAS.DataModel.Reporting.Calculate.DateRangeIncomeOptionCalculated:
-      properties:
-        type:
-          readOnly: true
-          type: string
-        dateRangeId:
-          type: integer
-          format: int32
-        incomeOptionId:
-          type: integer
-          format: int32
-        calculatedIncomeOptionId:
-          type: integer
-          format: int32
-        returnStyle:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IReturnStyle'
-        returns:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.IncomeReturnCalculatedBase'
-          xml:
-            name: IncomeReturnCalculatedBase
-            wrapped: true
-          type: array
-      xml:
-        name: DateRangeIncomeOptionCalculated
       type: object
     OAS.DataModel.Reporting.Calculate.GroupInfoCalculated:
       properties:
@@ -1595,7 +1471,139 @@ components:
       xml:
         name: GroupInfoCalculated
       type: object
-    OAS.DataModel.Reporting.Calculate.DateRangeTradingOptionCalculated:
+    OAS.DataModel.Reporting.Calculate.DateRangeIncomeOptionCalculated:
+      properties:
+        type:
+          readOnly: true
+          type: string
+        dateRangeId:
+          type: integer
+          format: int32
+        incomeOptionId:
+          type: integer
+          format: int32
+        calculatedIncomeOptionId:
+          type: integer
+          format: int32
+        returnStyle:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IReturnStyle'
+        returns:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.IncomeReturnCalculatedBase'
+          xml:
+            name: IncomeReturnCalculatedBase
+            wrapped: true
+          type: array
+      xml:
+        name: DateRangeIncomeOptionCalculated
+      type: object
+    OAS.DataModel.Reporting.Calculate.PerformanceOption:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        calculationMethod:
+          type: string
+          enum:
+          - TWR
+          - Simple
+          - IRR
+        includeAccruedInterest:
+          type: boolean
+        calcGrossOfFees:
+          type: boolean
+        calcFirstDayPerformance:
+          type: boolean
+        calcIntraDayPerformance:
+          type: boolean
+        annualize:
+          type: boolean
+        annualizeIncludeDaysWithoutValue:
+          type: boolean
+        flipSignForShort:
+          type: boolean
+        suppressMixedRanges:
+          type: boolean
+        suppressMixedAssetLevelGroups:
+          type: boolean
+        includeAIPLedger:
+          type: boolean
+        calcAfterTax:
+          type: boolean
+        intradayCalculationMethod:
+          type: string
+          enum:
+          - Standard
+          - Enhanced
+          - MarginEnhanced
+      xml:
+        name: PerformanceOption
+      type: object
+    OAS.WebApi.DTO.Reporting.VerboseCalculationAttributionOptionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        calculationMethod:
+          type: string
+          enum:
+          - BrinsonFachler
+        technique:
+          type: string
+          enum:
+          - Arithmetic
+        linkingMethod:
+          type: string
+          enum:
+          - Geometric
+      xml:
+        name: VerboseCalculationAttributionOptionDto
+      type: object
+    OAS.WebApi.DTO.Reporting.VerboseCalculationStatisticalOptionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        riskFreeBenchmarkId:
+          type: integer
+          format: int32
+        marketBenchmarkId:
+          type: integer
+          format: int32
+        options:
+          items:
+            type: string
+            enum:
+            - StandardDeviation
+            - Mean
+            - Variance
+            - Drawdown
+            - SharpeRatio
+            - SortinoRatio
+            - Covariance
+            - RSquared
+            - BetaCoefficient
+            - TreynorRatio
+            - JensensAlpha
+            - UpsideCaptureRatio
+            - DownsideCaptureRatio
+          xml:
+            name: StatisticType
+            wrapped: true
+          type: array
+      xml:
+        name: VerboseCalculationStatisticalOptionDto
+      type: object
+    OAS.DataModel.Reporting.Calculate.DateRangeBillingOptionCalculated:
       required:
       - $type
       properties:
@@ -1605,23 +1613,138 @@ components:
         dateRangeId:
           type: integer
           format: int32
-        tradingOptionId:
+        billingOptionId:
           type: integer
           format: int32
-        calculatedTradingOptionId:
+        calculatedBillingOptionId:
           type: integer
           format: int32
         returnStyle:
           $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IReturnStyle'
+        returnType:
+          type: string
+          enum:
+          - Disclaimers
+          - FeeSchedules
+          - DescriptiveData
+          - PayInstructions
+          - SpecialInstructions
+          - PaysFor
+          - RelatedAccounts
+          - BillingRule
         returns:
           items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.TradingReturn'
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.BillingReturnCalculatedBase'
           xml:
-            name: TradingReturn
+            name: BillingReturnCalculatedBase
             wrapped: true
           type: array
       xml:
-        name: DateRangeTradingOptionCalculated
+        name: DateRangeBillingOptionCalculated
+      type: object
+    OAS.WebApi.DTO.Reporting.VerboseCalculationReturnStyleDto:
+      properties:
+        context:
+          type: string
+          enum:
+          - Self
+          - Parent
+        frequency:
+          type: string
+          enum:
+          - Summary
+          - Annually
+          - Quarterly
+          - Monthly
+          - Weekly
+          - Daily
+          - Automatic
+        basedOn:
+          type: string
+          enum:
+          - Calendar
+          - RollingForward
+          - RollingBackward
+        breakBehavior:
+          type: string
+          enum:
+          - AllowPartialPeriods
+          - PartialPeriodsWithBreakPoints
+          - FullPeriodsOnly
+        cumulative:
+          type: boolean
+        cumulativeBasedOn:
+          type: string
+          enum:
+          - ForwardFromStartDate
+          - BackwardFromEndDate
+      xml:
+        name: VerboseCalculationReturnStyleDto
+      type: object
+    OAS.DataModel.Reporting.Calculate.ActivityDetailBase:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        isManaged:
+          type: boolean
+        flipSign:
+          type: boolean
+      xml:
+        name: ActivityDetailBase
+      type: object
+    OAS.DataModel.Reporting.Calculate.TradingReturn:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        startDate:
+          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
+        endDate:
+          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
+        groupBy:
+          type: string
+          enum:
+          - None
+          - IncludedInModel
+          - NotInModelRebalance
+          - NotInModel
+        actualPercent:
+          type: number
+          format: double
+        actualValue:
+          type: number
+          format: double
+        modelPercent:
+          type: number
+          format: double
+        modelValue:
+          type: number
+          format: double
+        percentOutOfBalance:
+          type: number
+          format: double
+        valueOutOfBalance:
+          type: number
+          format: double
+        itemTolLower:
+          type: number
+          format: double
+        itemTolUpper:
+          type: number
+          format: double
+        isExcluded:
+          type: boolean
+        hasCashAsset:
+          type: boolean
+        isOutOfTolerance:
+          type: boolean
+      xml:
+        name: TradingReturn
       type: object
     OAS.WebApi.DTO.Reporting.VerboseCalculationGroupDto:
       properties:
@@ -1834,11 +1957,18 @@ components:
       xml:
         name: VerboseCalculationBenchmarkDto
       type: object
-    OAS.WebApi.DTO.Reporting.VerboseCalculationCostBasisOptionDto:
+    OAS.DataModel.Reporting.Calculate.CostBasisOption:
+      required:
+      - $type
       properties:
+        $type:
+          readOnly: true
+          type: string
         id:
           type: integer
           format: int32
+        name:
+          type: string
         source:
           type: string
           enum:
@@ -1870,43 +2000,7 @@ components:
           - Gains
           - Losses
       xml:
-        name: VerboseCalculationCostBasisOptionDto
-      type: object
-    OAS.WebApi.DTO.Reporting.VerboseCalculationComparisonDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        benchmarks:
-          items:
-            type: integer
-            format: int32
-          type: array
-      xml:
-        name: VerboseCalculationComparisonDto
-      type: object
-    OAT.Utilities.Date.IDate:
-      properties:
-        date:
-          readOnly: true
-          type: string
-          format: date-time
-        year:
-          readOnly: true
-          type: integer
-          format: int32
-        month:
-          readOnly: true
-          type: integer
-          format: int32
-        day:
-          readOnly: true
-          type: integer
-          format: int32
-      xml:
-        name: IDate
+        name: CostBasisOption
       type: object
     OAS.WebApi.DTO.Reporting.Billing.VerboseCalculationDateRangeBillingOptionDto:
       properties:
@@ -1935,47 +2029,30 @@ components:
       xml:
         name: VerboseCalculationDateRangeBillingOptionDto
       type: object
-    OAS.DataModel.Reporting.Calculate.DateRangeComparisonBenchmarkCalculated:
+    OAS.WebApi.DTO.Reporting.VerboseCalculationActivityOptionDto:
       properties:
-        comparisonId:
+        id:
           type: integer
           format: int32
-        benchmarkId:
-          type: integer
-          format: int32
-        sortOrder:
-          type: integer
-          format: int32
-      xml:
-        name: DateRangeComparisonBenchmarkCalculated
-      type: object
-    OAS.DataModel.Reporting.Calculate.CostBasisReturnCalculatedBase:
-      properties:
-        type:
-          readOnly: true
+        name:
           type: string
-        startDate:
-          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
-        endDate:
-          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
-        isLongTerm:
-          type: boolean
-        transAmount:
-          type: number
-          format: double
-        costBasis:
-          type: number
-          format: double
-        amortization:
-          type: number
-          format: double
-        gainLoss:
-          type: number
-          format: double
+        inceptionValueMethod:
+          type: string
+          enum:
+          - NewMoney
+          - Zero
+          - DayAfter
+        details:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.ActivityDetailBase'
+          xml:
+            name: ActivityDetailBase
+            wrapped: true
+          type: array
       xml:
-        name: CostBasisReturnCalculatedBase
+        name: VerboseCalculationActivityOptionDto
       type: object
-    OAS.DataModel.Reporting.Calculate.BillingOption:
+    OAS.DataModel.Reporting.Calculate.TradingOption:
       required:
       - $type
       properties:
@@ -1987,520 +2064,123 @@ components:
           format: int32
         name:
           type: string
-        billsToReturn:
-          type: string
-          enum:
-          - AllBills
-          - LastBill
-          - MockBills
-          - LastMockBill
-        includedBillPayMethods:
-          items:
-            type: string
-            enum:
-            - ACH
-            - Check
-            - CreditCard
-            - Direct
-            - Indirect
-            - NoFee
-            - NonManaged
-            - SpecialInstructions
-          xml:
-            name: BillPayMethod
-            wrapped: true
-          type: array
-        includeOnlyRelevantFeeSchedules:
+        includeMoneyMarket:
           type: boolean
-        includeDollarFlatFeeSchedules:
+        includePendingTrades:
           type: boolean
-        useAsOfDateOverride:
-          type: boolean
-        cashflowRollup:
-          type: boolean
-        includedBillTypes:
-          items:
-            type: string
-            enum:
-            - Unknown
-            - Renewal
-            - NewMoney
-            - NewAccount
-            - FinancialPlanningFee
-            - Performance
-            - AdvanceCreditDebit
-          xml:
-            name: BillTypeEnum
-            wrapped: true
-          type: array
-        includedBillAdjustmentTypes:
-          items:
-            type: integer
-            format: int32
-          type: array
-        includedBillEntities:
-          items:
-            type: integer
-            format: int32
-          type: array
       xml:
-        name: BillingOption
+        name: TradingOption
       type: object
-    OAS.DataModel.Reporting.Interfaces.IStandardOption:
+    OAS.WebApi.DTO.Reporting.VerboseCalculationDateRangeCostBasisOptionDto:
       properties:
-        name:
-          readOnly: true
-          type: string
-        type:
-          readOnly: true
-          type: string
-        id:
-          readOnly: true
+        reportCategoryId:
           type: integer
           format: int32
+        dateRangeId:
+          type: integer
+          format: int32
+        costBasisOptionId:
+          type: integer
+          format: int32
+        returnStyle:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.VerboseCalculationReturnStyleDto'
+        returnType:
+          type: string
+          enum:
+          - AggregatedValue
+          - LotDetail
       xml:
-        name: IStandardOption
+        name: VerboseCalculationDateRangeCostBasisOptionDto
       type: object
-    OAS.DataModel.Reporting.Calculate.DateRangeActivityOptionCalculated:
+    OAS.DataModel.Reporting.Calculate.AttributionReturnCalculated:
+      required:
+      - $type
       properties:
-        type:
+        $type:
           readOnly: true
           type: string
+        startDate:
+          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
+        endDate:
+          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
+        benchmarkId:
+          type: integer
+          format: int32
+        portfolioWeight:
+          type: number
+          format: double
+        portfolioReturn:
+          type: number
+          format: double
+        benchmarkWeight:
+          type: number
+          format: double
+        benchmarkReturn:
+          type: number
+          format: double
+        allocationEffect:
+          type: number
+          format: double
+        selectionEffect:
+          type: number
+          format: double
+        interactionEffect:
+          type: number
+          format: double
+        totalEffect:
+          type: number
+          format: double
+      xml:
+        name: AttributionReturnCalculated
+      type: object
+    OAS.WebApi.DTO.Reporting.VerboseCalculationDateRangeActivityOptionDto:
+      properties:
+        reportCategoryId:
+          type: integer
+          format: int32
         dateRangeId:
           type: integer
           format: int32
         activityOptionId:
           type: integer
           format: int32
-        calculatedActivityOptionId:
-          type: integer
-          format: int32
         returnStyle:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IReturnStyle'
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.VerboseCalculationReturnStyleDto'
         returnType:
           type: string
           enum:
           - AggregatedValue
           - TransactionBreakdown
+      xml:
+        name: VerboseCalculationDateRangeActivityOptionDto
+      type: object
+    OAS.DataModel.Reporting.Calculate.DateRangeTradingOptionCalculated:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        dateRangeId:
+          type: integer
+          format: int32
+        tradingOptionId:
+          type: integer
+          format: int32
+        calculatedTradingOptionId:
+          type: integer
+          format: int32
+        returnStyle:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IReturnStyle'
         returns:
           items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.ActivityReturnCalculated'
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.TradingReturn'
           xml:
-            name: ActivityReturnCalculated
+            name: TradingReturn
             wrapped: true
           type: array
       xml:
-        name: DateRangeActivityOptionCalculated
-      type: object
-    OAS.WebApi.DTO.Reporting.VerboseCalculationDateRangeFullDto:
-      properties:
-        isDefault:
-          type: boolean
-        sortOrder:
-          type: integer
-          format: int32
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        displayName:
-          type: string
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        dataMustExistOnRangeStartDate:
-          type: boolean
-        dataMustExistOnRangeEndDate:
-          type: boolean
-        allowStartDateAdjustment:
-          type: boolean
-        startDateMethod:
-          type: string
-          enum:
-          - Inception
-          - HoldingPeriod
-          - AIPLedger
-      xml:
-        name: VerboseCalculationDateRangeFullDto
-      type: object
-    OAS.DataModel.Reporting.Calculate.DateRangeCalculated:
-      properties:
-        type:
-          readOnly: true
-          type: string
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        displayName:
-          type: string
-        startDate:
-          type: string
-        endDate:
-          type: string
-        dataMustExistOnRangeStartDate:
-          type: boolean
-        dataMustExistOnRangeEndDate:
-          type: boolean
-        allowStartDateAdjustment:
-          type: boolean
-        startDateMethod:
-          type: string
-          enum:
-          - Inception
-          - HoldingPeriod
-          - AIPLedger
-      xml:
-        name: DateRangeCalculated
-      type: object
-    OAS.WebApi.DTO.Reporting.VerboseCalculationStatisticalOptionDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        riskFreeBenchmarkId:
-          type: integer
-          format: int32
-        marketBenchmarkId:
-          type: integer
-          format: int32
-        options:
-          items:
-            type: string
-            enum:
-            - StandardDeviation
-            - Mean
-            - Variance
-            - Drawdown
-            - SharpeRatio
-            - SortinoRatio
-            - Covariance
-            - RSquared
-            - BetaCoefficient
-            - TreynorRatio
-            - JensensAlpha
-            - UpsideCaptureRatio
-            - DownsideCaptureRatio
-          xml:
-            name: StatisticType
-            wrapped: true
-          type: array
-      xml:
-        name: VerboseCalculationStatisticalOptionDto
-      type: object
-    OAS.DataModel.Reporting.Calculate.BillingReturnCalculatedBase:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        startDate:
-          type: string
-        endDate:
-          type: string
-      xml:
-        name: BillingReturnCalculatedBase
-      type: object
-    OAS.DataModel.Reporting.Calculate.BatchCalculated:
-      properties:
-        sessionId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        expirationDate:
-          type: string
-          format: date-time
-        groups:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.GroupCalculated'
-          xml:
-            name: GroupCalculated
-            wrapped: true
-          type: array
-        buckets:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.BucketCalculated'
-          xml:
-            name: BucketCalculated
-            wrapped: true
-          type: array
-        benchmarks:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.BenchmarkCalculated'
-          xml:
-            name: BenchmarkCalculated
-            wrapped: true
-          type: array
-        comparisons:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.ComparisonCalculated'
-          xml:
-            name: ComparisonCalculated
-            wrapped: true
-          type: array
-        dateRanges:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.DateRangeCalculated'
-          xml:
-            name: DateRangeCalculated
-            wrapped: true
-          type: array
-        activityOptions:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.ActivityOption'
-          xml:
-            name: ActivityOption
-            wrapped: true
-          type: array
-        attributionOptions:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.AttributionOption'
-          xml:
-            name: AttributionOption
-            wrapped: true
-          type: array
-        billingOptions:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.BillingOption'
-          xml:
-            name: BillingOption
-            wrapped: true
-          type: array
-        costBasisOptions:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.CostBasisOption'
-          xml:
-            name: CostBasisOption
-            wrapped: true
-          type: array
-        groupInfoOptions:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.GroupInfoCalculated'
-          xml:
-            name: GroupInfoCalculated
-            wrapped: true
-          type: array
-        performanceOptions:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.PerformanceOption'
-          xml:
-            name: PerformanceOption
-            wrapped: true
-          type: array
-        statisticalOptions:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.StatisticalOption'
-          xml:
-            name: StatisticalOption
-            wrapped: true
-          type: array
-        tradingOptions:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.TradingOption'
-          xml:
-            name: TradingOption
-            wrapped: true
-          type: array
-      xml:
-        name: BatchCalculated
-      type: object
-    OAS.DataModel.Reporting.Calculate.ComparisonCalculated:
-      properties:
-        id:
-          type: integer
-          format: int32
-        assignmentType:
-          type: string
-          enum:
-          - UserDefined
-          - Standard
-          - Attribution
-          - ProductReturns
-      xml:
-        name: ComparisonCalculated
-      type: object
-    OAS.WebApi.DTO.Reporting.VerboseCalculationDateRangeGroupInfoOptionDto:
-      properties:
-        reportCategoryId:
-          type: integer
-          format: int32
-        dateRangeId:
-          type: integer
-          format: int32
-        groupInfoOptionId:
-          type: integer
-          format: int32
-      xml:
-        name: VerboseCalculationDateRangeGroupInfoOptionDto
-      type: object
-    OAS.WebApi.DTO.Reporting.VerboseCalculationAttributionOptionDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        calculationMethod:
-          type: string
-          enum:
-          - BrinsonFachler
-        technique:
-          type: string
-          enum:
-          - Arithmetic
-        linkingMethod:
-          type: string
-          enum:
-          - Geometric
-      xml:
-        name: VerboseCalculationAttributionOptionDto
-      type: object
-    OAS.DataModel.Reporting.Calculate.ActivityDetailBase:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        isManaged:
-          type: boolean
-        flipSign:
-          type: boolean
-      xml:
-        name: ActivityDetailBase
-      type: object
-    OAS.DataModel.Reporting.Calculate.PerformanceOption:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        calculationMethod:
-          type: string
-          enum:
-          - TWR
-          - Simple
-          - IRR
-        includeAccruedInterest:
-          type: boolean
-        calcGrossOfFees:
-          type: boolean
-        calcFirstDayPerformance:
-          type: boolean
-        calcIntraDayPerformance:
-          type: boolean
-        annualize:
-          type: boolean
-        annualizeIncludeDaysWithoutValue:
-          type: boolean
-        flipSignForShort:
-          type: boolean
-        suppressMixedRanges:
-          type: boolean
-        suppressMixedAssetLevelGroups:
-          type: boolean
-        includeAIPLedger:
-          type: boolean
-        calcAfterTax:
-          type: boolean
-        intradayCalculationMethod:
-          type: string
-          enum:
-          - Standard
-          - Enhanced
-          - MarginEnhanced
-      xml:
-        name: PerformanceOption
-      type: object
-    OAS.WebApi.DTO.Reporting.VerboseCalculationDateRangeAttributionOptionDto:
-      properties:
-        reportCategoryId:
-          type: integer
-          format: int32
-        dateRangeId:
-          type: integer
-          format: int32
-        attributionOptionId:
-          type: integer
-          format: int32
-        performanceOptionId:
-          type: integer
-          format: int32
-        returnStyle:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.VerboseCalculationReturnStyleDto'
-        returnType:
-          type: string
-          enum:
-          - AggregatedValue
-          - GroupingDetail
-      xml:
-        name: VerboseCalculationDateRangeAttributionOptionDto
-      type: object
-    OAS.DataModel.Reporting.Calculate.AttributionOption:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        calculationMethod:
-          type: string
-          enum:
-          - BrinsonFachler
-        technique:
-          type: string
-          enum:
-          - Arithmetic
-        linkingMethod:
-          type: string
-          enum:
-          - Geometric
-      xml:
-        name: AttributionOption
-      type: object
-    OAS.WebApi.DTO.Reporting.VerboseCalculationDateRangePerformanceOptionDto:
-      properties:
-        reportCategoryId:
-          type: integer
-          format: int32
-        dateRangeId:
-          type: integer
-          format: int32
-        performanceOptionId:
-          type: integer
-          format: int32
-        comparisonId:
-          type: integer
-          format: int32
-        statisticalOptionId:
-          type: integer
-          format: int32
-        returnType:
-          type: string
-          enum:
-          - Aggregated
-          - Breakdown
-        returnStyle:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.VerboseCalculationReturnStyleDto'
-      xml:
-        name: VerboseCalculationDateRangePerformanceOptionDto
+        name: DateRangeTradingOptionCalculated
       type: object
     OAS.DataModel.Reporting.Calculate.GroupReportCategoryCalculated:
       properties:
@@ -2576,6 +2256,158 @@ components:
       xml:
         name: GroupReportCategoryCalculated
       type: object
+    OAS.DataModel.Reporting.Calculate.CostBasisReturnCalculatedBase:
+      properties:
+        type:
+          readOnly: true
+          type: string
+        startDate:
+          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
+        endDate:
+          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
+        isLongTerm:
+          type: boolean
+        transAmount:
+          type: number
+          format: double
+        costBasis:
+          type: number
+          format: double
+        amortization:
+          type: number
+          format: double
+        gainLoss:
+          type: number
+          format: double
+      xml:
+        name: CostBasisReturnCalculatedBase
+      type: object
+    OAS.DataModel.Reporting.Calculate.IncomeReturnCalculatedBase:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+      xml:
+        name: IncomeReturnCalculatedBase
+      type: object
+    OAS.WebApi.DTO.Reporting.VerboseCalculationDateRangeFullDto:
+      properties:
+        isDefault:
+          type: boolean
+        sortOrder:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        displayName:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        dataMustExistOnRangeStartDate:
+          type: boolean
+        dataMustExistOnRangeEndDate:
+          type: boolean
+        allowStartDateAdjustment:
+          type: boolean
+        startDateMethod:
+          type: string
+          enum:
+          - Inception
+          - HoldingPeriod
+          - AIPLedger
+      xml:
+        name: VerboseCalculationDateRangeFullDto
+      type: object
+    OAS.DataModel.Reporting.Calculate.PerformanceReturnCalculatedBase:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+      xml:
+        name: PerformanceReturnCalculatedBase
+      type: object
+    OAS.WebApi.DTO.Reporting.VerboseCalculationDateRangeAttributionOptionDto:
+      properties:
+        reportCategoryId:
+          type: integer
+          format: int32
+        dateRangeId:
+          type: integer
+          format: int32
+        attributionOptionId:
+          type: integer
+          format: int32
+        performanceOptionId:
+          type: integer
+          format: int32
+        returnStyle:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.VerboseCalculationReturnStyleDto'
+        returnType:
+          type: string
+          enum:
+          - AggregatedValue
+          - GroupingDetail
+      xml:
+        name: VerboseCalculationDateRangeAttributionOptionDto
+      type: object
+    OAS.DataModel.Reporting.Calculate.ActivityReturnCalculated:
+      properties:
+        type:
+          readOnly: true
+          type: string
+        startDate:
+          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
+        endDate:
+          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
+      xml:
+        name: ActivityReturnCalculated
+      type: object
+    OAS.DataModel.Reporting.Calculate.AttributionOption:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        calculationMethod:
+          type: string
+          enum:
+          - BrinsonFachler
+        technique:
+          type: string
+          enum:
+          - Arithmetic
+        linkingMethod:
+          type: string
+          enum:
+          - Geometric
+      xml:
+        name: AttributionOption
+      type: object
     OAS.DataModel.Reporting.Calculate.DateRangeAttributionOptionCalculated:
       required:
       - $type
@@ -2618,56 +2450,6 @@ components:
       xml:
         name: DateRangeAttributionOptionCalculated
       type: object
-    OAS.DataModel.Reporting.Calculate.TradingOption:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        includeMoneyMarket:
-          type: boolean
-        includePendingTrades:
-          type: boolean
-      xml:
-        name: TradingOption
-      type: object
-    OAS.WebApi.DTO.Reporting.VerboseCalculationDateRangeActivityOptionDto:
-      properties:
-        reportCategoryId:
-          type: integer
-          format: int32
-        dateRangeId:
-          type: integer
-          format: int32
-        activityOptionId:
-          type: integer
-          format: int32
-        returnStyle:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.VerboseCalculationReturnStyleDto'
-        returnType:
-          type: string
-          enum:
-          - AggregatedValue
-          - TransactionBreakdown
-      xml:
-        name: VerboseCalculationDateRangeActivityOptionDto
-      type: object
-    OAS.DataModel.Reporting.Calculate.ManagementOverride:
-      properties:
-        id:
-          type: integer
-          format: int32
-        isManaged:
-          type: boolean
-      xml:
-        name: ManagementOverride
-      type: object
     OAS.DataModel.Reporting.Calculate.BucketCalculated:
       properties:
         id:
@@ -2688,6 +2470,224 @@ components:
           format: int32
       xml:
         name: BucketCalculated
+      type: object
+    OAS.DataModel.Reporting.Calculate.StatisticalOption:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        riskFreeBenchmarkId:
+          type: integer
+          format: int32
+        marketBenchmarkId:
+          type: integer
+          format: int32
+        options:
+          items:
+            type: string
+            enum:
+            - StandardDeviation
+            - Mean
+            - Variance
+            - Drawdown
+            - SharpeRatio
+            - SortinoRatio
+            - Covariance
+            - RSquared
+            - BetaCoefficient
+            - TreynorRatio
+            - JensensAlpha
+            - UpsideCaptureRatio
+            - DownsideCaptureRatio
+          xml:
+            name: StatisticType
+            wrapped: true
+          type: array
+      xml:
+        name: StatisticalOption
+      type: object
+    OAS.WebApi.DTO.Reporting.VerboseCalculationDateRangeDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        displayName:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        dataMustExistOnRangeStartDate:
+          type: boolean
+        dataMustExistOnRangeEndDate:
+          type: boolean
+        allowStartDateAdjustment:
+          type: boolean
+        startDateMethod:
+          type: string
+          enum:
+          - Inception
+          - HoldingPeriod
+          - AIPLedger
+      xml:
+        name: VerboseCalculationDateRangeDto
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IReturnStyle:
+      properties:
+        frequency:
+          readOnly: true
+          type: string
+          enum:
+          - Summary
+          - Annually
+          - Quarterly
+          - Monthly
+          - Weekly
+          - Daily
+          - Automatic
+        basedOn:
+          readOnly: true
+          type: string
+          enum:
+          - Calendar
+          - RollingForward
+          - RollingBackward
+        breakBehavior:
+          readOnly: true
+          type: string
+          enum:
+          - AllowPartialPeriods
+          - PartialPeriodsWithBreakPoints
+          - FullPeriodsOnly
+        cumulative:
+          readOnly: true
+          type: boolean
+        cumulativeBasedOn:
+          readOnly: true
+          type: string
+          enum:
+          - ForwardFromStartDate
+          - BackwardFromEndDate
+        context:
+          readOnly: true
+          type: string
+          enum:
+          - Self
+          - Parent
+      xml:
+        name: IReturnStyle
+      type: object
+    OAS.WebApi.DTO.Reporting.VerboseCalculationPerformanceOptionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        calculationMethod:
+          type: string
+          enum:
+          - TWR
+          - Simple
+          - IRR
+        includeAccruedInterest:
+          type: boolean
+        calcGrossOfFees:
+          type: boolean
+        calcFirstDayPerformance:
+          type: boolean
+        calcIntraDayPerformance:
+          type: boolean
+        annualize:
+          type: boolean
+        annualizeIncludeDaysWithoutValue:
+          type: boolean
+        flipSignForShort:
+          type: boolean
+        suppressMixedRanges:
+          type: boolean
+        suppressMixedAssetLevelGroups:
+          type: boolean
+        includeAIPLedger:
+          type: boolean
+        calcAfterTax:
+          type: boolean
+        intradayCalculationMethod:
+          type: string
+          enum:
+          - Standard
+          - Enhanced
+          - MarginEnhanced
+      xml:
+        name: VerboseCalculationPerformanceOptionDto
+      type: object
+    OAS.DataModel.Reporting.Calculate.ComparisonCalculated:
+      properties:
+        id:
+          type: integer
+          format: int32
+        assignmentType:
+          type: string
+          enum:
+          - UserDefined
+          - Standard
+          - Attribution
+          - ProductReturns
+      xml:
+        name: ComparisonCalculated
+      type: object
+    OAS.DataModel.Reporting.Calculate.ActivityOption:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        displayName:
+          type: string
+        inceptionValueMethod:
+          type: string
+          enum:
+          - NewMoney
+          - Zero
+          - DayAfter
+        includeUnmanagedJournals:
+          type: boolean
+        details:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.ActivityDetailBase'
+          xml:
+            name: ActivityDetailBase
+            wrapped: true
+          type: array
+      xml:
+        name: ActivityOption
+      type: object
+    OAS.DataModel.Reporting.Calculate.ManagementOverride:
+      properties:
+        id:
+          type: integer
+          format: int32
+        isManaged:
+          type: boolean
+      xml:
+        name: ManagementOverride
       type: object
   securitySchemes:
     Authorization:

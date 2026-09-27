@@ -1321,6 +1321,60 @@ paths:
       - Authorization: []
 components:
   schemas:
+    OAS.WebApi.DTO.Reporting.Custom.CustomReportPromptDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+        prompt:
+          type: string
+        promptDescription:
+          type: string
+        promptType:
+          type: string
+          enum:
+          - None
+          - Text
+          - Numeric
+          - Date
+          - Dynamic Group
+        defaultValue:
+          type: string
+        isPromptUser:
+          type: boolean
+        sortOrder:
+          type: integer
+          format: int32
+      xml:
+        name: CustomReportPromptDto
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
+    OAS.WebApi.DTO.Confirm.ConfirmGroupDataQueryDto:
+      properties:
+        confirmGroupId:
+          type: integer
+          format: int32
+        customReportId:
+          type: integer
+          format: int32
+        dataQueryParams:
+          type: string
+        dataQuery:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Custom.CustomReportFullDto'
+      xml:
+        name: ConfirmGroupDataQueryDto
+      type: object
     OAS.WebApi.DTO.Confirm.ConfirmGroupDto:
       properties:
         id:
@@ -1380,6 +1434,151 @@ components:
           type: array
       xml:
         name: ConfirmGroupDto
+      type: object
+    OAS.WebApi.DTO.Confirm.ConfirmOverviewDto:
+      description: ''
+      properties:
+        id:
+          type: integer
+          format: int32
+        accountStatusIcon:
+          readOnly: true
+          type: string
+        databaseName:
+          type: string
+        downloadFileId:
+          type: integer
+          format: int32
+        formatName:
+          type: string
+        recordTypeName:
+          type: string
+        fileName:
+          type: string
+        confirmedCount:
+          type: integer
+          format: int32
+        notConfirmedCount:
+          type: integer
+          format: int32
+        excludedCount:
+          type: integer
+          format: int32
+        dataAggOnlyCount:
+          type: integer
+          format: int32
+        unmappedTransTypeCount:
+          type: integer
+          format: int32
+        status:
+          type: integer
+          format: int32
+        isImportComplete:
+          type: boolean
+        fileStatus:
+          type: string
+          enum:
+          - Created
+          - PendingImport
+          - StartingImport
+          - CreatingRecords
+          - RecordsCreated
+          - PostImportsStarted
+          - ImportFinished
+          - ImportFailed
+          - InitialVerifyStarted
+          - InitialVerifyFinished
+          - InitialVerifyFailed
+          - InitialApplyStarted
+          - InitialApplyFinished
+          - InitialApplyFailed
+          - ProcessingCompleted
+          - ProcessingFailed
+        fileStatusInt:
+          type: integer
+          format: int32
+        agentAnalysisStatus:
+          type: string
+          enum:
+          - NA
+          - NotStarted
+          - Running
+          - Complete
+        noteCount:
+          type: integer
+          format: int32
+        alClientId:
+          type: integer
+          format: int32
+        downloadSourceId:
+          type: integer
+          format: int32
+        fileDate:
+          type: string
+          format: date-time
+        fileCreated:
+          type: string
+          format: date-time
+        fileCreatedBy:
+          type: string
+        dateConfirmed:
+          type: string
+          format: date-time
+        downloadSource:
+          type: string
+        reconTargetTime:
+          type: string
+          format: date-time
+        noteSummary:
+          type: string
+        refreshStart:
+          type: string
+          format: date-time
+        refreshEnd:
+          type: string
+          format: date-time
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        serviceTeamRecon:
+          type: string
+        serviceTeamMember:
+          type: string
+        signOffBy:
+          type: string
+        signOffDate:
+          type: string
+          format: date-time
+        signOffByUserId:
+          type: integer
+          format: int32
+        message:
+          type: string
+        costBasisType:
+          type: string
+          enum:
+          - None
+          - Unrealized
+          - Realized
+          - Both
+        advisorNumber:
+          type: string
+        batchProcessingId:
+          type: integer
+          format: int32
+        isNonFileFormat:
+          type: boolean
+        hasReconNotes:
+          type: boolean
+      xml:
+        name: ConfirmOverviewDto
       type: object
     OAS.WebApi.DTO.Reporting.RunReport.RunToDto:
       properties:
@@ -1443,60 +1642,6 @@ components:
           - DashboardDataAuditProcessCountOnly
       xml:
         name: RunToDto
-      type: object
-    OAS.WebApi.DTO.Confirm.ConfirmGroupDataQueryDto:
-      properties:
-        confirmGroupId:
-          type: integer
-          format: int32
-        customReportId:
-          type: integer
-          format: int32
-        dataQueryParams:
-          type: string
-        dataQuery:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Custom.CustomReportFullDto'
-      xml:
-        name: ConfirmGroupDataQueryDto
-      type: object
-    OAS.DataModel.SimpleEntity:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleEntity
-      type: object
-    OAS.WebApi.DTO.Reporting.Custom.CustomReportPromptDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        code:
-          type: string
-        prompt:
-          type: string
-        promptDescription:
-          type: string
-        promptType:
-          type: string
-          enum:
-          - None
-          - Text
-          - Numeric
-          - Date
-          - Dynamic Group
-        defaultValue:
-          type: string
-        isPromptUser:
-          type: boolean
-        sortOrder:
-          type: integer
-          format: int32
-      xml:
-        name: CustomReportPromptDto
       type: object
     OAS.WebApi.DTO.Reporting.Custom.CustomReportFullDto:
       properties:
@@ -1766,151 +1911,6 @@ components:
           type: string
       xml:
         name: CustomReportFullDto
-      type: object
-    OAS.WebApi.DTO.Confirm.ConfirmOverviewDto:
-      description: ''
-      properties:
-        id:
-          type: integer
-          format: int32
-        accountStatusIcon:
-          readOnly: true
-          type: string
-        databaseName:
-          type: string
-        downloadFileId:
-          type: integer
-          format: int32
-        formatName:
-          type: string
-        recordTypeName:
-          type: string
-        fileName:
-          type: string
-        confirmedCount:
-          type: integer
-          format: int32
-        notConfirmedCount:
-          type: integer
-          format: int32
-        excludedCount:
-          type: integer
-          format: int32
-        dataAggOnlyCount:
-          type: integer
-          format: int32
-        unmappedTransTypeCount:
-          type: integer
-          format: int32
-        status:
-          type: integer
-          format: int32
-        isImportComplete:
-          type: boolean
-        fileStatus:
-          type: string
-          enum:
-          - Created
-          - PendingImport
-          - StartingImport
-          - CreatingRecords
-          - RecordsCreated
-          - PostImportsStarted
-          - ImportFinished
-          - ImportFailed
-          - InitialVerifyStarted
-          - InitialVerifyFinished
-          - InitialVerifyFailed
-          - InitialApplyStarted
-          - InitialApplyFinished
-          - InitialApplyFailed
-          - ProcessingCompleted
-          - ProcessingFailed
-        fileStatusInt:
-          type: integer
-          format: int32
-        agentAnalysisStatus:
-          type: string
-          enum:
-          - NA
-          - NotStarted
-          - Running
-          - Complete
-        noteCount:
-          type: integer
-          format: int32
-        alClientId:
-          type: integer
-          format: int32
-        downloadSourceId:
-          type: integer
-          format: int32
-        fileDate:
-          type: string
-          format: date-time
-        fileCreated:
-          type: string
-          format: date-time
-        fileCreatedBy:
-          type: string
-        dateConfirmed:
-          type: string
-          format: date-time
-        downloadSource:
-          type: string
-        reconTargetTime:
-          type: string
-          format: date-time
-        noteSummary:
-          type: string
-        refreshStart:
-          type: string
-          format: date-time
-        refreshEnd:
-          type: string
-          format: date-time
-        createdDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        serviceTeamRecon:
-          type: string
-        serviceTeamMember:
-          type: string
-        signOffBy:
-          type: string
-        signOffDate:
-          type: string
-          format: date-time
-        signOffByUserId:
-          type: integer
-          format: int32
-        message:
-          type: string
-        costBasisType:
-          type: string
-          enum:
-          - None
-          - Unrealized
-          - Realized
-          - Both
-        advisorNumber:
-          type: string
-        batchProcessingId:
-          type: integer
-          format: int32
-        isNonFileFormat:
-          type: boolean
-        hasReconNotes:
-          type: boolean
-      xml:
-        name: ConfirmOverviewDto
       type: object
   securitySchemes:
     Authorization:

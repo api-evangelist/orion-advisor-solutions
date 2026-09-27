@@ -1200,314 +1200,27 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.DataModel.Portfolio.ProductALClient:
+    OAS.DataModel.Confirm.CorpAction.CorpActionTaskQueue:
       required:
-      - productId
-      - alClientId
+      - id
+      - corpActionProcessingId
+      - corpActionTaskTypeId
       properties:
-        productId:
+        id:
           type: integer
           format: int32
-        alClientId:
-          type: integer
-          format: int32
-      xml:
-        name: ProductALClient
-      type: object
-    OAS.WebApi.DTO.Confirm.CorpAction.CorpActionProcessingTaskDto:
-      properties:
         corpActionProcessingId:
           type: integer
           format: int32
-        corpActionProcessingTaskType:
-          type: string
-          enum:
-          - ApproveCorpAction
-          - DisregardCorpAction
-          - CreateTransactions
-          - SetBackToNew
-          - UpdateDate
-          - UpdatePriceAmounts
-          - Cancel
-          - RecalculateTransactions
-          - RemoveUncoveredPendings
-          - CopyProcessingRecord
-          - BodConversion
-          - NameChange
-          - CusipChange
-        effectiveDate:
-          type: string
-          format: date-time
-        navPrice:
-          type: number
-          format: double
+        corpActionTaskTypeId:
+          type: integer
+          format: int32
+        processing:
+          $ref: '#/components/schemas/OAS.DataModel.Confirm.CorpAction.CorpActionProcessing'
+        taskType:
+          $ref: '#/components/schemas/OAS.DataModel.Confirm.CorpAction.CorpActionTaskType'
       xml:
-        name: CorpActionProcessingTaskDto
-      type: object
-    OAS.DataModel.Portfolio.CorporateAction:
-      required:
-      - id
-      - createdBy
-      - createdDate
-      - editedBy
-      - editedDate
-      properties:
-        id:
-          type: integer
-          format: int32
-        productId:
-          type: integer
-          format: int32
-        entryDate:
-          type: string
-          format: date-time
-        remarks:
-          type: string
-          maxLength: 50
-          minLength: 0
-        notifyType:
-          type: string
-          maxLength: 1
-          minLength: 0
-        notifyTypeUpdate:
-          type: string
-          maxLength: 1
-          minLength: 0
-        recordStatus:
-          type: string
-          maxLength: 1
-          minLength: 0
-        numOptions:
-          type: integer
-          format: int32
-          maximum: 2147483647
-          minimum: 0
-        securityType:
-          type: string
-          maxLength: 1
-          minLength: 0
-        effectiveDate:
-          type: string
-          format: date-time
-        cusip:
-          type: string
-        oldCusip:
-          type: string
-        ticker:
-          type: string
-        name:
-          type: string
-          maxLength: 50
-          minLength: 0
-        oldName:
-          type: string
-          maxLength: 50
-          minLength: 0
-        expireDate:
-          type: string
-          format: date-time
-        cash:
-          type: number
-          format: double
-        cashCode:
-          type: string
-          maxLength: 1
-          minLength: 0
-        stateCode:
-          type: string
-          maxLength: 2
-          minLength: 0
-        tenderAgent:
-          type: string
-          maxLength: 4
-          minLength: 0
-        infoAgent:
-          type: string
-          maxLength: 4
-          minLength: 0
-        maturityDate:
-          type: string
-          format: date-time
-        rate1:
-          type: number
-          format: double
-        rateCode:
-          type: string
-          maxLength: 1
-          minLength: 0
-        rate2:
-          type: number
-          format: double
-        voluntaryMandatory:
-          type: string
-          maxLength: 1
-          minLength: 0
-        dtc:
-          type: string
-          maxLength: 1
-          minLength: 0
-        prorationRate:
-          type: string
-          maxLength: 20
-          minLength: 0
-        prorationDate:
-          type: string
-          format: date-time
-        note:
-          type: string
-          maxLength: 3000
-          minLength: 0
-        createdBy:
-          type: string
-          maxLength: 40
-          minLength: 0
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-          maxLength: 40
-          minLength: 0
-        editedDate:
-          type: string
-          format: date-time
-        textNo:
-          type: integer
-          format: int32
-        dealNo:
-          type: integer
-          format: int32
-        costBasisFactor:
-          type: number
-          format: double
-        textNoUpdate:
-          type: integer
-          format: int32
-        fairMarketValue:
-          type: number
-          format: double
-        moreInfoUrl:
-          type: string
-          maxLength: 2000
-          minLength: 0
-        product:
-          $ref: '#/components/schemas/OAS.DataModel.Portfolio.ProductGlobal'
-        processes:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Confirm.CorpAction.CorpActionProcessing'
-          xml:
-            name: CorpActionProcessing
-            wrapped: true
-          type: array
-      xml:
-        name: CorporateAction
-      type: object
-    OAS.DataModel.Portfolio.SubHolding:
-      required:
-      - id
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-          maxLength: 150
-          minLength: 0
-        subHoldingDates:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Portfolio.SubHoldingDate'
-          xml:
-            name: SubHoldingDate
-            wrapped: true
-          type: array
-      xml:
-        name: SubHolding
-      type: object
-    OAS.DataModel.ComplexTypes.PhoneNumber:
-      properties:
-        number:
-          type: string
-          maxLength: 15
-          minLength: 0
-        hasValue:
-          readOnly: true
-          type: boolean
-      xml:
-        name: PhoneNumber
-      type: object
-    OAS.DataModel.Portfolio.ProductDescriptionProviderFlat:
-      required:
-      - productId
-      properties:
-        productId:
-          type: integer
-          format: int32
-        orionSub:
-          type: string
-          maxLength: 50
-          minLength: 0
-        orionCat:
-          type: string
-          maxLength: 50
-          minLength: 0
-        morningstarSector:
-          type: string
-          maxLength: 255
-          minLength: 0
-        morningstarGroup:
-          type: string
-          maxLength: 255
-          minLength: 0
-        morningstarIndustry:
-          type: string
-          maxLength: 255
-          minLength: 0
-        morningstarStyle:
-          type: string
-          maxLength: 255
-          minLength: 0
-        morningstarCategoryCode:
-          type: string
-          maxLength: 50
-          minLength: 0
-        morningstarCategory:
-          type: string
-          maxLength: 255
-          minLength: 0
-        lipperIOBClass:
-          type: string
-          maxLength: 50
-          minLength: 0
-        lipperIOBDescription:
-          type: string
-          maxLength: 255
-          minLength: 0
-        lipperIOBCategory:
-          type: string
-          maxLength: 50
-          minLength: 0
-        lipperClass:
-          type: string
-          maxLength: 50
-          minLength: 0
-        lipperClassDescription:
-          type: string
-          maxLength: 255
-          minLength: 0
-        lipperClassCategory:
-          type: string
-          maxLength: 50
-          minLength: 0
-        valueLineAbbrev:
-          type: string
-          maxLength: 50
-          minLength: 0
-        valueLineDesc:
-          type: string
-          maxLength: 255
-          minLength: 0
-      xml:
-        name: ProductDescriptionProviderFlat
+        name: CorpActionTaskQueue
       type: object
     OAS.WebApi.DTO.Confirm.CorpAction.CorporateActionProcessingDto:
       properties:
@@ -1569,119 +1282,126 @@ components:
       xml:
         name: CorporateActionProcessingDto
       type: object
-    OAS.DataModel.Portfolio.SubHoldingDate:
+    OAS.DataModel.Portfolio.PreferredRate:
       required:
       - id
+      - productId
+      - isFixedRate
+      - isConvertible
+      - isVotingRights
+      - isCallable
+      - isCumulative
+      - isParticipating
+      - isInDefault
+      - createdBy
+      - createdDate
+      - editedBy
+      - editedDate
       properties:
         id:
           type: integer
           format: int32
-        subHoldingId:
+        productId:
           type: integer
           format: int32
-        asOfDate:
+        dividendRate:
+          type: number
+          format: double
+        frequency:
+          type: integer
+          format: int32
+        parValue:
+          type: number
+          format: double
+        isFixedRate:
+          type: boolean
+        isConvertible:
+          type: boolean
+        isVotingRights:
+          type: boolean
+        isCallable:
+          type: boolean
+        isCumulative:
+          type: boolean
+        isParticipating:
+          type: boolean
+        isInDefault:
+          type: boolean
+        createdBy:
+          type: string
+          maxLength: 40
+          minLength: 0
+        createdDate:
           type: string
           format: date-time
-        subHoldingAllocs:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Portfolio.SubHoldingAlloc'
-          xml:
-            name: SubHoldingAlloc
-            wrapped: true
-          type: array
+        editedBy:
+          type: string
+          maxLength: 40
+          minLength: 0
+        editedDate:
+          type: string
+          format: date-time
       xml:
-        name: SubHoldingDate
+        name: PreferredRate
       type: object
-    OAS.WebApi.DTO.Confirm.CorpAction.CorpActionProcessingStatusCountsDto:
-      properties:
-        complete:
-          type: integer
-          format: int32
-        pending:
-          type: integer
-          format: int32
-        skipped:
-          type: integer
-          format: int32
-      xml:
-        name: CorpActionProcessingStatusCountsDto
-      type: object
-    OAS.DataModel.Portfolio.ProductSubType:
+    OAS.DataModel.Portfolio.State:
       required:
       - id
-      - productType
-      - isAlternative
+      - abbreviation
+      - hamptonEligible
       properties:
         id:
           type: integer
           format: int32
-        productType:
+        abbreviation:
           type: string
-          enum:
-          - None
-          - MutualFund
-          - Annuity
-          - AdvisorOne
-          - StockOrETF
-          - Option
-          - Bond
-          - Unknown
-          - CD
-          - Index
-        productSubTypeName:
-          type: string
-          maxLength: 50
+          maxLength: 2
           minLength: 0
-        isAlternative:
+        fullName:
+          type: string
+          maxLength: 30
+          minLength: 0
+        teamNo:
+          type: integer
+          format: int32
+        forDomestic:
+          type: string
+          maxLength: 2
+          minLength: 0
+        hamptonEligible:
           type: boolean
       xml:
-        name: ProductSubType
+        name: State
       type: object
-    OAS.DataModel.Portfolio.ProductGICSMapping:
+    OAS.DataModel.Portfolio.ProductUsage:
       required:
-      - id
-      - sectorCode
-      - sectorDescription
-      - industryGroupCode
-      - industryGroupDescription
-      - industryCode
-      - industryDescription
-      - subIndustryCode
-      - subIndustryDescription
+      - alClientId
+      - productId
       properties:
-        id:
+        alClientId:
           type: integer
           format: int32
-        sectorCode:
+        productId:
           type: integer
           format: int32
-        sectorDescription:
+        assetCount:
+          type: integer
+          format: int32
+        units:
+          type: integer
+          format: int32
+        overridden:
+          type: boolean
+        editedDate:
           type: string
-          maxLength: 60
-          minLength: 0
-        industryGroupCode:
-          type: integer
-          format: int32
-        industryGroupDescription:
+          format: date-time
+        riskScoreSource:
           type: string
-          maxLength: 60
-          minLength: 0
-        industryCode:
-          type: integer
-          format: int32
-        industryDescription:
-          type: string
-          maxLength: 60
-          minLength: 0
-        subIndustryCode:
-          type: integer
-          format: int32
-        subIndustryDescription:
-          type: string
-          maxLength: 60
-          minLength: 0
+          enum:
+          - Unscored
+          - FinMason
       xml:
-        name: ProductGICSMapping
+        name: ProductUsage
       type: object
     OAS.DataModel.Portfolio.PersonalGlobal:
       required:
@@ -2003,67 +1723,109 @@ components:
       xml:
         name: PersonalGlobal
       type: object
-    OAS.DataModel.Portfolio.PreferredRate:
-      required:
-      - id
-      - productId
-      - isFixedRate
-      - isConvertible
-      - isVotingRights
-      - isCallable
-      - isCumulative
-      - isParticipating
-      - isInDefault
-      - createdBy
-      - createdDate
-      - editedBy
-      - editedDate
+    OAS.WebApi.DTO.Confirm.CorpAction.CorpActionTransactionV2Dto:
       properties:
         id:
+          readOnly: true
+          type: string
+        dbName:
+          type: string
+        transactionId:
+          type: integer
+          format: int32
+        corpActionId:
           type: integer
           format: int32
         productId:
           type: integer
           format: int32
-        dividendRate:
-          type: number
-          format: double
-        frequency:
+        productName:
+          type: string
+        processingType:
+          type: string
+        accountId:
           type: integer
           format: int32
-        parValue:
+        assetId:
+          type: integer
+          format: int32
+        transDate:
+          type: string
+          format: date-time
+        transType:
+          type: string
+        amount:
           type: number
           format: double
-        isFixedRate:
+        units:
+          type: number
+          format: double
+        price:
+          type: number
+          format: double
+        tradeStatus:
+          type: string
+          enum:
+          - Complete
+          - Pending
+          - Rejected
+          - Reversed
+          - Inactive
+          - PendingCorpAction
+          - FutureAip
+        custodian:
+          type: string
+        transSubType:
+          type: string
+        isProcessing:
           type: boolean
-        isConvertible:
-          type: boolean
-        isVotingRights:
-          type: boolean
-        isCallable:
-          type: boolean
-        isCumulative:
-          type: boolean
-        isParticipating:
-          type: boolean
-        isInDefault:
-          type: boolean
+        processingId:
+          type: integer
+          format: int32
+        alClientId:
+          type: integer
+          format: int32
+        transTypeId:
+          type: integer
+          format: int32
+        transSubTypeId:
+          type: integer
+          format: int32
+        notes:
+          type: string
+        accountNumber:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
         createdBy:
           type: string
-          maxLength: 40
-          minLength: 0
-        createdDate:
+        editedDate:
           type: string
           format: date-time
         editedBy:
           type: string
-          maxLength: 40
-          minLength: 0
-        editedDate:
-          type: string
-          format: date-time
+        isCil:
+          type: boolean
+        custodianId:
+          type: integer
+          format: int32
       xml:
-        name: PreferredRate
+        name: CorpActionTransactionV2Dto
+      type: object
+    OAS.DataModel.Portfolio.ProductALClient:
+      required:
+      - productId
+      - alClientId
+      properties:
+        productId:
+          type: integer
+          format: int32
+        alClientId:
+          type: integer
+          format: int32
+      xml:
+        name: ProductALClient
       type: object
     OAS.DataModel.Portfolio.BondRate:
       required:
@@ -2171,22 +1933,677 @@ components:
       xml:
         name: BondRate
       type: object
-    OAS.DataModel.Confirm.CorpAction.CorpActionTaskType:
+    OAS.DataModel.Integration.FinMason.ProductRiskScoreExt:
       required:
-      - id
-      - statusChangeOnly
+      - productId
+      - asOfDate
+      - riskScore
+      properties:
+        productId:
+          type: integer
+          format: int32
+        asOfDate:
+          type: string
+          format: date-time
+        riskScore:
+          type: integer
+          format: int32
+        productStdDev1Yr:
+          type: number
+          format: double
+        productStdDev3Yr:
+          type: number
+          format: double
+        productStdDev5Yr:
+          type: number
+          format: double
+        productStdDev10Yr:
+          type: number
+          format: double
+        covarianceProductBench1Yr:
+          type: number
+          format: double
+        covarianceProductBench3Yr:
+          type: number
+          format: double
+        covarianceProductBench5Yr:
+          type: number
+          format: double
+        covarianceProductBench10Yr:
+          type: number
+          format: double
+        relativeRisk1Yr:
+          type: number
+          format: double
+        relativeRisk3Yr:
+          type: number
+          format: double
+        relativeRisk5Yr:
+          type: number
+          format: double
+        relativeRisk10Yr:
+          type: number
+          format: double
+        beta1Yr:
+          type: number
+          format: double
+        beta3Yr:
+          type: number
+          format: double
+        beta5Yr:
+          type: number
+          format: double
+        beta10Yr:
+          type: number
+          format: double
+        benchmarkStdDev1Yr:
+          type: number
+          format: double
+        benchmarkStdDev3Yr:
+          type: number
+          format: double
+        benchmarkStdDev5Yr:
+          type: number
+          format: double
+        benchmarkStdDev10Yr:
+          type: number
+          format: double
+        clusterCorrelation1Yr:
+          type: number
+          format: double
+        clusterCorrelation3Yr:
+          type: number
+          format: double
+        clusterCorrelation5Yr:
+          type: number
+          format: double
+        clusterCorrelation10Yr:
+          type: number
+          format: double
+      xml:
+        name: ProductRiskScoreExt
+      type: object
+    OAS.WebApi.DTO.Confirm.CorpAction.CorpActionProcessingStatusDto:
+      properties:
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        corporateActionId:
+          type: integer
+          format: int32
+        corporateActionProcessingId:
+          type: integer
+          format: int32
+        databaseName:
+          type: string
+        serverName:
+          type: string
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        ticker:
+          type: string
+        processingType:
+          type: string
+        effectiveDate:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+          - New
+          - Approved
+          - CreatePendings
+          - Processing
+          - InProcess
+          - Complete
+          - Cancelled
+          - RecalculateUnits
+          - NotProcessed
+          - MoveCostBasis
+        corporateActionTaskType:
+          type: string
+        corporateActionTaskQueueStatus:
+          type: string
+          enum:
+          - Unknown
+          - Pending
+          - Skipped
+          - Complete
+        corporateActionTaskQueueId:
+          type: integer
+          format: int32
+        alClientId:
+          type: integer
+          format: int32
+        corporateActionStatus:
+          type: string
+        mergeOutRatio:
+          type: number
+          format: double
+        roundingType:
+          type: string
+          enum:
+          - Normal
+          - Up
+          - Down
+          - Nearest
+          - NoRounding
+        expectedClose:
+          type: string
+          format: date-time
+        isHeld:
+          type: boolean
+        isVerified:
+          type: boolean
+        isBeginingOfDate:
+          type: boolean
+        navPrice:
+          type: number
+          format: double
+        auditedDate:
+          type: string
+          format: date-time
+        auditedBy:
+          type: string
+        skippedTask:
+          type: boolean
+        remarks:
+          type: string
+        recordStatus:
+          type: string
+        entryDate:
+          type: string
+          format: date-time
+        recordDate:
+          type: string
+          format: date-time
+        rate1:
+          type: number
+          format: double
+        rate2:
+          type: number
+          format: double
+        cash:
+          type: number
+          format: double
+        payDate:
+          type: string
+          format: date-time
+        note:
+          type: string
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+      xml:
+        name: CorpActionProcessingStatusDto
+      type: object
+    OAS.WebApi.DTO.Confirm.CorpAction.CorpActionTaskQueueSkippedDto:
       properties:
         id:
           type: integer
           format: int32
-        taskDescription:
+        alClientId:
+          type: integer
+          format: int32
+        corpActionProcessingId:
+          type: integer
+          format: int32
+        corpActionTaskQueueStartId:
+          type: integer
+          format: int32
+        corpActionTaskQueueEndId:
+          type: integer
+          format: int32
+        comment:
+          type: string
+      xml:
+        name: CorpActionTaskQueueSkippedDto
+      type: object
+    OAS.DataModel.Portfolio.DownloadSymbolHistory:
+      required:
+      - downloadSymbolId
+      - changeType
+      properties:
+        id:
+          type: integer
+          format: int32
+        downloadSymbolId:
+          type: integer
+          format: int32
+        changeType:
+          type: string
+          maxLength: 1
+          minLength: 0
+        auditedByDisplay:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+      xml:
+        name: DownloadSymbolHistory
+      type: object
+    OAS.DataModel.Portfolio.DownloadSymbol:
+      required:
+      - id
+      - symbol
+      properties:
+        id:
+          type: integer
+          format: int32
+        symbol:
           type: string
           maxLength: 50
           minLength: 0
-        statusChangeOnly:
+        productId:
+          type: integer
+          format: int32
+        isNASDAQPlatformSymbol:
+          type: boolean
+        audits:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Portfolio.DownloadSymbolHistory'
+          xml:
+            name: DownloadSymbolHistory
+            wrapped: true
+          type: array
+      xml:
+        name: DownloadSymbol
+      type: object
+    OAS.DataModel.Portfolio.ProductDescriptionProviderFlat:
+      required:
+      - productId
+      properties:
+        productId:
+          type: integer
+          format: int32
+        orionSub:
+          type: string
+          maxLength: 50
+          minLength: 0
+        orionCat:
+          type: string
+          maxLength: 50
+          minLength: 0
+        morningstarSector:
+          type: string
+          maxLength: 255
+          minLength: 0
+        morningstarGroup:
+          type: string
+          maxLength: 255
+          minLength: 0
+        morningstarIndustry:
+          type: string
+          maxLength: 255
+          minLength: 0
+        morningstarStyle:
+          type: string
+          maxLength: 255
+          minLength: 0
+        morningstarCategoryCode:
+          type: string
+          maxLength: 50
+          minLength: 0
+        morningstarCategory:
+          type: string
+          maxLength: 255
+          minLength: 0
+        lipperIOBClass:
+          type: string
+          maxLength: 50
+          minLength: 0
+        lipperIOBDescription:
+          type: string
+          maxLength: 255
+          minLength: 0
+        lipperIOBCategory:
+          type: string
+          maxLength: 50
+          minLength: 0
+        lipperClass:
+          type: string
+          maxLength: 50
+          minLength: 0
+        lipperClassDescription:
+          type: string
+          maxLength: 255
+          minLength: 0
+        lipperClassCategory:
+          type: string
+          maxLength: 50
+          minLength: 0
+        valueLineAbbrev:
+          type: string
+          maxLength: 50
+          minLength: 0
+        valueLineDesc:
+          type: string
+          maxLength: 255
+          minLength: 0
+      xml:
+        name: ProductDescriptionProviderFlat
+      type: object
+    OAS.DataModel.Portfolio.FundFamilyProduct:
+      required:
+      - id
+      - productId
+      - fundFamilyId
+      properties:
+        id:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        fundFamilyId:
+          type: integer
+          format: int32
+        product:
+          $ref: '#/components/schemas/OAS.DataModel.Portfolio.ProductGlobal'
+        fundFamily:
+          $ref: '#/components/schemas/OAS.DataModel.Portfolio.FundFamilyGlobal'
+      xml:
+        name: FundFamilyProduct
+      type: object
+    OAS.WebApi.DTO.Confirm.CorpAction.CorpActionProcessingTypeDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        notes:
+          type: string
+      xml:
+        name: CorpActionProcessingTypeDto
+      type: object
+    OAS.DataModel.Portfolio.ShareClass:
+      required:
+      - id
+      - class
+      properties:
+        id:
+          type: integer
+          format: int32
+        class:
+          type: string
+          maxLength: 10
+          minLength: 0
+        description:
+          type: string
+          maxLength: 255
+          minLength: 0
+        oldFundId:
+          type: integer
+          format: int32
+        loadType:
+          type: string
+          maxLength: 1
+          minLength: 0
+        isDefault:
           type: boolean
       xml:
-        name: CorpActionTaskType
+        name: ShareClass
+      type: object
+    OAS.DataModel.Portfolio.ProductGICSMapping:
+      required:
+      - id
+      - sectorCode
+      - sectorDescription
+      - industryGroupCode
+      - industryGroupDescription
+      - industryCode
+      - industryDescription
+      - subIndustryCode
+      - subIndustryDescription
+      properties:
+        id:
+          type: integer
+          format: int32
+        sectorCode:
+          type: integer
+          format: int32
+        sectorDescription:
+          type: string
+          maxLength: 60
+          minLength: 0
+        industryGroupCode:
+          type: integer
+          format: int32
+        industryGroupDescription:
+          type: string
+          maxLength: 60
+          minLength: 0
+        industryCode:
+          type: integer
+          format: int32
+        industryDescription:
+          type: string
+          maxLength: 60
+          minLength: 0
+        subIndustryCode:
+          type: integer
+          format: int32
+        subIndustryDescription:
+          type: string
+          maxLength: 60
+          minLength: 0
+      xml:
+        name: ProductGICSMapping
+      type: object
+    OAS.DataModel.Confirm.CorpAction.CorpActionProcessing:
+      required:
+      - id
+      - corpActionId
+      - corpActionProcessingTypeId
+      - processStatus
+      - roundingType
+      - isHeld
+      - isVerified
+      properties:
+        id:
+          type: integer
+          format: int32
+        corpActionId:
+          type: integer
+          format: int32
+        corpActionProcessingTypeId:
+          type: integer
+          format: int32
+        processStatus:
+          type: string
+          enum:
+          - New
+          - Approved
+          - CreatePendings
+          - Processing
+          - InProcess
+          - Complete
+          - Cancelled
+          - RecalculateUnits
+          - NotProcessed
+          - MoveCostBasis
+        mergeOutRatio:
+          type: number
+          format: double
+          maximum: 1.0
+          minimum: 0.0
+        roundingType:
+          type: string
+          enum:
+          - Normal
+          - Up
+          - Down
+          - Nearest
+          - NoRounding
+        expectedClose:
+          type: string
+          format: date-time
+        isHeld:
+          type: boolean
+        isVerified:
+          type: boolean
+        isBeginningOfDay:
+          type: boolean
+        navPrice:
+          type: number
+          format: double
+        newProductName:
+          type: string
+        newCusip:
+          type: string
+        newTicker:
+          type: string
+        processingType:
+          $ref: '#/components/schemas/OAS.DataModel.Confirm.CorpAction.CorpActionProcessingType'
+        corporateAction:
+          $ref: '#/components/schemas/OAS.DataModel.Portfolio.CorporateAction'
+        corpActionTaskQueues:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Confirm.CorpAction.CorpActionTaskQueue'
+          xml:
+            name: CorpActionTaskQueue
+            wrapped: true
+          type: array
+      xml:
+        name: CorpActionProcessing
+      type: object
+    OAT.DataModel.ComplexTypes.BasicAuditNullNull:
+      properties:
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+          maxLength: 100
+          minLength: 0
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+          maxLength: 100
+          minLength: 0
+      xml:
+        name: BasicAuditNullNull
+      type: object
+    OAS.DataModel.Portfolio.ProductRiskScoreCurrent:
+      properties:
+        productPk:
+          type: integer
+          format: int32
+        riskScore:
+          type: integer
+          format: int32
+        asOfDate:
+          type: string
+          format: date-time
+        riskScoreMethod:
+          type: string
+      xml:
+        name: ProductRiskScoreCurrent
+      type: object
+    OAS.DataModel.Portfolio.SubHolding:
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          maxLength: 150
+          minLength: 0
+        subHoldingDates:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Portfolio.SubHoldingDate'
+          xml:
+            name: SubHoldingDate
+            wrapped: true
+          type: array
+      xml:
+        name: SubHolding
+      type: object
+    OAS.DataModel.Portfolio.SubHoldingDate:
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int32
+        subHoldingId:
+          type: integer
+          format: int32
+        asOfDate:
+          type: string
+          format: date-time
+        subHoldingAllocs:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Portfolio.SubHoldingAlloc'
+          xml:
+            name: SubHoldingAlloc
+            wrapped: true
+          type: array
+      xml:
+        name: SubHoldingDate
+      type: object
+    OAS.DataModel.ComplexTypes.FullPhoneNumber:
+      properties:
+        extension:
+          type: string
+          maxLength: 10
+          minLength: 0
+        hasValue:
+          readOnly: true
+          type: boolean
+        number:
+          type: string
+          maxLength: 15
+          minLength: 0
+      xml:
+        name: FullPhoneNumber
+      type: object
+    OAS.DataModel.Portfolio.SubHoldingAlloc:
+      required:
+      - id
+      - subHoldingDateId
+      - productId
+      - allocationPercent
+      - units
+      properties:
+        id:
+          type: integer
+          format: int32
+        subHoldingDateId:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        allocationPercent:
+          type: number
+          format: double
+        units:
+          type: number
+          format: double
+        product:
+          $ref: '#/components/schemas/OAS.DataModel.Portfolio.ProductGlobal'
+      xml:
+        name: SubHoldingAlloc
       type: object
     OAS.WebApi.DTO.Confirm.CorpAction.CorporateActionProcessingDetailDto:
       properties:
@@ -2344,261 +2761,152 @@ components:
       xml:
         name: CorporateActionProcessingDetailDto
       type: object
-    OAS.WebApi.DTO.Confirm.CorpAction.CorpActionProcessingTypeDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        notes:
-          type: string
-      xml:
-        name: CorpActionProcessingTypeDto
-      type: object
-    OAS.DataModel.Portfolio.State:
+    OAS.DataModel.Portfolio.ProductGlobalAdditionalInfo:
       required:
-      - id
-      - abbreviation
-      - hamptonEligible
-      properties:
-        id:
-          type: integer
-          format: int32
-        abbreviation:
-          type: string
-          maxLength: 2
-          minLength: 0
-        fullName:
-          type: string
-          maxLength: 30
-          minLength: 0
-        teamNo:
-          type: integer
-          format: int32
-        forDomestic:
-          type: string
-          maxLength: 2
-          minLength: 0
-        hamptonEligible:
-          type: boolean
-      xml:
-        name: State
-      type: object
-    OAS.DataModel.Portfolio.PriceCurrent:
-      required:
-      - custodianCommonId
       - productId
-      - priceDate
-      - navPrice
-      - isValidated
       properties:
-        custodianCommonId:
-          type: integer
-          format: int32
         productId:
           type: integer
           format: int32
-        priceDate:
+        currentOrionPrice:
+          type: number
+          format: double
+        currentOrionPriceDate:
+          type: string
+          format: date-time
+      xml:
+        name: ProductGlobalAdditionalInfo
+      type: object
+    OAS.DataModel.ComplexTypes.PhoneNumber:
+      properties:
+        number:
+          type: string
+          maxLength: 15
+          minLength: 0
+        hasValue:
+          readOnly: true
+          type: boolean
+      xml:
+        name: PhoneNumber
+      type: object
+    OAS.DataModel.Confirm.CorpAction.CorpActionTaskType:
+      required:
+      - id
+      - statusChangeOnly
+      properties:
+        id:
+          type: integer
+          format: int32
+        taskDescription:
+          type: string
+          maxLength: 50
+          minLength: 0
+        statusChangeOnly:
+          type: boolean
+      xml:
+        name: CorpActionTaskType
+      type: object
+    OAS.WebApi.DTO.Confirm.CorpAction.CorpActionProcessingTaskDto:
+      properties:
+        corpActionProcessingId:
+          type: integer
+          format: int32
+        corpActionProcessingTaskType:
+          type: string
+          enum:
+          - ApproveCorpAction
+          - DisregardCorpAction
+          - CreateTransactions
+          - SetBackToNew
+          - UpdateDate
+          - UpdatePriceAmounts
+          - Cancel
+          - RecalculateTransactions
+          - RemoveUncoveredPendings
+          - CopyProcessingRecord
+          - BodConversion
+          - NameChange
+          - CusipChange
+        effectiveDate:
           type: string
           format: date-time
         navPrice:
           type: number
           format: double
-        isValidated:
-          type: boolean
       xml:
-        name: PriceCurrent
+        name: CorpActionProcessingTaskDto
       type: object
-    OAS.DataModel.Portfolio.DownloadSymbol:
+    OAS.WebApi.DTO.Confirm.CorpAction.CorpActionProcessingStatusCountsDto:
+      properties:
+        complete:
+          type: integer
+          format: int32
+        pending:
+          type: integer
+          format: int32
+        skipped:
+          type: integer
+          format: int32
+      xml:
+        name: CorpActionProcessingStatusCountsDto
+      type: object
+    OAS.DataModel.Performance.PortfolioAnalysis:
       required:
       - id
-      - symbol
+      - productId
+      - productIndex
+      - alClientId
+      - whenCalculated
       properties:
         id:
           type: integer
           format: int32
-        symbol:
-          type: string
-          maxLength: 50
-          minLength: 0
         productId:
           type: integer
           format: int32
-        isNASDAQPlatformSymbol:
-          type: boolean
-        audits:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Portfolio.DownloadSymbolHistory'
-          xml:
-            name: DownloadSymbolHistory
-            wrapped: true
-          type: array
-      xml:
-        name: DownloadSymbol
-      type: object
-    OAS.DataModel.Portfolio.ProductRiskScoreCurrent:
-      properties:
-        productPk:
-          type: integer
-          format: int32
-        riskScore:
-          type: integer
-          format: int32
-        asOfDate:
-          type: string
-          format: date-time
-        riskScoreMethod:
-          type: string
-      xml:
-        name: ProductRiskScoreCurrent
-      type: object
-    OAS.WebApi.DTO.Confirm.CorpAction.CorpActionProcessingStatusDto:
-      properties:
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        corporateActionId:
-          type: integer
-          format: int32
-        corporateActionProcessingId:
-          type: integer
-          format: int32
-        databaseName:
-          type: string
-        serverName:
-          type: string
-        productId:
-          type: integer
-          format: int32
-        productName:
-          type: string
-        ticker:
-          type: string
-        processingType:
-          type: string
-        effectiveDate:
-          type: string
-          format: date-time
-        status:
-          type: string
-          enum:
-          - New
-          - Approved
-          - CreatePendings
-          - Processing
-          - InProcess
-          - Complete
-          - Cancelled
-          - RecalculateUnits
-          - NotProcessed
-          - MoveCostBasis
-        corporateActionTaskType:
-          type: string
-        corporateActionTaskQueueStatus:
-          type: string
-          enum:
-          - Unknown
-          - Pending
-          - Skipped
-          - Complete
-        corporateActionTaskQueueId:
+        productIndex:
           type: integer
           format: int32
         alClientId:
           type: integer
           format: int32
-        corporateActionStatus:
-          type: string
-        mergeOutRatio:
-          type: number
-          format: double
-        roundingType:
-          type: string
-          enum:
-          - Normal
-          - Up
-          - Down
-          - Nearest
-          - NoRounding
-        expectedClose:
+        whenCalculated:
           type: string
           format: date-time
-        isHeld:
-          type: boolean
-        isVerified:
-          type: boolean
-        isBeginingOfDate:
-          type: boolean
-        navPrice:
+        standardDeviation:
           type: number
           format: double
-        auditedDate:
-          type: string
-          format: date-time
-        auditedBy:
-          type: string
-        skippedTask:
-          type: boolean
-        remarks:
-          type: string
-        recordStatus:
-          type: string
-        entryDate:
-          type: string
-          format: date-time
-        recordDate:
-          type: string
-          format: date-time
-        rate1:
+        beta:
           type: number
           format: double
-        rate2:
+        alpha:
           type: number
           format: double
-        cash:
+        rSquared:
           type: number
           format: double
-        payDate:
+        drawdown:
+          type: number
+          format: double
+        performance:
+          type: number
+          format: double
+        sharpe:
+          type: number
+          format: double
+        sortino:
+          type: number
+          format: double
+        treynor:
+          type: number
+          format: double
+        downsideCaptureRatio:
+          type: number
+          format: double
+        errorMessage:
           type: string
-          format: date-time
-        note:
-          type: string
-        productType:
-          type: string
-          enum:
-          - None
-          - MutualFund
-          - Annuity
-          - AdvisorOne
-          - StockOrETF
-          - Option
-          - Bond
-          - Unknown
-          - CD
-          - Index
       xml:
-        name: CorpActionProcessingStatusDto
-      type: object
-    OAT.DataModel.ComplexTypes.BasicAuditNullNull:
-      properties:
-        createdDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-          maxLength: 100
-          minLength: 0
-        editedDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-          maxLength: 100
-          minLength: 0
-      xml:
-        name: BasicAuditNullNull
+        name: PortfolioAnalysis
       type: object
     OAS.DataModel.ComplexTypes.Address:
       properties:
@@ -2629,250 +2937,7 @@ components:
       xml:
         name: Address
       type: object
-    OAS.WebApi.DTO.Confirm.CorpAction.CorpActionTaskQueueSkippedDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        alClientId:
-          type: integer
-          format: int32
-        corpActionProcessingId:
-          type: integer
-          format: int32
-        corpActionTaskQueueStartId:
-          type: integer
-          format: int32
-        corpActionTaskQueueEndId:
-          type: integer
-          format: int32
-        comment:
-          type: string
-      xml:
-        name: CorpActionTaskQueueSkippedDto
-      type: object
-    OAS.DataModel.Portfolio.FundFamilyGlobal:
-      required:
-      - id
-      - personalId
-      - isAnnuity
-      - isCanBeDownLoad
-      - isActive
-      properties:
-        id:
-          type: integer
-          format: int32
-        personalId:
-          type: integer
-          format: int32
-        isAnnuity:
-          type: boolean
-        isCanBeDownLoad:
-          type: boolean
-        oldGroup:
-          type: string
-          maxLength: 5
-          minLength: 0
-        oldFFId:
-          type: integer
-          format: int32
-        persContactId:
-          type: integer
-          format: int32
-        persOverNTId:
-          type: integer
-          format: int32
-        speedDial:
-          type: string
-          maxLength: 10
-          minLength: 0
-        tradeInstr:
-          type: string
-          maxLength: 255
-          minLength: 0
-        isActive:
-          type: boolean
-        createdDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-          maxLength: 20
-          minLength: 0
-        editedDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-          maxLength: 20
-          minLength: 0
-        timestamp:
-          type: string
-          format: byte
-        vendor:
-          type: string
-          maxLength: 50
-          minLength: 0
-        status:
-          type: string
-          maxLength: 50
-          minLength: 0
-        restrictionNotes:
-          type: string
-          maxLength: 500
-          minLength: 0
-        reregistrationNotes:
-          type: string
-          maxLength: 500
-          minLength: 0
-        cstOperationHours:
-          type: string
-          maxLength: 20
-          minLength: 0
-        isPhoneTrade:
-          type: boolean
-        isFaxTrade:
-          type: boolean
-        isUploadTrade:
-          type: boolean
-        isConfirmPhone:
-          type: boolean
-        isConfirmInternet:
-          type: boolean
-        isConfirmFundServ:
-          type: boolean
-        isConfirmAps:
-          type: boolean
-        isConfirmOther:
-          type: boolean
-        confirmNotes:
-          type: string
-          maxLength: 500
-          minLength: 0
-        downloadMethod:
-          type: string
-          maxLength: 10
-          minLength: 0
-        downloadNotes:
-          type: string
-          maxLength: 500
-          minLength: 0
-        custFundServe:
-          type: string
-          maxLength: 20
-          minLength: 0
-        directFundServe:
-          type: string
-          maxLength: 20
-          minLength: 0
-        trader:
-          type: string
-          maxLength: 20
-          minLength: 0
-        unitBalanceScale:
-          type: integer
-          format: int32
-        priceScale:
-          type: integer
-          format: int32
-        isAcctNumUnique:
-          type: boolean
-        isNetworkingEligible:
-          type: boolean
-        isShareClassSensitive:
-          type: boolean
-        sungardBrokerId:
-          type: integer
-          format: int32
-        personal:
-          $ref: '#/components/schemas/OAS.DataModel.Portfolio.PersonalGlobal'
-      xml:
-        name: FundFamilyGlobal
-      type: object
-    OAS.DataModel.Portfolio.ShareClass:
-      required:
-      - id
-      - class
-      properties:
-        id:
-          type: integer
-          format: int32
-        class:
-          type: string
-          maxLength: 10
-          minLength: 0
-        description:
-          type: string
-          maxLength: 255
-          minLength: 0
-        oldFundId:
-          type: integer
-          format: int32
-        loadType:
-          type: string
-          maxLength: 1
-          minLength: 0
-        isDefault:
-          type: boolean
-      xml:
-        name: ShareClass
-      type: object
-    OAS.DataModel.Portfolio.DownloadSymbolHistory:
-      required:
-      - downloadSymbolId
-      - changeType
-      properties:
-        id:
-          type: integer
-          format: int32
-        downloadSymbolId:
-          type: integer
-          format: int32
-        changeType:
-          type: string
-          maxLength: 1
-          minLength: 0
-        auditedByDisplay:
-          type: string
-        auditedDate:
-          type: string
-          format: date-time
-      xml:
-        name: DownloadSymbolHistory
-      type: object
-    OAS.DataModel.ComplexTypes.FullPhoneNumber:
-      properties:
-        extension:
-          type: string
-          maxLength: 10
-          minLength: 0
-        hasValue:
-          readOnly: true
-          type: boolean
-        number:
-          type: string
-          maxLength: 15
-          minLength: 0
-      xml:
-        name: FullPhoneNumber
-      type: object
-    OAS.DataModel.Portfolio.ProductGlobalAdditionalInfo:
-      required:
-      - productId
-      properties:
-        productId:
-          type: integer
-          format: int32
-        currentOrionPrice:
-          type: number
-          format: double
-        currentOrionPriceDate:
-          type: string
-          format: date-time
-      xml:
-        name: ProductGlobalAdditionalInfo
-      type: object
-    OAS.DataModel.Integration.FinMason.ProductRiskScoreExt:
+    OAS.DataModel.Integration.FinMason.ProductRiskScore:
       required:
       - productId
       - asOfDate
@@ -2887,192 +2952,31 @@ components:
         riskScore:
           type: integer
           format: int32
-        productStdDev1Yr:
-          type: number
-          format: double
-        productStdDev3Yr:
-          type: number
-          format: double
-        productStdDev5Yr:
-          type: number
-          format: double
-        productStdDev10Yr:
-          type: number
-          format: double
-        covarianceProductBench1Yr:
-          type: number
-          format: double
-        covarianceProductBench3Yr:
-          type: number
-          format: double
-        covarianceProductBench5Yr:
-          type: number
-          format: double
-        covarianceProductBench10Yr:
-          type: number
-          format: double
-        relativeRisk1Yr:
-          type: number
-          format: double
-        relativeRisk3Yr:
-          type: number
-          format: double
-        relativeRisk5Yr:
-          type: number
-          format: double
-        relativeRisk10Yr:
-          type: number
-          format: double
-        beta1Yr:
-          type: number
-          format: double
-        beta3Yr:
-          type: number
-          format: double
-        beta5Yr:
-          type: number
-          format: double
-        beta10Yr:
-          type: number
-          format: double
-        benchmarkStdDev1Yr:
-          type: number
-          format: double
-        benchmarkStdDev3Yr:
-          type: number
-          format: double
-        benchmarkStdDev5Yr:
-          type: number
-          format: double
-        benchmarkStdDev10Yr:
-          type: number
-          format: double
-        clusterCorrelation1Yr:
-          type: number
-          format: double
-        clusterCorrelation3Yr:
-          type: number
-          format: double
-        clusterCorrelation5Yr:
-          type: number
-          format: double
-        clusterCorrelation10Yr:
-          type: number
-          format: double
+        product:
+          $ref: '#/components/schemas/OAS.DataModel.Portfolio.ProductGlobal'
+        extension:
+          $ref: '#/components/schemas/OAS.DataModel.Integration.FinMason.ProductRiskScoreExt'
       xml:
-        name: ProductRiskScoreExt
+        name: ProductRiskScore
       type: object
-    OAS.WebApi.DTO.Confirm.CorpAction.CorpActionTransactionV2Dto:
-      properties:
-        id:
-          readOnly: true
-          type: string
-        dbName:
-          type: string
-        transactionId:
-          type: integer
-          format: int32
-        corpActionId:
-          type: integer
-          format: int32
-        productId:
-          type: integer
-          format: int32
-        productName:
-          type: string
-        processingType:
-          type: string
-        accountId:
-          type: integer
-          format: int32
-        assetId:
-          type: integer
-          format: int32
-        transDate:
-          type: string
-          format: date-time
-        transType:
-          type: string
-        amount:
-          type: number
-          format: double
-        units:
-          type: number
-          format: double
-        price:
-          type: number
-          format: double
-        tradeStatus:
-          type: string
-          enum:
-          - Complete
-          - Pending
-          - Rejected
-          - Reversed
-          - Inactive
-          - PendingCorpAction
-          - FutureAip
-        custodian:
-          type: string
-        transSubType:
-          type: string
-        isProcessing:
-          type: boolean
-        processingId:
-          type: integer
-          format: int32
-        alClientId:
-          type: integer
-          format: int32
-        transTypeId:
-          type: integer
-          format: int32
-        transSubTypeId:
-          type: integer
-          format: int32
-        notes:
-          type: string
-        accountNumber:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        isCil:
-          type: boolean
-        custodianId:
-          type: integer
-          format: int32
-      xml:
-        name: CorpActionTransactionV2Dto
-      type: object
-    OAS.DataModel.Confirm.CorpAction.CorpActionTaskQueue:
+    OAS.DataModel.Confirm.CorpAction.CorpActionProcessingType:
       required:
       - id
-      - corpActionProcessingId
-      - corpActionTaskTypeId
+      - name
       properties:
         id:
           type: integer
           format: int32
-        corpActionProcessingId:
-          type: integer
-          format: int32
-        corpActionTaskTypeId:
-          type: integer
-          format: int32
-        processing:
-          $ref: '#/components/schemas/OAS.DataModel.Confirm.CorpAction.CorpActionProcessing'
-        taskType:
-          $ref: '#/components/schemas/OAS.DataModel.Confirm.CorpAction.CorpActionTaskType'
+        name:
+          type: string
+          maxLength: 50
+          minLength: 0
+        notes:
+          type: string
+          maxLength: 255
+          minLength: 0
       xml:
-        name: CorpActionTaskQueue
+        name: CorpActionProcessingType
       type: object
     OAS.DataModel.Portfolio.ProductGlobal:
       required:
@@ -3344,261 +3248,357 @@ components:
       xml:
         name: ProductGlobal
       type: object
-    OAS.DataModel.Confirm.CorpAction.CorpActionProcessing:
+    OAS.DataModel.Portfolio.PriceCurrent:
       required:
-      - id
-      - corpActionId
-      - corpActionProcessingTypeId
-      - processStatus
-      - roundingType
-      - isHeld
-      - isVerified
+      - custodianCommonId
+      - productId
+      - priceDate
+      - navPrice
+      - isValidated
       properties:
-        id:
+        custodianCommonId:
           type: integer
           format: int32
-        corpActionId:
+        productId:
           type: integer
           format: int32
-        corpActionProcessingTypeId:
-          type: integer
-          format: int32
-        processStatus:
-          type: string
-          enum:
-          - New
-          - Approved
-          - CreatePendings
-          - Processing
-          - InProcess
-          - Complete
-          - Cancelled
-          - RecalculateUnits
-          - NotProcessed
-          - MoveCostBasis
-        mergeOutRatio:
-          type: number
-          format: double
-          maximum: 1.0
-          minimum: 0.0
-        roundingType:
-          type: string
-          enum:
-          - Normal
-          - Up
-          - Down
-          - Nearest
-          - NoRounding
-        expectedClose:
+        priceDate:
           type: string
           format: date-time
-        isHeld:
-          type: boolean
-        isVerified:
-          type: boolean
-        isBeginningOfDay:
-          type: boolean
         navPrice:
           type: number
           format: double
-        newProductName:
-          type: string
-        newCusip:
-          type: string
-        newTicker:
-          type: string
-        processingType:
-          $ref: '#/components/schemas/OAS.DataModel.Confirm.CorpAction.CorpActionProcessingType'
-        corporateAction:
-          $ref: '#/components/schemas/OAS.DataModel.Portfolio.CorporateAction'
-        corpActionTaskQueues:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Confirm.CorpAction.CorpActionTaskQueue'
-          xml:
-            name: CorpActionTaskQueue
-            wrapped: true
-          type: array
+        isValidated:
+          type: boolean
       xml:
-        name: CorpActionProcessing
+        name: PriceCurrent
       type: object
-    OAS.DataModel.Confirm.CorpAction.CorpActionProcessingType:
+    OAS.DataModel.Portfolio.CorporateAction:
       required:
       - id
-      - name
+      - createdBy
+      - createdDate
+      - editedBy
+      - editedDate
       properties:
         id:
           type: integer
           format: int32
+        productId:
+          type: integer
+          format: int32
+        entryDate:
+          type: string
+          format: date-time
+        remarks:
+          type: string
+          maxLength: 50
+          minLength: 0
+        notifyType:
+          type: string
+          maxLength: 1
+          minLength: 0
+        notifyTypeUpdate:
+          type: string
+          maxLength: 1
+          minLength: 0
+        recordStatus:
+          type: string
+          maxLength: 1
+          minLength: 0
+        numOptions:
+          type: integer
+          format: int32
+          maximum: 2147483647
+          minimum: 0
+        securityType:
+          type: string
+          maxLength: 1
+          minLength: 0
+        effectiveDate:
+          type: string
+          format: date-time
+        cusip:
+          type: string
+        oldCusip:
+          type: string
+        ticker:
+          type: string
         name:
           type: string
           maxLength: 50
           minLength: 0
-        notes:
+        oldName:
           type: string
-          maxLength: 255
+          maxLength: 50
           minLength: 0
-      xml:
-        name: CorpActionProcessingType
-      type: object
-    OAS.DataModel.Performance.PortfolioAnalysis:
-      required:
-      - id
-      - productId
-      - productIndex
-      - alClientId
-      - whenCalculated
-      properties:
-        id:
-          type: integer
-          format: int32
-        productId:
-          type: integer
-          format: int32
-        productIndex:
-          type: integer
-          format: int32
-        alClientId:
-          type: integer
-          format: int32
-        whenCalculated:
+        expireDate:
           type: string
           format: date-time
-        standardDeviation:
+        cash:
           type: number
           format: double
-        beta:
-          type: number
-          format: double
-        alpha:
-          type: number
-          format: double
-        rSquared:
-          type: number
-          format: double
-        drawdown:
-          type: number
-          format: double
-        performance:
-          type: number
-          format: double
-        sharpe:
-          type: number
-          format: double
-        sortino:
-          type: number
-          format: double
-        treynor:
-          type: number
-          format: double
-        downsideCaptureRatio:
-          type: number
-          format: double
-        errorMessage:
+        cashCode:
           type: string
-      xml:
-        name: PortfolioAnalysis
-      type: object
-    OAS.DataModel.Portfolio.SubHoldingAlloc:
-      required:
-      - id
-      - subHoldingDateId
-      - productId
-      - allocationPercent
-      - units
-      properties:
-        id:
-          type: integer
-          format: int32
-        subHoldingDateId:
-          type: integer
-          format: int32
-        productId:
-          type: integer
-          format: int32
-        allocationPercent:
+          maxLength: 1
+          minLength: 0
+        stateCode:
+          type: string
+          maxLength: 2
+          minLength: 0
+        tenderAgent:
+          type: string
+          maxLength: 4
+          minLength: 0
+        infoAgent:
+          type: string
+          maxLength: 4
+          minLength: 0
+        maturityDate:
+          type: string
+          format: date-time
+        rate1:
           type: number
           format: double
-        units:
+        rateCode:
+          type: string
+          maxLength: 1
+          minLength: 0
+        rate2:
           type: number
           format: double
-        product:
-          $ref: '#/components/schemas/OAS.DataModel.Portfolio.ProductGlobal'
-      xml:
-        name: SubHoldingAlloc
-      type: object
-    OAS.DataModel.Portfolio.ProductUsage:
-      required:
-      - alClientId
-      - productId
-      properties:
-        alClientId:
-          type: integer
-          format: int32
-        productId:
-          type: integer
-          format: int32
-        assetCount:
-          type: integer
-          format: int32
-        units:
-          type: integer
-          format: int32
-        overridden:
-          type: boolean
+        voluntaryMandatory:
+          type: string
+          maxLength: 1
+          minLength: 0
+        dtc:
+          type: string
+          maxLength: 1
+          minLength: 0
+        prorationRate:
+          type: string
+          maxLength: 20
+          minLength: 0
+        prorationDate:
+          type: string
+          format: date-time
+        note:
+          type: string
+          maxLength: 3000
+          minLength: 0
+        createdBy:
+          type: string
+          maxLength: 40
+          minLength: 0
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+          maxLength: 40
+          minLength: 0
         editedDate:
           type: string
           format: date-time
-        riskScoreSource:
-          type: string
-          enum:
-          - Unscored
-          - FinMason
-      xml:
-        name: ProductUsage
-      type: object
-    OAS.DataModel.Integration.FinMason.ProductRiskScore:
-      required:
-      - productId
-      - asOfDate
-      - riskScore
-      properties:
-        productId:
+        textNo:
           type: integer
           format: int32
-        asOfDate:
-          type: string
-          format: date-time
-        riskScore:
+        dealNo:
           type: integer
           format: int32
+        costBasisFactor:
+          type: number
+          format: double
+        textNoUpdate:
+          type: integer
+          format: int32
+        fairMarketValue:
+          type: number
+          format: double
+        moreInfoUrl:
+          type: string
+          maxLength: 2000
+          minLength: 0
         product:
           $ref: '#/components/schemas/OAS.DataModel.Portfolio.ProductGlobal'
-        extension:
-          $ref: '#/components/schemas/OAS.DataModel.Integration.FinMason.ProductRiskScoreExt'
+        processes:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Confirm.CorpAction.CorpActionProcessing'
+          xml:
+            name: CorpActionProcessing
+            wrapped: true
+          type: array
       xml:
-        name: ProductRiskScore
+        name: CorporateAction
       type: object
-    OAS.DataModel.Portfolio.FundFamilyProduct:
+    OAS.DataModel.Portfolio.FundFamilyGlobal:
       required:
       - id
-      - productId
-      - fundFamilyId
+      - personalId
+      - isAnnuity
+      - isCanBeDownLoad
+      - isActive
       properties:
         id:
           type: integer
           format: int32
-        productId:
+        personalId:
           type: integer
           format: int32
-        fundFamilyId:
+        isAnnuity:
+          type: boolean
+        isCanBeDownLoad:
+          type: boolean
+        oldGroup:
+          type: string
+          maxLength: 5
+          minLength: 0
+        oldFFId:
           type: integer
           format: int32
-        product:
-          $ref: '#/components/schemas/OAS.DataModel.Portfolio.ProductGlobal'
-        fundFamily:
-          $ref: '#/components/schemas/OAS.DataModel.Portfolio.FundFamilyGlobal'
+        persContactId:
+          type: integer
+          format: int32
+        persOverNTId:
+          type: integer
+          format: int32
+        speedDial:
+          type: string
+          maxLength: 10
+          minLength: 0
+        tradeInstr:
+          type: string
+          maxLength: 255
+          minLength: 0
+        isActive:
+          type: boolean
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+          maxLength: 20
+          minLength: 0
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+          maxLength: 20
+          minLength: 0
+        timestamp:
+          type: string
+          format: byte
+        vendor:
+          type: string
+          maxLength: 50
+          minLength: 0
+        status:
+          type: string
+          maxLength: 50
+          minLength: 0
+        restrictionNotes:
+          type: string
+          maxLength: 500
+          minLength: 0
+        reregistrationNotes:
+          type: string
+          maxLength: 500
+          minLength: 0
+        cstOperationHours:
+          type: string
+          maxLength: 20
+          minLength: 0
+        isPhoneTrade:
+          type: boolean
+        isFaxTrade:
+          type: boolean
+        isUploadTrade:
+          type: boolean
+        isConfirmPhone:
+          type: boolean
+        isConfirmInternet:
+          type: boolean
+        isConfirmFundServ:
+          type: boolean
+        isConfirmAps:
+          type: boolean
+        isConfirmOther:
+          type: boolean
+        confirmNotes:
+          type: string
+          maxLength: 500
+          minLength: 0
+        downloadMethod:
+          type: string
+          maxLength: 10
+          minLength: 0
+        downloadNotes:
+          type: string
+          maxLength: 500
+          minLength: 0
+        custFundServe:
+          type: string
+          maxLength: 20
+          minLength: 0
+        directFundServe:
+          type: string
+          maxLength: 20
+          minLength: 0
+        trader:
+          type: string
+          maxLength: 20
+          minLength: 0
+        unitBalanceScale:
+          type: integer
+          format: int32
+        priceScale:
+          type: integer
+          format: int32
+        isAcctNumUnique:
+          type: boolean
+        isNetworkingEligible:
+          type: boolean
+        isShareClassSensitive:
+          type: boolean
+        sungardBrokerId:
+          type: integer
+          format: int32
+        personal:
+          $ref: '#/components/schemas/OAS.DataModel.Portfolio.PersonalGlobal'
       xml:
-        name: FundFamilyProduct
+        name: FundFamilyGlobal
+      type: object
+    OAS.DataModel.Portfolio.ProductSubType:
+      required:
+      - id
+      - productType
+      - isAlternative
+      properties:
+        id:
+          type: integer
+          format: int32
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        productSubTypeName:
+          type: string
+          maxLength: 50
+          minLength: 0
+        isAlternative:
+          type: boolean
+      xml:
+        name: ProductSubType
       type: object
   securitySchemes:
     Authorization:

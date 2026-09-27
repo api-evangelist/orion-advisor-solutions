@@ -843,6 +843,189 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAS.DataModel.Integration.MoneyGuidePro.Topic:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Integration.MoneyGuidePro.Item'
+          xml:
+            name: Item
+            wrapped: true
+          type: array
+        changes:
+          type: string
+        current:
+          type: string
+        description:
+          type: string
+        recommended:
+          type: string
+      xml:
+        name: Topic
+      type: object
+    OAS.DataModel.Integration.MoneyGuidePro.Item:
+      properties:
+        details:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Integration.MoneyGuidePro.Detail'
+          xml:
+            name: Detail
+            wrapped: true
+          type: array
+        changes:
+          type: string
+        current:
+          type: string
+        description:
+          type: string
+        recommended:
+          type: string
+      xml:
+        name: Item
+      type: object
+    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.RefreshPositionsResponse:
+      properties:
+        messages:
+          items:
+            type: string
+          type: array
+        status:
+          type: string
+          enum:
+          - Success
+          - Failure
+          - NotFound
+          - Error
+      xml:
+        name: RefreshPositionsResponse
+      type: object
+    OAS.DataModel.Integration.MoneyGuidePro.Current:
+      properties:
+        calculations:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Integration.MoneyGuidePro.Calculation'
+          xml:
+            name: Calculation
+            wrapped: true
+          type: array
+        monteCarloMeter:
+          $ref: '#/components/schemas/OAS.DataModel.Integration.MoneyGuidePro.Montecarlometer'
+      xml:
+        name: Current
+      type: object
+    OAS.DataModel.Integration.MoneyGuidePro.Detail:
+      properties:
+        changes:
+          type: string
+        current:
+          type: string
+        description:
+          type: string
+        recommended:
+          type: string
+      xml:
+        name: Detail
+      type: object
+    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.InsurancePolicyBeneficiary:
+      properties:
+        name:
+          type: string
+        percent:
+          type: number
+          format: double
+      xml:
+        name: InsurancePolicyBeneficiary
+      type: object
+    OAS.Integrations.MoneyGuidePro.DTO.MGPHoldingInfo:
+      properties:
+        cmgrAssetKey:
+          readOnly: true
+          type: string
+        type:
+          type: string
+        description:
+          type: string
+        ticker:
+          type: string
+        cusip:
+          type: string
+        costBasis:
+          type: number
+          format: double
+        currentValue:
+          type: number
+          format: double
+        assetKey:
+          type: string
+        assetClasses:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.DTO.MGPAssetClassInfo'
+          xml:
+            name: MGPAssetClassInfo
+            wrapped: true
+          type: array
+      xml:
+        name: MGPHoldingInfo
+      type: object
+    OAS.Integrations.MoneyGuidePro.DTO.MGPHouseholdInfo:
+      properties:
+        interface:
+          type: integer
+          format: int32
+        integrationKey:
+          type: string
+        integrationUserId:
+          type: string
+        advisor:
+          $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.DTO.MGPAdvisorInfo'
+        participants:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.DTO.MGPParticipantInfo'
+          xml:
+            name: MGPParticipantInfo
+            wrapped: true
+          type: array
+        assets:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.DTO.MGPAssetInfo'
+          xml:
+            name: MGPAssetInfo
+            wrapped: true
+          type: array
+      xml:
+        name: MGPHouseholdInfo
+      type: object
+    OAS.DataModel.Integration.MoneyGuidePro.Recommended:
+      properties:
+        calculations:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Integration.MoneyGuidePro.Calculation'
+          xml:
+            name: Calculation
+            wrapped: true
+          type: array
+        monteCarloMeter:
+          $ref: '#/components/schemas/OAS.DataModel.Integration.MoneyGuidePro.Montecarlometer'
+      xml:
+        name: Recommended
+      type: object
+    OAS.Integrations.MoneyGuidePro.DTO.MGPAssetClassInfo:
+      properties:
+        id:
+          readOnly: true
+          type: string
+        description:
+          type: string
+        percent:
+          type: integer
+          format: int32
+        assetClassAbbreviation:
+          type: string
+        useAssetClassAbbreviation:
+          type: boolean
+      xml:
+        name: MGPAssetClassInfo
+      type: object
     OAS.Integrations.MoneyGuidePro.DTO.MGPParticipantInfo:
       properties:
         participantType:
@@ -911,6 +1094,31 @@ components:
       xml:
         name: MPGPlanSummary
       type: object
+    OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto:
+      properties:
+        key:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        termsAccepted:
+          type: boolean
+      xml:
+        name: IntegrationSetupRequestDto
+      type: object
+    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryCategoryHeader:
+      properties:
+        changes:
+          type: string
+        current:
+          type: string
+        description:
+          type: string
+        recommended:
+          type: string
+      xml:
+        name: PlanSummaryCategoryHeader
+      type: object
     OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.MonteCarloMeterResponse:
       properties:
         highlightHtmlColor:
@@ -935,18 +1143,144 @@ components:
       xml:
         name: MonteCarloMeterResponse
       type: object
-    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryResultCalculation:
+    OAS.DataModel.Integration.MoneyGuidePro.Category:
       properties:
         description:
           type: string
-        probabilityOfSuccess:
+        header:
+          $ref: '#/components/schemas/OAS.DataModel.Integration.MoneyGuidePro.Header'
+        topics:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Integration.MoneyGuidePro.Topic'
+          xml:
+            name: Topic
+            wrapped: true
+          type: array
+      xml:
+        name: Category
+      type: object
+    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryItem:
+      properties:
+        details:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryDetail'
+          xml:
+            name: PlanSummaryDetail
+            wrapped: true
+          type: array
+        changes:
           type: string
-        safetyMarginCurrent:
+        current:
           type: string
-        safetyMarginFuture:
+        description:
+          type: string
+        recommended:
           type: string
       xml:
-        name: PlanSummaryResultCalculation
+        name: PlanSummaryItem
+      type: object
+    OAS.DataModel.Integration.MoneyGuidePro.Header:
+      properties:
+        changes:
+          type: string
+        current:
+          type: string
+        description:
+          type: string
+        recommended:
+          type: string
+      xml:
+        name: Header
+      type: object
+    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.InsurancePoliciesResponse:
+      properties:
+        policies:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.InsurancePolicy'
+          xml:
+            name: InsurancePolicy
+            wrapped: true
+          type: array
+      xml:
+        name: InsurancePoliciesResponse
+      type: object
+    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.InsurancePolicy:
+      properties:
+        annualPremium:
+          type: number
+          format: double
+        beneficiaries:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.InsurancePolicyBeneficiary'
+          xml:
+            name: InsurancePolicyBeneficiary
+            wrapped: true
+          type: array
+        cashValue:
+          type: number
+          format: double
+        deathBenefit:
+          type: number
+          format: double
+        insuredName:
+          type: string
+        isAsset:
+          type: boolean
+        name:
+          type: string
+        ownerName:
+          type: string
+        premiumPaid:
+          type: string
+        typeName:
+          type: string
+      xml:
+        name: InsurancePolicy
+      type: object
+    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryDetail:
+      properties:
+        changes:
+          type: string
+        current:
+          type: string
+        description:
+          type: string
+        recommended:
+          type: string
+      xml:
+        name: PlanSummaryDetail
+      type: object
+    OAS.WebApi.DTO.Integrations.MoneyGuidePro.MoneyGuideProSettingsDto:
+      properties:
+        institutionId:
+          type: integer
+          format: int32
+        userName:
+          type: string
+        password:
+          type: string
+      xml:
+        name: MoneyGuideProSettingsDto
+      type: object
+    OAS.DataModel.Integration.MoneyGuidePro.Results:
+      properties:
+        current:
+          $ref: '#/components/schemas/OAS.DataModel.Integration.MoneyGuidePro.Current'
+        monteCarloTargetRangeHigh:
+          type: string
+        monteCarloTargetRangeLow:
+          type: string
+        recommended:
+          $ref: '#/components/schemas/OAS.DataModel.Integration.MoneyGuidePro.Recommended'
+      xml:
+        name: Results
+      type: object
+    OAS.Integrations.MoneyGuidePro.ClientIntegrationConfig:
+      properties:
+        enabled:
+          type: boolean
+      xml:
+        name: ClientIntegrationConfig
       type: object
     OAS.Integrations.MoneyGuidePro.DTO.MGPAssetInfo:
       properties:
@@ -1000,81 +1334,85 @@ components:
       xml:
         name: MGPAssetInfo
       type: object
-    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryTopic:
+    OAS.Integrations.MoneyGuidePro.IntegrationConfig:
       properties:
-        items:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryItem'
-          xml:
-            name: PlanSummaryItem
-            wrapped: true
-          type: array
-        changes:
-          type: string
-        current:
-          type: string
-        description:
-          type: string
-        recommended:
-          type: string
-      xml:
-        name: PlanSummaryTopic
-      type: object
-    OAS.WebApi.DTO.Integrations.MoneyGuidePro.MoneyGuideProSettingsDto:
-      properties:
-        institutionId:
-          type: integer
-          format: int32
-        userName:
+        userId:
           type: string
         password:
           type: string
       xml:
-        name: MoneyGuideProSettingsDto
+        name: IntegrationConfig
       type: object
-    OAS.Integrations.MoneyGuidePro.DTO.MGPHouseholdInfo:
+    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.NetworthResponse:
       properties:
-        interface:
-          type: integer
-          format: int32
-        integrationKey:
-          type: string
-        integrationUserId:
-          type: string
-        advisor:
-          $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.DTO.MGPAdvisorInfo'
-        participants:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.DTO.MGPParticipantInfo'
-          xml:
-            name: MGPParticipantInfo
-            wrapped: true
-          type: array
-        assets:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.DTO.MGPAssetInfo'
-          xml:
-            name: MGPAssetInfo
-            wrapped: true
-          type: array
-      xml:
-        name: MGPHouseholdInfo
-      type: object
-    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryResponse:
-      properties:
-        categories:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryCategory'
-          xml:
-            name: PlanSummaryCategory
-            wrapped: true
-          type: array
+        investmentAssets:
+          $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.NetworthGroup'
+        liabilities:
+          $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.NetworthGroup'
+        networth:
+          type: number
+          format: double
+        otherAssets:
+          $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.NetworthGroup'
         refreshPositionsResponse:
           $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.RefreshPositionsResponse'
-        results:
-          $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryResults'
+        totalAssets:
+          type: number
+          format: double
       xml:
-        name: PlanSummaryResponse
+        name: NetworthResponse
+      type: object
+    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryResultCalculation:
+      properties:
+        description:
+          type: string
+        probabilityOfSuccess:
+          type: string
+        safetyMarginCurrent:
+          type: string
+        safetyMarginFuture:
+          type: string
+      xml:
+        name: PlanSummaryResultCalculation
+      type: object
+    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryResultsScenario:
+      properties:
+        calculations:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryResultCalculation'
+          xml:
+            name: PlanSummaryResultCalculation
+            wrapped: true
+          type: array
+        monteCarloMeter:
+          $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.MonteCarloMeterResponse'
+      xml:
+        name: PlanSummaryResultsScenario
+      type: object
+    OAS.DataModel.Integration.MoneyGuidePro.Refreshpositionsresponse:
+      properties:
+        messages:
+          type: object
+        status:
+          type: string
+      xml:
+        name: Refreshpositionsresponse
+      type: object
+    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryCategory:
+      properties:
+        description:
+          type: string
+        header:
+          $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryCategoryHeader'
+        topics:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryTopic'
+          xml:
+            name: PlanSummaryTopic
+            wrapped: true
+          type: array
+      xml:
+        name: PlanSummaryCategory
       type: object
     OAS.DataModel.Integration.MoneyGuidePro.Montecarlometer:
       properties:
@@ -1100,82 +1438,6 @@ components:
       xml:
         name: Montecarlometer
       type: object
-    OAS.DataModel.Integration.MoneyGuidePro.Category:
-      properties:
-        description:
-          type: string
-        header:
-          $ref: '#/components/schemas/OAS.DataModel.Integration.MoneyGuidePro.Header'
-        topics:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Integration.MoneyGuidePro.Topic'
-          xml:
-            name: Topic
-            wrapped: true
-          type: array
-      xml:
-        name: Category
-      type: object
-    OAS.DataModel.Integration.MoneyGuidePro.Header:
-      properties:
-        changes:
-          type: string
-        current:
-          type: string
-        description:
-          type: string
-        recommended:
-          type: string
-      xml:
-        name: Header
-      type: object
-    OAS.DataModel.Integration.MoneyGuidePro.Current:
-      properties:
-        calculations:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Integration.MoneyGuidePro.Calculation'
-          xml:
-            name: Calculation
-            wrapped: true
-          type: array
-        monteCarloMeter:
-          $ref: '#/components/schemas/OAS.DataModel.Integration.MoneyGuidePro.Montecarlometer'
-      xml:
-        name: Current
-      type: object
-    OAS.DataModel.Integration.MoneyGuidePro.Item:
-      properties:
-        details:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Integration.MoneyGuidePro.Detail'
-          xml:
-            name: Detail
-            wrapped: true
-          type: array
-        changes:
-          type: string
-        current:
-          type: string
-        description:
-          type: string
-        recommended:
-          type: string
-      xml:
-        name: Item
-      type: object
-    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryDetail:
-      properties:
-        changes:
-          type: string
-        current:
-          type: string
-        description:
-          type: string
-        recommended:
-          type: string
-      xml:
-        name: PlanSummaryDetail
-      type: object
     OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.NetworthCategory:
       properties:
         name:
@@ -1185,6 +1447,52 @@ components:
           format: double
       xml:
         name: NetworthCategory
+      type: object
+    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryResults:
+      properties:
+        current:
+          $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryResultsScenario'
+        monteCarloTargetRangeHigh:
+          type: string
+        monteCarloTargetRangeLow:
+          type: string
+        recommended:
+          $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryResultsScenario'
+      xml:
+        name: PlanSummaryResults
+      type: object
+    OAS.DataModel.Integration.MoneyGuidePro.Calculation:
+      properties:
+        description:
+          type: string
+        probabilityOfSuccess:
+          type: string
+        safetyMarginCurrent:
+          type: object
+        safetyMarginFuture:
+          type: string
+      xml:
+        name: Calculation
+      type: object
+    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryTopic:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryItem'
+          xml:
+            name: PlanSummaryItem
+            wrapped: true
+          type: array
+        changes:
+          type: string
+        current:
+          type: string
+        description:
+          type: string
+        recommended:
+          type: string
+      xml:
+        name: PlanSummaryTopic
       type: object
     OAS.Integrations.MoneyGuidePro.DTO.MGPAdvisorInfo:
       properties:
@@ -1223,6 +1531,22 @@ components:
       xml:
         name: MGPAdvisorInfo
       type: object
+    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryResponse:
+      properties:
+        categories:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryCategory'
+          xml:
+            name: PlanSummaryCategory
+            wrapped: true
+          type: array
+        refreshPositionsResponse:
+          $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.RefreshPositionsResponse'
+        results:
+          $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryResults'
+      xml:
+        name: PlanSummaryResponse
+      type: object
     OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.NetworthGroup:
       properties:
         categories:
@@ -1239,330 +1563,6 @@ components:
           format: double
       xml:
         name: NetworthGroup
-      type: object
-    OAS.DataModel.Integration.MoneyGuidePro.Topic:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Integration.MoneyGuidePro.Item'
-          xml:
-            name: Item
-            wrapped: true
-          type: array
-        changes:
-          type: string
-        current:
-          type: string
-        description:
-          type: string
-        recommended:
-          type: string
-      xml:
-        name: Topic
-      type: object
-    OAS.DataModel.Integration.MoneyGuidePro.Recommended:
-      properties:
-        calculations:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Integration.MoneyGuidePro.Calculation'
-          xml:
-            name: Calculation
-            wrapped: true
-          type: array
-        monteCarloMeter:
-          $ref: '#/components/schemas/OAS.DataModel.Integration.MoneyGuidePro.Montecarlometer'
-      xml:
-        name: Recommended
-      type: object
-    OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto:
-      properties:
-        key:
-          type: integer
-          format: int32
-        productName:
-          type: string
-        termsAccepted:
-          type: boolean
-      xml:
-        name: IntegrationSetupRequestDto
-      type: object
-    OAS.DataModel.Integration.MoneyGuidePro.Refreshpositionsresponse:
-      properties:
-        messages:
-          type: object
-        status:
-          type: string
-      xml:
-        name: Refreshpositionsresponse
-      type: object
-    OAS.DataModel.Integration.MoneyGuidePro.Detail:
-      properties:
-        changes:
-          type: string
-        current:
-          type: string
-        description:
-          type: string
-        recommended:
-          type: string
-      xml:
-        name: Detail
-      type: object
-    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.InsurancePolicy:
-      properties:
-        annualPremium:
-          type: number
-          format: double
-        beneficiaries:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.InsurancePolicyBeneficiary'
-          xml:
-            name: InsurancePolicyBeneficiary
-            wrapped: true
-          type: array
-        cashValue:
-          type: number
-          format: double
-        deathBenefit:
-          type: number
-          format: double
-        insuredName:
-          type: string
-        isAsset:
-          type: boolean
-        name:
-          type: string
-        ownerName:
-          type: string
-        premiumPaid:
-          type: string
-        typeName:
-          type: string
-      xml:
-        name: InsurancePolicy
-      type: object
-    OAS.DataModel.Integration.MoneyGuidePro.Results:
-      properties:
-        current:
-          $ref: '#/components/schemas/OAS.DataModel.Integration.MoneyGuidePro.Current'
-        monteCarloTargetRangeHigh:
-          type: string
-        monteCarloTargetRangeLow:
-          type: string
-        recommended:
-          $ref: '#/components/schemas/OAS.DataModel.Integration.MoneyGuidePro.Recommended'
-      xml:
-        name: Results
-      type: object
-    OAS.Integrations.MoneyGuidePro.DTO.MGPAssetClassInfo:
-      properties:
-        id:
-          readOnly: true
-          type: string
-        description:
-          type: string
-        percent:
-          type: integer
-          format: int32
-        assetClassAbbreviation:
-          type: string
-        useAssetClassAbbreviation:
-          type: boolean
-      xml:
-        name: MGPAssetClassInfo
-      type: object
-    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryResultsScenario:
-      properties:
-        calculations:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryResultCalculation'
-          xml:
-            name: PlanSummaryResultCalculation
-            wrapped: true
-          type: array
-        monteCarloMeter:
-          $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.MonteCarloMeterResponse'
-      xml:
-        name: PlanSummaryResultsScenario
-      type: object
-    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.InsurancePoliciesResponse:
-      properties:
-        policies:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.InsurancePolicy'
-          xml:
-            name: InsurancePolicy
-            wrapped: true
-          type: array
-      xml:
-        name: InsurancePoliciesResponse
-      type: object
-    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryCategory:
-      properties:
-        description:
-          type: string
-        header:
-          $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryCategoryHeader'
-        topics:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryTopic'
-          xml:
-            name: PlanSummaryTopic
-            wrapped: true
-          type: array
-      xml:
-        name: PlanSummaryCategory
-      type: object
-    OAS.Integrations.MoneyGuidePro.DTO.MGPHoldingInfo:
-      properties:
-        cmgrAssetKey:
-          readOnly: true
-          type: string
-        type:
-          type: string
-        description:
-          type: string
-        ticker:
-          type: string
-        cusip:
-          type: string
-        costBasis:
-          type: number
-          format: double
-        currentValue:
-          type: number
-          format: double
-        assetKey:
-          type: string
-        assetClasses:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.DTO.MGPAssetClassInfo'
-          xml:
-            name: MGPAssetClassInfo
-            wrapped: true
-          type: array
-      xml:
-        name: MGPHoldingInfo
-      type: object
-    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.RefreshPositionsResponse:
-      properties:
-        messages:
-          items:
-            type: string
-          type: array
-        status:
-          type: string
-          enum:
-          - Success
-          - Failure
-          - NotFound
-          - Error
-      xml:
-        name: RefreshPositionsResponse
-      type: object
-    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryCategoryHeader:
-      properties:
-        changes:
-          type: string
-        current:
-          type: string
-        description:
-          type: string
-        recommended:
-          type: string
-      xml:
-        name: PlanSummaryCategoryHeader
-      type: object
-    OAS.DataModel.Integration.MoneyGuidePro.Calculation:
-      properties:
-        description:
-          type: string
-        probabilityOfSuccess:
-          type: string
-        safetyMarginCurrent:
-          type: object
-        safetyMarginFuture:
-          type: string
-      xml:
-        name: Calculation
-      type: object
-    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.InsurancePolicyBeneficiary:
-      properties:
-        name:
-          type: string
-        percent:
-          type: number
-          format: double
-      xml:
-        name: InsurancePolicyBeneficiary
-      type: object
-    OAS.Integrations.MoneyGuidePro.ClientIntegrationConfig:
-      properties:
-        enabled:
-          type: boolean
-      xml:
-        name: ClientIntegrationConfig
-      type: object
-    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryResults:
-      properties:
-        current:
-          $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryResultsScenario'
-        monteCarloTargetRangeHigh:
-          type: string
-        monteCarloTargetRangeLow:
-          type: string
-        recommended:
-          $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryResultsScenario'
-      xml:
-        name: PlanSummaryResults
-      type: object
-    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.NetworthResponse:
-      properties:
-        investmentAssets:
-          $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.NetworthGroup'
-        liabilities:
-          $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.NetworthGroup'
-        networth:
-          type: number
-          format: double
-        otherAssets:
-          $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.NetworthGroup'
-        refreshPositionsResponse:
-          $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.RefreshPositionsResponse'
-        totalAssets:
-          type: number
-          format: double
-      xml:
-        name: NetworthResponse
-      type: object
-    OAS.Integrations.MoneyGuidePro.IntegrationConfig:
-      properties:
-        userId:
-          type: string
-        password:
-          type: string
-      xml:
-        name: IntegrationConfig
-      type: object
-    OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryItem:
-      properties:
-        details:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.MoneyGuidePro.ExternalServices.MGP.PlanSummaryDetail'
-          xml:
-            name: PlanSummaryDetail
-            wrapped: true
-          type: array
-        changes:
-          type: string
-        current:
-          type: string
-        description:
-          type: string
-        recommended:
-          type: string
-      xml:
-        name: PlanSummaryItem
       type: object
   securitySchemes:
     Authorization:

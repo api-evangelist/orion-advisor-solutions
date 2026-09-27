@@ -4991,19 +4991,131 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.DTO.Reporting.Widgets.AccountAndSystematicsDto:
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
       properties:
-        account:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AccountDto'
-        systematics:
+        key:
+          readOnly: true
+          type: string
+        value:
           items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SystematicDto'
-          xml:
-            name: SystematicDto
-            wrapped: true
+            type: string
+          readOnly: true
           type: array
       xml:
-        name: AccountAndSystematicsDto
+        name: KeyValuePair`2
+      type: object
+    OAS.WebApi.DTO.Portfolio.SystematicDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        isActive:
+          type: boolean
+        isDoubleCheck:
+          type: boolean
+        type:
+          type: integer
+          format: int32
+        doubleCheckBy:
+          type: string
+        doubleCheckDate:
+          type: string
+          format: date-time
+        swpAmount:
+          type: number
+          format: double
+        isProrated:
+          type: boolean
+        isCashFundingIgnored:
+          type: boolean
+        frequency:
+          type: string
+          enum:
+          - Monthly
+          - Quarterly
+          - Semiannually
+          - Annually
+        cycleMonth:
+          type: integer
+          format: int32
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        inActiveDate:
+          type: string
+          format: date-time
+        transactionDay:
+          type: integer
+          format: int32
+        custodialSWPDate:
+          type: integer
+          format: int32
+        taxesWithheld:
+          type: number
+          format: double
+        stateTax:
+          type: number
+          format: double
+        distributionCode:
+          type: integer
+          format: int32
+        notes:
+          type: string
+        source:
+          type: integer
+          format: int32
+        dataEntryMethod:
+          type: integer
+          format: int32
+        howTransfered:
+          type: integer
+          format: int32
+        bankName:
+          type: string
+        bankAddress:
+          type: string
+        abaNumber:
+          type: string
+        bankAccountNumber:
+          type: string
+        lifeType:
+          type: integer
+          format: int32
+        beneficiaryName:
+          type: string
+        beneficiaryDoB:
+          type: string
+          format: date-time
+        beneficiarySSN:
+          type: string
+        reason:
+          type: string
+        isSpouse:
+          type: boolean
+        isTaxWithType:
+          type: string
+          enum:
+          - Undefined
+          - Dollar
+          - Percent
+          - Unknown
+          - None
+        isRecalc:
+          type: boolean
+        isAutoRmd:
+          type: boolean
+        nextDate:
+          type: string
+          format: date-time
+        importKey:
+          type: string
+        custodialSystematicId:
+          type: string
+      xml:
+        name: SystematicDto
       type: object
     OAS.WebApi.DTO.Portfolio.AccountDto:
       properties:
@@ -5268,204 +5380,83 @@ components:
       xml:
         name: AccountDto
       type: object
-    OAS.DataModel.Reporting.Widgets.SpimDashboardAumList:
+    OAS.WebApi.DTO.Reporting.Widgets.AssetIndexedAnnuityDto:
+      properties:
+        assetId:
+          type: integer
+          format: int32
+        accountAnnuityId:
+          type: integer
+          format: int64
+        productName:
+          type: string
+        accountNumber:
+          type: string
+        ticker:
+          type: string
+        incomeValue:
+          type: number
+          format: double
+        basisForNQ:
+          type: number
+          format: double
+        surrenderValue:
+          type: number
+          format: double
+        marketValue:
+          type: number
+          format: double
+      xml:
+        name: AssetIndexedAnnuityDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Widgets.AccountAndSystematicsDto:
+      properties:
+        account:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AccountDto'
+        systematics:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SystematicDto'
+          xml:
+            name: SystematicDto
+            wrapped: true
+          type: array
+      xml:
+        name: AccountAndSystematicsDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Widgets.WidgetDto:
       properties:
         id:
           type: integer
           format: int32
         name:
           type: string
-        percent:
-          type: number
-          format: double
-        value:
-          type: number
-          format: double
-      xml:
-        name: SpimDashboardAumList
-      type: object
-    OAS.WebApi.DTO.Portfolio.RmdDashboardDto:
-      properties:
-        accountStatusIcon:
-          readOnly: true
+        code:
           type: string
-        accountStatus:
-          readOnly: true
+        description:
           type: string
-        registrationStatusIcon:
-          readOnly: true
+        category:
           type: string
-        registrationStatus:
-          readOnly: true
+        securityCode:
           type: string
-        isAutoRmd:
-          readOnly: true
-          type: boolean
-        notes:
-          readOnly: true
-          type: string
-        amounts:
-          readOnly: true
-          type: number
-          format: double
-        annualizedAmounts:
-          readOnly: true
-          type: number
-          format: double
-        frequency:
-          readOnly: true
-          type: string
-        taxWitheld:
-          readOnly: true
-          type: string
-        stateTaxWitheld:
-          readOnly: true
-          type: string
-        recalc:
-          readOnly: true
-          type: boolean
-        banksOfRecord:
-          readOnly: true
-          type: string
-        bankAccountNumbers:
-          readOnly: true
-          type: string
-        accountId:
-          type: integer
-          format: int32
-        representativeId:
-          type: integer
-          format: int32
-        representativeName:
-          type: string
-        clientId:
-          type: integer
-          format: int32
-        clientName:
-          type: string
-        registrationId:
-          type: integer
-          format: int32
-        registrationLastName:
-          type: string
-        registrationName:
-          type: string
-        registrationSsn:
-          type: string
-        registrationDeceasedSsn:
-          type: string
-        accountType:
-          type: string
-        number:
-          type: string
-        rmdAmount:
-          type: number
-          format: double
-        rmdOriginalAmount:
-          type: number
-          format: double
-        endOfPreviousYearAccountValue:
-          type: number
-          format: double
-        calculatedEndOfPreviousYearAccountValue:
-          type: number
-          format: double
-        endOfPreviousYearAccountValueIsCalculated:
-          type: boolean
-        investorAge:
-          type: number
-          format: double
-        investorAgeText:
-          readOnly: true
-          type: string
-        dateOfBirth:
-          type: string
-        dateOfDeath:
-          type: string
-          format: date-time
-        distributionAmountYtd:
-          type: number
-          format: double
-        rmdRemaining:
-          readOnly: true
-          type: number
-          format: double
-        rmdRemainingGroup:
-          readOnly: true
-          type: number
-          format: double
-        rmdRemainingGroupApplied:
-          readOnly: true
-          type: number
-          format: double
         isActive:
           type: boolean
-        rmdSatisfiedOverview:
-          readOnly: true
+        endpoint:
           type: string
-        rmdRuleApplied:
-          readOnly: true
+        endpointVerb:
           type: string
-        rmdSatisfied:
-          type: boolean
-        manualRmdSatisfied:
-          type: boolean
-        primaryBeneficiaryName:
+        moreRoute:
           type: string
-        primaryBeneficiaryAge:
-          type: number
-          format: double
-        primaryBeneficiaryAgeText:
-          readOnly: true
+        imageName:
           type: string
-        primaryBeneficiaryRelation:
+        dashboardLevel:
+          type: integer
+          format: int32
+        widgetParams:
           type: string
-        irsTable:
+        tags:
           type: string
-        factor:
-          type: number
-          format: double
-        spouseIsPrimaryBeneAndMoreThan10YrsDiff:
-          readOnly: true
-          type: boolean
-        sweepCash:
-          type: number
-          format: double
-        accountNotes:
-          type: string
-        custodialCash:
-          type: number
-          format: double
-        rmdNotes:
-          type: string
-        custodianName:
-          type: string
-        clientAddressLine1:
-          type: string
-        clientAddressLine2:
-          type: string
-        clientAddressLine3:
-          type: string
-        clientCity:
-          type: string
-        clientState:
-          type: string
-        clientZip:
-          type: string
-        regRmdSatisfied:
-          type: boolean
-        outsideId:
-          type: string
-        additionalColumns:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Interface.AdditionalColumnDefinition'
-          readOnly: true
-          xml:
-            name: AdditionalColumnDefinition
-            wrapped: true
-          type: array
       xml:
-        name: RmdDashboardDto
+        name: WidgetDto
       type: object
     OAS.WebApi.Domains.Reporting.DashboardDataEngineController.SaveDashboardToPdfDto:
       properties:
@@ -5678,38 +5669,63 @@ components:
       xml:
         name: SaveDashboardToPdfDto
       type: object
-    OAS.WebApi.DTO.Portfolio.SystematicDto:
+    OAS.WebApi.DTO.Portfolio.RepresentativeBlobDto:
       properties:
+        representativeId:
+          type: integer
+          format: int32
+        isViewable:
+          type: boolean
+        isViewableAdvisor:
+          type: boolean
+        isViewableRepresentative:
+          type: boolean
+        createdDate:
+          type: string
+          format: date-time
         id:
           type: integer
           format: int32
-        isActive:
+        openWith:
+          type: string
+        fileName:
+          type: string
+        blobDesc:
+          type: string
+        blobText:
+          type: string
+        category:
+          type: string
+        isZip:
           type: boolean
-        isDoubleCheck:
+      xml:
+        name: RepresentativeBlobDto
+      type: object
+    OAS.WebApi.DTO.Interface.AdditionalColumnDefinition:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      xml:
+        name: AdditionalColumnDefinition
+      type: object
+    OAS.WebApi.DTO.Reporting.Widgets.RepTiles.RepresentativeAumDto:
+      properties:
+        includeAccruedInterest:
           type: boolean
-        type:
+        contributionTypes:
           type: integer
           format: int32
-        doubleCheckBy:
-          type: string
-        doubleCheckDate:
-          type: string
-          format: date-time
-        swpAmount:
-          type: number
-          format: double
-        isProrated:
-          type: boolean
-        isCashFundingIgnored:
-          type: boolean
-        frequency:
-          type: string
-          enum:
-          - Monthly
-          - Quarterly
-          - Semiannually
-          - Annually
-        cycleMonth:
+        distributionTypes:
+          type: integer
+          format: int32
+        profileIDs:
+          items:
+            type: integer
+            format: int32
+          type: array
+        id:
           type: integer
           format: int32
         startDate:
@@ -5718,78 +5734,27 @@ components:
         endDate:
           type: string
           format: date-time
-        inActiveDate:
+        asOfDate:
           type: string
           format: date-time
-        transactionDay:
-          type: integer
-          format: int32
-        custodialSWPDate:
-          type: integer
-          format: int32
-        taxesWithheld:
-          type: number
-          format: double
-        stateTax:
-          type: number
-          format: double
-        distributionCode:
-          type: integer
-          format: int32
-        notes:
-          type: string
-        source:
-          type: integer
-          format: int32
-        dataEntryMethod:
-          type: integer
-          format: int32
-        howTransfered:
-          type: integer
-          format: int32
-        bankName:
-          type: string
-        bankAddress:
-          type: string
-        abaNumber:
-          type: string
-        bankAccountNumber:
-          type: string
-        lifeType:
-          type: integer
-          format: int32
-        beneficiaryName:
-          type: string
-        beneficiaryDoB:
-          type: string
-          format: date-time
-        beneficiarySSN:
-          type: string
-        reason:
-          type: string
-        isSpouse:
-          type: boolean
-        isTaxWithType:
-          type: string
-          enum:
-          - Undefined
-          - Dollar
-          - Percent
-          - Unknown
-          - None
-        isRecalc:
-          type: boolean
-        isAutoRmd:
-          type: boolean
-        nextDate:
-          type: string
-          format: date-time
-        importKey:
-          type: string
-        custodialSystematicId:
-          type: string
       xml:
-        name: SystematicDto
+        name: RepresentativeAumDto
+      type: object
+    OAS.DataModel.Reporting.Widgets.SpimDashboardAumList:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        percent:
+          type: number
+          format: double
+        value:
+          type: number
+          format: double
+      xml:
+        name: SpimDashboardAumList
       type: object
     OAS.DataModel.Reporting.Portfolio.SpimAumInsight:
       properties:
@@ -5804,16 +5769,258 @@ components:
       xml:
         name: SpimAumInsight
       type: object
-    OAS.WebApi.DTO.Portfolio.StaticFileDto:
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
       properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-        openWith:
+        fileName:
           type: string
-        blobDesc:
+        mediaType:
           type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
       xml:
-        name: StaticFileDto
+        name: HttpFile
+      type: object
+    OAS.WebApi.DTO.Portfolio.RegistrationBeneficiaryDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        dob:
+          type: string
+          format: date-time
+        type:
+          type: string
+        relation:
+          type: string
+        relationDisplay:
+          type: string
+        percentage:
+          type: number
+          format: double
+        address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        ssn:
+          type: string
+        reason:
+          type: string
+        perStirpes:
+          type: boolean
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+      xml:
+        name: RegistrationBeneficiaryDto
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    OAS.WebApi.DTO.Portfolio.RmdDashboardDto:
+      properties:
+        accountStatusIcon:
+          readOnly: true
+          type: string
+        accountStatus:
+          readOnly: true
+          type: string
+        registrationStatusIcon:
+          readOnly: true
+          type: string
+        registrationStatus:
+          readOnly: true
+          type: string
+        isAutoRmd:
+          readOnly: true
+          type: boolean
+        notes:
+          readOnly: true
+          type: string
+        amounts:
+          readOnly: true
+          type: number
+          format: double
+        annualizedAmounts:
+          readOnly: true
+          type: number
+          format: double
+        frequency:
+          readOnly: true
+          type: string
+        taxWitheld:
+          readOnly: true
+          type: string
+        stateTaxWitheld:
+          readOnly: true
+          type: string
+        recalc:
+          readOnly: true
+          type: boolean
+        banksOfRecord:
+          readOnly: true
+          type: string
+        bankAccountNumbers:
+          readOnly: true
+          type: string
+        accountId:
+          type: integer
+          format: int32
+        representativeId:
+          type: integer
+          format: int32
+        representativeName:
+          type: string
+        clientId:
+          type: integer
+          format: int32
+        clientName:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        registrationLastName:
+          type: string
+        registrationName:
+          type: string
+        registrationSsn:
+          type: string
+        registrationDeceasedSsn:
+          type: string
+        accountType:
+          type: string
+        number:
+          type: string
+        rmdAmount:
+          type: number
+          format: double
+        rmdOriginalAmount:
+          type: number
+          format: double
+        endOfPreviousYearAccountValue:
+          type: number
+          format: double
+        calculatedEndOfPreviousYearAccountValue:
+          type: number
+          format: double
+        endOfPreviousYearAccountValueIsCalculated:
+          type: boolean
+        investorAge:
+          type: number
+          format: double
+        investorAgeText:
+          readOnly: true
+          type: string
+        dateOfBirth:
+          type: string
+        dateOfDeath:
+          type: string
+          format: date-time
+        distributionAmountYtd:
+          type: number
+          format: double
+        rmdRemaining:
+          readOnly: true
+          type: number
+          format: double
+        rmdRemainingGroup:
+          readOnly: true
+          type: number
+          format: double
+        rmdRemainingGroupApplied:
+          readOnly: true
+          type: number
+          format: double
+        isActive:
+          type: boolean
+        rmdSatisfiedOverview:
+          readOnly: true
+          type: string
+        rmdRuleApplied:
+          readOnly: true
+          type: string
+        rmdSatisfied:
+          type: boolean
+        manualRmdSatisfied:
+          type: boolean
+        primaryBeneficiaryName:
+          type: string
+        primaryBeneficiaryAge:
+          type: number
+          format: double
+        primaryBeneficiaryAgeText:
+          readOnly: true
+          type: string
+        primaryBeneficiaryRelation:
+          type: string
+        irsTable:
+          type: string
+        factor:
+          type: number
+          format: double
+        spouseIsPrimaryBeneAndMoreThan10YrsDiff:
+          readOnly: true
+          type: boolean
+        sweepCash:
+          type: number
+          format: double
+        accountNotes:
+          type: string
+        custodialCash:
+          type: number
+          format: double
+        rmdNotes:
+          type: string
+        custodianName:
+          type: string
+        clientAddressLine1:
+          type: string
+        clientAddressLine2:
+          type: string
+        clientAddressLine3:
+          type: string
+        clientCity:
+          type: string
+        clientState:
+          type: string
+        clientZip:
+          type: string
+        regRmdSatisfied:
+          type: boolean
+        outsideId:
+          type: string
+        additionalColumns:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Interface.AdditionalColumnDefinition'
+          readOnly: true
+          xml:
+            name: AdditionalColumnDefinition
+            wrapped: true
+          type: array
+      xml:
+        name: RmdDashboardDto
       type: object
     OAS.WebApi.DTO.Portfolio.RegistrationSuitabilityDto:
       properties:
@@ -5862,198 +6069,6 @@ components:
       xml:
         name: RegistrationSuitabilityDto
       type: object
-    OAS.WebApi.DTO.Portfolio.RepresentativeBlobDto:
-      properties:
-        representativeId:
-          type: integer
-          format: int32
-        isViewable:
-          type: boolean
-        isViewableAdvisor:
-          type: boolean
-        isViewableRepresentative:
-          type: boolean
-        createdDate:
-          type: string
-          format: date-time
-        id:
-          type: integer
-          format: int32
-        openWith:
-          type: string
-        fileName:
-          type: string
-        blobDesc:
-          type: string
-        blobText:
-          type: string
-        category:
-          type: string
-        isZip:
-          type: boolean
-      xml:
-        name: RepresentativeBlobDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.RegistrationBeneficiaryDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        dob:
-          type: string
-          format: date-time
-        type:
-          type: string
-        relation:
-          type: string
-        relationDisplay:
-          type: string
-        percentage:
-          type: number
-          format: double
-        address:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zip:
-          type: string
-        ssn:
-          type: string
-        reason:
-          type: string
-        perStirpes:
-          type: boolean
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-      xml:
-        name: RegistrationBeneficiaryDto
-      type: object
-    OAS.WebApi.DTO.Interface.AdditionalColumnDefinition:
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-      xml:
-        name: AdditionalColumnDefinition
-      type: object
-    OAS.WebApi.DTO.Reporting.Widgets.RepTiles.RepresentativeTileDto:
-      properties:
-        profileIDs:
-          items:
-            type: integer
-            format: int32
-          type: array
-        id:
-          type: integer
-          format: int32
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        asOfDate:
-          type: string
-          format: date-time
-      xml:
-        name: RepresentativeTileDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Widgets.RepTiles.RepresentativeAumDto:
-      properties:
-        includeAccruedInterest:
-          type: boolean
-        contributionTypes:
-          type: integer
-          format: int32
-        distributionTypes:
-          type: integer
-          format: int32
-        profileIDs:
-          items:
-            type: integer
-            format: int32
-          type: array
-        id:
-          type: integer
-          format: int32
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        asOfDate:
-          type: string
-          format: date-time
-      xml:
-        name: RepresentativeAumDto
-      type: object
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
-      type: object
-    OAS.WebApi.DTO.Reporting.Widgets.AssetIndexedAnnuityDto:
-      properties:
-        assetId:
-          type: integer
-          format: int32
-        accountAnnuityId:
-          type: integer
-          format: int64
-        productName:
-          type: string
-        accountNumber:
-          type: string
-        ticker:
-          type: string
-        incomeValue:
-          type: number
-          format: double
-        basisForNQ:
-          type: number
-          format: double
-        surrenderValue:
-          type: number
-          format: double
-        marketValue:
-          type: number
-          format: double
-      xml:
-        name: AssetIndexedAnnuityDto
-      type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
-      properties:
-        key:
-          readOnly: true
-          type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: KeyValuePair`2
-      type: object
     OAS.WebApi.DTO.Reporting.Widgets.AccountAndSuitabilityDto:
       properties:
         account:
@@ -6062,19 +6077,6 @@ components:
           $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.RegistrationSuitabilityDto'
       xml:
         name: AccountAndSuitabilityDto
-      type: object
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
       type: object
     OAS.WebApi.DTO.Portfolio.BlobBaseDto:
       properties:
@@ -6099,40 +6101,38 @@ components:
       xml:
         name: BlobBaseDto
       type: object
-    OAS.WebApi.DTO.Reporting.Widgets.WidgetDto:
+    OAS.WebApi.DTO.Reporting.Widgets.RepTiles.RepresentativeTileDto:
       properties:
+        profileIDs:
+          items:
+            type: integer
+            format: int32
+          type: array
         id:
           type: integer
           format: int32
-        name:
+        startDate:
           type: string
-        code:
+          format: date-time
+        endDate:
           type: string
-        description:
+          format: date-time
+        asOfDate:
           type: string
-        category:
+          format: date-time
+      xml:
+        name: RepresentativeTileDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.StaticFileDto:
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+        openWith:
           type: string
-        securityCode:
-          type: string
-        isActive:
-          type: boolean
-        endpoint:
-          type: string
-        endpointVerb:
-          type: string
-        moreRoute:
-          type: string
-        imageName:
-          type: string
-        dashboardLevel:
-          type: integer
-          format: int32
-        widgetParams:
-          type: string
-        tags:
+        blobDesc:
           type: string
       xml:
-        name: WidgetDto
+        name: StaticFileDto
       type: object
   securitySchemes:
     Authorization:
