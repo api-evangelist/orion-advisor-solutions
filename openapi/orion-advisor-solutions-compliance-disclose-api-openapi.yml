@@ -2459,6 +2459,54 @@ paths:
         required: true
 components:
   schemas:
+    OAS.WebApi.DTO.Compliance.Disclose13FSummaryReportDto:
+      properties:
+        tableMarketValue:
+          type: number
+          format: double
+        tableEntryTotal:
+          type: integer
+          format: int32
+      xml:
+        name: Disclose13FSummaryReportDto
+      type: object
+    OAS.WebApi.DTO.Compliance.DiscloseAuaAumDto:
+      properties:
+        aum:
+          type: number
+          format: double
+        accounts:
+          type: integer
+          format: int32
+        registrations:
+          type: integer
+          format: int32
+        clients:
+          type: integer
+          format: int32
+      xml:
+        name: DiscloseAuaAumDto
+      type: object
+    OAS.WebApi.DTO.Compliance.AdvClientCategoryDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        description:
+          type: string
+      xml:
+        name: AdvClientCategoryDto
+      type: object
+    OAS.WebApi.DTO.Compliance.AdvAssetCategoryDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        description:
+          type: string
+      xml:
+        name: AdvAssetCategoryDto
+      type: object
     OAS.WebApi.DTO.Compliance.ComplianceFilterDto:
       properties:
         label:
@@ -2667,9 +2715,12 @@ components:
       xml:
         name: ComplianceFilterDto
       type: object
-    OAS.WebApi.DTO.Compliance.DiscloseAuaAumDto:
+    OAS.WebApi.DTO.Compliance.DiscloseAdvAumDto:
       properties:
         aum:
+          type: number
+          format: double
+        smaAum:
           type: number
           format: double
         accounts:
@@ -2682,7 +2733,92 @@ components:
           type: integer
           format: int32
       xml:
-        name: DiscloseAuaAumDto
+        name: DiscloseAdvAumDto
+      type: object
+    OAS.WebApi.Domains.Compliance.DiscloseController.AdvDetailUpdateDto:
+      properties:
+        alClientId:
+          type: integer
+          format: int32
+        ids:
+          items:
+            type: integer
+            format: int32
+          type: array
+        field:
+          type: string
+        value:
+          type: string
+        asOfDate:
+          type: string
+          format: date-time
+      xml:
+        name: AdvDetailUpdateDto
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
+    OAS.WebApi.DTO.Compliance.DiscloseAdvSloaDto:
+      properties:
+        aum:
+          type: number
+          format: double
+        totalActiveSloas:
+          type: integer
+          format: int32
+        numberOfHouseholds:
+          type: integer
+          format: int32
+        numberOfAccounts:
+          type: integer
+          format: int32
+      xml:
+        name: DiscloseAdvSloaDto
+      type: object
+    OAS.WebApi.DTO.Compliance.DiscloseAuaProductDto:
+      properties:
+        products:
+          type: integer
+          format: int32
+        assets:
+          type: integer
+          format: int32
+      xml:
+        name: DiscloseAuaProductDto
+      type: object
+    OAS.WebApi.DTO.Compliance.DisclosDashboardEntityDto:
+      properties:
+        label:
+          type: string
+        aum:
+          type: number
+          format: double
+        count:
+          type: integer
+          format: int32
+        percentage:
+          type: number
+          format: double
+      xml:
+        name: DisclosDashboardEntityDto
+      type: object
+    OAS.WebApi.DTO.Compliance.Disclose13FDto:
+      properties:
+        equityValue:
+          type: number
+          format: double
+        productListUpdate:
+          type: string
+          format: date-time
+      xml:
+        name: Disclose13FDto
       type: object
     OAS.WebApi.DTO.Compliance.DiscloseAdvCustodyDto:
       properties:
@@ -2702,54 +2838,6 @@ components:
           format: double
       xml:
         name: DiscloseAdvCustodyDto
-      type: object
-    OAS.DataModel.SimpleEntity:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleEntity
-      type: object
-    OAS.WebApi.DTO.Compliance.AdvClientCategoryDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        description:
-          type: string
-      xml:
-        name: AdvClientCategoryDto
-      type: object
-    OAS.WebApi.DTO.Compliance.DiscloseAuaProductDto:
-      properties:
-        products:
-          type: integer
-          format: int32
-        assets:
-          type: integer
-          format: int32
-      xml:
-        name: DiscloseAuaProductDto
-      type: object
-    OAS.WebApi.DTO.Compliance.DiscloseAdvSloaDto:
-      properties:
-        aum:
-          type: number
-          format: double
-        totalActiveSloas:
-          type: integer
-          format: int32
-        numberOfHouseholds:
-          type: integer
-          format: int32
-        numberOfAccounts:
-          type: integer
-          format: int32
-      xml:
-        name: DiscloseAdvSloaDto
       type: object
     OAS.DataProcess.DTO.Compliance.ADVConsolidatedDetailDto:
       properties:
@@ -2861,94 +2949,6 @@ components:
           format: date-time
       xml:
         name: ADVConsolidatedDetailDto
-      type: object
-    OAS.WebApi.DTO.Compliance.Disclose13FSummaryReportDto:
-      properties:
-        tableMarketValue:
-          type: number
-          format: double
-        tableEntryTotal:
-          type: integer
-          format: int32
-      xml:
-        name: Disclose13FSummaryReportDto
-      type: object
-    OAS.WebApi.Domains.Compliance.DiscloseController.AdvDetailUpdateDto:
-      properties:
-        alClientId:
-          type: integer
-          format: int32
-        ids:
-          items:
-            type: integer
-            format: int32
-          type: array
-        field:
-          type: string
-        value:
-          type: string
-        asOfDate:
-          type: string
-          format: date-time
-      xml:
-        name: AdvDetailUpdateDto
-      type: object
-    OAS.WebApi.DTO.Compliance.DisclosDashboardEntityDto:
-      properties:
-        label:
-          type: string
-        aum:
-          type: number
-          format: double
-        count:
-          type: integer
-          format: int32
-        percentage:
-          type: number
-          format: double
-      xml:
-        name: DisclosDashboardEntityDto
-      type: object
-    OAS.WebApi.DTO.Compliance.Disclose13FDto:
-      properties:
-        equityValue:
-          type: number
-          format: double
-        productListUpdate:
-          type: string
-          format: date-time
-      xml:
-        name: Disclose13FDto
-      type: object
-    OAS.WebApi.DTO.Compliance.AdvAssetCategoryDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        description:
-          type: string
-      xml:
-        name: AdvAssetCategoryDto
-      type: object
-    OAS.WebApi.DTO.Compliance.DiscloseAdvAumDto:
-      properties:
-        aum:
-          type: number
-          format: double
-        smaAum:
-          type: number
-          format: double
-        accounts:
-          type: integer
-          format: int32
-        registrations:
-          type: integer
-          format: int32
-        clients:
-          type: integer
-          format: int32
-      xml:
-        name: DiscloseAdvAumDto
       type: object
   securitySchemes:
     Authorization:

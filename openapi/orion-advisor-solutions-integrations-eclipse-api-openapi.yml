@@ -3715,82 +3715,11 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.Eclipse.Lambda.Model.AssignedAccount:
-      properties:
-        accountId:
-          type: integer
-          format: int32
-        orionAccountId:
-          type: integer
-          format: int32
-        accountNumber:
-          type: string
-        orionConnectFirmId:
-          type: integer
-          format: int32
-        portfolioId:
-          type: integer
-          format: int32
-        modelAllocationSynchLevel:
-          type: string
-      xml:
-        name: AssignedAccount
-      type: object
-    OAS.Integrations.Eclipse.Models.EclipseSecurityDto:
+    OAS.Integrations.Eclipse.Model.SecurityExtended:
       properties:
         id:
           type: integer
           format: int32
-        isMACSecurity:
-          type: integer
-          format: int64
-        name:
-          type: string
-        pendingInAmt:
-          type: number
-          format: double
-        pendingInPercent:
-          type: number
-          format: double
-        securityId:
-          type: integer
-          format: int32
-        securitySetId:
-          type: integer
-          format: int32
-        securitySetName:
-          type: string
-        symbol:
-          type: string
-        targetInAmt:
-          type: number
-          format: double
-        targetInPercent:
-          type: number
-          format: double
-        currentInAmt:
-          type: number
-          format: double
-        currentInPercent:
-          type: number
-          format: double
-        parentModelDetailId:
-          type: integer
-          format: int32
-        smaLevel:
-          type: string
-        modelElementId:
-          type: integer
-          format: int32
-        isPortfolioSecurity:
-          type: boolean
-        inTolerance:
-          type: boolean
-      xml:
-        name: EclipseSecurityDto
-      type: object
-    OAS.Integrations.Eclipse.Security:
-      properties:
         externalId:
           type: integer
           format: int32
@@ -3814,71 +3743,15 @@ components:
         isCustodialCash:
           type: boolean
       xml:
-        name: Security
+        name: SecurityExtended
       type: object
-    OAS.Integrations.Eclipse.Models.EclipseV2PortfolioAllocationDto:
-      properties:
-        portfolioId:
-          type: integer
-          format: int32
-        needAnalytics:
-          type: integer
-          format: int32
-        failedReason:
-          type: string
-        totalAUM:
-          type: number
-          format: double
-        setAsideCash:
-          type: number
-          format: double
-        reserveCash:
-          type: number
-          format: double
-        reserveCashPercent:
-          type: number
-          format: double
-        setAsideCashPercent:
-          type: number
-          format: double
-        securities:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipseSecurityDto'
-          xml:
-            name: EclipseSecurityDto
-            wrapped: true
-          type: array
-        categories:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipseModelCategoryDto'
-          xml:
-            name: EclipseModelCategoryDto
-            wrapped: true
-          type: array
-        classes:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipseModelClassDto'
-          xml:
-            name: EclipseModelClassDto
-            wrapped: true
-          type: array
-        subClasses:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipseModelSubClassDto'
-          xml:
-            name: EclipseModelSubClassDto
-            wrapped: true
-          type: array
-      xml:
-        name: EclipseV2PortfolioAllocationDto
-      type: object
-    OAS.Eclipse.Lambda.Model.EclipseSyncMessageListOfOAS.Eclipse.Lambda.Model.UpdateAccountSma:
+    OAS.Eclipse.Lambda.Model.EclipseSyncMessageListOfOAS.Eclipse.Lambda.Model.UpdateDoNotTrade:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.UpdateAccountSma'
+            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.UpdateDoNotTrade'
           xml:
-            name: UpdateAccountSma
+            name: UpdateDoNotTrade
             wrapped: true
           type: array
         orionBaseUrl:
@@ -3915,41 +3788,142 @@ components:
       xml:
         name: EclipseSyncMessageList`1
       type: object
-    OAS.Integrations.Eclipse.Model.EclipsePendingModel:
+    OAS.Integrations.Eclipse.Model.EclipseAccountToUpdatePortfolio:
       properties:
+        accountId:
+          type: integer
+          format: int32
+        doNotTrade:
+          type: boolean
+      xml:
+        name: EclipseAccountToUpdatePortfolio
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipseAccount:
+      properties:
+        id:
+          type: integer
+          format: int32
+        accountId:
+          type: string
+        name:
+          type: string
+        accountNumber:
+          type: string
+        custodian:
+          type: string
+        accountType:
+          type: string
+        model:
+          type: string
+        style:
+          type: string
+        managedValue:
+          type: number
+          format: double
+        excludedValue:
+          type: number
+          format: double
+        value:
+          type: number
+          format: double
+        pendingValue:
+          type: number
+          format: double
+        currentCash:
+          type: number
+          format: double
+        targetCash:
+          type: number
+          format: double
+        currentCashPercent:
+          type: number
+          format: double
+        pendingCash:
+          type: number
+          format: double
+        holdings:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseHolding'
+          xml:
+            name: EclipseHolding
+            wrapped: true
+          type: array
+      xml:
+        name: EclipseAccount
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipseTrade:
+      properties:
+        accountId:
+          type: integer
+          format: int32
         portfolioId:
           type: integer
           format: int32
-        modelId:
+        actionId:
+          type: string
+        securityId:
           type: integer
           format: int32
+        symbol:
+          type: string
+        dollarAmount:
+          type: number
+          format: double
+        quantity:
+          type: number
+          format: double
+        percentage:
+          type: number
+          format: double
+        isSendImmediately:
+          type: boolean
+      xml:
+        name: EclipseTrade
+      type: object
+    OAS.WebApi.DTO.Integrations.Eclipse.EclipseFirmDto:
+      properties:
+        eclipseFirmId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        createdBy:
+          type: string
         createdDate:
           type: string
           format: date-time
-        model:
-          $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseModel'
-      xml:
-        name: EclipsePendingModel
-      type: object
-    OAS.Eclipse.Lambda.Model.UpdateDoNotTrade:
-      properties:
-        OrionConnectExternalId:
-          type: integer
-          format: int32
-        EclipseAccountId.:
+        editedBy:
           type: string
-        IsTradeBlocked:
+        editedDate:
+          type: string
+          format: date-time
+        syncDate:
+          type: string
+          format: date-time
+        syncBy:
+          type: string
+        syncStatus:
+          type: string
+        canDelete:
           type: boolean
+        accountNameType:
+          description: 'Contains a value such as FullName or lastFirst which indicates how the account name
+
+            is configured to be displayed.'
+          type: string
+        assetClassMapping:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Eclipse.AssetClassMapping'
+          description: Contains the mapping definitions for AssetClasses which indicate how assets should be classified
       xml:
-        name: UpdateDoNotTrade
+        name: EclipseFirmDto
       type: object
-    OAS.Eclipse.Lambda.Model.EclipseSyncMessageListOfOAS.Eclipse.Lambda.Model.ModelEdit:
+    OAS.Eclipse.Lambda.Model.EclipseSyncMessageListOfOAS.Eclipse.Lambda.Model.ModelAssignment:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.ModelEdit'
+            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.ModelAssignment'
           xml:
-            name: ModelEdit
+            name: ModelAssignment
             wrapped: true
           type: array
         orionBaseUrl:
@@ -3985,6 +3959,129 @@ components:
           format: uuid
       xml:
         name: EclipseSyncMessageList`1
+      type: object
+    OAS.Integrations.Eclipse.Realizedgainloss:
+      properties:
+        externalId:
+          type: string
+        symbol:
+          type: string
+        grossProceeds:
+          type: number
+          format: double
+        netProceeds:
+          type: number
+          format: double
+        costAmount:
+          type: number
+          format: float
+        dateAquired:
+          type: string
+        sellDate:
+          type: string
+        quantity:
+          type: number
+          format: float
+        longTerm:
+          type: integer
+          format: int32
+        sellMethod:
+          type: string
+        totalGains:
+          type: number
+          format: double
+      xml:
+        name: Realizedgainloss
+      type: object
+    OAS.Eclipse.Lambda.Model.PortfolioAssignment:
+      required:
+      - orionFirmId
+      - clientId
+      - eclipsePortfolioId
+      - eclipsePortfolioName
+      - accounts
+      properties:
+        orionFirmId:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        eclipsePortfolioId:
+          type: integer
+          format: int32
+        eclipsePortfolioName:
+          type: string
+        orionPortfolioGroupId:
+          type: integer
+          format: int32
+        orionPortfolioGroupName:
+          type: string
+        accounts:
+          items:
+            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.PortfolioAssignmentAccount'
+          xml:
+            name: PortfolioAssignmentAccount
+            wrapped: true
+          type: array
+      xml:
+        name: PortfolioAssignment
+      type: object
+    OAS.Eclipse.Lambda.Model.TLHSecurity:
+      properties:
+        productId:
+          type: integer
+          format: int32
+      xml:
+        name: TLHSecurity
+      type: object
+    OAS.Eclipse.Lambda.Model.PortfolioAssignmentAccount:
+      required:
+      - eclipseAccountId
+      - orionAccountId
+      properties:
+        eclipseAccountId:
+          type: integer
+          format: int32
+        orionAccountId:
+          type: integer
+          format: int32
+      xml:
+        name: PortfolioAssignmentAccount
+      type: object
+    OAS.Integrations.Eclipse.EclipseAccountResponse:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        portfolio:
+          type: string
+        portfolioId:
+          type: integer
+          format: int32
+        accountId:
+          type: string
+        restrictedPlanId:
+          type: integer
+          format: int32
+        orionConnectFirmId:
+          type: integer
+          format: int32
+        orionConnectExternalId:
+          type: integer
+          format: int32
+        astroEnabled:
+          type: boolean
+        isDoNotBuySell:
+          type: boolean
+        needAnalyticsStatus:
+          type: string
+        tags:
+          type: string
+      xml:
+        name: EclipseAccountResponse
       type: object
     OAS.Integrations.Eclipse.Model.EclipseModel:
       properties:
@@ -4113,6 +4210,61 @@ components:
       xml:
         name: EclipseModel
       type: object
+    OAS.Integrations.Eclipse.Model.EclipseDistributionSleevedPortfolios:
+      properties:
+        id:
+          type: integer
+          format: int32
+        amount:
+          type: number
+          format: double
+      xml:
+        name: EclipseDistributionSleevedPortfolios
+      type: object
+    OAS.WebApi.DTO.Integrations.Eclipse.EclipseFirmWithAlClientDto:
+      properties:
+        alClients:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Eclipse.EclipseFirmAlClientDto'
+          xml:
+            name: EclipseFirmAlClientDto
+            wrapped: true
+          type: array
+        eclipseFirmId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        syncDate:
+          type: string
+          format: date-time
+        syncBy:
+          type: string
+        syncStatus:
+          type: string
+        canDelete:
+          type: boolean
+        accountNameType:
+          description: 'Contains a value such as FullName or lastFirst which indicates how the account name
+
+            is configured to be displayed.'
+          type: string
+        assetClassMapping:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Eclipse.AssetClassMapping'
+          description: Contains the mapping definitions for AssetClasses which indicate how assets should be classified
+      xml:
+        name: EclipseFirmWithAlClientDto
+      type: object
     OAS.Integrations.Eclipse.Model.EclipseModelDetail:
       properties:
         id:
@@ -4211,6 +4363,372 @@ components:
       xml:
         name: EclipseModelDetail
       type: object
+    OAS.Integrations.Eclipse.Holding:
+      properties:
+        externalId:
+          type: integer
+          format: int32
+        symbol:
+          type: string
+        price:
+          type: number
+          format: double
+        marketValue:
+          type: number
+          format: double
+        quantity:
+          type: number
+          format: double
+        positionYTDRealizedSTGL:
+          type: number
+          format: double
+        positionYTDRealizedLTGL:
+          type: number
+          format: double
+      xml:
+        name: Holding
+      type: object
+    OAS.WebApi.DTO.Integrations.Eclipse.EclipseFirmAlClientDto:
+      properties:
+        pkEclipseFirmAlClient:
+          type: integer
+          format: int32
+        eclipseFirmId:
+          type: integer
+          format: int32
+        fkAlClient:
+          type: integer
+          format: int32
+        isDefault:
+          type: boolean
+        isDefaultEclipseFirm:
+          type: boolean
+        accountPrefix:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+      xml:
+        name: EclipseFirmAlClientDto
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipseModelChild:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        modelDetailId:
+          type: integer
+          format: int32
+        modelTypeId:
+          type: integer
+          format: int32
+        targetPercent:
+          type: number
+          format: double
+        lowerModelTolerancePercent:
+          type: number
+          format: double
+        upperModelTolerancePercent:
+          type: number
+          format: double
+        toleranceTypeValue:
+          type: integer
+          format: int32
+        rank:
+          type: integer
+          format: int32
+        lowerModelToleranceAmount:
+          type: number
+          format: double
+        upperModelToleranceAmount:
+          type: number
+          format: double
+        lowerTradeTolerancePercent:
+          type: number
+          format: double
+        upperTradeTolerancePercent:
+          type: number
+          format: double
+        isEdited:
+          type: boolean
+        isSubstituted:
+          type: boolean
+        substitutedOf:
+          type: integer
+          format: int32
+        securityAsset:
+          $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipsSecurityAsset'
+        children:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseModelChild'
+          xml:
+            name: EclipseModelChild
+            wrapped: true
+          type: array
+        addedElements:
+          items:
+            type: integer
+            format: int32
+          type: array
+        modifiedElements:
+          items:
+            type: integer
+            format: int32
+          type: array
+        removedElements:
+          items:
+            type: integer
+            format: int32
+          type: array
+        isNewlySubstitutedNode:
+          type: boolean
+        isEditSubstituted:
+          type: boolean
+      xml:
+        name: EclipseModelChild
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipseHolding:
+      properties:
+        id:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        securityName:
+          type: string
+        securitySymbol:
+          type: string
+        securityId:
+          type: integer
+          format: int32
+        price:
+          type: number
+          format: double
+        shares:
+          type: number
+          format: double
+        value:
+          type: number
+          format: double
+        currentInPer:
+          type: number
+          format: double
+        targetInPer:
+          type: number
+          format: double
+        pendingShares:
+          type: number
+          format: double
+        pendingValue:
+          type: number
+          format: double
+        pendingInPer:
+          type: number
+          format: double
+        excluded:
+          type: string
+        inModel:
+          type: string
+        isDeleted:
+          type: boolean
+        isCash:
+          type: string
+      xml:
+        name: EclipseHolding
+      type: object
+    OAS.Eclipse.Lambda.Model.TradeAnalysisReport:
+      properties:
+        PortfolioId:
+          type: integer
+          format: int32
+        PortfolioName:
+          type: string
+        FirmId:
+          type: integer
+          format: int32
+        householdIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        TradeAnalysisReportUrl:
+          type: string
+      xml:
+        name: TradeAnalysisReport
+      type: object
+    OAS.WebApi.DTO.Integrations.Eclipse.EclipseAccountTradeInfoDto:
+      properties:
+        cashValue:
+          type: number
+          format: double
+        cashValuePostTrade:
+          type: number
+          format: double
+        minimumCashDollarAmount:
+          type: number
+          format: double
+      xml:
+        name: EclipseAccountTradeInfoDto
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipseCustodianInfo:
+      properties:
+        portfolioId:
+          type: integer
+          format: int32
+        custodialAccountNumber:
+          type: string
+        name:
+          type: string
+        accounts:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseCustodianInfoAccount'
+          xml:
+            name: EclipseCustodianInfoAccount
+            wrapped: true
+          type: array
+      xml:
+        name: EclipseCustodianInfo
+      type: object
+    OAS.Integrations.Eclipse.Models.EclipseModelClassDto:
+      properties:
+        classId:
+          type: integer
+          format: int32
+        className:
+          type: string
+        pendingInAmount:
+          type: number
+          format: double
+        pendingInPercent:
+          type: number
+          format: double
+        targetInAmount:
+          type: number
+          format: double
+        targetInPercent:
+          type: number
+          format: double
+        currentInAmount:
+          type: number
+          format: double
+        currentInPercent:
+          type: number
+          format: double
+        accountId:
+          type: integer
+          format: int32
+        aggregatedCurrentAmount:
+          type: number
+          format: double
+        aggregatedCurrentPercent:
+          type: number
+          format: double
+        aggregatedPostAmount:
+          type: number
+          format: double
+        aggregatedPostPercent:
+          type: number
+          format: double
+        effectiveTargetAmount:
+          type: number
+          format: double
+        effectiveTargetPercentage:
+          type: number
+          format: double
+        isMACSecurity:
+          type: integer
+          format: int64
+        isSMANode:
+          type: integer
+          format: int64
+        modelElementId:
+          type: integer
+          format: int32
+        modelId:
+          type: integer
+          format: int64
+        name:
+          type: string
+        nodeId:
+          type: integer
+          format: int64
+        parentModelDetailId:
+          type: integer
+          format: int32
+        portfolioId:
+          type: integer
+          format: int32
+        relatedType:
+          type: string
+        relatedTypeId:
+          type: integer
+          format: int64
+        securityName:
+          type: string
+        symbol:
+          type: string
+        inTolerance:
+          type: boolean
+      xml:
+        name: EclipseModelClassDto
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipsePrivilege:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        code:
+          type: string
+        isDeleted:
+          type: boolean
+      xml:
+        name: EclipsePrivilege
+      type: object
+    OAS.Integrations.Eclipse.Taxlot:
+      properties:
+        externalId:
+          type: string
+        symbol:
+          type: string
+        dateAcquired:
+          type: string
+        quantity:
+          type: number
+          format: double
+        costAmount:
+          type: number
+          format: double
+        costPerShare:
+          type: number
+          format: double
+        price:
+          type: number
+          format: double
+        marketValue:
+          type: number
+          format: double
+        priceDate:
+          type: string
+          format: date-time
+        isLongTerm:
+          type: boolean
+      xml:
+        name: Taxlot
+      type: object
     OAS.Integrations.Eclipse.Model.EclipseTradeValidateResponse:
       properties:
         message:
@@ -4228,70 +4746,88 @@ components:
       xml:
         name: EclipseTradeValidateResponse
       type: object
-    OAS.Eclipse.Lambda.Model.ModelAssignment:
+    OAS.Integrations.Eclipse.Models.EclipseModelSubClassDto:
       properties:
+        subClassId:
+          type: integer
+          format: int32
+        subClassName:
+          type: string
+        pendingInAmount:
+          type: number
+          format: double
+        pendingInPercent:
+          type: number
+          format: double
+        targetInAmount:
+          type: number
+          format: double
+        targetInPercent:
+          type: number
+          format: double
+        currentInAmount:
+          type: number
+          format: double
+        currentInPercent:
+          type: number
+          format: double
+        accountId:
+          type: integer
+          format: int32
+        aggregatedCurrentAmount:
+          type: number
+          format: double
+        aggregatedCurrentPercent:
+          type: number
+          format: double
+        aggregatedPostAmount:
+          type: number
+          format: double
+        aggregatedPostPercent:
+          type: number
+          format: double
+        effectiveTargetAmount:
+          type: number
+          format: double
+        effectiveTargetPercentage:
+          type: number
+          format: double
+        isMACSecurity:
+          type: integer
+          format: int64
+        isSMANode:
+          type: integer
+          format: int64
+        modelElementId:
+          type: integer
+          format: int32
         modelId:
           type: integer
-          format: int32
-        modelName:
+          format: int64
+        name:
           type: string
-        managementStyle:
-          type: string
-        action:
-          type: string
-        securities:
-          items:
-            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.ModelItem'
-          xml:
-            name: ModelItem
-            wrapped: true
-          type: array
-        accounts:
-          items:
-            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.AssignedAccount'
-          xml:
-            name: AssignedAccount
-            wrapped: true
-          type: array
-        isAstroEnabled:
-          type: boolean
-        syncToAstro:
-          type: boolean
-        communityModelId:
+        nodeId:
+          type: integer
+          format: int64
+        parentModelDetailId:
           type: integer
           format: int32
-        sleeveSuffix:
+        portfolioId:
+          type: integer
+          format: int32
+        relatedType:
           type: string
-        productTypes:
-          items:
-            type: integer
-            format: int32
-          type: array
-        orionConnectRiskCategory:
+        relatedTypeId:
           type: integer
-          format: int32
-        orionConnectProductClass:
-          type: integer
-          format: int32
-        isSma:
-          type: boolean
-        astroTemplateId:
+          format: int64
+        securityName:
           type: string
-        altsManagedByStrategist:
+        symbol:
+          type: string
+        inTolerance:
           type: boolean
-        altsModelLevel:
-          type: boolean
-        excludeRebalanceSleeve:
-          type: boolean
-        modelTypeId:
-          type: integer
-          format: int32
-        tags:
-          items:
-            type: string
-          type: array
       xml:
-        name: ModelAssignment
+        name: EclipseModelSubClassDto
       type: object
     OAS.Eclipse.Lambda.Model.EclipseSyncMessageListOfSystem.Int32:
       properties:
@@ -4333,6 +4869,319 @@ components:
           format: uuid
       xml:
         name: EclipseSyncMessageList`1
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipseModelAllocation:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        symbol:
+          type: string
+        targetInPercent:
+          type: number
+          format: double
+      xml:
+        name: EclipseModelAllocation
+      type: object
+    OAS.Eclipse.Lambda.Model.EclipseSyncMessageListOfOAS.Eclipse.Lambda.Model.PortfolioAssignment:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.PortfolioAssignment'
+          xml:
+            name: PortfolioAssignment
+            wrapped: true
+          type: array
+        orionBaseUrl:
+          type: string
+        eclipseBaseUrl:
+          type: string
+        eclipseFirmId:
+          type: integer
+          format: int32
+        orionFirmId:
+          type: integer
+          format: int32
+        firmId:
+          type: integer
+          format: int32
+        type:
+          type: string
+        orionToken:
+          type: string
+        eclipseToken:
+          type: string
+        userName:
+          type: string
+        orionUserDetailId:
+          type: integer
+          format: int32
+        timeStamp:
+          type: string
+          format: date-time
+        logId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+      xml:
+        name: EclipseSyncMessageList`1
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipseUserPrivilege:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        canAdd:
+          type: boolean
+        canUpdate:
+          type: boolean
+        canRead:
+          type: boolean
+        canDelete:
+          type: boolean
+        isDeleted:
+          type: boolean
+      xml:
+        name: EclipseUserPrivilege
+      type: object
+    OAS.WebApi.DTO.Interface.IEclipseFirmWithAlClients:
+      properties:
+        alClients:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Eclipse.EclipseFirmAlClientDto'
+          xml:
+            name: EclipseFirmAlClientDto
+            wrapped: true
+          type: array
+        eclipseFirmId:
+          type: integer
+          format: int32
+        accountNameType:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        name:
+          readOnly: true
+          type: string
+        syncDate:
+          type: string
+          format: date-time
+        syncBy:
+          type: string
+        syncStatus:
+          type: string
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        canDelete:
+          readOnly: true
+          type: boolean
+      xml:
+        name: IEclipseFirmWithAlClients
+      type: object
+    OAS.Integrations.Eclipse.Model.AccountSimple:
+      properties:
+        number:
+          type: string
+        type:
+          type: string
+        id:
+          type: integer
+          format: int32
+        accountId:
+          type: string
+        name:
+          type: string
+        accountNumber:
+          type: string
+        custodian:
+          type: string
+        accountType:
+          type: string
+        model:
+          type: string
+        style:
+          type: string
+        managedValue:
+          type: number
+          format: double
+        excludedValue:
+          type: number
+          format: double
+        value:
+          type: number
+          format: double
+        pendingValue:
+          type: number
+          format: double
+        currentCash:
+          type: number
+          format: double
+        targetCash:
+          type: number
+          format: double
+        currentCashPercent:
+          type: number
+          format: double
+        pendingCash:
+          type: number
+          format: double
+        holdings:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseHolding'
+          xml:
+            name: EclipseHolding
+            wrapped: true
+          type: array
+      xml:
+        name: AccountSimple
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipsePendingModel:
+      properties:
+        portfolioId:
+          type: integer
+          format: int32
+        modelId:
+          type: integer
+          format: int32
+        createdDate:
+          type: string
+          format: date-time
+        model:
+          $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseModel'
+      xml:
+        name: EclipsePendingModel
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipseTradeOrderObject:
+      properties:
+        id:
+          type: integer
+          format: int32
+        isEnabled:
+          type: boolean
+        status:
+          type: string
+        account:
+          $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.AccountSimple'
+        warningMessage:
+          type: string
+        action:
+          type: string
+        orderQty:
+          type: number
+          format: double
+        tradePercent:
+          type: number
+          format: double
+        cashValuePostTrade:
+          type: number
+          format: double
+        estimateAmount:
+          type: number
+          format: double
+        price:
+          type: number
+          format: double
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+        instanceDescription:
+          type: string
+        custodian:
+          type: string
+        security:
+          $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.SecurityExtended'
+        cashValue:
+          type: number
+          format: double
+        pendingUnits:
+          type: string
+        tradePercentOfAccount:
+          type: number
+          format: double
+        representativeName:
+          type: string
+        currentModelName:
+          type: string
+        handleInst:
+          type: string
+        instanceId:
+          type: integer
+          format: int32
+      xml:
+        name: EclipseTradeOrderObject
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipsePortfolioAllocation:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        currentInPercent:
+          type: number
+          format: double
+        currentInAmt:
+          type: number
+          format: double
+      xml:
+        name: EclipsePortfolioAllocation
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipseDistributionAccount:
+      properties:
+        id:
+          type: integer
+          format: int32
+        amount:
+          type: number
+          format: double
+      xml:
+        name: EclipseDistributionAccount
+      type: object
+    OAS.Eclipse.Lambda.Model.ModelItem:
+      properties:
+        ticker:
+          type: string
+        orionConnectExternalId:
+          type: integer
+          format: int32
+        targetPercent:
+          type: number
+          format: double
+        upperTolerance:
+          type: number
+          format: double
+        lowerTolerance:
+          type: number
+          format: double
+        assetCategoryName:
+          type: string
+        assetClassName:
+          type: string
+        subClassName:
+          type: string
+        tlhSecurities:
+          items:
+            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.TLHSecurity'
+          xml:
+            name: TLHSecurity
+            wrapped: true
+          type: array
+      xml:
+        name: ModelItem
       type: object
     OAS.Eclipse.Lambda.Model.Trades:
       properties:
@@ -4381,6 +5230,566 @@ components:
           type: string
       xml:
         name: Trades
+      type: object
+    OAS.Integrations.Eclipse.Models.EclipseSecurityDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        isMACSecurity:
+          type: integer
+          format: int64
+        name:
+          type: string
+        pendingInAmt:
+          type: number
+          format: double
+        pendingInPercent:
+          type: number
+          format: double
+        securityId:
+          type: integer
+          format: int32
+        securitySetId:
+          type: integer
+          format: int32
+        securitySetName:
+          type: string
+        symbol:
+          type: string
+        targetInAmt:
+          type: number
+          format: double
+        targetInPercent:
+          type: number
+          format: double
+        currentInAmt:
+          type: number
+          format: double
+        currentInPercent:
+          type: number
+          format: double
+        parentModelDetailId:
+          type: integer
+          format: int32
+        smaLevel:
+          type: string
+        modelElementId:
+          type: integer
+          format: int32
+        isPortfolioSecurity:
+          type: boolean
+        inTolerance:
+          type: boolean
+      xml:
+        name: EclipseSecurityDto
+      type: object
+    OAS.Integrations.Eclipse.Transaction:
+      properties:
+        externalId:
+          type: integer
+          format: int32
+        symbol:
+          type: string
+        tradeDate:
+          type: string
+        quantity:
+          type: number
+          format: double
+        amount:
+          type: number
+          format: double
+        type:
+          type: string
+        action:
+          type: string
+        tradeCost:
+          type: number
+          format: double
+        eclipseTradeOrderId:
+          type: integer
+          format: int32
+        status:
+          type: string
+      xml:
+        name: Transaction
+      type: object
+    OAS.Eclipse.Lambda.Model.EclipseSyncMessageListOfOAS.Eclipse.Lambda.Model.UpdateAccountSma:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.UpdateAccountSma'
+          xml:
+            name: UpdateAccountSma
+            wrapped: true
+          type: array
+        orionBaseUrl:
+          type: string
+        eclipseBaseUrl:
+          type: string
+        eclipseFirmId:
+          type: integer
+          format: int32
+        orionFirmId:
+          type: integer
+          format: int32
+        firmId:
+          type: integer
+          format: int32
+        type:
+          type: string
+        orionToken:
+          type: string
+        eclipseToken:
+          type: string
+        userName:
+          type: string
+        orionUserDetailId:
+          type: integer
+          format: int32
+        timeStamp:
+          type: string
+          format: date-time
+        logId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+      xml:
+        name: EclipseSyncMessageList`1
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipseTradeOrder:
+      properties:
+        id:
+          type: integer
+          format: int32
+        tradeInstanceId:
+          type: integer
+          format: int32
+        requestType:
+          type: string
+        isEnabled:
+          type: boolean
+        notes:
+          type: string
+        errorMessage:
+          type: string
+        orderCount:
+          type: number
+          format: double
+        executeStatus:
+          type: string
+        closeOrderCount:
+          type: number
+          format: double
+        entity:
+          type: string
+        openOrderCount:
+          type: number
+          format: double
+        errorStatus:
+          type: boolean
+        instanceDescription:
+          type: string
+        orderQty:
+          type: number
+          format: double
+        account:
+          $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.AccountSimple'
+        security:
+          $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.SecurityExtended'
+        cashValue:
+          type: number
+          format: double
+        warningMessage:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+      xml:
+        name: EclipseTradeOrder
+      type: object
+    OAS.WebApi.DTO.Trading.CurrentAccountModelDto:
+      properties:
+        currentPercent:
+          type: number
+          format: double
+        currentValue:
+          type: number
+          format: double
+        currentShares:
+          type: number
+          format: double
+        productCategoryName:
+          type: string
+        id:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        productClass:
+          type: string
+        ticker:
+          type: string
+        targetPercent:
+          type: number
+          format: double
+        itemTol:
+          type: integer
+          format: int32
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        itemTolUpper:
+          type: number
+          format: double
+        itemTolLower:
+          type: number
+          format: double
+        oub:
+          type: number
+          format: double
+        modelAggId:
+          type: integer
+          format: int32
+        productRiskScore:
+          type: integer
+          format: int32
+      xml:
+        name: CurrentAccountModelDto
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipseDistributionEmphasizedAccount:
+      properties:
+        id:
+          type: integer
+          format: int32
+        node:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseDistributionEmphasizedNode'
+          xml:
+            name: EclipseDistributionEmphasizedNode
+            wrapped: true
+          type: array
+      xml:
+        name: EclipseDistributionEmphasizedAccount
+      type: object
+    OAS.Integrations.Eclipse.Models.EclipseV2PortfolioAllocationDto:
+      properties:
+        portfolioId:
+          type: integer
+          format: int32
+        needAnalytics:
+          type: integer
+          format: int32
+        failedReason:
+          type: string
+        totalAUM:
+          type: number
+          format: double
+        setAsideCash:
+          type: number
+          format: double
+        reserveCash:
+          type: number
+          format: double
+        reserveCashPercent:
+          type: number
+          format: double
+        setAsideCashPercent:
+          type: number
+          format: double
+        securities:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipseSecurityDto'
+          xml:
+            name: EclipseSecurityDto
+            wrapped: true
+          type: array
+        categories:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipseModelCategoryDto'
+          xml:
+            name: EclipseModelCategoryDto
+            wrapped: true
+          type: array
+        classes:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipseModelClassDto'
+          xml:
+            name: EclipseModelClassDto
+            wrapped: true
+          type: array
+        subClasses:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.EclipseModelSubClassDto'
+          xml:
+            name: EclipseModelSubClassDto
+            wrapped: true
+          type: array
+      xml:
+        name: EclipseV2PortfolioAllocationDto
+      type: object
+    OAS.Integrations.Eclipse.SleevedAccounts:
+      properties:
+        firmId:
+          type: integer
+          format: int32
+        accounts:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Eclipse.EclipseAccount'
+          xml:
+            name: EclipseAccount
+            wrapped: true
+          type: array
+      xml:
+        name: SleevedAccounts
+      type: object
+    OAS.WebApi.DTO.ValidateImport.ValidateOrderDto:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        action:
+          type: string
+        ticker:
+          type: string
+        dollars:
+          type: number
+          format: double
+        shares:
+          type: number
+          format: double
+        percent:
+          type: number
+          format: double
+        productId:
+          type: integer
+          format: int32
+        message:
+          type: string
+        tradeType:
+          type: string
+          enum:
+          - Undefined
+          - Shares
+          - Dollars
+          - Percent
+        navPrice:
+          type: number
+          format: double
+        side:
+          type: string
+        amount:
+          type: number
+          format: double
+        exchangeTicker:
+          type: string
+        exchangeProductId:
+          type: integer
+          format: int32
+        cashTradeAmount:
+          type: number
+          format: double
+        cashValuePostTrade:
+          type: number
+          format: double
+        isValid:
+          type: boolean
+        validationMessage:
+          type: string
+        warningMessage:
+          type: string
+      xml:
+        name: ValidateOrderDto
+      type: object
+    OAS.Eclipse.Lambda.Model.PendingTransactions:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        orionAccountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        securityExternalId:
+          type: integer
+          format: int32
+        securityName:
+          type: string
+        securityTicker:
+          type: string
+        securityPrice:
+          type: number
+          format: double
+        tradesId:
+          type: integer
+          format: int32
+        tradesCreatedDate:
+          type: string
+          format: date-time
+        tradesEstAmount:
+          type: number
+          format: double
+        tradesOrderQty:
+          type: number
+          format: double
+        tradesAction:
+          type: string
+        positionExternalId:
+          type: integer
+          format: int32
+        tradesStatus:
+          type: string
+        description:
+          type: string
+        isTradeGeneratedDuringJournalOnlyRebalance:
+          type: boolean
+        tranLinkCode:
+          type: string
+      xml:
+        name: PendingTransactions
+      type: object
+    OAS.Integrations.Eclipse.Security:
+      properties:
+        externalId:
+          type: integer
+          format: int32
+        symbol:
+          type: string
+        name:
+          type: string
+        price:
+          type: number
+          format: float
+        securityType:
+          type: string
+        assetCategory:
+          type: string
+        assetClass:
+          type: string
+        subClass:
+          type: string
+        maturityDate:
+          type: string
+        isCustodialCash:
+          type: boolean
+      xml:
+        name: Security
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipseDistributionEmphasizedNode:
+      properties:
+        level:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        amount:
+          type: number
+          format: double
+      xml:
+        name: EclipseDistributionEmphasizedNode
+      type: object
+    OAS.Eclipse.Lambda.Model.EclipseSyncMessageListOfOAS.Eclipse.Lambda.Model.Trades:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.Trades'
+          xml:
+            name: Trades
+            wrapped: true
+          type: array
+        orionBaseUrl:
+          type: string
+        eclipseBaseUrl:
+          type: string
+        eclipseFirmId:
+          type: integer
+          format: int32
+        orionFirmId:
+          type: integer
+          format: int32
+        firmId:
+          type: integer
+          format: int32
+        type:
+          type: string
+        orionToken:
+          type: string
+        eclipseToken:
+          type: string
+        userName:
+          type: string
+        orionUserDetailId:
+          type: integer
+          format: int32
+        timeStamp:
+          type: string
+          format: date-time
+        logId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+      xml:
+        name: EclipseSyncMessageList`1
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipseSettings:
+      properties:
+        rebalanceAllowWashSale:
+          type: boolean
+        rebalanceAllowShortTermGain:
+          type: boolean
+        rebalanceMinTradeAmount:
+          type: number
+          format: double
+      xml:
+        name: EclipseSettings
+      type: object
+    OAS.Eclipse.Lambda.Model.UpdateAccountSma:
+      properties:
+        OrionConnectExternalId:
+          type: integer
+          format: int32
+        EclipseAccountId:
+          type: integer
+          format: int32
+        AccountSmaDto:
+          $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.AccountSmaDto'
+      xml:
+        name: UpdateAccountSma
+      type: object
+    OAS.Eclipse.Lambda.Model.AssignedAccount:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        orionAccountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        orionConnectFirmId:
+          type: integer
+          format: int32
+        portfolioId:
+          type: integer
+          format: int32
+        modelAllocationSynchLevel:
+          type: string
+      xml:
+        name: AssignedAccount
       type: object
     OAS.Integrations.Eclipse.EclipseAccount:
       properties:
@@ -4561,687 +5970,6 @@ components:
       xml:
         name: EclipseAccount
       type: object
-    OAS.Integrations.Eclipse.Model.EclipseDistributionEmphasizedAccount:
-      properties:
-        id:
-          type: integer
-          format: int32
-        node:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseDistributionEmphasizedNode'
-          xml:
-            name: EclipseDistributionEmphasizedNode
-            wrapped: true
-          type: array
-      xml:
-        name: EclipseDistributionEmphasizedAccount
-      type: object
-    OAS.Integrations.Eclipse.Taxlot:
-      properties:
-        externalId:
-          type: string
-        symbol:
-          type: string
-        dateAcquired:
-          type: string
-        quantity:
-          type: number
-          format: double
-        costAmount:
-          type: number
-          format: double
-        costPerShare:
-          type: number
-          format: double
-        price:
-          type: number
-          format: double
-        marketValue:
-          type: number
-          format: double
-        priceDate:
-          type: string
-          format: date-time
-        isLongTerm:
-          type: boolean
-      xml:
-        name: Taxlot
-      type: object
-    OAS.Integrations.Eclipse.SleevedAccounts:
-      properties:
-        firmId:
-          type: integer
-          format: int32
-        accounts:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.Eclipse.EclipseAccount'
-          xml:
-            name: EclipseAccount
-            wrapped: true
-          type: array
-      xml:
-        name: SleevedAccounts
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipsePrivilege:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        code:
-          type: string
-        isDeleted:
-          type: boolean
-      xml:
-        name: EclipsePrivilege
-      type: object
-    OAS.Eclipse.Lambda.Model.PendingTransactions:
-      properties:
-        accountId:
-          type: integer
-          format: int32
-        orionAccountId:
-          type: integer
-          format: int32
-        accountNumber:
-          type: string
-        securityExternalId:
-          type: integer
-          format: int32
-        securityName:
-          type: string
-        securityTicker:
-          type: string
-        securityPrice:
-          type: number
-          format: double
-        tradesId:
-          type: integer
-          format: int32
-        tradesCreatedDate:
-          type: string
-          format: date-time
-        tradesEstAmount:
-          type: number
-          format: double
-        tradesOrderQty:
-          type: number
-          format: double
-        tradesAction:
-          type: string
-        positionExternalId:
-          type: integer
-          format: int32
-        tradesStatus:
-          type: string
-        description:
-          type: string
-        isTradeGeneratedDuringJournalOnlyRebalance:
-          type: boolean
-        tranLinkCode:
-          type: string
-      xml:
-        name: PendingTransactions
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipseTradeOrder:
-      properties:
-        id:
-          type: integer
-          format: int32
-        tradeInstanceId:
-          type: integer
-          format: int32
-        requestType:
-          type: string
-        isEnabled:
-          type: boolean
-        notes:
-          type: string
-        errorMessage:
-          type: string
-        orderCount:
-          type: number
-          format: double
-        executeStatus:
-          type: string
-        closeOrderCount:
-          type: number
-          format: double
-        entity:
-          type: string
-        openOrderCount:
-          type: number
-          format: double
-        errorStatus:
-          type: boolean
-        instanceDescription:
-          type: string
-        orderQty:
-          type: number
-          format: double
-        account:
-          $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.AccountSimple'
-        security:
-          $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.SecurityExtended'
-        cashValue:
-          type: number
-          format: double
-        warningMessage:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-      xml:
-        name: EclipseTradeOrder
-      type: object
-    OAS.Eclipse.Lambda.Model.ModelEdit:
-      properties:
-        modelId:
-          type: integer
-          format: int32
-        modelName:
-          type: string
-        managementStyle:
-          type: string
-        action:
-          type: string
-        securities:
-          items:
-            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.ModelItem'
-          xml:
-            name: ModelItem
-            wrapped: true
-          type: array
-        accounts:
-          items:
-            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.AssignedAccount'
-          xml:
-            name: AssignedAccount
-            wrapped: true
-          type: array
-        isAstroEnabled:
-          type: boolean
-        syncToAstro:
-          type: boolean
-        communityModelId:
-          type: integer
-          format: int32
-        sleeveSuffix:
-          type: string
-        productTypes:
-          items:
-            type: integer
-            format: int32
-          type: array
-        orionConnectRiskCategory:
-          type: integer
-          format: int32
-        orionConnectProductClass:
-          type: integer
-          format: int32
-        isSma:
-          type: boolean
-        astroTemplateId:
-          type: string
-        altsManagedByStrategist:
-          type: boolean
-        altsModelLevel:
-          type: boolean
-        excludeRebalanceSleeve:
-          type: boolean
-        modelTypeId:
-          type: integer
-          format: int32
-        tags:
-          items:
-            type: string
-          type: array
-      xml:
-        name: ModelEdit
-      type: object
-    OAS.Integrations.Eclipse.Models.EclipseModelSubClassDto:
-      properties:
-        subClassId:
-          type: integer
-          format: int32
-        subClassName:
-          type: string
-        pendingInAmount:
-          type: number
-          format: double
-        pendingInPercent:
-          type: number
-          format: double
-        targetInAmount:
-          type: number
-          format: double
-        targetInPercent:
-          type: number
-          format: double
-        currentInAmount:
-          type: number
-          format: double
-        currentInPercent:
-          type: number
-          format: double
-        accountId:
-          type: integer
-          format: int32
-        aggregatedCurrentAmount:
-          type: number
-          format: double
-        aggregatedCurrentPercent:
-          type: number
-          format: double
-        aggregatedPostAmount:
-          type: number
-          format: double
-        aggregatedPostPercent:
-          type: number
-          format: double
-        effectiveTargetAmount:
-          type: number
-          format: double
-        effectiveTargetPercentage:
-          type: number
-          format: double
-        isMACSecurity:
-          type: integer
-          format: int64
-        isSMANode:
-          type: integer
-          format: int64
-        modelElementId:
-          type: integer
-          format: int32
-        modelId:
-          type: integer
-          format: int64
-        name:
-          type: string
-        nodeId:
-          type: integer
-          format: int64
-        parentModelDetailId:
-          type: integer
-          format: int32
-        portfolioId:
-          type: integer
-          format: int32
-        relatedType:
-          type: string
-        relatedTypeId:
-          type: integer
-          format: int64
-        securityName:
-          type: string
-        symbol:
-          type: string
-        inTolerance:
-          type: boolean
-      xml:
-        name: EclipseModelSubClassDto
-      type: object
-    OAS.WebApi.DTO.Trading.CurrentAccountModelDto:
-      properties:
-        currentPercent:
-          type: number
-          format: double
-        currentValue:
-          type: number
-          format: double
-        currentShares:
-          type: number
-          format: double
-        productCategoryName:
-          type: string
-        id:
-          type: integer
-          format: int32
-        productId:
-          type: integer
-          format: int32
-        productName:
-          type: string
-        productClass:
-          type: string
-        ticker:
-          type: string
-        targetPercent:
-          type: number
-          format: double
-        itemTol:
-          type: integer
-          format: int32
-        createdDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        itemTolUpper:
-          type: number
-          format: double
-        itemTolLower:
-          type: number
-          format: double
-        oub:
-          type: number
-          format: double
-        modelAggId:
-          type: integer
-          format: int32
-        productRiskScore:
-          type: integer
-          format: int32
-      xml:
-        name: CurrentAccountModelDto
-      type: object
-    OAS.Integrations.Eclipse.EclipseAccountResponse:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        portfolio:
-          type: string
-        portfolioId:
-          type: integer
-          format: int32
-        accountId:
-          type: string
-        restrictedPlanId:
-          type: integer
-          format: int32
-        orionConnectFirmId:
-          type: integer
-          format: int32
-        orionConnectExternalId:
-          type: integer
-          format: int32
-        astroEnabled:
-          type: boolean
-        isDoNotBuySell:
-          type: boolean
-        needAnalyticsStatus:
-          type: string
-        tags:
-          type: string
-      xml:
-        name: EclipseAccountResponse
-      type: object
-    OAS.WebApi.DTO.Integrations.Eclipse.EclipseFirmDto:
-      properties:
-        eclipseFirmId:
-          type: integer
-          format: int32
-        name:
-          type: string
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        syncDate:
-          type: string
-          format: date-time
-        syncBy:
-          type: string
-        syncStatus:
-          type: string
-        canDelete:
-          type: boolean
-        accountNameType:
-          description: 'Contains a value such as FullName or lastFirst which indicates how the account name
-
-            is configured to be displayed.'
-          type: string
-        assetClassMapping:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Eclipse.AssetClassMapping'
-          description: Contains the mapping definitions for AssetClasses which indicate how assets should be classified
-      xml:
-        name: EclipseFirmDto
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipseDistributionEmphasizedNode:
-      properties:
-        level:
-          type: integer
-          format: int32
-        id:
-          type: integer
-          format: int32
-        amount:
-          type: number
-          format: double
-      xml:
-        name: EclipseDistributionEmphasizedNode
-      type: object
-    OAS.Eclipse.Lambda.Model.AccountSmaDto:
-      properties:
-        isSma:
-          type: boolean
-        eclipseSMA:
-          type: string
-          enum:
-          - 'False'
-          - 'True'
-          - FollowOrion
-        smaAssetId:
-          type: integer
-          format: int32
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-      xml:
-        name: AccountSmaDto
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipseHolding:
-      properties:
-        id:
-          type: integer
-          format: int32
-        accountId:
-          type: integer
-          format: int32
-        accountNumber:
-          type: string
-        securityName:
-          type: string
-        securitySymbol:
-          type: string
-        securityId:
-          type: integer
-          format: int32
-        price:
-          type: number
-          format: double
-        shares:
-          type: number
-          format: double
-        value:
-          type: number
-          format: double
-        currentInPer:
-          type: number
-          format: double
-        targetInPer:
-          type: number
-          format: double
-        pendingShares:
-          type: number
-          format: double
-        pendingValue:
-          type: number
-          format: double
-        pendingInPer:
-          type: number
-          format: double
-        excluded:
-          type: string
-        inModel:
-          type: string
-        isDeleted:
-          type: boolean
-        isCash:
-          type: string
-      xml:
-        name: EclipseHolding
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipseDistributionAccount:
-      properties:
-        id:
-          type: integer
-          format: int32
-        amount:
-          type: number
-          format: double
-      xml:
-        name: EclipseDistributionAccount
-      type: object
-    OAS.WebApi.DTO.Integrations.Eclipse.AssetClassMapping:
-      properties:
-        classMappingType:
-          type: string
-          enum:
-          - AssetCategory
-          - AssetClass
-          - RiskCategory
-        subClassMappingType:
-          type: string
-          enum:
-          - AssetCategory
-          - AssetClass
-          - RiskCategory
-        categoryMappingType:
-          type: string
-          enum:
-          - AssetCategory
-          - AssetClass
-          - RiskCategory
-      xml:
-        name: AssetClassMapping
-      type: object
-    OAS.Eclipse.Lambda.Model.TLHSecurity:
-      properties:
-        productId:
-          type: integer
-          format: int32
-      xml:
-        name: TLHSecurity
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipsePortfolio:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        model:
-          type: string
-        managedValue:
-          type: number
-          format: double
-        targetCash:
-          type: number
-          format: double
-        currentCash:
-          type: number
-          format: double
-        pendingCash:
-          type: number
-          format: double
-        detail:
-          type: object
-        accounts:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseAccount'
-          xml:
-            name: EclipseAccount
-            wrapped: true
-          type: array
-      xml:
-        name: EclipsePortfolio
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipsePortfolioAllocation:
-      properties:
-        accountId:
-          type: integer
-          format: int32
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        currentInPercent:
-          type: number
-          format: double
-        currentInAmt:
-          type: number
-          format: double
-      xml:
-        name: EclipsePortfolioAllocation
-      type: object
-    OAS.Eclipse.Lambda.Model.EclipseSyncMessageListOfOAS.Eclipse.Lambda.Model.Trades:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.Trades'
-          xml:
-            name: Trades
-            wrapped: true
-          type: array
-        orionBaseUrl:
-          type: string
-        eclipseBaseUrl:
-          type: string
-        eclipseFirmId:
-          type: integer
-          format: int32
-        orionFirmId:
-          type: integer
-          format: int32
-        firmId:
-          type: integer
-          format: int32
-        type:
-          type: string
-        orionToken:
-          type: string
-        eclipseToken:
-          type: string
-        userName:
-          type: string
-        orionUserDetailId:
-          type: integer
-          format: int32
-        timeStamp:
-          type: string
-          format: date-time
-        logId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-      xml:
-        name: EclipseSyncMessageList`1
-      type: object
     OAS.Eclipse.Lambda.Model.EclipseSyncMessageListOfOAS.Eclipse.Lambda.Model.PendingTransactions:
       properties:
         data:
@@ -5285,372 +6013,17 @@ components:
       xml:
         name: EclipseSyncMessageList`1
       type: object
-    OAS.WebApi.DTO.Integrations.Eclipse.EclipseFirmWithAlClientDto:
+    OAS.Eclipse.Lambda.Model.UpdateDoNotTrade:
       properties:
-        alClients:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Eclipse.EclipseFirmAlClientDto'
-          xml:
-            name: EclipseFirmAlClientDto
-            wrapped: true
-          type: array
-        eclipseFirmId:
+        OrionConnectExternalId:
           type: integer
           format: int32
-        name:
+        EclipseAccountId.:
           type: string
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        syncDate:
-          type: string
-          format: date-time
-        syncBy:
-          type: string
-        syncStatus:
-          type: string
-        canDelete:
-          type: boolean
-        accountNameType:
-          description: 'Contains a value such as FullName or lastFirst which indicates how the account name
-
-            is configured to be displayed.'
-          type: string
-        assetClassMapping:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Eclipse.AssetClassMapping'
-          description: Contains the mapping definitions for AssetClasses which indicate how assets should be classified
-      xml:
-        name: EclipseFirmWithAlClientDto
-      type: object
-    OAS.WebApi.DTO.Integrations.Eclipse.EclipseAccountTradeInfoDto:
-      properties:
-        cashValue:
-          type: number
-          format: double
-        cashValuePostTrade:
-          type: number
-          format: double
-        minimumCashDollarAmount:
-          type: number
-          format: double
-      xml:
-        name: EclipseAccountTradeInfoDto
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipseTrade:
-      properties:
-        accountId:
-          type: integer
-          format: int32
-        portfolioId:
-          type: integer
-          format: int32
-        actionId:
-          type: string
-        securityId:
-          type: integer
-          format: int32
-        symbol:
-          type: string
-        dollarAmount:
-          type: number
-          format: double
-        quantity:
-          type: number
-          format: double
-        percentage:
-          type: number
-          format: double
-        isSendImmediately:
+        IsTradeBlocked:
           type: boolean
       xml:
-        name: EclipseTrade
-      type: object
-    OAS.Eclipse.Lambda.Model.TradeAnalysisReport:
-      properties:
-        PortfolioId:
-          type: integer
-          format: int32
-        PortfolioName:
-          type: string
-        FirmId:
-          type: integer
-          format: int32
-        householdIds:
-          items:
-            type: integer
-            format: int32
-          type: array
-        TradeAnalysisReportUrl:
-          type: string
-      xml:
-        name: TradeAnalysisReport
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipseCustodianInfoAccount:
-      properties:
-        accountName:
-          type: string
-        accountType:
-          type: string
-        accountId:
-          type: integer
-          format: int32
-        externalId:
-          type: integer
-          format: int32
-        tradingProgress:
-          type: boolean
-        incompatibleAssets:
-          type: boolean
-        hasInvestmentRestrictions:
-          type: boolean
-        pendingModelChange:
-          type: string
-          format: date-time
-        initialInvestmentOccured:
-          type: string
-          format: date-time
-        lastRebalnceDate:
-          type: string
-          format: date-time
-        accountLevel:
-          type: string
-      xml:
-        name: EclipseCustodianInfoAccount
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipseAccountToUpdatePortfolio:
-      properties:
-        accountId:
-          type: integer
-          format: int32
-        doNotTrade:
-          type: boolean
-      xml:
-        name: EclipseAccountToUpdatePortfolio
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipseModelAllocation:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        symbol:
-          type: string
-        targetInPercent:
-          type: number
-          format: double
-      xml:
-        name: EclipseModelAllocation
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipseTradeMethod:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: EclipseTradeMethod
-      type: object
-    OAS.Eclipse.Lambda.Model.EclipseSyncMessageListOfOAS.Eclipse.Lambda.Model.ModelAssignment:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.ModelAssignment'
-          xml:
-            name: ModelAssignment
-            wrapped: true
-          type: array
-        orionBaseUrl:
-          type: string
-        eclipseBaseUrl:
-          type: string
-        eclipseFirmId:
-          type: integer
-          format: int32
-        orionFirmId:
-          type: integer
-          format: int32
-        firmId:
-          type: integer
-          format: int32
-        type:
-          type: string
-        orionToken:
-          type: string
-        eclipseToken:
-          type: string
-        userName:
-          type: string
-        orionUserDetailId:
-          type: integer
-          format: int32
-        timeStamp:
-          type: string
-          format: date-time
-        logId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-      xml:
-        name: EclipseSyncMessageList`1
-      type: object
-    OAS.Integrations.Eclipse.Model.SecurityExtended:
-      properties:
-        id:
-          type: integer
-          format: int32
-        externalId:
-          type: integer
-          format: int32
-        symbol:
-          type: string
-        name:
-          type: string
-        price:
-          type: number
-          format: float
-        securityType:
-          type: string
-        assetCategory:
-          type: string
-        assetClass:
-          type: string
-        subClass:
-          type: string
-        maturityDate:
-          type: string
-        isCustodialCash:
-          type: boolean
-      xml:
-        name: SecurityExtended
-      type: object
-    OAS.Integrations.Eclipse.EclipseExtractRequestV2:
-      required:
-      - eclipseFirmIds
-      - importType
-      properties:
-        eclipseFirmIds:
-          items:
-            type: integer
-            format: int32
-          type: array
-        apiUri:
-          type: string
-        correlationId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        importType:
-          type: string
-        s3BucketPath:
-          type: string
-        bucketName:
-          type: string
-      xml:
-        name: EclipseExtractRequestV2
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipseAccount:
-      properties:
-        id:
-          type: integer
-          format: int32
-        accountId:
-          type: string
-        name:
-          type: string
-        accountNumber:
-          type: string
-        custodian:
-          type: string
-        accountType:
-          type: string
-        model:
-          type: string
-        style:
-          type: string
-        managedValue:
-          type: number
-          format: double
-        excludedValue:
-          type: number
-          format: double
-        value:
-          type: number
-          format: double
-        pendingValue:
-          type: number
-          format: double
-        currentCash:
-          type: number
-          format: double
-        targetCash:
-          type: number
-          format: double
-        currentCashPercent:
-          type: number
-          format: double
-        pendingCash:
-          type: number
-          format: double
-        holdings:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseHolding'
-          xml:
-            name: EclipseHolding
-            wrapped: true
-          type: array
-      xml:
-        name: EclipseAccount
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipseDistributionTrade:
-      properties:
-        selectedMethodId:
-          type: integer
-          format: int32
-        raiseFullAmount:
-          type: boolean
-        filterType:
-          readOnly: true
-          type: string
-        accounts:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseDistributionAccount'
-          xml:
-            name: EclipseDistributionAccount
-            wrapped: true
-          type: array
-        sleevedPortfolios:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseDistributionSleevedPortfolios'
-          xml:
-            name: EclipseDistributionSleevedPortfolios
-            wrapped: true
-          type: array
-        emphasiedAccounts:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseDistributionEmphasizedAccount'
-          xml:
-            name: EclipseDistributionEmphasizedAccount
-            wrapped: true
-          type: array
-        reason:
-          type: string
-        isSetAsideCash:
-          readOnly: true
-          type: boolean
-        isExcelImport:
-          readOnly: true
-          type: boolean
-      xml:
-        name: EclipseDistributionTrade
+        name: UpdateDoNotTrade
       type: object
     OAS.Integrations.Eclipse.Models.EclipseModelCategoryDto:
       properties:
@@ -5735,338 +6108,110 @@ components:
       xml:
         name: EclipseModelCategoryDto
       type: object
-    OAS.Integrations.Eclipse.Model.EclipseTradeOrderObject:
+    OAS.Integrations.Eclipse.Model.EclipseCustodianInfoAccount:
       properties:
-        id:
-          type: integer
-          format: int32
-        isEnabled:
-          type: boolean
-        status:
-          type: string
-        account:
-          $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.AccountSimple'
-        warningMessage:
-          type: string
-        action:
-          type: string
-        orderQty:
-          type: number
-          format: double
-        tradePercent:
-          type: number
-          format: double
-        cashValuePostTrade:
-          type: number
-          format: double
-        estimateAmount:
-          type: number
-          format: double
-        price:
-          type: number
-          format: double
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-        instanceDescription:
-          type: string
-        custodian:
-          type: string
-        security:
-          $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.SecurityExtended'
-        cashValue:
-          type: number
-          format: double
-        pendingUnits:
-          type: string
-        tradePercentOfAccount:
-          type: number
-          format: double
-        representativeName:
-          type: string
-        currentModelName:
-          type: string
-        handleInst:
-          type: string
-        instanceId:
-          type: integer
-          format: int32
-      xml:
-        name: EclipseTradeOrderObject
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipseSettings:
-      properties:
-        rebalanceAllowWashSale:
-          type: boolean
-        rebalanceAllowShortTermGain:
-          type: boolean
-        rebalanceMinTradeAmount:
-          type: number
-          format: double
-      xml:
-        name: EclipseSettings
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipseDistributionSleevedPortfolios:
-      properties:
-        id:
-          type: integer
-          format: int32
-        amount:
-          type: number
-          format: double
-      xml:
-        name: EclipseDistributionSleevedPortfolios
-      type: object
-    OAS.Integrations.Eclipse.Model.AccountSimple:
-      properties:
-        number:
-          type: string
-        type:
-          type: string
-        id:
-          type: integer
-          format: int32
-        accountId:
-          type: string
-        name:
-          type: string
-        accountNumber:
-          type: string
-        custodian:
+        accountName:
           type: string
         accountType:
           type: string
-        model:
-          type: string
-        style:
-          type: string
-        managedValue:
-          type: number
-          format: double
-        excludedValue:
-          type: number
-          format: double
-        value:
-          type: number
-          format: double
-        pendingValue:
-          type: number
-          format: double
-        currentCash:
-          type: number
-          format: double
-        targetCash:
-          type: number
-          format: double
-        currentCashPercent:
-          type: number
-          format: double
-        pendingCash:
-          type: number
-          format: double
-        holdings:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseHolding'
-          xml:
-            name: EclipseHolding
-            wrapped: true
-          type: array
-      xml:
-        name: AccountSimple
-      type: object
-    OAS.Integrations.Eclipse.Transaction:
-      properties:
-        externalId:
-          type: integer
-          format: int32
-        symbol:
-          type: string
-        tradeDate:
-          type: string
-        quantity:
-          type: number
-          format: double
-        amount:
-          type: number
-          format: double
-        type:
-          type: string
-        action:
-          type: string
-        tradeCost:
-          type: number
-          format: double
-        eclipseTradeOrderId:
-          type: integer
-          format: int32
-        status:
-          type: string
-      xml:
-        name: Transaction
-      type: object
-    OAS.Integrations.Eclipse.Holding:
-      properties:
-        externalId:
-          type: integer
-          format: int32
-        symbol:
-          type: string
-        price:
-          type: number
-          format: double
-        marketValue:
-          type: number
-          format: double
-        quantity:
-          type: number
-          format: double
-        positionYTDRealizedSTGL:
-          type: number
-          format: double
-        positionYTDRealizedLTGL:
-          type: number
-          format: double
-      xml:
-        name: Holding
-      type: object
-    OAS.Integrations.Eclipse.Models.EclipseModelClassDto:
-      properties:
-        classId:
-          type: integer
-          format: int32
-        className:
-          type: string
-        pendingInAmount:
-          type: number
-          format: double
-        pendingInPercent:
-          type: number
-          format: double
-        targetInAmount:
-          type: number
-          format: double
-        targetInPercent:
-          type: number
-          format: double
-        currentInAmount:
-          type: number
-          format: double
-        currentInPercent:
-          type: number
-          format: double
         accountId:
           type: integer
           format: int32
-        aggregatedCurrentAmount:
-          type: number
-          format: double
-        aggregatedCurrentPercent:
-          type: number
-          format: double
-        aggregatedPostAmount:
-          type: number
-          format: double
-        aggregatedPostPercent:
-          type: number
-          format: double
-        effectiveTargetAmount:
-          type: number
-          format: double
-        effectiveTargetPercentage:
-          type: number
-          format: double
-        isMACSecurity:
-          type: integer
-          format: int64
-        isSMANode:
-          type: integer
-          format: int64
-        modelElementId:
+        externalId:
           type: integer
           format: int32
+        tradingProgress:
+          type: boolean
+        incompatibleAssets:
+          type: boolean
+        hasInvestmentRestrictions:
+          type: boolean
+        pendingModelChange:
+          type: string
+          format: date-time
+        initialInvestmentOccured:
+          type: string
+          format: date-time
+        lastRebalnceDate:
+          type: string
+          format: date-time
+        accountLevel:
+          type: string
+      xml:
+        name: EclipseCustodianInfoAccount
+      type: object
+    OAS.Eclipse.Lambda.Model.ModelEdit:
+      properties:
         modelId:
           type: integer
-          format: int64
-        name:
-          type: string
-        nodeId:
-          type: integer
-          format: int64
-        parentModelDetailId:
-          type: integer
           format: int32
-        portfolioId:
-          type: integer
-          format: int32
-        relatedType:
+        modelName:
           type: string
-        relatedTypeId:
-          type: integer
-          format: int64
-        securityName:
+        managementStyle:
           type: string
-        symbol:
+        action:
           type: string
-        inTolerance:
+        securities:
+          items:
+            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.ModelItem'
+          xml:
+            name: ModelItem
+            wrapped: true
+          type: array
+        accounts:
+          items:
+            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.AssignedAccount'
+          xml:
+            name: AssignedAccount
+            wrapped: true
+          type: array
+        isAstroEnabled:
           type: boolean
+        syncToAstro:
+          type: boolean
+        communityModelId:
+          type: integer
+          format: int32
+        sleeveSuffix:
+          type: string
+        productTypes:
+          items:
+            type: integer
+            format: int32
+          type: array
+        orionConnectRiskCategory:
+          type: integer
+          format: int32
+        orionConnectProductClass:
+          type: integer
+          format: int32
+        isSma:
+          type: boolean
+        astroTemplateId:
+          type: string
+        altsManagedByStrategist:
+          type: boolean
+        altsModelLevel:
+          type: boolean
+        excludeRebalanceSleeve:
+          type: boolean
+        modelTypeId:
+          type: integer
+          format: int32
+        tags:
+          items:
+            type: string
+          type: array
       xml:
-        name: EclipseModelClassDto
+        name: ModelEdit
       type: object
-    OAS.Eclipse.Lambda.Model.PortfolioAssignmentAccount:
-      required:
-      - eclipseAccountId
-      - orionAccountId
-      properties:
-        eclipseAccountId:
-          type: integer
-          format: int32
-        orionAccountId:
-          type: integer
-          format: int32
-      xml:
-        name: PortfolioAssignmentAccount
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipsSecurityAsset:
-      properties:
-        id:
-          type: integer
-          format: int32
-        meId:
-          type: integer
-          format: int32
-        color:
-          type: string
-      xml:
-        name: EclipsSecurityAsset
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipseUserPrivilege:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        canAdd:
-          type: boolean
-        canUpdate:
-          type: boolean
-        canRead:
-          type: boolean
-        canDelete:
-          type: boolean
-        isDeleted:
-          type: boolean
-      xml:
-        name: EclipseUserPrivilege
-      type: object
-    OAS.Eclipse.Lambda.Model.EclipseSyncMessageListOfOAS.Eclipse.Lambda.Model.PortfolioAssignment:
+    OAS.Eclipse.Lambda.Model.EclipseSyncMessageListOfOAS.Eclipse.Lambda.Model.ModelEdit:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.PortfolioAssignment'
+            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.ModelEdit'
           xml:
-            name: PortfolioAssignment
+            name: ModelEdit
             wrapped: true
           type: array
         orionBaseUrl:
@@ -6102,25 +6247,6 @@ components:
           format: uuid
       xml:
         name: EclipseSyncMessageList`1
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipseCustodianInfo:
-      properties:
-        portfolioId:
-          type: integer
-          format: int32
-        custodialAccountNumber:
-          type: string
-        name:
-          type: string
-        accounts:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseCustodianInfoAccount'
-          xml:
-            name: EclipseCustodianInfoAccount
-            wrapped: true
-          type: array
-      xml:
-        name: EclipseCustodianInfo
       type: object
     OAS.Eclipse.Lambda.Model.EclipseSyncMessageListOfOAS.Eclipse.Lambda.Model.TradeAnalysisReport:
       properties:
@@ -6165,132 +6291,6 @@ components:
       xml:
         name: EclipseSyncMessageList`1
       type: object
-    OAS.Eclipse.Lambda.Model.EclipseSyncMessageListOfOAS.Eclipse.Lambda.Model.UpdateDoNotTrade:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.UpdateDoNotTrade'
-          xml:
-            name: UpdateDoNotTrade
-            wrapped: true
-          type: array
-        orionBaseUrl:
-          type: string
-        eclipseBaseUrl:
-          type: string
-        eclipseFirmId:
-          type: integer
-          format: int32
-        orionFirmId:
-          type: integer
-          format: int32
-        firmId:
-          type: integer
-          format: int32
-        type:
-          type: string
-        orionToken:
-          type: string
-        eclipseToken:
-          type: string
-        userName:
-          type: string
-        orionUserDetailId:
-          type: integer
-          format: int32
-        timeStamp:
-          type: string
-          format: date-time
-        logId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-      xml:
-        name: EclipseSyncMessageList`1
-      type: object
-    OAS.WebApi.DTO.Integrations.Eclipse.EclipseFirmAlClientDto:
-      properties:
-        pkEclipseFirmAlClient:
-          type: integer
-          format: int32
-        eclipseFirmId:
-          type: integer
-          format: int32
-        fkAlClient:
-          type: integer
-          format: int32
-        isDefault:
-          type: boolean
-        isDefaultEclipseFirm:
-          type: boolean
-        accountPrefix:
-          type: string
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-      xml:
-        name: EclipseFirmAlClientDto
-      type: object
-    OAS.WebApi.DTO.Interface.IEclipseFirmWithAlClients:
-      properties:
-        alClients:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Eclipse.EclipseFirmAlClientDto'
-          xml:
-            name: EclipseFirmAlClientDto
-            wrapped: true
-          type: array
-        eclipseFirmId:
-          type: integer
-          format: int32
-        accountNameType:
-          type: string
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        name:
-          readOnly: true
-          type: string
-        syncDate:
-          type: string
-          format: date-time
-        syncBy:
-          type: string
-        syncStatus:
-          type: string
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        canDelete:
-          readOnly: true
-          type: boolean
-      xml:
-        name: IEclipseFirmWithAlClients
-      type: object
-    OAS.Integrations.Eclipse.EclipseInitV2ImportOnEclipseRequest:
-      required:
-      - firmId
-      - isFullExtract
-      properties:
-        firmId:
-          type: integer
-          format: int32
-        isFullExtract:
-          type: boolean
-      xml:
-        name: EclipseInitV2ImportOnEclipseRequest
-      type: object
     OAS.WebApi.DTO.Integrations.Eclipse.MyEclipseSetupDto:
       description: 'Used by the "My Eclipse Setup" page to update certain
 
@@ -6317,255 +6317,229 @@ components:
       xml:
         name: MyEclipseSetupDto
       type: object
-    OAS.Eclipse.Lambda.Model.UpdateAccountSma:
-      properties:
-        OrionConnectExternalId:
-          type: integer
-          format: int32
-        EclipseAccountId:
-          type: integer
-          format: int32
-        AccountSmaDto:
-          $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.AccountSmaDto'
-      xml:
-        name: UpdateAccountSma
-      type: object
-    OAS.WebApi.DTO.ValidateImport.ValidateOrderDto:
-      properties:
-        accountId:
-          type: integer
-          format: int32
-        accountNumber:
-          type: string
-        action:
-          type: string
-        ticker:
-          type: string
-        dollars:
-          type: number
-          format: double
-        shares:
-          type: number
-          format: double
-        percent:
-          type: number
-          format: double
-        productId:
-          type: integer
-          format: int32
-        message:
-          type: string
-        tradeType:
-          type: string
-          enum:
-          - Undefined
-          - Shares
-          - Dollars
-          - Percent
-        navPrice:
-          type: number
-          format: double
-        side:
-          type: string
-        amount:
-          type: number
-          format: double
-        exchangeTicker:
-          type: string
-        exchangeProductId:
-          type: integer
-          format: int32
-        cashTradeAmount:
-          type: number
-          format: double
-        cashValuePostTrade:
-          type: number
-          format: double
-        isValid:
-          type: boolean
-        validationMessage:
-          type: string
-        warningMessage:
-          type: string
-      xml:
-        name: ValidateOrderDto
-      type: object
-    OAS.Eclipse.Lambda.Model.ModelItem:
-      properties:
-        ticker:
-          type: string
-        orionConnectExternalId:
-          type: integer
-          format: int32
-        targetPercent:
-          type: number
-          format: double
-        upperTolerance:
-          type: number
-          format: double
-        lowerTolerance:
-          type: number
-          format: double
-        assetCategoryName:
-          type: string
-        assetClassName:
-          type: string
-        subClassName:
-          type: string
-        tlhSecurities:
-          items:
-            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.TLHSecurity'
-          xml:
-            name: TLHSecurity
-            wrapped: true
-          type: array
-      xml:
-        name: ModelItem
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipseModelChild:
+    OAS.Integrations.Eclipse.Model.EclipseTradeMethod:
       properties:
         id:
           type: integer
           format: int32
         name:
           type: string
-        modelDetailId:
-          type: integer
-          format: int32
-        modelTypeId:
-          type: integer
-          format: int32
-        targetPercent:
-          type: number
-          format: double
-        lowerModelTolerancePercent:
-          type: number
-          format: double
-        upperModelTolerancePercent:
-          type: number
-          format: double
-        toleranceTypeValue:
-          type: integer
-          format: int32
-        rank:
-          type: integer
-          format: int32
-        lowerModelToleranceAmount:
-          type: number
-          format: double
-        upperModelToleranceAmount:
-          type: number
-          format: double
-        lowerTradeTolerancePercent:
-          type: number
-          format: double
-        upperTradeTolerancePercent:
-          type: number
-          format: double
-        isEdited:
-          type: boolean
-        isSubstituted:
-          type: boolean
-        substitutedOf:
-          type: integer
-          format: int32
-        securityAsset:
-          $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipsSecurityAsset'
-        children:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseModelChild'
-          xml:
-            name: EclipseModelChild
-            wrapped: true
-          type: array
-        addedElements:
-          items:
-            type: integer
-            format: int32
-          type: array
-        modifiedElements:
-          items:
-            type: integer
-            format: int32
-          type: array
-        removedElements:
-          items:
-            type: integer
-            format: int32
-          type: array
-        isNewlySubstitutedNode:
-          type: boolean
-        isEditSubstituted:
-          type: boolean
       xml:
-        name: EclipseModelChild
+        name: EclipseTradeMethod
       type: object
-    OAS.Eclipse.Lambda.Model.PortfolioAssignment:
+    OAS.Integrations.Eclipse.EclipseExtractRequestV2:
       required:
-      - orionFirmId
-      - clientId
-      - eclipsePortfolioId
-      - eclipsePortfolioName
-      - accounts
+      - eclipseFirmIds
+      - importType
       properties:
-        orionFirmId:
-          type: integer
-          format: int32
-        clientId:
-          type: integer
-          format: int32
-        eclipsePortfolioId:
-          type: integer
-          format: int32
-        eclipsePortfolioName:
+        eclipseFirmIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        apiUri:
           type: string
-        orionPortfolioGroupId:
+        correlationId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        importType:
+          type: string
+        s3BucketPath:
+          type: string
+        bucketName:
+          type: string
+      xml:
+        name: EclipseExtractRequestV2
+      type: object
+    OAS.Eclipse.Lambda.Model.AccountSmaDto:
+      properties:
+        isSma:
+          type: boolean
+        eclipseSMA:
+          type: string
+          enum:
+          - 'False'
+          - 'True'
+          - FollowOrion
+        smaAssetId:
           type: integer
           format: int32
-        orionPortfolioGroupName:
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+      xml:
+        name: AccountSmaDto
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipseDistributionTrade:
+      properties:
+        selectedMethodId:
+          type: integer
+          format: int32
+        raiseFullAmount:
+          type: boolean
+        filterType:
+          readOnly: true
           type: string
         accounts:
           items:
-            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.PortfolioAssignmentAccount'
+            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseDistributionAccount'
           xml:
-            name: PortfolioAssignmentAccount
+            name: EclipseDistributionAccount
+            wrapped: true
+          type: array
+        sleevedPortfolios:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseDistributionSleevedPortfolios'
+          xml:
+            name: EclipseDistributionSleevedPortfolios
+            wrapped: true
+          type: array
+        emphasiedAccounts:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseDistributionEmphasizedAccount'
+          xml:
+            name: EclipseDistributionEmphasizedAccount
+            wrapped: true
+          type: array
+        reason:
+          type: string
+        isSetAsideCash:
+          readOnly: true
+          type: boolean
+        isExcelImport:
+          readOnly: true
+          type: boolean
+      xml:
+        name: EclipseDistributionTrade
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipsePortfolio:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        model:
+          type: string
+        managedValue:
+          type: number
+          format: double
+        targetCash:
+          type: number
+          format: double
+        currentCash:
+          type: number
+          format: double
+        pendingCash:
+          type: number
+          format: double
+        detail:
+          type: object
+        accounts:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseAccount'
+          xml:
+            name: EclipseAccount
             wrapped: true
           type: array
       xml:
-        name: PortfolioAssignment
+        name: EclipsePortfolio
       type: object
-    OAS.Integrations.Eclipse.Realizedgainloss:
+    OAS.WebApi.DTO.Integrations.Eclipse.AssetClassMapping:
       properties:
-        externalId:
+        classMappingType:
           type: string
-        symbol:
+          enum:
+          - AssetCategory
+          - AssetClass
+          - RiskCategory
+        subClassMappingType:
           type: string
-        grossProceeds:
-          type: number
-          format: double
-        netProceeds:
-          type: number
-          format: double
-        costAmount:
-          type: number
-          format: float
-        dateAquired:
+          enum:
+          - AssetCategory
+          - AssetClass
+          - RiskCategory
+        categoryMappingType:
           type: string
-        sellDate:
-          type: string
-        quantity:
-          type: number
-          format: float
-        longTerm:
+          enum:
+          - AssetCategory
+          - AssetClass
+          - RiskCategory
+      xml:
+        name: AssetClassMapping
+      type: object
+    OAS.Eclipse.Lambda.Model.ModelAssignment:
+      properties:
+        modelId:
           type: integer
           format: int32
-        sellMethod:
+        modelName:
           type: string
-        totalGains:
-          type: number
-          format: double
+        managementStyle:
+          type: string
+        action:
+          type: string
+        securities:
+          items:
+            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.ModelItem'
+          xml:
+            name: ModelItem
+            wrapped: true
+          type: array
+        accounts:
+          items:
+            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.AssignedAccount'
+          xml:
+            name: AssignedAccount
+            wrapped: true
+          type: array
+        isAstroEnabled:
+          type: boolean
+        syncToAstro:
+          type: boolean
+        communityModelId:
+          type: integer
+          format: int32
+        sleeveSuffix:
+          type: string
+        productTypes:
+          items:
+            type: integer
+            format: int32
+          type: array
+        orionConnectRiskCategory:
+          type: integer
+          format: int32
+        orionConnectProductClass:
+          type: integer
+          format: int32
+        isSma:
+          type: boolean
+        astroTemplateId:
+          type: string
+        altsManagedByStrategist:
+          type: boolean
+        altsModelLevel:
+          type: boolean
+        excludeRebalanceSleeve:
+          type: boolean
+        modelTypeId:
+          type: integer
+          format: int32
+        tags:
+          items:
+            type: string
+          type: array
       xml:
-        name: Realizedgainloss
+        name: ModelAssignment
       type: object
     OAS.Integrations.Eclipse.Model.EclipseSecurity:
       properties:
@@ -6602,6 +6576,32 @@ components:
           type: boolean
       xml:
         name: EclipseSecurity
+      type: object
+    OAS.Integrations.Eclipse.EclipseInitV2ImportOnEclipseRequest:
+      required:
+      - firmId
+      - isFullExtract
+      properties:
+        firmId:
+          type: integer
+          format: int32
+        isFullExtract:
+          type: boolean
+      xml:
+        name: EclipseInitV2ImportOnEclipseRequest
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipsSecurityAsset:
+      properties:
+        id:
+          type: integer
+          format: int32
+        meId:
+          type: integer
+          format: int32
+        color:
+          type: string
+      xml:
+        name: EclipsSecurityAsset
       type: object
   securitySchemes:
     Authorization:

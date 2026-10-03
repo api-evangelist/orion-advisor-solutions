@@ -1107,6 +1107,52 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAS.WebApi.DTO.Blogging.EmailListDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        subject:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        attachmentCount:
+          type: integer
+          format: int32
+      xml:
+        name: EmailListDto
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
+    OAS.WebApi.DTO.Blogging.NewEmailDto:
+      properties:
+        recipients:
+          type: string
+        subject:
+          type: string
+        messageText:
+          type: string
+        notificationMessage:
+          type: string
+        files:
+          items:
+            $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+          xml:
+            name: HttpFile
+            wrapped: true
+          type: array
+      xml:
+        name: NewEmailDto
+      type: object
     OAS.WebApi.DTO.Blogging.EmailDto:
       properties:
         id:
@@ -1133,6 +1179,18 @@ components:
       xml:
         name: EmailDto
       type: object
+    OAS.WebApi.DTO.Blogging.EmailAttachmentDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        blobDesc:
+          type: string
+        canDownload:
+          type: boolean
+      xml:
+        name: EmailAttachmentDto
+      type: object
     System.Net.Http.StreamContent:
       properties:
         headers:
@@ -1146,17 +1204,16 @@ components:
       xml:
         name: StreamContent
       type: object
-    OAS.WebApi.DTO.Blogging.EmailAttachmentDto:
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
       properties:
-        id:
-          type: integer
-          format: int32
-        blobDesc:
+        fileName:
           type: string
-        canDownload:
-          type: boolean
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
       xml:
-        name: EmailAttachmentDto
+        name: HttpFile
       type: object
     System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
       properties:
@@ -1170,32 +1227,6 @@ components:
           type: array
       xml:
         name: KeyValuePair`2
-      type: object
-    OAS.DataModel.SimpleEntity:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleEntity
-      type: object
-    OAS.WebApi.DTO.Blogging.EmailListDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        subject:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        attachmentCount:
-          type: integer
-          format: int32
-      xml:
-        name: EmailListDto
       type: object
     OAS.WebApi.DTO.Blogging.RecipientDto:
       properties:
@@ -1411,37 +1442,6 @@ components:
           type: string
       xml:
         name: RecipientDto
-      type: object
-    OAS.WebApi.DTO.Blogging.NewEmailDto:
-      properties:
-        recipients:
-          type: string
-        subject:
-          type: string
-        messageText:
-          type: string
-        notificationMessage:
-          type: string
-        files:
-          items:
-            $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-          xml:
-            name: HttpFile
-            wrapped: true
-          type: array
-      xml:
-        name: NewEmailDto
-      type: object
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
       type: object
   securitySchemes:
     Authorization:

@@ -692,6 +692,23 @@ components:
       xml:
         name: ProcessWorkflowPhaseDto
       type: object
+    OAS.WebApi.DTO.Reporting.Qpe.WorkflowActionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        actionDesc:
+          type: string
+        completedDate:
+          type: string
+          format: date-time
+        actionComment:
+          type: string
+        runnableClass:
+          type: string
+      xml:
+        name: WorkflowActionDto
+      type: object
     OAS.DataModel.SimpleEntity:
       properties:
         id:
@@ -701,6 +718,23 @@ components:
           type: string
       xml:
         name: SimpleEntity
+      type: object
+    OAS.WebApi.DTO.Reporting.Qpe.WorkflowItemDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        itemDesc:
+          type: string
+        actions:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Qpe.WorkflowActionDto'
+          xml:
+            name: WorkflowActionDto
+            wrapped: true
+          type: array
+      xml:
+        name: WorkflowItemDto
       type: object
     OAS.DataProcess.DTO.Reporting.ProcessManagerDto:
       properties:
@@ -751,23 +785,6 @@ components:
           type: string
       xml:
         name: ProcessManagerDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Qpe.WorkflowItemDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        itemDesc:
-          type: string
-        actions:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Qpe.WorkflowActionDto'
-          xml:
-            name: WorkflowActionDto
-            wrapped: true
-          type: array
-      xml:
-        name: WorkflowItemDto
       type: object
     OAS.DataProcess.DTO.Reporting.ProcessWorkflowDetailsDto:
       properties:
@@ -1042,23 +1059,6 @@ components:
           type: string
       xml:
         name: ProcessManagerSimpleDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Qpe.WorkflowActionDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        actionDesc:
-          type: string
-        completedDate:
-          type: string
-          format: date-time
-        actionComment:
-          type: string
-        runnableClass:
-          type: string
-      xml:
-        name: WorkflowActionDto
       type: object
   securitySchemes:
     Authorization:

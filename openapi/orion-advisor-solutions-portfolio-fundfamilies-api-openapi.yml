@@ -1372,8 +1372,12 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.WebApi.DTO.Portfolio.FundFamilyDto:
+    OAS.WebApi.DTO.Portfolio.FundFamilyWithErrorsDto:
       properties:
+        status:
+          type: string
+        errorMessage:
+          type: string
         id:
           type: integer
           format: int32
@@ -1434,57 +1438,46 @@ components:
             wrapped: true
           type: array
       xml:
-        name: FundFamilyDto
+        name: FundFamilyWithErrorsDto
       type: object
-    OAS.WebApi.DTO.Portfolio.SimpleAccountWithValue:
+    OAS.WebApi.DTO.Portfolio.CustComplexDto:
       properties:
-        value:
-          type: number
-          format: double
-        number:
-          type: string
-        managementStyle:
-          type: string
-        isActive:
-          type: boolean
-        clientId:
-          type: integer
-          format: int32
-        custodian:
-          type: string
-        registrationId:
-          type: integer
-          format: int32
         id:
           type: integer
           format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleAccountWithValue
-      type: object
-    OAS.WebApi.DTO.Interface.AdditionalColumnDefinition:
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-      xml:
-        name: AdditionalColumnDefinition
-      type: object
-    OAS.WebApi.DTO.Portfolio.TradeFormatDto:
-      properties:
-        tradeFormatId:
+        custodianId:
           type: integer
           format: int32
-        formatDisplayName:
+        custodianName:
           type: string
-        typeData:
+        isDefault:
+          type: boolean
+        fundFamilyId:
+          type: integer
+          format: int32
+        fundFamilyName:
           type: string
-        type:
+        collectFormatId:
+          type: integer
+          format: int32
+        collectFormatName:
           type: string
+        collectMethodName:
+          type: string
+        collectMethodId:
+          type: integer
+          format: int32
+        newAcctFormatId:
+          type: integer
+          format: int32
+        chkReqFormatId:
+          type: integer
+          format: int32
+        swdFormatId:
+          type: integer
+          format: int32
       xml:
-        name: TradeFormatDto
+        name: CustComplexDto
       type: object
     OAS.DataModel.SimpleEntity:
       properties:
@@ -1495,50 +1488,6 @@ components:
           type: string
       xml:
         name: SimpleEntity
-      type: object
-    OAS.WebApi.DTO.Simple.SimpleValueDto:
-      properties:
-        value:
-          type: number
-          format: double
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleValueDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.CustodianTradeFileFormatDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        custodianId:
-          type: integer
-          format: int32
-        fundFamilyId:
-          type: integer
-          format: int32
-        registrationTypeId:
-          type: integer
-          format: int32
-        platformId:
-          type: integer
-          format: int32
-        trExFmtId:
-          type: integer
-          format: int32
-        tPlusDays:
-          type: integer
-          format: int32
-        isNAAllowed:
-          type: boolean
-        trExFmtEndResultId:
-          type: integer
-          format: int32
-      xml:
-        name: CustodianTradeFileFormatDto
       type: object
     OAS.WebApi.DTO.Portfolio.FundFamilyDefinitionDto:
       properties:
@@ -1603,7 +1552,7 @@ components:
       xml:
         name: FundFamilyDefinitionDto
       type: object
-    OAS.WebApi.DTO.Portfolio.CustComplexDto:
+    OAS.DataModel.Portfolio.CustodianTradeFileFormat:
       properties:
         id:
           type: integer
@@ -1611,36 +1560,92 @@ components:
         custodianId:
           type: integer
           format: int32
-        custodianName:
-          type: string
-        isDefault:
-          type: boolean
         fundFamilyId:
           type: integer
           format: int32
-        fundFamilyName:
-          type: string
-        collectFormatId:
+        registrationTypeId:
           type: integer
           format: int32
-        collectFormatName:
-          type: string
-        collectMethodName:
-          type: string
-        collectMethodId:
+        platformId:
           type: integer
           format: int32
-        newAcctFormatId:
+        trExFmtId:
           type: integer
           format: int32
-        chkReqFormatId:
+        tPlusDays:
           type: integer
           format: int32
-        swdFormatId:
+        isNAAllowed:
+          type: boolean
+        trExFmtEndResultId:
           type: integer
           format: int32
       xml:
-        name: CustComplexDto
+        name: CustodianTradeFileFormat
+      type: object
+    OAS.WebApi.DTO.Portfolio.FundFamilyEntityOptionDto:
+      properties:
+        entityId:
+          type: integer
+          format: int32
+        userDefineDefinitionId:
+          type: integer
+          format: int32
+        userDefineDataId:
+          type: integer
+          format: int32
+        value:
+          type: string
+        name:
+          type: string
+        code:
+          type: string
+        securityCode:
+          type: string
+        definition:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.FundFamilyDefinitionDto'
+      xml:
+        name: FundFamilyEntityOptionDto
+      type: object
+    OAS.WebApi.DTO.Simple.SimpleValueDto:
+      properties:
+        value:
+          type: number
+          format: double
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleValueDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.SimpleAccountWithValue:
+      properties:
+        value:
+          type: number
+          format: double
+        number:
+          type: string
+        managementStyle:
+          type: string
+        isActive:
+          type: boolean
+        clientId:
+          type: integer
+          format: int32
+        custodian:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleAccountWithValue
       type: object
     OAS.WebApi.DTO.Portfolio.FundFamilyOptionDto:
       properties:
@@ -1670,29 +1675,114 @@ components:
       xml:
         name: FundFamilyOptionDto
       type: object
-    OAS.WebApi.DTO.Portfolio.FundFamilyEntityOptionDto:
+    OAS.WebApi.DTO.Portfolio.FundFamilyDto:
       properties:
-        entityId:
+        id:
           type: integer
           format: int32
-        userDefineDefinitionId:
-          type: integer
-          format: int32
-        userDefineDataId:
-          type: integer
-          format: int32
-        value:
-          type: string
         name:
           type: string
-        code:
+        editedDate:
           type: string
-        securityCode:
+          format: date-time
+        createdBy:
           type: string
-        definition:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.FundFamilyDefinitionDto'
+        isActive:
+          type: boolean
+        isAnnuity:
+          type: boolean
+        unitScale:
+          type: integer
+          format: int32
+        priceScale:
+          type: integer
+          format: int32
+        isShareClassSensitive:
+          type: boolean
+        isAcctNumUnique:
+          type: boolean
+        isDefault:
+          type: boolean
+        isCreateDistribution:
+          type: boolean
+        sungardBrokerId:
+          type: integer
+          format: int32
+        custComplexes:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustComplexDto'
+          xml:
+            name: CustComplexDto
+            wrapped: true
+          type: array
+        custodianTradeFileFormats:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustodianTradeFileFormatDto'
+          xml:
+            name: CustodianTradeFileFormatDto
+            wrapped: true
+          type: array
+        userDefinedFields:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+          xml:
+            name: EntityOptionDto
+            wrapped: true
+          type: array
+        entityOptions:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.FundFamilyEntityOptionDto'
+          xml:
+            name: FundFamilyEntityOptionDto
+            wrapped: true
+          type: array
       xml:
-        name: FundFamilyEntityOptionDto
+        name: FundFamilyDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.TradeFormatDto:
+      properties:
+        tradeFormatId:
+          type: integer
+          format: int32
+        formatDisplayName:
+          type: string
+        typeData:
+          type: string
+        type:
+          type: string
+      xml:
+        name: TradeFormatDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.CustodianTradeFileFormatDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        custodianId:
+          type: integer
+          format: int32
+        fundFamilyId:
+          type: integer
+          format: int32
+        registrationTypeId:
+          type: integer
+          format: int32
+        platformId:
+          type: integer
+          format: int32
+        trExFmtId:
+          type: integer
+          format: int32
+        tPlusDays:
+          type: integer
+          format: int32
+        isNAAllowed:
+          type: boolean
+        trExFmtEndResultId:
+          type: integer
+          format: int32
+      xml:
+        name: CustodianTradeFileFormatDto
       type: object
     OAS.WebApi.DTO.Portfolio.AccountDto:
       properties:
@@ -1957,37 +2047,6 @@ components:
       xml:
         name: AccountDto
       type: object
-    OAS.DataModel.Portfolio.CustodianTradeFileFormat:
-      properties:
-        id:
-          type: integer
-          format: int32
-        custodianId:
-          type: integer
-          format: int32
-        fundFamilyId:
-          type: integer
-          format: int32
-        registrationTypeId:
-          type: integer
-          format: int32
-        platformId:
-          type: integer
-          format: int32
-        trExFmtId:
-          type: integer
-          format: int32
-        tPlusDays:
-          type: integer
-          format: int32
-        isNAAllowed:
-          type: boolean
-        trExFmtEndResultId:
-          type: integer
-          format: int32
-      xml:
-        name: CustodianTradeFileFormat
-      type: object
     OAS.WebApi.DTO.Settings.EntityOptionDto:
       properties:
         userDefineDataId:
@@ -2233,73 +2292,14 @@ components:
       xml:
         name: EntityOptionDto
       type: object
-    OAS.WebApi.DTO.Portfolio.FundFamilyWithErrorsDto:
+    OAS.WebApi.DTO.Interface.AdditionalColumnDefinition:
       properties:
-        status:
+        key:
           type: string
-        errorMessage:
+        value:
           type: string
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        isActive:
-          type: boolean
-        isAnnuity:
-          type: boolean
-        unitScale:
-          type: integer
-          format: int32
-        priceScale:
-          type: integer
-          format: int32
-        isShareClassSensitive:
-          type: boolean
-        isAcctNumUnique:
-          type: boolean
-        isDefault:
-          type: boolean
-        isCreateDistribution:
-          type: boolean
-        sungardBrokerId:
-          type: integer
-          format: int32
-        custComplexes:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustComplexDto'
-          xml:
-            name: CustComplexDto
-            wrapped: true
-          type: array
-        custodianTradeFileFormats:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CustodianTradeFileFormatDto'
-          xml:
-            name: CustodianTradeFileFormatDto
-            wrapped: true
-          type: array
-        userDefinedFields:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
-          xml:
-            name: EntityOptionDto
-            wrapped: true
-          type: array
-        entityOptions:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.FundFamilyEntityOptionDto'
-          xml:
-            name: FundFamilyEntityOptionDto
-            wrapped: true
-          type: array
       xml:
-        name: FundFamilyWithErrorsDto
+        name: AdditionalColumnDefinition
       type: object
   securitySchemes:
     Authorization:

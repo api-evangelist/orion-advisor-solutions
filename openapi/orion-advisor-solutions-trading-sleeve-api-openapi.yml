@@ -2436,53 +2436,19 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.WebApi.DTO.Trading.AccountSleeveAssetCategoryAllocationsDto:
+    OAS.WebApi.DTO.Trading.DeletedSleeveTargetDto:
       properties:
-        category:
-          type: string
-        value:
-          type: number
-          format: double
-        percent:
-          type: number
-          format: double
-      xml:
-        name: AccountSleeveAssetCategoryAllocationsDto
-      type: object
-    OAS.WebApi.DTO.Trading.SleeveNormalAcctBillingDto:
-      properties:
-        billFeeScheduleId:
+        accountId:
           type: integer
           format: int32
-        billFeeScheduleName:
-          type: string
-        billMasterPayoutScheduleId:
+        deletedModelId:
           type: integer
           format: int32
-        billMasterPayoutScheduleName:
-          type: string
-        recurringAdjustments:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BillRecurrentAdjustmentDto'
-          xml:
-            name: BillRecurrentAdjustmentDto
-            wrapped: true
-          type: array
+        targetModelId:
+          type: integer
+          format: int32
       xml:
-        name: SleeveNormalAcctBillingDto
-      type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
-      properties:
-        key:
-          readOnly: true
-          type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: KeyValuePair`2
+        name: DeletedSleeveTargetDto
       type: object
     OAS.WebApi.DTO.Trading.SleeveActionTransferDto:
       properties:
@@ -2502,6 +2468,62 @@ components:
           type: boolean
       xml:
         name: SleeveActionTransferDto
+      type: object
+    OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
+      description: import file DTO for validating imports
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+          description: the imported file
+      xml:
+        name: ValidateFileImportDto
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+    OAS.WebApi.DTO.Trading.AggregateModelSubstituteDto:
+      properties:
+        sleeveStrategyDetailId:
+          type: integer
+          format: int32
+        sleeveStrategyId:
+          type: integer
+          format: int32
+        aggregateModelId:
+          type: integer
+          format: int32
+        modelAggName:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+        isSubstitute:
+          type: boolean
+      xml:
+        name: AggregateModelSubstituteDto
+      type: object
+    OAS.WebApi.DTO.Trading.AccountSleeveAssetCategoryAllocationsDto:
+      properties:
+        category:
+          type: string
+        value:
+          type: number
+          format: double
+        percent:
+          type: number
+          format: double
+      xml:
+        name: AccountSleeveAssetCategoryAllocationsDto
       type: object
     OAS.WebApi.DTO.Portfolio.SystematicDto:
       properties:
@@ -2616,563 +2638,15 @@ components:
       xml:
         name: SystematicDto
       type: object
-    OAS.WebApi.DTO.Trading.RegistrationSleeveDto:
+    OAS.WebApi.DTO.Trading.RegistrationTradingInstructionsDto:
       properties:
         registrationId:
           type: integer
           format: int32
-        sleeveStrategyAggId:
-          type: integer
-          format: int32
-        sleeveStrategyId:
-          type: integer
-          format: int32
-        isActive:
-          type: boolean
-        isDoNotTrade:
-          type: boolean
-        custodialAccountNumber:
-          type: string
-        asOfDate:
-          type: string
-          format: date-time
-        eclipseFirmId:
-          type: integer
-          format: int32
-        tolerancePercent:
-          type: number
-          format: double
-        aggregateRiskScore:
-          type: number
-          format: double
-        registrationRiskTolerance:
-          type: integer
-          format: int32
-        contributionAllocationMethod:
-          type: string
-          enum:
-          - UseAssigned
-          - UseTarget
-          - UseOUB
-          - UseCurrent
-        distributionAllocationMethod:
-          type: string
-          enum:
-          - UseAssigned
-          - UseTarget
-          - UseOUB
-          - UseCurrent
-        corporateActionAllocationMethod:
-          type: string
-          enum:
-          - UseAssigned
-          - UseTarget
-          - UseOUB
-          - UseCurrent
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        autoRebalFrequency:
-          type: string
-          enum:
-          - None
-          - Monthly
-          - Quarterly
-          - Semiannual
-          - Annual
-        autoRebalMonth:
-          type: integer
-          format: int32
-        autoRebalDay:
-          type: integer
-          format: int32
-        mandate:
-          type: boolean
-        needsUpdate:
-          type: boolean
-        needsUpdateReason:
+        tradingInstructions:
           type: string
       xml:
-        name: RegistrationSleeveDto
-      type: object
-    OAS.WebApi.DTO.Trading.RegistrationSleeveFullDto:
-      properties:
-        accountSleeves:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountSleeveProcessDto'
-          xml:
-            name: AccountSleeveProcessDto
-            wrapped: true
-          type: array
-        custodialBilling:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveCustodialAcctBillingDto'
-        sleeveBilling:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveNormalAcctBillingDto'
-        excludedAssets:
-          items:
-            type: integer
-            format: int32
-          type: array
-        includedAssets:
-          items:
-            type: integer
-            format: int32
-          type: array
-        deletedSleeveTargets:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.DeletedSleeveTargetDto'
-          xml:
-            name: DeletedSleeveTargetDto
-            wrapped: true
-          type: array
-        clientId:
-          type: integer
-          format: int32
-        isPendingAccount:
-          type: boolean
-        registrationId:
-          type: integer
-          format: int32
-        sleeveStrategyAggId:
-          type: integer
-          format: int32
-        sleeveStrategyId:
-          type: integer
-          format: int32
-        isActive:
-          type: boolean
-        isDoNotTrade:
-          type: boolean
-        custodialAccountNumber:
-          type: string
-        asOfDate:
-          type: string
-          format: date-time
-        eclipseFirmId:
-          type: integer
-          format: int32
-        tolerancePercent:
-          type: number
-          format: double
-        aggregateRiskScore:
-          type: number
-          format: double
-        registrationRiskTolerance:
-          type: integer
-          format: int32
-        contributionAllocationMethod:
-          type: string
-          enum:
-          - UseAssigned
-          - UseTarget
-          - UseOUB
-          - UseCurrent
-        distributionAllocationMethod:
-          type: string
-          enum:
-          - UseAssigned
-          - UseTarget
-          - UseOUB
-          - UseCurrent
-        corporateActionAllocationMethod:
-          type: string
-          enum:
-          - UseAssigned
-          - UseTarget
-          - UseOUB
-          - UseCurrent
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        autoRebalFrequency:
-          type: string
-          enum:
-          - None
-          - Monthly
-          - Quarterly
-          - Semiannual
-          - Annual
-        autoRebalMonth:
-          type: integer
-          format: int32
-        autoRebalDay:
-          type: integer
-          format: int32
-        mandate:
-          type: boolean
-        needsUpdate:
-          type: boolean
-        needsUpdateReason:
-          type: string
-      xml:
-        name: RegistrationSleeveFullDto
-      type: object
-    OAS.WebApi.DTO.Trading.SleeveCustodialAcctBillingDto:
-      properties:
-        billFeeScheduleId:
-          type: integer
-          format: int32
-        billFeeScheduleName:
-          type: string
-        billMasterPayoutScheduleId:
-          type: integer
-          format: int32
-        billMasterPayoutScheduleName:
-          type: string
-        recurringAdjustments:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BillRecurrentAdjustmentDto'
-          xml:
-            name: BillRecurrentAdjustmentDto
-            wrapped: true
-          type: array
-      xml:
-        name: SleeveCustodialAcctBillingDto
-      type: object
-    OAS.WebApi.DTO.Trading.UpcomingSwpDataDto:
-      properties:
-        custodialAccountNumbers:
-          items:
-            type: string
-          type: array
-        upcomingSWP:
-          type: boolean
-      xml:
-        name: UpcomingSwpDataDto
-      type: object
-    OAS.WebApi.DTO.Trading.AgingCashBalancesDto:
-      properties:
-        status:
-          readOnly: true
-          type: string
-        lastZeroBalanceDate:
-          type: string
-          format: date-time
-        minTransactionDateSinceZeroBalance:
-          readOnly: true
-          type: string
-          format: date-time
-        ageInDays:
-          readOnly: true
-          type: integer
-          format: int32
-        accountId:
-          type: integer
-          format: int32
-        sleeveDescription:
-          type: string
-        targetAllocation:
-          type: number
-          format: double
-        currentAllocation:
-          type: number
-          format: double
-        currentValue:
-          type: number
-          format: double
-        contributionAllocation:
-          type: number
-          format: double
-        distributionAllocation:
-          type: number
-          format: double
-        corporateActionAllocation:
-          type: number
-          format: double
-        toleranceUpper:
-          type: number
-          format: double
-        toleranceLower:
-          type: number
-          format: double
-        sleeveType:
-          type: string
-          enum:
-          - Normal sleeve
-          - Custodial account
-          - Contribution sleeve
-          - Distribution sleeve
-          - Unmanaged sleeve
-        modelAgg:
-          type: string
-        managementStyle:
-          type: string
-        subAdvisor:
-          type: string
-        modelType:
-          type: string
-        registrationId:
-          type: integer
-          format: int32
-        subAdvisorId:
-          type: integer
-          format: int32
-        modelAggId:
-          type: integer
-          format: int32
-        managementStyleId:
-          type: integer
-          format: int32
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        targetBalanceType:
-          type: string
-          enum:
-          - Dollars
-          - Percent
-        doNotTrade:
-          type: boolean
-        riskScore:
-          type: number
-          format: double
-        regValue:
-          type: number
-          format: double
-        isCustomized:
-          type: boolean
-        sleeveStrategyDetailId:
-          type: integer
-          format: int32
-        sleeveStrategyId:
-          type: integer
-          format: int32
-        sleeveStrategy:
-          type: string
-        sleeveStrategyToleranceUpper:
-          type: number
-          format: double
-        sleeveStrategyToleranceLower:
-          type: number
-          format: double
-        modelAggExcludeRebalanceSleeve:
-          type: boolean
-        businessLine:
-          type: string
-        unitBalanceScale:
-          type: string
-        assets:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AssetDto'
-          xml:
-            name: AssetDto
-            wrapped: true
-          type: array
-        categoryAllocations:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountSleeveAssetCategoryAllocationsDto'
-          readOnly: true
-          xml:
-            name: AccountSleeveAssetCategoryAllocationsDto
-            wrapped: true
-          type: array
-      xml:
-        name: AgingCashBalancesDto
-      type: object
-    OAS.WebApi.DTO.Trading.AccountSleeveProcessDto:
-      properties:
-        modelAllocations:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelItemFullDto'
-          xml:
-            name: ModelItemFullDto
-            wrapped: true
-          type: array
-        sweepAssetId:
-          type: integer
-          format: int32
-        custodialBilling:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveCustodialAcctBillingDto'
-        sleeveBilling:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveNormalAcctBillingDto'
-        minimumCash:
-          type: number
-          format: double
-        replenishMinCash:
-          type: boolean
-        substitutes:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AggregateModelSubstituteDto'
-          xml:
-            name: AggregateModelSubstituteDto
-            wrapped: true
-          type: array
-        hasSMAModel:
-          type: boolean
-        modelAggType:
-          type: string
-          enum:
-          - Normal
-          - CustomIndex
-          - SelfDirected
-        minimumInvestmentAmount:
-          type: number
-          format: double
-        createdFromOciProcess:
-          type: boolean
-        accountId:
-          type: integer
-          format: int32
-        sleeveDescription:
-          type: string
-        targetAllocation:
-          type: number
-          format: double
-        currentAllocation:
-          type: number
-          format: double
-        currentValue:
-          type: number
-          format: double
-        contributionAllocation:
-          type: number
-          format: double
-        distributionAllocation:
-          type: number
-          format: double
-        corporateActionAllocation:
-          type: number
-          format: double
-        toleranceUpper:
-          type: number
-          format: double
-        toleranceLower:
-          type: number
-          format: double
-        sleeveType:
-          type: string
-          enum:
-          - Normal sleeve
-          - Custodial account
-          - Contribution sleeve
-          - Distribution sleeve
-          - Unmanaged sleeve
-        modelAgg:
-          type: string
-        managementStyle:
-          type: string
-        subAdvisor:
-          type: string
-        modelType:
-          type: string
-        registrationId:
-          type: integer
-          format: int32
-        subAdvisorId:
-          type: integer
-          format: int32
-        modelAggId:
-          type: integer
-          format: int32
-        managementStyleId:
-          type: integer
-          format: int32
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        targetBalanceType:
-          type: string
-          enum:
-          - Dollars
-          - Percent
-        doNotTrade:
-          type: boolean
-        riskScore:
-          type: number
-          format: double
-        regValue:
-          type: number
-          format: double
-        isCustomized:
-          type: boolean
-        sleeveStrategyDetailId:
-          type: integer
-          format: int32
-        sleeveStrategyId:
-          type: integer
-          format: int32
-        sleeveStrategy:
-          type: string
-        sleeveStrategyToleranceUpper:
-          type: number
-          format: double
-        sleeveStrategyToleranceLower:
-          type: number
-          format: double
-        modelAggExcludeRebalanceSleeve:
-          type: boolean
-        businessLine:
-          type: string
-        unitBalanceScale:
-          type: string
-        assets:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AssetDto'
-          xml:
-            name: AssetDto
-            wrapped: true
-          type: array
-        categoryAllocations:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountSleeveAssetCategoryAllocationsDto'
-          readOnly: true
-          xml:
-            name: AccountSleeveAssetCategoryAllocationsDto
-            wrapped: true
-          type: array
-      xml:
-        name: AccountSleeveProcessDto
-      type: object
-    OAS.WebApi.DTO.Trading.AggregateModelSubstituteDto:
-      properties:
-        sleeveStrategyDetailId:
-          type: integer
-          format: int32
-        sleeveStrategyId:
-          type: integer
-          format: int32
-        aggregateModelId:
-          type: integer
-          format: int32
-        modelAggName:
-          type: string
-        auditedDate:
-          type: string
-          format: date-time
-        auditedByDisplay:
-          type: string
-        isSubstitute:
-          type: boolean
-      xml:
-        name: AggregateModelSubstituteDto
+        name: RegistrationTradingInstructionsDto
       type: object
     OAS.WebApi.DTO.Trading.RegistrationSleeveHistoryDto:
       properties:
@@ -3240,146 +2714,6 @@ components:
           format: date-time
       xml:
         name: RegistrationSleeveHistoryDto
-      type: object
-    OAS.WebApi.DTO.Trading.RiskGuardrailValidationResponse:
-      properties:
-        successful:
-          type: boolean
-        message:
-          type: string
-      xml:
-        name: RiskGuardrailValidationResponse
-      type: object
-    OAS.WebApi.Domains.Trading.Sleeve.SleeveRegistrationResponseDto:
-      properties:
-        IsSuccess:
-          type: boolean
-        StatusMessage:
-          type: string
-        RowsUpdated:
-          type: integer
-          format: int32
-        AccountsUpdated:
-          type: integer
-          format: int32
-      xml:
-        name: SleeveRegistrationResponseDto
-      type: object
-    OAS.WebApi.DTO.Trading.ModelItemFullDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        productId:
-          type: integer
-          format: int32
-        productName:
-          type: string
-        productClass:
-          type: string
-        ticker:
-          type: string
-        targetPercent:
-          type: number
-          format: double
-        itemTol:
-          type: integer
-          format: int32
-        createdDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        itemTolUpper:
-          type: number
-          format: double
-        itemTolLower:
-          type: number
-          format: double
-        oub:
-          type: number
-          format: double
-        modelAggId:
-          type: integer
-          format: int32
-        productRiskScore:
-          type: integer
-          format: int32
-      xml:
-        name: ModelItemFullDto
-      type: object
-    OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
-      description: import file DTO for validating imports
-      properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-          description: the imported file
-      xml:
-        name: ValidateFileImportDto
-      type: object
-    OAS.WebApi.DTO.Trading.RegistrationTradingInstructionsDto:
-      properties:
-        registrationId:
-          type: integer
-          format: int32
-        tradingInstructions:
-          type: string
-      xml:
-        name: RegistrationTradingInstructionsDto
-      type: object
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
-      type: object
-    OAS.WebApi.DTO.Trading.RegistrationCheckDto:
-      description: A DTO used to inform the front-end of any issues pertaining to a given Registration.
-      properties:
-        promptToSplit:
-          description: 'If <see langword="true" />, causes the front-end to prompt the user
-
-            "Would you like to create separate registrations for each account so it can be sleeved?"'
-          type: boolean
-        message:
-          description: The message to display to the user relating to the error or warning.
-          type: string
-        id:
-          description: The ID of the Registration being validated.
-          type: integer
-          format: int32
-        regName:
-          description: The name of the Registration being validated.
-          type: string
-        isError:
-          description: When set to <see langword="true" />, the user is not able to process the sleeves.
-          type: boolean
-        isWarning:
-          type: boolean
-        alwaysLoadSleeves:
-          description: 'When {OAS.WebApi.DTO.Trading.RegistrationCheckDto.AlwaysLoadSleeves} and {OAS.WebApi.DTO.Trading.RegistrationCheckDto.IsError} are both <see langword="true" /> the
-
-            front-end should always load any sleeves associated with the Registration.'
-          type: boolean
-        sleeveStrategyAggId:
-          description: The ID of the Sleeve Strategy Agg being assigned to the Registration.
-          type: integer
-          format: int32
-        sleeveStrategyAggName:
-          description: The name of the Sleeve Strategy Agg being assigned to the Registration.
-          type: string
-      xml:
-        name: RegistrationCheckDto
       type: object
     OAS.WebApi.DTO.Portfolio.AssetDto:
       properties:
@@ -3730,261 +3064,68 @@ components:
       xml:
         name: AssetDto
       type: object
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
-      type: object
-    OAS.WebApi.DTO.Trading.AccountSleeveDto:
-      properties:
-        accountId:
-          type: integer
-          format: int32
-        sleeveDescription:
-          type: string
-        targetAllocation:
-          type: number
-          format: double
-        currentAllocation:
-          type: number
-          format: double
-        currentValue:
-          type: number
-          format: double
-        contributionAllocation:
-          type: number
-          format: double
-        distributionAllocation:
-          type: number
-          format: double
-        corporateActionAllocation:
-          type: number
-          format: double
-        toleranceUpper:
-          type: number
-          format: double
-        toleranceLower:
-          type: number
-          format: double
-        sleeveType:
-          type: string
-          enum:
-          - Normal sleeve
-          - Custodial account
-          - Contribution sleeve
-          - Distribution sleeve
-          - Unmanaged sleeve
-        modelAgg:
-          type: string
-        managementStyle:
-          type: string
-        subAdvisor:
-          type: string
-        modelType:
-          type: string
-        registrationId:
-          type: integer
-          format: int32
-        subAdvisorId:
-          type: integer
-          format: int32
-        modelAggId:
-          type: integer
-          format: int32
-        managementStyleId:
-          type: integer
-          format: int32
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        targetBalanceType:
-          type: string
-          enum:
-          - Dollars
-          - Percent
-        doNotTrade:
-          type: boolean
-        riskScore:
-          type: number
-          format: double
-        regValue:
-          type: number
-          format: double
-        isCustomized:
-          type: boolean
-        sleeveStrategyDetailId:
-          type: integer
-          format: int32
-        sleeveStrategyId:
-          type: integer
-          format: int32
-        sleeveStrategy:
-          type: string
-        sleeveStrategyToleranceUpper:
-          type: number
-          format: double
-        sleeveStrategyToleranceLower:
-          type: number
-          format: double
-        modelAggExcludeRebalanceSleeve:
-          type: boolean
-        businessLine:
-          type: string
-        unitBalanceScale:
-          type: string
-        assets:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AssetDto'
-          xml:
-            name: AssetDto
-            wrapped: true
-          type: array
-        categoryAllocations:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountSleeveAssetCategoryAllocationsDto'
-          readOnly: true
-          xml:
-            name: AccountSleeveAssetCategoryAllocationsDto
-            wrapped: true
-          type: array
-      xml:
-        name: AccountSleeveDto
-      type: object
-    OAS.WebApi.DTO.Trading.CarsonProcessAccount:
-      properties:
-        accountId:
-          type: integer
-          format: int32
-        feeScheduleId:
-          type: integer
-          format: int32
-        masterPayoutScheduleId:
-          type: integer
-          format: int32
-        managementStyleId:
-          type: integer
-          format: int32
-        modelAggId:
-          type: integer
-          format: int32
-        aumType:
-          type: string
-        businessType:
-          type: string
-        secMgrNum:
-          type: string
-        modelType:
-          type: string
-      xml:
-        name: CarsonProcessAccount
-      type: object
-    OAS.WebApi.DTO.Trading.AccountSleeveHistoryDto:
+    OAS.WebApi.DTO.Trading.ModelItemFullDto:
       properties:
         id:
           type: integer
           format: int32
-        changeType:
-          type: string
-        accountId:
+        productId:
           type: integer
           format: int32
-        accountNumber:
+        productName:
           type: string
-        modelAggId:
+        productClass:
+          type: string
+        ticker:
+          type: string
+        targetPercent:
+          type: number
+          format: double
+        itemTol:
           type: integer
           format: int32
-        modelName:
+        createdDate:
           type: string
-        targetAllocation:
-          type: number
-          format: double
-        contributionAllocation:
-          type: number
-          format: double
-        distributionAllocation:
-          type: number
-          format: double
-        corporateActionAllocation:
-          type: number
-          format: double
-        toleranceUpper:
-          type: number
-          format: double
-        toleranceLower:
-          type: number
-          format: double
-        editedBy:
+          format: date-time
+        createdBy:
           type: string
         editedDate:
           type: string
           format: date-time
-        sleeveType:
+        editedBy:
           type: string
-          enum:
-          - Normal sleeve
-          - Custodial account
-          - Contribution sleeve
-          - Distribution sleeve
-          - Unmanaged sleeve
-        autoTradeTypes:
-          type: string
-          enum:
-          - None
-          - RegistrationRebalance
-          - SleeveRebalance
-          - ContributionAllocation
-          - TransferInRebalance
-        autoTradeRequested:
-          type: string
-          format: date-time
-        autoTradeRequestedBy:
-          type: string
-        autoTradeProcessed:
-          type: string
-          format: date-time
-        suspendAutoContribUntil:
-          type: string
-          format: date-time
-        targetBalanceType:
-          type: string
-          enum:
-          - Dollars
-          - Percent
-        doNotTrade:
-          type: boolean
-        sleeveStrategyToleranceUpper:
+        itemTolUpper:
           type: number
           format: double
-        sleeveStrategyToleranceLower:
+        itemTolLower:
           type: number
           format: double
-      xml:
-        name: AccountSleeveHistoryDto
-      type: object
-    OAS.WebApi.DTO.Trading.RegistrationSleeveIsDoNotTradeDto:
-      properties:
-        registrationId:
+        oub:
+          type: number
+          format: double
+        modelAggId:
           type: integer
           format: int32
-        isDoNotTrade:
-          type: boolean
+        productRiskScore:
+          type: integer
+          format: int32
       xml:
-        name: RegistrationSleeveIsDoNotTradeDto
+        name: ModelItemFullDto
+      type: object
+    OAS.WebApi.Domains.Trading.Sleeve.SleeveRegistrationResponseDto:
+      properties:
+        IsSuccess:
+          type: boolean
+        StatusMessage:
+          type: string
+        RowsUpdated:
+          type: integer
+          format: int32
+        AccountsUpdated:
+          type: integer
+          format: int32
+      xml:
+        name: SleeveRegistrationResponseDto
       type: object
     OAS.WebApi.DTO.Trading.RegistrationSleeveFullValidationDto:
       properties:
@@ -4117,6 +3258,19 @@ components:
       xml:
         name: RegistrationSleeveFullValidationDto
       type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
     OAS.WebApi.DTO.Portfolio.BillRecurrentAdjustmentDto:
       properties:
         id:
@@ -4146,6 +3300,722 @@ components:
       xml:
         name: BillRecurrentAdjustmentDto
       type: object
+    OAS.WebApi.DTO.Trading.RegistrationSleeveIsDoNotTradeDto:
+      properties:
+        registrationId:
+          type: integer
+          format: int32
+        isDoNotTrade:
+          type: boolean
+      xml:
+        name: RegistrationSleeveIsDoNotTradeDto
+      type: object
+    OAS.WebApi.DTO.Trading.RegistrationSleeveDto:
+      properties:
+        registrationId:
+          type: integer
+          format: int32
+        sleeveStrategyAggId:
+          type: integer
+          format: int32
+        sleeveStrategyId:
+          type: integer
+          format: int32
+        isActive:
+          type: boolean
+        isDoNotTrade:
+          type: boolean
+        custodialAccountNumber:
+          type: string
+        asOfDate:
+          type: string
+          format: date-time
+        eclipseFirmId:
+          type: integer
+          format: int32
+        tolerancePercent:
+          type: number
+          format: double
+        aggregateRiskScore:
+          type: number
+          format: double
+        registrationRiskTolerance:
+          type: integer
+          format: int32
+        contributionAllocationMethod:
+          type: string
+          enum:
+          - UseAssigned
+          - UseTarget
+          - UseOUB
+          - UseCurrent
+        distributionAllocationMethod:
+          type: string
+          enum:
+          - UseAssigned
+          - UseTarget
+          - UseOUB
+          - UseCurrent
+        corporateActionAllocationMethod:
+          type: string
+          enum:
+          - UseAssigned
+          - UseTarget
+          - UseOUB
+          - UseCurrent
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        autoRebalFrequency:
+          type: string
+          enum:
+          - None
+          - Monthly
+          - Quarterly
+          - Semiannual
+          - Annual
+        autoRebalMonth:
+          type: integer
+          format: int32
+        autoRebalDay:
+          type: integer
+          format: int32
+        mandate:
+          type: boolean
+        needsUpdate:
+          type: boolean
+        needsUpdateReason:
+          type: string
+      xml:
+        name: RegistrationSleeveDto
+      type: object
+    OAS.WebApi.DTO.Trading.AccountSleeveHistoryDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        changeType:
+          type: string
+        accountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        modelAggId:
+          type: integer
+          format: int32
+        modelName:
+          type: string
+        targetAllocation:
+          type: number
+          format: double
+        contributionAllocation:
+          type: number
+          format: double
+        distributionAllocation:
+          type: number
+          format: double
+        corporateActionAllocation:
+          type: number
+          format: double
+        toleranceUpper:
+          type: number
+          format: double
+        toleranceLower:
+          type: number
+          format: double
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        sleeveType:
+          type: string
+          enum:
+          - Normal sleeve
+          - Custodial account
+          - Contribution sleeve
+          - Distribution sleeve
+          - Unmanaged sleeve
+        autoTradeTypes:
+          type: string
+          enum:
+          - None
+          - RegistrationRebalance
+          - SleeveRebalance
+          - ContributionAllocation
+          - TransferInRebalance
+        autoTradeRequested:
+          type: string
+          format: date-time
+        autoTradeRequestedBy:
+          type: string
+        autoTradeProcessed:
+          type: string
+          format: date-time
+        suspendAutoContribUntil:
+          type: string
+          format: date-time
+        targetBalanceType:
+          type: string
+          enum:
+          - Dollars
+          - Percent
+        doNotTrade:
+          type: boolean
+        sleeveStrategyToleranceUpper:
+          type: number
+          format: double
+        sleeveStrategyToleranceLower:
+          type: number
+          format: double
+      xml:
+        name: AccountSleeveHistoryDto
+      type: object
+    OAS.WebApi.DTO.Trading.UpcomingSwpDataDto:
+      properties:
+        custodialAccountNumbers:
+          items:
+            type: string
+          type: array
+        upcomingSWP:
+          type: boolean
+      xml:
+        name: UpcomingSwpDataDto
+      type: object
+    OAS.WebApi.DTO.Trading.AgingCashBalancesDto:
+      properties:
+        status:
+          readOnly: true
+          type: string
+        lastZeroBalanceDate:
+          type: string
+          format: date-time
+        minTransactionDateSinceZeroBalance:
+          readOnly: true
+          type: string
+          format: date-time
+        ageInDays:
+          readOnly: true
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        sleeveDescription:
+          type: string
+        targetAllocation:
+          type: number
+          format: double
+        currentAllocation:
+          type: number
+          format: double
+        currentValue:
+          type: number
+          format: double
+        contributionAllocation:
+          type: number
+          format: double
+        distributionAllocation:
+          type: number
+          format: double
+        corporateActionAllocation:
+          type: number
+          format: double
+        toleranceUpper:
+          type: number
+          format: double
+        toleranceLower:
+          type: number
+          format: double
+        sleeveType:
+          type: string
+          enum:
+          - Normal sleeve
+          - Custodial account
+          - Contribution sleeve
+          - Distribution sleeve
+          - Unmanaged sleeve
+        modelAgg:
+          type: string
+        managementStyle:
+          type: string
+        subAdvisor:
+          type: string
+        modelType:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        subAdvisorId:
+          type: integer
+          format: int32
+        modelAggId:
+          type: integer
+          format: int32
+        managementStyleId:
+          type: integer
+          format: int32
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        targetBalanceType:
+          type: string
+          enum:
+          - Dollars
+          - Percent
+        doNotTrade:
+          type: boolean
+        riskScore:
+          type: number
+          format: double
+        regValue:
+          type: number
+          format: double
+        isCustomized:
+          type: boolean
+        sleeveStrategyDetailId:
+          type: integer
+          format: int32
+        sleeveStrategyId:
+          type: integer
+          format: int32
+        sleeveStrategy:
+          type: string
+        sleeveStrategyToleranceUpper:
+          type: number
+          format: double
+        sleeveStrategyToleranceLower:
+          type: number
+          format: double
+        modelAggExcludeRebalanceSleeve:
+          type: boolean
+        businessLine:
+          type: string
+        unitBalanceScale:
+          type: string
+        assets:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AssetDto'
+          xml:
+            name: AssetDto
+            wrapped: true
+          type: array
+        categoryAllocations:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountSleeveAssetCategoryAllocationsDto'
+          readOnly: true
+          xml:
+            name: AccountSleeveAssetCategoryAllocationsDto
+            wrapped: true
+          type: array
+      xml:
+        name: AgingCashBalancesDto
+      type: object
+    OAS.WebApi.DTO.Trading.RegistrationCheckDto:
+      description: A DTO used to inform the front-end of any issues pertaining to a given Registration.
+      properties:
+        promptToSplit:
+          description: 'If <see langword="true" />, causes the front-end to prompt the user
+
+            "Would you like to create separate registrations for each account so it can be sleeved?"'
+          type: boolean
+        message:
+          description: The message to display to the user relating to the error or warning.
+          type: string
+        id:
+          description: The ID of the Registration being validated.
+          type: integer
+          format: int32
+        regName:
+          description: The name of the Registration being validated.
+          type: string
+        isError:
+          description: When set to <see langword="true" />, the user is not able to process the sleeves.
+          type: boolean
+        isWarning:
+          type: boolean
+        alwaysLoadSleeves:
+          description: 'When {OAS.WebApi.DTO.Trading.RegistrationCheckDto.AlwaysLoadSleeves} and {OAS.WebApi.DTO.Trading.RegistrationCheckDto.IsError} are both <see langword="true" /> the
+
+            front-end should always load any sleeves associated with the Registration.'
+          type: boolean
+        sleeveStrategyAggId:
+          description: The ID of the Sleeve Strategy Agg being assigned to the Registration.
+          type: integer
+          format: int32
+        sleeveStrategyAggName:
+          description: The name of the Sleeve Strategy Agg being assigned to the Registration.
+          type: string
+      xml:
+        name: RegistrationCheckDto
+      type: object
+    OAS.WebApi.DTO.Trading.SleeveCustodialAcctBillingDto:
+      properties:
+        billFeeScheduleId:
+          type: integer
+          format: int32
+        billFeeScheduleName:
+          type: string
+        billMasterPayoutScheduleId:
+          type: integer
+          format: int32
+        billMasterPayoutScheduleName:
+          type: string
+        recurringAdjustments:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BillRecurrentAdjustmentDto'
+          xml:
+            name: BillRecurrentAdjustmentDto
+            wrapped: true
+          type: array
+      xml:
+        name: SleeveCustodialAcctBillingDto
+      type: object
+    OAS.WebApi.DTO.Trading.RegistrationSleeveFullDto:
+      properties:
+        accountSleeves:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountSleeveProcessDto'
+          xml:
+            name: AccountSleeveProcessDto
+            wrapped: true
+          type: array
+        custodialBilling:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveCustodialAcctBillingDto'
+        sleeveBilling:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveNormalAcctBillingDto'
+        excludedAssets:
+          items:
+            type: integer
+            format: int32
+          type: array
+        includedAssets:
+          items:
+            type: integer
+            format: int32
+          type: array
+        deletedSleeveTargets:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.DeletedSleeveTargetDto'
+          xml:
+            name: DeletedSleeveTargetDto
+            wrapped: true
+          type: array
+        clientId:
+          type: integer
+          format: int32
+        isPendingAccount:
+          type: boolean
+        registrationId:
+          type: integer
+          format: int32
+        sleeveStrategyAggId:
+          type: integer
+          format: int32
+        sleeveStrategyId:
+          type: integer
+          format: int32
+        isActive:
+          type: boolean
+        isDoNotTrade:
+          type: boolean
+        custodialAccountNumber:
+          type: string
+        asOfDate:
+          type: string
+          format: date-time
+        eclipseFirmId:
+          type: integer
+          format: int32
+        tolerancePercent:
+          type: number
+          format: double
+        aggregateRiskScore:
+          type: number
+          format: double
+        registrationRiskTolerance:
+          type: integer
+          format: int32
+        contributionAllocationMethod:
+          type: string
+          enum:
+          - UseAssigned
+          - UseTarget
+          - UseOUB
+          - UseCurrent
+        distributionAllocationMethod:
+          type: string
+          enum:
+          - UseAssigned
+          - UseTarget
+          - UseOUB
+          - UseCurrent
+        corporateActionAllocationMethod:
+          type: string
+          enum:
+          - UseAssigned
+          - UseTarget
+          - UseOUB
+          - UseCurrent
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        autoRebalFrequency:
+          type: string
+          enum:
+          - None
+          - Monthly
+          - Quarterly
+          - Semiannual
+          - Annual
+        autoRebalMonth:
+          type: integer
+          format: int32
+        autoRebalDay:
+          type: integer
+          format: int32
+        mandate:
+          type: boolean
+        needsUpdate:
+          type: boolean
+        needsUpdateReason:
+          type: string
+      xml:
+        name: RegistrationSleeveFullDto
+      type: object
+    OAS.WebApi.DTO.Trading.SleeveNormalAcctBillingDto:
+      properties:
+        billFeeScheduleId:
+          type: integer
+          format: int32
+        billFeeScheduleName:
+          type: string
+        billMasterPayoutScheduleId:
+          type: integer
+          format: int32
+        billMasterPayoutScheduleName:
+          type: string
+        recurringAdjustments:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BillRecurrentAdjustmentDto'
+          xml:
+            name: BillRecurrentAdjustmentDto
+            wrapped: true
+          type: array
+      xml:
+        name: SleeveNormalAcctBillingDto
+      type: object
+    OAS.WebApi.DTO.Trading.CarsonProcessAccount:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        feeScheduleId:
+          type: integer
+          format: int32
+        masterPayoutScheduleId:
+          type: integer
+          format: int32
+        managementStyleId:
+          type: integer
+          format: int32
+        modelAggId:
+          type: integer
+          format: int32
+        aumType:
+          type: string
+        businessType:
+          type: string
+        secMgrNum:
+          type: string
+        modelType:
+          type: string
+      xml:
+        name: CarsonProcessAccount
+      type: object
+    OAS.WebApi.DTO.Trading.AccountSleeveProcessDto:
+      properties:
+        modelAllocations:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelItemFullDto'
+          xml:
+            name: ModelItemFullDto
+            wrapped: true
+          type: array
+        sweepAssetId:
+          type: integer
+          format: int32
+        custodialBilling:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveCustodialAcctBillingDto'
+        sleeveBilling:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.SleeveNormalAcctBillingDto'
+        minimumCash:
+          type: number
+          format: double
+        replenishMinCash:
+          type: boolean
+        substitutes:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AggregateModelSubstituteDto'
+          xml:
+            name: AggregateModelSubstituteDto
+            wrapped: true
+          type: array
+        hasSMAModel:
+          type: boolean
+        modelAggType:
+          type: string
+          enum:
+          - Normal
+          - CustomIndex
+          - SelfDirected
+        minimumInvestmentAmount:
+          type: number
+          format: double
+        createdFromOciProcess:
+          type: boolean
+        accountId:
+          type: integer
+          format: int32
+        sleeveDescription:
+          type: string
+        targetAllocation:
+          type: number
+          format: double
+        currentAllocation:
+          type: number
+          format: double
+        currentValue:
+          type: number
+          format: double
+        contributionAllocation:
+          type: number
+          format: double
+        distributionAllocation:
+          type: number
+          format: double
+        corporateActionAllocation:
+          type: number
+          format: double
+        toleranceUpper:
+          type: number
+          format: double
+        toleranceLower:
+          type: number
+          format: double
+        sleeveType:
+          type: string
+          enum:
+          - Normal sleeve
+          - Custodial account
+          - Contribution sleeve
+          - Distribution sleeve
+          - Unmanaged sleeve
+        modelAgg:
+          type: string
+        managementStyle:
+          type: string
+        subAdvisor:
+          type: string
+        modelType:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        subAdvisorId:
+          type: integer
+          format: int32
+        modelAggId:
+          type: integer
+          format: int32
+        managementStyleId:
+          type: integer
+          format: int32
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        targetBalanceType:
+          type: string
+          enum:
+          - Dollars
+          - Percent
+        doNotTrade:
+          type: boolean
+        riskScore:
+          type: number
+          format: double
+        regValue:
+          type: number
+          format: double
+        isCustomized:
+          type: boolean
+        sleeveStrategyDetailId:
+          type: integer
+          format: int32
+        sleeveStrategyId:
+          type: integer
+          format: int32
+        sleeveStrategy:
+          type: string
+        sleeveStrategyToleranceUpper:
+          type: number
+          format: double
+        sleeveStrategyToleranceLower:
+          type: number
+          format: double
+        modelAggExcludeRebalanceSleeve:
+          type: boolean
+        businessLine:
+          type: string
+        unitBalanceScale:
+          type: string
+        assets:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AssetDto'
+          xml:
+            name: AssetDto
+            wrapped: true
+          type: array
+        categoryAllocations:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountSleeveAssetCategoryAllocationsDto'
+          readOnly: true
+          xml:
+            name: AccountSleeveAssetCategoryAllocationsDto
+            wrapped: true
+          type: array
+      xml:
+        name: AccountSleeveProcessDto
+      type: object
     OAS.WebApi.DTO.Trading.CarsonProcessSleevesDto:
       properties:
         registrationId:
@@ -4163,19 +4033,149 @@ components:
       xml:
         name: CarsonProcessSleevesDto
       type: object
-    OAS.WebApi.DTO.Trading.DeletedSleeveTargetDto:
+    OAS.WebApi.DTO.Trading.AccountSleeveDto:
       properties:
         accountId:
           type: integer
           format: int32
-        deletedModelId:
+        sleeveDescription:
+          type: string
+        targetAllocation:
+          type: number
+          format: double
+        currentAllocation:
+          type: number
+          format: double
+        currentValue:
+          type: number
+          format: double
+        contributionAllocation:
+          type: number
+          format: double
+        distributionAllocation:
+          type: number
+          format: double
+        corporateActionAllocation:
+          type: number
+          format: double
+        toleranceUpper:
+          type: number
+          format: double
+        toleranceLower:
+          type: number
+          format: double
+        sleeveType:
+          type: string
+          enum:
+          - Normal sleeve
+          - Custodial account
+          - Contribution sleeve
+          - Distribution sleeve
+          - Unmanaged sleeve
+        modelAgg:
+          type: string
+        managementStyle:
+          type: string
+        subAdvisor:
+          type: string
+        modelType:
+          type: string
+        registrationId:
           type: integer
           format: int32
-        targetModelId:
+        subAdvisorId:
           type: integer
           format: int32
+        modelAggId:
+          type: integer
+          format: int32
+        managementStyleId:
+          type: integer
+          format: int32
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        targetBalanceType:
+          type: string
+          enum:
+          - Dollars
+          - Percent
+        doNotTrade:
+          type: boolean
+        riskScore:
+          type: number
+          format: double
+        regValue:
+          type: number
+          format: double
+        isCustomized:
+          type: boolean
+        sleeveStrategyDetailId:
+          type: integer
+          format: int32
+        sleeveStrategyId:
+          type: integer
+          format: int32
+        sleeveStrategy:
+          type: string
+        sleeveStrategyToleranceUpper:
+          type: number
+          format: double
+        sleeveStrategyToleranceLower:
+          type: number
+          format: double
+        modelAggExcludeRebalanceSleeve:
+          type: boolean
+        businessLine:
+          type: string
+        unitBalanceScale:
+          type: string
+        assets:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.AssetDto'
+          xml:
+            name: AssetDto
+            wrapped: true
+          type: array
+        categoryAllocations:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.AccountSleeveAssetCategoryAllocationsDto'
+          readOnly: true
+          xml:
+            name: AccountSleeveAssetCategoryAllocationsDto
+            wrapped: true
+          type: array
       xml:
-        name: DeletedSleeveTargetDto
+        name: AccountSleeveDto
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    OAS.WebApi.DTO.Trading.RiskGuardrailValidationResponse:
+      properties:
+        successful:
+          type: boolean
+        message:
+          type: string
+      xml:
+        name: RiskGuardrailValidationResponse
       type: object
     OAS.WebApi.DTO.Trading.RiskGuardrailValidationConfiguration:
       properties:

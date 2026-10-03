@@ -123,38 +123,17 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.WebApi.DTO.Confirm.Recon.SyncDashboardDetailDto:
+    OAS.WebApi.DTO.Confirm.Recon.SyncDashboardDto:
       properties:
-        analystLoginUserId:
+        summaryDate:
           type: string
-        serviceTeamName:
-          type: string
-        databaseName:
-          type: string
-        downloadSourceName:
-          type: string
-        groupErrorCount:
-          type: integer
-          format: int32
+          format: date-time
+        groups:
+          additionalProperties:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncDashboardGroupDto'
+          type: object
       xml:
-        name: SyncDashboardDetailDto
-      type: object
-    OAS.WebApi.DTO.Confirm.Recon.SyncDashboardGroupDto:
-      properties:
-        description:
-          type: string
-        errorCount:
-          type: integer
-          format: int32
-        details:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncDashboardDetailDto'
-          xml:
-            name: SyncDashboardDetailDto
-            wrapped: true
-          type: array
-      xml:
-        name: SyncDashboardGroupDto
+        name: SyncDashboardDto
       type: object
     OAS.WebApi.DTO.Confirm.Recon.SyncCountsDto:
       properties:
@@ -179,17 +158,38 @@ components:
       xml:
         name: SyncCountsDto
       type: object
-    OAS.WebApi.DTO.Confirm.Recon.SyncDashboardDto:
+    OAS.WebApi.DTO.Confirm.Recon.SyncDashboardGroupDto:
       properties:
-        summaryDate:
+        description:
           type: string
-          format: date-time
-        groups:
-          additionalProperties:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncDashboardGroupDto'
-          type: object
+        errorCount:
+          type: integer
+          format: int32
+        details:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.Recon.SyncDashboardDetailDto'
+          xml:
+            name: SyncDashboardDetailDto
+            wrapped: true
+          type: array
       xml:
-        name: SyncDashboardDto
+        name: SyncDashboardGroupDto
+      type: object
+    OAS.WebApi.DTO.Confirm.Recon.SyncDashboardDetailDto:
+      properties:
+        analystLoginUserId:
+          type: string
+        serviceTeamName:
+          type: string
+        databaseName:
+          type: string
+        downloadSourceName:
+          type: string
+        groupErrorCount:
+          type: integer
+          format: int32
+      xml:
+        name: SyncDashboardDetailDto
       type: object
   securitySchemes:
     Authorization:

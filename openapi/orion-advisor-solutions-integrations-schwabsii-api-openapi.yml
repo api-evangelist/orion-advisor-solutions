@@ -1104,54 +1104,50 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAT.Integrations.Schwab.SII.Dto.Document:
+    OAT.Integrations.Schwab.SII.Dto.Holder:
       properties:
-        accountId:
+        role:
+          type: string
+        beneficiaryAssetPercentage:
+          type: string
+        id:
           type: integer
           format: int32
-        preparedByDate:
-          type: string
-          format: date-time
-        reportId:
-          type: string
-        reportName:
-          type: string
-        reportType:
-          type: string
-        reportDescription:
+        name:
           type: string
       xml:
-        name: Document
+        name: Holder
       type: object
-    OAT.Integrations.Schwab.SII.Dto.SchwabRestRealizedGainLossResponse:
+    OAT.Integrations.Schwab.SII.Dto.Lotdetail:
       properties:
-        summary:
-          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.RealizedGainLossSummary'
-        transactionList:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.RealizedGainLossTransactionlist'
-          xml:
-            name: RealizedGainLossTransactionlist
-            wrapped: true
-          type: array
-        actualResponseCount:
-          type: integer
-          format: int32
-        totalCount:
-          type: integer
-          format: int32
-        nextRowId:
-          type: integer
-          format: int32
-        errors:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.error'
-          xml:
-            name: error
-            wrapped: true
-          type: array
+        adjustedCostBasis:
+          type: string
+        adjustedCostPerShare:
+          type: string
+        adjustedUnrealizedGainLossDollar:
+          type: string
+        adjustedUnrealizedGainLossPercent:
+          type: string
+        costBasis:
+          type: string
+        costPerShare:
+          type: string
+        currentPrice:
+          type: string
+        todaysChangeInPriceDollar:
+          type: string
+        todaysChangeInPricePercent:
+          type: string
+        todaysChangeInValueDollar:
+          type: string
+        todaysChangeInValuePercent:
+          type: string
+        unrealizedGainLossDollar:
+          type: string
+        unrealizedGainLossPercent:
+          type: string
       xml:
-        name: SchwabRestRealizedGainLossResponse
+        name: Lotdetail
       type: object
     OAT.Integrations.Schwab.SII.Dto.SchwabSIIEnrollmentStatusDto:
       properties:
@@ -1174,67 +1170,60 @@ components:
       xml:
         name: SchwabSIIEnrollmentStatusDto
       type: object
-    OAT.Integrations.Schwab.SII.Dto.SchwabSIICostBasicPreferencesResponse:
+    OAT.Integrations.Schwab.SII.Dto.SchwabRestTransactionResponse:
       properties:
-        accountPreferences:
-          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.AccountPreferences'
-        actualResponseCount:
-          type: integer
-          format: int32
-        totalCount:
-          type: integer
-          format: int32
-        nextRowId:
-          type: integer
-          format: int32
-        errors:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.error'
-          xml:
-            name: error
-            wrapped: true
-          type: array
+        transactionsResponse:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Transactionsresponse'
       xml:
-        name: SchwabSIICostBasicPreferencesResponse
+        name: SchwabRestTransactionResponse
       type: object
-    OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto:
+    OAT.Integrations.Schwab.SII.Dto.SchwabSIIEnrollmentRequestDto:
       properties:
-        partnerAppId:
-          description: The unique ID of the partner app.
-          type: integer
-          format: int32
-        productName:
-          description: The unique name of the partner app product.
+        url:
+          type: string
+        sourceData:
+          type: string
+        digitalSignature:
           type: string
       xml:
-        name: BasicIntegrationConfigDto
+        name: SchwabSIIEnrollmentRequestDto
       type: object
-    OAT.Integrations.Schwab.SII.Dto.SchwabRestProfilesResponse:
+    OAS.Integrations.SchwabV2.User_Authorizations.SchwabUAData:
       properties:
-        profiles:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestProfileResponse'
-          xml:
-            name: SchwabRestProfileResponse
-            wrapped: true
-          type: array
+        id:
+          type: string
+        type:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/OAS.Integrations.SchwabV2.User_Authorizations.SchwabUAAttributes'
       xml:
-        name: SchwabRestProfilesResponse
+        name: SchwabUAData
       type: object
-    OAT.Integrations.Schwab.SII.Dto.UnRealizedSummary:
+    OAT.Integrations.Schwab.SII.Dto.SchwabRestReportRequest:
       properties:
         accountId:
+          type: integer
+          format: int32
+        startRow:
+          type: integer
+          format: int32
+        maxRows:
+          type: integer
+          format: int32
+        startDate:
+          type: integer
+          format: int32
+        endDate:
+          type: integer
+          format: int32
+        reportType:
           type: string
-        totalKnownCostBasis:
+        reportName:
           type: string
-        totalKnownMarketValue:
-          type: string
-        totalKnownUnrealizedGainLossDollar:
-          type: string
-        totalKnownUnrealizedGainLossPercent:
+        reportId:
           type: string
       xml:
-        name: UnRealizedSummary
+        name: SchwabRestReportRequest
       type: object
     OAT.Integrations.Schwab.SII.Dto.SchwabRestUnrealizedGainLossDetailResponse:
       properties:
@@ -1270,41 +1259,28 @@ components:
       xml:
         name: SchwabRestUnrealizedGainLossDetailResponse
       type: object
-    OAT.Integrations.Schwab.SII.Dto.RealizedGainLossLotdetail:
+    OAT.Integrations.Schwab.SII.Dto.SchwabSIICostBasicPreferencesResponse:
       properties:
-        adjustedCostBasis:
-          type: string
-        adjustedCostPerShare:
-          type: string
-        adjustedDisallowedLossW:
-          type: string
-        adjustedRealizedGainLossDollar:
-          type: string
-        adjustedRealizedGainLossPercent:
-          type: string
-        costBasis:
-          type: string
-        costPerShare:
-          type: string
-        disallowedLossW:
-          type: string
-        holdingPeriod:
-          type: string
-        proceedsPerShare:
-          type: string
-        realizedGainLossDollar:
-          type: string
-        realizedGainLossPercent:
-          type: string
+        accountPreferences:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.AccountPreferences'
+        actualResponseCount:
+          type: integer
+          format: int32
+        totalCount:
+          type: integer
+          format: int32
+        nextRowId:
+          type: integer
+          format: int32
+        errors:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.error'
+          xml:
+            name: error
+            wrapped: true
+          type: array
       xml:
-        name: RealizedGainLossLotdetail
-      type: object
-    OAT.Integrations.Schwab.SII.Dto.SchwabRestTransDetailResponse:
-      properties:
-        transactionDetail:
-          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Transactiondetail'
-      xml:
-        name: SchwabRestTransDetailResponse
+        name: SchwabSIICostBasicPreferencesResponse
       type: object
     OAT.Integrations.Schwab.SII.Dto.AccountPreferencesSummary:
       properties:
@@ -1325,78 +1301,36 @@ components:
       xml:
         name: AccountPreferencesSummary
       type: object
-    OAT.Integrations.Schwab.SII.Dto.UnrealizedLotPosition:
+    OAT.Integrations.Schwab.SII.Dto.RealizedGainLossTransactionlotlist:
       properties:
-        lots:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.UnrealizedLotDetailLot'
-          xml:
-            name: UnrealizedLotDetailLot
-            wrapped: true
-          type: array
-        positionId:
+        acquiredOrOpened:
+          type: string
+        costBasis:
+          type: string
+        longTermRealizedGainLoss:
+          type: string
+        lotDetail:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.RealizedGainLossLotdetail'
+        lotDetailType:
+          type: string
+        lotId:
+          type: string
+        notes:
+          type: string
+        quantitySold:
+          type: string
+        shortTermRealizedGainLoss:
+          type: string
+        soldClosed:
+          type: string
+        totalProceeds:
+          type: string
+        totalRealizedGainLossDollar:
+          type: string
+        totalRealizedGainLossPercent:
           type: string
       xml:
-        name: UnrealizedLotPosition
-      type: object
-    OAT.Integrations.Schwab.SII.Dto.RealizedGainLossSummary:
-      properties:
-        accountId:
-          type: string
-        totalKnownCostBasis:
-          type: string
-        totalKnownLongTermRealizedGainLoss:
-          type: string
-        totalKnownProceeds:
-          type: string
-        totalKnownShortTermRealizedGainLoss:
-          type: string
-        totalKnownRealizedGainLossDollar:
-          type: string
-        totalKnownRealizedGainLossPercent:
-          type: string
-        errors:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.error'
-          xml:
-            name: error
-            wrapped: true
-          type: array
-      xml:
-        name: RealizedGainLossSummary
-      type: object
-    OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto:
-      properties:
-        key:
-          type: integer
-          format: int32
-        productName:
-          type: string
-        termsAccepted:
-          type: boolean
-      xml:
-        name: IntegrationSetupRequestDto
-      type: object
-    OAT.Integrations.Schwab.SII.Dto.Holder:
-      properties:
-        role:
-          type: string
-        beneficiaryAssetPercentage:
-          type: string
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: Holder
-      type: object
-    OAT.Integrations.Schwab.SII.Dto.SchwabRestTransactionResponse:
-      properties:
-        transactionsResponse:
-          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Transactionsresponse'
-      xml:
-        name: SchwabRestTransactionResponse
+        name: RealizedGainLossTransactionlotlist
       type: object
     OAT.Integrations.Schwab.SII.Dto.RealizedGainLossTransactionlist:
       properties:
@@ -1438,49 +1372,140 @@ components:
       xml:
         name: RealizedGainLossTransactionlist
       type: object
-    OAT.Integrations.Schwab.SII.Dto.Accountbalances:
+    OAT.Integrations.Schwab.SII.Dto.UnRealizedPosition:
       properties:
-        accountNetWorth:
-          type: number
-          format: double
-        cash:
-          type: number
-          format: double
-        marginBalance:
-          type: number
-          format: double
-        moneyMarketFund:
-          type: number
-          format: double
-        totalAccountBalance:
-          type: number
-          format: double
-        totalMarketValue:
-          type: number
-          format: double
+        costBasis:
+          type: string
+        marketValue:
+          type: string
+        notes:
+          type: string
+        positionId:
+          type: string
+        quantity:
+          type: string
+        securityName:
+          type: string
+        symbol:
+          type: string
+        unrealizedGainLossDollar:
+          type: string
+        unrealizedGainLossPercent:
+          type: string
       xml:
-        name: Accountbalances
+        name: UnRealizedPosition
       type: object
-    OAT.Integrations.Schwab.SII.Dto.SchwabSIIAccountAlertsInquiryDtoRest:
+    OAT.Integrations.Schwab.SII.Dto.UnrealizedLotPosition:
       properties:
-        alerts:
+        lots:
           items:
-            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Alert'
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.UnrealizedLotDetailLot'
           xml:
-            name: Alert
+            name: UnrealizedLotDetailLot
             wrapped: true
           type: array
-        nextRowId:
-          type: integer
-          format: int32
-        totalCount:
-          type: integer
-          format: int32
-        responseActual:
-          type: integer
-          format: int32
+        positionId:
+          type: string
       xml:
-        name: SchwabSIIAccountAlertsInquiryDtoRest
+        name: UnrealizedLotPosition
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.UnrealizedLotDetailLot:
+      properties:
+        acquiredOrOpened:
+          type: string
+        costBasis:
+          type: string
+        holdingPeriod:
+          type: string
+        lotDetail:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Lotdetail'
+        lotDetailType:
+          type: string
+        lotId:
+          type: string
+        marketValue:
+          type: string
+        notes:
+          type: string
+        quantity:
+          type: string
+        unrealizedGainLossDollar:
+          type: string
+        unrealizedGainLossPercent:
+          type: string
+      xml:
+        name: UnrealizedLotDetailLot
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.Document:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        preparedByDate:
+          type: string
+          format: date-time
+        reportId:
+          type: string
+        reportName:
+          type: string
+        reportType:
+          type: string
+        reportDescription:
+          type: string
+      xml:
+        name: Document
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabRestPostionsDetail:
+      properties:
+        positions:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Positions'
+      xml:
+        name: SchwabRestPostionsDetail
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.UnRealizedPositionLotDetailResponse:
+      properties:
+        positions:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.UnrealizedLotPosition'
+          xml:
+            name: UnrealizedLotPosition
+            wrapped: true
+          type: array
+        errors:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.error'
+          xml:
+            name: error
+            wrapped: true
+          type: array
+      xml:
+        name: UnRealizedPositionLotDetailResponse
+      type: object
+    OAS.Integrations.SchwabV2.User_Authorizations.SchwabUAAttributes:
+      properties:
+        isUserFsa:
+          type: boolean
+        authorizations:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.SchwabV2.User_Authorizations.SchwabUAAuthorizations'
+          xml:
+            name: SchwabUAAuthorizations
+            wrapped: true
+          type: array
+      xml:
+        name: SchwabUAAttributes
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.Transactionsresponse:
+      properties:
+        transactions:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Transaction'
+          xml:
+            name: Transaction
+            wrapped: true
+          type: array
+      xml:
+        name: Transactionsresponse
       type: object
     OAT.Integrations.Schwab.SII.Dto.error:
       properties:
@@ -1497,17 +1522,158 @@ components:
       xml:
         name: error
       type: object
-    OAT.Integrations.Schwab.SII.Dto.Transactionsresponse:
+    OAT.Integrations.Schwab.SII.Dto.AccountPreferences:
       properties:
-        transactions:
+        summary:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.AccountPreferencesSummary'
+        details:
           items:
-            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Transaction'
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.AccountPreferencesDetail'
           xml:
-            name: Transaction
+            name: AccountPreferencesDetail
             wrapped: true
           type: array
       xml:
-        name: Transactionsresponse
+        name: AccountPreferences
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabSIIServiceMessageDto:
+      properties:
+        code:
+          type: string
+        type:
+          type: string
+        description:
+          type: string
+      xml:
+        name: SchwabSIIServiceMessageDto
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.Positionsdetail:
+      properties:
+        dayChange:
+          type: string
+        marketValue:
+          type: number
+          format: double
+        quantity:
+          type: number
+          format: double
+        quotedPrice:
+          type: number
+          format: double
+        securityName:
+          type: string
+        securityType:
+          type: string
+        symbol:
+          type: string
+      xml:
+        name: Positionsdetail
+      type: object
+    OAS.Integrations.SchwabV2.User_Authorizations.SchwabUserAuthorizationsResponseDto:
+      properties:
+        data:
+          $ref: '#/components/schemas/OAS.Integrations.SchwabV2.User_Authorizations.SchwabUAData'
+      xml:
+        name: SchwabUserAuthorizationsResponseDto
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.RealizedGainLossLotdetail:
+      properties:
+        adjustedCostBasis:
+          type: string
+        adjustedCostPerShare:
+          type: string
+        adjustedDisallowedLossW:
+          type: string
+        adjustedRealizedGainLossDollar:
+          type: string
+        adjustedRealizedGainLossPercent:
+          type: string
+        costBasis:
+          type: string
+        costPerShare:
+          type: string
+        disallowedLossW:
+          type: string
+        holdingPeriod:
+          type: string
+        proceedsPerShare:
+          type: string
+        realizedGainLossDollar:
+          type: string
+        realizedGainLossPercent:
+          type: string
+      xml:
+        name: RealizedGainLossLotdetail
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.Contacts:
+      properties:
+        city:
+          type: string
+        country:
+          type: string
+        mailingAddress:
+          type: string
+        stateZip:
+          type: string
+      xml:
+        name: Contacts
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabRestBalance:
+      properties:
+        accountBalances:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Accountbalances'
+      xml:
+        name: SchwabRestBalance
+      type: object
+    OAS.WebApi.DTO.Integrations.BasicIntegrationConfigDto:
+      properties:
+        partnerAppId:
+          description: The unique ID of the partner app.
+          type: integer
+          format: int32
+        productName:
+          description: The unique name of the partner app product.
+          type: string
+      xml:
+        name: BasicIntegrationConfigDto
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabRestReportResponse:
+      properties:
+        documents:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Document'
+          xml:
+            name: Document
+            wrapped: true
+          type: array
+        actualResponseCount:
+          type: integer
+          format: int32
+        nextRowId:
+          type: integer
+          format: int32
+        totalCount:
+          type: integer
+          format: int32
+        serviceMessage:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIServiceMessageDto'
+      xml:
+        name: SchwabRestReportResponse
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.UnRealizedSummary:
+      properties:
+        accountId:
+          type: string
+        totalKnownCostBasis:
+          type: string
+        totalKnownMarketValue:
+          type: string
+        totalKnownUnrealizedGainLossDollar:
+          type: string
+        totalKnownUnrealizedGainLossPercent:
+          type: string
+      xml:
+        name: UnRealizedSummary
       type: object
     OAT.Integrations.Schwab.SII.Dto.Transaction:
       properties:
@@ -1541,75 +1707,56 @@ components:
       xml:
         name: Transaction
       type: object
-    OAT.Integrations.Schwab.SII.Dto.Positionsdetail:
+    OAS.Integrations.SchwabV2.User_Authorizations.SchwabUAAuthorizations:
       properties:
-        dayChange:
+        authorization:
           type: string
-        marketValue:
-          type: number
-          format: double
-        quantity:
-          type: number
-          format: double
-        quotedPrice:
-          type: number
-          format: double
-        securityName:
-          type: string
-        securityType:
-          type: string
-        symbol:
-          type: string
-      xml:
-        name: Positionsdetail
-      type: object
-    OAT.Integrations.Schwab.SII.Dto.SchwabRestProfileResponse:
-      properties:
-        accountId:
-          type: string
-        contact:
-          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Contacts'
-        holders:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Holder'
-          xml:
-            name: Holder
-            wrapped: true
-          type: array
-        registrationType:
-          type: string
-      xml:
-        name: SchwabRestProfileResponse
-      type: object
-    OAT.Integrations.Schwab.SII.Dto.SchwabSIIEnrollmentRequestDto:
-      properties:
-        url:
-          type: string
-        sourceData:
-          type: string
-        digitalSignature:
-          type: string
-      xml:
-        name: SchwabSIIEnrollmentRequestDto
-      type: object
-    OAT.Integrations.Schwab.SII.Dto.SchwabSIIUnenrollDTO:
-      properties:
-        serviceStatusField:
+        isAuthorized:
           type: boolean
-        statusIndicatorField:
-          type: boolean
-        responseDateTimeField:
-          type: string
-          format: date-time
-        serviceMessagesField:
+      xml:
+        name: SchwabUAAuthorizations
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabRestProfilesResponse:
+      properties:
+        profiles:
           items:
-            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIServiceMessageDto'
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRestProfileResponse'
           xml:
-            name: SchwabSIIServiceMessageDto
+            name: SchwabRestProfileResponse
             wrapped: true
           type: array
       xml:
-        name: SchwabSIIUnenrollDTO
+        name: SchwabRestProfilesResponse
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabRestRealizedGainLossResponse:
+      properties:
+        summary:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.RealizedGainLossSummary'
+        transactionList:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.RealizedGainLossTransactionlist'
+          xml:
+            name: RealizedGainLossTransactionlist
+            wrapped: true
+          type: array
+        actualResponseCount:
+          type: integer
+          format: int32
+        totalCount:
+          type: integer
+          format: int32
+        nextRowId:
+          type: integer
+          format: int32
+        errors:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.error'
+          xml:
+            name: error
+            wrapped: true
+          type: array
+      xml:
+        name: SchwabRestRealizedGainLossResponse
       type: object
     OAT.Integrations.Schwab.SII.Dto.Alert:
       properties:
@@ -1648,75 +1795,158 @@ components:
       xml:
         name: Alert
       type: object
-    OAS.Integrations.SchwabV2.User_Authorizations.SchwabUAAttributes:
+    OAT.Integrations.Schwab.SII.Dto.SchwabRestTransDetailResponse:
       properties:
-        isUserFsa:
+        transactionDetail:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Transactiondetail'
+      xml:
+        name: SchwabRestTransDetailResponse
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabSIIUnenrollDTO:
+      properties:
+        serviceStatusField:
           type: boolean
-        authorizations:
+        statusIndicatorField:
+          type: boolean
+        responseDateTimeField:
+          type: string
+          format: date-time
+        serviceMessagesField:
           items:
-            $ref: '#/components/schemas/OAS.Integrations.SchwabV2.User_Authorizations.SchwabUAAuthorizations'
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIServiceMessageDto'
           xml:
-            name: SchwabUAAuthorizations
+            name: SchwabSIIServiceMessageDto
             wrapped: true
           type: array
       xml:
-        name: SchwabUAAttributes
+        name: SchwabSIIUnenrollDTO
       type: object
-    OAT.Integrations.Schwab.SII.Dto.SchwabRestReportRequest:
+    OAT.Integrations.Schwab.SII.Dto.SchwabRestProfileResponse:
       properties:
         accountId:
-          type: integer
-          format: int32
-        startRow:
-          type: integer
-          format: int32
-        maxRows:
-          type: integer
-          format: int32
-        startDate:
-          type: integer
-          format: int32
-        endDate:
-          type: integer
-          format: int32
-        reportType:
           type: string
-        reportName:
-          type: string
-        reportId:
+        contact:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Contacts'
+        holders:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Holder'
+          xml:
+            name: Holder
+            wrapped: true
+          type: array
+        registrationType:
           type: string
       xml:
-        name: SchwabRestReportRequest
+        name: SchwabRestProfileResponse
       type: object
-    OAT.Integrations.Schwab.SII.Dto.SchwabRestPostionsDetail:
+    OAT.Integrations.Schwab.SII.Dto.Accountbalances:
       properties:
-        positions:
-          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Positions'
+        accountNetWorth:
+          type: number
+          format: double
+        cash:
+          type: number
+          format: double
+        marginBalance:
+          type: number
+          format: double
+        moneyMarketFund:
+          type: number
+          format: double
+        totalAccountBalance:
+          type: number
+          format: double
+        totalMarketValue:
+          type: number
+          format: double
       xml:
-        name: SchwabRestPostionsDetail
+        name: Accountbalances
       type: object
-    OAT.Integrations.Schwab.SII.Dto.UnRealizedPosition:
+    OAT.Integrations.Schwab.SII.Dto.RealizedGainLossSummary:
       properties:
-        costBasis:
+        accountId:
           type: string
-        marketValue:
+        totalKnownCostBasis:
           type: string
-        notes:
+        totalKnownLongTermRealizedGainLoss:
           type: string
-        positionId:
+        totalKnownProceeds:
           type: string
-        quantity:
+        totalKnownShortTermRealizedGainLoss:
           type: string
-        securityName:
+        totalKnownRealizedGainLossDollar:
           type: string
-        symbol:
+        totalKnownRealizedGainLossPercent:
           type: string
-        unrealizedGainLossDollar:
+        errors:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.error'
+          xml:
+            name: error
+            wrapped: true
+          type: array
+      xml:
+        name: RealizedGainLossSummary
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabSIIUserAuthorizationTokenDto:
+      properties:
+        sacoAuthToken:
           type: string
-        unrealizedGainLossPercent:
+        logOnUrl:
+          type: string
+        responseDateTime:
+          type: string
+          format: date-time
+        serviceMessages:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIServiceMessageDto'
+          xml:
+            name: SchwabSIIServiceMessageDto
+            wrapped: true
+          type: array
+        accountNumber:
           type: string
       xml:
-        name: UnRealizedPosition
+        name: SchwabSIIUserAuthorizationTokenDto
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.AccountPreferencesDetail:
+      properties:
+        accountNumber:
+          type: string
+        accountName:
+          type: string
+        nonTaxableAccount:
+          type: boolean
+        initialCbProvider:
+          type: string
+        accountingMethod:
+          type: string
+        averageMF:
+          type: boolean
+        adjustCostBasisFI:
+          type: boolean
+        gainLossTab:
+          type: boolean
+        schwabAllianceLogOn:
+          type: boolean
+        cBonStatements:
+          type: boolean
+        yearEndGainLossReport:
+          type: string
+      xml:
+        name: AccountPreferencesDetail
+      type: object
+    OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto:
+      properties:
+        key:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        termsAccepted:
+          type: boolean
+      xml:
+        name: IntegrationSetupRequestDto
       type: object
     OAT.Integrations.Schwab.SII.Dto.Transactiondetail:
       properties:
@@ -1799,233 +2029,26 @@ components:
       xml:
         name: Transactiondetail
       type: object
-    OAT.Integrations.Schwab.SII.Dto.SchwabRestBalance:
+    OAT.Integrations.Schwab.SII.Dto.SchwabSIIAccountAlertsInquiryDtoRest:
       properties:
-        accountBalances:
-          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Accountbalances'
-      xml:
-        name: SchwabRestBalance
-      type: object
-    OAT.Integrations.Schwab.SII.Dto.RealizedGainLossTransactionlotlist:
-      properties:
-        acquiredOrOpened:
-          type: string
-        costBasis:
-          type: string
-        longTermRealizedGainLoss:
-          type: string
-        lotDetail:
-          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.RealizedGainLossLotdetail'
-        lotDetailType:
-          type: string
-        lotId:
-          type: string
-        notes:
-          type: string
-        quantitySold:
-          type: string
-        shortTermRealizedGainLoss:
-          type: string
-        soldClosed:
-          type: string
-        totalProceeds:
-          type: string
-        totalRealizedGainLossDollar:
-          type: string
-        totalRealizedGainLossPercent:
-          type: string
-      xml:
-        name: RealizedGainLossTransactionlotlist
-      type: object
-    OAS.Integrations.SchwabV2.User_Authorizations.SchwabUAAuthorizations:
-      properties:
-        authorization:
-          type: string
-        isAuthorized:
-          type: boolean
-      xml:
-        name: SchwabUAAuthorizations
-      type: object
-    OAT.Integrations.Schwab.SII.Dto.SchwabSIIUserAuthorizationTokenDto:
-      properties:
-        sacoAuthToken:
-          type: string
-        logOnUrl:
-          type: string
-        responseDateTime:
-          type: string
-          format: date-time
-        serviceMessages:
+        alerts:
           items:
-            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIServiceMessageDto'
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Alert'
           xml:
-            name: SchwabSIIServiceMessageDto
+            name: Alert
             wrapped: true
           type: array
-        accountNumber:
-          type: string
+        nextRowId:
+          type: integer
+          format: int32
+        totalCount:
+          type: integer
+          format: int32
+        responseActual:
+          type: integer
+          format: int32
       xml:
-        name: SchwabSIIUserAuthorizationTokenDto
-      type: object
-    OAT.Integrations.Schwab.SII.Dto.AccountPreferences:
-      properties:
-        summary:
-          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.AccountPreferencesSummary'
-        details:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.AccountPreferencesDetail'
-          xml:
-            name: AccountPreferencesDetail
-            wrapped: true
-          type: array
-      xml:
-        name: AccountPreferences
-      type: object
-    OAT.Integrations.Schwab.SII.Dto.AccountPreferencesDetail:
-      properties:
-        accountNumber:
-          type: string
-        accountName:
-          type: string
-        nonTaxableAccount:
-          type: boolean
-        initialCbProvider:
-          type: string
-        accountingMethod:
-          type: string
-        averageMF:
-          type: boolean
-        adjustCostBasisFI:
-          type: boolean
-        gainLossTab:
-          type: boolean
-        schwabAllianceLogOn:
-          type: boolean
-        cBonStatements:
-          type: boolean
-        yearEndGainLossReport:
-          type: string
-      xml:
-        name: AccountPreferencesDetail
-      type: object
-    OAT.Integrations.Schwab.SII.Dto.SchwabSIIServiceMessageDto:
-      properties:
-        code:
-          type: string
-        type:
-          type: string
-        description:
-          type: string
-      xml:
-        name: SchwabSIIServiceMessageDto
-      type: object
-    OAT.Integrations.Schwab.SII.Dto.UnRealizedPositionLotDetailResponse:
-      properties:
-        positions:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.UnrealizedLotPosition'
-          xml:
-            name: UnrealizedLotPosition
-            wrapped: true
-          type: array
-        errors:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.error'
-          xml:
-            name: error
-            wrapped: true
-          type: array
-      xml:
-        name: UnRealizedPositionLotDetailResponse
-      type: object
-    OAT.Integrations.Schwab.SII.Dto.Contacts:
-      properties:
-        city:
-          type: string
-        country:
-          type: string
-        mailingAddress:
-          type: string
-        stateZip:
-          type: string
-      xml:
-        name: Contacts
-      type: object
-    OAS.Integrations.SchwabV2.User_Authorizations.SchwabUserAuthorizationsResponseDto:
-      properties:
-        data:
-          $ref: '#/components/schemas/OAS.Integrations.SchwabV2.User_Authorizations.SchwabUAData'
-      xml:
-        name: SchwabUserAuthorizationsResponseDto
-      type: object
-    OAT.Integrations.Schwab.SII.Dto.UnrealizedLotDetailLot:
-      properties:
-        acquiredOrOpened:
-          type: string
-        costBasis:
-          type: string
-        holdingPeriod:
-          type: string
-        lotDetail:
-          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Lotdetail'
-        lotDetailType:
-          type: string
-        lotId:
-          type: string
-        marketValue:
-          type: string
-        notes:
-          type: string
-        quantity:
-          type: string
-        unrealizedGainLossDollar:
-          type: string
-        unrealizedGainLossPercent:
-          type: string
-      xml:
-        name: UnrealizedLotDetailLot
-      type: object
-    OAT.Integrations.Schwab.SII.Dto.Lotdetail:
-      properties:
-        adjustedCostBasis:
-          type: string
-        adjustedCostPerShare:
-          type: string
-        adjustedUnrealizedGainLossDollar:
-          type: string
-        adjustedUnrealizedGainLossPercent:
-          type: string
-        costBasis:
-          type: string
-        costPerShare:
-          type: string
-        currentPrice:
-          type: string
-        todaysChangeInPriceDollar:
-          type: string
-        todaysChangeInPricePercent:
-          type: string
-        todaysChangeInValueDollar:
-          type: string
-        todaysChangeInValuePercent:
-          type: string
-        unrealizedGainLossDollar:
-          type: string
-        unrealizedGainLossPercent:
-          type: string
-      xml:
-        name: Lotdetail
-      type: object
-    OAS.Integrations.SchwabV2.User_Authorizations.SchwabUAData:
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-        attributes:
-          $ref: '#/components/schemas/OAS.Integrations.SchwabV2.User_Authorizations.SchwabUAAttributes'
-      xml:
-        name: SchwabUAData
+        name: SchwabSIIAccountAlertsInquiryDtoRest
       type: object
     OAT.Integrations.Schwab.SII.Dto.Positions:
       properties:
@@ -2038,29 +2061,6 @@ components:
           type: array
       xml:
         name: Positions
-      type: object
-    OAT.Integrations.Schwab.SII.Dto.SchwabRestReportResponse:
-      properties:
-        documents:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.Document'
-          xml:
-            name: Document
-            wrapped: true
-          type: array
-        actualResponseCount:
-          type: integer
-          format: int32
-        nextRowId:
-          type: integer
-          format: int32
-        totalCount:
-          type: integer
-          format: int32
-        serviceMessage:
-          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabSIIServiceMessageDto'
-      xml:
-        name: SchwabRestReportResponse
       type: object
   securitySchemes:
     Authorization:

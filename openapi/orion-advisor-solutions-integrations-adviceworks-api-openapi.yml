@@ -405,6 +405,103 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAT.Integrations.Cetera.DTOs.Employment:
+      properties:
+        employmentStatus:
+          type: string
+        employerName:
+          type: string
+        occupation:
+          type: string
+        workPhoneNumber:
+          type: string
+        extension:
+          type: string
+        employerAddress:
+          $ref: '#/components/schemas/OAT.Integrations.Cetera.DTOs.Employeraddress'
+      xml:
+        name: Employment
+      type: object
+    OAT.Integrations.Cetera.DTOs.Investment:
+      properties:
+        type:
+          type: string
+        value:
+          type: number
+          format: float
+        freeText:
+          type: string
+      xml:
+        name: Investment
+      type: object
+    OAT.Integrations.Cetera.DTOs.Acctowner:
+      properties:
+        clientUniqueIdSource:
+          type: integer
+          format: int32
+        clientIdTarget:
+          type: integer
+          format: int32
+        acctOwnerType:
+          type: string
+        firstName:
+          type: string
+        middleName:
+          type: string
+        lastNameOrEntityName:
+          type: string
+        countryOfCitizenship:
+          type: string
+        taxId:
+          type: string
+        taxIdType:
+          type: string
+        clientType:
+          type: string
+        clientSubType:
+          type: string
+      xml:
+        name: Acctowner
+      type: object
+    OAT.Integrations.Cetera.DTOs.Investmentexperience:
+      properties:
+        experience:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Cetera.DTOs.Experience'
+          xml:
+            name: Experience
+            wrapped: true
+          type: array
+      xml:
+        name: Investmentexperience
+      type: object
+    OAT.Integrations.Cetera.DTOs.ReserveAccountRequest:
+      properties:
+        type:
+          type: string
+        data:
+          $ref: '#/components/schemas/OAT.Integrations.Cetera.DTOs.ReserveAccountData'
+      xml:
+        name: ReserveAccountRequest
+      type: object
+    OAT.Integrations.Cetera.DTOs.ClientSearchResponse:
+      properties:
+        totalCount:
+          type: integer
+          format: int32
+        page:
+          type: integer
+          format: int32
+        data:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Cetera.DTOs.Data'
+          xml:
+            name: Data
+            wrapped: true
+          type: array
+      xml:
+        name: ClientSearchResponse
+      type: object
     OAT.Integrations.Cetera.DTOs.Accountinformation:
       properties:
         acctUniqueIdSource:
@@ -436,15 +533,6 @@ components:
           type: array
       xml:
         name: Accountinformation
-      type: object
-    OAT.Integrations.Cetera.DTOs.ReserveAccountResponse:
-      properties:
-        hasError:
-          type: boolean
-        data:
-          $ref: '#/components/schemas/OAT.Integrations.Cetera.DTOs.Account_Data'
-      xml:
-        name: ReserveAccountResponse
       type: object
     OAT.Integrations.Cetera.DTOs.Account_Data:
       properties:
@@ -508,22 +596,68 @@ components:
       xml:
         name: Account_Data
       type: object
-    OAT.Integrations.Cetera.DTOs.Employment:
+    OAT.Integrations.Cetera.DTOs.Financialinformation:
       properties:
-        employmentStatus:
+        annualIncome:
           type: string
-        employerName:
+        adjustedNetWorth:
           type: string
-        occupation:
+        liquidNetWorth:
           type: string
-        workPhoneNumber:
+        riskTolerance:
           type: string
-        extension:
+        investmentObjective:
           type: string
-        employerAddress:
-          $ref: '#/components/schemas/OAT.Integrations.Cetera.DTOs.Employeraddress'
+        federalTaxBracket:
+          type: string
+        otherInvestments:
+          $ref: '#/components/schemas/OAT.Integrations.Cetera.DTOs.Otherinvestments'
+        investmentExperience:
+          $ref: '#/components/schemas/OAT.Integrations.Cetera.DTOs.Investmentexperience'
+        hasInvestentmentExperience:
+          type: boolean
       xml:
-        name: Employment
+        name: Financialinformation
+      type: object
+    OAT.Integrations.Cetera.DTOs.Affiliation:
+      properties:
+        stakeholderOfPubliclyTradedCompany:
+          type: string
+        politician:
+          type: string
+        politicianCountry:
+          type: string
+        brokerDealer:
+          type: string
+        brokerDealerWithCeteraBD:
+          type: string
+        brokerDealerFirm:
+          type: string
+        affiliatedWithCeteraBD:
+          type: string
+        affiliatedFirmName:
+          type: string
+        affiliatedWithBrokerDealerOrFINRA:
+          type: string
+        companyAffiliations:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Cetera.DTOs.CompanyAffiliation'
+          xml:
+            name: CompanyAffiliation
+            wrapped: true
+          type: array
+      xml:
+        name: Affiliation
+      type: object
+    OAT.Integrations.Cetera.DTOs.Experience:
+      properties:
+        type:
+          type: string
+        years:
+          type: integer
+          format: int32
+      xml:
+        name: Experience
       type: object
     OAT.Integrations.Cetera.DTOs.Mail:
       properties:
@@ -541,14 +675,83 @@ components:
       xml:
         name: Mail
       type: object
-    OAT.Integrations.Cetera.DTOs.ReserveAccountRequest:
+    OAT.Integrations.Cetera.DTOs.Employeraddress:
       properties:
-        type:
+        addressLine1:
           type: string
-        data:
-          $ref: '#/components/schemas/OAT.Integrations.Cetera.DTOs.ReserveAccountData'
+        addressLine2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        zip:
+          type: string
       xml:
-        name: ReserveAccountRequest
+        name: Employeraddress
+      type: object
+    OAT.Integrations.Cetera.DTOs.PrimaryAdvisor:
+      properties:
+        advisorId:
+          type: integer
+          format: int32
+        firstname:
+          type: string
+        middlename:
+          type: string
+        lastname:
+          type: string
+        crdNumber:
+          type: string
+        isPrimary:
+          type: boolean
+        emails:
+          items:
+            type: string
+          type: array
+      xml:
+        name: PrimaryAdvisor
+      type: object
+    OAS.DataModel.Integration.Cetera.Token:
+      properties:
+        access_token:
+          type: string
+        expires_in:
+          type: integer
+          format: int32
+        expires_datetime:
+          type: string
+          format: date-time
+      xml:
+        name: Token
+      type: object
+    OAT.Integrations.Cetera.DTOs.Advisor:
+      properties:
+        advisorId:
+          type: integer
+          format: int32
+        firstname:
+          type: string
+        middlename:
+          type: string
+        lastname:
+          type: string
+        startDate:
+          type: string
+        crdNumber:
+          type: string
+        isPrimary:
+          type: boolean
+        isSplitRep:
+          type: boolean
+        emails:
+          items:
+            type: string
+          type: array
+      xml:
+        name: Advisor
       type: object
     OAT.Integrations.Cetera.DTOs.Profile:
       properties:
@@ -627,72 +830,66 @@ components:
       xml:
         name: Profile
       type: object
-    OAT.Integrations.Cetera.DTOs.Phone:
+    OAS.WebApi.Domains.Integrations.CeteraController.RepCustomData:
       properties:
-        phoneNumberId:
+        crd:
+          type: string
+        brokerDealId:
+          type: string
+      xml:
+        name: RepCustomData
+      type: object
+    OAT.Integrations.Cetera.DTOs.CompanyAffiliation:
+      properties:
+        companyName:
+          type: string
+        tradingSymbol:
+          type: string
+      xml:
+        name: CompanyAffiliation
+      type: object
+    OAT.Integrations.Cetera.DTOs.Rep:
+      properties:
+        repnumberid:
           type: integer
           format: int32
+        repnumber:
+          type: string
         type:
+          type: string
+        repcode:
+          type: string
+        repNumberDescription:
+          type: string
+        advisors:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Cetera.DTOs.Advisor'
+          xml:
+            name: Advisor
+            wrapped: true
+          type: array
+      xml:
+        name: Rep
+      type: object
+    OAT.Integrations.Cetera.DTOs.Trustedcontactinformation:
+      properties:
+        trustedContactId:
+          type: integer
+          format: int32
+        isTrustedContactDeclined:
+          type: boolean
+        firstName:
+          type: string
+        lastName:
           type: string
         phoneNumber:
           type: string
-        status:
+        otherRelationshipDesc:
+          type: string
+        relationshipType:
           type: string
       xml:
-        name: Phone
-      type: object
-    OAT.Integrations.Cetera.DTOs.Acctowner:
-      properties:
-        clientUniqueIdSource:
-          type: integer
-          format: int32
-        clientIdTarget:
-          type: integer
-          format: int32
-        acctOwnerType:
-          type: string
-        firstName:
-          type: string
-        middleName:
-          type: string
-        lastNameOrEntityName:
-          type: string
-        countryOfCitizenship:
-          type: string
-        taxId:
-          type: string
-        taxIdType:
-          type: string
-        clientType:
-          type: string
-        clientSubType:
-          type: string
-      xml:
-        name: Acctowner
-      type: object
-    OAT.Integrations.Cetera.DTOs.Address:
-      properties:
-        addressId:
-          type: integer
-          format: int32
-        addressline1:
-          type: string
-        addressline2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-        zipcode:
-          type: string
-        addressType:
-          type: string
-        isPrimary:
-          type: boolean
-      xml:
-        name: Address
+        name: Trustedcontactinformation
       type: object
     OAT.Integrations.Cetera.DTOs.Data:
       properties:
@@ -726,6 +923,61 @@ components:
       xml:
         name: Data
       type: object
+    OAT.Integrations.Cetera.DTOs.Address:
+      properties:
+        addressId:
+          type: integer
+          format: int32
+        addressline1:
+          type: string
+        addressline2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        zipcode:
+          type: string
+        addressType:
+          type: string
+        isPrimary:
+          type: boolean
+      xml:
+        name: Address
+      type: object
+    OAT.Integrations.Cetera.DTOs.ReserveAccountData:
+      properties:
+        reqIntKeySource:
+          type: string
+        reqENVTarget:
+          type: string
+        reqAPIVersionTarget:
+          type: string
+        reqContext:
+          type: string
+        reqUniqueId:
+          type: string
+        reqDateTime:
+          type: string
+        brokerDealerFirmCode:
+          type: string
+        brokerDealerId:
+          type: integer
+          format: int32
+        clearingFirm:
+          type: string
+        reqProcessingLevel:
+          type: integer
+          format: int32
+        tenantNameSource:
+          type: string
+        accountInformation:
+          $ref: '#/components/schemas/OAT.Integrations.Cetera.DTOs.Accountinformation'
+      xml:
+        name: ReserveAccountData
+      type: object
     OAT.Integrations.Cetera.DTOs.CS_Phone:
       properties:
         phoneNumber:
@@ -755,63 +1007,6 @@ components:
           type: boolean
       xml:
         name: Otherinvestments
-      type: object
-    OAT.Integrations.Cetera.DTOs.PrimaryAdvisor:
-      properties:
-        advisorId:
-          type: integer
-          format: int32
-        firstname:
-          type: string
-        middlename:
-          type: string
-        lastname:
-          type: string
-        crdNumber:
-          type: string
-        isPrimary:
-          type: boolean
-        emails:
-          items:
-            type: string
-          type: array
-      xml:
-        name: PrimaryAdvisor
-      type: object
-    OAT.Integrations.Cetera.DTOs.Advisorinfo:
-      properties:
-        repNumber:
-          type: string
-        clearingFirmRepNumber:
-          type: string
-        repCode:
-          type: string
-        advOfficeNumber:
-          type: string
-        advIDTarget:
-          type: string
-        advNumberIDTarget:
-          type: string
-      xml:
-        name: Advisorinfo
-      type: object
-    OAT.Integrations.Cetera.DTOs.ClientSearchResponse:
-      properties:
-        totalCount:
-          type: integer
-          format: int32
-        page:
-          type: integer
-          format: int32
-        data:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Cetera.DTOs.Data'
-          xml:
-            name: Data
-            wrapped: true
-          type: array
-      xml:
-        name: ClientSearchResponse
       type: object
     OAT.Integrations.Cetera.DTOs.Identification:
       properties:
@@ -857,6 +1052,76 @@ components:
           type: string
       xml:
         name: Identification
+      type: object
+    OAT.Integrations.Cetera.DTOs.Advisorinfo:
+      properties:
+        repNumber:
+          type: string
+        clearingFirmRepNumber:
+          type: string
+        repCode:
+          type: string
+        advOfficeNumber:
+          type: string
+        advIDTarget:
+          type: string
+        advNumberIDTarget:
+          type: string
+      xml:
+        name: Advisorinfo
+      type: object
+    OAT.Integrations.Cetera.DTOs.Phone:
+      properties:
+        phoneNumberId:
+          type: integer
+          format: int32
+        type:
+          type: string
+        phoneNumber:
+          type: string
+        status:
+          type: string
+      xml:
+        name: Phone
+      type: object
+    OAS.DataModel.Integration.Cetera.ClientSearch:
+      properties:
+        name:
+          type: string
+        orionRepId:
+          type: integer
+          format: int32
+        status:
+          type: string
+        repCode:
+          type: string
+        ssn:
+          type: string
+        dob:
+          type: string
+        phoneNumber:
+          type: string
+        sortOrder:
+          type: string
+        sortBy:
+          type: string
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+      xml:
+        name: ClientSearch
+      type: object
+    OAT.Integrations.Cetera.DTOs.ReserveAccountResponse:
+      properties:
+        hasError:
+          type: boolean
+        data:
+          $ref: '#/components/schemas/OAT.Integrations.Cetera.DTOs.Account_Data'
+      xml:
+        name: ReserveAccountResponse
       type: object
     OAT.Integrations.Cetera.DTOs.ClientDetailsResponse:
       properties:
@@ -904,271 +1169,6 @@ components:
           $ref: '#/components/schemas/OAT.Integrations.Cetera.DTOs.Trustedcontactinformation'
       xml:
         name: ClientDetailsResponse
-      type: object
-    OAS.DataModel.Integration.Cetera.Token:
-      properties:
-        access_token:
-          type: string
-        expires_in:
-          type: integer
-          format: int32
-        expires_datetime:
-          type: string
-          format: date-time
-      xml:
-        name: Token
-      type: object
-    OAT.Integrations.Cetera.DTOs.Trustedcontactinformation:
-      properties:
-        trustedContactId:
-          type: integer
-          format: int32
-        isTrustedContactDeclined:
-          type: boolean
-        firstName:
-          type: string
-        lastName:
-          type: string
-        phoneNumber:
-          type: string
-        otherRelationshipDesc:
-          type: string
-        relationshipType:
-          type: string
-      xml:
-        name: Trustedcontactinformation
-      type: object
-    OAT.Integrations.Cetera.DTOs.Investment:
-      properties:
-        type:
-          type: string
-        value:
-          type: number
-          format: float
-        freeText:
-          type: string
-      xml:
-        name: Investment
-      type: object
-    OAT.Integrations.Cetera.DTOs.Advisor:
-      properties:
-        advisorId:
-          type: integer
-          format: int32
-        firstname:
-          type: string
-        middlename:
-          type: string
-        lastname:
-          type: string
-        startDate:
-          type: string
-        crdNumber:
-          type: string
-        isPrimary:
-          type: boolean
-        isSplitRep:
-          type: boolean
-        emails:
-          items:
-            type: string
-          type: array
-      xml:
-        name: Advisor
-      type: object
-    OAT.Integrations.Cetera.DTOs.CompanyAffiliation:
-      properties:
-        companyName:
-          type: string
-        tradingSymbol:
-          type: string
-      xml:
-        name: CompanyAffiliation
-      type: object
-    OAT.Integrations.Cetera.DTOs.Experience:
-      properties:
-        type:
-          type: string
-        years:
-          type: integer
-          format: int32
-      xml:
-        name: Experience
-      type: object
-    OAS.WebApi.Domains.Integrations.CeteraController.RepCustomData:
-      properties:
-        crd:
-          type: string
-        brokerDealId:
-          type: string
-      xml:
-        name: RepCustomData
-      type: object
-    OAT.Integrations.Cetera.DTOs.Financialinformation:
-      properties:
-        annualIncome:
-          type: string
-        adjustedNetWorth:
-          type: string
-        liquidNetWorth:
-          type: string
-        riskTolerance:
-          type: string
-        investmentObjective:
-          type: string
-        federalTaxBracket:
-          type: string
-        otherInvestments:
-          $ref: '#/components/schemas/OAT.Integrations.Cetera.DTOs.Otherinvestments'
-        investmentExperience:
-          $ref: '#/components/schemas/OAT.Integrations.Cetera.DTOs.Investmentexperience'
-        hasInvestentmentExperience:
-          type: boolean
-      xml:
-        name: Financialinformation
-      type: object
-    OAT.Integrations.Cetera.DTOs.Rep:
-      properties:
-        repnumberid:
-          type: integer
-          format: int32
-        repnumber:
-          type: string
-        type:
-          type: string
-        repcode:
-          type: string
-        repNumberDescription:
-          type: string
-        advisors:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Cetera.DTOs.Advisor'
-          xml:
-            name: Advisor
-            wrapped: true
-          type: array
-      xml:
-        name: Rep
-      type: object
-    OAT.Integrations.Cetera.DTOs.Affiliation:
-      properties:
-        stakeholderOfPubliclyTradedCompany:
-          type: string
-        politician:
-          type: string
-        politicianCountry:
-          type: string
-        brokerDealer:
-          type: string
-        brokerDealerWithCeteraBD:
-          type: string
-        brokerDealerFirm:
-          type: string
-        affiliatedWithCeteraBD:
-          type: string
-        affiliatedFirmName:
-          type: string
-        affiliatedWithBrokerDealerOrFINRA:
-          type: string
-        companyAffiliations:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Cetera.DTOs.CompanyAffiliation'
-          xml:
-            name: CompanyAffiliation
-            wrapped: true
-          type: array
-      xml:
-        name: Affiliation
-      type: object
-    OAT.Integrations.Cetera.DTOs.Employeraddress:
-      properties:
-        addressLine1:
-          type: string
-        addressLine2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-        zip:
-          type: string
-      xml:
-        name: Employeraddress
-      type: object
-    OAS.DataModel.Integration.Cetera.ClientSearch:
-      properties:
-        name:
-          type: string
-        orionRepId:
-          type: integer
-          format: int32
-        status:
-          type: string
-        repCode:
-          type: string
-        ssn:
-          type: string
-        dob:
-          type: string
-        phoneNumber:
-          type: string
-        sortOrder:
-          type: string
-        sortBy:
-          type: string
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-      xml:
-        name: ClientSearch
-      type: object
-    OAT.Integrations.Cetera.DTOs.ReserveAccountData:
-      properties:
-        reqIntKeySource:
-          type: string
-        reqENVTarget:
-          type: string
-        reqAPIVersionTarget:
-          type: string
-        reqContext:
-          type: string
-        reqUniqueId:
-          type: string
-        reqDateTime:
-          type: string
-        brokerDealerFirmCode:
-          type: string
-        brokerDealerId:
-          type: integer
-          format: int32
-        clearingFirm:
-          type: string
-        reqProcessingLevel:
-          type: integer
-          format: int32
-        tenantNameSource:
-          type: string
-        accountInformation:
-          $ref: '#/components/schemas/OAT.Integrations.Cetera.DTOs.Accountinformation'
-      xml:
-        name: ReserveAccountData
-      type: object
-    OAT.Integrations.Cetera.DTOs.Investmentexperience:
-      properties:
-        experience:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Cetera.DTOs.Experience'
-          xml:
-            name: Experience
-            wrapped: true
-          type: array
-      xml:
-        name: Investmentexperience
       type: object
   securitySchemes:
     Authorization:

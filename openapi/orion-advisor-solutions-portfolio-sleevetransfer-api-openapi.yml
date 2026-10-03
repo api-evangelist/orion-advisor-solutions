@@ -675,38 +675,94 @@ components:
       xml:
         name: SleeveTransferBatchTransactionDto
       type: object
-    OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductModelDto:
+    OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductAvailableModel:
       properties:
-        sleeveModels:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveModelDto'
+        modelAggId:
           readOnly: true
-          xml:
-            name: SleeveModelDto
-            wrapped: true
-          type: array
-        sleeveModelsByRegistrationId:
-          additionalProperties:
-            items:
-              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductAvailableModel'
-            xml:
-              name: SleeveProductAvailableModel
-              wrapped: true
-            type: array
+          type: integer
+          format: int32
+        modelName:
           readOnly: true
-          type: object
-        sleeveModelsByProductId:
-          additionalProperties:
-            items:
-              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductAvailableModel'
-            xml:
-              name: SleeveProductAvailableModel
-              wrapped: true
-            type: array
+          type: string
+        sleeveType:
           readOnly: true
-          type: object
+          type: string
+          enum:
+          - Normal sleeve
+          - Custodial account
+          - Contribution sleeve
+          - Distribution sleeve
+          - Unmanaged sleeve
+        displayModelName:
+          readOnly: true
+          type: string
+        accountId:
+          readOnly: true
+          type: integer
+          format: int32
       xml:
-        name: SleeveProductModelDto
+        name: SleeveProductAvailableModel
+      type: object
+    OAS.WebApi.DTO.Portfolio.Sleeve.SleeveTransferBatchDto:
+      properties:
+        id:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        registrationsImpacted:
+          type: integer
+          format: int32
+        assetsImpacted:
+          type: integer
+          format: int32
+        transactionsCreated:
+          type: integer
+          format: int32
+      xml:
+        name: SleeveTransferBatchDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.Sleeve.SleeveModelDto:
+      properties:
+        assetId:
+          readOnly: true
+          type: integer
+          format: int32
+        accountId:
+          readOnly: true
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        registrationId:
+          readOnly: true
+          type: integer
+          format: int32
+        modelAggId:
+          readOnly: true
+          type: integer
+          format: int32
+        modelName:
+          readOnly: true
+          type: string
+        sleeveType:
+          readOnly: true
+          type: string
+          enum:
+          - Normal sleeve
+          - Custodial account
+          - Contribution sleeve
+          - Distribution sleeve
+          - Unmanaged sleeve
+        displayModelName:
+          readOnly: true
+          type: string
+      xml:
+        name: SleeveModelDto
       type: object
     OAS.WebApi.DTO.Portfolio.Sleeve.AssetSleeveDto:
       properties:
@@ -785,94 +841,38 @@ components:
       xml:
         name: AssetSleeveDto
       type: object
-    OAS.WebApi.DTO.Portfolio.Sleeve.SleeveTransferBatchDto:
+    OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductModelDto:
       properties:
-        id:
-          type: integer
-          format: int64
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        registrationsImpacted:
-          type: integer
-          format: int32
-        assetsImpacted:
-          type: integer
-          format: int32
-        transactionsCreated:
-          type: integer
-          format: int32
+        sleeveModels:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveModelDto'
+          readOnly: true
+          xml:
+            name: SleeveModelDto
+            wrapped: true
+          type: array
+        sleeveModelsByRegistrationId:
+          additionalProperties:
+            items:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductAvailableModel'
+            xml:
+              name: SleeveProductAvailableModel
+              wrapped: true
+            type: array
+          readOnly: true
+          type: object
+        sleeveModelsByProductId:
+          additionalProperties:
+            items:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductAvailableModel'
+            xml:
+              name: SleeveProductAvailableModel
+              wrapped: true
+            type: array
+          readOnly: true
+          type: object
       xml:
-        name: SleeveTransferBatchDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.Sleeve.SleeveModelDto:
-      properties:
-        assetId:
-          readOnly: true
-          type: integer
-          format: int32
-        accountId:
-          readOnly: true
-          type: integer
-          format: int32
-        productId:
-          type: integer
-          format: int32
-        registrationId:
-          readOnly: true
-          type: integer
-          format: int32
-        modelAggId:
-          readOnly: true
-          type: integer
-          format: int32
-        modelName:
-          readOnly: true
-          type: string
-        sleeveType:
-          readOnly: true
-          type: string
-          enum:
-          - Normal sleeve
-          - Custodial account
-          - Contribution sleeve
-          - Distribution sleeve
-          - Unmanaged sleeve
-        displayModelName:
-          readOnly: true
-          type: string
-      xml:
-        name: SleeveModelDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductAvailableModel:
-      properties:
-        modelAggId:
-          readOnly: true
-          type: integer
-          format: int32
-        modelName:
-          readOnly: true
-          type: string
-        sleeveType:
-          readOnly: true
-          type: string
-          enum:
-          - Normal sleeve
-          - Custodial account
-          - Contribution sleeve
-          - Distribution sleeve
-          - Unmanaged sleeve
-        displayModelName:
-          readOnly: true
-          type: string
-        accountId:
-          readOnly: true
-          type: integer
-          format: int32
-      xml:
-        name: SleeveProductAvailableModel
+        name: SleeveProductModelDto
       type: object
   securitySchemes:
     Authorization:

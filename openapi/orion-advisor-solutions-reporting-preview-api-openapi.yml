@@ -100,6 +100,82 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAS.WebApi.DTO.Reporting.Envision.PreviewDto:
+      properties:
+        entity:
+          type: string
+          enum:
+          - Database
+          - BrokerDealer
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - AggregateModel
+          - DynamicGrouping
+          - PortfolioGroup
+          - UserDetail
+          - Prospect
+          - CustomGrouping
+        entityIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        orientation:
+          type: string
+          enum:
+          - Portrait
+          - Landscape
+        start:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.DateExpression'
+        end:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.DateExpression'
+        selectedTheme:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        controls:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Controls.ListControl'
+        options:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+        featureFlagsOverride:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IReportFeatureFlagOverrider'
+      xml:
+        name: PreviewDto
+      type: object
+    OAS.DataModel.Reporting.Controls.ListControl:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        controls:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
+          xml:
+            name: ControlBase
+            wrapped: true
+          type: array
+        customClass:
+          type: string
+        width:
+          type: string
+      xml:
+        name: ListControl
+      type: object
     OAS.DataModel.Reporting.Interfaces.IReportFeatureFlagOverrider:
       properties:
         dynamicBenchmarkProcessType:
@@ -186,81 +262,40 @@ components:
       xml:
         name: IReportFeatureFlagOverrider
       type: object
-    OAS.DataModel.Reporting.Controls.ListControl:
+    OAS.DataModel.Reporting.ReportOption:
       required:
+      - id
       - $type
       properties:
+        id:
+          type: string
         $type:
           readOnly: true
           type: string
-        id:
+        optionGuid:
           example: 00000000-0000-0000-0000-000000000000
           type: string
           format: uuid
-        controls:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
-          xml:
-            name: ControlBase
-            wrapped: true
-          type: array
-        customClass:
+        optionId:
+          type: integer
+          format: int32
+        isDisabled:
+          type: boolean
+        isGlobal:
+          type: boolean
+        isIgnored:
+          type: boolean
+        name:
           type: string
-        width:
-          type: string
-      xml:
-        name: ListControl
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.PreviewDto:
-      properties:
-        entity:
+        useInception:
+          type: boolean
+        prompt:
           type: string
           enum:
-          - Database
-          - BrokerDealer
-          - Representative
-          - Client
-          - Registration
-          - Account
-          - Asset
-          - Product
-          - AggregateModel
-          - DynamicGrouping
-          - PortfolioGroup
-          - UserDetail
-          - Prospect
-          - CustomGrouping
-        entityIds:
-          items:
-            type: integer
-            format: int32
-          type: array
-        orientation:
-          type: string
-          enum:
-          - Portrait
-          - Landscape
-        start:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.DateExpression'
-        end:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.DateExpression'
-        selectedTheme:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        controls:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Controls.ListControl'
-        options:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
-          xml:
-            name: ReportOption
-            wrapped: true
-          type: array
-        featureFlagsOverride:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IReportFeatureFlagOverrider'
+          - Never
+          - Always
       xml:
-        name: PreviewDto
+        name: ReportOption
       type: object
     OAS.WebApi.DTO.Reporting.RunReport.InceptionDateDto:
       properties:
@@ -299,41 +334,6 @@ components:
           - Dynamic
       xml:
         name: DateExpression
-      type: object
-    OAS.DataModel.Reporting.ReportOption:
-      required:
-      - id
-      - $type
-      properties:
-        id:
-          type: string
-        $type:
-          readOnly: true
-          type: string
-        optionGuid:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        optionId:
-          type: integer
-          format: int32
-        isDisabled:
-          type: boolean
-        isGlobal:
-          type: boolean
-        isIgnored:
-          type: boolean
-        name:
-          type: string
-        useInception:
-          type: boolean
-        prompt:
-          type: string
-          enum:
-          - Never
-          - Always
-      xml:
-        name: ReportOption
       type: object
   securitySchemes:
     Authorization:

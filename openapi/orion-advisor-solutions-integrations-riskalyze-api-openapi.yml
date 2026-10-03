@@ -983,144 +983,6 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.Integrations.RiskAlyze.Dto.RiskalyzeAccountDto:
-      properties:
-        riskalyzeAccountId:
-          type: integer
-          format: int32
-        name:
-          type: string
-        status:
-          type: string
-        type:
-          type: string
-        total:
-          type: number
-          format: double
-        allocationPercent:
-          type: number
-          format: double
-        analysis:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Dto.AnalysisDto'
-        allocations:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Dto.RiskalyzeAllocationDto'
-          xml:
-            name: RiskalyzeAllocationDto
-            wrapped: true
-          type: array
-      xml:
-        name: RiskalyzeAccountDto
-      type: object
-    OAS.DataModel.Integration.RiskAlyze.RiskAlyzeUser:
-      properties:
-        access_token:
-          type: string
-        expires_in:
-          type: integer
-          format: int32
-        token_type:
-          type: string
-        scope:
-          type: string
-        refresh_token:
-          type: string
-        deadRefreshToken:
-          type: boolean
-        errorMessage:
-          type: string
-        tokenExpiresIn:
-          readOnly: true
-          type: string
-          format: date-time
-      xml:
-        name: RiskAlyzeUser
-      type: object
-    OAS.Integrations.RiskAlyze.Classes.AssetClass:
-      properties:
-        bonds:
-          type: number
-          format: double
-        stocks:
-          type: number
-          format: double
-        cash:
-          type: number
-          format: double
-        other:
-          type: number
-          format: double
-        unavailable:
-          type: number
-          format: double
-      xml:
-        name: AssetClass
-      type: object
-    OAS.Integrations.RiskAlyze.IntegrationInfo:
-      properties:
-        client_secret:
-          type: string
-        client_id:
-          type: string
-        orionUid:
-          type: string
-        orionPwd:
-          type: string
-        redirect_uri:
-          type: string
-        repId:
-          type: string
-      xml:
-        name: IntegrationInfo
-      type: object
-    OAS.Integrations.RiskAlyze.Classes.Security:
-      properties:
-        shortname:
-          type: string
-        longname:
-          type: string
-        type:
-          type: string
-      xml:
-        name: Security
-      type: object
-    OAS.Integrations.RiskAlyze.Classes.AccountIntegration:
-      properties:
-        client_ex_api_link_id:
-          type: string
-        custodial_account_number:
-          type: string
-        custodian_id:
-          type: integer
-          format: int32
-        custodian_slug:
-          type: string
-        ex_account_id:
-          type: string
-        service:
-          type: string
-      xml:
-        name: AccountIntegration
-      type: object
-    OAS.Integrations.RiskAlyze.Dto.AnalysisDto:
-      properties:
-        riskNumber:
-          type: number
-          format: double
-        riskScoreImage:
-          type: string
-          format: byte
-        riskScoreImageUri:
-          type: string
-        best:
-          type: number
-          format: double
-        worst:
-          type: number
-          format: double
-      xml:
-        name: AnalysisDto
-      type: object
     OAS.Integrations.RiskAlyze.Dto.RiskAlyzeAccountUpsertDto.Allocation:
       properties:
         id:
@@ -1139,50 +1001,6 @@ components:
       xml:
         name: Allocation
       type: object
-    OAS.Integrations.RiskAlyze.Dto.RiskAlyzeAccountUpsertDto:
-      properties:
-        riskAlyzeId:
-          type: string
-        orionAccountId:
-          type: integer
-          format: int32
-        modelAggId:
-          type: integer
-          format: int32
-        riskBudget:
-          type: integer
-          format: int32
-        firstName:
-          type: string
-        lastName:
-          type: string
-        repId:
-          type: integer
-          format: int32
-        sessionAuthToken:
-          type: string
-        custodian:
-          type: string
-        allocations:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Dto.RiskAlyzeAccountUpsertDto.Allocation'
-          xml:
-            name: Allocation
-            wrapped: true
-          type: array
-      xml:
-        name: RiskAlyzeAccountUpsertDto
-      type: object
-    OAS.Integrations.RiskAlyze.Dto.TickerAllocationsDto:
-      properties:
-        ticker:
-          type: string
-        allocation:
-          type: number
-          format: double
-      xml:
-        name: TickerAllocationsDto
-      type: object
     OAS.Integrations.RiskAlyze.Classes.StressTest:
       properties:
         slug:
@@ -1199,47 +1017,47 @@ components:
       xml:
         name: StressTest
       type: object
-    OAS.Integrations.RiskAlyze.Classes.Permissions:
+    OAS.Integrations.RiskAlyze.Classes.Extras:
       properties:
-        change_type:
+        type:
+          type: string
+        database_id:
           type: integer
           format: int32
-        allocation_details:
+        contact_id:
           type: integer
           format: int32
-        settings:
+      xml:
+        name: Extras
+      type: object
+    OAS.Integrations.RiskAlyze.Dto.RiskalyzePortfolioDto:
+      properties:
+        riskalyzePortfolioId:
           type: integer
           format: int32
-        optimizer:
+        name:
+          type: string
+        status:
+          type: string
+        type:
+          type: string
+        total:
           type: integer
           format: int32
-        add:
-          type: integer
-          format: int32
-        remove:
-          type: integer
-          format: int32
-        delete:
-          type: integer
-          format: int32
-        entry_type:
+        analysis:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Dto.AnalysisDto'
+        riskScoreImage:
+          type: string
+          format: byte
+        accounts:
           items:
-            type: string
+            $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Dto.RiskalyzeAccountDto'
+          xml:
+            name: RiskalyzeAccountDto
+            wrapped: true
           type: array
       xml:
-        name: Permissions
-      type: object
-    OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto:
-      properties:
-        key:
-          type: integer
-          format: int32
-        productName:
-          type: string
-        termsAccepted:
-          type: boolean
-      xml:
-        name: IntegrationSetupRequestDto
+        name: RiskalyzePortfolioDto
       type: object
     OAS.WebApi.DTO.Billing.BillScheduleDto:
       properties:
@@ -1673,236 +1491,29 @@ components:
       xml:
         name: BillScheduleDto
       type: object
-    OAS.Integrations.RiskAlyze.Classes.Heatmap:
+    OAS.DataModel.Integration.RiskAlyze.RiskAlyzeUser:
       properties:
-        diversified_risk:
-          type: number
-          format: double
-        risk:
-          type: number
-          format: double
-        reward:
-          type: number
-          format: double
-      xml:
-        name: Heatmap
-      type: object
-    OAS.Integrations.RiskAlyze.Classes.Extras:
-      properties:
-        type:
+        access_token:
           type: string
-        database_id:
+        expires_in:
           type: integer
           format: int32
-        contact_id:
-          type: integer
-          format: int32
-      xml:
-        name: Extras
-      type: object
-    OAS.Integrations.RiskAlyze.Dto.RiskalyzeAllocationDto:
-      properties:
-        riskalyzeAllocationId:
-          type: integer
-          format: int32
-        longName:
+        token_type:
           type: string
-        shortName:
+        scope:
           type: string
-        type:
+        refresh_token:
           type: string
-        amount:
-          type: number
-          format: double
-        allocationPercent:
-          type: number
-          format: double
-        analysis:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Dto.AnalysisDto'
-      xml:
-        name: RiskalyzeAllocationDto
-      type: object
-    OAS.Integrations.RiskAlyze.Classes.Integration:
-      properties:
-        id:
+        deadRefreshToken:
+          type: boolean
+        errorMessage:
           type: string
-        client_id:
-          type: string
-        type:
-          type: string
-        ex_id_1:
-          type: string
-        ex_id_2:
-          type: string
-        timestamp:
+        tokenExpiresIn:
+          readOnly: true
           type: string
           format: date-time
       xml:
-        name: Integration
-      type: object
-    OAS.Integrations.RiskAlyze.Classes.DefaultAllocations:
-      properties:
-        sec_id:
-          type: integer
-          format: int32
-        security:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Security'
-      xml:
-        name: DefaultAllocations
-      type: object
-    OAS.Integrations.RiskAlyze.Classes.Standard:
-      properties:
-        order:
-          type: integer
-          format: int32
-        label:
-          type: string
-        description:
-          type: string
-        default_allocations:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.DefaultAllocations'
-          xml:
-            name: DefaultAllocations
-            wrapped: true
-          type: array
-        permissions:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Permissions'
-      xml:
-        name: Standard
-      type: object
-    OAS.Integrations.RiskAlyze.Dto.RiskAlyzeAccountUpsertDto.Security:
-      properties:
-        ticker:
-          type: string
-        longname:
-          type: string
-        type:
-          type: string
-      xml:
-        name: Security
-      type: object
-    OAS.Integrations.RiskAlyze.Dto.RiskalyzeAnalysisDto:
-      properties:
-        clientId:
-          type: integer
-          format: int32
-        riskalyzeClientId:
-          type: integer
-          format: int32
-        firstName:
-          type: string
-        lastName:
-          type: string
-        status:
-          type: string
-        created:
-          type: string
-          format: date-time
-        riskNumber:
-          type: number
-          format: double
-        currentPortfolio:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Dto.RiskalyzePortfolioDto'
-        proposedPortfolio:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Dto.RiskalyzePortfolioDto'
-        questionnaire:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Dto.QuestionnaireDto'
-      xml:
-        name: RiskalyzeAnalysisDto
-      type: object
-    OAS.Integrations.RiskAlyze.Dto.QuestionnaireDto:
-      properties:
-        riskalyzeQuestionnaireId:
-          type: integer
-          format: int32
-        firstName:
-          type: string
-        lastName:
-          type: string
-        birthYear:
-          type: string
-        retirementAge:
-          type: string
-        retirementYear:
-          type: string
-        timeStamp:
-          type: string
-          format: date-time
-        riskNumber:
-          type: number
-          format: double
-        riskScoreImage:
-          type: string
-          format: byte
-        riskScoreImageUri:
-          type: string
-      xml:
-        name: QuestionnaireDto
-      type: object
-    OAS.Integrations.RiskAlyze.Classes.RiskMetric:
-      properties:
-        type:
-          type: string
-        value:
-          type: integer
-          format: int32
-      xml:
-        name: RiskMetric
-      type: object
-    OAS.Integrations.RiskAlyze.Classes.Questionnaire:
-      properties:
-        id:
-          type: integer
-          format: int32
-        user_id:
-          type: string
-        client_id:
-          type: string
-        advisor_id:
-          type: string
-        fname:
-          type: string
-        lname:
-          type: string
-        ai:
-          type: string
-        financial_status:
-          type: string
-        financial_goals:
-          type: string
-        archived:
-          type: string
-        sent:
-          type: string
-        sent_timestamp:
-          type: string
-          format: date-time
-        timestamp:
-          type: string
-          format: date-time
-        completed:
-          type: string
-        deleted:
-          type: string
-        rq4_simple:
-          type: string
-        birth_year:
-          type: string
-        retirement_age:
-          type: string
-        retirement_year:
-          type: string
-        risk_number:
-          type: number
-          format: double
-        x_RiskScoreImage:
-          type: string
-          format: byte
-        x_RiskScoreImageUri:
-          type: string
-      xml:
-        name: Questionnaire
+        name: RiskAlyzeUser
       type: object
     OAS.Integrations.RiskAlyze.Classes.Client:
       properties:
@@ -1970,6 +1581,486 @@ components:
           type: string
       xml:
         name: Client
+      type: object
+    OAS.Integrations.RiskAlyze.Classes.Questionnaire:
+      properties:
+        id:
+          type: integer
+          format: int32
+        user_id:
+          type: string
+        client_id:
+          type: string
+        advisor_id:
+          type: string
+        fname:
+          type: string
+        lname:
+          type: string
+        ai:
+          type: string
+        financial_status:
+          type: string
+        financial_goals:
+          type: string
+        archived:
+          type: string
+        sent:
+          type: string
+        sent_timestamp:
+          type: string
+          format: date-time
+        timestamp:
+          type: string
+          format: date-time
+        completed:
+          type: string
+        deleted:
+          type: string
+        rq4_simple:
+          type: string
+        birth_year:
+          type: string
+        retirement_age:
+          type: string
+        retirement_year:
+          type: string
+        risk_number:
+          type: number
+          format: double
+        x_RiskScoreImage:
+          type: string
+          format: byte
+        x_RiskScoreImageUri:
+          type: string
+      xml:
+        name: Questionnaire
+      type: object
+    OAS.Integrations.RiskAlyze.Classes.Portfolio:
+      properties:
+        id:
+          type: integer
+          format: int32
+        user_id:
+          type: string
+        client_id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        total:
+          type: integer
+          format: int32
+        analysis:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Analysis'
+        status:
+          type: string
+        type:
+          type: string
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+        analyzed:
+          type: string
+          format: date-time
+        data_model:
+          type: integer
+          format: int32
+        deleted:
+          type: integer
+          format: int32
+        editable:
+          type: integer
+          format: int32
+        data_models:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.DataModel'
+          xml:
+            name: DataModel
+            wrapped: true
+          type: array
+        is_dirty:
+          type: integer
+          format: int32
+        accounts:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Account'
+          xml:
+            name: Account
+            wrapped: true
+          type: array
+        config:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Config'
+        permissions:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.PortfolioPermissions'
+        result:
+          type: string
+      xml:
+        name: Portfolio
+      type: object
+    OAS.Integrations.RiskAlyze.Classes.Standard:
+      properties:
+        order:
+          type: integer
+          format: int32
+        label:
+          type: string
+        description:
+          type: string
+        default_allocations:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.DefaultAllocations'
+          xml:
+            name: DefaultAllocations
+            wrapped: true
+          type: array
+        permissions:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Permissions'
+      xml:
+        name: Standard
+      type: object
+    OAS.Integrations.RiskAlyze.Dto.AnalysisDto:
+      properties:
+        riskNumber:
+          type: number
+          format: double
+        riskScoreImage:
+          type: string
+          format: byte
+        riskScoreImageUri:
+          type: string
+        best:
+          type: number
+          format: double
+        worst:
+          type: number
+          format: double
+      xml:
+        name: AnalysisDto
+      type: object
+    OAS.Integrations.RiskAlyze.Classes.RiskMetric:
+      properties:
+        type:
+          type: string
+        value:
+          type: integer
+          format: int32
+      xml:
+        name: RiskMetric
+      type: object
+    OAS.Integrations.RiskAlyze.Dto.RiskalyzeAnalysisDto:
+      properties:
+        clientId:
+          type: integer
+          format: int32
+        riskalyzeClientId:
+          type: integer
+          format: int32
+        firstName:
+          type: string
+        lastName:
+          type: string
+        status:
+          type: string
+        created:
+          type: string
+          format: date-time
+        riskNumber:
+          type: number
+          format: double
+        currentPortfolio:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Dto.RiskalyzePortfolioDto'
+        proposedPortfolio:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Dto.RiskalyzePortfolioDto'
+        questionnaire:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Dto.QuestionnaireDto'
+      xml:
+        name: RiskalyzeAnalysisDto
+      type: object
+    OAS.Integrations.RiskAlyze.Classes.Analysis:
+      properties:
+        return:
+          type: number
+          format: double
+        ttm_dividend:
+          type: number
+          format: double
+        annual_fee:
+          type: number
+          format: double
+        advisory_fee:
+          type: number
+          format: double
+        stdev:
+          type: number
+          format: double
+        risk_number:
+          type: number
+          format: double
+        risk_metric:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.RiskMetric'
+        worst:
+          type: number
+          format: double
+        best:
+          type: number
+          format: double
+        stresstests:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.StressTest'
+          xml:
+            name: StressTest
+            wrapped: true
+          type: array
+        categories:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Categories'
+        heatmap:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Heatmap'
+        alloclog_id:
+          type: integer
+          format: int32
+        x_RiskScoreImage:
+          type: string
+          format: byte
+        x_RiskScoreImageUri:
+          type: string
+      xml:
+        name: Analysis
+      type: object
+    OAS.Integrations.RiskAlyze.Classes.DefaultAllocations:
+      properties:
+        sec_id:
+          type: integer
+          format: int32
+        security:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Security'
+      xml:
+        name: DefaultAllocations
+      type: object
+    OAS.Integrations.RiskAlyze.Classes.DataModel:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        type:
+          type: string
+        market:
+          type: number
+          format: double
+        interest:
+          type: number
+          format: double
+        risk_number:
+          type: integer
+          format: int32
+      xml:
+        name: DataModel
+      type: object
+    OAS.Integrations.RiskAlyze.Classes.AccountTypes:
+      properties:
+        standard:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Standard'
+        sma:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Sma'
+        uma:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Uma'
+        va:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Va'
+      xml:
+        name: AccountTypes
+      type: object
+    OAS.Integrations.RiskAlyze.Classes.Categories:
+      properties:
+        asset_class:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.AssetClass'
+      xml:
+        name: Categories
+      type: object
+    OAS.Integrations.RiskAlyze.Classes.PortfolioPermissions:
+      properties:
+        read:
+          type: integer
+          format: int32
+        write:
+          type: integer
+          format: int32
+        delete:
+          type: integer
+          format: int32
+      xml:
+        name: PortfolioPermissions
+      type: object
+    OAS.Integrations.RiskAlyze.Dto.RiskalyzeAccountDto:
+      properties:
+        riskalyzeAccountId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        status:
+          type: string
+        type:
+          type: string
+        total:
+          type: number
+          format: double
+        allocationPercent:
+          type: number
+          format: double
+        analysis:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Dto.AnalysisDto'
+        allocations:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Dto.RiskalyzeAllocationDto'
+          xml:
+            name: RiskalyzeAllocationDto
+            wrapped: true
+          type: array
+      xml:
+        name: RiskalyzeAccountDto
+      type: object
+    OAS.Integrations.RiskAlyze.Dto.RiskalyzeAllocationDto:
+      properties:
+        riskalyzeAllocationId:
+          type: integer
+          format: int32
+        longName:
+          type: string
+        shortName:
+          type: string
+        type:
+          type: string
+        amount:
+          type: number
+          format: double
+        allocationPercent:
+          type: number
+          format: double
+        analysis:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Dto.AnalysisDto'
+      xml:
+        name: RiskalyzeAllocationDto
+      type: object
+    OAS.Integrations.RiskAlyze.Classes.Security:
+      properties:
+        shortname:
+          type: string
+        longname:
+          type: string
+        type:
+          type: string
+      xml:
+        name: Security
+      type: object
+    OAS.Integrations.RiskAlyze.Classes.Sma:
+      properties:
+        order:
+          type: integer
+          format: int32
+        label:
+          type: string
+        description:
+          type: string
+        default_allocations:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.DefaultAllocations'
+          xml:
+            name: DefaultAllocations
+            wrapped: true
+          type: array
+        permissions:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Permissions'
+      xml:
+        name: Sma
+      type: object
+    OAS.Integrations.RiskAlyze.Classes.Uma:
+      properties:
+        order:
+          type: integer
+          format: int32
+        label:
+          type: string
+        description:
+          type: string
+        default_allocations:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.DefaultAllocations'
+          xml:
+            name: DefaultAllocations
+            wrapped: true
+          type: array
+        permissions:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Permissions'
+      xml:
+        name: Uma
+      type: object
+    OAS.Integrations.RiskAlyze.Dto.QuestionnaireDto:
+      properties:
+        riskalyzeQuestionnaireId:
+          type: integer
+          format: int32
+        firstName:
+          type: string
+        lastName:
+          type: string
+        birthYear:
+          type: string
+        retirementAge:
+          type: string
+        retirementYear:
+          type: string
+        timeStamp:
+          type: string
+          format: date-time
+        riskNumber:
+          type: number
+          format: double
+        riskScoreImage:
+          type: string
+          format: byte
+        riskScoreImageUri:
+          type: string
+      xml:
+        name: QuestionnaireDto
+      type: object
+    OAS.Integrations.RiskAlyze.Dto.RiskAlyzeAccountUpsertDto:
+      properties:
+        riskAlyzeId:
+          type: string
+        orionAccountId:
+          type: integer
+          format: int32
+        modelAggId:
+          type: integer
+          format: int32
+        riskBudget:
+          type: integer
+          format: int32
+        firstName:
+          type: string
+        lastName:
+          type: string
+        repId:
+          type: integer
+          format: int32
+        sessionAuthToken:
+          type: string
+        custodian:
+          type: string
+        allocations:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Dto.RiskAlyzeAccountUpsertDto.Allocation'
+          xml:
+            name: Allocation
+            wrapped: true
+          type: array
+      xml:
+        name: RiskAlyzeAccountUpsertDto
       type: object
     OAS.Integrations.RiskAlyze.Classes.Account:
       properties:
@@ -2040,48 +2131,6 @@ components:
       xml:
         name: Account
       type: object
-    OAS.Integrations.RiskAlyze.Classes.Uma:
-      properties:
-        order:
-          type: integer
-          format: int32
-        label:
-          type: string
-        description:
-          type: string
-        default_allocations:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.DefaultAllocations'
-          xml:
-            name: DefaultAllocations
-            wrapped: true
-          type: array
-        permissions:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Permissions'
-      xml:
-        name: Uma
-      type: object
-    OAS.Integrations.RiskAlyze.Classes.Sma:
-      properties:
-        order:
-          type: integer
-          format: int32
-        label:
-          type: string
-        description:
-          type: string
-        default_allocations:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.DefaultAllocations'
-          xml:
-            name: DefaultAllocations
-            wrapped: true
-          type: array
-        permissions:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Permissions'
-      xml:
-        name: Sma
-      type: object
     OAS.Integrations.RiskAlyze.Classes.Va:
       properties:
         order:
@@ -2103,19 +2152,113 @@ components:
       xml:
         name: Va
       type: object
-    OAS.Integrations.RiskAlyze.Classes.PortfolioPermissions:
+    OAS.Integrations.RiskAlyze.Classes.Config:
       properties:
-        read:
+        account_types:
+          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.AccountTypes'
+        lists:
+          type: object
+        model_default_total:
           type: integer
           format: int32
-        write:
+      xml:
+        name: Config
+      type: object
+    OAS.Integrations.RiskAlyze.IntegrationInfo:
+      properties:
+        client_secret:
+          type: string
+        client_id:
+          type: string
+        orionUid:
+          type: string
+        orionPwd:
+          type: string
+        redirect_uri:
+          type: string
+        repId:
+          type: string
+      xml:
+        name: IntegrationInfo
+      type: object
+    OAS.Integrations.RiskAlyze.Classes.Integration:
+      properties:
+        id:
+          type: string
+        client_id:
+          type: string
+        type:
+          type: string
+        ex_id_1:
+          type: string
+        ex_id_2:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+      xml:
+        name: Integration
+      type: object
+    OAS.Integrations.RiskAlyze.Dto.RiskAlyzeAccountUpsertDto.Security:
+      properties:
+        ticker:
+          type: string
+        longname:
+          type: string
+        type:
+          type: string
+      xml:
+        name: Security
+      type: object
+    OAS.Integrations.RiskAlyze.Classes.AssetClass:
+      properties:
+        bonds:
+          type: number
+          format: double
+        stocks:
+          type: number
+          format: double
+        cash:
+          type: number
+          format: double
+        other:
+          type: number
+          format: double
+        unavailable:
+          type: number
+          format: double
+      xml:
+        name: AssetClass
+      type: object
+    OAS.Integrations.RiskAlyze.Classes.Permissions:
+      properties:
+        change_type:
+          type: integer
+          format: int32
+        allocation_details:
+          type: integer
+          format: int32
+        settings:
+          type: integer
+          format: int32
+        optimizer:
+          type: integer
+          format: int32
+        add:
+          type: integer
+          format: int32
+        remove:
           type: integer
           format: int32
         delete:
           type: integer
           format: int32
+        entry_type:
+          items:
+            type: string
+          type: array
       xml:
-        name: PortfolioPermissions
+        name: Permissions
       type: object
     OAS.Integrations.RiskAlyze.Classes.Allocation:
       properties:
@@ -2163,202 +2306,59 @@ components:
       xml:
         name: Allocation
       type: object
-    OAS.Integrations.RiskAlyze.Classes.Analysis:
+    OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto:
       properties:
-        return:
-          type: number
-          format: double
-        ttm_dividend:
-          type: number
-          format: double
-        annual_fee:
-          type: number
-          format: double
-        advisory_fee:
-          type: number
-          format: double
-        stdev:
-          type: number
-          format: double
-        risk_number:
-          type: number
-          format: double
-        risk_metric:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.RiskMetric'
-        worst:
-          type: number
-          format: double
-        best:
-          type: number
-          format: double
-        stresstests:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.StressTest'
-          xml:
-            name: StressTest
-            wrapped: true
-          type: array
-        categories:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Categories'
-        heatmap:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Heatmap'
-        alloclog_id:
+        key:
           type: integer
           format: int32
-        x_RiskScoreImage:
+        productName:
           type: string
-          format: byte
-        x_RiskScoreImageUri:
-          type: string
+        termsAccepted:
+          type: boolean
       xml:
-        name: Analysis
+        name: IntegrationSetupRequestDto
       type: object
-    OAS.Integrations.RiskAlyze.Classes.Config:
+    OAS.Integrations.RiskAlyze.Dto.TickerAllocationsDto:
       properties:
-        account_types:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.AccountTypes'
-        lists:
-          type: object
-        model_default_total:
-          type: integer
-          format: int32
-      xml:
-        name: Config
-      type: object
-    OAS.Integrations.RiskAlyze.Classes.DataModel:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
+        ticker:
           type: string
-        type:
-          type: string
-        market:
+        allocation:
           type: number
           format: double
-        interest:
+      xml:
+        name: TickerAllocationsDto
+      type: object
+    OAS.Integrations.RiskAlyze.Classes.AccountIntegration:
+      properties:
+        client_ex_api_link_id:
+          type: string
+        custodial_account_number:
+          type: string
+        custodian_id:
+          type: integer
+          format: int32
+        custodian_slug:
+          type: string
+        ex_account_id:
+          type: string
+        service:
+          type: string
+      xml:
+        name: AccountIntegration
+      type: object
+    OAS.Integrations.RiskAlyze.Classes.Heatmap:
+      properties:
+        diversified_risk:
           type: number
           format: double
-        risk_number:
-          type: integer
-          format: int32
+        risk:
+          type: number
+          format: double
+        reward:
+          type: number
+          format: double
       xml:
-        name: DataModel
-      type: object
-    OAS.Integrations.RiskAlyze.Classes.AccountTypes:
-      properties:
-        standard:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Standard'
-        sma:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Sma'
-        uma:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Uma'
-        va:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Va'
-      xml:
-        name: AccountTypes
-      type: object
-    OAS.Integrations.RiskAlyze.Classes.Portfolio:
-      properties:
-        id:
-          type: integer
-          format: int32
-        user_id:
-          type: string
-        client_id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        total:
-          type: integer
-          format: int32
-        analysis:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Analysis'
-        status:
-          type: string
-        type:
-          type: string
-        created:
-          type: string
-          format: date-time
-        updated:
-          type: string
-          format: date-time
-        analyzed:
-          type: string
-          format: date-time
-        data_model:
-          type: integer
-          format: int32
-        deleted:
-          type: integer
-          format: int32
-        editable:
-          type: integer
-          format: int32
-        data_models:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.DataModel'
-          xml:
-            name: DataModel
-            wrapped: true
-          type: array
-        is_dirty:
-          type: integer
-          format: int32
-        accounts:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Account'
-          xml:
-            name: Account
-            wrapped: true
-          type: array
-        config:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.Config'
-        permissions:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.PortfolioPermissions'
-        result:
-          type: string
-      xml:
-        name: Portfolio
-      type: object
-    OAS.Integrations.RiskAlyze.Dto.RiskalyzePortfolioDto:
-      properties:
-        riskalyzePortfolioId:
-          type: integer
-          format: int32
-        name:
-          type: string
-        status:
-          type: string
-        type:
-          type: string
-        total:
-          type: integer
-          format: int32
-        analysis:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Dto.AnalysisDto'
-        riskScoreImage:
-          type: string
-          format: byte
-        accounts:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Dto.RiskalyzeAccountDto'
-          xml:
-            name: RiskalyzeAccountDto
-            wrapped: true
-          type: array
-      xml:
-        name: RiskalyzePortfolioDto
-      type: object
-    OAS.Integrations.RiskAlyze.Classes.Categories:
-      properties:
-        asset_class:
-          $ref: '#/components/schemas/OAS.Integrations.RiskAlyze.Classes.AssetClass'
-      xml:
-        name: Categories
+        name: Heatmap
       type: object
   securitySchemes:
     Authorization:

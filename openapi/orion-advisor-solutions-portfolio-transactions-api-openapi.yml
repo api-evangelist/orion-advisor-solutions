@@ -2731,6 +2731,758 @@ paths:
         required: true
 components:
   schemas:
+    OAS.WebApi.DTO.Portfolio.TransactionSimpleDto:
+      properties:
+        transDate:
+          type: string
+          format: date-time
+        productName:
+          type: string
+        ticker:
+          type: string
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: TransactionSimpleDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.TransactionPortfolioDto:
+      properties:
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        ticker:
+          type: string
+        transDate:
+          type: string
+          format: date-time
+        transTime:
+          type: string
+          format: date-time
+        transAmount:
+          type: number
+          format: double
+        navPrice:
+          type: number
+          format: double
+        noUnits:
+          type: number
+          format: double
+        assetId:
+          type: integer
+          format: int32
+        status:
+          type: string
+          enum:
+          - Complete
+          - Pending
+          - Rejected
+          - Reversed
+          - Inactive
+          - PendingCorpAction
+          - FutureAip
+        transactionDescription:
+          type: string
+        notes:
+          type: string
+        transTypeId:
+          type: integer
+          format: int32
+        transactionSubTypeId:
+          type: integer
+          format: int32
+        transactionSubTypeName:
+          type: string
+        contributionCodeId:
+          type: integer
+          format: int32
+        distributionCodeId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        managementStyle:
+          type: string
+        payee:
+          type: integer
+          format: int32
+        advisorNotes:
+          type: string
+        state:
+          type: string
+        settleDate:
+          type: string
+          format: date-time
+        tradeReferenceNumber:
+          type: string
+        transactionLinkCode:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        registrationId:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        typeCode:
+          type: string
+        typeSource:
+          type: string
+        signField:
+          type: string
+        eclipseOrderId:
+          type: integer
+          format: int32
+        performanceFeeBreak:
+          type: boolean
+        financialType:
+          type: string
+          enum:
+          - None
+          - Contribution
+          - Distribution
+          - Exchange
+          - DivReinvest
+          - MgmntFees
+          - DivCash
+          - MiscFees
+          - Journal
+          - Merges
+        fileTranCode:
+          type: string
+      xml:
+        name: TransactionPortfolioDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.TransactionFeeDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        transactionFeeTypeId:
+          type: integer
+          format: int32
+        feeAmount:
+          type: number
+          format: double
+        fileFeeDescription:
+          type: string
+        feeType:
+          type: string
+      xml:
+        name: TransactionFeeDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.TransactionVerboseDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        isDataSharingEntity:
+          type: boolean
+        portfolio:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionPortfolioDto'
+        billing:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionBillingDto'
+        costBasis:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CostBasisDto'
+          xml:
+            name: CostBasisDto
+            wrapped: true
+          type: array
+        additionalInformation:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioTransactionAdditionalInformationDto'
+        alternative:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionVerboseAlternativeDto'
+        userDefinedFields:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+          xml:
+            name: EntityOptionDto
+            wrapped: true
+          type: array
+        entityOptions:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+          xml:
+            name: EntityOptionDto
+            wrapped: true
+          type: array
+        transactionFee:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionFeeDto'
+          xml:
+            name: TransactionFeeDto
+            wrapped: true
+          type: array
+      xml:
+        name: TransactionVerboseDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.TransactionVerboseAlternativeDto:
+      properties:
+        impactsCommitment:
+          type: boolean
+        impactsCapitalBalance:
+          type: boolean
+        originalCost:
+          type: number
+          format: double
+        originalCostDate:
+          type: string
+          format: date-time
+        equityFundingType:
+          type: string
+        equityFundingTypeId:
+          type: integer
+          format: int32
+        equityActivityType:
+          type: string
+        equityActivityTypeId:
+          type: integer
+          format: int32
+        productTransactionId:
+          type: integer
+          format: int32
+        cashDate:
+          type: string
+          format: date-time
+        isParent:
+          type: boolean
+      xml:
+        name: TransactionVerboseAlternativeDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.PortfolioTransactionAdditionalInformationDto:
+      properties:
+        yieldToMaturity:
+          type: number
+          format: double
+        isOID:
+          type: boolean
+        tradeRequestId:
+          type: integer
+          format: int32
+        commIndicator:
+          type: integer
+          format: int32
+        orderType:
+          type: integer
+          format: int32
+        marketCode:
+          type: integer
+          format: int32
+        blotterCode:
+          type: integer
+          format: int32
+        distIndicator:
+          type: integer
+          format: int32
+        revenueType:
+          type: integer
+          format: int32
+        spreadStraddle:
+          type: integer
+          format: int32
+        brokerCode:
+          type: string
+        includeAsRmdDistribution:
+          type: boolean
+        includeAsRmdDistributionIsSystemMaintained:
+          type: boolean
+        divExDate:
+          type: string
+          format: date-time
+        oidInterest:
+          type: number
+          format: double
+      xml:
+        name: PortfolioTransactionAdditionalInformationDto
+      type: object
+    OAS.WebApi.DTO.Confirm.CorpAction.CorpActionTransactionV2Dto:
+      properties:
+        id:
+          readOnly: true
+          type: string
+        dbName:
+          type: string
+        transactionId:
+          type: integer
+          format: int32
+        corpActionId:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        processingType:
+          type: string
+        accountId:
+          type: integer
+          format: int32
+        assetId:
+          type: integer
+          format: int32
+        transDate:
+          type: string
+          format: date-time
+        transType:
+          type: string
+        amount:
+          type: number
+          format: double
+        units:
+          type: number
+          format: double
+        price:
+          type: number
+          format: double
+        tradeStatus:
+          type: string
+          enum:
+          - Complete
+          - Pending
+          - Rejected
+          - Reversed
+          - Inactive
+          - PendingCorpAction
+          - FutureAip
+        custodian:
+          type: string
+        transSubType:
+          type: string
+        isProcessing:
+          type: boolean
+        processingId:
+          type: integer
+          format: int32
+        alClientId:
+          type: integer
+          format: int32
+        transTypeId:
+          type: integer
+          format: int32
+        transSubTypeId:
+          type: integer
+          format: int32
+        notes:
+          type: string
+        accountNumber:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        isCil:
+          type: boolean
+        custodianId:
+          type: integer
+          format: int32
+      xml:
+        name: CorpActionTransactionV2Dto
+      type: object
+    OAS.WebApi.DTO.Portfolio.TransactionAlternativeDto:
+      properties:
+        impactsCommitment:
+          type: boolean
+        impactsCapitalBalance:
+          type: boolean
+        originalCost:
+          type: number
+          format: double
+        originalCostDate:
+          type: string
+          format: date-time
+        equityFundingType:
+          type: string
+        equityFundingTypeId:
+          type: integer
+          format: int32
+        equityActivityType:
+          type: string
+        equityActivityTypeId:
+          type: integer
+          format: int32
+        costBasis:
+          type: number
+          format: double
+        productTransactionId:
+          type: integer
+          format: int32
+        cashDate:
+          type: string
+          format: date-time
+        id:
+          type: integer
+          format: int32
+        transDate:
+          type: string
+          format: date-time
+        transactionDescription:
+          type: string
+        productName:
+          type: string
+        ticker:
+          type: string
+        transAmount:
+          type: number
+          format: double
+        noUnits:
+          type: number
+          format: double
+        navPrice:
+          type: number
+          format: double
+        accountNumber:
+          type: string
+        status:
+          type: string
+          enum:
+          - Complete
+          - Pending
+          - Rejected
+          - Reversed
+          - Inactive
+          - PendingCorpAction
+          - FutureAip
+        fileTranCode:
+          type: string
+        type:
+          type: string
+        transTime:
+          type: string
+          format: date-time
+        assetId:
+          type: integer
+          format: int32
+        assetStatusId:
+          type: integer
+          format: int32
+        cusip:
+          type: string
+        notes:
+          type: string
+        transTypeId:
+          type: integer
+          format: int32
+        transactionSubTypeId:
+          type: integer
+          format: int32
+        transactionSubTypeName:
+          type: string
+        transactionSubTypeDescription:
+          type: string
+        contributionCodeId:
+          type: integer
+          format: int32
+        contributionCodeName:
+          type: string
+        distributionCodeId:
+          type: integer
+          format: int32
+        distributionCodeName:
+          type: string
+        accountId:
+          type: integer
+          format: int32
+        accountStatusId:
+          type: integer
+          format: int32
+        managementStyle:
+          type: string
+        payee:
+          type: integer
+          format: int32
+        advisorNotes:
+          type: string
+        state:
+          type: string
+        settleDate:
+          type: string
+          format: date-time
+        tradeReferenceNumber:
+          type: string
+        transactionLinkCode:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        registrationId:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        typeCode:
+          type: string
+        brokerCode:
+          type: string
+        accountType:
+          type: string
+        fundFamily:
+          type: string
+        custodian:
+          type: string
+        count:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        unitBalance:
+          type: number
+          format: double
+        productId:
+          type: integer
+          format: int32
+        performanceFeeBreak:
+          type: boolean
+        financialType:
+          type: string
+          enum:
+          - None
+          - Contribution
+          - Distribution
+          - Exchange
+          - DivReinvest
+          - MgmntFees
+          - DivCash
+          - MiscFees
+          - Journal
+          - Merges
+      xml:
+        name: TransactionAlternativeDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.TransactionBillingDto:
+      properties:
+        isNMReady:
+          type: boolean
+        isBilled:
+          type: boolean
+        isAdvanceBilled:
+          type: boolean
+        isCashFlow:
+          type: boolean
+        billedDate:
+          type: string
+          format: date-time
+      xml:
+        name: TransactionBillingDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.TransactionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        transDate:
+          type: string
+          format: date-time
+        transactionDescription:
+          type: string
+        productName:
+          type: string
+        ticker:
+          type: string
+        transAmount:
+          type: number
+          format: double
+        noUnits:
+          type: number
+          format: double
+        navPrice:
+          type: number
+          format: double
+        accountNumber:
+          type: string
+        status:
+          type: string
+          enum:
+          - Complete
+          - Pending
+          - Rejected
+          - Reversed
+          - Inactive
+          - PendingCorpAction
+          - FutureAip
+        fileTranCode:
+          type: string
+        type:
+          type: string
+        transTime:
+          type: string
+          format: date-time
+        assetId:
+          type: integer
+          format: int32
+        assetStatusId:
+          type: integer
+          format: int32
+        cusip:
+          type: string
+        notes:
+          type: string
+        transTypeId:
+          type: integer
+          format: int32
+        transactionSubTypeId:
+          type: integer
+          format: int32
+        transactionSubTypeName:
+          type: string
+        transactionSubTypeDescription:
+          type: string
+        contributionCodeId:
+          type: integer
+          format: int32
+        contributionCodeName:
+          type: string
+        distributionCodeId:
+          type: integer
+          format: int32
+        distributionCodeName:
+          type: string
+        accountId:
+          type: integer
+          format: int32
+        accountStatusId:
+          type: integer
+          format: int32
+        managementStyle:
+          type: string
+        payee:
+          type: integer
+          format: int32
+        advisorNotes:
+          type: string
+        state:
+          type: string
+        settleDate:
+          type: string
+          format: date-time
+        tradeReferenceNumber:
+          type: string
+        transactionLinkCode:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        registrationId:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        typeCode:
+          type: string
+        brokerCode:
+          type: string
+        accountType:
+          type: string
+        fundFamily:
+          type: string
+        custodian:
+          type: string
+        count:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        unitBalance:
+          type: number
+          format: double
+        productId:
+          type: integer
+          format: int32
+        performanceFeeBreak:
+          type: boolean
+        financialType:
+          type: string
+          enum:
+          - None
+          - Contribution
+          - Distribution
+          - Exchange
+          - DivReinvest
+          - MgmntFees
+          - DivCash
+          - MiscFees
+          - Journal
+          - Merges
+      xml:
+        name: TransactionDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.CostBasisDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        costDate:
+          type: string
+          format: date-time
+        holdingPeriodDate:
+          type: string
+          format: date-time
+        costUnits:
+          type: number
+          format: double
+        costPrice:
+          type: number
+          format: double
+        costTotal:
+          type: number
+          format: double
+        costNotes:
+          type: string
+        transTypeId:
+          type: integer
+          format: int32
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+      xml:
+        name: CostBasisDto
+      type: object
     OAS.WebApi.DTO.Portfolio.TransactionBaseDto:
       properties:
         id:
@@ -2879,285 +3631,6 @@ components:
           - Merges
       xml:
         name: TransactionBaseDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.TransactionVerboseAlternativeDto:
-      properties:
-        impactsCommitment:
-          type: boolean
-        impactsCapitalBalance:
-          type: boolean
-        originalCost:
-          type: number
-          format: double
-        originalCostDate:
-          type: string
-          format: date-time
-        equityFundingType:
-          type: string
-        equityFundingTypeId:
-          type: integer
-          format: int32
-        equityActivityType:
-          type: string
-        equityActivityTypeId:
-          type: integer
-          format: int32
-        productTransactionId:
-          type: integer
-          format: int32
-        cashDate:
-          type: string
-          format: date-time
-        isParent:
-          type: boolean
-      xml:
-        name: TransactionVerboseAlternativeDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.TransactionVerboseDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        isDataSharingEntity:
-          type: boolean
-        portfolio:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionPortfolioDto'
-        billing:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionBillingDto'
-        costBasis:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CostBasisDto'
-          xml:
-            name: CostBasisDto
-            wrapped: true
-          type: array
-        additionalInformation:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioTransactionAdditionalInformationDto'
-        alternative:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionVerboseAlternativeDto'
-        userDefinedFields:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
-          xml:
-            name: EntityOptionDto
-            wrapped: true
-          type: array
-        entityOptions:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
-          xml:
-            name: EntityOptionDto
-            wrapped: true
-          type: array
-        transactionFee:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionFeeDto'
-          xml:
-            name: TransactionFeeDto
-            wrapped: true
-          type: array
-      xml:
-        name: TransactionVerboseDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.TransactionSimpleDto:
-      properties:
-        transDate:
-          type: string
-          format: date-time
-        productName:
-          type: string
-        ticker:
-          type: string
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: TransactionSimpleDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.TransactionPortfolioDto:
-      properties:
-        productId:
-          type: integer
-          format: int32
-        productName:
-          type: string
-        ticker:
-          type: string
-        transDate:
-          type: string
-          format: date-time
-        transTime:
-          type: string
-          format: date-time
-        transAmount:
-          type: number
-          format: double
-        navPrice:
-          type: number
-          format: double
-        noUnits:
-          type: number
-          format: double
-        assetId:
-          type: integer
-          format: int32
-        status:
-          type: string
-          enum:
-          - Complete
-          - Pending
-          - Rejected
-          - Reversed
-          - Inactive
-          - PendingCorpAction
-          - FutureAip
-        transactionDescription:
-          type: string
-        notes:
-          type: string
-        transTypeId:
-          type: integer
-          format: int32
-        transactionSubTypeId:
-          type: integer
-          format: int32
-        transactionSubTypeName:
-          type: string
-        contributionCodeId:
-          type: integer
-          format: int32
-        distributionCodeId:
-          type: integer
-          format: int32
-        accountId:
-          type: integer
-          format: int32
-        accountNumber:
-          type: string
-        managementStyle:
-          type: string
-        payee:
-          type: integer
-          format: int32
-        advisorNotes:
-          type: string
-        state:
-          type: string
-        settleDate:
-          type: string
-          format: date-time
-        tradeReferenceNumber:
-          type: string
-        transactionLinkCode:
-          type: string
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        registrationId:
-          type: integer
-          format: int32
-        clientId:
-          type: integer
-          format: int32
-        typeCode:
-          type: string
-        typeSource:
-          type: string
-        signField:
-          type: string
-        eclipseOrderId:
-          type: integer
-          format: int32
-        performanceFeeBreak:
-          type: boolean
-        financialType:
-          type: string
-          enum:
-          - None
-          - Contribution
-          - Distribution
-          - Exchange
-          - DivReinvest
-          - MgmntFees
-          - DivCash
-          - MiscFees
-          - Journal
-          - Merges
-        fileTranCode:
-          type: string
-      xml:
-        name: TransactionPortfolioDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.PortfolioTransactionAdditionalInformationDto:
-      properties:
-        yieldToMaturity:
-          type: number
-          format: double
-        isOID:
-          type: boolean
-        tradeRequestId:
-          type: integer
-          format: int32
-        commIndicator:
-          type: integer
-          format: int32
-        orderType:
-          type: integer
-          format: int32
-        marketCode:
-          type: integer
-          format: int32
-        blotterCode:
-          type: integer
-          format: int32
-        distIndicator:
-          type: integer
-          format: int32
-        revenueType:
-          type: integer
-          format: int32
-        spreadStraddle:
-          type: integer
-          format: int32
-        brokerCode:
-          type: string
-        includeAsRmdDistribution:
-          type: boolean
-        includeAsRmdDistributionIsSystemMaintained:
-          type: boolean
-        divExDate:
-          type: string
-          format: date-time
-        oidInterest:
-          type: number
-          format: double
-      xml:
-        name: PortfolioTransactionAdditionalInformationDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.TransactionBillingDto:
-      properties:
-        isNMReady:
-          type: boolean
-        isBilled:
-          type: boolean
-        isAdvanceBilled:
-          type: boolean
-        isCashFlow:
-          type: boolean
-        billedDate:
-          type: string
-          format: date-time
-      xml:
-        name: TransactionBillingDto
       type: object
     OAS.WebApi.DTO.Settings.EntityOptionDto:
       properties:
@@ -3403,479 +3876,6 @@ components:
           type: boolean
       xml:
         name: EntityOptionDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.TransactionAlternativeDto:
-      properties:
-        impactsCommitment:
-          type: boolean
-        impactsCapitalBalance:
-          type: boolean
-        originalCost:
-          type: number
-          format: double
-        originalCostDate:
-          type: string
-          format: date-time
-        equityFundingType:
-          type: string
-        equityFundingTypeId:
-          type: integer
-          format: int32
-        equityActivityType:
-          type: string
-        equityActivityTypeId:
-          type: integer
-          format: int32
-        costBasis:
-          type: number
-          format: double
-        productTransactionId:
-          type: integer
-          format: int32
-        cashDate:
-          type: string
-          format: date-time
-        id:
-          type: integer
-          format: int32
-        transDate:
-          type: string
-          format: date-time
-        transactionDescription:
-          type: string
-        productName:
-          type: string
-        ticker:
-          type: string
-        transAmount:
-          type: number
-          format: double
-        noUnits:
-          type: number
-          format: double
-        navPrice:
-          type: number
-          format: double
-        accountNumber:
-          type: string
-        status:
-          type: string
-          enum:
-          - Complete
-          - Pending
-          - Rejected
-          - Reversed
-          - Inactive
-          - PendingCorpAction
-          - FutureAip
-        fileTranCode:
-          type: string
-        type:
-          type: string
-        transTime:
-          type: string
-          format: date-time
-        assetId:
-          type: integer
-          format: int32
-        assetStatusId:
-          type: integer
-          format: int32
-        cusip:
-          type: string
-        notes:
-          type: string
-        transTypeId:
-          type: integer
-          format: int32
-        transactionSubTypeId:
-          type: integer
-          format: int32
-        transactionSubTypeName:
-          type: string
-        transactionSubTypeDescription:
-          type: string
-        contributionCodeId:
-          type: integer
-          format: int32
-        contributionCodeName:
-          type: string
-        distributionCodeId:
-          type: integer
-          format: int32
-        distributionCodeName:
-          type: string
-        accountId:
-          type: integer
-          format: int32
-        accountStatusId:
-          type: integer
-          format: int32
-        managementStyle:
-          type: string
-        payee:
-          type: integer
-          format: int32
-        advisorNotes:
-          type: string
-        state:
-          type: string
-        settleDate:
-          type: string
-          format: date-time
-        tradeReferenceNumber:
-          type: string
-        transactionLinkCode:
-          type: string
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        registrationId:
-          type: integer
-          format: int32
-        clientId:
-          type: integer
-          format: int32
-        typeCode:
-          type: string
-        brokerCode:
-          type: string
-        accountType:
-          type: string
-        fundFamily:
-          type: string
-        custodian:
-          type: string
-        count:
-          type: integer
-          format: int32
-        registrationName:
-          type: string
-        unitBalance:
-          type: number
-          format: double
-        productId:
-          type: integer
-          format: int32
-        performanceFeeBreak:
-          type: boolean
-        financialType:
-          type: string
-          enum:
-          - None
-          - Contribution
-          - Distribution
-          - Exchange
-          - DivReinvest
-          - MgmntFees
-          - DivCash
-          - MiscFees
-          - Journal
-          - Merges
-      xml:
-        name: TransactionAlternativeDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.CostBasisDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        costDate:
-          type: string
-          format: date-time
-        holdingPeriodDate:
-          type: string
-          format: date-time
-        costUnits:
-          type: number
-          format: double
-        costPrice:
-          type: number
-          format: double
-        costTotal:
-          type: number
-          format: double
-        costNotes:
-          type: string
-        transTypeId:
-          type: integer
-          format: int32
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-      xml:
-        name: CostBasisDto
-      type: object
-    OAS.WebApi.DTO.Confirm.CorpAction.CorpActionTransactionV2Dto:
-      properties:
-        id:
-          readOnly: true
-          type: string
-        dbName:
-          type: string
-        transactionId:
-          type: integer
-          format: int32
-        corpActionId:
-          type: integer
-          format: int32
-        productId:
-          type: integer
-          format: int32
-        productName:
-          type: string
-        processingType:
-          type: string
-        accountId:
-          type: integer
-          format: int32
-        assetId:
-          type: integer
-          format: int32
-        transDate:
-          type: string
-          format: date-time
-        transType:
-          type: string
-        amount:
-          type: number
-          format: double
-        units:
-          type: number
-          format: double
-        price:
-          type: number
-          format: double
-        tradeStatus:
-          type: string
-          enum:
-          - Complete
-          - Pending
-          - Rejected
-          - Reversed
-          - Inactive
-          - PendingCorpAction
-          - FutureAip
-        custodian:
-          type: string
-        transSubType:
-          type: string
-        isProcessing:
-          type: boolean
-        processingId:
-          type: integer
-          format: int32
-        alClientId:
-          type: integer
-          format: int32
-        transTypeId:
-          type: integer
-          format: int32
-        transSubTypeId:
-          type: integer
-          format: int32
-        notes:
-          type: string
-        accountNumber:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        isCil:
-          type: boolean
-        custodianId:
-          type: integer
-          format: int32
-      xml:
-        name: CorpActionTransactionV2Dto
-      type: object
-    OAS.WebApi.DTO.Portfolio.TransactionFeeDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        transactionFeeTypeId:
-          type: integer
-          format: int32
-        feeAmount:
-          type: number
-          format: double
-        fileFeeDescription:
-          type: string
-        feeType:
-          type: string
-      xml:
-        name: TransactionFeeDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.TransactionDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        transDate:
-          type: string
-          format: date-time
-        transactionDescription:
-          type: string
-        productName:
-          type: string
-        ticker:
-          type: string
-        transAmount:
-          type: number
-          format: double
-        noUnits:
-          type: number
-          format: double
-        navPrice:
-          type: number
-          format: double
-        accountNumber:
-          type: string
-        status:
-          type: string
-          enum:
-          - Complete
-          - Pending
-          - Rejected
-          - Reversed
-          - Inactive
-          - PendingCorpAction
-          - FutureAip
-        fileTranCode:
-          type: string
-        type:
-          type: string
-        transTime:
-          type: string
-          format: date-time
-        assetId:
-          type: integer
-          format: int32
-        assetStatusId:
-          type: integer
-          format: int32
-        cusip:
-          type: string
-        notes:
-          type: string
-        transTypeId:
-          type: integer
-          format: int32
-        transactionSubTypeId:
-          type: integer
-          format: int32
-        transactionSubTypeName:
-          type: string
-        transactionSubTypeDescription:
-          type: string
-        contributionCodeId:
-          type: integer
-          format: int32
-        contributionCodeName:
-          type: string
-        distributionCodeId:
-          type: integer
-          format: int32
-        distributionCodeName:
-          type: string
-        accountId:
-          type: integer
-          format: int32
-        accountStatusId:
-          type: integer
-          format: int32
-        managementStyle:
-          type: string
-        payee:
-          type: integer
-          format: int32
-        advisorNotes:
-          type: string
-        state:
-          type: string
-        settleDate:
-          type: string
-          format: date-time
-        tradeReferenceNumber:
-          type: string
-        transactionLinkCode:
-          type: string
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        registrationId:
-          type: integer
-          format: int32
-        clientId:
-          type: integer
-          format: int32
-        typeCode:
-          type: string
-        brokerCode:
-          type: string
-        accountType:
-          type: string
-        fundFamily:
-          type: string
-        custodian:
-          type: string
-        count:
-          type: integer
-          format: int32
-        registrationName:
-          type: string
-        unitBalance:
-          type: number
-          format: double
-        productId:
-          type: integer
-          format: int32
-        performanceFeeBreak:
-          type: boolean
-        financialType:
-          type: string
-          enum:
-          - None
-          - Contribution
-          - Distribution
-          - Exchange
-          - DivReinvest
-          - MgmntFees
-          - DivCash
-          - MiscFees
-          - Journal
-          - Merges
-      xml:
-        name: TransactionDto
       type: object
   securitySchemes:
     Authorization:

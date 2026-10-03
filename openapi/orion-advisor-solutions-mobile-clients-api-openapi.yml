@@ -700,24 +700,29 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.WebApi.DTO.Mobile.AccountsMenuReturnDto:
+    OAS.WebApi.DTO.Mobile.UnmanagedAccountsMenuDto:
       properties:
-        managed:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Mobile.ManagedAccountsMenuDto'
-          xml:
-            name: ManagedAccountsMenuDto
-            wrapped: true
-          type: array
-        unmanaged:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Mobile.UnmanagedAccountsMenuDto'
-          xml:
-            name: UnmanagedAccountsMenuDto
-            wrapped: true
-          type: array
+        accountId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        value:
+          type: number
+          format: double
+        maskedAccountNumber:
+          type: string
+        managementStyle:
+          type: string
+        modelName:
+          type: string
+        subAdvisor:
+          type: string
+        riskBudget:
+          type: integer
+          format: int32
       xml:
-        name: AccountsMenuReturnDto
+        name: UnmanagedAccountsMenuDto
       type: object
     OAS.WebApi.DTO.Mobile.AccountsMenuSettingsDto:
       properties:
@@ -739,50 +744,6 @@ components:
           type: boolean
       xml:
         name: AccountsMenuSettingsDto
-      type: object
-    OAS.DataModel.Portfolio.SimpleClient:
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        entityName:
-          type: string
-        isActive:
-          type: boolean
-        repCode:
-          type: string
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleClient
-      type: object
-    OAS.WebApi.DTO.Mobile.PortfolioGroupValuesDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        grouping:
-          type: integer
-          format: int32
-        name:
-          type: string
-        asOfDate:
-          readOnly: true
-          type: string
-        value:
-          type: number
-          format: double
-        percent:
-          type: number
-          format: double
-        color:
-          type: string
-      xml:
-        name: PortfolioGroupValuesDto
       type: object
     OAS.WebApi.DTO.Mobile.RepresentativeDto:
       properties:
@@ -823,29 +784,25 @@ components:
       xml:
         name: RepresentativeDto
       type: object
-    OAS.WebApi.DTO.Mobile.UnmanagedAccountsMenuDto:
+    OAS.DataModel.Portfolio.SimpleClient:
       properties:
-        accountId:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        entityName:
+          type: string
+        isActive:
+          type: boolean
+        repCode:
+          type: string
+        id:
           type: integer
           format: int32
         name:
           type: string
-        value:
-          type: number
-          format: double
-        maskedAccountNumber:
-          type: string
-        managementStyle:
-          type: string
-        modelName:
-          type: string
-        subAdvisor:
-          type: string
-        riskBudget:
-          type: integer
-          format: int32
       xml:
-        name: UnmanagedAccountsMenuDto
+        name: SimpleClient
       type: object
     OAS.WebApi.DTO.Mobile.ManagedAccountsMenuDto:
       properties:
@@ -883,6 +840,49 @@ components:
           format: int32
       xml:
         name: ManagedAccountsMenuDto
+      type: object
+    OAS.WebApi.DTO.Mobile.AccountsMenuReturnDto:
+      properties:
+        managed:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Mobile.ManagedAccountsMenuDto'
+          xml:
+            name: ManagedAccountsMenuDto
+            wrapped: true
+          type: array
+        unmanaged:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Mobile.UnmanagedAccountsMenuDto'
+          xml:
+            name: UnmanagedAccountsMenuDto
+            wrapped: true
+          type: array
+      xml:
+        name: AccountsMenuReturnDto
+      type: object
+    OAS.WebApi.DTO.Mobile.PortfolioGroupValuesDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        grouping:
+          type: integer
+          format: int32
+        name:
+          type: string
+        asOfDate:
+          readOnly: true
+          type: string
+        value:
+          type: number
+          format: double
+        percent:
+          type: number
+          format: double
+        color:
+          type: string
+      xml:
+        name: PortfolioGroupValuesDto
       type: object
   securitySchemes:
     Authorization:

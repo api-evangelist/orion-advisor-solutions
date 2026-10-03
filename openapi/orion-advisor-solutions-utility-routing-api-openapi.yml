@@ -1319,22 +1319,95 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.Integrations.Eclipse.Model.EclipseResponse:
+    OAS.Integrations.Eclipse.Model.SecurityExtended:
       properties:
-        status:
-          type: boolean
-        message:
-          type: string
-        entityId:
+        id:
           type: integer
           format: int32
-        platform:
+        externalId:
+          type: integer
+          format: int32
+        symbol:
           type: string
-          enum:
-          - TOM
-          - Eclipse
+        name:
+          type: string
+        price:
+          type: number
+          format: float
+        securityType:
+          type: string
+        assetCategory:
+          type: string
+        assetClass:
+          type: string
+        subClass:
+          type: string
+        maturityDate:
+          type: string
+        isCustodialCash:
+          type: boolean
       xml:
-        name: EclipseResponse
+        name: SecurityExtended
+      type: object
+    OAS.WebApi.DTO.Trading.ModelAccountFullDto:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        accountName:
+          type: string
+        accountNumber:
+          type: string
+        canDelete:
+          type: boolean
+        lastRebalanced:
+          type: string
+          format: date-time
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        value:
+          type: number
+          format: double
+        modelId:
+          type: integer
+          format: int32
+      xml:
+        name: ModelAccountFullDto
+      type: object
+    OAS.WebApi.DTO.Trading.ValidationAccountIdDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        isValid:
+          type: boolean
+        warningMessage:
+          type: string
+        errorMessage:
+          type: string
+      xml:
+        name: ValidationAccountIdDto
+      type: object
+    OAS.WebApi.DTO.Trading.SleeveStrategyAccountAssignmentReturnDto:
+      properties:
+        batchId:
+          type: integer
+          format: int32
+        sleveStrategy:
+          type: integer
+          format: int32
+        accounts:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ValidationAccountIdDto'
+          xml:
+            name: ValidationAccountIdDto
+            wrapped: true
+          type: array
+      xml:
+        name: SleeveStrategyAccountAssignmentReturnDto
       type: object
     OAS.WebApi.DTO.Trading.OrderDto:
       properties:
@@ -1873,20 +1946,6 @@ components:
       xml:
         name: OrderDto
       type: object
-    OAS.WebApi.DTO.Trading.ValidationAccountIdDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        isValid:
-          type: boolean
-        warningMessage:
-          type: string
-        errorMessage:
-          type: string
-      xml:
-        name: ValidationAccountIdDto
-      type: object
     OAS.WebApi.DTO.Search.SearchProductDto:
       properties:
         ticker:
@@ -1922,22 +1981,52 @@ components:
       xml:
         name: SearchProductDto
       type: object
-    OAS.DataModel.Trading.LocalTradeOrderInstance:
+    OAS.DataModel.Portfolio.ShareClass:
+      required:
+      - id
+      - class
       properties:
         id:
           type: integer
           format: int32
-        orionRepId:
+        class:
+          type: string
+          maxLength: 10
+          minLength: 0
+        description:
+          type: string
+          maxLength: 255
+          minLength: 0
+        oldFundId:
           type: integer
           format: int32
-        accountId:
-          type: integer
-          format: int32
-        registrationId:
-          type: integer
-          format: int32
-        completed:
+        loadType:
+          type: string
+          maxLength: 1
+          minLength: 0
+        isDefault:
           type: boolean
+      xml:
+        name: ShareClass
+      type: object
+    OAS.DataModel.Trading.LocalTradeOrderInstanceProduct:
+      properties:
+        tradeOrderInstanceId:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        ticker:
+          type: string
+        tradeType:
+          type: string
+          enum:
+          - Sell
+          - Buy
+        amount:
+          type: number
+          format: double
         deleted:
           type: boolean
         createdDate:
@@ -1945,262 +2034,8 @@ components:
           format: date-time
         createdBy:
           type: string
-        products:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Trading.LocalTradeOrderInstanceProduct'
-          xml:
-            name: LocalTradeOrderInstanceProduct
-            wrapped: true
-          type: array
       xml:
-        name: LocalTradeOrderInstance
-      type: object
-    OAS.WebApi.DTO.Trading.SleeveStrategyAccountAssignmentReturnDto:
-      properties:
-        batchId:
-          type: integer
-          format: int32
-        sleveStrategy:
-          type: integer
-          format: int32
-        accounts:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ValidationAccountIdDto'
-          xml:
-            name: ValidationAccountIdDto
-            wrapped: true
-          type: array
-      xml:
-        name: SleeveStrategyAccountAssignmentReturnDto
-      type: object
-    OAS.WebApi.DTO.Trading.ModelFullDto:
-      properties:
-        fundFamilyId:
-          type: integer
-          format: int32
-        shareClassId:
-          type: integer
-          format: int32
-        platformId:
-          type: integer
-          format: int32
-        isListTraded:
-          type: boolean
-        modNotes:
-          type: string
-        representativeId:
-          type: integer
-          format: int32
-        sequence:
-          type: integer
-          format: int32
-        changeReason:
-          type: string
-        modelLevels:
-          type: integer
-          format: int32
-        dynamicEffectiveDate:
-          type: string
-          format: date-time
-        custodianId:
-          type: integer
-          format: int32
-        items:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelItemFullDto'
-          xml:
-            name: ModelItemFullDto
-            wrapped: true
-          type: array
-        accounts:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelAccountFullDto'
-          xml:
-            name: ModelAccountFullDto
-            wrapped: true
-          type: array
-        ranges:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelRangeFullDto'
-          xml:
-            name: ModelRangeFullDto
-            wrapped: true
-          type: array
-        riskRangeId:
-          type: integer
-          format: int32
-        defaultModelAggId:
-          type: integer
-          format: int32
-        eclipseFirmId:
-          type: integer
-          format: int32
-        EclipseFirmIds:
-          description: A pipe-delimited list of Eclipse Firm IDs that are associated with this model.
-          type: string
-        communityModel:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelDto'
-        eclipseModelId:
-          description: The Eclipse model ID for non-community models.
-          type: integer
-          format: int32
-        riskScore:
-          type: number
-          format: double
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        lastRebalanced:
-          type: string
-          format: date-time
-        fundName:
-          type: string
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        groupNum:
-          type: string
-        subAdvisor:
-          type: string
-        modelNum:
-          type: integer
-          format: int32
-        percEquity:
-          type: integer
-          format: int32
-        modelType:
-          type: string
-        fundList:
-          type: string
-        modelTol:
-          type: integer
-          format: int32
-        cashPerc:
-          type: integer
-          format: int32
-        cashTol:
-          type: integer
-          format: int32
-        isActive:
-          type: boolean
-        createdDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        class:
-          type: string
-        modelCode:
-          type: string
-        managementStyle:
-          type: string
-        notes:
-          type: string
-        isDynamic:
-          type: boolean
-        custodian:
-          type: string
-        subAdvisorId:
-          type: integer
-          format: int32
-        communityModelId:
-          type: integer
-          format: int64
-        useRestrictions:
-          type: boolean
-        isSMA:
-          type: boolean
-        assetClassId:
-          type: integer
-          format: int32
-        riskCategoryId:
-          type: integer
-          format: int32
-      xml:
-        name: ModelFullDto
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipseTradeOrder:
-      properties:
-        id:
-          type: integer
-          format: int32
-        tradeInstanceId:
-          type: integer
-          format: int32
-        requestType:
-          type: string
-        isEnabled:
-          type: boolean
-        notes:
-          type: string
-        errorMessage:
-          type: string
-        orderCount:
-          type: number
-          format: double
-        executeStatus:
-          type: string
-        closeOrderCount:
-          type: number
-          format: double
-        entity:
-          type: string
-        openOrderCount:
-          type: number
-          format: double
-        errorStatus:
-          type: boolean
-        instanceDescription:
-          type: string
-        orderQty:
-          type: number
-          format: double
-        account:
-          $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.AccountSimple'
-        security:
-          $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.SecurityExtended'
-        cashValue:
-          type: number
-          format: double
-        warningMessage:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-      xml:
-        name: EclipseTradeOrder
-      type: object
-    OAS.WebApi.DTO.Trading.ModelAccountFullDto:
-      properties:
-        accountId:
-          type: integer
-          format: int32
-        accountName:
-          type: string
-        accountNumber:
-          type: string
-        canDelete:
-          type: boolean
-        lastRebalanced:
-          type: string
-          format: date-time
-        editedDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        value:
-          type: number
-          format: double
-        modelId:
-          type: integer
-          format: int32
-      xml:
-        name: ModelAccountFullDto
+        name: LocalTradeOrderInstanceProduct
       type: object
     OAS.WebApi.DTO.Trading.ModelItemFullDto:
       properties:
@@ -2250,141 +2085,125 @@ components:
       xml:
         name: ModelItemFullDto
       type: object
-    OAS.WebApi.DTO.Integrations.Communities.CommunityModelDto:
+    OAS.Integrations.Eclipse.Model.EclipseHolding:
       properties:
-        modelId:
+        id:
           type: integer
           format: int32
-        communityModelId:
+        accountId:
           type: integer
-          format: int64
-        communityModelName:
+          format: int32
+        accountNumber:
           type: string
-        targetRiskUpper:
-          type: number
-          format: double
-        targetRiskLower:
-          type: number
-          format: double
-        style:
+        securityName:
           type: string
-        advisorFee:
-          type: number
-          format: double
-        weightedAvgNetExpenses:
-          type: number
-          format: double
-        currentRisk:
-          type: number
-          format: double
-        minimumAmount:
-          type: number
-          format: double
-        dateRebalanceRequested:
+        securitySymbol:
           type: string
-          format: date-time
-        lastRebalanceDate:
+        securityId:
+          type: integer
+          format: int32
+        price:
+          type: number
+          format: double
+        shares:
+          type: number
+          format: double
+        value:
+          type: number
+          format: double
+        currentInPer:
+          type: number
+          format: double
+        targetInPer:
+          type: number
+          format: double
+        pendingShares:
+          type: number
+          format: double
+        pendingValue:
+          type: number
+          format: double
+        pendingInPer:
+          type: number
+          format: double
+        excluded:
           type: string
-          format: date-time
-        needsRebalance:
+        inModel:
+          type: string
+        isDeleted:
           type: boolean
-        platFormId:
+        isCash:
+          type: string
+      xml:
+        name: EclipseHolding
+      type: object
+    OAS.DataModel.Trading.LocalTradeOrderInstance:
+      properties:
+        id:
           type: integer
           format: int32
-        shareClassId:
+        orionRepId:
           type: integer
           format: int32
-        notes:
-          type: string
-        groupNum:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        strategistId:
+        accountId:
           type: integer
           format: int32
-        strategistName:
-          type: string
-        modelManagerId:
+        registrationId:
           type: integer
           format: int32
-        modelManagerName:
-          type: string
-        name:
-          type: string
-        isActive:
+        completed:
+          type: boolean
+        deleted:
           type: boolean
         createdDate:
           type: string
           format: date-time
         createdBy:
           type: string
-        modelCode:
-          type: string
-        cashPerc:
-          type: integer
-          format: int32
-        cashTol:
-          type: integer
-          format: int32
-        fundList:
-          type: string
-        modelNum:
-          type: integer
-          format: int32
-        modelTol:
-          type: integer
-          format: int32
-        isDynamic:
-          type: boolean
-        modelType:
-          type: string
-        percEquity:
-          type: integer
-          format: int32
-        subAdvisorId:
-          type: integer
-          format: int32
-        useRestrictions:
-          type: boolean
-        fundName:
-          type: string
-        class:
-          type: string
-        managementStyle:
-          type: string
-        custodian:
-          type: string
-        subAdvisor:
-          type: string
-        accountCount:
-          type: integer
-          format: int32
-        aum:
+        products:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Trading.LocalTradeOrderInstanceProduct'
+          xml:
+            name: LocalTradeOrderInstanceProduct
+            wrapped: true
+          type: array
+      xml:
+        name: LocalTradeOrderInstance
+      type: object
+    OAS.WebApi.DTO.Search.SearchProductExtendedDto:
+      properties:
+        price:
           type: number
           format: double
-        astroUsage:
+        ticker:
           type: string
-          enum:
-          - Undefined
-          - Disabled
-          - Restricted
-          - FullAccess
-        opsTier:
+        productId:
+          type: integer
+          format: int32
+        productName:
           type: string
-        dateRebalanceExecutionRequested:
+        productType:
+          type: integer
+          format: int32
+        productTypeName:
           type: string
-          format: date-time
-        benchmark:
+        shareClass:
+          $ref: '#/components/schemas/OAS.DataModel.Portfolio.ShareClass'
+        externalId:
+          type: integer
+          format: int32
+        productRiskScore:
+          type: integer
+          format: int32
+        productClass:
           type: string
-        strategistExternalId:
+        productCategory:
+          type: string
+        riskScore:
           type: integer
           format: int32
       xml:
-        name: CommunityModelDto
+        name: SearchProductExtendedDto
       type: object
     OAS.WebApi.DTO.Trading.TradeRequestInstanceDto:
       properties:
@@ -2669,216 +2488,62 @@ components:
       xml:
         name: TradeRequestInstanceDto
       type: object
-    OAS.DataModel.Trading.TradeEntityInfo:
+    OAS.Integrations.Eclipse.Model.AccountSimple:
       properties:
-        entityId:
-          type: integer
-          format: int32
-        tradingPlatform:
+        number:
           type: string
-          enum:
-          - TOM
-          - Eclipse
-      xml:
-        name: TradeEntityInfo
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipseHolding:
-      properties:
+        type:
+          type: string
         id:
           type: integer
           format: int32
         accountId:
-          type: integer
-          format: int32
+          type: string
+        name:
+          type: string
         accountNumber:
           type: string
-        securityName:
+        custodian:
           type: string
-        securitySymbol:
+        accountType:
           type: string
-        securityId:
-          type: integer
-          format: int32
-        price:
+        model:
+          type: string
+        style:
+          type: string
+        managedValue:
           type: number
           format: double
-        shares:
+        excludedValue:
           type: number
           format: double
         value:
           type: number
           format: double
-        currentInPer:
-          type: number
-          format: double
-        targetInPer:
-          type: number
-          format: double
-        pendingShares:
-          type: number
-          format: double
         pendingValue:
           type: number
           format: double
-        pendingInPer:
+        currentCash:
           type: number
           format: double
-        excluded:
-          type: string
-        inModel:
-          type: string
-        isDeleted:
-          type: boolean
-        isCash:
-          type: string
+        targetCash:
+          type: number
+          format: double
+        currentCashPercent:
+          type: number
+          format: double
+        pendingCash:
+          type: number
+          format: double
+        holdings:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseHolding'
+          xml:
+            name: EclipseHolding
+            wrapped: true
+          type: array
       xml:
-        name: EclipseHolding
-      type: object
-    OAS.DataModel.Portfolio.ShareClass:
-      required:
-      - id
-      - class
-      properties:
-        id:
-          type: integer
-          format: int32
-        class:
-          type: string
-          maxLength: 10
-          minLength: 0
-        description:
-          type: string
-          maxLength: 255
-          minLength: 0
-        oldFundId:
-          type: integer
-          format: int32
-        loadType:
-          type: string
-          maxLength: 1
-          minLength: 0
-        isDefault:
-          type: boolean
-      xml:
-        name: ShareClass
-      type: object
-    OAS.DataModel.Trading.LocalTradeOrderInstanceProduct:
-      properties:
-        tradeOrderInstanceId:
-          type: integer
-          format: int32
-        productId:
-          type: integer
-          format: int32
-        ticker:
-          type: string
-        tradeType:
-          type: string
-          enum:
-          - Sell
-          - Buy
-        amount:
-          type: number
-          format: double
-        deleted:
-          type: boolean
-        createdDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-      xml:
-        name: LocalTradeOrderInstanceProduct
-      type: object
-    OAS.Integrations.Eclipse.Model.SecurityExtended:
-      properties:
-        id:
-          type: integer
-          format: int32
-        externalId:
-          type: integer
-          format: int32
-        symbol:
-          type: string
-        name:
-          type: string
-        price:
-          type: number
-          format: float
-        securityType:
-          type: string
-        assetCategory:
-          type: string
-        assetClass:
-          type: string
-        subClass:
-          type: string
-        maturityDate:
-          type: string
-        isCustodialCash:
-          type: boolean
-      xml:
-        name: SecurityExtended
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipseTradeOrderObject:
-      properties:
-        id:
-          type: integer
-          format: int32
-        isEnabled:
-          type: boolean
-        status:
-          type: string
-        account:
-          $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.AccountSimple'
-        warningMessage:
-          type: string
-        action:
-          type: string
-        orderQty:
-          type: number
-          format: double
-        tradePercent:
-          type: number
-          format: double
-        cashValuePostTrade:
-          type: number
-          format: double
-        estimateAmount:
-          type: number
-          format: double
-        price:
-          type: number
-          format: double
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-        instanceDescription:
-          type: string
-        custodian:
-          type: string
-        security:
-          $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.SecurityExtended'
-        cashValue:
-          type: number
-          format: double
-        pendingUnits:
-          type: string
-        tradePercentOfAccount:
-          type: number
-          format: double
-        representativeName:
-          type: string
-        currentModelName:
-          type: string
-        handleInst:
-          type: string
-        instanceId:
-          type: integer
-          format: int32
-      xml:
-        name: EclipseTradeOrderObject
+        name: AccountSimple
       type: object
     OAS.WebApi.DTO.Settings.EntityOptionDto:
       properties:
@@ -3125,97 +2790,415 @@ components:
       xml:
         name: EntityOptionDto
       type: object
-    OAS.Integrations.Eclipse.Model.AccountSimple:
+    OAS.Integrations.Eclipse.Model.EclipseTradeOrderObject:
       properties:
-        number:
-          type: string
-        type:
-          type: string
         id:
           type: integer
           format: int32
-        accountId:
+        isEnabled:
+          type: boolean
+        status:
           type: string
-        name:
+        account:
+          $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.AccountSimple'
+        warningMessage:
           type: string
-        accountNumber:
+        action:
           type: string
-        custodian:
-          type: string
-        accountType:
-          type: string
-        model:
-          type: string
-        style:
-          type: string
-        managedValue:
+        orderQty:
           type: number
           format: double
-        excludedValue:
+        tradePercent:
           type: number
           format: double
-        value:
+        cashValuePostTrade:
           type: number
           format: double
-        pendingValue:
+        estimateAmount:
           type: number
           format: double
-        currentCash:
-          type: number
-          format: double
-        targetCash:
-          type: number
-          format: double
-        currentCashPercent:
-          type: number
-          format: double
-        pendingCash:
-          type: number
-          format: double
-        holdings:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.EclipseHolding'
-          xml:
-            name: EclipseHolding
-            wrapped: true
-          type: array
-      xml:
-        name: AccountSimple
-      type: object
-    OAS.WebApi.DTO.Search.SearchProductExtendedDto:
-      properties:
         price:
           type: number
           format: double
-        ticker:
+        createdBy:
           type: string
-        productId:
-          type: integer
-          format: int32
-        productName:
+        createdDate:
           type: string
-        productType:
-          type: integer
-          format: int32
-        productTypeName:
+        instanceDescription:
           type: string
-        shareClass:
-          $ref: '#/components/schemas/OAS.DataModel.Portfolio.ShareClass'
-        externalId:
-          type: integer
-          format: int32
-        productRiskScore:
-          type: integer
-          format: int32
-        productClass:
+        custodian:
           type: string
-        productCategory:
+        security:
+          $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.SecurityExtended'
+        cashValue:
+          type: number
+          format: double
+        pendingUnits:
           type: string
-        riskScore:
+        tradePercentOfAccount:
+          type: number
+          format: double
+        representativeName:
+          type: string
+        currentModelName:
+          type: string
+        handleInst:
+          type: string
+        instanceId:
           type: integer
           format: int32
       xml:
-        name: SearchProductExtendedDto
+        name: EclipseTradeOrderObject
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipseTradeOrder:
+      properties:
+        id:
+          type: integer
+          format: int32
+        tradeInstanceId:
+          type: integer
+          format: int32
+        requestType:
+          type: string
+        isEnabled:
+          type: boolean
+        notes:
+          type: string
+        errorMessage:
+          type: string
+        orderCount:
+          type: number
+          format: double
+        executeStatus:
+          type: string
+        closeOrderCount:
+          type: number
+          format: double
+        entity:
+          type: string
+        openOrderCount:
+          type: number
+          format: double
+        errorStatus:
+          type: boolean
+        instanceDescription:
+          type: string
+        orderQty:
+          type: number
+          format: double
+        account:
+          $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.AccountSimple'
+        security:
+          $ref: '#/components/schemas/OAS.Integrations.Eclipse.Model.SecurityExtended'
+        cashValue:
+          type: number
+          format: double
+        warningMessage:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+      xml:
+        name: EclipseTradeOrder
+      type: object
+    OAS.WebApi.DTO.Trading.ModelFullDto:
+      properties:
+        fundFamilyId:
+          type: integer
+          format: int32
+        shareClassId:
+          type: integer
+          format: int32
+        platformId:
+          type: integer
+          format: int32
+        isListTraded:
+          type: boolean
+        modNotes:
+          type: string
+        representativeId:
+          type: integer
+          format: int32
+        sequence:
+          type: integer
+          format: int32
+        changeReason:
+          type: string
+        modelLevels:
+          type: integer
+          format: int32
+        dynamicEffectiveDate:
+          type: string
+          format: date-time
+        custodianId:
+          type: integer
+          format: int32
+        items:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelItemFullDto'
+          xml:
+            name: ModelItemFullDto
+            wrapped: true
+          type: array
+        accounts:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelAccountFullDto'
+          xml:
+            name: ModelAccountFullDto
+            wrapped: true
+          type: array
+        ranges:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.ModelRangeFullDto'
+          xml:
+            name: ModelRangeFullDto
+            wrapped: true
+          type: array
+        riskRangeId:
+          type: integer
+          format: int32
+        defaultModelAggId:
+          type: integer
+          format: int32
+        eclipseFirmId:
+          type: integer
+          format: int32
+        EclipseFirmIds:
+          description: A pipe-delimited list of Eclipse Firm IDs that are associated with this model.
+          type: string
+        communityModel:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Communities.CommunityModelDto'
+        eclipseModelId:
+          description: The Eclipse model ID for non-community models.
+          type: integer
+          format: int32
+        riskScore:
+          type: number
+          format: double
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        lastRebalanced:
+          type: string
+          format: date-time
+        fundName:
+          type: string
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        groupNum:
+          type: string
+        subAdvisor:
+          type: string
+        modelNum:
+          type: integer
+          format: int32
+        percEquity:
+          type: integer
+          format: int32
+        modelType:
+          type: string
+        fundList:
+          type: string
+        modelTol:
+          type: integer
+          format: int32
+        cashPerc:
+          type: integer
+          format: int32
+        cashTol:
+          type: integer
+          format: int32
+        isActive:
+          type: boolean
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        class:
+          type: string
+        modelCode:
+          type: string
+        managementStyle:
+          type: string
+        notes:
+          type: string
+        isDynamic:
+          type: boolean
+        custodian:
+          type: string
+        subAdvisorId:
+          type: integer
+          format: int32
+        communityModelId:
+          type: integer
+          format: int64
+        useRestrictions:
+          type: boolean
+        isSMA:
+          type: boolean
+        assetClassId:
+          type: integer
+          format: int32
+        riskCategoryId:
+          type: integer
+          format: int32
+      xml:
+        name: ModelFullDto
+      type: object
+    OAS.DataModel.Trading.TradeEntityInfo:
+      properties:
+        entityId:
+          type: integer
+          format: int32
+        tradingPlatform:
+          type: string
+          enum:
+          - TOM
+          - Eclipse
+      xml:
+        name: TradeEntityInfo
+      type: object
+    OAS.WebApi.DTO.Integrations.Communities.CommunityModelDto:
+      properties:
+        modelId:
+          type: integer
+          format: int32
+        communityModelId:
+          type: integer
+          format: int64
+        communityModelName:
+          type: string
+        targetRiskUpper:
+          type: number
+          format: double
+        targetRiskLower:
+          type: number
+          format: double
+        style:
+          type: string
+        advisorFee:
+          type: number
+          format: double
+        weightedAvgNetExpenses:
+          type: number
+          format: double
+        currentRisk:
+          type: number
+          format: double
+        minimumAmount:
+          type: number
+          format: double
+        dateRebalanceRequested:
+          type: string
+          format: date-time
+        lastRebalanceDate:
+          type: string
+          format: date-time
+        needsRebalance:
+          type: boolean
+        platFormId:
+          type: integer
+          format: int32
+        shareClassId:
+          type: integer
+          format: int32
+        notes:
+          type: string
+        groupNum:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        strategistId:
+          type: integer
+          format: int32
+        strategistName:
+          type: string
+        modelManagerId:
+          type: integer
+          format: int32
+        modelManagerName:
+          type: string
+        name:
+          type: string
+        isActive:
+          type: boolean
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        modelCode:
+          type: string
+        cashPerc:
+          type: integer
+          format: int32
+        cashTol:
+          type: integer
+          format: int32
+        fundList:
+          type: string
+        modelNum:
+          type: integer
+          format: int32
+        modelTol:
+          type: integer
+          format: int32
+        isDynamic:
+          type: boolean
+        modelType:
+          type: string
+        percEquity:
+          type: integer
+          format: int32
+        subAdvisorId:
+          type: integer
+          format: int32
+        useRestrictions:
+          type: boolean
+        fundName:
+          type: string
+        class:
+          type: string
+        managementStyle:
+          type: string
+        custodian:
+          type: string
+        subAdvisor:
+          type: string
+        accountCount:
+          type: integer
+          format: int32
+        aum:
+          type: number
+          format: double
+        astroUsage:
+          type: string
+          enum:
+          - Undefined
+          - Disabled
+          - Restricted
+          - FullAccess
+        opsTier:
+          type: string
+        dateRebalanceExecutionRequested:
+          type: string
+          format: date-time
+        benchmark:
+          type: string
+        strategistExternalId:
+          type: integer
+          format: int32
+      xml:
+        name: CommunityModelDto
       type: object
     OAS.WebApi.DTO.Trading.ModelRangeFullDto:
       properties:
@@ -3249,6 +3232,23 @@ components:
           type: array
       xml:
         name: ModelRangeFullDto
+      type: object
+    OAS.Integrations.Eclipse.Model.EclipseResponse:
+      properties:
+        status:
+          type: boolean
+        message:
+          type: string
+        entityId:
+          type: integer
+          format: int32
+        platform:
+          type: string
+          enum:
+          - TOM
+          - Eclipse
+      xml:
+        name: EclipseResponse
       type: object
   securitySchemes:
     Authorization:

@@ -1939,172 +1939,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
-      type: object
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
-      type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
-      properties:
-        key:
-          readOnly: true
-          type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: KeyValuePair`2
-      type: object
-    OAS.DataModel.SimpleEntity:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleEntity
-      type: object
-    OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        payeeId:
-          type: integer
-          format: int32
-        payee:
-          type: string
-        asOfDate:
-          type: string
-          format: date-time
-        paymentAmount:
-          type: number
-          format: double
-        adjustmentAmount:
-          type: number
-          format: double
-        uncollectedAmount:
-          type: number
-          format: double
-        totalPaymentAmount:
-          readOnly: true
-          type: number
-          format: double
-        createdDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        note:
-          type: string
-        toPay:
-          type: boolean
-        blobId:
-          type: integer
-          format: int32
-        hangFireId:
-          type: string
-      xml:
-        name: BillPayoutDashboardPaymentDto
-      type: object
-    OAS.DataModel.Billing.BillPayoutDashboardPaymentListDto:
-      properties:
-        payeeId:
-          type: integer
-          format: int32
-        paymentAmount:
-          type: number
-          format: double
-        adjustmentAmount:
-          type: number
-          format: double
-        uncollectedAmount:
-          type: number
-          format: double
-        payee:
-          type: string
-        totalPaymentAmount:
-          type: number
-          format: double
-        toPay:
-          type: boolean
-        asOfDate:
-          type: string
-          format: date-time
-      xml:
-        name: BillPayoutDashboardPaymentListDto
-      type: object
-    Hangfire.Console.Monitoring.LineDto:
-      properties:
-        type:
-          readOnly: true
-          type: string
-          enum:
-          - Any
-          - Text
-          - ProgressBar
-        timestamp:
-          readOnly: true
-          type: string
-          format: date-time
-        color:
-          readOnly: true
-          type: string
-      xml:
-        name: LineDto
-      type: object
-    OAS.WebApi.DTO.Billing.AdvisoryFeeReportBlobDto:
-      properties:
-        entityName:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        id:
-          type: integer
-          format: int32
-        openWith:
-          type: string
-        fileName:
-          type: string
-        blobDesc:
-          type: string
-        blobText:
-          type: string
-        category:
-          type: string
-        isZip:
-          type: boolean
-      xml:
-        name: AdvisoryFeeReportBlobDto
-      type: object
     OAS.WebApi.DTO.Billing.ManualReportFileUploadDto:
       required:
       - entity
@@ -2317,24 +2151,63 @@ components:
       xml:
         name: ManualReportFileUploadDto
       type: object
-    OAS.WebApi.DTO.Billing.PayoutDashboardActivityChartDto:
+    OAS.DataModel.SimpleEntity:
       properties:
-        calculatedDate:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
+    OAS.WebApi.DTO.Billing.BillPayoutDashboardPaymentDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        payeeId:
+          type: integer
+          format: int32
+        payee:
+          type: string
+        asOfDate:
           type: string
           format: date-time
-        payoutStatus:
-          type: string
-          enum:
-          - PendingApproval
-          - CurrentlyApproved
-          - CreditAndExpenses
-          - OutsideAccounts
-          - Paid
-        amount:
+        paymentAmount:
           type: number
           format: double
+        adjustmentAmount:
+          type: number
+          format: double
+        uncollectedAmount:
+          type: number
+          format: double
+        totalPaymentAmount:
+          readOnly: true
+          type: number
+          format: double
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        note:
+          type: string
+        toPay:
+          type: boolean
+        blobId:
+          type: integer
+          format: int32
+        hangFireId:
+          type: string
       xml:
-        name: PayoutDashboardActivityChartDto
+        name: BillPayoutDashboardPaymentDto
       type: object
     OAS.WebApi.DTO.Utility.FileImportDto:
       properties:
@@ -2360,6 +2233,74 @@ components:
           type: string
       xml:
         name: FileImportDto
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    OAS.WebApi.DTO.Billing.AdvisoryFeeReportBlobDto:
+      properties:
+        entityName:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        id:
+          type: integer
+          format: int32
+        openWith:
+          type: string
+        fileName:
+          type: string
+        blobDesc:
+          type: string
+        blobText:
+          type: string
+        category:
+          type: string
+        isZip:
+          type: boolean
+      xml:
+        name: AdvisoryFeeReportBlobDto
+      type: object
+    OAS.WebApi.DTO.Billing.PayoutDashboardActivityChartDto:
+      properties:
+        calculatedDate:
+          type: string
+          format: date-time
+        payoutStatus:
+          type: string
+          enum:
+          - PendingApproval
+          - CurrentlyApproved
+          - CreditAndExpenses
+          - OutsideAccounts
+          - Paid
+        amount:
+          type: number
+          format: double
+      xml:
+        name: PayoutDashboardActivityChartDto
       type: object
     OAS.WebApi.DTO.Billing.PayoutDashboardDto:
       properties:
@@ -2456,6 +2397,65 @@ components:
           format: int32
       xml:
         name: PayoutDashboardDto
+      type: object
+    OAS.DataModel.Billing.BillPayoutDashboardPaymentListDto:
+      properties:
+        payeeId:
+          type: integer
+          format: int32
+        paymentAmount:
+          type: number
+          format: double
+        adjustmentAmount:
+          type: number
+          format: double
+        uncollectedAmount:
+          type: number
+          format: double
+        payee:
+          type: string
+        totalPaymentAmount:
+          type: number
+          format: double
+        toPay:
+          type: boolean
+        asOfDate:
+          type: string
+          format: date-time
+      xml:
+        name: BillPayoutDashboardPaymentListDto
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    Hangfire.Console.Monitoring.LineDto:
+      properties:
+        type:
+          readOnly: true
+          type: string
+          enum:
+          - Any
+          - Text
+          - ProgressBar
+        timestamp:
+          readOnly: true
+          type: string
+          format: date-time
+        color:
+          readOnly: true
+          type: string
+      xml:
+        name: LineDto
       type: object
   securitySchemes:
     Authorization:

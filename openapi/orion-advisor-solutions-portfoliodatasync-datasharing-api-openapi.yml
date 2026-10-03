@@ -1850,32 +1850,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
-      type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
-      properties:
-        key:
-          readOnly: true
-          type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: KeyValuePair`2
-      type: object
     OAS.WebApi.DTO.PortfolioDataSync.DataSharingNotificationDto:
       properties:
         dataSharingSourceId:
@@ -1902,29 +1876,6 @@ components:
       xml:
         name: DataSharingNotificationDto
       type: object
-    OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntityMapDto:
-      properties:
-        dataSharingSourceId:
-          type: integer
-          format: int32
-        entityEnum:
-          type: integer
-          format: int32
-        entitySource:
-          type: integer
-          format: int32
-        entityDescriptionSource:
-          type: string
-        entityInfoSourceJSON:
-          type: string
-        entityDestination:
-          type: integer
-          format: int32
-        entityDescriptionDestination:
-          type: string
-      xml:
-        name: DataSharingEntityMapDto
-      type: object
     OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
       description: import file DTO for validating imports
       properties:
@@ -1933,6 +1884,30 @@ components:
           description: the imported file
       xml:
         name: ValidateFileImportDto
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
       type: object
     OAS.WebApi.DTO.PortfolioDataSync.DataSharingSourceDto:
       properties:
@@ -1980,16 +1955,18 @@ components:
       xml:
         name: DataSharingSourceDto
       type: object
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
       properties:
-        fileName:
+        key:
+          readOnly: true
           type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
       xml:
-        name: HttpFile
+        name: KeyValuePair`2
       type: object
     OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntitySelectionDto:
       properties:
@@ -2015,6 +1992,29 @@ components:
           format: date-time
       xml:
         name: DataSharingEntitySelectionDto
+      type: object
+    OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntityMapDto:
+      properties:
+        dataSharingSourceId:
+          type: integer
+          format: int32
+        entityEnum:
+          type: integer
+          format: int32
+        entitySource:
+          type: integer
+          format: int32
+        entityDescriptionSource:
+          type: string
+        entityInfoSourceJSON:
+          type: string
+        entityDestination:
+          type: integer
+          format: int32
+        entityDescriptionDestination:
+          type: string
+      xml:
+        name: DataSharingEntityMapDto
       type: object
   securitySchemes:
     Authorization:

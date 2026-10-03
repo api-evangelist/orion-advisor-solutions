@@ -470,6 +470,77 @@ paths:
       - Authorization: []
 components:
   schemas:
+    OAS.WebApi.DTO.Trading.FundFamilyOverride:
+      properties:
+        fundFamilyId:
+          type: integer
+          format: int32
+        fundFamilyName:
+          type: string
+        productId:
+          type: integer
+          format: int32
+        tradeTicker:
+          type: string
+        altProductId:
+          type: integer
+          format: int32
+        altProductName:
+          type: string
+        altTicker:
+          type: string
+      xml:
+        name: FundFamilyOverride
+      type: object
+    OAS.WebApi.DTO.Trading.FundFamilyOverrideDTO:
+      properties:
+        fundFamiliesOverriden:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FundFamilyOverride'
+          xml:
+            name: FundFamilyOverride
+            wrapped: true
+          type: array
+        isAlternativeSymColumnShown:
+          type: boolean
+      xml:
+        name: FundFamilyOverrideDTO
+      type: object
+    OAS.WebApi.DTO.Search.SearchProductDto:
+      properties:
+        ticker:
+          type: string
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        productType:
+          type: integer
+          format: int32
+        productTypeName:
+          type: string
+        price:
+          type: number
+          format: double
+        shareClass:
+          $ref: '#/components/schemas/OAS.DataModel.Portfolio.ShareClass'
+        externalId:
+          type: integer
+          format: int32
+        productRiskScore:
+          type: integer
+          format: int32
+        productClass:
+          type: string
+        productCategory:
+          type: string
+        riskScore:
+          type: integer
+          format: int32
+      xml:
+        name: SearchProductDto
+      type: object
     OAS.DataModel.Portfolio.ShareClass:
       required:
       - id
@@ -497,20 +568,6 @@ components:
           type: boolean
       xml:
         name: ShareClass
-      type: object
-    OAS.WebApi.DTO.Trading.FundFamilyOverrideDTO:
-      properties:
-        fundFamiliesOverriden:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FundFamilyOverride'
-          xml:
-            name: FundFamilyOverride
-            wrapped: true
-          type: array
-        isAlternativeSymColumnShown:
-          type: boolean
-      xml:
-        name: FundFamilyOverrideDTO
       type: object
     OAS.WebApi.DTO.Trading.RealtimePriceDto:
       properties:
@@ -623,63 +680,6 @@ components:
           type: string
       xml:
         name: RealtimePriceDto
-      type: object
-    OAS.WebApi.DTO.Trading.FundFamilyOverride:
-      properties:
-        fundFamilyId:
-          type: integer
-          format: int32
-        fundFamilyName:
-          type: string
-        productId:
-          type: integer
-          format: int32
-        tradeTicker:
-          type: string
-        altProductId:
-          type: integer
-          format: int32
-        altProductName:
-          type: string
-        altTicker:
-          type: string
-      xml:
-        name: FundFamilyOverride
-      type: object
-    OAS.WebApi.DTO.Search.SearchProductDto:
-      properties:
-        ticker:
-          type: string
-        productId:
-          type: integer
-          format: int32
-        productName:
-          type: string
-        productType:
-          type: integer
-          format: int32
-        productTypeName:
-          type: string
-        price:
-          type: number
-          format: double
-        shareClass:
-          $ref: '#/components/schemas/OAS.DataModel.Portfolio.ShareClass'
-        externalId:
-          type: integer
-          format: int32
-        productRiskScore:
-          type: integer
-          format: int32
-        productClass:
-          type: string
-        productCategory:
-          type: string
-        riskScore:
-          type: integer
-          format: int32
-      xml:
-        name: SearchProductDto
       type: object
   securitySchemes:
     Authorization:

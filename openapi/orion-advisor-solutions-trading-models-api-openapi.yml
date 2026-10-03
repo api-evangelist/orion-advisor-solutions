@@ -2597,38 +2597,111 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.WebApi.DTO.Trading.ModelRangeFullDto:
+    OAS.WebApi.DTO.Trading.ModelAccountFullDto:
       properties:
-        id:
+        accountId:
           type: integer
           format: int32
-        summary:
+        accountName:
           type: string
-        createdDate:
+        accountNumber:
+          type: string
+        canDelete:
+          type: boolean
+        lastRebalanced:
           type: string
           format: date-time
-        createdBy:
-          type: string
         editedDate:
           type: string
           format: date-time
         editedBy:
           type: string
-        upperScore:
+        value:
+          type: number
+          format: double
+        modelId:
           type: integer
           format: int32
-        lowerScore:
-          type: integer
-          format: int32
-        userDefinedFields:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
-          xml:
-            name: EntityOptionDto
-            wrapped: true
-          type: array
       xml:
-        name: ModelRangeFullDto
+        name: ModelAccountFullDto
+      type: object
+    OAS.WebApi.DTO.Trading.ModelDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        lastRebalanced:
+          type: string
+          format: date-time
+        fundName:
+          type: string
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        groupNum:
+          type: string
+        subAdvisor:
+          type: string
+        modelNum:
+          type: integer
+          format: int32
+        percEquity:
+          type: integer
+          format: int32
+        modelType:
+          type: string
+        fundList:
+          type: string
+        modelTol:
+          type: integer
+          format: int32
+        cashPerc:
+          type: integer
+          format: int32
+        cashTol:
+          type: integer
+          format: int32
+        isActive:
+          type: boolean
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        class:
+          type: string
+        modelCode:
+          type: string
+        managementStyle:
+          type: string
+        notes:
+          type: string
+        isDynamic:
+          type: boolean
+        custodian:
+          type: string
+        subAdvisorId:
+          type: integer
+          format: int32
+        communityModelId:
+          type: integer
+          format: int64
+        useRestrictions:
+          type: boolean
+        isSMA:
+          type: boolean
+        assetClassId:
+          type: integer
+          format: int32
+        riskCategoryId:
+          type: integer
+          format: int32
+      xml:
+        name: ModelDto
       type: object
     OAS.WebApi.DTO.Trading.ModelRestrictionDto:
       properties:
@@ -2840,6 +2913,162 @@ components:
       xml:
         name: ModelRestrictionDto
       type: object
+    OAS.DataModel.Trading.SimpleModel:
+      properties:
+        isActive:
+          type: boolean
+        isSMA:
+          type: boolean
+        assetClassId:
+          type: integer
+          format: int32
+        riskCategoryId:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleModel
+      type: object
+    OAS.WebApi.DTO.Integrations.Communities.CommunityModelDto:
+      properties:
+        modelId:
+          type: integer
+          format: int32
+        communityModelId:
+          type: integer
+          format: int64
+        communityModelName:
+          type: string
+        targetRiskUpper:
+          type: number
+          format: double
+        targetRiskLower:
+          type: number
+          format: double
+        style:
+          type: string
+        advisorFee:
+          type: number
+          format: double
+        weightedAvgNetExpenses:
+          type: number
+          format: double
+        currentRisk:
+          type: number
+          format: double
+        minimumAmount:
+          type: number
+          format: double
+        dateRebalanceRequested:
+          type: string
+          format: date-time
+        lastRebalanceDate:
+          type: string
+          format: date-time
+        needsRebalance:
+          type: boolean
+        platFormId:
+          type: integer
+          format: int32
+        shareClassId:
+          type: integer
+          format: int32
+        notes:
+          type: string
+        groupNum:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        strategistId:
+          type: integer
+          format: int32
+        strategistName:
+          type: string
+        modelManagerId:
+          type: integer
+          format: int32
+        modelManagerName:
+          type: string
+        name:
+          type: string
+        isActive:
+          type: boolean
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        modelCode:
+          type: string
+        cashPerc:
+          type: integer
+          format: int32
+        cashTol:
+          type: integer
+          format: int32
+        fundList:
+          type: string
+        modelNum:
+          type: integer
+          format: int32
+        modelTol:
+          type: integer
+          format: int32
+        isDynamic:
+          type: boolean
+        modelType:
+          type: string
+        percEquity:
+          type: integer
+          format: int32
+        subAdvisorId:
+          type: integer
+          format: int32
+        useRestrictions:
+          type: boolean
+        fundName:
+          type: string
+        class:
+          type: string
+        managementStyle:
+          type: string
+        custodian:
+          type: string
+        subAdvisor:
+          type: string
+        accountCount:
+          type: integer
+          format: int32
+        aum:
+          type: number
+          format: double
+        astroUsage:
+          type: string
+          enum:
+          - Undefined
+          - Disabled
+          - Restricted
+          - FullAccess
+        opsTier:
+          type: string
+        dateRebalanceExecutionRequested:
+          type: string
+          format: date-time
+        benchmark:
+          type: string
+        strategistExternalId:
+          type: integer
+          format: int32
+      xml:
+        name: CommunityModelDto
+      type: object
     OAS.DataModel.SimpleEntity:
       properties:
         id:
@@ -3000,19 +3229,51 @@ components:
       xml:
         name: ModelFullDto
       type: object
-    OAS.WebApi.Domains.Trading.ModelsController.ValidatedModelDto:
+    OAS.WebApi.DTO.Trading.ModelDetailsDto:
       properties:
         modelId:
           type: integer
           format: int32
+        communityModelId:
+          type: integer
+          format: int64
+        ytdPerformance:
+          type: number
+          format: double
+        riskScore:
+          type: number
+          format: double
+        indexBlendId:
+          type: integer
+          format: int32
+        modelAccounts:
+          type: integer
+          format: int32
+        prevDayPerformance:
+          type: number
+          format: double
         modelName:
           type: string
-        isValid:
-          type: boolean
-        validationMessage:
+        strategist:
+          type: string
+        strategistId:
+          type: integer
+          format: int32
+        advisorFee:
+          type: number
+          format: double
+        aum:
+          type: number
+          format: double
+        aggregateModelId:
+          type: integer
+          format: int32
+        riskCategory:
+          type: string
+        assetClass:
           type: string
       xml:
-        name: ValidatedModelDto
+        name: ModelDetailsDto
       type: object
     OAS.WebApi.DTO.Trading.SmaModelAccountTypeRestrictionDto:
       properties:
@@ -3028,33 +3289,62 @@ components:
       xml:
         name: SmaModelAccountTypeRestrictionDto
       type: object
-    OAS.WebApi.DTO.Trading.ModelAccountFullDto:
+    OAS.WebApi.Domains.Trading.ModelsController.ValidatedModelDto:
       properties:
-        accountId:
+        modelId:
           type: integer
           format: int32
-        accountName:
+        modelName:
           type: string
-        accountNumber:
-          type: string
-        canDelete:
+        isValid:
           type: boolean
-        lastRebalanced:
+        validationMessage:
+          type: string
+      xml:
+        name: ValidatedModelDto
+      type: object
+    OAS.WebApi.Domains.Trading.ModelsController.ModelsToValidateDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: ModelsToValidateDto
+      type: object
+    OAS.WebApi.DTO.Trading.ModelRangeFullDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        summary:
+          type: string
+        createdDate:
           type: string
           format: date-time
+        createdBy:
+          type: string
         editedDate:
           type: string
           format: date-time
         editedBy:
           type: string
-        value:
-          type: number
-          format: double
-        modelId:
+        upperScore:
           type: integer
           format: int32
+        lowerScore:
+          type: integer
+          format: int32
+        userDefinedFields:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+          xml:
+            name: EntityOptionDto
+            wrapped: true
+          type: array
       xml:
-        name: ModelAccountFullDto
+        name: ModelRangeFullDto
       type: object
     OAS.WebApi.DTO.Trading.ModelItemFullDto:
       properties:
@@ -3103,360 +3393,6 @@ components:
           format: int32
       xml:
         name: ModelItemFullDto
-      type: object
-    OAS.WebApi.DTO.Trading.ModelValueDto:
-      properties:
-        accountCount:
-          type: integer
-          format: int32
-        value:
-          type: number
-          format: double
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        lastRebalanced:
-          type: string
-          format: date-time
-        fundName:
-          type: string
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        groupNum:
-          type: string
-        subAdvisor:
-          type: string
-        modelNum:
-          type: integer
-          format: int32
-        percEquity:
-          type: integer
-          format: int32
-        modelType:
-          type: string
-        fundList:
-          type: string
-        modelTol:
-          type: integer
-          format: int32
-        cashPerc:
-          type: integer
-          format: int32
-        cashTol:
-          type: integer
-          format: int32
-        isActive:
-          type: boolean
-        createdDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        class:
-          type: string
-        modelCode:
-          type: string
-        managementStyle:
-          type: string
-        notes:
-          type: string
-        isDynamic:
-          type: boolean
-        custodian:
-          type: string
-        subAdvisorId:
-          type: integer
-          format: int32
-        communityModelId:
-          type: integer
-          format: int64
-        useRestrictions:
-          type: boolean
-        isSMA:
-          type: boolean
-        assetClassId:
-          type: integer
-          format: int32
-        riskCategoryId:
-          type: integer
-          format: int32
-      xml:
-        name: ModelValueDto
-      type: object
-    OAS.WebApi.DTO.Trading.ModelDetailsDto:
-      properties:
-        modelId:
-          type: integer
-          format: int32
-        communityModelId:
-          type: integer
-          format: int64
-        ytdPerformance:
-          type: number
-          format: double
-        riskScore:
-          type: number
-          format: double
-        indexBlendId:
-          type: integer
-          format: int32
-        modelAccounts:
-          type: integer
-          format: int32
-        prevDayPerformance:
-          type: number
-          format: double
-        modelName:
-          type: string
-        strategist:
-          type: string
-        strategistId:
-          type: integer
-          format: int32
-        advisorFee:
-          type: number
-          format: double
-        aum:
-          type: number
-          format: double
-        aggregateModelId:
-          type: integer
-          format: int32
-        riskCategory:
-          type: string
-        assetClass:
-          type: string
-      xml:
-        name: ModelDetailsDto
-      type: object
-    OAS.WebApi.DTO.Trading.ModelDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        lastRebalanced:
-          type: string
-          format: date-time
-        fundName:
-          type: string
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        groupNum:
-          type: string
-        subAdvisor:
-          type: string
-        modelNum:
-          type: integer
-          format: int32
-        percEquity:
-          type: integer
-          format: int32
-        modelType:
-          type: string
-        fundList:
-          type: string
-        modelTol:
-          type: integer
-          format: int32
-        cashPerc:
-          type: integer
-          format: int32
-        cashTol:
-          type: integer
-          format: int32
-        isActive:
-          type: boolean
-        createdDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        class:
-          type: string
-        modelCode:
-          type: string
-        managementStyle:
-          type: string
-        notes:
-          type: string
-        isDynamic:
-          type: boolean
-        custodian:
-          type: string
-        subAdvisorId:
-          type: integer
-          format: int32
-        communityModelId:
-          type: integer
-          format: int64
-        useRestrictions:
-          type: boolean
-        isSMA:
-          type: boolean
-        assetClassId:
-          type: integer
-          format: int32
-        riskCategoryId:
-          type: integer
-          format: int32
-      xml:
-        name: ModelDto
-      type: object
-    OAS.WebApi.DTO.Integrations.Communities.CommunityModelDto:
-      properties:
-        modelId:
-          type: integer
-          format: int32
-        communityModelId:
-          type: integer
-          format: int64
-        communityModelName:
-          type: string
-        targetRiskUpper:
-          type: number
-          format: double
-        targetRiskLower:
-          type: number
-          format: double
-        style:
-          type: string
-        advisorFee:
-          type: number
-          format: double
-        weightedAvgNetExpenses:
-          type: number
-          format: double
-        currentRisk:
-          type: number
-          format: double
-        minimumAmount:
-          type: number
-          format: double
-        dateRebalanceRequested:
-          type: string
-          format: date-time
-        lastRebalanceDate:
-          type: string
-          format: date-time
-        needsRebalance:
-          type: boolean
-        platFormId:
-          type: integer
-          format: int32
-        shareClassId:
-          type: integer
-          format: int32
-        notes:
-          type: string
-        groupNum:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        strategistId:
-          type: integer
-          format: int32
-        strategistName:
-          type: string
-        modelManagerId:
-          type: integer
-          format: int32
-        modelManagerName:
-          type: string
-        name:
-          type: string
-        isActive:
-          type: boolean
-        createdDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        modelCode:
-          type: string
-        cashPerc:
-          type: integer
-          format: int32
-        cashTol:
-          type: integer
-          format: int32
-        fundList:
-          type: string
-        modelNum:
-          type: integer
-          format: int32
-        modelTol:
-          type: integer
-          format: int32
-        isDynamic:
-          type: boolean
-        modelType:
-          type: string
-        percEquity:
-          type: integer
-          format: int32
-        subAdvisorId:
-          type: integer
-          format: int32
-        useRestrictions:
-          type: boolean
-        fundName:
-          type: string
-        class:
-          type: string
-        managementStyle:
-          type: string
-        custodian:
-          type: string
-        subAdvisor:
-          type: string
-        accountCount:
-          type: integer
-          format: int32
-        aum:
-          type: number
-          format: double
-        astroUsage:
-          type: string
-          enum:
-          - Undefined
-          - Disabled
-          - Restricted
-          - FullAccess
-        opsTier:
-          type: string
-        dateRebalanceExecutionRequested:
-          type: string
-          format: date-time
-        benchmark:
-          type: string
-        strategistExternalId:
-          type: integer
-          format: int32
-      xml:
-        name: CommunityModelDto
-      type: object
-    OAS.WebApi.Domains.Trading.ModelsController.ModelsToValidateDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: ModelsToValidateDto
       type: object
     OAS.WebApi.DTO.Settings.EntityOptionDto:
       properties:
@@ -3703,9 +3639,78 @@ components:
       xml:
         name: EntityOptionDto
       type: object
-    OAS.DataModel.Trading.SimpleModel:
+    OAS.WebApi.DTO.Trading.ModelValueDto:
       properties:
+        accountCount:
+          type: integer
+          format: int32
+        value:
+          type: number
+          format: double
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        lastRebalanced:
+          type: string
+          format: date-time
+        fundName:
+          type: string
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        groupNum:
+          type: string
+        subAdvisor:
+          type: string
+        modelNum:
+          type: integer
+          format: int32
+        percEquity:
+          type: integer
+          format: int32
+        modelType:
+          type: string
+        fundList:
+          type: string
+        modelTol:
+          type: integer
+          format: int32
+        cashPerc:
+          type: integer
+          format: int32
+        cashTol:
+          type: integer
+          format: int32
         isActive:
+          type: boolean
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        class:
+          type: string
+        modelCode:
+          type: string
+        managementStyle:
+          type: string
+        notes:
+          type: string
+        isDynamic:
+          type: boolean
+        custodian:
+          type: string
+        subAdvisorId:
+          type: integer
+          format: int32
+        communityModelId:
+          type: integer
+          format: int64
+        useRestrictions:
           type: boolean
         isSMA:
           type: boolean
@@ -3715,13 +3720,8 @@ components:
         riskCategoryId:
           type: integer
           format: int32
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
       xml:
-        name: SimpleModel
+        name: ModelValueDto
       type: object
   securitySchemes:
     Authorization:

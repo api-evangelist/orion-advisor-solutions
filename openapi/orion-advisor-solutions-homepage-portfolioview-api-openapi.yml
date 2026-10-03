@@ -290,14 +290,241 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.Domains.Homepage.CachedData:
+    OAS.WebApi.DTO.HomepageDashboard.AvailableValueDto:
       properties:
-        key:
+        displayName:
           type: string
-        data:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.DataSourceDataResultOfSystem.Object'
+        value:
+          type: string
+        sortOrder:
+          type: integer
+          format: int32
+        bucketValue:
+          type: string
+        isHidden:
+          type: boolean
+        dataText:
+          type: string
+        cssClass:
+          type: string
+        setting:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardSettingDto'
       xml:
-        name: CachedData
+        name: AvailableValueDto
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.CardMappingDto:
+      properties:
+        type:
+          type: string
+        text:
+          type: string
+        originalAvailableValues:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.AvailableValueDto'
+          xml:
+            name: AvailableValueDto
+            wrapped: true
+          type: array
+        buckets:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.BucketMappingDto'
+          xml:
+            name: BucketMappingDto
+            wrapped: true
+          type: array
+      xml:
+        name: CardMappingDto
+      type: object
+    OAS.DataProcess.Integrations.OpenAI.Agenda:
+      properties:
+        title:
+          type: string
+        allocatedTime:
+          type: integer
+          format: int32
+        allocatedTimeInMinute:
+          readOnly: true
+          type: string
+        keyPoints:
+          items:
+            type: string
+          type: array
+      xml:
+        name: Agenda
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.HomepageDashboardDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        isDefault:
+          type: boolean
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        isGlobal:
+          type: boolean
+        parentDashboardId:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        isShared:
+          type: boolean
+        dashboardType:
+          type: string
+          enum:
+          - Homepage
+          - View
+          - Tool
+        cards:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardDto'
+          xml:
+            name: CardDto
+            wrapped: true
+          type: array
+      xml:
+        name: HomepageDashboardDto
+      type: object
+    OAS.DataProcess.Integrations.OpenAI.MeetingAgenda:
+      properties:
+        reportId:
+          type: string
+        fileId:
+          type: string
+        items:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.Integrations.OpenAI.Agenda'
+          xml:
+            name: Agenda
+            wrapped: true
+          type: array
+      xml:
+        name: MeetingAgenda
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.ListEditorConfigDto:
+      description: Declarative list editor UI config stored on card settings JSON (listEditor).
+      properties:
+        mode:
+          type: string
+        labelField:
+          type: string
+        valueField:
+          type: string
+        readOnlyFields:
+          items:
+            type: string
+          type: array
+        maxItems:
+          type: integer
+          format: int32
+        minItems:
+          type: integer
+          format: int32
+        allowAdd:
+          type: boolean
+        allowRemove:
+          type: boolean
+        allowReorder:
+          type: boolean
+        emptyMessage:
+          type: string
+        persistStrategy:
+          type: string
+      xml:
+        name: ListEditorConfigDto
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.DataSourceDataResultOfSystem.Object:
+      properties:
+        dataSourceId:
+          description: ''
+          type: integer
+          format: int32
+        data:
+          description: ''
+          readOnly: true
+          type: object
+        isCached:
+          type: boolean
+        error:
+          description: ''
+          type: string
+      xml:
+        name: DataSourceDataResult`1
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.CardSettingDto:
+      properties:
+        displayName:
+          type: string
+        promptType:
+          type: integer
+          format: int32
+        selectedValue:
+          type: string
+        code:
+          type: string
+        dataType:
+          type: string
+        availableValues:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.AvailableValueDto'
+          xml:
+            name: AvailableValueDto
+            wrapped: true
+          type: array
+        valuesSource:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ValuesSourceDto'
+        option:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardsettingOptionDto'
+        hidden:
+          type: boolean
+        settings:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardSettingDto'
+          xml:
+            name: CardSettingDto
+            wrapped: true
+          type: array
+        category:
+          type: string
+        dragSortEnabled:
+          type: boolean
+        useDefaultIfHidden:
+          type: boolean
+        isThreeDotMenu:
+          type: boolean
+        cardEventType:
+          type: integer
+          format: int32
+        mappings:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardMappingDto'
+        listEditor:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ListEditorConfigDto'
+        listEditorMenuTargetCode:
+          type: string
+        maxOptionsAllowed:
+          type: integer
+          format: int32
+      xml:
+        name: CardSettingDto
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.BucketMappingDto:
+      properties:
+        name:
+          type: string
+        id:
+          type: integer
+          format: int32
+        includedValues:
+          type: string
+      xml:
+        name: BucketMappingDto
       type: object
     OAS.WebApi.DTO.HomepageDashboard.CardDto:
       properties:
@@ -369,173 +596,7 @@ components:
       xml:
         name: CardDto
       type: object
-    OAS.WebApi.DTO.HomepageDashboard.HomepageDashboardDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        isDefault:
-          type: boolean
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        isGlobal:
-          type: boolean
-        parentDashboardId:
-          type: integer
-          format: int32
-        userId:
-          type: integer
-          format: int32
-        isShared:
-          type: boolean
-        dashboardType:
-          type: string
-          enum:
-          - Homepage
-          - View
-          - Tool
-        cards:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardDto'
-          xml:
-            name: CardDto
-            wrapped: true
-          type: array
-      xml:
-        name: HomepageDashboardDto
-      type: object
-    OAS.WebApi.DTO.HomepageDashboard.CardsettingOptionDto:
-      properties:
-        inputOption:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.InputOption'
-        sliderOption:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.SliderOptionDto'
-      xml:
-        name: CardsettingOptionDto
-      type: object
-    OAS.WebApi.DTO.HomepageDashboard.ListEditorConfigDto:
-      description: Declarative list editor UI config stored on card settings JSON (listEditor).
-      properties:
-        mode:
-          type: string
-        labelField:
-          type: string
-        valueField:
-          type: string
-        readOnlyFields:
-          items:
-            type: string
-          type: array
-        maxItems:
-          type: integer
-          format: int32
-        minItems:
-          type: integer
-          format: int32
-        allowAdd:
-          type: boolean
-        allowRemove:
-          type: boolean
-        allowReorder:
-          type: boolean
-        emptyMessage:
-          type: string
-        persistStrategy:
-          type: string
-      xml:
-        name: ListEditorConfigDto
-      type: object
-    OAS.WebApi.DTO.HomepageDashboard.CardSettingDto:
-      properties:
-        displayName:
-          type: string
-        promptType:
-          type: integer
-          format: int32
-        selectedValue:
-          type: string
-        code:
-          type: string
-        dataType:
-          type: string
-        availableValues:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.AvailableValueDto'
-          xml:
-            name: AvailableValueDto
-            wrapped: true
-          type: array
-        valuesSource:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ValuesSourceDto'
-        option:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardsettingOptionDto'
-        hidden:
-          type: boolean
-        settings:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardSettingDto'
-          xml:
-            name: CardSettingDto
-            wrapped: true
-          type: array
-        category:
-          type: string
-        dragSortEnabled:
-          type: boolean
-        useDefaultIfHidden:
-          type: boolean
-        isThreeDotMenu:
-          type: boolean
-        cardEventType:
-          type: integer
-          format: int32
-        mappings:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardMappingDto'
-        listEditor:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ListEditorConfigDto'
-        listEditorMenuTargetCode:
-          type: string
-        maxOptionsAllowed:
-          type: integer
-          format: int32
-      xml:
-        name: CardSettingDto
-      type: object
-    OAS.DataProcess.Integrations.OpenAI.Agenda:
-      properties:
-        title:
-          type: string
-        allocatedTime:
-          type: integer
-          format: int32
-        allocatedTimeInMinute:
-          readOnly: true
-          type: string
-        keyPoints:
-          items:
-            type: string
-          type: array
-      xml:
-        name: Agenda
-      type: object
-    OAS.WebApi.DTO.HomepageDashboard.BucketMappingDto:
-      properties:
-        name:
-          type: string
-        id:
-          type: integer
-          format: int32
-        includedValues:
-          type: string
-      xml:
-        name: BucketMappingDto
-      type: object
-    OAS.WebApi.DTO.HomepageDashboard.SliderOptionDto:
+    OAS.WebApi.DTO.HomepageDashboard.InputOption:
       properties:
         min:
           type: integer
@@ -543,11 +604,17 @@ components:
         max:
           type: integer
           format: int32
-        dimension:
-          type: integer
-          format: int32
       xml:
-        name: SliderOptionDto
+        name: InputOption
+      type: object
+    OAS.WebApi.Domains.Homepage.CachedData:
+      properties:
+        key:
+          type: string
+        data:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.DataSourceDataResultOfSystem.Object'
+      xml:
+        name: CachedData
       type: object
     OAS.WebApi.DTO.HomepageDashboard.DataSource:
       properties:
@@ -589,59 +656,7 @@ components:
       xml:
         name: DataSource
       type: object
-    OAS.WebApi.DTO.HomepageDashboard.ValuesSourceDto:
-      properties:
-        endpoint:
-          type: string
-        labelField:
-          type: string
-        valueField:
-          type: string
-      xml:
-        name: ValuesSourceDto
-      type: object
-    OAS.WebApi.DTO.HomepageDashboard.CardMappingDto:
-      properties:
-        type:
-          type: string
-        text:
-          type: string
-        originalAvailableValues:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.AvailableValueDto'
-          xml:
-            name: AvailableValueDto
-            wrapped: true
-          type: array
-        buckets:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.BucketMappingDto'
-          xml:
-            name: BucketMappingDto
-            wrapped: true
-          type: array
-      xml:
-        name: CardMappingDto
-      type: object
-    OAS.WebApi.DTO.HomepageDashboard.DataSourceDataResultOfSystem.Object:
-      properties:
-        dataSourceId:
-          description: ''
-          type: integer
-          format: int32
-        data:
-          description: ''
-          readOnly: true
-          type: object
-        isCached:
-          type: boolean
-        error:
-          description: ''
-          type: string
-      xml:
-        name: DataSourceDataResult`1
-      type: object
-    OAS.WebApi.DTO.HomepageDashboard.InputOption:
+    OAS.WebApi.DTO.HomepageDashboard.SliderOptionDto:
       properties:
         min:
           type: integer
@@ -649,46 +664,11 @@ components:
         max:
           type: integer
           format: int32
-      xml:
-        name: InputOption
-      type: object
-    OAS.DataProcess.Integrations.OpenAI.MeetingAgenda:
-      properties:
-        reportId:
-          type: string
-        fileId:
-          type: string
-        items:
-          items:
-            $ref: '#/components/schemas/OAS.DataProcess.Integrations.OpenAI.Agenda'
-          xml:
-            name: Agenda
-            wrapped: true
-          type: array
-      xml:
-        name: MeetingAgenda
-      type: object
-    OAS.WebApi.DTO.HomepageDashboard.AvailableValueDto:
-      properties:
-        displayName:
-          type: string
-        value:
-          type: string
-        sortOrder:
+        dimension:
           type: integer
           format: int32
-        bucketValue:
-          type: string
-        isHidden:
-          type: boolean
-        dataText:
-          type: string
-        cssClass:
-          type: string
-        setting:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardSettingDto'
       xml:
-        name: AvailableValueDto
+        name: SliderOptionDto
       type: object
     OAS.WebApi.DTO.HomepageDashboard.ParameterDto:
       properties:
@@ -704,6 +684,26 @@ components:
           type: string
       xml:
         name: ParameterDto
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.ValuesSourceDto:
+      properties:
+        endpoint:
+          type: string
+        labelField:
+          type: string
+        valueField:
+          type: string
+      xml:
+        name: ValuesSourceDto
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.CardsettingOptionDto:
+      properties:
+        inputOption:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.InputOption'
+        sliderOption:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.SliderOptionDto'
+      xml:
+        name: CardsettingOptionDto
       type: object
     OAS.WebApi.DTO.HomepageDashboard.ComponentDto:
       properties:

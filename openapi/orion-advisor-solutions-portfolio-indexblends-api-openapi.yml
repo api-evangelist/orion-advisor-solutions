@@ -425,55 +425,43 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.DataModel.Portfolio.ShareClass:
-      required:
-      - id
-      - class
-      properties:
-        id:
-          type: integer
-          format: int32
-        class:
-          type: string
-          maxLength: 10
-          minLength: 0
-        description:
-          type: string
-          maxLength: 255
-          minLength: 0
-        oldFundId:
-          type: integer
-          format: int32
-        loadType:
-          type: string
-          maxLength: 1
-          minLength: 0
-        isDefault:
-          type: boolean
-      xml:
-        name: ShareClass
-      type: object
-    OAS.DataModel.SimpleEntity:
+    OAS.WebApi.DTO.Portfolio.IndexBlendDto:
       properties:
         id:
           type: integer
           format: int32
         name:
           type: string
-      xml:
-        name: SimpleEntity
-      type: object
-    OAS.WebApi.DTO.Portfolio.IndexBlendDynamicDetailDto:
-      properties:
-        id:
+        interval:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        assetClassId:
           type: integer
           format: int32
-        name:
+        assetClassName:
           type: string
-        product:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Search.SearchProductDto'
+        color:
+          type: string
+        dynamicType:
+          type: string
+          enum:
+          - None
+          - AssetClass
+          - AssetCategory
+          - ManagementStyle
+          - AggregateModel
+          - RiskCategory
       xml:
-        name: IndexBlendDynamicDetailDto
+        name: IndexBlendDto
       type: object
     OAS.WebApi.DTO.Portfolio.IndexBlendFullDto:
       properties:
@@ -543,66 +531,33 @@ components:
       xml:
         name: IndexBlendFullDto
       type: object
-    OAS.DataModel.Portfolio.IndexBlendDetailDateRange:
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-      xml:
-        name: IndexBlendDetailDateRange
-      type: object
-    OAS.WebApi.DTO.Portfolio.IndexBlendDto:
+    OAS.DataModel.SimpleEntity:
       properties:
         id:
           type: integer
           format: int32
         name:
           type: string
-        interval:
-          type: string
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        assetClassId:
-          type: integer
-          format: int32
-        assetClassName:
-          type: string
-        color:
-          type: string
-        dynamicType:
-          type: string
-          enum:
-          - None
-          - AssetClass
-          - AssetCategory
-          - ManagementStyle
-          - AggregateModel
-          - RiskCategory
       xml:
-        name: IndexBlendDto
+        name: SimpleEntity
       type: object
-    OAS.DataModel.Portfolio.SimpleRepresentative:
+    OAS.WebApi.DTO.Portfolio.IndexBlendAllocationDto:
       properties:
-        isActive:
-          type: boolean
-        number:
-          type: string
         id:
           type: integer
           format: int32
-        name:
+        productId:
+          type: integer
+          format: int32
+        ticker:
           type: string
+        productName:
+          type: string
+        weight:
+          type: number
+          format: double
       xml:
-        name: SimpleRepresentative
+        name: IndexBlendAllocationDto
       type: object
     OAS.WebApi.DTO.Portfolio.IndexBlendTimeframeDto:
       properties:
@@ -624,6 +579,104 @@ components:
           type: array
       xml:
         name: IndexBlendTimeframeDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.IndexBlendDynamicDetailDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        product:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Search.SearchProductDto'
+      xml:
+        name: IndexBlendDynamicDetailDto
+      type: object
+    OAS.DataModel.Portfolio.IndexBlendDetailDateRange:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      xml:
+        name: IndexBlendDetailDateRange
+      type: object
+    OAS.DataModel.Portfolio.SimpleRepresentative:
+      properties:
+        isActive:
+          type: boolean
+        number:
+          type: string
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleRepresentative
+      type: object
+    OAS.WebApi.DTO.Search.SearchProductDto:
+      properties:
+        ticker:
+          type: string
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        productType:
+          type: integer
+          format: int32
+        productTypeName:
+          type: string
+        price:
+          type: number
+          format: double
+        shareClass:
+          $ref: '#/components/schemas/OAS.DataModel.Portfolio.ShareClass'
+        externalId:
+          type: integer
+          format: int32
+        productRiskScore:
+          type: integer
+          format: int32
+        productClass:
+          type: string
+        productCategory:
+          type: string
+        riskScore:
+          type: integer
+          format: int32
+      xml:
+        name: SearchProductDto
+      type: object
+    OAS.DataModel.Portfolio.ShareClass:
+      required:
+      - id
+      - class
+      properties:
+        id:
+          type: integer
+          format: int32
+        class:
+          type: string
+          maxLength: 10
+          minLength: 0
+        description:
+          type: string
+          maxLength: 255
+          minLength: 0
+        oldFundId:
+          type: integer
+          format: int32
+        loadType:
+          type: string
+          maxLength: 1
+          minLength: 0
+        isDefault:
+          type: boolean
+      xml:
+        name: ShareClass
       type: object
     OAS.WebApi.DTO.Settings.EntityOptionDto:
       properties:
@@ -869,59 +922,6 @@ components:
           type: boolean
       xml:
         name: EntityOptionDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.IndexBlendAllocationDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        productId:
-          type: integer
-          format: int32
-        ticker:
-          type: string
-        productName:
-          type: string
-        weight:
-          type: number
-          format: double
-      xml:
-        name: IndexBlendAllocationDto
-      type: object
-    OAS.WebApi.DTO.Search.SearchProductDto:
-      properties:
-        ticker:
-          type: string
-        productId:
-          type: integer
-          format: int32
-        productName:
-          type: string
-        productType:
-          type: integer
-          format: int32
-        productTypeName:
-          type: string
-        price:
-          type: number
-          format: double
-        shareClass:
-          $ref: '#/components/schemas/OAS.DataModel.Portfolio.ShareClass'
-        externalId:
-          type: integer
-          format: int32
-        productRiskScore:
-          type: integer
-          format: int32
-        productClass:
-          type: string
-        productCategory:
-          type: string
-        riskScore:
-          type: integer
-          format: int32
-      xml:
-        name: SearchProductDto
       type: object
   securitySchemes:
     Authorization:

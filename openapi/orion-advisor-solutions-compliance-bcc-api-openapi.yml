@@ -721,159 +721,17 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.WebApi.DTO.Security.UserInfoDetailsDto:
+    OAS.DataModel.Compliance.GetRepresentativesModel.FundModel:
       properties:
-        profiles:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Security.ProfileDto'
-          xml:
-            name: ProfileDto
-            wrapped: true
-          type: array
-        password:
-          type: string
-        isSecureExchangeRecipient:
-          type: boolean
-        partnerAppId:
+        alertId:
           type: integer
           format: int32
-        twoFactor:
-          type: boolean
-        errorMessage:
+        ticker:
           type: string
-        id:
-          type: integer
-          format: int32
-        userId:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-        isActive:
-          type: boolean
-        activeDate:
-          type: string
-          format: date-time
-        inactiveDate:
-          type: string
-          format: date-time
-        lastLogin:
-          type: string
-          format: date-time
-        lastPasswordChange:
-          type: string
-          format: date-time
-        isReset:
-          type: boolean
-        mobilePhone:
-          type: string
-        businessPhone:
-          type: string
-        businessPhoneExtension:
-          type: string
-        company:
-          type: string
-        jobTitle:
-          type: string
-        entityName:
-          type: string
-        contactType:
-          type: string
-          enum:
-          - NotApproved
-          - Approved
-          - MainContact
-          - NoLongerWithFirm
-        createdDate:
-          type: string
-          format: date-time
-      xml:
-        name: UserInfoDetailsDto
-      type: object
-    OAS.DataModel.Compliance.GetRepresentativesModel:
-      properties:
-        funds:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Compliance.GetRepresentativesModel.FundModel'
-          xml:
-            name: FundModel
-            wrapped: true
-          type: array
-      xml:
-        name: GetRepresentativesModel
-      type: object
-    OAS.DataModel.SimpleEntity:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
+        custodian:
           type: string
       xml:
-        name: SimpleEntity
-      type: object
-    OAS.WebApi.DTO.Compliance.InformAccountForBccDto:
-      properties:
-        informBrokerageAccountId:
-          type: integer
-          format: int32
-        accessPersonId:
-          type: integer
-          format: int32
-        informUserId:
-          type: integer
-          format: int32
-        vendorAccountCode:
-          type: string
-        accountNumber:
-          type: string
-        institutionName:
-          type: string
-        recordSource:
-          type: string
-          enum:
-          - Unknown
-          - Quovo
-          - Retirement
-          - OrionConnect
-          - Plaid
-          - ByAll
-        isActive:
-          type: boolean
-      xml:
-        name: InformAccountForBccDto
-      type: object
-    OAS.WebApi.DTO.Compliance.InformUserForBccDto:
-      properties:
-        userId:
-          type: integer
-          format: int32
-        userDtlId:
-          type: integer
-          format: int32
-        informUserId:
-          type: integer
-          format: int32
-        accessPersonId:
-          type: integer
-          format: int32
-        loginUserId:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-        isActiveUser:
-          type: boolean
-        isActiveAccessPerson:
-          type: boolean
-      xml:
-        name: InformUserForBccDto
+        name: FundModel
       type: object
     OAS.WebApi.DTO.Security.ProfileDto:
       properties:
@@ -1132,17 +990,177 @@ components:
       xml:
         name: InformTransactionForBccDto
       type: object
-    OAS.DataModel.Compliance.GetRepresentativesModel.FundModel:
+    OAS.DataModel.SimpleEntity:
       properties:
-        alertId:
+        id:
           type: integer
           format: int32
-        ticker:
-          type: string
-        custodian:
+        name:
           type: string
       xml:
-        name: FundModel
+        name: SimpleEntity
+      type: object
+    OAS.DataModel.Compliance.NotifyConsultantsModel:
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        company:
+          type: string
+        consultantIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        comment:
+          type: string
+      xml:
+        name: NotifyConsultantsModel
+      type: object
+    OAS.WebApi.DTO.Compliance.InformAccountForBccDto:
+      properties:
+        informBrokerageAccountId:
+          type: integer
+          format: int32
+        accessPersonId:
+          type: integer
+          format: int32
+        informUserId:
+          type: integer
+          format: int32
+        vendorAccountCode:
+          type: string
+        accountNumber:
+          type: string
+        institutionName:
+          type: string
+        recordSource:
+          type: string
+          enum:
+          - Unknown
+          - Quovo
+          - Retirement
+          - OrionConnect
+          - Plaid
+          - ByAll
+        isActive:
+          type: boolean
+      xml:
+        name: InformAccountForBccDto
+      type: object
+    OAS.WebApi.DTO.Compliance.InformUserForBccDto:
+      properties:
+        userId:
+          type: integer
+          format: int32
+        userDtlId:
+          type: integer
+          format: int32
+        informUserId:
+          type: integer
+          format: int32
+        accessPersonId:
+          type: integer
+          format: int32
+        loginUserId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        isActiveUser:
+          type: boolean
+        isActiveAccessPerson:
+          type: boolean
+      xml:
+        name: InformUserForBccDto
+      type: object
+    OAS.DataModel.Compliance.GetRepresentativesModel:
+      properties:
+        funds:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Compliance.GetRepresentativesModel.FundModel'
+          xml:
+            name: FundModel
+            wrapped: true
+          type: array
+      xml:
+        name: GetRepresentativesModel
+      type: object
+    OAS.WebApi.DTO.Security.UserInfoDetailsDto:
+      properties:
+        profiles:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Security.ProfileDto'
+          xml:
+            name: ProfileDto
+            wrapped: true
+          type: array
+        password:
+          type: string
+        isSecureExchangeRecipient:
+          type: boolean
+        partnerAppId:
+          type: integer
+          format: int32
+        twoFactor:
+          type: boolean
+        errorMessage:
+          type: string
+        id:
+          type: integer
+          format: int32
+        userId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        isActive:
+          type: boolean
+        activeDate:
+          type: string
+          format: date-time
+        inactiveDate:
+          type: string
+          format: date-time
+        lastLogin:
+          type: string
+          format: date-time
+        lastPasswordChange:
+          type: string
+          format: date-time
+        isReset:
+          type: boolean
+        mobilePhone:
+          type: string
+        businessPhone:
+          type: string
+        businessPhoneExtension:
+          type: string
+        company:
+          type: string
+        jobTitle:
+          type: string
+        entityName:
+          type: string
+        contactType:
+          type: string
+          enum:
+          - NotApproved
+          - Approved
+          - MainContact
+          - NoLongerWithFirm
+        createdDate:
+          type: string
+          format: date-time
+      xml:
+        name: UserInfoDetailsDto
       type: object
     OAS.WebApi.DTO.Compliance.InformHoldingForBccDto:
       properties:
@@ -1193,24 +1211,6 @@ components:
           type: string
       xml:
         name: InformHoldingForBccDto
-      type: object
-    OAS.DataModel.Compliance.NotifyConsultantsModel:
-      properties:
-        name:
-          type: string
-        email:
-          type: string
-        company:
-          type: string
-        consultantIds:
-          items:
-            type: integer
-            format: int32
-          type: array
-        comment:
-          type: string
-      xml:
-        name: NotifyConsultantsModel
       type: object
   securitySchemes:
     Authorization:

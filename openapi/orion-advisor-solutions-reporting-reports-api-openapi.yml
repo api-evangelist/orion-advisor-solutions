@@ -2008,6 +2008,120 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAS.WebApi.DTO.Reporting.Envision.EnvisionReportDto:
+      properties:
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        requiredOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+        additionalOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOptionCategory'
+          xml:
+            name: ReportOptionCategory
+            wrapped: true
+          type: array
+        deliveryOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+        hasAdditionalOptions:
+          type: boolean
+        featureFlagOverrides:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IReportFeatureFlagOverrider'
+        groupingOptionOverrider:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.IGroupingOptionOverrider'
+        isFavorite:
+          type: boolean
+        reportName:
+          type: string
+        reportDescription:
+          type: string
+        parentCategory:
+          type: string
+        category:
+          type: string
+        runAssignedVersion:
+          type: boolean
+      xml:
+        name: EnvisionReportDto
+      type: object
+    OAS.WebApi.DTO.Reporting.RunReport.RunReportOptionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        childParameter:
+          type: string
+        name:
+          type: string
+        value:
+          type: string
+        display:
+          type: string
+        order:
+          type: integer
+          format: int32
+        description:
+          type: string
+        input:
+          type: string
+        options:
+          type: object
+      xml:
+        name: RunReportOptionDto
+      type: object
+    OAS.DataModel.SimpleEntityBase:
+      properties:
+        name:
+          type: string
+      xml:
+        name: SimpleEntityBase
+      type: object
+    OAS.WebApi.DTO.Reporting.RunReport.BatchReportGenerationStatus:
+      properties:
+        status:
+          type: string
+          enum:
+          - NotGenerated
+          - ErroredReport
+          - OnHold
+          - Generated
+          - PendingGeneration
+          - WillNotBeGenerated
+        reports:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.ReportGenerationStatus'
+          xml:
+            name: ReportGenerationStatus
+            wrapped: true
+          type: array
+        totalReports:
+          type: integer
+          format: int32
+      xml:
+        name: BatchReportGenerationStatus
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
     OAS.WebApi.DTO.Reporting.RunReport.ReportBaseDto:
       properties:
         reportName:
@@ -2022,6 +2136,20 @@ components:
           type: boolean
       xml:
         name: ReportBaseDto
+      type: object
+    OAS.WebApi.DTO.Reporting.RunReport.RunReportCategoryDto:
+      properties:
+        category:
+          type: string
+        parameters:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.RunReportOptionDto'
+          xml:
+            name: RunReportOptionDto
+            wrapped: true
+          type: array
+      xml:
+        name: RunReportCategoryDto
       type: object
     OAS.DataModel.Reporting.Interfaces.IReportFeatureFlagOverrider:
       properties:
@@ -2109,8 +2237,10 @@ components:
       xml:
         name: IReportFeatureFlagOverrider
       type: object
-    OAS.WebApi.DTO.Reporting.RunReport.BatchReportGenerationStatus:
+    OAS.WebApi.DTO.Reporting.RunReport.ReportGenerationStatus:
       properties:
+        runFor:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.RunForDto'
         status:
           type: string
           enum:
@@ -2120,18 +2250,53 @@ components:
           - Generated
           - PendingGeneration
           - WillNotBeGenerated
-        reports:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.ReportGenerationStatus'
-          xml:
-            name: ReportGenerationStatus
-            wrapped: true
-          type: array
-        totalReports:
+        location:
+          type: string
+      xml:
+        name: ReportGenerationStatus
+      type: object
+    OAS.WebApi.DTO.Reporting.RunReport.InceptionDateDto:
+      properties:
+        inceptionDate:
+          type: string
+          format: date-time
+      xml:
+        name: InceptionDateDto
+      type: object
+    OAS.DataModel.Reporting.ReportOption:
+      required:
+      - id
+      - $type
+      properties:
+        id:
+          type: string
+        $type:
+          readOnly: true
+          type: string
+        optionGuid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        optionId:
           type: integer
           format: int32
+        isDisabled:
+          type: boolean
+        isGlobal:
+          type: boolean
+        isIgnored:
+          type: boolean
+        name:
+          type: string
+        useInception:
+          type: boolean
+        prompt:
+          type: string
+          enum:
+          - Never
+          - Always
       xml:
-        name: BatchReportGenerationStatus
+        name: ReportOption
       type: object
     OAS.WebApi.DTO.Reporting.RunReport.RunReportDto:
       properties:
@@ -2196,78 +2361,6 @@ components:
           type: boolean
       xml:
         name: RunReportDto
-      type: object
-    OAS.DataModel.SimpleEntity:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleEntity
-      type: object
-    OAS.WebApi.DTO.Reporting.RunReport.InceptionDateDto:
-      properties:
-        inceptionDate:
-          type: string
-          format: date-time
-      xml:
-        name: InceptionDateDto
-      type: object
-    OAS.DataModel.Reporting.ReportOptionCategory:
-      required:
-      - category
-      - options
-      properties:
-        category:
-          type: string
-        options:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
-          xml:
-            name: ReportOption
-            wrapped: true
-          type: array
-      xml:
-        name: ReportOptionCategory
-      type: object
-    OAS.WebApi.DTO.Reporting.RunReport.RunReportCategoryDto:
-      properties:
-        category:
-          type: string
-        parameters:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.RunReportOptionDto'
-          xml:
-            name: RunReportOptionDto
-            wrapped: true
-          type: array
-      xml:
-        name: RunReportCategoryDto
-      type: object
-    OAS.DataModel.Reporting.Engine.IGroupingOptionOverrider:
-      properties:
-        allowExpireClientsToStorePerformance:
-          type: boolean
-        ensureAssetsUpdated:
-          type: boolean
-        groupCustodialCashTogether:
-          type: boolean
-        groupLinksTogether:
-          type: boolean
-        returnActiveLinkedEntity:
-          type: boolean
-        useAccountChange:
-          type: boolean
-        useSmaSettings:
-          type: boolean
-        accountInclusion:
-          type: string
-        includeHistoricalLinks:
-          type: string
-      xml:
-        name: IGroupingOptionOverrider
       type: object
     OAS.WebApi.DTO.Reporting.RunReport.RunForDto:
       properties:
@@ -2468,6 +2561,23 @@ components:
       xml:
         name: RunForDto
       type: object
+    OAS.DataModel.Reporting.ReportOptionCategory:
+      required:
+      - category
+      - options
+      properties:
+        category:
+          type: string
+        options:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+      xml:
+        name: ReportOptionCategory
+      type: object
     OAS.WebApi.DTO.Reporting.RunReport.RunToDto:
       properties:
         reportFormat:
@@ -2531,138 +2641,28 @@ components:
       xml:
         name: RunToDto
       type: object
-    OAS.WebApi.DTO.Reporting.RunReport.ReportGenerationStatus:
+    OAS.DataModel.Reporting.Engine.IGroupingOptionOverrider:
       properties:
-        runFor:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.RunReport.RunForDto'
-        status:
+        allowExpireClientsToStorePerformance:
+          type: boolean
+        ensureAssetsUpdated:
+          type: boolean
+        groupCustodialCashTogether:
+          type: boolean
+        groupLinksTogether:
+          type: boolean
+        returnActiveLinkedEntity:
+          type: boolean
+        useAccountChange:
+          type: boolean
+        useSmaSettings:
+          type: boolean
+        accountInclusion:
           type: string
-          enum:
-          - NotGenerated
-          - ErroredReport
-          - OnHold
-          - Generated
-          - PendingGeneration
-          - WillNotBeGenerated
-        location:
+        includeHistoricalLinks:
           type: string
       xml:
-        name: ReportGenerationStatus
-      type: object
-    OAS.WebApi.DTO.Reporting.RunReport.RunReportOptionDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        childParameter:
-          type: string
-        name:
-          type: string
-        value:
-          type: string
-        display:
-          type: string
-        order:
-          type: integer
-          format: int32
-        description:
-          type: string
-        input:
-          type: string
-        options:
-          type: object
-      xml:
-        name: RunReportOptionDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.EnvisionReportDto:
-      properties:
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        requiredOptions:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
-          xml:
-            name: ReportOption
-            wrapped: true
-          type: array
-        additionalOptions:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOptionCategory'
-          xml:
-            name: ReportOptionCategory
-            wrapped: true
-          type: array
-        deliveryOptions:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
-          xml:
-            name: ReportOption
-            wrapped: true
-          type: array
-        hasAdditionalOptions:
-          type: boolean
-        featureFlagOverrides:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IReportFeatureFlagOverrider'
-        groupingOptionOverrider:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.IGroupingOptionOverrider'
-        isFavorite:
-          type: boolean
-        reportName:
-          type: string
-        reportDescription:
-          type: string
-        parentCategory:
-          type: string
-        category:
-          type: string
-        runAssignedVersion:
-          type: boolean
-      xml:
-        name: EnvisionReportDto
-      type: object
-    OAS.DataModel.SimpleEntityBase:
-      properties:
-        name:
-          type: string
-      xml:
-        name: SimpleEntityBase
-      type: object
-    OAS.DataModel.Reporting.ReportOption:
-      required:
-      - id
-      - $type
-      properties:
-        id:
-          type: string
-        $type:
-          readOnly: true
-          type: string
-        optionGuid:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        optionId:
-          type: integer
-          format: int32
-        isDisabled:
-          type: boolean
-        isGlobal:
-          type: boolean
-        isIgnored:
-          type: boolean
-        name:
-          type: string
-        useInception:
-          type: boolean
-        prompt:
-          type: string
-          enum:
-          - Never
-          - Always
-      xml:
-        name: ReportOption
+        name: IGroupingOptionOverrider
       type: object
   securitySchemes:
     Authorization:

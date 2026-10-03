@@ -552,16 +552,41 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseData:
+    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseAttributes:
       properties:
-        id:
+        status:
           type: string
-        type:
-          type: string
-        attributes:
-          $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseAttributes'
+        maxLimit:
+          type: integer
+          format: int32
+        available:
+          type: integer
+          format: int32
+        reserved:
+          type: integer
+          format: int32
+        accounts:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseAccount'
+          xml:
+            name: AccountBlockNumbersRetrieveResponseAccount
+            wrapped: true
+          type: array
       xml:
-        name: AccountBlockNumbersRetrieveResponseData
+        name: AccountBlockNumbersRetrieveResponseAttributes
+      type: object
+    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseAccount:
+      properties:
+        account:
+          type: integer
+          format: int32
+        updatedBy:
+          type: string
+        UpdatedDate:
+          type: string
+          format: date-time
+      xml:
+        name: AccountBlockNumbersRetrieveResponseAccount
       type: object
     OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersError:
       properties:
@@ -577,33 +602,6 @@ components:
           $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersErrorSource'
       xml:
         name: AccountBlockNumbersError
-      type: object
-    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponse:
-      properties:
-        data:
-          $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseData'
-        errors:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersError'
-          xml:
-            name: AccountBlockNumbersError
-            wrapped: true
-          type: array
-      xml:
-        name: AccountBlockNumbersRetrieveResponse
-      type: object
-    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseAccount:
-      properties:
-        account:
-          type: integer
-          format: int32
-        updatedBy:
-          type: string
-        UpdatedDate:
-          type: string
-          format: date-time
-      xml:
-        name: AccountBlockNumbersRetrieveResponseAccount
       type: object
     OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersErrorSource:
       properties:
@@ -633,6 +631,20 @@ components:
       xml:
         name: SchwabAllianceToken
       type: object
+    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseData'
+        errors:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersError'
+          xml:
+            name: AccountBlockNumbersError
+            wrapped: true
+          type: array
+      xml:
+        name: AccountBlockNumbersRetrieveResponse
+      type: object
     OAS.Integrations.SchwabV2.Shared.SchwabSAPostDto:
       properties:
         alClientId:
@@ -653,28 +665,16 @@ components:
       xml:
         name: SchwabSAPostDto
       type: object
-    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseAttributes:
+    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseData:
       properties:
-        status:
+        id:
           type: string
-        maxLimit:
-          type: integer
-          format: int32
-        available:
-          type: integer
-          format: int32
-        reserved:
-          type: integer
-          format: int32
-        accounts:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseAccount'
-          xml:
-            name: AccountBlockNumbersRetrieveResponseAccount
-            wrapped: true
-          type: array
+        type:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseAttributes'
       xml:
-        name: AccountBlockNumbersRetrieveResponseAttributes
+        name: AccountBlockNumbersRetrieveResponseData
       type: object
   securitySchemes:
     Authorization:

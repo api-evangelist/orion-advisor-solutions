@@ -1223,84 +1223,20 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.DataModel.Integration.Advizr.AssetAllocationDto:
+    OAS.Integrations.Advizr.OrionPlanningSAML:
       properties:
-        assetClass:
+        urL_BASE:
           type: string
-        currentValue:
-          type: integer
-          format: int32
-      xml:
-        name: AssetAllocationDto
-      type: object
-    OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto:
-      properties:
-        key:
-          type: integer
-          format: int32
-        productName:
+        issuer:
           type: string
-        termsAccepted:
-          type: boolean
-      xml:
-        name: IntegrationSetupRequestDto
-      type: object
-    OAS.DataModel.Integration.Advizr.OrionPlanningNewHousehold:
-      properties:
-        orionFirmId:
+        cerT_PATH:
           type: string
-        orionRepLoginUserId:
+        oP_ENCRYPT_CERT_PATH:
           type: string
-        orionRepresentativeId:
-          type: integer
-          format: int32
-        emailAddress:
-          type: string
-        orionConnectHousehold:
-          type: string
-        globalId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        sendInvite:
-          type: boolean
-        primary:
-          $ref: '#/components/schemas/OAS.DataModel.Integration.Advizr.OrionPlanningUser'
-        spouse:
-          $ref: '#/components/schemas/OAS.DataModel.Integration.Advizr.OrionPlanningUser'
-        address:
-          $ref: '#/components/schemas/OAS.DataModel.Integration.Advizr.OrionPlanningAddress'
-        redtail:
-          $ref: '#/components/schemas/OAS.DataModel.Integration.Advizr.RedtailHousehold'
-      xml:
-        name: OrionPlanningNewHousehold
-      type: object
-    OAS.DataModel.Integration.Advizr.RedtailHousehold:
-      properties:
-        userId:
-          type: integer
-          format: int32
-        databaseId:
-          type: integer
-          format: int32
-        userKey:
-          type: string
-        headOfFamilyContactId:
-          type: integer
-          format: int32
-      xml:
-        name: RedtailHousehold
-      type: object
-    OAS.DataModel.Integration.Advizr.OrionPlanningUser:
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        dateOfBirth:
+        uri:
           type: string
       xml:
-        name: OrionPlanningUser
+        name: OrionPlanningSAML
       type: object
     OAS.DataProcess.Integrations.Apex.DTOs.ApexProspectClient:
       properties:
@@ -1337,6 +1273,28 @@ components:
       xml:
         name: ApexProspectClient
       type: object
+    OAS.DataModel.Integration.Advizr.CreateDecumulationRequestDto:
+      properties:
+        orionPlanningHouseholdId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        accountType:
+          type: string
+        currentValue:
+          type: number
+          format: double
+        assets:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Integration.Advizr.AssetAllocationDto'
+          xml:
+            name: AssetAllocationDto
+            wrapped: true
+          type: array
+      xml:
+        name: CreateDecumulationRequestDto
+      type: object
     OAS.DataProcess.Integrations.Apex.DTOs.RetirementAccountBeneficiary:
       properties:
         GivenName:
@@ -1357,6 +1315,92 @@ components:
           format: int64
       xml:
         name: RetirementAccountBeneficiary
+      type: object
+    OAS.DataModel.Integration.Advizr.OrionPlanningNewHousehold:
+      properties:
+        orionFirmId:
+          type: string
+        orionRepLoginUserId:
+          type: string
+        orionRepresentativeId:
+          type: integer
+          format: int32
+        emailAddress:
+          type: string
+        orionConnectHousehold:
+          type: string
+        globalId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        sendInvite:
+          type: boolean
+        primary:
+          $ref: '#/components/schemas/OAS.DataModel.Integration.Advizr.OrionPlanningUser'
+        spouse:
+          $ref: '#/components/schemas/OAS.DataModel.Integration.Advizr.OrionPlanningUser'
+        address:
+          $ref: '#/components/schemas/OAS.DataModel.Integration.Advizr.OrionPlanningAddress'
+        redtail:
+          $ref: '#/components/schemas/OAS.DataModel.Integration.Advizr.RedtailHousehold'
+      xml:
+        name: OrionPlanningNewHousehold
+      type: object
+    OAS.DataModel.Integration.Advizr.OrionPlanningAddress:
+      properties:
+        state:
+          type: string
+      xml:
+        name: OrionPlanningAddress
+      type: object
+    OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto:
+      properties:
+        key:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        termsAccepted:
+          type: boolean
+      xml:
+        name: IntegrationSetupRequestDto
+      type: object
+    OAS.DataModel.Integration.Advizr.AssetAllocationDto:
+      properties:
+        assetClass:
+          type: string
+        currentValue:
+          type: integer
+          format: int32
+      xml:
+        name: AssetAllocationDto
+      type: object
+    OAS.DataModel.Integration.Advizr.OrionPlanningUser:
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dateOfBirth:
+          type: string
+      xml:
+        name: OrionPlanningUser
+      type: object
+    OAS.DataModel.Integration.Advizr.RedtailHousehold:
+      properties:
+        userId:
+          type: integer
+          format: int32
+        databaseId:
+          type: integer
+          format: int32
+        userKey:
+          type: string
+        headOfFamilyContactId:
+          type: integer
+          format: int32
+      xml:
+        name: RedtailHousehold
       type: object
     OAS.DataProcess.Integrations.Apex.DTOs.ApexAccountOpeningDto:
       properties:
@@ -1395,50 +1439,6 @@ components:
           $ref: '#/components/schemas/OAS.DataProcess.Integrations.Apex.DTOs.ApexProspectClient'
       xml:
         name: ApexAccountOpeningDto
-      type: object
-    OAS.Integrations.Advizr.OrionPlanningSAML:
-      properties:
-        urL_BASE:
-          type: string
-        issuer:
-          type: string
-        cerT_PATH:
-          type: string
-        oP_ENCRYPT_CERT_PATH:
-          type: string
-        uri:
-          type: string
-      xml:
-        name: OrionPlanningSAML
-      type: object
-    OAS.DataModel.Integration.Advizr.OrionPlanningAddress:
-      properties:
-        state:
-          type: string
-      xml:
-        name: OrionPlanningAddress
-      type: object
-    OAS.DataModel.Integration.Advizr.CreateDecumulationRequestDto:
-      properties:
-        orionPlanningHouseholdId:
-          type: integer
-          format: int32
-        name:
-          type: string
-        accountType:
-          type: string
-        currentValue:
-          type: number
-          format: double
-        assets:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Integration.Advizr.AssetAllocationDto'
-          xml:
-            name: AssetAllocationDto
-            wrapped: true
-          type: array
-      xml:
-        name: CreateDecumulationRequestDto
       type: object
   securitySchemes:
     Authorization:

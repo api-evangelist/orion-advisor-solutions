@@ -1358,39 +1358,45 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.DTO.Portfolio.WholesalerStateDto:
+    OAS.DataModel.SimpleEntity:
       properties:
         id:
           type: integer
           format: int32
-        stateId:
-          type: integer
-          format: int32
-        stateName:
+        name:
           type: string
       xml:
-        name: WholesalerStateDto
+        name: SimpleEntity
       type: object
-    OAS.WebApi.DTO.Portfolio.NoteDto:
+    OAS.WebApi.DTO.Portfolio.DocumentDto:
       properties:
         id:
           type: integer
           format: int32
-        text:
+        description:
+          type: string
+        category:
           type: string
         editedBy:
           type: string
         editedDate:
           type: string
           format: date-time
-        category:
-          type: string
-        isWebVisible:
-          type: boolean
-        isSystemGenerated:
+        systemGenerated:
           type: boolean
       xml:
-        name: NoteDto
+        name: DocumentDto
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
       type: object
     System.Net.Http.StreamContent:
       properties:
@@ -1404,6 +1410,15 @@ components:
           type: array
       xml:
         name: StreamContent
+      type: object
+    OAS.WebApi.DTO.Portfolio.UpdateSsnDto:
+      properties:
+        ssn:
+          type: string
+        reason:
+          type: string
+      xml:
+        name: UpdateSsnDto
       type: object
     OAS.WebApi.DTO.Portfolio.WholesalerPortfolioDto:
       properties:
@@ -1486,6 +1501,36 @@ components:
       xml:
         name: WholesalerPortfolioDto
       type: object
+    OAS.WebApi.DTO.Portfolio.WholesalerStateDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        stateId:
+          type: integer
+          format: int32
+        stateName:
+          type: string
+      xml:
+        name: WholesalerStateDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.WholesalerFileDto:
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+        openWith:
+          type: string
+        blobDesc:
+          type: string
+        category:
+          type: string
+        blobType:
+          type: string
+          enum:
+          - CrmDocuments
+      xml:
+        name: WholesalerFileDto
+      type: object
     System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
       properties:
         key:
@@ -1532,56 +1577,6 @@ components:
       xml:
         name: WholesalerVerboseDto
       type: object
-    OAS.WebApi.DTO.Portfolio.WholesalerFileDto:
-      properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-        openWith:
-          type: string
-        blobDesc:
-          type: string
-        category:
-          type: string
-        blobType:
-          type: string
-          enum:
-          - CrmDocuments
-      xml:
-        name: WholesalerFileDto
-      type: object
-    OAS.DataModel.SimpleEntity:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleEntity
-      type: object
-    OAS.WebApi.DTO.Portfolio.BlobBaseDto:
-      properties:
-        createdDate:
-          type: string
-          format: date-time
-        id:
-          type: integer
-          format: int32
-        openWith:
-          type: string
-        fileName:
-          type: string
-        blobDesc:
-          type: string
-        blobText:
-          type: string
-        category:
-          type: string
-        isZip:
-          type: boolean
-      xml:
-        name: BlobBaseDto
-      type: object
     OAS.WebApi.DTO.Portfolio.WholesalerDto:
       properties:
         id:
@@ -1603,34 +1598,6 @@ components:
           type: boolean
       xml:
         name: WholesalerDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.DocumentDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        description:
-          type: string
-        category:
-          type: string
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        systemGenerated:
-          type: boolean
-      xml:
-        name: DocumentDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.UpdateSsnDto:
-      properties:
-        ssn:
-          type: string
-        reason:
-          type: string
-      xml:
-        name: UpdateSsnDto
       type: object
     OAS.WebApi.DTO.Settings.EntityOptionDto:
       properties:
@@ -1877,16 +1844,49 @@ components:
       xml:
         name: EntityOptionDto
       type: object
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+    OAS.WebApi.DTO.Portfolio.BlobBaseDto:
       properties:
+        createdDate:
+          type: string
+          format: date-time
+        id:
+          type: integer
+          format: int32
+        openWith:
+          type: string
         fileName:
           type: string
-        mediaType:
+        blobDesc:
           type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+        blobText:
+          type: string
+        category:
+          type: string
+        isZip:
+          type: boolean
       xml:
-        name: HttpFile
+        name: BlobBaseDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.NoteDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        text:
+          type: string
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        category:
+          type: string
+        isWebVisible:
+          type: boolean
+        isSystemGenerated:
+          type: boolean
+      xml:
+        name: NoteDto
       type: object
   securitySchemes:
     Authorization:

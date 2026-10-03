@@ -159,6 +159,24 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAS.WebApi.DTO.Confirm.MatrixCashActivityGemini.MatrixCashActivityGeminiInspectDto:
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+      xml:
+        name: MatrixCashActivityGeminiInspectDto
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
     System.Net.Http.StreamContent:
       properties:
         headers:
@@ -172,18 +190,24 @@ components:
       xml:
         name: StreamContent
       type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+    OAS.WebApi.DTO.Confirm.MatrixCashActivityGemini.MatrixCashActivityGeminiValidateDto:
       properties:
-        key:
-          readOnly: true
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+        fileType:
           type: string
-        value:
+          enum:
+          - Settlement
+          - Dividend
+        tradeDate:
+          type: string
+          format: date-time
+        worksheetNames:
           items:
             type: string
-          readOnly: true
           type: array
       xml:
-        name: KeyValuePair`2
+        name: MatrixCashActivityGeminiValidateDto
       type: object
     OAS.WebApi.DTO.Confirm.MatrixCashActivityGemini.MatrixCashActivityGeminiConvertDto:
       properties:
@@ -204,24 +228,18 @@ components:
       xml:
         name: MatrixCashActivityGeminiConvertDto
       type: object
-    OAS.WebApi.DTO.Confirm.MatrixCashActivityGemini.MatrixCashActivityGeminiValidateDto:
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
       properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-        fileType:
+        key:
+          readOnly: true
           type: string
-          enum:
-          - Settlement
-          - Dividend
-        tradeDate:
-          type: string
-          format: date-time
-        worksheetNames:
+        value:
           items:
             type: string
+          readOnly: true
           type: array
       xml:
-        name: MatrixCashActivityGeminiValidateDto
+        name: KeyValuePair`2
       type: object
     OAS.WebApi.DTO.Confirm.MatrixCashActivityGemini.MatrixCashActivityGeminiInspectResultDto:
       properties:
@@ -251,24 +269,6 @@ components:
           format: int32
       xml:
         name: MatrixCashActivityGeminiValidateResultDto
-      type: object
-    OAS.WebApi.DTO.Confirm.MatrixCashActivityGemini.MatrixCashActivityGeminiInspectDto:
-      properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-      xml:
-        name: MatrixCashActivityGeminiInspectDto
-      type: object
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
       type: object
   securitySchemes:
     Authorization:

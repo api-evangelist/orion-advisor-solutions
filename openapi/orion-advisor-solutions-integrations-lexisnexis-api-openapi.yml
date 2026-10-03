@@ -563,7 +563,61 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityName:
+    OAS.WebApi.DTO.Integrations.LexisNexis.SearchResultDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        issueStatusIcon:
+          readOnly: true
+          type: string
+        issueStatus:
+          readOnly: true
+          type: string
+        hasIssue:
+          type: boolean
+        lexisNexisSearchId:
+          type: string
+        registrationId:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        registrationType:
+          type: string
+        registrationCreated:
+          type: string
+          format: date-time
+        clientId:
+          type: integer
+          format: int32
+        message:
+          type: string
+        dbName:
+          type: string
+        ria:
+          type: string
+        brokerDealer:
+          type: string
+        representative:
+          type: string
+        approvedBy:
+          type: string
+        approvedId:
+          type: integer
+          format: int32
+        approvedDate:
+          type: string
+          format: date-time
+        approvalReason:
+          type: string
+        alClientId:
+          type: integer
+          format: int32
+      xml:
+        name: SearchResultDto
+      type: object
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityAka:
       properties:
         title:
           type: string
@@ -577,25 +631,6 @@ components:
           type: string
         generation:
           type: string
-      xml:
-        name: MatchEntityName
-      type: object
-    OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityAddress:
-      properties:
-        full:
-          type: string
-        street_1:
-          type: string
-        street_2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        postalCode:
-          type: string
-        country:
-          type: string
         notes:
           type: string
         id:
@@ -608,8 +643,27 @@ components:
           format: int32
         typeSpecified:
           type: boolean
+        category:
+          type: integer
+          format: int32
+        categorySpecified:
+          type: boolean
       xml:
-        name: MatchEntityAddress
+        name: MatchEntityAka
+      type: object
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.BasicScoredInputList:
+      properties:
+        score:
+          type: integer
+          format: int32
+        scoreSpecified:
+          type: boolean
+        input:
+          type: string
+        list:
+          type: string
+      xml:
+        name: BasicScoredInputList
       type: object
     OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntity:
       properties:
@@ -709,36 +763,50 @@ components:
       xml:
         name: MatchEntity
       type: object
-    OAS.DataProcess.DTO.Integration.LexisNexis.Results.BasicScoredTypeInputList:
+    OAS.WebApi.DTO.Integrations.LexisNexis.SearchScheduleDto:
       properties:
-        type:
+        id:
           type: integer
           format: int32
-        typeSpecified:
+        enabled:
           type: boolean
-        score:
+        searchFrequency:
+          type: string
+          enum:
+          - OnDemand
+          - DailyNewAccounts
+          - Monthly
+          - Quarterly
+        uploadTargetId:
           type: integer
           format: int32
-        scoreSpecified:
+        isProcessing:
           type: boolean
-        input:
+        lastQuery:
           type: string
-        list:
+          format: date-time
+        lastSent:
           type: string
+          format: date-time
+        lastFetched:
+          type: string
+          format: date-time
+        lastSearch:
+          type: string
+          format: date-time
+        lastError:
+          type: string
+        searchSelection:
+          type: string
+          enum:
+          - ALL
+          - NEW
       xml:
-        name: BasicScoredTypeInputList
+        name: SearchScheduleDto
       type: object
-    OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityId:
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityDescription:
       properties:
-        label:
-          type: string
-        number:
-          type: string
-        issuer:
-          type: string
-        issueDate:
-          type: string
-        expDate:
+        value:
           type: string
         notes:
           type: string
@@ -753,57 +821,7 @@ components:
         typeSpecified:
           type: boolean
       xml:
-        name: MatchEntityId
-      type: object
-    OAS.DataProcess.DTO.Integration.LexisNexis.SearchResultDetailsDto:
-      properties:
-        registrationId:
-          type: integer
-          format: int32
-        address1:
-          type: string
-        address2:
-          type: string
-        address3:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        postalCode:
-          type: string
-        country:
-          type: string
-        firstName:
-          type: string
-        fullName:
-          type: string
-        lastName:
-          type: string
-        businessPhone:
-          type: string
-        homePhone:
-          type: string
-        mobilePhone:
-          type: string
-        ssn:
-          type: string
-        match:
-          $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.Results.WatchListMatch'
-      xml:
-        name: SearchResultDetailsDto
-      type: object
-    OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto:
-      properties:
-        key:
-          type: integer
-          format: int32
-        productName:
-          type: string
-        termsAccepted:
-          type: boolean
-      xml:
-        name: IntegrationSetupRequestDto
+        name: MatchEntityDescription
       type: object
     OAS.DataProcess.DTO.Integration.LexisNexis.Results.WatchListMatch:
       properties:
@@ -860,6 +878,23 @@ components:
       xml:
         name: WatchListMatch
       type: object
+    OAS.WebApi.DTO.Integrations.LexisNexis.ApprovalDto:
+      properties:
+        ids:
+          description: The collection of Search Result Ids to apply the reason to.
+          items:
+            type: integer
+            format: int32
+          type: array
+        reason:
+          description: The reason to apply to the search results with the above ids.
+          type: string
+        hasIssue:
+          description: Whether the issue is valid or not.
+          type: boolean
+      xml:
+        name: ApprovalDto
+      type: object
     OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityPhone:
       properties:
         number:
@@ -879,63 +914,36 @@ components:
       xml:
         name: MatchEntityPhone
       type: object
-    OAS.WebApi.DTO.Integrations.LexisNexis.ApprovalDto:
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityAddress:
       properties:
-        ids:
-          description: The collection of Search Result Ids to apply the reason to.
-          items:
-            type: integer
-            format: int32
-          type: array
-        reason:
-          description: The reason to apply to the search results with the above ids.
+        full:
           type: string
-        hasIssue:
-          description: Whether the issue is valid or not.
-          type: boolean
-      xml:
-        name: ApprovalDto
-      type: object
-    OAS.WebApi.DTO.Integrations.LexisNexis.SearchScheduleDto:
-      properties:
+        street_1:
+          type: string
+        street_2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+        notes:
+          type: string
         id:
           type: integer
           format: int32
-        enabled:
+        idSpecified:
           type: boolean
-        searchFrequency:
-          type: string
-          enum:
-          - OnDemand
-          - DailyNewAccounts
-          - Monthly
-          - Quarterly
-        uploadTargetId:
+        type:
           type: integer
           format: int32
-        isProcessing:
+        typeSpecified:
           type: boolean
-        lastQuery:
-          type: string
-          format: date-time
-        lastSent:
-          type: string
-          format: date-time
-        lastFetched:
-          type: string
-          format: date-time
-        lastSearch:
-          type: string
-          format: date-time
-        lastError:
-          type: string
-        searchSelection:
-          type: string
-          enum:
-          - ALL
-          - NEW
       xml:
-        name: SearchScheduleDto
+        name: MatchEntityAddress
       type: object
     OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchSummary:
       properties:
@@ -972,76 +980,14 @@ components:
       xml:
         name: MatchSummary
       type: object
-    OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityNamedItem:
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.BasicInputList:
       properties:
-        id:
-          type: integer
-          format: int32
-        idSpecified:
-          type: boolean
-        type:
-          type: integer
-          format: int32
-        typeSpecified:
-          type: boolean
-        text:
+        input:
+          type: string
+        list:
           type: string
       xml:
-        name: MatchEntityNamedItem
-      type: object
-    OAS.WebApi.DTO.Integrations.LexisNexis.SearchResultDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        issueStatusIcon:
-          readOnly: true
-          type: string
-        issueStatus:
-          readOnly: true
-          type: string
-        hasIssue:
-          type: boolean
-        lexisNexisSearchId:
-          type: string
-        registrationId:
-          type: integer
-          format: int32
-        registrationName:
-          type: string
-        registrationType:
-          type: string
-        registrationCreated:
-          type: string
-          format: date-time
-        clientId:
-          type: integer
-          format: int32
-        message:
-          type: string
-        dbName:
-          type: string
-        ria:
-          type: string
-        brokerDealer:
-          type: string
-        representative:
-          type: string
-        approvedBy:
-          type: string
-        approvedId:
-          type: integer
-          format: int32
-        approvedDate:
-          type: string
-          format: date-time
-        approvalReason:
-          type: string
-        alClientId:
-          type: integer
-          format: int32
-      xml:
-        name: SearchResultDto
+        name: BasicInputList
       type: object
     OAS.WebApi.DTO.Integrations.LexisNexis.IntegrationConfigDto:
       description: The configuration details for the Lexis Nexis integration.
@@ -1115,7 +1061,64 @@ components:
       xml:
         name: IntegrationConfigDto
       type: object
-    OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityAka:
+    OAS.DataProcess.DTO.Integration.LexisNexis.SearchResultDetailsDto:
+      properties:
+        registrationId:
+          type: integer
+          format: int32
+        address1:
+          type: string
+        address2:
+          type: string
+        address3:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+        firstName:
+          type: string
+        fullName:
+          type: string
+        lastName:
+          type: string
+        businessPhone:
+          type: string
+        homePhone:
+          type: string
+        mobilePhone:
+          type: string
+        ssn:
+          type: string
+        match:
+          $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.LexisNexis.Results.WatchListMatch'
+      xml:
+        name: SearchResultDetailsDto
+      type: object
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.BasicScoredTypeInputList:
+      properties:
+        type:
+          type: integer
+          format: int32
+        typeSpecified:
+          type: boolean
+        score:
+          type: integer
+          format: int32
+        scoreSpecified:
+          type: boolean
+        input:
+          type: string
+        list:
+          type: string
+      xml:
+        name: BasicScoredTypeInputList
+      type: object
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityName:
       properties:
         title:
           type: string
@@ -1129,39 +1132,8 @@ components:
           type: string
         generation:
           type: string
-        notes:
-          type: string
-        id:
-          type: integer
-          format: int32
-        idSpecified:
-          type: boolean
-        type:
-          type: integer
-          format: int32
-        typeSpecified:
-          type: boolean
-        category:
-          type: integer
-          format: int32
-        categorySpecified:
-          type: boolean
       xml:
-        name: MatchEntityAka
-      type: object
-    OAS.DataProcess.DTO.Integration.LexisNexis.Results.BasicScoredInputList:
-      properties:
-        score:
-          type: integer
-          format: int32
-        scoreSpecified:
-          type: boolean
-        input:
-          type: string
-        list:
-          type: string
-      xml:
-        name: BasicScoredInputList
+        name: MatchEntityName
       type: object
     OAS.WebApi.DTO.Compliance.ComplianceFilterDto:
       properties:
@@ -1371,18 +1343,46 @@ components:
       xml:
         name: ComplianceFilterDto
       type: object
-    OAS.DataProcess.DTO.Integration.LexisNexis.Results.BasicInputList:
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityNamedItem:
       properties:
-        input:
-          type: string
-        list:
+        id:
+          type: integer
+          format: int32
+        idSpecified:
+          type: boolean
+        type:
+          type: integer
+          format: int32
+        typeSpecified:
+          type: boolean
+        text:
           type: string
       xml:
-        name: BasicInputList
+        name: MatchEntityNamedItem
       type: object
-    OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityDescription:
+    OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto:
       properties:
-        value:
+        key:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        termsAccepted:
+          type: boolean
+      xml:
+        name: IntegrationSetupRequestDto
+      type: object
+    OAS.DataProcess.DTO.Integration.LexisNexis.Results.MatchEntityId:
+      properties:
+        label:
+          type: string
+        number:
+          type: string
+        issuer:
+          type: string
+        issueDate:
+          type: string
+        expDate:
           type: string
         notes:
           type: string
@@ -1397,7 +1397,7 @@ components:
         typeSpecified:
           type: boolean
       xml:
-        name: MatchEntityDescription
+        name: MatchEntityId
       type: object
   securitySchemes:
     Authorization:

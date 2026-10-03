@@ -813,21 +813,309 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAT.Integrations.Fidelity.Classes.AccountHistoryResponse:
+    OAS.Integrations.FidelityDocuments.FidelityDocumentTokenInputDto:
+      required:
+      - firstName
+      - lastName
+      - dateOfBirth
+      - last4SSN
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date-time
+        last4SSN:
+          type: string
+        userGuid:
+          type: string
+      xml:
+        name: FidelityDocumentTokenInputDto
+      type: object
+    EchoTest.EchoResponseType:
+      properties:
+        echo:
+          type: string
+      xml:
+        name: EchoResponseType
+      type: object
+    OAT.Integrations.Fidelity.Classes.ResultListOfOAT.Integrations.Fidelity.Classes.CurrentInvestorAlertsMessagesTypeDTO:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.CurrentInvestorAlertsMessagesTypeDTO'
+          xml:
+            name: CurrentInvestorAlertsMessagesTypeDTO
+            wrapped: true
+          type: array
+        hasError:
+          type: boolean
+        status:
+          type: string
+      xml:
+        name: ResultList`1
+      type: object
+    OAT.Integrations.Fidelity.Classes.CurrentInvestorAlertsMessagesTypeDTO:
+      properties:
+        messageId:
+          type: string
+        classCode:
+          type: string
+        classDesc:
+          type: string
+        superCategoryCode:
+          type: string
+        superCategoryDesc:
+          type: string
+        categoryCode:
+          type: string
+        categoryDesc:
+          type: string
+        subCategoryCode:
+          type: string
+        subCategoryDesc:
+          type: string
+        userStatusCode:
+          type: string
+        clientId:
+          type: string
+        creationTmstmp:
+          type: string
+          format: date-time
+        creationTmstmpSpecified:
+          type: boolean
+        branchCode:
+          type: string
+        regRep1Code:
+          type: string
+        regRep2Code:
+          type: string
+        agencyCode:
+          type: string
+        gNum:
+          type: string
+        acctNum:
+          type: string
+        userActionCode:
+          type: string
+        messageSubject:
+          type: string
+        rowNum:
+          type: integer
+          format: int32
+        rowNumSpecified:
+          type: boolean
+        deepLink:
+          type: string
+      xml:
+        name: CurrentInvestorAlertsMessagesTypeDTO
+      type: object
+    OAT.Integrations.Fidelity.Classes.ResultListOfOAT.Integrations.Fidelity.Classes.CurrentAlertsMessagesTypeDTO:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.CurrentAlertsMessagesTypeDTO'
+          xml:
+            name: CurrentAlertsMessagesTypeDTO
+            wrapped: true
+          type: array
+        hasError:
+          type: boolean
+        status:
+          type: string
+      xml:
+        name: ResultList`1
+      type: object
+    OAT.Integrations.Fidelity.Classes.ResultListOfOAT.Integrations.Fidelity.Classes.SubscriberAlertMessagesCountDetailsTypeDTO:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.SubscriberAlertMessagesCountDetailsTypeDTO'
+          xml:
+            name: SubscriberAlertMessagesCountDetailsTypeDTO
+            wrapped: true
+          type: array
+        hasError:
+          type: boolean
+        status:
+          type: string
+      xml:
+        name: ResultList`1
+      type: object
+    EchoTest.EchoResponse:
+      properties:
+        externalPrincipalIdentity:
+          $ref: '#/components/schemas/EchoTest.ExternalPrincipalIdentity'
+        externalProcessingDirectives:
+          $ref: '#/components/schemas/EchoTest.ExternalProcessingDirectives'
+        echoResponse1:
+          $ref: '#/components/schemas/EchoTest.EchoResponseType'
+      xml:
+        name: EchoResponse
+      type: object
+    OAT.Integrations.Fidelity.Classes.ResultItemOfOAT.Integrations.Fidelity.Classes.MessageCountDetailsDTO:
+      properties:
+        item:
+          $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.MessageCountDetailsDTO'
+        hasError:
+          type: boolean
+        status:
+          type: string
+      xml:
+        name: ResultItem`1
+      type: object
+    OAT.Integrations.Fidelity.Classes.SubscriberAlertMessagesCountDetailsTypeDTO:
+      properties:
+        subscriberAlertMessagesCountResults:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.SubscriberAlertMessagesCountResultsType'
+          xml:
+            name: SubscriberAlertMessagesCountResultsType
+            wrapped: true
+          type: array
+        requestorId:
+          type: string
+        recipientTypeCode:
+          type: string
+      xml:
+        name: SubscriberAlertMessagesCountDetailsTypeDTO
+      type: object
+    EchoTest.ExternalProcessingDirectives:
+      properties:
+        logTrackingId:
+          type: string
+        timeoutMillis:
+          type: integer
+          format: int32
+        timeoutMillisSpecified:
+          type: boolean
+      xml:
+        name: ExternalProcessingDirectives
+      type: object
+    OAS.WebApi.Code.Integrations.FidelityPreGenInDto:
+      properties:
+        numberOfAccounts:
+          type: integer
+          format: int32
+        repId:
+          type: integer
+          format: int32
+        isRepSelf:
+          readOnly: true
+          type: boolean
+      xml:
+        name: FidelityPreGenInDto
+      type: object
+    OAT.Integrations.Fidelity.Classes.AccountBalancesDTO:
+      properties:
+        totalAccountValue:
+          type: number
+          format: double
+        totalSecuritiesMarketValue:
+          type: number
+          format: double
+        coreSweepFund:
+          type: number
+          format: double
+        cashDebitCredit:
+          type: number
+          format: double
+        cashMarketValue:
+          type: number
+          format: double
+        settledCash:
+          type: number
+          format: double
+        unsettledCashCredit:
+          type: number
+          format: double
+        unsettledCashDebit:
+          type: number
+          format: double
+        cashAvailableWithdraw:
+          type: number
+          format: double
+        buyingPowerCashOnly:
+          type: number
+          format: double
+      xml:
+        name: AccountBalancesDTO
+      type: object
+    EchoTest.SecurityTokenType:
+      properties:
+        tokenType:
+          type: string
+        tokenValue:
+          type: string
+      xml:
+        name: SecurityTokenType
+      type: object
+    OAT.Integrations.Fidelity.Classes.AccountHistoryDTO:
+      properties:
+        entrydate:
+          type: string
+          format: date-time
+        tradedate:
+          type: string
+          format: date-time
+        settledate:
+          type: string
+          format: date-time
+        price:
+          type: number
+          format: double
+        netAmount:
+          type: number
+          format: double
+        secId:
+          type: string
+        description:
+          type: string
+        quantity:
+          type: number
+          format: double
+        transactionType:
+          type: string
+      xml:
+        name: AccountHistoryDTO
+      type: object
+    OAT.Integrations.Fidelity.Classes.AccountBalanceResponse:
       properties:
         status:
           type: string
         hasError:
           type: boolean
-        accountHistoryLst:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountHistoryDTO'
-          xml:
-            name: AccountHistoryDTO
-            wrapped: true
-          type: array
+        accountBalances:
+          $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountBalancesDTO'
       xml:
-        name: AccountHistoryResponse
+        name: AccountBalanceResponse
+      type: object
+    OAT.Integrations.Fidelity.Classes.MessageCountDetailsDTO:
+      properties:
+        totalMessageCount:
+          type: integer
+          format: int32
+        totalMessageCountFieldSpecified:
+          type: boolean
+        readMessageCount:
+          type: integer
+          format: int32
+        readMessageCountFieldSpecified:
+          type: boolean
+        unReadMessageCount:
+          type: integer
+          format: int32
+        unReadMessageCountFieldSpecified:
+          type: boolean
+        flaggedMessageCount:
+          type: integer
+          format: int32
+        flaggedMessageCountFieldSpecified:
+          type: boolean
+      xml:
+        name: MessageCountDetailsDTO
       type: object
     OAT.Integrations.Fidelity.Classes.CurrentAlertsMessagesTypeDTO:
       properties:
@@ -904,38 +1192,6 @@ components:
       xml:
         name: CurrentAlertsMessagesTypeDTO
       type: object
-    OAT.Integrations.Fidelity.Classes.AccountPositionsResponse:
-      properties:
-        status:
-          type: string
-        hasError:
-          type: boolean
-        accountPositionsLst:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.PositionsDTO'
-          xml:
-            name: PositionsDTO
-            wrapped: true
-          type: array
-      xml:
-        name: AccountPositionsResponse
-      type: object
-    OAT.Integrations.Fidelity.Classes.ResultListOfOAT.Integrations.Fidelity.Classes.CurrentAlertsMessagesTypeDTO:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.CurrentAlertsMessagesTypeDTO'
-          xml:
-            name: CurrentAlertsMessagesTypeDTO
-            wrapped: true
-          type: array
-        hasError:
-          type: boolean
-        status:
-          type: string
-      xml:
-        name: ResultList`1
-      type: object
     EchoTest.ExternalPrincipalIdentity:
       properties:
         b2BPartnerPrincipalId:
@@ -979,116 +1235,6 @@ components:
       xml:
         name: ExternalPrincipalIdentity
       type: object
-    OAT.Integrations.Fidelity.Classes.MessageCountDetailsDTO:
-      properties:
-        totalMessageCount:
-          type: integer
-          format: int32
-        totalMessageCountFieldSpecified:
-          type: boolean
-        readMessageCount:
-          type: integer
-          format: int32
-        readMessageCountFieldSpecified:
-          type: boolean
-        unReadMessageCount:
-          type: integer
-          format: int32
-        unReadMessageCountFieldSpecified:
-          type: boolean
-        flaggedMessageCount:
-          type: integer
-          format: int32
-        flaggedMessageCountFieldSpecified:
-          type: boolean
-      xml:
-        name: MessageCountDetailsDTO
-      type: object
-    OAT.Integrations.Fidelity.Classes.CurrentInvestorAlertsMessagesTypeDTO:
-      properties:
-        messageId:
-          type: string
-        classCode:
-          type: string
-        classDesc:
-          type: string
-        superCategoryCode:
-          type: string
-        superCategoryDesc:
-          type: string
-        categoryCode:
-          type: string
-        categoryDesc:
-          type: string
-        subCategoryCode:
-          type: string
-        subCategoryDesc:
-          type: string
-        userStatusCode:
-          type: string
-        clientId:
-          type: string
-        creationTmstmp:
-          type: string
-          format: date-time
-        creationTmstmpSpecified:
-          type: boolean
-        branchCode:
-          type: string
-        regRep1Code:
-          type: string
-        regRep2Code:
-          type: string
-        agencyCode:
-          type: string
-        gNum:
-          type: string
-        acctNum:
-          type: string
-        userActionCode:
-          type: string
-        messageSubject:
-          type: string
-        rowNum:
-          type: integer
-          format: int32
-        rowNumSpecified:
-          type: boolean
-        deepLink:
-          type: string
-      xml:
-        name: CurrentInvestorAlertsMessagesTypeDTO
-      type: object
-    EchoTest.EchoResponseType:
-      properties:
-        echo:
-          type: string
-      xml:
-        name: EchoResponseType
-      type: object
-    EchoTest.ExternalProcessingDirectives:
-      properties:
-        logTrackingId:
-          type: string
-        timeoutMillis:
-          type: integer
-          format: int32
-        timeoutMillisSpecified:
-          type: boolean
-      xml:
-        name: ExternalProcessingDirectives
-      type: object
-    OAT.Integrations.Fidelity.Classes.AccountBalanceResponse:
-      properties:
-        status:
-          type: string
-        hasError:
-          type: boolean
-        accountBalances:
-          $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountBalancesDTO'
-      xml:
-        name: AccountBalanceResponse
-      type: object
     OAT.Integrations.Fidelity.Classes.PositionsDTO:
       properties:
         securityId:
@@ -1112,61 +1258,37 @@ components:
       xml:
         name: PositionsDTO
       type: object
-    OAT.Integrations.Fidelity.Classes.AccountBalancesDTO:
+    OAT.Integrations.Fidelity.Classes.AccountHistoryResponse:
       properties:
-        totalAccountValue:
-          type: number
-          format: double
-        totalSecuritiesMarketValue:
-          type: number
-          format: double
-        coreSweepFund:
-          type: number
-          format: double
-        cashDebitCredit:
-          type: number
-          format: double
-        cashMarketValue:
-          type: number
-          format: double
-        settledCash:
-          type: number
-          format: double
-        unsettledCashCredit:
-          type: number
-          format: double
-        unsettledCashDebit:
-          type: number
-          format: double
-        cashAvailableWithdraw:
-          type: number
-          format: double
-        buyingPowerCashOnly:
-          type: number
-          format: double
+        status:
+          type: string
+        hasError:
+          type: boolean
+        accountHistoryLst:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.AccountHistoryDTO'
+          xml:
+            name: AccountHistoryDTO
+            wrapped: true
+          type: array
       xml:
-        name: AccountBalancesDTO
+        name: AccountHistoryResponse
       type: object
-    OAS.Integrations.FidelityDocuments.FidelityDocumentTokenInputDto:
-      required:
-      - firstName
-      - lastName
-      - dateOfBirth
-      - last4SSN
+    OAT.Integrations.Fidelity.Classes.AccountPositionsResponse:
       properties:
-        firstName:
+        status:
           type: string
-        lastName:
-          type: string
-        dateOfBirth:
-          type: string
-          format: date-time
-        last4SSN:
-          type: string
-        userGuid:
-          type: string
+        hasError:
+          type: boolean
+        accountPositionsLst:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.PositionsDTO'
+          xml:
+            name: PositionsDTO
+            wrapped: true
+          type: array
       xml:
-        name: FidelityDocumentTokenInputDto
+        name: AccountPositionsResponse
       type: object
     OAT.Integrations.Fidelity.Classes.SubscriberAlertMessagesCountResultsType:
       properties:
@@ -1185,128 +1307,6 @@ components:
           type: boolean
       xml:
         name: SubscriberAlertMessagesCountResultsType
-      type: object
-    OAT.Integrations.Fidelity.Classes.ResultListOfOAT.Integrations.Fidelity.Classes.SubscriberAlertMessagesCountDetailsTypeDTO:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.SubscriberAlertMessagesCountDetailsTypeDTO'
-          xml:
-            name: SubscriberAlertMessagesCountDetailsTypeDTO
-            wrapped: true
-          type: array
-        hasError:
-          type: boolean
-        status:
-          type: string
-      xml:
-        name: ResultList`1
-      type: object
-    OAS.WebApi.Code.Integrations.FidelityPreGenInDto:
-      properties:
-        numberOfAccounts:
-          type: integer
-          format: int32
-        repId:
-          type: integer
-          format: int32
-        isRepSelf:
-          readOnly: true
-          type: boolean
-      xml:
-        name: FidelityPreGenInDto
-      type: object
-    OAT.Integrations.Fidelity.Classes.SubscriberAlertMessagesCountDetailsTypeDTO:
-      properties:
-        subscriberAlertMessagesCountResults:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.SubscriberAlertMessagesCountResultsType'
-          xml:
-            name: SubscriberAlertMessagesCountResultsType
-            wrapped: true
-          type: array
-        requestorId:
-          type: string
-        recipientTypeCode:
-          type: string
-      xml:
-        name: SubscriberAlertMessagesCountDetailsTypeDTO
-      type: object
-    EchoTest.EchoResponse:
-      properties:
-        externalPrincipalIdentity:
-          $ref: '#/components/schemas/EchoTest.ExternalPrincipalIdentity'
-        externalProcessingDirectives:
-          $ref: '#/components/schemas/EchoTest.ExternalProcessingDirectives'
-        echoResponse1:
-          $ref: '#/components/schemas/EchoTest.EchoResponseType'
-      xml:
-        name: EchoResponse
-      type: object
-    OAT.Integrations.Fidelity.Classes.ResultListOfOAT.Integrations.Fidelity.Classes.CurrentInvestorAlertsMessagesTypeDTO:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.CurrentInvestorAlertsMessagesTypeDTO'
-          xml:
-            name: CurrentInvestorAlertsMessagesTypeDTO
-            wrapped: true
-          type: array
-        hasError:
-          type: boolean
-        status:
-          type: string
-      xml:
-        name: ResultList`1
-      type: object
-    OAT.Integrations.Fidelity.Classes.ResultItemOfOAT.Integrations.Fidelity.Classes.MessageCountDetailsDTO:
-      properties:
-        item:
-          $ref: '#/components/schemas/OAT.Integrations.Fidelity.Classes.MessageCountDetailsDTO'
-        hasError:
-          type: boolean
-        status:
-          type: string
-      xml:
-        name: ResultItem`1
-      type: object
-    EchoTest.SecurityTokenType:
-      properties:
-        tokenType:
-          type: string
-        tokenValue:
-          type: string
-      xml:
-        name: SecurityTokenType
-      type: object
-    OAT.Integrations.Fidelity.Classes.AccountHistoryDTO:
-      properties:
-        entrydate:
-          type: string
-          format: date-time
-        tradedate:
-          type: string
-          format: date-time
-        settledate:
-          type: string
-          format: date-time
-        price:
-          type: number
-          format: double
-        netAmount:
-          type: number
-          format: double
-        secId:
-          type: string
-        description:
-          type: string
-        quantity:
-          type: number
-          format: double
-        transactionType:
-          type: string
-      xml:
-        name: AccountHistoryDTO
       type: object
   securitySchemes:
     Authorization:

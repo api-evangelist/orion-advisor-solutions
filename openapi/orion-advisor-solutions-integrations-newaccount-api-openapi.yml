@@ -598,6 +598,77 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAS.Integrations.Element.DTOs.Datum:
+      properties:
+        category:
+          type: string
+        key:
+          type: string
+        value:
+          type: object
+      xml:
+        name: Datum
+      type: object
+    OAS.Integrations.Element.DTOs.FormSessionUpload:
+      properties:
+        id:
+          type: string
+        size:
+          type: integer
+          format: int32
+        fileType:
+          type: string
+        fileBase64:
+          type: string
+        fileName:
+          type: string
+        parentFolderPath:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        markForDelete:
+          type: boolean
+        entityType:
+          type: integer
+          format: int32
+        entityId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        uploadId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        formCollectionId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        formSessionId:
+          type: string
+        accountNumber:
+          type: string
+        documentType:
+          type: string
+        indexValues:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.UserFormData'
+          xml:
+            name: UserFormData
+            wrapped: true
+          type: array
+      xml:
+        name: FormSessionUpload
+      type: object
+    System.ValueTupleOfSystem.StringAndSystem.Boolean:
+      properties:
+        item1:
+          type: string
+        item2:
+          type: boolean
+      xml:
+        name: ValueTuple`2
+      type: object
     OAS.Integrations.Element.DTOs.Contact:
       properties:
         _id:
@@ -626,15 +697,6 @@ components:
           type: array
       xml:
         name: Contact
-      type: object
-    System.ValueTupleOfSystem.StringAndSystem.Boolean:
-      properties:
-        item1:
-          type: string
-        item2:
-          type: boolean
-      xml:
-        name: ValueTuple`2
       type: object
     OAS.Integrations.Element.DTOs.WorkflowDataDto:
       properties:
@@ -689,68 +751,6 @@ components:
           type: object
       xml:
         name: UserFormData
-      type: object
-    OAS.Integrations.Element.DTOs.FormSessionUpload:
-      properties:
-        id:
-          type: string
-        size:
-          type: integer
-          format: int32
-        fileType:
-          type: string
-        fileBase64:
-          type: string
-        fileName:
-          type: string
-        parentFolderPath:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        markForDelete:
-          type: boolean
-        entityType:
-          type: integer
-          format: int32
-        entityId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        uploadId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        formCollectionId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        formSessionId:
-          type: string
-        accountNumber:
-          type: string
-        documentType:
-          type: string
-        indexValues:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.Element.DTOs.UserFormData'
-          xml:
-            name: UserFormData
-            wrapped: true
-          type: array
-      xml:
-        name: FormSessionUpload
-      type: object
-    OAS.Integrations.Element.DTOs.Datum:
-      properties:
-        category:
-          type: string
-        key:
-          type: string
-        value:
-          type: object
-      xml:
-        name: Datum
       type: object
   securitySchemes:
     Authorization:

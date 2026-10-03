@@ -909,6 +909,27 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAS.WebApi.DTO.Authorization.ServiceTeamDatabaseAssignRequestDto:
+      properties:
+        serviceTeamId:
+          type: integer
+          format: int32
+        teamType:
+          type: string
+          enum:
+          - ServiceTeam
+          - ReconTeam
+          - ApplicationTeam
+          - AlternateApplicationTeam
+          - RemovedServiceTeam
+        alClientIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+      xml:
+        name: ServiceTeamDatabaseAssignRequestDto
+      type: object
     OAS.DataModel.SimpleEntity:
       properties:
         id:
@@ -918,6 +939,35 @@ components:
           type: string
       xml:
         name: SimpleEntity
+      type: object
+    OAS.WebApi.DTO.Security.AlClientOpsDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        clientName:
+          type: string
+        isFullOps:
+          type: boolean
+        isBilling:
+          type: boolean
+        isComposites:
+          type: boolean
+        isStatements:
+          type: boolean
+        isTrading:
+          type: boolean
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+        databaseName:
+          type: string
+        serverName:
+          type: string
+      xml:
+        name: AlClientOpsDto
       type: object
     OAS.WebApi.DTO.Authorization.ALClientDto:
       properties:
@@ -1009,56 +1059,6 @@ components:
           type: string
       xml:
         name: ServiceTeamDto
-      type: object
-    OAS.WebApi.DTO.Authorization.ServiceTeamDatabaseAssignRequestDto:
-      properties:
-        serviceTeamId:
-          type: integer
-          format: int32
-        teamType:
-          type: string
-          enum:
-          - ServiceTeam
-          - ReconTeam
-          - ApplicationTeam
-          - AlternateApplicationTeam
-          - RemovedServiceTeam
-        alClientIds:
-          items:
-            type: integer
-            format: int32
-          type: array
-      xml:
-        name: ServiceTeamDatabaseAssignRequestDto
-      type: object
-    OAS.WebApi.DTO.Security.AlClientOpsDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        clientName:
-          type: string
-        isFullOps:
-          type: boolean
-        isBilling:
-          type: boolean
-        isComposites:
-          type: boolean
-        isStatements:
-          type: boolean
-        isTrading:
-          type: boolean
-        auditedDate:
-          type: string
-          format: date-time
-        auditedByDisplay:
-          type: string
-        databaseName:
-          type: string
-        serverName:
-          type: string
-      xml:
-        name: AlClientOpsDto
       type: object
   securitySchemes:
     Authorization:

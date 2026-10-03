@@ -1541,31 +1541,6 @@ paths:
         required: true
 components:
   schemas:
-    OAS.WebApi.DTO.Compliance.AuditDefaultRequestCategoryDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        description:
-          type: string
-        displaySequence:
-          type: integer
-          format: int32
-        items:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Compliance.AuditDefaultRequestItemDto'
-          xml:
-            name: AuditDefaultRequestItemDto
-            wrapped: true
-          type: array
-        alClient:
-          type: integer
-          format: int32
-        dbName:
-          type: string
-      xml:
-        name: AuditDefaultRequestCategoryDto
-      type: object
     OAS.WebApi.DTO.Compliance.ComplianceFilterDto:
       properties:
         label:
@@ -1773,124 +1748,6 @@ components:
           type: boolean
       xml:
         name: ComplianceFilterDto
-      type: object
-    OAS.WebApi.DTO.Compliance.AuditRequestItemAttachmentDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        fileName:
-          type: string
-        blobId_Attachment:
-          type: integer
-          format: int32
-        auditedDate:
-          type: string
-          format: date-time
-        auditedByDisplay:
-          type: string
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-      xml:
-        name: AuditRequestItemAttachmentDto
-      type: object
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
-      type: object
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
-      type: object
-    OAS.WebApi.DTO.Compliance.AuditRequestItemDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        auditRequestId:
-          type: integer
-          format: int32
-        category:
-          type: string
-        type:
-          type: string
-        description:
-          type: string
-        customRptId:
-          type: integer
-          format: int32
-        auditedDate:
-          type: string
-          format: date-time
-        auditedByDisplay:
-          type: string
-        attachments:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Compliance.AuditRequestItemAttachmentDto'
-          xml:
-            name: AuditRequestItemAttachmentDto
-            wrapped: true
-          type: array
-      xml:
-        name: AuditRequestItemDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Custom.CustomReportPromptDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        code:
-          type: string
-        prompt:
-          type: string
-        promptDescription:
-          type: string
-        promptType:
-          type: string
-          enum:
-          - None
-          - Text
-          - Numeric
-          - Date
-          - Dynamic Group
-        defaultValue:
-          type: string
-        isPromptUser:
-          type: boolean
-        sortOrder:
-          type: integer
-          format: int32
-      xml:
-        name: CustomReportPromptDto
-      type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
-      properties:
-        key:
-          readOnly: true
-          type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: KeyValuePair`2
       type: object
     OAS.WebApi.DTO.Compliance.AuditRequestDto:
       properties:
@@ -2118,68 +1975,90 @@ components:
       xml:
         name: AuditRequestDto
       type: object
-    OAS.WebApi.DTO.Reporting.RunReport.RunToDto:
+    OAS.WebApi.DTO.Compliance.AuditRequestItemDto:
       properties:
-        reportFormat:
+        id:
+          type: integer
+          format: int32
+        auditRequestId:
+          type: integer
+          format: int32
+        category:
           type: string
-          enum:
-          - Xml
-          - 'Null'
-          - Csv
-          - Image
-          - PDF
-          - Html
-          - Html40
-          - Html32
-          - Mhtml
-          - Excel
-          - ExcelX
-          - HtmlOwc
-          - Json
-          - CustomImport
-        storageType:
+        type:
           type: string
-        provider:
+        description:
           type: string
-        folderPath:
+        customRptId:
+          type: integer
+          format: int32
+        auditedDate:
           type: string
-        combinationMethod:
+          format: date-time
+        auditedByDisplay:
+          type: string
+        attachments:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Compliance.AuditRequestItemAttachmentDto'
+          xml:
+            name: AuditRequestItemAttachmentDto
+            wrapped: true
+          type: array
+      xml:
+        name: AuditRequestItemDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Custom.CustomReportPromptDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+        prompt:
+          type: string
+        promptDescription:
+          type: string
+        promptType:
           type: string
           enum:
           - None
-          - Aggregate
-          - Zip
-          - Merge
-          - MergeSimplex
-          - MergeDuplex
-          - TarGzip
-        userIdList:
-          items:
-            type: integer
-            format: int32
-          type: array
-        archiveReport:
+          - Text
+          - Numeric
+          - Date
+          - Dynamic Group
+        defaultValue:
+          type: string
+        isPromptUser:
           type: boolean
-        uploadTargetId:
+        sortOrder:
           type: integer
           format: int32
-        source:
-          type: string
-          enum:
-          - OnDemandUI
-          - OnDemandAPI
-          - QueryTester
-          - Scheduled
-          - AuditRequestOnDemand
-          - AuditTestOnDemand
-          - AuditTestSchedule
-          - SubscriptionNotification
-          - ReportBatchSyncDynamicGroupEntities
-          - ReconCompleteNotification
-          - DashboardDataAuditProcess
-          - DashboardDataAuditProcessCountOnly
       xml:
-        name: RunToDto
+        name: CustomReportPromptDto
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
       type: object
     OAS.WebApi.DTO.Compliance.AuditDefaultRequestItemDto:
       properties:
@@ -2665,6 +2544,127 @@ components:
           type: string
       xml:
         name: CustomReportFullDto
+      type: object
+    OAS.WebApi.DTO.Compliance.AuditDefaultRequestCategoryDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        description:
+          type: string
+        displaySequence:
+          type: integer
+          format: int32
+        items:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Compliance.AuditDefaultRequestItemDto'
+          xml:
+            name: AuditDefaultRequestItemDto
+            wrapped: true
+          type: array
+        alClient:
+          type: integer
+          format: int32
+        dbName:
+          type: string
+      xml:
+        name: AuditDefaultRequestCategoryDto
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    OAS.WebApi.DTO.Compliance.AuditRequestItemAttachmentDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        fileName:
+          type: string
+        blobId_Attachment:
+          type: integer
+          format: int32
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+      xml:
+        name: AuditRequestItemAttachmentDto
+      type: object
+    OAS.WebApi.DTO.Reporting.RunReport.RunToDto:
+      properties:
+        reportFormat:
+          type: string
+          enum:
+          - Xml
+          - 'Null'
+          - Csv
+          - Image
+          - PDF
+          - Html
+          - Html40
+          - Html32
+          - Mhtml
+          - Excel
+          - ExcelX
+          - HtmlOwc
+          - Json
+          - CustomImport
+        storageType:
+          type: string
+        provider:
+          type: string
+        folderPath:
+          type: string
+        combinationMethod:
+          type: string
+          enum:
+          - None
+          - Aggregate
+          - Zip
+          - Merge
+          - MergeSimplex
+          - MergeDuplex
+          - TarGzip
+        userIdList:
+          items:
+            type: integer
+            format: int32
+          type: array
+        archiveReport:
+          type: boolean
+        uploadTargetId:
+          type: integer
+          format: int32
+        source:
+          type: string
+          enum:
+          - OnDemandUI
+          - OnDemandAPI
+          - QueryTester
+          - Scheduled
+          - AuditRequestOnDemand
+          - AuditTestOnDemand
+          - AuditTestSchedule
+          - SubscriptionNotification
+          - ReportBatchSyncDynamicGroupEntities
+          - ReconCompleteNotification
+          - DashboardDataAuditProcess
+          - DashboardDataAuditProcessCountOnly
+      xml:
+        name: RunToDto
       type: object
   securitySchemes:
     Authorization:

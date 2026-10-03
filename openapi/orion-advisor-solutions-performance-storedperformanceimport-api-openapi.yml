@@ -722,6 +722,15 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceImportFileDto:
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+        delimiter:
+          type: string
+      xml:
+        name: StoredPerformanceImportFileDto
+      type: object
     System.Net.Http.StreamContent:
       properties:
         headers:
@@ -735,27 +744,32 @@ components:
       xml:
         name: StreamContent
       type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
       properties:
-        key:
-          readOnly: true
+        fileName:
           type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
       xml:
-        name: KeyValuePair`2
+        name: HttpFile
       type: object
-    OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceImportFileDto:
+    OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceImportVerboseOptionsDto:
       properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-        delimiter:
+        s3FileName:
           type: string
+        columnMappings:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceColumnMapping'
+          xml:
+            name: StoredPerformanceColumnMapping
+            wrapped: true
+          type: array
+        addDayToStartDate:
+          type: boolean
       xml:
-        name: StoredPerformanceImportFileDto
+        name: StoredPerformanceImportVerboseOptionsDto
       type: object
     OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceColumnMapping:
       properties:
@@ -1006,21 +1020,18 @@ components:
       xml:
         name: StoredPerformanceImportEntity
       type: object
-    OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceImportVerboseOptionsDto:
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
       properties:
-        s3FileName:
+        key:
+          readOnly: true
           type: string
-        columnMappings:
+        value:
           items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceColumnMapping'
-          xml:
-            name: StoredPerformanceColumnMapping
-            wrapped: true
+            type: string
+          readOnly: true
           type: array
-        addDayToStartDate:
-          type: boolean
       xml:
-        name: StoredPerformanceImportVerboseOptionsDto
+        name: KeyValuePair`2
       type: object
     OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceImportVerboseDto:
       properties:
@@ -1049,17 +1060,6 @@ components:
           type: string
       xml:
         name: StoredPerformanceImportVerboseDto
-      type: object
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
       type: object
   securitySchemes:
     Authorization:

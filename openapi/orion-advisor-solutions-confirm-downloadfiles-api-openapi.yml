@@ -3638,77 +3638,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.DTO.Utility.BatchProcessingErrorDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        batchId:
-          type: integer
-          format: int32
-        errorMessage:
-          type: string
-        details:
-          type: string
-        severityCode:
-          type: integer
-          format: int32
-        severity:
-          type: string
-          enum:
-          - Error
-          - Warning
-          - Information
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-      xml:
-        name: BatchProcessingErrorDto
-      type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
-      properties:
-        key:
-          readOnly: true
-          type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: KeyValuePair`2
-      type: object
-    OAS.WebApi.DTO.Utility.GridCountDto:
-      properties:
-        name:
-          type: string
-        key:
-          type: string
-        value:
-          type: object
-        count:
-          type: integer
-          format: int32
-      xml:
-        name: GridCountDto
-      type: object
-    OAS.Remote.Confirmation.VerifyApplyFileRequest:
-      properties:
-        downloadFileId:
-          type: integer
-          format: int32
-        apply:
-          type: boolean
-        triggerAgenticRecon:
-          type: boolean
-        currentAttempt:
-          type: integer
-          format: int32
-      xml:
-        name: VerifyApplyFileRequest
-      type: object
     OAS.WebApi.DTO.Confirm.RateAgentNextBestActionRecordRequestDto:
       description: 'One download detail row to rate, identified by file and record id (JSON: downloadFileId, id).'
       properties:
@@ -3721,26 +3650,152 @@ components:
       xml:
         name: RateAgentNextBestActionRecordRequestDto
       type: object
-    OAS.WebApi.DTO.Confirm.DownloadFileKeyValue:
+    OAS.WebApi.DTO.Confirm.DownloadFileImportFileDto:
       properties:
-        alClientId:
+        downloadSourceId:
           type: integer
           format: int32
-        fileId:
-          type: integer
-          format: int32
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+        autoApply:
+          type: string
+          enum:
+          - None
+          - VerifyPrice
+          - ApplyPrice
+          - VerifyName
+          - ApplyName
+          - VerifyTran
+          - ApplyTran
+          - VerifyPos
+          - ApplyPos
+          - VerifyCorpAction
+          - ApplyCorpAction
+          - VerifySecurity
+          - ApplySecurity
+          - VerifyDiv
+          - ApplyDiv
+          - VerifyTranDetail
+          - ApplyTranDetail
+          - VerifyGeneric
+          - ApplyGeneric
+          - VerifyCostBasis
+          - ApplyCostBasis
+          - VerifyBeneficiary
+          - ApplyBeneficiary
+          - VerifyBanking
+          - ApplyBanking
+          - VerifyRMD
+          - ApplyRMD
+          - VerifySystematic
+          - ApplySystematic
+          - VerifyStoredPerformance
+          - ApplyStoredPerformance
+          - VerifyAndApplyAll
       xml:
-        name: DownloadFileKeyValue
+        name: DownloadFileImportFileDto
       type: object
-    OAS.DataModel.Confirm.ConfirmExclusionReason:
+    OAS.DataModel.SimpleEntity:
       properties:
         id:
           type: integer
           format: int32
-        reason:
+        name:
           type: string
       xml:
-        name: ConfirmExclusionReason
+        name: SimpleEntity
+      type: object
+    OAS.WebApi.DTO.Confirm.DownloadFileDetailDto:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        id:
+          type: integer
+          format: int32
+        downloadFileId:
+          type: integer
+          format: int32
+        downloadSourceId:
+          type: integer
+          format: int32
+        downloadDescription:
+          type: string
+        status:
+          type: string
+          enum:
+          - NotConfirmed
+          - Confirmed
+          - Excluded
+          - AggregationOnly
+        createdDate:
+          type: string
+          format: date-time
+        fileDate:
+          type: string
+          format: date-time
+        link:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailLinkDto'
+        memoDescription:
+          type: string
+        memoCount:
+          type: integer
+          format: int32
+        memoSeverity:
+          type: integer
+          format: int32
+        memos:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadMemoDto'
+          xml:
+            name: DownloadMemoDto
+            wrapped: true
+          type: array
+        downloadFormatId:
+          type: integer
+          format: int32
+        databaseId:
+          type: integer
+          format: int32
+        databaseName:
+          type: string
+        memoDescriptionList:
+          items:
+            type: string
+          type: array
+        suggestion:
+          type: string
+        suggestionAuditedBy:
+          type: string
+      xml:
+        name: DownloadFileDetailDto
+      type: object
+    OAS.WebApi.DTO.Confirm.SleeveColumnDataDto:
+      properties:
+        columnName:
+          type: string
+        columnSize:
+          type: integer
+          format: int32
+        columnCodeName:
+          type: string
+        columnEnabled:
+          type: boolean
+      xml:
+        name: SleeveColumnDataDto
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
       type: object
     OAS.WebApi.DTO.Confirm.DownloadFileDto:
       properties:
@@ -3808,83 +3863,21 @@ components:
       xml:
         name: DownloadFileDto
       type: object
-    OAS.WebApi.DTO.Confirm.DownloadFileImportFileDto:
+    OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileReturnDto:
+      description: Download File Import Multiple File Return DTO
       properties:
-        downloadSourceId:
+        filename:
+          description: The file name being imported
+          type: string
+        batchProcessingId:
+          description: Batch Processing Id for the import
           type: integer
           format: int32
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-        autoApply:
-          type: string
-          enum:
-          - None
-          - VerifyPrice
-          - ApplyPrice
-          - VerifyName
-          - ApplyName
-          - VerifyTran
-          - ApplyTran
-          - VerifyPos
-          - ApplyPos
-          - VerifyCorpAction
-          - ApplyCorpAction
-          - VerifySecurity
-          - ApplySecurity
-          - VerifyDiv
-          - ApplyDiv
-          - VerifyTranDetail
-          - ApplyTranDetail
-          - VerifyGeneric
-          - ApplyGeneric
-          - VerifyCostBasis
-          - ApplyCostBasis
-          - VerifyBeneficiary
-          - ApplyBeneficiary
-          - VerifyBanking
-          - ApplyBanking
-          - VerifyRMD
-          - ApplyRMD
-          - VerifySystematic
-          - ApplySystematic
-          - VerifyStoredPerformance
-          - ApplyStoredPerformance
-          - VerifyAndApplyAll
-      xml:
-        name: DownloadFileImportFileDto
-      type: object
-    OAS.DataModel.SimpleEntity:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
+        errorMessage:
+          description: Any error message from trying to start the import
           type: string
       xml:
-        name: SimpleEntity
-      type: object
-    OAS.WebApi.DTO.Confirm.DownloadFilesOptionsDto:
-      properties:
-        downloadFileIds:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileKeyValue'
-          xml:
-            name: DownloadFileKeyValue
-            wrapped: true
-          type: array
-      xml:
-        name: DownloadFilesOptionsDto
-      type: object
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
+        name: DownloadFileImportMultiFileReturnDto
       type: object
     System.Net.Http.StreamContent:
       properties:
@@ -3898,6 +3891,56 @@ components:
           type: array
       xml:
         name: StreamContent
+      type: object
+    OAS.Remote.Confirmation.VerifyApplyFileRequest:
+      properties:
+        downloadFileId:
+          type: integer
+          format: int32
+        apply:
+          type: boolean
+        triggerAgenticRecon:
+          type: boolean
+        currentAttempt:
+          type: integer
+          format: int32
+      xml:
+        name: VerifyApplyFileRequest
+      type: object
+    OAS.WebApi.DTO.Confirm.DownloadFileDetailLinkDto:
+      properties:
+        representativeId:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        registrationId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        assetId:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        transactionId:
+          type: integer
+          format: int32
+        personalId:
+          type: integer
+          format: int32
+        receivableId:
+          type: integer
+          format: int32
+        dividendId:
+          type: integer
+          format: int32
+      xml:
+        name: DownloadFileDetailLinkDto
       type: object
     OAS.WebApi.DTO.Utility.BatchProcessingDto:
       properties:
@@ -3979,131 +4022,29 @@ components:
       xml:
         name: BatchProcessingDto
       type: object
-    OAS.WebApi.DTO.Confirm.DownloadFileCreateTransDto:
+    OAS.WebApi.DTO.Utility.GridCountDto:
       properties:
-        confirmOverviewId:
-          type: integer
-          format: int32
-        downloadSourceId:
-          type: integer
-          format: int32
-        downloadFileId:
-          type: integer
-          format: int32
-        alClientId:
+        name:
+          type: string
+        key:
+          type: string
+        value:
+          type: object
+        count:
           type: integer
           format: int32
       xml:
-        name: DownloadFileCreateTransDto
+        name: GridCountDto
       type: object
-    OAS.WebApi.DTO.Confirm.DownloadFileDetailLinkDto:
-      properties:
-        representativeId:
-          type: integer
-          format: int32
-        clientId:
-          type: integer
-          format: int32
-        registrationId:
-          type: integer
-          format: int32
-        accountId:
-          type: integer
-          format: int32
-        assetId:
-          type: integer
-          format: int32
-        productId:
-          type: integer
-          format: int32
-        transactionId:
-          type: integer
-          format: int32
-        personalId:
-          type: integer
-          format: int32
-        receivableId:
-          type: integer
-          format: int32
-        dividendId:
-          type: integer
-          format: int32
-      xml:
-        name: DownloadFileDetailLinkDto
-      type: object
-    OAS.WebApi.DTO.Confirm.SleeveColumnDataDto:
-      properties:
-        columnName:
-          type: string
-        columnSize:
-          type: integer
-          format: int32
-        columnCodeName:
-          type: string
-        columnEnabled:
-          type: boolean
-      xml:
-        name: SleeveColumnDataDto
-      type: object
-    OAS.WebApi.DTO.Confirm.DownloadFileImportFilesMultiDownloadSourceDto:
-      properties:
-        downloadSourceIds:
-          items:
-            type: integer
-            format: int32
-          type: array
-        autoApply:
-          type: string
-          enum:
-          - None
-          - VerifyPrice
-          - ApplyPrice
-          - VerifyName
-          - ApplyName
-          - VerifyTran
-          - ApplyTran
-          - VerifyPos
-          - ApplyPos
-          - VerifyCorpAction
-          - ApplyCorpAction
-          - VerifySecurity
-          - ApplySecurity
-          - VerifyDiv
-          - ApplyDiv
-          - VerifyTranDetail
-          - ApplyTranDetail
-          - VerifyGeneric
-          - ApplyGeneric
-          - VerifyCostBasis
-          - ApplyCostBasis
-          - VerifyBeneficiary
-          - ApplyBeneficiary
-          - VerifyBanking
-          - ApplyBanking
-          - VerifyRMD
-          - ApplyRMD
-          - VerifySystematic
-          - ApplySystematic
-          - VerifyStoredPerformance
-          - ApplyStoredPerformance
-          - VerifyAndApplyAll
-        encoding:
-          type: string
-      xml:
-        name: DownloadFileImportFilesMultiDownloadSourceDto
-      type: object
-    OAS.WebApi.DTO.Confirm.DownloadMemoDto:
+    OAS.DataModel.Confirm.ConfirmExclusionReason:
       properties:
         id:
           type: integer
           format: int32
-        memoCode:
-          type: integer
-          format: int32
-        description:
+        reason:
           type: string
       xml:
-        name: DownloadMemoDto
+        name: ConfirmExclusionReason
       type: object
     OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileDto:
       properties:
@@ -4161,21 +4102,63 @@ components:
       xml:
         name: DownloadFileImportMultiFileDto
       type: object
-    OAS.WebApi.DTO.Confirm.DownloadFileImportMultiFileReturnDto:
-      description: Download File Import Multiple File Return DTO
+    OAS.WebApi.DTO.Confirm.DownloadFileKeyValue:
       properties:
-        filename:
-          description: The file name being imported
-          type: string
-        batchProcessingId:
-          description: Batch Processing Id for the import
+        alClientId:
           type: integer
           format: int32
-        errorMessage:
-          description: Any error message from trying to start the import
+        fileId:
+          type: integer
+          format: int32
+      xml:
+        name: DownloadFileKeyValue
+      type: object
+    OAS.WebApi.DTO.Confirm.DownloadFileImportFilesMultiDownloadSourceDto:
+      properties:
+        downloadSourceIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        autoApply:
+          type: string
+          enum:
+          - None
+          - VerifyPrice
+          - ApplyPrice
+          - VerifyName
+          - ApplyName
+          - VerifyTran
+          - ApplyTran
+          - VerifyPos
+          - ApplyPos
+          - VerifyCorpAction
+          - ApplyCorpAction
+          - VerifySecurity
+          - ApplySecurity
+          - VerifyDiv
+          - ApplyDiv
+          - VerifyTranDetail
+          - ApplyTranDetail
+          - VerifyGeneric
+          - ApplyGeneric
+          - VerifyCostBasis
+          - ApplyCostBasis
+          - VerifyBeneficiary
+          - ApplyBeneficiary
+          - VerifyBanking
+          - ApplyBanking
+          - VerifyRMD
+          - ApplyRMD
+          - VerifySystematic
+          - ApplySystematic
+          - VerifyStoredPerformance
+          - ApplyStoredPerformance
+          - VerifyAndApplyAll
+        encoding:
           type: string
       xml:
-        name: DownloadFileImportMultiFileReturnDto
+        name: DownloadFileImportFilesMultiDownloadSourceDto
       type: object
     OAS.WebApi.DTO.Confirm.RateAgentNextBestActionRequestDto:
       required:
@@ -4199,72 +4182,89 @@ components:
       xml:
         name: RateAgentNextBestActionRequestDto
       type: object
-    OAS.WebApi.DTO.Confirm.DownloadFileDetailDto:
-      required:
-      - $type
+    OAS.WebApi.DTO.Confirm.DownloadFileCreateTransDto:
       properties:
-        $type:
-          readOnly: true
-          type: string
-        id:
-          type: integer
-          format: int32
-        downloadFileId:
+        confirmOverviewId:
           type: integer
           format: int32
         downloadSourceId:
           type: integer
           format: int32
-        downloadDescription:
+        downloadFileId:
+          type: integer
+          format: int32
+        alClientId:
+          type: integer
+          format: int32
+      xml:
+        name: DownloadFileCreateTransDto
+      type: object
+    OAS.WebApi.DTO.Utility.BatchProcessingErrorDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        batchId:
+          type: integer
+          format: int32
+        errorMessage:
           type: string
-        status:
+        details:
+          type: string
+        severityCode:
+          type: integer
+          format: int32
+        severity:
           type: string
           enum:
-          - NotConfirmed
-          - Confirmed
-          - Excluded
-          - AggregationOnly
+          - Error
+          - Warning
+          - Information
+        createdBy:
+          type: string
         createdDate:
           type: string
           format: date-time
-        fileDate:
-          type: string
-          format: date-time
-        link:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileDetailLinkDto'
-        memoDescription:
-          type: string
-        memoCount:
+      xml:
+        name: BatchProcessingErrorDto
+      type: object
+    OAS.WebApi.DTO.Confirm.DownloadMemoDto:
+      properties:
+        id:
           type: integer
           format: int32
-        memoSeverity:
+        memoCode:
           type: integer
           format: int32
-        memos:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadMemoDto'
-          xml:
-            name: DownloadMemoDto
-            wrapped: true
-          type: array
-        downloadFormatId:
-          type: integer
-          format: int32
-        databaseId:
-          type: integer
-          format: int32
-        databaseName:
-          type: string
-        memoDescriptionList:
-          items:
-            type: string
-          type: array
-        suggestion:
-          type: string
-        suggestionAuditedBy:
+        description:
           type: string
       xml:
-        name: DownloadFileDetailDto
+        name: DownloadMemoDto
+      type: object
+    OAS.WebApi.DTO.Confirm.DownloadFilesOptionsDto:
+      properties:
+        downloadFileIds:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.DownloadFileKeyValue'
+          xml:
+            name: DownloadFileKeyValue
+            wrapped: true
+          type: array
+      xml:
+        name: DownloadFilesOptionsDto
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
       type: object
   securitySchemes:
     Authorization:

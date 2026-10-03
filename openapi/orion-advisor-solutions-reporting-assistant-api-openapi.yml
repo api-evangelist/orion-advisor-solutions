@@ -224,27 +224,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ConversationSummaryContext:
-      properties:
-        summary:
-          type: string
-        messageCount:
-          type: integer
-          format: int32
-      xml:
-        name: ConversationSummaryContext
-      type: object
-    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.SecondaryIntentStepDto:
-      properties:
-        request:
-          type: string
-        controlIntentOutput:
-          additionalProperties:
-            type: object
-          type: object
-      xml:
-        name: SecondaryIntentStepDto
-      type: object
     OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ReportAssistantPrompt:
       properties:
         code:
@@ -255,6 +234,99 @@ components:
           type: string
       xml:
         name: ReportAssistantPrompt
+      type: object
+    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ReportAssistantPromptResponse:
+      properties:
+        promptType:
+          type: string
+          enum:
+          - System
+          - Prompt
+        promptParams:
+          type: string
+        sortOrder:
+          type: integer
+          format: int32
+        code:
+          type: string
+        displayName:
+          type: string
+        prompt:
+          type: string
+      xml:
+        name: ReportAssistantPromptResponse
+      type: object
+    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ConversationSummaryContext:
+      properties:
+        summary:
+          type: string
+        messageCount:
+          type: integer
+          format: int32
+      xml:
+        name: ConversationSummaryContext
+      type: object
+    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ReportAssistantControlListResponse:
+      properties:
+        displayName:
+          type: string
+        defaultSchema:
+          type: string
+      xml:
+        name: ReportAssistantControlListResponse
+      type: object
+    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ReportAssistantResponse:
+      properties:
+        response:
+          type: string
+        promptSuggestions:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ReportAssistantPromptResponse'
+          xml:
+            name: ReportAssistantPromptResponse
+            wrapped: true
+          type: array
+        intentParams:
+          $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.UserIntentParams'
+        summaryContext:
+          $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ConversationSummaryContext'
+        primaryIntent:
+          $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.RouteUserIntentOutput'
+        originalPrompt:
+          type: string
+        secondaryIntents:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.SecondaryIntentStepDto'
+          xml:
+            name: SecondaryIntentStepDto
+            wrapped: true
+          type: array
+        cachedReferenceMaterial:
+          $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.CachedReferenceMaterial'
+      xml:
+        name: ReportAssistantResponse
+      type: object
+    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.UserIntentParams:
+      properties:
+        intent:
+          type: string
+        parentControlId:
+          type: string
+        addControlLocation:
+          type: string
+        addControlType:
+          type: string
+        documentationType:
+          type: string
+          enum:
+          - Full
+          - Property
+        requests:
+          items:
+            type: string
+          type: array
+      xml:
+        name: UserIntentParams
       type: object
     OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.AiChatMessage:
       properties:
@@ -319,47 +391,57 @@ components:
       xml:
         name: ReportAssistantRequest
       type: object
-    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.CachedReferenceMaterial:
+    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.RouteUserIntentOutput:
       properties:
-        groupingList:
+        intent:
           type: string
-        tagList:
+        confidence:
+          type: number
+          format: double
+        steps:
+          items:
+            type: string
+          type: array
+        controlList:
+          items:
+            type: string
+          type: array
+        addControlType:
           type: string
-        settingsList:
+        convertToControlType:
+          type: string
+        referenceControlType:
+          type: string
+        location:
+          type: string
+        needsTags:
+          type: boolean
+        skipGroupingQuery:
+          type: boolean
+        needsSettings:
+          type: boolean
+        reason:
+          type: string
+        followupQuestion:
           type: string
       xml:
-        name: CachedReferenceMaterial
+        name: RouteUserIntentOutput
       type: object
-    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ReportAssistantResponse:
+    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.UserContext:
       properties:
-        response:
+        alClientId:
+          type: integer
+          format: int32
+        loginEntityId:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        loginUserId:
           type: string
-        promptSuggestions:
-          items:
-            $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ReportAssistantPromptResponse'
-          xml:
-            name: ReportAssistantPromptResponse
-            wrapped: true
-          type: array
-        intentParams:
-          $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.UserIntentParams'
-        summaryContext:
-          $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ConversationSummaryContext'
-        primaryIntent:
-          $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.RouteUserIntentOutput'
-        originalPrompt:
-          type: string
-        secondaryIntents:
-          items:
-            $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.SecondaryIntentStepDto'
-          xml:
-            name: SecondaryIntentStepDto
-            wrapped: true
-          type: array
-        cachedReferenceMaterial:
-          $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.CachedReferenceMaterial'
       xml:
-        name: ReportAssistantResponse
+        name: UserContext
       type: object
     OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.PromptSystemResponse:
       properties:
@@ -415,109 +497,27 @@ components:
       xml:
         name: PaginationInfo
       type: object
-    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ReportAssistantPromptResponse:
+    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.CachedReferenceMaterial:
       properties:
-        promptType:
+        groupingList:
           type: string
-          enum:
-          - System
-          - Prompt
-        promptParams:
+        tagList:
           type: string
-        sortOrder:
-          type: integer
-          format: int32
-        code:
-          type: string
-        displayName:
-          type: string
-        prompt:
+        settingsList:
           type: string
       xml:
-        name: ReportAssistantPromptResponse
+        name: CachedReferenceMaterial
       type: object
-    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ReportAssistantControlListResponse:
+    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.SecondaryIntentStepDto:
       properties:
-        displayName:
+        request:
           type: string
-        defaultSchema:
-          type: string
+        controlIntentOutput:
+          additionalProperties:
+            type: object
+          type: object
       xml:
-        name: ReportAssistantControlListResponse
-      type: object
-    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.UserIntentParams:
-      properties:
-        intent:
-          type: string
-        parentControlId:
-          type: string
-        addControlLocation:
-          type: string
-        addControlType:
-          type: string
-        documentationType:
-          type: string
-          enum:
-          - Full
-          - Property
-        requests:
-          items:
-            type: string
-          type: array
-      xml:
-        name: UserIntentParams
-      type: object
-    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.UserContext:
-      properties:
-        alClientId:
-          type: integer
-          format: int32
-        loginEntityId:
-          type: integer
-          format: int32
-        userId:
-          type: integer
-          format: int32
-        loginUserId:
-          type: string
-      xml:
-        name: UserContext
-      type: object
-    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.RouteUserIntentOutput:
-      properties:
-        intent:
-          type: string
-        confidence:
-          type: number
-          format: double
-        steps:
-          items:
-            type: string
-          type: array
-        controlList:
-          items:
-            type: string
-          type: array
-        addControlType:
-          type: string
-        convertToControlType:
-          type: string
-        referenceControlType:
-          type: string
-        location:
-          type: string
-        needsTags:
-          type: boolean
-        skipGroupingQuery:
-          type: boolean
-        needsSettings:
-          type: boolean
-        reason:
-          type: string
-        followupQuestion:
-          type: string
-      xml:
-        name: RouteUserIntentOutput
+        name: SecondaryIntentStepDto
       type: object
   securitySchemes:
     Authorization:

@@ -206,6 +206,71 @@ paths:
       - Authorization: []
 components:
   schemas:
+    OAS.WebApi.DTO.Billing.AuditFileBlobDto:
+      properties:
+        instanceId:
+          type: integer
+          format: int32
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        createdDate:
+          type: string
+          format: date-time
+        id:
+          type: integer
+          format: int32
+        openWith:
+          type: string
+        fileName:
+          type: string
+        blobDesc:
+          type: string
+        blobText:
+          type: string
+        category:
+          type: string
+        isZip:
+          type: boolean
+      xml:
+        name: AuditFileBlobDto
+      type: object
+    OAS.WebApi.DTO.Billing.PostAuditDataDto:
+      properties:
+        billData:
+          description: UNUSED
+          type: boolean
+        payableSummary:
+          description: UNUSED
+          type: boolean
+        billingAudit:
+          description: UNUSED
+          type: boolean
+        startDate:
+          description: Start date of the bill instance date range to filter on
+          type: string
+          format: date-time
+        endDate:
+          description: End date of the bill instance date range to filter on
+          type: string
+          format: date-time
+        billInstanceIds:
+          description: A comma-separated list of bill instance IDs to include
+          type: string
+        entityList:
+          description: List of payable entities to filter the accounts on
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Billing.PostAuditEntity'
+          xml:
+            name: PostAuditEntity
+            wrapped: true
+          type: array
+      xml:
+        name: PostAuditDataDto
+      type: object
     OAS.DataModel.Billing.PostAuditEntity:
       properties:
         entity:
@@ -277,71 +342,6 @@ components:
           - ProRata
       xml:
         name: CashFundingGridDto
-      type: object
-    OAS.WebApi.DTO.Billing.AuditFileBlobDto:
-      properties:
-        instanceId:
-          type: integer
-          format: int32
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        createdDate:
-          type: string
-          format: date-time
-        id:
-          type: integer
-          format: int32
-        openWith:
-          type: string
-        fileName:
-          type: string
-        blobDesc:
-          type: string
-        blobText:
-          type: string
-        category:
-          type: string
-        isZip:
-          type: boolean
-      xml:
-        name: AuditFileBlobDto
-      type: object
-    OAS.WebApi.DTO.Billing.PostAuditDataDto:
-      properties:
-        billData:
-          description: UNUSED
-          type: boolean
-        payableSummary:
-          description: UNUSED
-          type: boolean
-        billingAudit:
-          description: UNUSED
-          type: boolean
-        startDate:
-          description: Start date of the bill instance date range to filter on
-          type: string
-          format: date-time
-        endDate:
-          description: End date of the bill instance date range to filter on
-          type: string
-          format: date-time
-        billInstanceIds:
-          description: A comma-separated list of bill instance IDs to include
-          type: string
-        entityList:
-          description: List of payable entities to filter the accounts on
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Billing.PostAuditEntity'
-          xml:
-            name: PostAuditEntity
-            wrapped: true
-          type: array
-      xml:
-        name: PostAuditDataDto
       type: object
   securitySchemes:
     Authorization:

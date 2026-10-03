@@ -461,16 +461,6 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.WebApi.DTO.Scheduler.JobScheduleUpdateRequest:
-      properties:
-        jobRunTime:
-          type: string
-          format: date-time
-        weekdaysOnly:
-          type: boolean
-      xml:
-        name: JobScheduleUpdateRequest
-      type: object
     OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto:
       properties:
         key:
@@ -482,6 +472,51 @@ components:
           type: boolean
       xml:
         name: IntegrationSetupRequestDto
+      type: object
+    OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto:
+      properties:
+        partnerAppId:
+          description: The unique ID of the partner app.
+          type: integer
+          format: int32
+        productName:
+          description: The unique name of the partner app product.
+          type: string
+        jobScheduleDescription:
+          description: The description of the scheduled job.
+          type: string
+        jobScheduleId:
+          description: An optional ID of the Job scheduled for the current integration and firm. Defaults to zero if no Job is scheduled.
+          type: integer
+          format: int32
+        lastRun:
+          type: string
+          format: date-time
+        runOn:
+          description: The date and time of the next run of the scheduled jobs.
+          type: string
+          format: date-time
+        status:
+          description: Gets or sets a JobStatus description of the last run.
+          type: string
+        weekdaysOnly:
+          description: Indicates whether the job is run on weekdays only or everyday.
+          type: boolean
+        routePrefix:
+          description: The prefix for this controller. Used by clients to determine the correct endpoints to call.
+          type: string
+      xml:
+        name: PartnerAppConfigurationDto
+      type: object
+    OAS.WebApi.DTO.Scheduler.JobScheduleUpdateRequest:
+      properties:
+        jobRunTime:
+          type: string
+          format: date-time
+        weekdaysOnly:
+          type: boolean
+      xml:
+        name: JobScheduleUpdateRequest
       type: object
     OAS.WebApi.DTO.Integrations.iRebal.IntegrationConfigDto:
       properties:
@@ -523,41 +558,6 @@ components:
           type: string
       xml:
         name: IntegrationConfigDto
-      type: object
-    OAS.WebApi.DTO.Integrations.PartnerAppConfigurationDto:
-      properties:
-        partnerAppId:
-          description: The unique ID of the partner app.
-          type: integer
-          format: int32
-        productName:
-          description: The unique name of the partner app product.
-          type: string
-        jobScheduleDescription:
-          description: The description of the scheduled job.
-          type: string
-        jobScheduleId:
-          description: An optional ID of the Job scheduled for the current integration and firm. Defaults to zero if no Job is scheduled.
-          type: integer
-          format: int32
-        lastRun:
-          type: string
-          format: date-time
-        runOn:
-          description: The date and time of the next run of the scheduled jobs.
-          type: string
-          format: date-time
-        status:
-          description: Gets or sets a JobStatus description of the last run.
-          type: string
-        weekdaysOnly:
-          description: Indicates whether the job is run on weekdays only or everyday.
-          type: boolean
-        routePrefix:
-          description: The prefix for this controller. Used by clients to determine the correct endpoints to call.
-          type: string
-      xml:
-        name: PartnerAppConfigurationDto
       type: object
   securitySchemes:
     Authorization:

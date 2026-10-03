@@ -56,13 +56,29 @@ paths:
         required: true
 components:
   schemas:
-    OAS.DataModel.Reporting.Interfaces.IMakeProjectedIncomeOption:
+    OAS.DataModel.Reporting.Interfaces.IMakeComparisonOption:
       properties:
         type:
           readOnly: true
           type: string
       xml:
-        name: IMakeProjectedIncomeOption
+        name: IMakeComparisonOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeCostBasisOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeCostBasisOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeDateRange:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeDateRange
       type: object
     OAT.Utilities.Date.IDate:
       properties:
@@ -85,29 +101,13 @@ components:
       xml:
         name: IDate
       type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeStatisticalOption:
+    OAS.DataModel.Reporting.Interfaces.IMakeIncomeOption:
       properties:
         type:
           readOnly: true
           type: string
       xml:
-        name: IMakeStatisticalOption
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeActivityOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeActivityOption
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeAttributionOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeAttributionOption
+        name: IMakeIncomeOption
       type: object
     OAS.DataModel.Reporting.Calculation.IMakeCalculationOption:
       properties:
@@ -116,6 +116,107 @@ components:
           type: string
       xml:
         name: IMakeCalculationOption
+      type: object
+    OAS.DataAccess.Domains.Reporting.DataEngine.IGotCalculated:
+      properties:
+        id:
+          type: string
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IGotCalculated
+      type: object
+    OAS.WebApi.DTO.Reporting.Calculate.ScopeFeatureFlagsDto:
+      properties:
+        dynamicBenchmarkProcessType:
+          type: string
+          enum:
+          - Cloud
+          - LocalService
+        forceAssetGroupingIntraDayPerformance:
+          type: boolean
+        activityProcessType:
+          type: string
+          enum:
+          - Cloud
+          - LocalService
+        costBasisProcessType:
+          type: string
+          enum:
+          - Old
+          - Cloud
+          - LocalService
+        morningstarLevel2Assignment:
+          type: boolean
+        localPriceCutOverDate:
+          type: string
+          format: date-time
+        noScope:
+          type: boolean
+        ensureAssetsUpdated:
+          type: boolean
+        storeReportDataCompressed:
+          type: boolean
+        showEInModelNames:
+          type: boolean
+        performanceProcessType:
+          type: string
+          enum:
+          - Cloud
+          - LocalService
+        forceNonSummaryPerformanceToUseTwr:
+          type: boolean
+        forceNetOfFeesPerformance:
+          type: boolean
+        costBasisStoredSource:
+          type: string
+          enum:
+          - Orion
+          - Custodian
+        tradingWithParentGrouping:
+          type: boolean
+        useGlobalSettingsUniqueIds:
+          type: boolean
+        showEquations:
+          type: boolean
+        isReportCompare:
+          type: boolean
+        useBenchmarksInAccountChangeHistory:
+          type: boolean
+        benchmarkAssignmentOverride:
+          type: string
+        useAsOfDateForAdvizr:
+          type: boolean
+        accountNumbersToShow:
+          type: integer
+          format: int32
+        useBatchSettingsBulkCopy:
+          type: boolean
+        showExcludedFromRebalance:
+          type: boolean
+        useInMemoryForModelVsActual:
+          type: boolean
+        useNewLineChartRenderer:
+          type: boolean
+        useNewScatterPlotChartRenderer:
+          type: boolean
+        useInMemoryIncomeCalculation:
+          type: boolean
+        useModelAllocationHistory:
+          type: boolean
+        useDisclaimerShadowDom:
+          type: boolean
+      xml:
+        name: ScopeFeatureFlagsDto
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeMaturityPeriodOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeMaturityPeriodOption
       type: object
     OAS.WebApi.DTO.Reporting.Envision.AccountManagementOverride:
       properties:
@@ -131,21 +232,13 @@ components:
       xml:
         name: AccountManagementOverride
       type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeTaxOption:
+    OAS.DataModel.Reporting.Interfaces.IMakeStatisticalOption:
       properties:
         type:
           readOnly: true
           type: string
       xml:
-        name: IMakeTaxOption
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeTransactionOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeTransactionOption
+        name: IMakeStatisticalOption
       type: object
     OAS.WebApi.DTO.Reporting.Calculate.ScopeSettingsDto:
       properties:
@@ -389,69 +482,37 @@ components:
       xml:
         name: ScopeSettingsDto
       type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeBillingOption:
+    OAS.DataModel.Reporting.Interfaces.IMakeActivityOption:
       properties:
         type:
           readOnly: true
           type: string
       xml:
-        name: IMakeBillingOption
+        name: IMakeActivityOption
       type: object
-    OAS.WebApi.DTO.Reporting.Calculate.CalculateBase:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        id:
-          type: string
-        contextChange:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.ContextChange'
-      xml:
-        name: CalculateBase
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakePerformanceOption:
+    OAS.DataModel.Reporting.Interfaces.IMakeAttributionOption:
       properties:
         type:
           readOnly: true
           type: string
       xml:
-        name: IMakePerformanceOption
+        name: IMakeAttributionOption
       type: object
-    OAS.DataAccess.Domains.Reporting.DataEngine.IGotCalculated:
-      properties:
-        id:
-          type: string
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IGotCalculated
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeIncomeOption:
+    OAS.DataModel.Reporting.Interfaces.IMakeTransactionOption:
       properties:
         type:
           readOnly: true
           type: string
       xml:
-        name: IMakeIncomeOption
+        name: IMakeTransactionOption
       type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeMaturityPeriodOption:
+    OAS.DataModel.Reporting.Interfaces.IMakeTaxOption:
       properties:
         type:
           readOnly: true
           type: string
       xml:
-        name: IMakeMaturityPeriodOption
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeComparisonOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeComparisonOption
+        name: IMakeTaxOption
       type: object
     OAS.WebApi.DTO.Reporting.Calculate.ScopeDto:
       properties:
@@ -473,6 +534,14 @@ components:
           type: array
       xml:
         name: ScopeDto
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakePerformanceOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakePerformanceOption
       type: object
     OAS.DataModel.Reporting.Engine.ContextChange:
       properties:
@@ -605,96 +674,19 @@ components:
       xml:
         name: ContextChange
       type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeTradingOption:
+    OAS.WebApi.DTO.Reporting.Calculate.CalculateBase:
+      required:
+      - $type
       properties:
-        type:
+        $type:
           readOnly: true
           type: string
+        id:
+          type: string
+        contextChange:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.ContextChange'
       xml:
-        name: IMakeTradingOption
-      type: object
-    OAS.WebApi.DTO.Reporting.Calculate.ScopeFeatureFlagsDto:
-      properties:
-        dynamicBenchmarkProcessType:
-          type: string
-          enum:
-          - Cloud
-          - LocalService
-        forceAssetGroupingIntraDayPerformance:
-          type: boolean
-        activityProcessType:
-          type: string
-          enum:
-          - Cloud
-          - LocalService
-        costBasisProcessType:
-          type: string
-          enum:
-          - Old
-          - Cloud
-          - LocalService
-        morningstarLevel2Assignment:
-          type: boolean
-        localPriceCutOverDate:
-          type: string
-          format: date-time
-        noScope:
-          type: boolean
-        ensureAssetsUpdated:
-          type: boolean
-        storeReportDataCompressed:
-          type: boolean
-        showEInModelNames:
-          type: boolean
-        performanceProcessType:
-          type: string
-          enum:
-          - Cloud
-          - LocalService
-        forceNonSummaryPerformanceToUseTwr:
-          type: boolean
-        forceNetOfFeesPerformance:
-          type: boolean
-        costBasisStoredSource:
-          type: string
-          enum:
-          - Orion
-          - Custodian
-        tradingWithParentGrouping:
-          type: boolean
-        useGlobalSettingsUniqueIds:
-          type: boolean
-        showEquations:
-          type: boolean
-        isReportCompare:
-          type: boolean
-        useBenchmarksInAccountChangeHistory:
-          type: boolean
-        benchmarkAssignmentOverride:
-          type: string
-        useAsOfDateForAdvizr:
-          type: boolean
-        accountNumbersToShow:
-          type: integer
-          format: int32
-        useBatchSettingsBulkCopy:
-          type: boolean
-        showExcludedFromRebalance:
-          type: boolean
-        useInMemoryForModelVsActual:
-          type: boolean
-        useNewLineChartRenderer:
-          type: boolean
-        useNewScatterPlotChartRenderer:
-          type: boolean
-        useInMemoryIncomeCalculation:
-          type: boolean
-        useModelAllocationHistory:
-          type: boolean
-        useDisclaimerShadowDom:
-          type: boolean
-      xml:
-        name: ScopeFeatureFlagsDto
+        name: CalculateBase
       type: object
     OAS.DataModel.Reporting.Interfaces.IReturnStyle:
       properties:
@@ -741,21 +733,29 @@ components:
       xml:
         name: IReturnStyle
       type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeDateRange:
+    OAS.DataModel.Reporting.Interfaces.IMakeTradingOption:
       properties:
         type:
           readOnly: true
           type: string
       xml:
-        name: IMakeDateRange
+        name: IMakeTradingOption
       type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeCostBasisOption:
+    OAS.DataModel.Reporting.Interfaces.IMakeProjectedIncomeOption:
       properties:
         type:
           readOnly: true
           type: string
       xml:
-        name: IMakeCostBasisOption
+        name: IMakeProjectedIncomeOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeBillingOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeBillingOption
       type: object
   securitySchemes:
     Authorization:

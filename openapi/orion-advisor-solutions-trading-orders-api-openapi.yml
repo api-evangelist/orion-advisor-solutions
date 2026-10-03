@@ -2301,20 +2301,139 @@ paths:
         required: true
 components:
   schemas:
-    OAS.WebApi.DTO.Trading.FixIncomeTradeOrderListDto:
+    OAS.WebApi.DTO.Portfolio.SelectedLotsDto:
+      properties:
+        acquiredDate:
+          type: string
+          format: date-time
+        assetCostCustodianId:
+          type: integer
+          format: int32
+        assetId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        symbol:
+          type: string
+        costBasisPerUnit:
+          type: number
+          format: double
+        units:
+          type: number
+          format: double
+      xml:
+        name: SelectedLotsDto
+      type: object
+    OAS.Remote.Trading.OptionTrade:
+      properties:
+        tradeRequestFixId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        masterAccountNumber:
+          type: string
+        tradeInterfaceId:
+          type: integer
+          format: int32
+        side:
+          type: string
+        discretionary:
+          type: boolean
+        solicited:
+          type: boolean
+        symbol:
+          type: string
+        quantity:
+          type: number
+          format: double
+        expiration:
+          type: string
+          format: date-time
+        callOrPut:
+          type: string
+        openOrClose:
+          type: string
+        strikePrice:
+          type: number
+          format: double
+      xml:
+        name: OptionTrade
+      type: object
+    OAS.WebApi.DTO.Trading.ActionDeleteDto:
+      properties:
+        deletedIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        updatedItems:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+          xml:
+            name: OrderDto
+            wrapped: true
+          type: array
+      xml:
+        name: ActionDeleteDto
+      type: object
+    OAS.WebApi.DTO.Trading.CreateBlocksDto:
+      properties:
+        batchId:
+          type: integer
+          format: int32
+        orderIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+      xml:
+        name: CreateBlocksDto
+      type: object
+    OAS.WebApi.DTO.Trading.FixMutualFundsNotSentDto:
+      properties:
+        custodian:
+          type: string
+        side:
+          type: string
+        numberOrders:
+          type: integer
+          format: int32
+        dollarAmount:
+          type: number
+          format: double
+        ids:
+          items:
+            type: integer
+            format: int32
+          type: array
+      xml:
+        name: FixMutualFundsNotSentDto
+      type: object
+    OAS.WebApi.DTO.Trading.FixIncomeTradeOrdersInfoDto:
       properties:
         fixTradeRequestId:
           type: integer
           format: int32
-        fixIncomeTradeOrdersInfos:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixIncomeTradeOrdersInfoDto'
-          xml:
-            name: FixIncomeTradeOrdersInfoDto
-            wrapped: true
-          type: array
+        accountId:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        ticker:
+          type: string
+        price:
+          type: number
+          format: double
+        orderQty:
+          type: number
+          format: double
       xml:
-        name: FixIncomeTradeOrderListDto
+        name: FixIncomeTradeOrdersInfoDto
       type: object
     OAS.WebApi.DTO.Trading.FixTradeRequestHistoryDto:
       properties:
@@ -2693,155 +2812,6 @@ components:
           type: string
       xml:
         name: FixTradeRequestHistoryDto
-      type: object
-    OAS.WebApi.DTO.Trading.CreateBlocksDto:
-      properties:
-        batchId:
-          type: integer
-          format: int32
-        orderIds:
-          items:
-            type: integer
-            format: int32
-          type: array
-      xml:
-        name: CreateBlocksDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.SelectedLotsDto:
-      properties:
-        acquiredDate:
-          type: string
-          format: date-time
-        assetCostCustodianId:
-          type: integer
-          format: int32
-        assetId:
-          type: integer
-          format: int32
-        productName:
-          type: string
-        symbol:
-          type: string
-        costBasisPerUnit:
-          type: number
-          format: double
-        units:
-          type: number
-          format: double
-      xml:
-        name: SelectedLotsDto
-      type: object
-    OAS.WebApi.DTO.Trading.RealtimePriceDto:
-      properties:
-        date:
-          type: string
-          format: date-time
-        last:
-          type: number
-          format: double
-        isRealTimeQuote:
-          type: boolean
-        isDelayedQuote:
-          type: boolean
-        changeFromLastClose:
-          type: number
-          format: double
-        changeFromLastMarketClose:
-          type: number
-          format: double
-        changeFromMarketClose:
-          type: number
-          format: double
-        changeFromMarketOpen:
-          type: number
-          format: double
-        changeFromPrev:
-          type: number
-          format: double
-        lastClosePrice:
-          type: number
-          format: double
-        lastMarketClosePrice:
-          type: number
-          format: double
-        marketClosePrice:
-          type: number
-          format: double
-        marketOpenPrice:
-          type: number
-          format: double
-        percentChangeFromLastClose:
-          type: number
-          format: double
-        percentChangeFromLastMarketClose:
-          type: number
-          format: double
-        percentChangeFromMarketClose:
-          type: number
-          format: double
-        percentChangeFromMarketOpen:
-          type: number
-          format: double
-        percentChangeFromOpen:
-          type: number
-          format: double
-        percentChangeFromPrev:
-          type: number
-          format: double
-        ask:
-          type: number
-          format: double
-        askQuantity:
-          type: number
-          format: double
-        bid:
-          type: number
-          format: double
-        bidQuantity:
-          type: number
-          format: double
-        changeFromOpen:
-          type: number
-          format: double
-        changeFromPrevious:
-          type: number
-          format: double
-        cusip:
-          type: string
-        delay:
-          type: number
-          format: double
-        high:
-          type: number
-          format: double
-        low:
-          type: number
-          format: double
-        name:
-          type: string
-        outcome:
-          type: string
-        percentageChangeFromOpen:
-          type: number
-          format: double
-        percentageChangeFromPrevious:
-          type: number
-          format: double
-        quantity:
-          type: number
-          format: double
-        volume:
-          type: number
-          format: double
-        open:
-          type: number
-          format: double
-        priceSource:
-          type: string
-        symbol:
-          type: string
-      xml:
-        name: RealtimePriceDto
       type: object
     OAS.WebApi.DTO.Trading.OrderDto:
       properties:
@@ -3441,79 +3411,6 @@ components:
       xml:
         name: CustodianOnlyCostBasisLotDto
       type: object
-    OAS.WebApi.DTO.Trading.ActionDeleteDto:
-      properties:
-        deletedIds:
-          items:
-            type: integer
-            format: int32
-          type: array
-        updatedItems:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
-          xml:
-            name: OrderDto
-            wrapped: true
-          type: array
-      xml:
-        name: ActionDeleteDto
-      type: object
-    OAS.WebApi.DTO.Trading.FixMutualFundsNotSentDto:
-      properties:
-        custodian:
-          type: string
-        side:
-          type: string
-        numberOrders:
-          type: integer
-          format: int32
-        dollarAmount:
-          type: number
-          format: double
-        ids:
-          items:
-            type: integer
-            format: int32
-          type: array
-      xml:
-        name: FixMutualFundsNotSentDto
-      type: object
-    OAS.Remote.Trading.OptionTrade:
-      properties:
-        tradeRequestFixId:
-          type: integer
-          format: int32
-        accountNumber:
-          type: string
-        masterAccountNumber:
-          type: string
-        tradeInterfaceId:
-          type: integer
-          format: int32
-        side:
-          type: string
-        discretionary:
-          type: boolean
-        solicited:
-          type: boolean
-        symbol:
-          type: string
-        quantity:
-          type: number
-          format: double
-        expiration:
-          type: string
-          format: date-time
-        callOrPut:
-          type: string
-        openOrClose:
-          type: string
-        strikePrice:
-          type: number
-          format: double
-      xml:
-        name: OptionTrade
-      type: object
     OAS.Remote.Trading.OptionTrades:
       properties:
         trades:
@@ -3643,29 +3540,132 @@ components:
       xml:
         name: OptionTrades
       type: object
-    OAS.WebApi.DTO.Trading.FixIncomeTradeOrdersInfoDto:
+    OAS.WebApi.DTO.Trading.FixIncomeTradeOrderListDto:
       properties:
         fixTradeRequestId:
           type: integer
           format: int32
-        accountId:
-          type: integer
-          format: int32
-        productId:
-          type: integer
-          format: int32
-        productName:
-          type: string
-        ticker:
-          type: string
-        price:
-          type: number
-          format: double
-        orderQty:
-          type: number
-          format: double
+        fixIncomeTradeOrdersInfos:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixIncomeTradeOrdersInfoDto'
+          xml:
+            name: FixIncomeTradeOrdersInfoDto
+            wrapped: true
+          type: array
       xml:
-        name: FixIncomeTradeOrdersInfoDto
+        name: FixIncomeTradeOrderListDto
+      type: object
+    OAS.WebApi.DTO.Trading.RealtimePriceDto:
+      properties:
+        date:
+          type: string
+          format: date-time
+        last:
+          type: number
+          format: double
+        isRealTimeQuote:
+          type: boolean
+        isDelayedQuote:
+          type: boolean
+        changeFromLastClose:
+          type: number
+          format: double
+        changeFromLastMarketClose:
+          type: number
+          format: double
+        changeFromMarketClose:
+          type: number
+          format: double
+        changeFromMarketOpen:
+          type: number
+          format: double
+        changeFromPrev:
+          type: number
+          format: double
+        lastClosePrice:
+          type: number
+          format: double
+        lastMarketClosePrice:
+          type: number
+          format: double
+        marketClosePrice:
+          type: number
+          format: double
+        marketOpenPrice:
+          type: number
+          format: double
+        percentChangeFromLastClose:
+          type: number
+          format: double
+        percentChangeFromLastMarketClose:
+          type: number
+          format: double
+        percentChangeFromMarketClose:
+          type: number
+          format: double
+        percentChangeFromMarketOpen:
+          type: number
+          format: double
+        percentChangeFromOpen:
+          type: number
+          format: double
+        percentChangeFromPrev:
+          type: number
+          format: double
+        ask:
+          type: number
+          format: double
+        askQuantity:
+          type: number
+          format: double
+        bid:
+          type: number
+          format: double
+        bidQuantity:
+          type: number
+          format: double
+        changeFromOpen:
+          type: number
+          format: double
+        changeFromPrevious:
+          type: number
+          format: double
+        cusip:
+          type: string
+        delay:
+          type: number
+          format: double
+        high:
+          type: number
+          format: double
+        low:
+          type: number
+          format: double
+        name:
+          type: string
+        outcome:
+          type: string
+        percentageChangeFromOpen:
+          type: number
+          format: double
+        percentageChangeFromPrevious:
+          type: number
+          format: double
+        quantity:
+          type: number
+          format: double
+        volume:
+          type: number
+          format: double
+        open:
+          type: number
+          format: double
+        priceSource:
+          type: string
+        symbol:
+          type: string
+      xml:
+        name: RealtimePriceDto
       type: object
   securitySchemes:
     Authorization:

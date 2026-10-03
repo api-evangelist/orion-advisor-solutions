@@ -1438,127 +1438,21 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.WebApi.DTO.Blogging.NewsFeedTypeCountDto:
+    OAS.WebApi.DTO.Blogging.NewsfeedRssGridDto:
       properties:
-        isEnabled:
-          readOnly: true
-          type: boolean
-        posts:
-          type: integer
-          format: int32
-        rssFeeds:
-          type: integer
-          format: int32
-        clientStatements:
-          type: integer
-          format: int32
-        notifications:
-          type: integer
-          format: int32
-      xml:
-        name: NewsFeedTypeCountDto
-      type: object
-    OAS.WebApi.DTO.Blogging.NewsfeedContentDto:
-      properties:
-        caption:
-          type: string
-        contentText:
-          type: string
-        url:
-          type: string
-        blobId:
-          type: integer
-          format: int32
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-        fileName:
-          type: string
-      xml:
-        name: NewsfeedContentDto
-      type: object
-    OAS.WebApi.DTO.Blogging.NewsfeedAudienceDto:
-      properties:
-        includeAllClients:
-          type: boolean
-        clients:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Portfolio.SimpleClient'
-          xml:
-            name: SimpleClient
-            wrapped: true
-          type: array
-        isInclusive:
-          type: boolean
-        brokerDealerIds:
-          items:
-            type: integer
-            format: int32
-          type: array
-        audienceFacing:
-          type: string
-      xml:
-        name: NewsfeedAudienceDto
-      type: object
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
-      type: object
-    OAS.WebApi.DTO.Blogging.NewsFeedCompilationDto:
-      properties:
-        compilation:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Blogging.NewsfeedViewDto'
-          xml:
-            name: NewsfeedViewDto
-            wrapped: true
-          type: array
-        previousPublishDate:
-          type: string
-          format: date-time
-      xml:
-        name: NewsFeedCompilationDto
-      type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
-      properties:
-        key:
-          readOnly: true
-          type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: KeyValuePair`2
-      type: object
-    OAS.DataModel.Portfolio.SimpleClient:
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        entityName:
-          type: string
-        isActive:
-          type: boolean
-        repCode:
-          type: string
         id:
           type: integer
           format: int32
-        name:
+        isActive:
+          type: boolean
+        title:
+          type: string
+        url:
+          type: string
+        createdBy:
           type: string
       xml:
-        name: SimpleClient
+        name: NewsfeedRssGridDto
       type: object
     OAS.WebApi.DTO.Blogging.NewsfeedViewDto:
       properties:
@@ -1598,6 +1492,64 @@ components:
           type: string
       xml:
         name: NewsfeedViewDto
+      type: object
+    OAS.WebApi.DTO.Blogging.NewsFeedCompilationDto:
+      properties:
+        compilation:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Blogging.NewsfeedViewDto'
+          xml:
+            name: NewsfeedViewDto
+            wrapped: true
+          type: array
+        previousPublishDate:
+          type: string
+          format: date-time
+      xml:
+        name: NewsFeedCompilationDto
+      type: object
+    OAS.WebApi.DTO.Blogging.NewsfeedAudienceDto:
+      properties:
+        includeAllClients:
+          type: boolean
+        clients:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Portfolio.SimpleClient'
+          xml:
+            name: SimpleClient
+            wrapped: true
+          type: array
+        isInclusive:
+          type: boolean
+        brokerDealerIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        audienceFacing:
+          type: string
+      xml:
+        name: NewsfeedAudienceDto
+      type: object
+    OAS.WebApi.DTO.Blogging.NewsFeedTypeCountDto:
+      properties:
+        isEnabled:
+          readOnly: true
+          type: boolean
+        posts:
+          type: integer
+          format: int32
+        rssFeeds:
+          type: integer
+          format: int32
+        clientStatements:
+          type: integer
+          format: int32
+        notifications:
+          type: integer
+          format: int32
+      xml:
+        name: NewsFeedTypeCountDto
       type: object
     OAS.WebApi.DTO.Blogging.NewsfeedDto:
       properties:
@@ -1650,21 +1602,62 @@ components:
       xml:
         name: NewsfeedDto
       type: object
-    OAS.WebApi.DTO.Blogging.NewsfeedRssGridDto:
+    OAS.DataModel.Portfolio.SimpleClient:
       properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        entityName:
+          type: string
+        isActive:
+          type: boolean
+        repCode:
+          type: string
         id:
           type: integer
           format: int32
-        isActive:
-          type: boolean
-        title:
-          type: string
-        url:
-          type: string
-        createdBy:
+        name:
           type: string
       xml:
-        name: NewsfeedRssGridDto
+        name: SimpleClient
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
       type: object
     OAS.WebApi.DTO.Blogging.NewsfeedAdvisorMaterialDto:
       properties:
@@ -1723,17 +1716,6 @@ components:
           type: string
       xml:
         name: NewsfeedAdvisorMaterialDto
-      type: object
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
       type: object
     OAS.WebApi.DTO.Blogging.NewsfeedPostGridDto:
       properties:
@@ -1831,6 +1813,24 @@ components:
           format: uuid
       xml:
         name: AdvisorBlob
+      type: object
+    OAS.WebApi.DTO.Blogging.NewsfeedContentDto:
+      properties:
+        caption:
+          type: string
+        contentText:
+          type: string
+        url:
+          type: string
+        blobId:
+          type: integer
+          format: int32
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+        fileName:
+          type: string
+      xml:
+        name: NewsfeedContentDto
       type: object
   securitySchemes:
     Authorization:

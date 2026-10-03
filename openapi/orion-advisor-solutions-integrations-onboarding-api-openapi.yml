@@ -394,18 +394,38 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.WebApi.DTO.Integrations.Onboarding.FileDataDTO:
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
       properties:
-        name:
+        fileName:
           type: string
-        size:
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+    OAS.WebApi.DTO.Integrations.Onboarding.ChunkDto:
+      properties:
+        _chunkSize:
           type: integer
-          format: int64
+          format: int32
+        _currentChunkSize:
+          type: integer
+          format: int32
+        _chunkNumber:
+          type: integer
+          format: int32
+        _totalSize:
+          type: integer
+          format: int32
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
         conversionSourceId:
           type: integer
           format: int32
       xml:
-        name: FileDataDTO
+        name: ChunkDto
       type: object
     System.Net.Http.StreamContent:
       properties:
@@ -484,38 +504,18 @@ components:
       xml:
         name: ConversionSourceDto
       type: object
-    OAS.WebApi.DTO.Integrations.Onboarding.ChunkDto:
+    OAS.WebApi.DTO.Integrations.Onboarding.FileDataDTO:
       properties:
-        _chunkSize:
+        name:
+          type: string
+        size:
           type: integer
-          format: int32
-        _currentChunkSize:
-          type: integer
-          format: int32
-        _chunkNumber:
-          type: integer
-          format: int32
-        _totalSize:
-          type: integer
-          format: int32
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+          format: int64
         conversionSourceId:
           type: integer
           format: int32
       xml:
-        name: ChunkDto
-      type: object
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
+        name: FileDataDTO
       type: object
   securitySchemes:
     Authorization:

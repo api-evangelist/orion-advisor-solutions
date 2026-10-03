@@ -2351,21 +2351,6 @@ paths:
         required: true
 components:
   schemas:
-    OAS.WebApi.DTO.Trading.TradeBatchDto:
-      properties:
-        batchId:
-          type: integer
-          format: int32
-        trades:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
-          xml:
-            name: TacticalTradeDto
-            wrapped: true
-          type: array
-      xml:
-        name: TradeBatchDto
-      type: object
     OAS.WebApi.DTO.Trading.OrderDto:
       properties:
         id:
@@ -2903,6 +2888,36 @@ components:
       xml:
         name: OrderDto
       type: object
+    OAS.WebApi.Domains.Trading.Dto.AccountListRequest:
+      properties:
+        usePendingValue:
+          type: boolean
+        modelId:
+          type: integer
+          format: int32
+        includeCash:
+          type: boolean
+        ignoreDollarModel:
+          type: boolean
+        cashValue:
+          type: number
+          format: float
+        accountType:
+          type: string
+        calculateCosts:
+          type: boolean
+        resetCache:
+          type: boolean
+        defaultAction:
+          type: string
+        ids:
+          items:
+            type: integer
+            format: int32
+          type: array
+      xml:
+        name: AccountListRequest
+      type: object
     OAS.WebApi.DTO.Trading.TacticalTradeDto:
       properties:
         outOfTolerance:
@@ -3116,35 +3131,20 @@ components:
       xml:
         name: TacticalTradeDto
       type: object
-    OAS.WebApi.Domains.Trading.Dto.AccountListRequest:
+    OAS.WebApi.DTO.Trading.TradeBatchDto:
       properties:
-        usePendingValue:
-          type: boolean
-        modelId:
+        batchId:
           type: integer
           format: int32
-        includeCash:
-          type: boolean
-        ignoreDollarModel:
-          type: boolean
-        cashValue:
-          type: number
-          format: float
-        accountType:
-          type: string
-        calculateCosts:
-          type: boolean
-        resetCache:
-          type: boolean
-        defaultAction:
-          type: string
-        ids:
+        trades:
           items:
-            type: integer
-            format: int32
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.TacticalTradeDto'
+          xml:
+            name: TacticalTradeDto
+            wrapped: true
           type: array
       xml:
-        name: AccountListRequest
+        name: TradeBatchDto
       type: object
   securitySchemes:
     Authorization:

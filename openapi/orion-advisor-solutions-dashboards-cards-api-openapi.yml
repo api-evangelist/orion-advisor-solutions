@@ -143,14 +143,27 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.DTO.HomepageDashboard.CardsettingOptionDto:
+    OAS.WebApi.DTO.HomepageDashboard.AvailableValueDto:
       properties:
-        inputOption:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.InputOption'
-        sliderOption:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.SliderOptionDto'
+        displayName:
+          type: string
+        value:
+          type: string
+        sortOrder:
+          type: integer
+          format: int32
+        bucketValue:
+          type: string
+        isHidden:
+          type: boolean
+        dataText:
+          type: string
+        cssClass:
+          type: string
+        setting:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardSettingDto'
       xml:
-        name: CardsettingOptionDto
+        name: AvailableValueDto
       type: object
     OAS.WebApi.DTO.HomepageDashboard.ListEditorConfigDto:
       description: Declarative list editor UI config stored on card settings JSON (listEditor).
@@ -252,6 +265,44 @@ components:
       xml:
         name: BucketMappingDto
       type: object
+    OAS.WebApi.DTO.HomepageDashboard.CardSettingSaveDto:
+      required:
+      - cardId
+      - name
+      - size
+      properties:
+        dashboardCardId:
+          type: integer
+          format: int32
+        cardId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        size:
+          type: integer
+          format: int32
+        setting:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardSettingDto'
+          xml:
+            name: CardSettingDto
+            wrapped: true
+          type: array
+      xml:
+        name: CardSettingSaveDto
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.InputOption:
+      properties:
+        min:
+          type: integer
+          format: int32
+        max:
+          type: integer
+          format: int32
+      xml:
+        name: InputOption
+      type: object
     OAS.WebApi.DTO.HomepageDashboard.SliderOptionDto:
       properties:
         min:
@@ -265,17 +316,6 @@ components:
           format: int32
       xml:
         name: SliderOptionDto
-      type: object
-    OAS.WebApi.DTO.HomepageDashboard.InputOption:
-      properties:
-        min:
-          type: integer
-          format: int32
-        max:
-          type: integer
-          format: int32
-      xml:
-        name: InputOption
       type: object
     OAS.WebApi.DTO.HomepageDashboard.CardMappingDto:
       properties:
@@ -311,54 +351,14 @@ components:
       xml:
         name: ValuesSourceDto
       type: object
-    OAS.WebApi.DTO.HomepageDashboard.AvailableValueDto:
+    OAS.WebApi.DTO.HomepageDashboard.CardsettingOptionDto:
       properties:
-        displayName:
-          type: string
-        value:
-          type: string
-        sortOrder:
-          type: integer
-          format: int32
-        bucketValue:
-          type: string
-        isHidden:
-          type: boolean
-        dataText:
-          type: string
-        cssClass:
-          type: string
-        setting:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardSettingDto'
+        inputOption:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.InputOption'
+        sliderOption:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.SliderOptionDto'
       xml:
-        name: AvailableValueDto
-      type: object
-    OAS.WebApi.DTO.HomepageDashboard.CardSettingSaveDto:
-      required:
-      - cardId
-      - name
-      - size
-      properties:
-        dashboardCardId:
-          type: integer
-          format: int32
-        cardId:
-          type: integer
-          format: int32
-        name:
-          type: string
-        size:
-          type: integer
-          format: int32
-        setting:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardSettingDto'
-          xml:
-            name: CardSettingDto
-            wrapped: true
-          type: array
-      xml:
-        name: CardSettingSaveDto
+        name: CardsettingOptionDto
       type: object
   securitySchemes:
     Authorization:

@@ -392,6 +392,70 @@ paths:
       - Authorization: []
 components:
   schemas:
+    OAS.DataModel.Billing.BillComboForHousehold:
+      properties:
+        billId:
+          type: integer
+          format: int32
+        billType:
+          type: string
+        dateRange:
+          type: string
+      xml:
+        name: BillComboForHousehold
+      type: object
+    OAS.WebApi.DTO.Billing.BillingComparePayablesDto:
+      properties:
+        clientId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        regName:
+          type: string
+        acctCode:
+          type: string
+        instance1PayablesTotal:
+          type: number
+          format: double
+        instance2PayablesTotal:
+          type: number
+          format: double
+        payablesDifference:
+          type: number
+          format: double
+        instance1PayoutSchedule:
+          type: string
+        instance2PayoutSchedule:
+          type: string
+        instance1BillEntities:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillEntityDetailDto'
+          xml:
+            name: BillEntityDetailDto
+            wrapped: true
+          type: array
+        instance2BillEntities:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillEntityDetailDto'
+          xml:
+            name: BillEntityDetailDto
+            wrapped: true
+          type: array
+        warningMessage:
+          type: string
+        clientName:
+          type: string
+        lName:
+          type: string
+        repName:
+          type: string
+        repNo:
+          type: string
+      xml:
+        name: BillingComparePayablesDto
+      type: object
     OAS.WebApi.DTO.Billing.BillingCompareReceivablesDto:
       properties:
         clientId:
@@ -609,58 +673,6 @@ components:
       xml:
         name: BillEntityDetailDto
       type: object
-    OAS.WebApi.DTO.Billing.BillingComparePayablesDto:
-      properties:
-        clientId:
-          type: integer
-          format: int32
-        accountId:
-          type: integer
-          format: int32
-        regName:
-          type: string
-        acctCode:
-          type: string
-        instance1PayablesTotal:
-          type: number
-          format: double
-        instance2PayablesTotal:
-          type: number
-          format: double
-        payablesDifference:
-          type: number
-          format: double
-        instance1PayoutSchedule:
-          type: string
-        instance2PayoutSchedule:
-          type: string
-        instance1BillEntities:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillEntityDetailDto'
-          xml:
-            name: BillEntityDetailDto
-            wrapped: true
-          type: array
-        instance2BillEntities:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Billing.BillEntityDetailDto'
-          xml:
-            name: BillEntityDetailDto
-            wrapped: true
-          type: array
-        warningMessage:
-          type: string
-        clientName:
-          type: string
-        lName:
-          type: string
-        repName:
-          type: string
-        repNo:
-          type: string
-      xml:
-        name: BillingComparePayablesDto
-      type: object
     OAS.WebApi.DTO.Billing.BillingCompareEnhancedDto:
       description: Enhanced billing compare response that includes both Receivables and Payables data
       properties:
@@ -684,18 +696,6 @@ components:
           type: array
       xml:
         name: BillingCompareEnhancedDto
-      type: object
-    OAS.DataModel.Billing.BillComboForHousehold:
-      properties:
-        billId:
-          type: integer
-          format: int32
-        billType:
-          type: string
-        dateRange:
-          type: string
-      xml:
-        name: BillComboForHousehold
       type: object
   securitySchemes:
     Authorization:

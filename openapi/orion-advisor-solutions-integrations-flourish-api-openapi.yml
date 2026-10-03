@@ -635,6 +635,100 @@ paths:
       - Authorization: []
 components:
   schemas:
+    OAS.Integrations.Flourish.Models.UserIdSearchRequest:
+      properties:
+        userIds:
+          items:
+            type: string
+          type: array
+      xml:
+        name: UserIdSearchRequest
+      type: object
+    OAS.Integrations.Flourish.Models.Household:
+      properties:
+        externalId:
+          type: string
+        name:
+          type: string
+      xml:
+        name: Household
+      type: object
+    OAS.Integrations.Flourish.Models.EmailSearchRequest:
+      properties:
+        emails:
+          items:
+            type: string
+          type: array
+      xml:
+        name: EmailSearchRequest
+      type: object
+    OAS.Integrations.Flourish.Models.AddressObjectNoCountry:
+      properties:
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        postalCode:
+          type: string
+        state:
+          type: string
+          enum:
+          - AK
+          - AL
+          - AR
+          - AZ
+          - CA
+          - CO
+          - CT
+          - DC
+          - DE
+          - FL
+          - GA
+          - HI
+          - IA
+          - ID
+          - IL
+          - IN
+          - KS
+          - KY
+          - LA
+          - MA
+          - MD
+          - ME
+          - MI
+          - MN
+          - MO
+          - MS
+          - MT
+          - NC
+          - ND
+          - NE
+          - NH
+          - NJ
+          - NM
+          - NV
+          - NY
+          - OH
+          - OK
+          - OR
+          - PA
+          - RI
+          - SC
+          - SD
+          - TN
+          - TX
+          - UT
+          - VA
+          - VT
+          - WA
+          - WI
+          - WV
+          - WY
+      xml:
+        name: AddressObjectNoCountry
+      type: object
     OAS.Integrations.Flourish.Models.FlourishTosDto:
       properties:
         flourishTosStatus:
@@ -646,14 +740,110 @@ components:
       xml:
         name: FlourishTosDto
       type: object
-    OAS.Integrations.Flourish.Models.EmailSearchRequest:
+    OAS.Integrations.Flourish.Models.Contactdata:
       properties:
-        emails:
+        alienResidencyStatus:
+          type: string
+        annualIncome:
+          type: string
+        citizenship:
+          type: string
+        currentEmployerAddress:
+          $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.AddressObject'
+        currentEmployerName:
+          type: string
+        dateOfBirth:
+          type: string
+        employmentStatus:
+          type: string
+        gender:
+          type: string
+        hasFinraAffiliation:
+          type: boolean
+        homePhone:
+          type: string
+        liquidNetWorth:
+          type: string
+        mailingAddress:
+          $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.AddressObject'
+        middleName:
+          type: string
+        mobilePhone:
+          type: string
+        occupation:
+          type: string
+        otherPhone:
+          type: string
+        primaryAddress:
+          $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.AddressObject'
+        primarySourceOfWealth:
+          type: string
+        taxId:
+          type: string
+        usePrimaryAddressAsMailingAddress:
+          type: boolean
+        workPhone:
+          type: string
+      xml:
+        name: Contactdata
+      type: object
+    OAS.Integrations.Flourish.Models.FlourishToken:
+      properties:
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        scope:
+          type: string
+        token_type:
+          type: string
+        code_verifier:
+          type: string
+        expires_in:
+          type: integer
+          format: int32
+        expires_datetime:
+          type: string
+          format: date-time
+        error:
+          type: string
+        flourish_tos_status:
+          type: string
+          enum:
+          - Unaccepted
+          - Accepted
+          - Rejected
+        last_flourish_tos_interaction:
+          type: string
+          format: date-time
+      xml:
+        name: FlourishToken
+      type: object
+    OAS.Integrations.Flourish.Models.Tier:
+      properties:
+        rangeBottom:
+          type: number
+          format: double
+        rangeTop:
+          type: number
+          format: double
+        rate:
+          type: number
+          format: double
+      xml:
+        name: Tier
+      type: object
+    OAS.Integrations.Flourish.Models.Rates:
+      properties:
+        rateSchedules:
           items:
-            type: string
+            $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.Rateschedule'
+          xml:
+            name: Rateschedule
+            wrapped: true
           type: array
       xml:
-        name: EmailSearchRequest
+        name: Rates
       type: object
     OAS.Integrations.Flourish.Models.ContactRequest:
       properties:
@@ -672,36 +862,97 @@ components:
       xml:
         name: ContactRequest
       type: object
-    OAS.Integrations.Flourish.Models.CreateUserRequest:
+    OAS.Integrations.Flourish.Models.AddressObject:
       properties:
-        email:
+        addressLine1:
           type: string
-        firstName:
+        addressLine2:
           type: string
-        isCurrentAdvisoryClient:
-          type: boolean
-        lastName:
+        city:
           type: string
-        secondaryEmail:
+        country:
           type: string
-        secondaryFirstName:
+        postalCode:
           type: string
-        secondaryLastName:
+        state:
           type: string
+          enum:
+          - AK
+          - AL
+          - AR
+          - AZ
+          - CA
+          - CO
+          - CT
+          - DC
+          - DE
+          - FL
+          - GA
+          - HI
+          - IA
+          - ID
+          - IL
+          - IN
+          - KS
+          - KY
+          - LA
+          - MA
+          - MD
+          - ME
+          - MI
+          - MN
+          - MO
+          - MS
+          - MT
+          - NC
+          - ND
+          - NE
+          - NH
+          - NJ
+          - NM
+          - NV
+          - NY
+          - OH
+          - OK
+          - OR
+          - PA
+          - RI
+          - SC
+          - SD
+          - TN
+          - TX
+          - UT
+          - VA
+          - VT
+          - WA
+          - WI
+          - WV
+          - WY
       xml:
-        name: CreateUserRequest
+        name: AddressObject
       type: object
-    OAS.Integrations.Flourish.Models.Rates:
+    OAS.Integrations.Flourish.Models.Rateschedule:
       properties:
-        rateSchedules:
+        fdicCoverage:
+          type: number
+          format: double
+        fdicEffectiveDate:
+          type: string
+          format: date-time
+        rateEffectiveDate:
+          type: string
+          format: date-time
+        scheduleType:
+          type: string
+        tiers:
           items:
-            $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.Rateschedule'
+            $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.Tier'
           xml:
-            name: Rateschedule
+            name: Tier
             wrapped: true
           type: array
       xml:
-        name: Rates
+        name: Rateschedule
       type: object
     OAS.Integrations.Flourish.Models.Secondaryuserdata:
       properties:
@@ -1032,85 +1283,6 @@ components:
       xml:
         name: Secondaryuserdata
       type: object
-    OAS.Integrations.Flourish.Models.Contactdata:
-      properties:
-        alienResidencyStatus:
-          type: string
-        annualIncome:
-          type: string
-        citizenship:
-          type: string
-        currentEmployerAddress:
-          $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.AddressObject'
-        currentEmployerName:
-          type: string
-        dateOfBirth:
-          type: string
-        employmentStatus:
-          type: string
-        gender:
-          type: string
-        hasFinraAffiliation:
-          type: boolean
-        homePhone:
-          type: string
-        liquidNetWorth:
-          type: string
-        mailingAddress:
-          $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.AddressObject'
-        middleName:
-          type: string
-        mobilePhone:
-          type: string
-        occupation:
-          type: string
-        otherPhone:
-          type: string
-        primaryAddress:
-          $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.AddressObject'
-        primarySourceOfWealth:
-          type: string
-        taxId:
-          type: string
-        usePrimaryAddressAsMailingAddress:
-          type: boolean
-        workPhone:
-          type: string
-      xml:
-        name: Contactdata
-      type: object
-    OAS.Integrations.Flourish.Models.Rateschedule:
-      properties:
-        fdicCoverage:
-          type: number
-          format: double
-        fdicEffectiveDate:
-          type: string
-          format: date-time
-        rateEffectiveDate:
-          type: string
-          format: date-time
-        scheduleType:
-          type: string
-        tiers:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.Flourish.Models.Tier'
-          xml:
-            name: Tier
-            wrapped: true
-          type: array
-      xml:
-        name: Rateschedule
-      type: object
-    OAS.Integrations.Flourish.Models.Household:
-      properties:
-        externalId:
-          type: string
-        name:
-          type: string
-      xml:
-        name: Household
-      type: object
     OAS.Integrations.Flourish.Models.Primaryuserdata:
       properties:
         alienResidencyStatus:
@@ -1440,196 +1612,24 @@ components:
       xml:
         name: Primaryuserdata
       type: object
-    OAS.Integrations.Flourish.Models.AddressObjectNoCountry:
+    OAS.Integrations.Flourish.Models.CreateUserRequest:
       properties:
-        addressLine1:
+        email:
           type: string
-        addressLine2:
+        firstName:
           type: string
-        city:
+        isCurrentAdvisoryClient:
+          type: boolean
+        lastName:
           type: string
-        postalCode:
+        secondaryEmail:
           type: string
-        state:
+        secondaryFirstName:
           type: string
-          enum:
-          - AK
-          - AL
-          - AR
-          - AZ
-          - CA
-          - CO
-          - CT
-          - DC
-          - DE
-          - FL
-          - GA
-          - HI
-          - IA
-          - ID
-          - IL
-          - IN
-          - KS
-          - KY
-          - LA
-          - MA
-          - MD
-          - ME
-          - MI
-          - MN
-          - MO
-          - MS
-          - MT
-          - NC
-          - ND
-          - NE
-          - NH
-          - NJ
-          - NM
-          - NV
-          - NY
-          - OH
-          - OK
-          - OR
-          - PA
-          - RI
-          - SC
-          - SD
-          - TN
-          - TX
-          - UT
-          - VA
-          - VT
-          - WA
-          - WI
-          - WV
-          - WY
+        secondaryLastName:
+          type: string
       xml:
-        name: AddressObjectNoCountry
-      type: object
-    OAS.Integrations.Flourish.Models.UserIdSearchRequest:
-      properties:
-        userIds:
-          items:
-            type: string
-          type: array
-      xml:
-        name: UserIdSearchRequest
-      type: object
-    OAS.Integrations.Flourish.Models.AddressObject:
-      properties:
-        addressLine1:
-          type: string
-        addressLine2:
-          type: string
-        city:
-          type: string
-        country:
-          type: string
-        postalCode:
-          type: string
-        state:
-          type: string
-          enum:
-          - AK
-          - AL
-          - AR
-          - AZ
-          - CA
-          - CO
-          - CT
-          - DC
-          - DE
-          - FL
-          - GA
-          - HI
-          - IA
-          - ID
-          - IL
-          - IN
-          - KS
-          - KY
-          - LA
-          - MA
-          - MD
-          - ME
-          - MI
-          - MN
-          - MO
-          - MS
-          - MT
-          - NC
-          - ND
-          - NE
-          - NH
-          - NJ
-          - NM
-          - NV
-          - NY
-          - OH
-          - OK
-          - OR
-          - PA
-          - RI
-          - SC
-          - SD
-          - TN
-          - TX
-          - UT
-          - VA
-          - VT
-          - WA
-          - WI
-          - WV
-          - WY
-      xml:
-        name: AddressObject
-      type: object
-    OAS.Integrations.Flourish.Models.FlourishToken:
-      properties:
-        access_token:
-          type: string
-        refresh_token:
-          type: string
-        scope:
-          type: string
-        token_type:
-          type: string
-        code_verifier:
-          type: string
-        expires_in:
-          type: integer
-          format: int32
-        expires_datetime:
-          type: string
-          format: date-time
-        error:
-          type: string
-        flourish_tos_status:
-          type: string
-          enum:
-          - Unaccepted
-          - Accepted
-          - Rejected
-        last_flourish_tos_interaction:
-          type: string
-          format: date-time
-      xml:
-        name: FlourishToken
-      type: object
-    OAS.Integrations.Flourish.Models.Tier:
-      properties:
-        rangeBottom:
-          type: number
-          format: double
-        rangeTop:
-          type: number
-          format: double
-        rate:
-          type: number
-          format: double
-      xml:
-        name: Tier
+        name: CreateUserRequest
       type: object
     OAS.Integrations.Flourish.Models.InviteAndApplyRequest:
       properties:

@@ -86,6 +86,44 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    System.Reflection.CustomAttributeData:
+      properties:
+        attributeType:
+          readOnly: true
+          type: string
+        constructor:
+          $ref: '#/components/schemas/System.Reflection.ConstructorInfo'
+          readOnly: true
+        constructorArguments:
+          items:
+            $ref: '#/components/schemas/System.Reflection.CustomAttributeTypedArgument'
+          readOnly: true
+          xml:
+            name: CustomAttributeTypedArgument
+            wrapped: true
+          type: array
+        namedArguments:
+          items:
+            $ref: '#/components/schemas/System.Reflection.CustomAttributeNamedArgument'
+          readOnly: true
+          xml:
+            name: CustomAttributeNamedArgument
+            wrapped: true
+          type: array
+      xml:
+        name: CustomAttributeData
+      type: object
+    OAS.WebApi.DTO.Status.HangfireStatusDto:
+      properties:
+        activeServerCount:
+          type: integer
+          format: int32
+        lastHeartbeat:
+          type: string
+          format: date-time
+      xml:
+        name: HangfireStatusDto
+      type: object
     System.Reflection.MethodInfo:
       properties:
         memberType:
@@ -255,6 +293,121 @@ components:
       xml:
         name: MethodInfo
       type: object
+    System.Reflection.ParameterInfo:
+      properties:
+        parameterType:
+          readOnly: true
+          type: string
+        name:
+          readOnly: true
+          type: string
+        hasDefaultValue:
+          readOnly: true
+          type: boolean
+        defaultValue:
+          readOnly: true
+          type: object
+        rawDefaultValue:
+          readOnly: true
+          type: object
+        position:
+          readOnly: true
+          type: integer
+          format: int32
+        attributes:
+          readOnly: true
+          type: string
+          enum:
+          - None
+          - In
+          - Out
+          - Lcid
+          - Retval
+          - Optional
+          - ReservedMask
+          - HasDefault
+          - HasFieldMarshal
+          - Reserved3
+          - Reserved4
+        member:
+          $ref: '#/components/schemas/System.Reflection.MemberInfo'
+          readOnly: true
+        isIn:
+          readOnly: true
+          type: boolean
+        isOut:
+          readOnly: true
+          type: boolean
+        isLcid:
+          readOnly: true
+          type: boolean
+        isRetval:
+          readOnly: true
+          type: boolean
+        isOptional:
+          readOnly: true
+          type: boolean
+        metadataToken:
+          readOnly: true
+          type: integer
+          format: int32
+        customAttributes:
+          items:
+            $ref: '#/components/schemas/System.Reflection.CustomAttributeData'
+          readOnly: true
+          xml:
+            name: CustomAttributeData
+            wrapped: true
+          type: array
+      xml:
+        name: ParameterInfo
+      type: object
+    Hangfire.Storage.Monitoring.ProcessingJobDto:
+      properties:
+        job:
+          $ref: '#/components/schemas/Hangfire.Common.Job'
+        loadException:
+          type: object
+        invocationData:
+          $ref: '#/components/schemas/Hangfire.Storage.InvocationData'
+        inProcessingState:
+          type: boolean
+        serverId:
+          type: string
+        startedAt:
+          type: string
+          format: date-time
+        stateData:
+          additionalProperties:
+            type: string
+          type: object
+      xml:
+        name: ProcessingJobDto
+      type: object
+    System.Reflection.ICustomAttributeProvider:
+      properties: {}
+      xml:
+        name: ICustomAttributeProvider
+      type: object
+    Hangfire.Storage.InvocationData:
+      properties:
+        type:
+          readOnly: true
+          type: string
+        method:
+          readOnly: true
+          type: string
+        parameterTypes:
+          readOnly: true
+          type: string
+        arguments:
+          type: string
+        queue:
+          readOnly: true
+          type: string
+      xml:
+        name: InvocationData
+      type: object
     System.Reflection.ConstructorInfo:
       properties:
         memberType:
@@ -415,211 +568,6 @@ components:
       xml:
         name: ConstructorInfo
       type: object
-    Hangfire.Storage.Monitoring.ProcessingJobDto:
-      properties:
-        job:
-          $ref: '#/components/schemas/Hangfire.Common.Job'
-        loadException:
-          type: object
-        invocationData:
-          $ref: '#/components/schemas/Hangfire.Storage.InvocationData'
-        inProcessingState:
-          type: boolean
-        serverId:
-          type: string
-        startedAt:
-          type: string
-          format: date-time
-        stateData:
-          additionalProperties:
-            type: string
-          type: object
-      xml:
-        name: ProcessingJobDto
-      type: object
-    System.Reflection.CustomAttributeTypedArgument:
-      properties:
-        argumentType:
-          readOnly: true
-          type: string
-        value:
-          readOnly: true
-          type: object
-      xml:
-        name: CustomAttributeTypedArgument
-      type: object
-    System.Reflection.CustomAttributeNamedArgument:
-      properties:
-        memberInfo:
-          $ref: '#/components/schemas/System.Reflection.MemberInfo'
-          readOnly: true
-        typedValue:
-          $ref: '#/components/schemas/System.Reflection.CustomAttributeTypedArgument'
-          readOnly: true
-        memberName:
-          readOnly: true
-          type: string
-        isField:
-          readOnly: true
-          type: boolean
-      xml:
-        name: CustomAttributeNamedArgument
-      type: object
-    System.Reflection.ParameterInfo:
-      properties:
-        parameterType:
-          readOnly: true
-          type: string
-        name:
-          readOnly: true
-          type: string
-        hasDefaultValue:
-          readOnly: true
-          type: boolean
-        defaultValue:
-          readOnly: true
-          type: object
-        rawDefaultValue:
-          readOnly: true
-          type: object
-        position:
-          readOnly: true
-          type: integer
-          format: int32
-        attributes:
-          readOnly: true
-          type: string
-          enum:
-          - None
-          - In
-          - Out
-          - Lcid
-          - Retval
-          - Optional
-          - ReservedMask
-          - HasDefault
-          - HasFieldMarshal
-          - Reserved3
-          - Reserved4
-        member:
-          $ref: '#/components/schemas/System.Reflection.MemberInfo'
-          readOnly: true
-        isIn:
-          readOnly: true
-          type: boolean
-        isOut:
-          readOnly: true
-          type: boolean
-        isLcid:
-          readOnly: true
-          type: boolean
-        isRetval:
-          readOnly: true
-          type: boolean
-        isOptional:
-          readOnly: true
-          type: boolean
-        metadataToken:
-          readOnly: true
-          type: integer
-          format: int32
-        customAttributes:
-          items:
-            $ref: '#/components/schemas/System.Reflection.CustomAttributeData'
-          readOnly: true
-          xml:
-            name: CustomAttributeData
-            wrapped: true
-          type: array
-      xml:
-        name: ParameterInfo
-      type: object
-    Hangfire.Common.Job:
-      properties:
-        type:
-          readOnly: true
-          type: string
-        method:
-          $ref: '#/components/schemas/System.Reflection.MethodInfo'
-          readOnly: true
-        args:
-          items:
-            type: object
-          readOnly: true
-          type: array
-        queue:
-          readOnly: true
-          type: string
-        arguments:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: Job
-      type: object
-    Hangfire.Storage.InvocationData:
-      properties:
-        type:
-          readOnly: true
-          type: string
-        method:
-          readOnly: true
-          type: string
-        parameterTypes:
-          readOnly: true
-          type: string
-        arguments:
-          type: string
-        queue:
-          readOnly: true
-          type: string
-      xml:
-        name: InvocationData
-      type: object
-    System.Reflection.CustomAttributeData:
-      properties:
-        attributeType:
-          readOnly: true
-          type: string
-        constructor:
-          $ref: '#/components/schemas/System.Reflection.ConstructorInfo'
-          readOnly: true
-        constructorArguments:
-          items:
-            $ref: '#/components/schemas/System.Reflection.CustomAttributeTypedArgument'
-          readOnly: true
-          xml:
-            name: CustomAttributeTypedArgument
-            wrapped: true
-          type: array
-        namedArguments:
-          items:
-            $ref: '#/components/schemas/System.Reflection.CustomAttributeNamedArgument'
-          readOnly: true
-          xml:
-            name: CustomAttributeNamedArgument
-            wrapped: true
-          type: array
-      xml:
-        name: CustomAttributeData
-      type: object
-    System.Reflection.ICustomAttributeProvider:
-      properties: {}
-      xml:
-        name: ICustomAttributeProvider
-      type: object
-    OAS.WebApi.DTO.Status.HangfireStatusDto:
-      properties:
-        activeServerCount:
-          type: integer
-          format: int32
-        lastHeartbeat:
-          type: string
-          format: date-time
-      xml:
-        name: HangfireStatusDto
-      type: object
     System.Reflection.MemberInfo:
       properties:
         memberType:
@@ -661,6 +609,58 @@ components:
           type: object
       xml:
         name: MemberInfo
+      type: object
+    Hangfire.Common.Job:
+      properties:
+        type:
+          readOnly: true
+          type: string
+        method:
+          $ref: '#/components/schemas/System.Reflection.MethodInfo'
+          readOnly: true
+        args:
+          items:
+            type: object
+          readOnly: true
+          type: array
+        queue:
+          readOnly: true
+          type: string
+        arguments:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: Job
+      type: object
+    System.Reflection.CustomAttributeNamedArgument:
+      properties:
+        memberInfo:
+          $ref: '#/components/schemas/System.Reflection.MemberInfo'
+          readOnly: true
+        typedValue:
+          $ref: '#/components/schemas/System.Reflection.CustomAttributeTypedArgument'
+          readOnly: true
+        memberName:
+          readOnly: true
+          type: string
+        isField:
+          readOnly: true
+          type: boolean
+      xml:
+        name: CustomAttributeNamedArgument
+      type: object
+    System.Reflection.CustomAttributeTypedArgument:
+      properties:
+        argumentType:
+          readOnly: true
+          type: string
+        value:
+          readOnly: true
+          type: object
+      xml:
+        name: CustomAttributeTypedArgument
       type: object
   securitySchemes:
     Authorization:

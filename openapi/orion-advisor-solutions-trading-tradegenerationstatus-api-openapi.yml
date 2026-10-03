@@ -101,6 +101,23 @@ paths:
       - Authorization: []
 components:
   schemas:
+    OAS.WebApi.DTO.Utility.MessageDetailDto:
+      properties:
+        severityCode:
+          type: integer
+          format: int32
+        severity:
+          type: string
+        message:
+          type: string
+        entityEnum:
+          type: string
+        entityId:
+          type: integer
+          format: int32
+      xml:
+        name: MessageDetailDto
+      type: object
     OAS.WebApi.DTO.Utility.MessageDto:
       properties:
         entityId:
@@ -129,35 +146,6 @@ components:
           type: array
       xml:
         name: MessageDto
-      type: object
-    OAS.WebApi.DTO.Utility.BatchProcessingErrorDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        batchId:
-          type: integer
-          format: int32
-        errorMessage:
-          type: string
-        details:
-          type: string
-        severityCode:
-          type: integer
-          format: int32
-        severity:
-          type: string
-          enum:
-          - Error
-          - Warning
-          - Information
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-      xml:
-        name: BatchProcessingErrorDto
       type: object
     OAS.WebApi.DTO.Utility.BatchProcessingDto:
       properties:
@@ -239,22 +227,34 @@ components:
       xml:
         name: BatchProcessingDto
       type: object
-    OAS.WebApi.DTO.Utility.MessageDetailDto:
+    OAS.WebApi.DTO.Utility.BatchProcessingErrorDto:
       properties:
+        id:
+          type: integer
+          format: int32
+        batchId:
+          type: integer
+          format: int32
+        errorMessage:
+          type: string
+        details:
+          type: string
         severityCode:
           type: integer
           format: int32
         severity:
           type: string
-        message:
+          enum:
+          - Error
+          - Warning
+          - Information
+        createdBy:
           type: string
-        entityEnum:
+        createdDate:
           type: string
-        entityId:
-          type: integer
-          format: int32
+          format: date-time
       xml:
-        name: MessageDetailDto
+        name: BatchProcessingErrorDto
       type: object
   securitySchemes:
     Authorization:

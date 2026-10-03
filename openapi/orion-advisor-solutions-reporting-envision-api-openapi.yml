@@ -6747,6 +6747,152 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAS.DataProcess.Reporting.ReportTemplates.ReportThumbnailFileDto:
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+      xml:
+        name: ReportThumbnailFileDto
+      type: object
+    OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
+      description: import file DTO for validating imports
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+          description: the imported file
+      xml:
+        name: ValidateFileImportDto
+      type: object
+    OAS.DataModel.Reporting.ReportOption:
+      required:
+      - id
+      - $type
+      properties:
+        id:
+          type: string
+        $type:
+          readOnly: true
+          type: string
+        optionGuid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        optionId:
+          type: integer
+          format: int32
+        isDisabled:
+          type: boolean
+        isGlobal:
+          type: boolean
+        isIgnored:
+          type: boolean
+        name:
+          type: string
+        useInception:
+          type: boolean
+        prompt:
+          type: string
+          enum:
+          - Never
+          - Always
+      xml:
+        name: ReportOption
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+    OAS.DataModel.Reporting.ControlBase:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        width:
+          type: string
+      xml:
+        name: ControlBase
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ExcelReportSchemaDto:
+      properties:
+        contextChange:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.ContextChange'
+        workBook:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Controls.WorkBookControl'
+      xml:
+        name: ExcelReportSchemaDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportThemeSelectionDto:
+      properties:
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        name:
+          type: string
+        isDefault:
+          type: boolean
+      xml:
+        name: ReportThemeSelectionDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportDto:
+      properties:
+        type:
+          type: string
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        versionOfReportId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        canEdit:
+          type: boolean
+        canDelete:
+          type: boolean
+        auditedBy:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        category:
+          type: string
+        isFavorite:
+          type: boolean
+        isDeleted:
+          type: boolean
+        hasThumbnail:
+          type: boolean
+        deletedDate:
+          type: string
+          format: date-time
+        deletedBy:
+          type: string
+      xml:
+        name: ReportDto
+      type: object
     OAS.DataModel.Reporting.Calculation.Format.FormatSettings:
       properties:
         custom:
@@ -6777,192 +6923,6 @@ components:
           type: string
       xml:
         name: FormatSettings
-      type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
-      properties:
-        key:
-          readOnly: true
-          type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: KeyValuePair`2
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportCoverPageDto:
-      properties:
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        name:
-          type: string
-        description:
-          type: string
-        canEdit:
-          type: boolean
-        canDelete:
-          type: boolean
-        auditedBy:
-          type: string
-        auditedDate:
-          type: string
-          format: date-time
-        orientation:
-          type: string
-          enum:
-          - Portrait
-          - Landscape
-        paperSize:
-          type: string
-          enum:
-          - Letter
-          - Legal
-          - A4
-        isDefault:
-          type: boolean
-        schema:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportCoverPageSchemaDto'
-        additionalOptions:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOptionCategory'
-          xml:
-            name: ReportOptionCategory
-            wrapped: true
-          type: array
-      xml:
-        name: ReportCoverPageDto
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IRenderDataTable:
-      properties:
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IRenderDataTable
-      type: object
-    OAS.DataModel.Reporting.DataEngine.PaperMargins:
-      properties:
-        units:
-          type: string
-        top:
-          type: number
-          format: double
-        bottom:
-          type: number
-          format: double
-        right:
-          type: number
-          format: double
-        left:
-          type: number
-          format: double
-      xml:
-        name: PaperMargins
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportPdfDto:
-      properties:
-        id:
-          type: string
-        pdfUrl:
-          type: string
-        name:
-          type: string
-        pageCount:
-          type: integer
-          format: int32
-        alClientId:
-          type: integer
-          format: int32
-      xml:
-        name: ReportPdfDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.FragmentVerboseReferencedOptionDto:
-      properties:
-        optionGuid:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        option:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
-      xml:
-        name: FragmentVerboseReferencedOptionDto
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeStatisticalOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeStatisticalOption
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ExcelReportPortfolioDto:
-      properties:
-        category:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        canEdit:
-          type: boolean
-        canDelete:
-          type: boolean
-        auditedBy:
-          type: string
-        auditedDate:
-          type: string
-          format: date-time
-      xml:
-        name: ExcelReportPortfolioDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseGroupAccessRuleDto:
-      properties:
-        databaseGroupId:
-          type: integer
-          format: int32
-        loginEntityId:
-          type: string
-          enum:
-          - BrokerDealer
-          - Wholesaler
-          - Representative
-          - Client
-          - RIA
-          - Administrator
-          - SubAdvisor
-          - ThirdPartyAdministrator
-          - Custodian
-          - PlanSponsor
-          - ThirdParty
-          - ServiceAccount
-          - Participant
-          - RepAccountManager
-          - Payee
-          - RIATable
-          - Cotenant
-        name:
-          type: string
-        canRun:
-          type: boolean
-        canEdit:
-          type: boolean
-      xml:
-        name: ReportDatabaseGroupAccessRuleDto
-      type: object
-    OAS.DataModel.Reporting.Calculation.IMakeCalculationOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeCalculationOption
       type: object
     OAS.WebApi.DTO.Reporting.Envision.FragmentVerboseDto:
       properties:
@@ -7073,104 +7033,147 @@ components:
       xml:
         name: FragmentVerboseDto
       type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeTaxOption:
+    OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseAccessRuleDto:
       properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeTaxOption
-      type: object
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportUserAccessRuleDto:
-      properties:
-        userId:
+        alClientId:
           type: integer
           format: int32
+        loginEntityId:
+          type: string
+          enum:
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - RIA
+          - Administrator
+          - SubAdvisor
+          - ThirdPartyAdministrator
+          - Custodian
+          - PlanSponsor
+          - ThirdParty
+          - ServiceAccount
+          - Participant
+          - RepAccountManager
+          - Payee
+          - RIATable
+          - Cotenant
         name:
           type: string
         canRun:
           type: boolean
         canEdit:
           type: boolean
-        canDelete:
-          type: boolean
       xml:
-        name: ReportUserAccessRuleDto
+        name: ReportDatabaseAccessRuleDto
       type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportThemeOption:
+    OAS.WebApi.DTO.Reporting.Envision.ReportImageDto:
       properties:
-        tableGroupLevels:
-          type: integer
-          format: int32
-      xml:
-        name: ReportThemeOption
-      type: object
-    OAS.DataModel.Reporting.Engine.ContextFilter:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
+        id:
           type: string
-        change:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.ContextChange'
-        filters:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.ContextCalculationFilter'
-          xml:
-            name: ContextCalculationFilter
-            wrapped: true
-          type: array
-        method:
+        imageUrl:
           type: string
-          enum:
-          - All
-          - Any
-        oldFilterValue:
-          type: string
-          enum:
-          - None
-          - HasValue
-          - HasUnits
-      xml:
-        name: ContextFilter
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportClientVersionAssignmentDto:
-      properties:
-        clientId:
-          type: integer
-          format: int32
-        reportId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
         name:
           type: string
-        reportVersionId:
-          example: 00000000-0000-0000-0000-000000000000
+        widthPixels:
+          type: integer
+          format: int32
+        heightPixels:
+          type: integer
+          format: int32
+        alt:
           type: string
-          format: uuid
       xml:
-        name: ReportClientVersionAssignmentDto
+        name: ReportImageDto
       type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeIncomeOption:
+    OAS.DataModel.Reporting.Interfaces.IMakeActivityOption:
       properties:
         type:
           readOnly: true
           type: string
       xml:
-        name: IMakeIncomeOption
+        name: IMakeActivityOption
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportBrokerDealersRepresentativesAccessRuleDto:
+      properties:
+        brokerDealerId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        canRun:
+          type: boolean
+      xml:
+        name: ReportBrokerDealersRepresentativesAccessRuleDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ExcelReportVerboseDto:
+      properties:
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        name:
+          type: string
+        portfolio:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ExcelReportPortfolioDto'
+        schema:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ExcelReportSchemaDto'
+        requiredOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+        additionalOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOptionCategory'
+          xml:
+            name: ReportOptionCategory
+            wrapped: true
+          type: array
+        loginAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportLoginAccessRuleDto'
+          xml:
+            name: ReportLoginAccessRuleDto
+            wrapped: true
+          type: array
+        databaseGroupAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseGroupAccessRuleDto'
+          xml:
+            name: ReportDatabaseGroupAccessRuleDto
+            wrapped: true
+          type: array
+        databaseAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseAccessRuleDto'
+          xml:
+            name: ReportDatabaseAccessRuleDto
+            wrapped: true
+          type: array
+        roleAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportRoleAccessRuleDto'
+          xml:
+            name: ReportRoleAccessRuleDto
+            wrapped: true
+          type: array
+        userAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportUserAccessRuleDto'
+          xml:
+            name: ReportUserAccessRuleDto
+            wrapped: true
+          type: array
+      xml:
+        name: ExcelReportVerboseDto
+      type: object
+    OAS.DataModel.Reporting.ReportUrlBuilderCore:
+      properties: {}
+      xml:
+        name: ReportUrlBuilderCore
       type: object
     System.ValueTupleOfSystem.StringAndSystem.Int32AndSystem.Guid:
       properties:
@@ -7186,18 +7189,6 @@ components:
       xml:
         name: ValueTuple`3
       type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportClientAccessRuleDto:
-      properties:
-        clientId:
-          type: integer
-          format: int32
-        name:
-          type: string
-        canRun:
-          type: boolean
-      xml:
-        name: ReportClientAccessRuleDto
-      type: object
     OAS.WebApi.DTO.Reporting.Envision.ReportBrokerDealerAccessRuleDto:
       properties:
         brokerDealerId:
@@ -7209,18 +7200,6 @@ components:
           type: boolean
       xml:
         name: ReportBrokerDealerAccessRuleDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportBrokerDealersRepresentativesAccessRuleDto:
-      properties:
-        brokerDealerId:
-          type: integer
-          format: int32
-        name:
-          type: string
-        canRun:
-          type: boolean
-      xml:
-        name: ReportBrokerDealersRepresentativesAccessRuleDto
       type: object
     OAS.DataModel.Reporting.Envision.ReportSettings:
       properties:
@@ -7277,8 +7256,174 @@ components:
       xml:
         name: ReportSettings
       type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportLoginAccessRuleDto:
+    OAS.DataModel.Reporting.Interfaces.IMakeProjectedIncomeOption:
       properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeProjectedIncomeOption
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportCoverPageDto:
+      properties:
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        canEdit:
+          type: boolean
+        canDelete:
+          type: boolean
+        auditedBy:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        orientation:
+          type: string
+          enum:
+          - Portrait
+          - Landscape
+        paperSize:
+          type: string
+          enum:
+          - Letter
+          - Legal
+          - A4
+        isDefault:
+          type: boolean
+        schema:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportCoverPageSchemaDto'
+        additionalOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOptionCategory'
+          xml:
+            name: ReportOptionCategory
+            wrapped: true
+          type: array
+      xml:
+        name: ReportCoverPageDto
+      type: object
+    OAS.DataModel.SimpleEntityWithOrientationOfSystem.Guid:
+      properties:
+        orientation:
+          type: string
+          enum:
+          - Portrait
+          - Landscape
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        name:
+          type: string
+      xml:
+        name: SimpleEntityWithOrientation`1
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeDateRange:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeDateRange
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportPortfolioDto:
+      properties:
+        parentCategory:
+          type: string
+        category:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        versionOfReportId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        versionOfReportName:
+          type: string
+        canEdit:
+          type: boolean
+        canDelete:
+          type: boolean
+        auditedBy:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        isDeleted:
+          type: boolean
+        hasThumbnail:
+          type: boolean
+      xml:
+        name: ReportPortfolioDto
+      type: object
+    OAS.DataModel.Reporting.Controls.WorkBookControl:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        controls:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Controls.WorkSheetControl'
+          xml:
+            name: WorkSheetControl
+            wrapped: true
+          type: array
+        customClass:
+          type: string
+        width:
+          type: string
+      xml:
+        name: WorkBookControl
+      type: object
+    OAS.DataModel.Reporting.ReportOptionCategory:
+      required:
+      - category
+      - options
+      properties:
+        category:
+          type: string
+        options:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+      xml:
+        name: ReportOptionCategory
+      type: object
+    OAS.DataModel.Reporting.Calculation.IMakeCalculationOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeCalculationOption
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.Frequency.ExcelReportScheduleFrequencyIntervalDto:
+      properties: {}
+      xml:
+        name: ExcelReportScheduleFrequencyIntervalDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseGroupAccessRuleDto:
+      properties:
+        databaseGroupId:
+          type: integer
+          format: int32
         loginEntityId:
           type: string
           enum:
@@ -7299,28 +7444,765 @@ components:
           - Payee
           - RIATable
           - Cotenant
+        name:
+          type: string
+        canRun:
+          type: boolean
+        canEdit:
+          type: boolean
+      xml:
+        name: ReportDatabaseGroupAccessRuleDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportClientAccessRuleDto:
+      properties:
+        clientId:
+          type: integer
+          format: int32
+        name:
+          type: string
         canRun:
           type: boolean
       xml:
-        name: ReportLoginAccessRuleDto
+        name: ReportClientAccessRuleDto
       type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportRepresentativeVersionAssignmentDto:
+    OAS.DataModel.Reporting.Interfaces.IReportFeatureFlagOverrider:
+      properties:
+        dynamicBenchmarkProcessType:
+          readOnly: true
+          type: string
+          enum:
+          - Cloud
+          - LocalService
+        forceAssetGroupingIntraDayPerformance:
+          readOnly: true
+          type: boolean
+        activityProcessType:
+          readOnly: true
+          type: string
+          enum:
+          - Cloud
+          - LocalService
+        costBasisProcessType:
+          type: string
+          enum:
+          - Old
+          - Cloud
+          - LocalService
+        morningstarLevel2Assignment:
+          type: boolean
+        localPriceCutOverDate:
+          type: string
+          format: date-time
+        noScope:
+          type: boolean
+        ensureAssetsUpdated:
+          type: boolean
+        storeReportDataCompressed:
+          type: boolean
+        showEInModelNames:
+          type: boolean
+        performanceProcessType:
+          type: string
+          enum:
+          - Cloud
+          - LocalService
+        forceNonSummaryPerformanceToUseTwr:
+          type: boolean
+        forceNetOfFeesPerformance:
+          type: boolean
+        costBasisStoredSource:
+          type: string
+          enum:
+          - Orion
+          - Custodian
+        tradingWithParentGrouping:
+          type: boolean
+        useGlobalSettingsUniqueIds:
+          type: boolean
+        showEquations:
+          type: boolean
+        isReportCompare:
+          type: boolean
+        useBenchmarksInAccountChangeHistory:
+          type: boolean
+        benchmarkAssignmentOverride:
+          type: string
+        useAsOfDateForAdvizr:
+          type: boolean
+        accountNumbersToShow:
+          type: integer
+          format: int32
+        useBatchSettingsBulkCopy:
+          type: boolean
+        showExcludedFromRebalance:
+          type: boolean
+        useInMemoryForModelVsActual:
+          type: boolean
+        useNewLineChartRenderer:
+          type: boolean
+        useNewScatterPlotChartRenderer:
+          type: boolean
+        useInMemoryIncomeCalculation:
+          type: boolean
+        useModelAllocationHistory:
+          type: boolean
+        useDisclaimerShadowDom:
+          type: boolean
+      xml:
+        name: IReportFeatureFlagOverrider
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.FragmentVerboseReferencedOptionDto:
+      properties:
+        optionGuid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        option:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+      xml:
+        name: FragmentVerboseReferencedOptionDto
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeMaturityPeriodOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeMaturityPeriodOption
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ExcelReportPromptArrayWithErrorDataDto:
+      properties:
+        prompts:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+        isValid:
+          type: boolean
+        errorMessage:
+          type: string
+        databaseIdList:
+          items:
+            type: integer
+            format: int32
+          type: array
+        fileFormat:
+          type: string
+          enum:
+          - Csv
+          - Xls
+          - Xlsx
+          - Psv
+        fileName:
+          type: string
+        displayName:
+          type: string
+        dynamicDateFormat:
+          type: string
+      xml:
+        name: ExcelReportPromptArrayWithErrorDataDto
+      type: object
+    OAS.DataModel.Reporting.Engine.ContextTagResultFormatted:
+      properties:
+        formatted:
+          type: string
+        $index:
+          type: string
+      xml:
+        name: ContextTagResultFormatted
+      type: object
+    OAS.DataModel.Reporting.DataEngine.PaperMargins:
+      properties:
+        units:
+          type: string
+        top:
+          type: number
+          format: double
+        bottom:
+          type: number
+          format: double
+        right:
+          type: number
+          format: double
+        left:
+          type: number
+          format: double
+      xml:
+        name: PaperMargins
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeTransactionOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeTransactionOption
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportRepresentativeAccessRuleDto:
       properties:
         representativeId:
           type: integer
           format: int32
-        reportId:
+        name:
+          type: string
+        canRun:
+          type: boolean
+      xml:
+        name: ReportRepresentativeAccessRuleDto
+      type: object
+    OAS.DataModel.SimpleEntityOfSystem.Guid:
+      properties:
+        id:
           example: 00000000-0000-0000-0000-000000000000
           type: string
           format: uuid
         name:
           type: string
-        reportVersionId:
+      xml:
+        name: SimpleEntity`1
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportSchemaDto:
+      properties:
+        contextChange:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.ContextChange'
+        firstHeader:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
+        header:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
+        body:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
+        footer:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
+        overlay:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
+      xml:
+        name: ReportSchemaDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ExcelReportScheduleDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        excelReportId:
           example: 00000000-0000-0000-0000-000000000000
           type: string
           format: uuid
+        parameters:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ExcelReportPromptArrayWithErrorDataDto'
+        frequencyInfo:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ExcelReportScheduleFrequencyDto'
+        notes:
+          type: string
+        isActive:
+          type: boolean
+        createdByIsActive:
+          type: boolean
+        lastRunDate:
+          type: string
+          format: date-time
+        uploadTargetId:
+          type: integer
+          format: int32
+        auditedBy:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
       xml:
-        name: ReportRepresentativeVersionAssignmentDto
+        name: ExcelReportScheduleDto
+      type: object
+    OAS.DataModel.Reporting.DataEngine.EnvisionReportModel:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        sessionId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        generationTime:
+          type: string
+          format: date-time
+        title:
+          type: string
+        author:
+          type: string
+        subject:
+          type: string
+        keywords:
+          type: string
+        includeBlankPageAfterCover:
+          type: boolean
+        tableOfContents:
+          type: string
+          enum:
+          - None
+          - Normal
+        coverPage:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        firstHeader:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        header:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        footer:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        body:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        overlay:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        hud:
+          type: string
+          enum:
+          - None
+          - Basic
+          - Debug
+        urlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilderCore'
+          readOnly: true
+        pdfDownloadUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        customColorCssUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        renderCssUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        standardCssUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        themeUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        expirationDate:
+          type: string
+          format: date-time
+        orientation:
+          type: string
+          enum:
+          - Portrait
+          - Landscape
+        paperSize:
+          type: string
+          enum:
+          - Letter
+          - Legal
+          - A4
+        margins:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.DataEngine.PaperMargins'
+      xml:
+        name: EnvisionReportModel
+      type: object
+    OAS.DataModel.Reporting.ReportUrlBuilder:
+      properties:
+        originalPath:
+          readOnly: true
+          type: string
+        urlKind:
+          readOnly: true
+          type: string
+          enum:
+          - Literal
+          - OrionApi
+          - OrionUi
+      xml:
+        name: ReportUrlBuilder
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeTradingOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeTradingOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeBillingOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeBillingOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeComparisonOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeComparisonOption
+      type: object
+    OAS.DataModel.Reporting.Controls.PositionedControl:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        control:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
+        top:
+          type: string
+        left:
+          type: string
+        height:
+          type: string
+        customClass:
+          type: string
+        width:
+          type: string
+      xml:
+        name: PositionedControl
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportRepresentativesClientsAccessRuleDto:
+      properties:
+        representativeId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        canRun:
+          type: boolean
+      xml:
+        name: ReportRepresentativesClientsAccessRuleDto
+      type: object
+    OAS.DataAccess.Domains.Reporting.Envision.CalculationGroupingOption:
+      properties:
+        options:
+          items:
+            type: string
+            enum:
+            - ReportCategory
+            - DateRange
+            - Performance
+            - Comparison
+            - Activity
+            - Income
+            - Trading
+            - Size
+            - Statistical
+            - Billing
+            - CostBasis
+            - Calculation
+            - Prompt
+            - Sma
+            - MaturityPeriod
+            - LimitMethod
+            - WeightedBenchmarkGrouping
+            - TaxInceptionType
+            - CostPerShareMethod
+            - MaskString
+          xml:
+            name: PlaceholderOptionType
+            wrapped: true
+          type: array
+        additionalOptions:
+          items:
+            type: string
+            enum:
+            - ReportCategory
+            - DateRange
+            - Performance
+            - Comparison
+            - Activity
+            - Income
+            - Trading
+            - Size
+            - Statistical
+            - Billing
+            - CostBasis
+            - Calculation
+            - Prompt
+            - Sma
+            - MaturityPeriod
+            - LimitMethod
+            - WeightedBenchmarkGrouping
+            - TaxInceptionType
+            - CostPerShareMethod
+            - MaskString
+          xml:
+            name: PlaceholderOptionType
+            wrapped: true
+          type: array
+        optionLists:
+          items:
+            type: string
+            enum:
+            - ReportCategory
+            - DateRange
+            - Performance
+            - Comparison
+            - Activity
+            - Income
+            - Trading
+            - Size
+            - Statistical
+            - Billing
+            - CostBasis
+            - Calculation
+            - Prompt
+            - Sma
+            - MaturityPeriod
+            - LimitMethod
+            - WeightedBenchmarkGrouping
+            - TaxInceptionType
+            - CostPerShareMethod
+            - MaskString
+          xml:
+            name: PlaceholderOptionType
+            wrapped: true
+          type: array
+        allowedEntityType:
+          items:
+            type: string
+            enum:
+            - AssetBased
+            - Prospect
+            - SecurityClassification
+          xml:
+            name: PlaceholderEntityType
+            wrapped: true
+          type: array
+        grouping:
+          readOnly: true
+          type: string
+          enum:
+          - Self
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - FundFamily
+          - Platform
+          - Custodian
+          - AggregateModel
+          - DynamicGrouping
+          - AssetClass
+          - AssetLevelStrategy
+          - AssetCategory
+          - RiskCategory
+          - AccountType
+          - RegistrationTaxType
+          - ProductType
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - ProductVintageYear
+          - ProductSubType
+          - AssetCategoryParent
+          - PortfolioGroup
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - MaturityPeriod
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - MorningstarGeography
+          - BillEntityType
+          - ProductSubHolding
+          - Country
+          - Currency
+          - CustomGrouping
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - Prospect
+          - Transaction
+          - Comparison
+          - CostBasisLot
+          - ModelInclusion
+          - ContextChanges
+          - ActivityOptions
+          - DateRanges
+          - Time
+          - Bill
+          - Beneficiary
+          - Trustee
+          - Systematic
+          - BillTier
+          - BillAdjustment
+          - FeeSchedules
+          - BillCashflow
+          - ModelVsActual
+          - BillAssetLevel
+          - HouseholdMember
+          - CustomIndexing
+          - ProspectAccount
+          - CustomIndexingScenario
+          - ProspectAssetClass
+          - ProspectAssetCategory
+          - CustomIndexingPreference
+          - ProspectMandate
+          - ProspectComparisonAssetClass
+          - ProspectComparisonAssetCategory
+          - ProspectComparisonHolding
+          - ProspectHolding
+          - ProspectModelAgg
+          - ProspectAccountStressTestsGrouped
+          - ProspectAccountStressTestScenario
+          - ProspectComparisonStressTestsGrouped
+          - ProspectComparisonStressTestScenario
+          - ProspectStressTestsGrouped
+          - ProspectStressTestScenario
+          - ProspectAccountCorrelation
+          - ProspectComparisonAccountCorrelation
+          - ProspectCorrelation
+          - ProspectOrionPlanningCurrentGoal
+          - ProspectOrionPlanningProposedGoal
+          - ProspectOrionPlanningCurrentGoalResults
+          - ProspectOrionPlanningProposedGoalResults
+          - ProspectOrionPlanningCurrentGoalStepsResults
+          - ProspectOrionPlanningProposedGoalStepsResults
+          - ProspectHoldingSectorResults
+          - ProspectHoldingGeographyResults
+          - ProspectAccountHoldingSectorResults
+          - ProspectAccountHoldingGeographyResults
+          - ProspectComparisonAccountHoldingSectorResults
+          - ProspectComparisonAccountHoldingGeographyResults
+          - ProspectOrionPlanningNetWorth
+          - ProspectSelfDirectedResults
+          - ProspectSelfDirectedAssetClass
+          - ProspectSelfDirectedAssetCategory
+          - ProspectHouseholdMembers
+          - ProspectStrategist
+          - ProspectWeightedAssetClass
+          - ProspectAccountWeightedAssetClass
+          - BillingRelatedAccounts
+          - ProspectAccountBlendedFactSheet
+          - CustomIndexingBuys
+          - CustomIndexingSells
+          - ProspectBlendedAssetClasses
+          - ProspectBlendedAssetCategories
+          - ProspectOrionPlanningCurrentNetWorthAssetClasses
+          - ProspectOrionPlanningProposedNetWorthAssetClasses
+          - ProspectOrionPlanningNetWorthAsset
+          - ProspectOrionPlanningCurrentNetWorthAssetCategories
+          - ProspectOrionPlanningProposedNetWorthAssetCategories
+          - ProspectOrionPlanningCurrentAssetCategories
+          - ProspectOrionPlanningProposedAssetCategories
+          - ProspectOrionPlanningCurrentAssetClasses
+          - ProspectOrionPlanningProposedAssetClasses
+          - ProspectComparisonHouseholdManualAccounts
+          - AdHocGrouping
+        value:
+          readOnly: true
+          type: integer
+          format: int32
+        name:
+          type: string
+        category:
+          type: string
+          enum:
+          - Account
+          - Activity
+          - Alternatives
+          - Asset
+          - Benchmark
+          - Billing
+          - CostBasis
+          - CustomIndexing
+          - DateTime
+          - Firm
+          - Household
+          - Product
+          - Prospect
+          - Registration
+          - TargetAllocation
+          - Trading
+          - Other
+          - Blended
+        isAssetBased:
+          readOnly: true
+          type: boolean
+      xml:
+        name: CalculationGroupingOption
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportSettingsDto:
+      required:
+      - id
+      - name
+      - settings
+      properties:
+        id:
+          type: integer
+          format: int32
+        guid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        isSystemDefault:
+          type: boolean
+        name:
+          type: string
+          maxLength: 200
+          minLength: 0
+        optionType:
+          type: string
+        isDefault:
+          type: boolean
+        isDisabled:
+          type: boolean
+        settings:
+          type: string
+        isGlobal:
+          type: boolean
+      xml:
+        name: ReportSettingsDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ExcelReportScheduleFrequencyDto:
+      properties:
+        interval:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.Frequency.ExcelReportScheduleFrequencyIntervalDto'
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        timeOfDay:
+          type: string
+          format: date-time
+        isValid:
+          type: boolean
+        errorMessage:
+          type: string
+      xml:
+        name: ExcelReportScheduleFrequencyDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportImageFileDto:
+      properties:
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+        name:
+          type: string
+      xml:
+        name: ReportImageFileDto
       type: object
     OAS.WebApi.DTO.Reporting.Envision.FragmentPortfolioDto:
       properties:
@@ -7346,17 +8228,69 @@ components:
       xml:
         name: FragmentPortfolioDto
       type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportRepresentativesClientsAccessRuleDto:
+    OAS.WebApi.DTO.Reporting.Envision.ReportThemeVerboseDto:
       properties:
-        representativeId:
-          type: integer
-          format: int32
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
         name:
           type: string
-        canRun:
+          maxLength: 200
+          minLength: 0
+        description:
+          type: string
+        category:
+          type: string
+        canEdit:
           type: boolean
+        canDelete:
+          type: boolean
+        isDefault:
+          type: boolean
+        css:
+          type: string
+        import:
+          type: string
+        options:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportThemeOption'
+        loginAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportLoginAccessRuleDto'
+          xml:
+            name: ReportLoginAccessRuleDto
+            wrapped: true
+          type: array
+        databaseGroupAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseGroupAccessRuleDto'
+          xml:
+            name: ReportDatabaseGroupAccessRuleDto
+            wrapped: true
+          type: array
+        databaseAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseAccessRuleDto'
+          xml:
+            name: ReportDatabaseAccessRuleDto
+            wrapped: true
+          type: array
+        roleAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportRoleAccessRuleDto'
+          xml:
+            name: ReportRoleAccessRuleDto
+            wrapped: true
+          type: array
+        userAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportUserAccessRuleDto'
+          xml:
+            name: ReportUserAccessRuleDto
+            wrapped: true
+          type: array
       xml:
-        name: ReportRepresentativesClientsAccessRuleDto
+        name: ReportThemeVerboseDto
       type: object
     OAS.DataModel.Reporting.Engine.ContextCalculationFilter:
       required:
@@ -7931,255 +8865,6 @@ components:
       xml:
         name: ContextCalculationFilter
       type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportPortfolioGroupVersionAssignmentDto:
-      properties:
-        portfolioGroupId:
-          type: integer
-          format: int32
-        reportId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        name:
-          type: string
-        reportVersionId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-      xml:
-        name: ReportPortfolioGroupVersionAssignmentDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ExcelReportFullDto:
-      properties:
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        requiredOptions:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
-          xml:
-            name: ReportOption
-            wrapped: true
-          type: array
-        featureFlagOverrides:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IReportFeatureFlagOverrider'
-        deliveryOptions:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
-          xml:
-            name: ReportOption
-            wrapped: true
-          type: array
-        queryType:
-          readOnly: true
-          type: string
-          enum:
-          - None
-          - Custom
-          - Excel
-          - All
-        databaseIdList:
-          items:
-            type: integer
-            format: int32
-          type: array
-        references:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Envision.ReportSettingsReference'
-          xml:
-            name: ReportSettingsReference
-            wrapped: true
-          type: array
-        category:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-      xml:
-        name: ExcelReportFullDto
-      type: object
-    OAS.DataModel.Reporting.Controls.PositionedControlListControl:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        height:
-          type: string
-        controls:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Controls.PositionedControl'
-          xml:
-            name: PositionedControl
-            wrapped: true
-          type: array
-        customClass:
-          type: string
-        width:
-          type: string
-      xml:
-        name: PositionedControlListControl
-      type: object
-    OAS.DataModel.Reporting.DataEngine.EnvisionReportModel:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        sessionId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        generationTime:
-          type: string
-          format: date-time
-        title:
-          type: string
-        author:
-          type: string
-        subject:
-          type: string
-        keywords:
-          type: string
-        includeBlankPageAfterCover:
-          type: boolean
-        tableOfContents:
-          type: string
-          enum:
-          - None
-          - Normal
-        coverPage:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
-        firstHeader:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
-        header:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
-        footer:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
-        body:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
-        overlay:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
-        hud:
-          type: string
-          enum:
-          - None
-          - Basic
-          - Debug
-        urlBuilder:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilderCore'
-          readOnly: true
-        pdfDownloadUrlBuilder:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
-        customColorCssUrlBuilder:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
-        renderCssUrlBuilder:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
-        standardCssUrlBuilder:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
-        themeUrlBuilder:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
-        expirationDate:
-          type: string
-          format: date-time
-        orientation:
-          type: string
-          enum:
-          - Portrait
-          - Landscape
-        paperSize:
-          type: string
-          enum:
-          - Letter
-          - Legal
-          - A4
-        margins:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.DataEngine.PaperMargins'
-      xml:
-        name: EnvisionReportModel
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeBillingOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeBillingOption
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseAccessRuleDto:
-      properties:
-        alClientId:
-          type: integer
-          format: int32
-        loginEntityId:
-          type: string
-          enum:
-          - BrokerDealer
-          - Wholesaler
-          - Representative
-          - Client
-          - RIA
-          - Administrator
-          - SubAdvisor
-          - ThirdPartyAdministrator
-          - Custodian
-          - PlanSponsor
-          - ThirdParty
-          - ServiceAccount
-          - Participant
-          - RepAccountManager
-          - Payee
-          - RIATable
-          - Cotenant
-        name:
-          type: string
-        canRun:
-          type: boolean
-        canEdit:
-          type: boolean
-      xml:
-        name: ReportDatabaseAccessRuleDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportPortfolioDto:
-      properties:
-        parentCategory:
-          type: string
-        category:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        versionOfReportId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        versionOfReportName:
-          type: string
-        canEdit:
-          type: boolean
-        canDelete:
-          type: boolean
-        auditedBy:
-          type: string
-        auditedDate:
-          type: string
-          format: date-time
-        isDeleted:
-          type: boolean
-        hasThumbnail:
-          type: boolean
-      xml:
-        name: ReportPortfolioDto
-      type: object
     OAS.WebApi.DTO.Reporting.Envision.ReportCoverPagePortfolioDto:
       properties:
         name:
@@ -8199,1412 +8884,6 @@ components:
           format: date-time
       xml:
         name: ReportCoverPagePortfolioDto
-      type: object
-    OAS.DataModel.SimpleEntityWithOrientationOfSystem.Guid:
-      properties:
-        orientation:
-          type: string
-          enum:
-          - Portrait
-          - Landscape
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        name:
-          type: string
-      xml:
-        name: SimpleEntityWithOrientation`1
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ExcelReportSchemaDto:
-      properties:
-        contextChange:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.ContextChange'
-        workBook:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Controls.WorkBookControl'
-      xml:
-        name: ExcelReportSchemaDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ExcelReportDto:
-      properties:
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        canEdit:
-          type: boolean
-        canDelete:
-          type: boolean
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        auditedBy:
-          type: string
-        auditedDate:
-          type: string
-          format: date-time
-        isFavorite:
-          type: boolean
-        scheduleCount:
-          type: integer
-          format: int32
-        isActive:
-          type: boolean
-        queryType:
-          readOnly: true
-          type: string
-          enum:
-          - None
-          - Custom
-          - Excel
-          - All
-        category:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-      xml:
-        name: ExcelReportDto
-      type: object
-    OAS.DataProcess.Reporting.ReportTemplates.ReportThumbnailFileDto:
-      properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-      xml:
-        name: ReportThumbnailFileDto
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeMaturityPeriodOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeMaturityPeriodOption
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IReportFeatureFlagOverrider:
-      properties:
-        dynamicBenchmarkProcessType:
-          readOnly: true
-          type: string
-          enum:
-          - Cloud
-          - LocalService
-        forceAssetGroupingIntraDayPerformance:
-          readOnly: true
-          type: boolean
-        activityProcessType:
-          readOnly: true
-          type: string
-          enum:
-          - Cloud
-          - LocalService
-        costBasisProcessType:
-          type: string
-          enum:
-          - Old
-          - Cloud
-          - LocalService
-        morningstarLevel2Assignment:
-          type: boolean
-        localPriceCutOverDate:
-          type: string
-          format: date-time
-        noScope:
-          type: boolean
-        ensureAssetsUpdated:
-          type: boolean
-        storeReportDataCompressed:
-          type: boolean
-        showEInModelNames:
-          type: boolean
-        performanceProcessType:
-          type: string
-          enum:
-          - Cloud
-          - LocalService
-        forceNonSummaryPerformanceToUseTwr:
-          type: boolean
-        forceNetOfFeesPerformance:
-          type: boolean
-        costBasisStoredSource:
-          type: string
-          enum:
-          - Orion
-          - Custodian
-        tradingWithParentGrouping:
-          type: boolean
-        useGlobalSettingsUniqueIds:
-          type: boolean
-        showEquations:
-          type: boolean
-        isReportCompare:
-          type: boolean
-        useBenchmarksInAccountChangeHistory:
-          type: boolean
-        benchmarkAssignmentOverride:
-          type: string
-        useAsOfDateForAdvizr:
-          type: boolean
-        accountNumbersToShow:
-          type: integer
-          format: int32
-        useBatchSettingsBulkCopy:
-          type: boolean
-        showExcludedFromRebalance:
-          type: boolean
-        useInMemoryForModelVsActual:
-          type: boolean
-        useNewLineChartRenderer:
-          type: boolean
-        useNewScatterPlotChartRenderer:
-          type: boolean
-        useInMemoryIncomeCalculation:
-          type: boolean
-        useModelAllocationHistory:
-          type: boolean
-        useDisclaimerShadowDom:
-          type: boolean
-      xml:
-        name: IReportFeatureFlagOverrider
-      type: object
-    OAS.DataModel.Reporting.ControlBase:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        width:
-          type: string
-      xml:
-        name: ControlBase
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportImageFileDto:
-      properties:
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-        name:
-          type: string
-      xml:
-        name: ReportImageFileDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ExcelReportVerboseDto:
-      properties:
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        name:
-          type: string
-        portfolio:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ExcelReportPortfolioDto'
-        schema:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ExcelReportSchemaDto'
-        requiredOptions:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
-          xml:
-            name: ReportOption
-            wrapped: true
-          type: array
-        additionalOptions:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOptionCategory'
-          xml:
-            name: ReportOptionCategory
-            wrapped: true
-          type: array
-        loginAccessRules:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportLoginAccessRuleDto'
-          xml:
-            name: ReportLoginAccessRuleDto
-            wrapped: true
-          type: array
-        databaseGroupAccessRules:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseGroupAccessRuleDto'
-          xml:
-            name: ReportDatabaseGroupAccessRuleDto
-            wrapped: true
-          type: array
-        databaseAccessRules:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseAccessRuleDto'
-          xml:
-            name: ReportDatabaseAccessRuleDto
-            wrapped: true
-          type: array
-        roleAccessRules:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportRoleAccessRuleDto'
-          xml:
-            name: ReportRoleAccessRuleDto
-            wrapped: true
-          type: array
-        userAccessRules:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportUserAccessRuleDto'
-          xml:
-            name: ReportUserAccessRuleDto
-            wrapped: true
-          type: array
-      xml:
-        name: ExcelReportVerboseDto
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeDateRange:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeDateRange
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportThemeDto:
-      required:
-      - id
-      - name
-      - description
-      - css
-      properties:
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        name:
-          type: string
-          maxLength: 200
-          minLength: 0
-        description:
-          type: string
-        canEdit:
-          type: boolean
-        canDelete:
-          type: boolean
-        auditedBy:
-          type: string
-        auditedDate:
-          type: string
-          format: date-time
-        isDefault:
-          type: boolean
-        css:
-          type: string
-      xml:
-        name: ReportThemeDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportSettingsDto:
-      required:
-      - id
-      - name
-      - settings
-      properties:
-        id:
-          type: integer
-          format: int32
-        guid:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        isSystemDefault:
-          type: boolean
-        name:
-          type: string
-          maxLength: 200
-          minLength: 0
-        optionType:
-          type: string
-        isDefault:
-          type: boolean
-        isDisabled:
-          type: boolean
-        settings:
-          type: string
-        isGlobal:
-          type: boolean
-      xml:
-        name: ReportSettingsDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.Frequency.ExcelReportScheduleFrequencyIntervalDto:
-      properties: {}
-      xml:
-        name: ExcelReportScheduleFrequencyIntervalDto
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IGetRendered:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IGetRendered
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeProjectedIncomeOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeProjectedIncomeOption
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.FragmentDto:
-      properties:
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        category:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        canEdit:
-          type: boolean
-        canDelete:
-          type: boolean
-        auditedBy:
-          type: string
-        auditedDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        isDynamic:
-          type: boolean
-      xml:
-        name: FragmentDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Custom.DataQueryBaseDto:
-      properties:
-        category:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        queryType:
-          readOnly: true
-          type: string
-          enum:
-          - None
-          - Custom
-          - Excel
-          - All
-      xml:
-        name: DataQueryBaseDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportRoleAccessRuleDto:
-      properties:
-        roleId:
-          type: integer
-          format: int32
-        name:
-          type: string
-        canRun:
-          type: boolean
-        canEdit:
-          type: boolean
-        canDelete:
-          type: boolean
-      xml:
-        name: ReportRoleAccessRuleDto
-      type: object
-    OAS.DataModel.Reporting.Controls.WorkBookControl:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        controls:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Controls.WorkSheetControl'
-          xml:
-            name: WorkSheetControl
-            wrapped: true
-          type: array
-        customClass:
-          type: string
-        width:
-          type: string
-      xml:
-        name: WorkBookControl
-      type: object
-    OAS.DataModel.Reporting.Engine.ContextTagResultFormatted:
-      properties:
-        formatted:
-          type: string
-        $index:
-          type: string
-      xml:
-        name: ContextTagResultFormatted
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeActivityOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeActivityOption
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeAttributionOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeAttributionOption
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportSchemaDto:
-      properties:
-        contextChange:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.ContextChange'
-        firstHeader:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
-        header:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
-        body:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
-        footer:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
-        overlay:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
-      xml:
-        name: ReportSchemaDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ExcelReportScheduleFrequencyDto:
-      properties:
-        interval:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.Frequency.ExcelReportScheduleFrequencyIntervalDto'
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        timeOfDay:
-          type: string
-          format: date-time
-        isValid:
-          type: boolean
-        errorMessage:
-          type: string
-      xml:
-        name: ExcelReportScheduleFrequencyDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportPdfFileDto:
-      properties:
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-        name:
-          type: string
-      xml:
-        name: ReportPdfFileDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ExcelReportPromptArrayWithErrorDataDto:
-      properties:
-        prompts:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
-          xml:
-            name: ReportOption
-            wrapped: true
-          type: array
-        isValid:
-          type: boolean
-        errorMessage:
-          type: string
-        databaseIdList:
-          items:
-            type: integer
-            format: int32
-          type: array
-        fileFormat:
-          type: string
-          enum:
-          - Csv
-          - Xls
-          - Xlsx
-          - Psv
-        fileName:
-          type: string
-        displayName:
-          type: string
-        dynamicDateFormat:
-          type: string
-      xml:
-        name: ExcelReportPromptArrayWithErrorDataDto
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeTransactionOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeTransactionOption
-      type: object
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportThemeVerboseDto:
-      properties:
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        name:
-          type: string
-          maxLength: 200
-          minLength: 0
-        description:
-          type: string
-        category:
-          type: string
-        canEdit:
-          type: boolean
-        canDelete:
-          type: boolean
-        isDefault:
-          type: boolean
-        css:
-          type: string
-        import:
-          type: string
-        options:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportThemeOption'
-        loginAccessRules:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportLoginAccessRuleDto'
-          xml:
-            name: ReportLoginAccessRuleDto
-            wrapped: true
-          type: array
-        databaseGroupAccessRules:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseGroupAccessRuleDto'
-          xml:
-            name: ReportDatabaseGroupAccessRuleDto
-            wrapped: true
-          type: array
-        databaseAccessRules:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseAccessRuleDto'
-          xml:
-            name: ReportDatabaseAccessRuleDto
-            wrapped: true
-          type: array
-        roleAccessRules:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportRoleAccessRuleDto'
-          xml:
-            name: ReportRoleAccessRuleDto
-            wrapped: true
-          type: array
-        userAccessRules:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportUserAccessRuleDto'
-          xml:
-            name: ReportUserAccessRuleDto
-            wrapped: true
-          type: array
-      xml:
-        name: ReportThemeVerboseDto
-      type: object
-    OAS.DataModel.Reporting.Controls.PositionedControl:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        control:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
-        top:
-          type: string
-        left:
-          type: string
-        height:
-          type: string
-        customClass:
-          type: string
-        width:
-          type: string
-      xml:
-        name: PositionedControl
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportRepresentativeAccessRuleDto:
-      properties:
-        representativeId:
-          type: integer
-          format: int32
-        name:
-          type: string
-        canRun:
-          type: boolean
-      xml:
-        name: ReportRepresentativeAccessRuleDto
-      type: object
-    OAS.DataModel.Reporting.Envision.ReportSettingsOfSettings:
-      properties:
-        parentReportSettingId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        childReportSettingId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-      xml:
-        name: ReportSettingsOfSettings
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportDto:
-      properties:
-        type:
-          type: string
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        name:
-          type: string
-        description:
-          type: string
-        versionOfReportId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        canEdit:
-          type: boolean
-        canDelete:
-          type: boolean
-        auditedBy:
-          type: string
-        auditedDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        category:
-          type: string
-        isFavorite:
-          type: boolean
-        isDeleted:
-          type: boolean
-        hasThumbnail:
-          type: boolean
-        deletedDate:
-          type: string
-          format: date-time
-        deletedBy:
-          type: string
-      xml:
-        name: ReportDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportProtoRunForDto:
-      properties:
-        entity:
-          type: string
-          enum:
-          - Database
-          - BrokerDealer
-          - Representative
-          - Client
-          - Registration
-          - Account
-          - Asset
-          - Product
-          - AggregateModel
-          - DynamicGrouping
-          - PortfolioGroup
-          - UserDetail
-          - Prospect
-          - CustomGrouping
-        entityIds:
-          items:
-            type: integer
-            format: int32
-          type: array
-        prospectId:
-          type: string
-        asOfDate:
-          type: string
-        accountInclusion:
-          type: string
-          enum:
-          - Default
-          - All
-          - ActiveOnly
-          - ActiveWithValue
-          - ActiveRegistrationsOnly
-          - RegistrationsWithValue
-        groupCustodialCashTogether:
-          type: boolean
-        useSmaSettings:
-          type: boolean
-        unmanagedInclusionOverride:
-          type: string
-          enum:
-          - Unmanaged
-          - Performance
-          - ActivitySummary
-          - Allocation
-          - PortfolioDetail
-          - TaxDetail
-        includeHistoricalLinks:
-          type: string
-          enum:
-          - None
-          - CostBasis
-          - Performance
-        accountManagementOverride:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.ManagementOverride'
-          xml:
-            name: ManagementOverride
-            wrapped: true
-          type: array
-        exclusions:
-          properties:
-            account:
-              items:
-                type: integer
-                format: int32
-              type: array
-            fundFamily:
-              items:
-                type: integer
-                format: int32
-              type: array
-          type: object
-      xml:
-        name: ReportProtoRunForDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportVersionDto:
-      properties:
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        name:
-          type: string
-        isDeleted:
-          type: boolean
-      xml:
-        name: ReportVersionDto
-      type: object
-    OAS.DataModel.Reporting.ReportUrlBuilder:
-      properties:
-        originalPath:
-          readOnly: true
-          type: string
-        urlKind:
-          readOnly: true
-          type: string
-          enum:
-          - Literal
-          - OrionApi
-          - OrionUi
-      xml:
-        name: ReportUrlBuilder
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeComparisonOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeComparisonOption
-      type: object
-    OAS.DataModel.Reporting.Engine.ContextChange:
-      properties:
-        activityOption:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeActivityOption'
-        billingOption:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeBillingOption'
-        calculationOption:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculation.IMakeCalculationOption'
-        comparisonOption:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeComparisonOption'
-        costBasisOption:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeCostBasisOption'
-        dateRange:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeDateRange'
-        incomeOption:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeIncomeOption'
-        maturityPeriodOption:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeMaturityPeriodOption'
-        performanceOption:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakePerformanceOption'
-        projectedIncomeOption:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeProjectedIncomeOption'
-        statisticalOption:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeStatisticalOption'
-        taxOption:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeTaxOption'
-        tradingOption:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeTradingOption'
-        transactionOption:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeTransactionOption'
-        attributionOption:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeAttributionOption'
-        activityOptionId:
-          type: integer
-          format: int32
-        billingOptionId:
-          type: integer
-          format: int32
-        calculationOptionId:
-          type: integer
-          format: int32
-        comparisonOptionId:
-          type: integer
-          format: int32
-        costBasisOptionId:
-          type: integer
-          format: int32
-        dateRangeId:
-          type: integer
-          format: int32
-        incomeOptionId:
-          type: integer
-          format: int32
-        maturityPeriodOptionId:
-          type: integer
-          format: int32
-        performanceOptionId:
-          type: integer
-          format: int32
-        projectedIncomeOptionId:
-          type: integer
-          format: int32
-        promptOptionId:
-          type: integer
-          format: int32
-        reportCategoryId:
-          type: integer
-          format: int32
-        statisticalOptionId:
-          type: integer
-          format: int32
-        taxOptionId:
-          type: integer
-          format: int32
-        tradingOptionId:
-          type: integer
-          format: int32
-        transactionOptionId:
-          type: integer
-          format: int32
-        attributionId:
-          type: integer
-          format: int32
-        returnStyle:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IReturnStyle'
-        percentFormat:
-          type: string
-        dollarFormat:
-          type: string
-        decimalFormat:
-          type: string
-        numericFormat:
-          type: string
-        quickDate:
-          type: string
-          enum:
-          - Day
-          - WTD
-          - MTD
-          - QTD
-          - YTD
-          - OneYear
-          - TwoYear
-          - ThreeYear
-          - FourYear
-          - FiveYear
-          - SixYear
-          - SevenYear
-          - EightYear
-          - NineYear
-          - TenYear
-          - PreviousOneYear
-          - PreviousTwoYear
-          - PreviousThreeYear
-          - PreviousFourYear
-          - PreviousFiveYear
-          - PreviousSixYear
-          - PreviousSevenYear
-          - PreviousEightYear
-          - PreviousNineYear
-          - PreviousTenYear
-          - Inception
-          - HoldingPeriod
-          - AIPLedger
-        globalsSynced:
-          type: boolean
-        useSmaSetting:
-          type: boolean
-      xml:
-        name: ContextChange
-      type: object
-    OAS.DataModel.SimpleEntityOfSystem.Guid:
-      properties:
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        name:
-          type: string
-      xml:
-        name: SimpleEntity`1
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeTradingOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeTradingOption
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IReturnStyle:
-      properties:
-        frequency:
-          readOnly: true
-          type: string
-          enum:
-          - Summary
-          - Annually
-          - Quarterly
-          - Monthly
-          - Weekly
-          - Daily
-          - Automatic
-        basedOn:
-          readOnly: true
-          type: string
-          enum:
-          - Calendar
-          - RollingForward
-          - RollingBackward
-        breakBehavior:
-          readOnly: true
-          type: string
-          enum:
-          - AllowPartialPeriods
-          - PartialPeriodsWithBreakPoints
-          - FullPeriodsOnly
-        cumulative:
-          readOnly: true
-          type: boolean
-        cumulativeBasedOn:
-          readOnly: true
-          type: string
-          enum:
-          - ForwardFromStartDate
-          - BackwardFromEndDate
-        context:
-          readOnly: true
-          type: string
-          enum:
-          - Self
-          - Parent
-      xml:
-        name: IReturnStyle
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportImageDto:
-      properties:
-        id:
-          type: string
-        imageUrl:
-          type: string
-        name:
-          type: string
-        widthPixels:
-          type: integer
-          format: int32
-        heightPixels:
-          type: integer
-          format: int32
-        alt:
-          type: string
-      xml:
-        name: ReportImageDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportBrokerDealerVersionAssignmentDto:
-      properties:
-        brokerDealerId:
-          type: integer
-          format: int32
-        reportId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        name:
-          type: string
-        reportVersionId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-      xml:
-        name: ReportBrokerDealerVersionAssignmentDto
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeCostBasisOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeCostBasisOption
-      type: object
-    OAS.DataModel.SimpleEntityWithDescriptionOfSystem.Guid:
-      properties:
-        description:
-          type: string
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        name:
-          type: string
-      xml:
-        name: SimpleEntityWithDescription`1
-      type: object
-    OAS.DataAccess.Domains.Reporting.Envision.CalculationGroupingOption:
-      properties:
-        options:
-          items:
-            type: string
-            enum:
-            - ReportCategory
-            - DateRange
-            - Performance
-            - Comparison
-            - Activity
-            - Income
-            - Trading
-            - Size
-            - Statistical
-            - Billing
-            - CostBasis
-            - Calculation
-            - Prompt
-            - Sma
-            - MaturityPeriod
-            - LimitMethod
-            - WeightedBenchmarkGrouping
-            - TaxInceptionType
-            - CostPerShareMethod
-            - MaskString
-          xml:
-            name: PlaceholderOptionType
-            wrapped: true
-          type: array
-        additionalOptions:
-          items:
-            type: string
-            enum:
-            - ReportCategory
-            - DateRange
-            - Performance
-            - Comparison
-            - Activity
-            - Income
-            - Trading
-            - Size
-            - Statistical
-            - Billing
-            - CostBasis
-            - Calculation
-            - Prompt
-            - Sma
-            - MaturityPeriod
-            - LimitMethod
-            - WeightedBenchmarkGrouping
-            - TaxInceptionType
-            - CostPerShareMethod
-            - MaskString
-          xml:
-            name: PlaceholderOptionType
-            wrapped: true
-          type: array
-        optionLists:
-          items:
-            type: string
-            enum:
-            - ReportCategory
-            - DateRange
-            - Performance
-            - Comparison
-            - Activity
-            - Income
-            - Trading
-            - Size
-            - Statistical
-            - Billing
-            - CostBasis
-            - Calculation
-            - Prompt
-            - Sma
-            - MaturityPeriod
-            - LimitMethod
-            - WeightedBenchmarkGrouping
-            - TaxInceptionType
-            - CostPerShareMethod
-            - MaskString
-          xml:
-            name: PlaceholderOptionType
-            wrapped: true
-          type: array
-        allowedEntityType:
-          items:
-            type: string
-            enum:
-            - AssetBased
-            - Prospect
-            - SecurityClassification
-          xml:
-            name: PlaceholderEntityType
-            wrapped: true
-          type: array
-        grouping:
-          readOnly: true
-          type: string
-          enum:
-          - Self
-          - BrokerDealer
-          - Wholesaler
-          - Representative
-          - Client
-          - Registration
-          - Account
-          - Asset
-          - Product
-          - FundFamily
-          - Platform
-          - Custodian
-          - AggregateModel
-          - DynamicGrouping
-          - AssetClass
-          - AssetLevelStrategy
-          - AssetCategory
-          - RiskCategory
-          - AccountType
-          - RegistrationTaxType
-          - ProductType
-          - ProductRegion
-          - ProductPropertyType
-          - ProductManagerAip
-          - ProductVintageYear
-          - ProductSubType
-          - AssetCategoryParent
-          - PortfolioGroup
-          - Taxability
-          - Qualified
-          - TaxID
-          - BondState
-          - ProductTaxability
-          - TargetAllocation
-          - MoodyRating
-          - SPRating
-          - BondMaturityYear
-          - InterestRate
-          - MaturityPeriod
-          - SleeveStrategyAggregate
-          - MorningstarSector
-          - BillEntity
-          - MorningstarGeography
-          - BillEntityType
-          - ProductSubHolding
-          - Country
-          - Currency
-          - CustomGrouping
-          - SecurityClassification1
-          - SecurityClassification2
-          - SecurityClassification3
-          - SecurityClassification4
-          - SecurityClassification5
-          - SecurityClassification6
-          - SecurityClassification7
-          - SecurityClassification8
-          - SecurityClassification9
-          - SecurityClassification10
-          - Prospect
-          - Transaction
-          - Comparison
-          - CostBasisLot
-          - ModelInclusion
-          - ContextChanges
-          - ActivityOptions
-          - DateRanges
-          - Time
-          - Bill
-          - Beneficiary
-          - Trustee
-          - Systematic
-          - BillTier
-          - BillAdjustment
-          - FeeSchedules
-          - BillCashflow
-          - ModelVsActual
-          - BillAssetLevel
-          - HouseholdMember
-          - CustomIndexing
-          - ProspectAccount
-          - CustomIndexingScenario
-          - ProspectAssetClass
-          - ProspectAssetCategory
-          - CustomIndexingPreference
-          - ProspectMandate
-          - ProspectComparisonAssetClass
-          - ProspectComparisonAssetCategory
-          - ProspectComparisonHolding
-          - ProspectHolding
-          - ProspectModelAgg
-          - ProspectAccountStressTestsGrouped
-          - ProspectAccountStressTestScenario
-          - ProspectComparisonStressTestsGrouped
-          - ProspectComparisonStressTestScenario
-          - ProspectStressTestsGrouped
-          - ProspectStressTestScenario
-          - ProspectAccountCorrelation
-          - ProspectComparisonAccountCorrelation
-          - ProspectCorrelation
-          - ProspectOrionPlanningCurrentGoal
-          - ProspectOrionPlanningProposedGoal
-          - ProspectOrionPlanningCurrentGoalResults
-          - ProspectOrionPlanningProposedGoalResults
-          - ProspectOrionPlanningCurrentGoalStepsResults
-          - ProspectOrionPlanningProposedGoalStepsResults
-          - ProspectHoldingSectorResults
-          - ProspectHoldingGeographyResults
-          - ProspectAccountHoldingSectorResults
-          - ProspectAccountHoldingGeographyResults
-          - ProspectComparisonAccountHoldingSectorResults
-          - ProspectComparisonAccountHoldingGeographyResults
-          - ProspectOrionPlanningNetWorth
-          - ProspectSelfDirectedResults
-          - ProspectSelfDirectedAssetClass
-          - ProspectSelfDirectedAssetCategory
-          - ProspectHouseholdMembers
-          - ProspectStrategist
-          - ProspectWeightedAssetClass
-          - ProspectAccountWeightedAssetClass
-          - BillingRelatedAccounts
-          - ProspectAccountBlendedFactSheet
-          - CustomIndexingBuys
-          - CustomIndexingSells
-          - ProspectBlendedAssetClasses
-          - ProspectBlendedAssetCategories
-          - ProspectOrionPlanningCurrentNetWorthAssetClasses
-          - ProspectOrionPlanningProposedNetWorthAssetClasses
-          - ProspectOrionPlanningNetWorthAsset
-          - ProspectOrionPlanningCurrentNetWorthAssetCategories
-          - ProspectOrionPlanningProposedNetWorthAssetCategories
-          - ProspectOrionPlanningCurrentAssetCategories
-          - ProspectOrionPlanningProposedAssetCategories
-          - ProspectOrionPlanningCurrentAssetClasses
-          - ProspectOrionPlanningProposedAssetClasses
-          - ProspectComparisonHouseholdManualAccounts
-          - AdHocGrouping
-        value:
-          readOnly: true
-          type: integer
-          format: int32
-        name:
-          type: string
-        category:
-          type: string
-          enum:
-          - Account
-          - Activity
-          - Alternatives
-          - Asset
-          - Benchmark
-          - Billing
-          - CostBasis
-          - CustomIndexing
-          - DateTime
-          - Firm
-          - Household
-          - Product
-          - Prospect
-          - Registration
-          - TargetAllocation
-          - Trading
-          - Other
-          - Blended
-        isAssetBased:
-          readOnly: true
-          type: boolean
-      xml:
-        name: CalculationGroupingOption
-      type: object
-    OAS.DataModel.Reporting.ReportOptionCategory:
-      required:
-      - category
-      - options
-      properties:
-        category:
-          type: string
-        options:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
-          xml:
-            name: ReportOption
-            wrapped: true
-          type: array
-      xml:
-        name: ReportOptionCategory
-      type: object
-    System.ValueTupleOfSystem.GuidAndSystem.Int32:
-      properties:
-        item1:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        item2:
-          type: integer
-          format: int32
-      xml:
-        name: ValueTuple`2
       type: object
     OAS.WebApi.DTO.Reporting.Envision.ReportCoverPageVerboseDto:
       properties:
@@ -9665,324 +8944,95 @@ components:
       xml:
         name: ReportCoverPageVerboseDto
       type: object
-    OAS.DataModel.Reporting.Envision.ReportSettingsReference:
+    OAS.WebApi.DTO.Reporting.Envision.ReportClientVersionAssignmentDto:
       properties:
-        optionGuid:
+        clientId:
+          type: integer
+          format: int32
+        reportId:
           example: 00000000-0000-0000-0000-000000000000
           type: string
           format: uuid
-        reportId:
-          type: integer
-          format: int32
-        reportOption:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Envision.ReportSettings'
+        name:
+          type: string
+        reportVersionId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
       xml:
-        name: ReportSettingsReference
+        name: ReportClientVersionAssignmentDto
       type: object
-    OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
-      description: import file DTO for validating imports
-      properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-          description: the imported file
-      xml:
-        name: ValidateFileImportDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ExcelReportScheduleDto:
+    OAS.WebApi.DTO.Reporting.Envision.ExcelReportDto:
       properties:
         id:
-          type: integer
-          format: int32
-        excelReportId:
           example: 00000000-0000-0000-0000-000000000000
           type: string
           format: uuid
-        parameters:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ExcelReportPromptArrayWithErrorDataDto'
-        frequencyInfo:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ExcelReportScheduleFrequencyDto'
-        notes:
+        canEdit:
+          type: boolean
+        canDelete:
+          type: boolean
+        createdBy:
           type: string
-        isActive:
-          type: boolean
-        createdByIsActive:
-          type: boolean
-        lastRunDate:
+        createdDate:
           type: string
           format: date-time
-        uploadTargetId:
+        auditedBy:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        isFavorite:
+          type: boolean
+        scheduleCount:
           type: integer
           format: int32
+        isActive:
+          type: boolean
+        queryType:
+          readOnly: true
+          type: string
+          enum:
+          - None
+          - Custom
+          - Excel
+          - All
+        category:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+      xml:
+        name: ExcelReportDto
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IGetRendered:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IGetRendered
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ExcelReportPortfolioDto:
+      properties:
+        category:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        canEdit:
+          type: boolean
+        canDelete:
+          type: boolean
         auditedBy:
           type: string
         auditedDate:
           type: string
           format: date-time
       xml:
-        name: ExcelReportScheduleDto
-      type: object
-    OAS.DataModel.Reporting.Envision.ReportSettingsAlClient:
-      properties:
-        reportSettingsId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        alClientId:
-          type: integer
-          format: int32
-      xml:
-        name: ReportSettingsAlClient
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportThemeSelectionDto:
-      properties:
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        name:
-          type: string
-        isDefault:
-          type: boolean
-      xml:
-        name: ReportThemeSelectionDto
-      type: object
-    OAS.DataModel.Reporting.ReportUrlBuilderCore:
-      properties: {}
-      xml:
-        name: ReportUrlBuilderCore
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportCoverPageSchemaDto:
-      properties:
-        body:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Controls.PositionedControlListControl'
-      xml:
-        name: ReportCoverPageSchemaDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.ReportVerboseDto:
-      properties:
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        name:
-          type: string
-        portfolio:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportPortfolioDto'
-        schema:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportSchemaDto'
-        requiredOptions:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
-          xml:
-            name: ReportOption
-            wrapped: true
-          type: array
-        additionalOptions:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOptionCategory'
-          xml:
-            name: ReportOptionCategory
-            wrapped: true
-          type: array
-        versions:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportVersionDto'
-          xml:
-            name: ReportVersionDto
-            wrapped: true
-          type: array
-        loginAccessRules:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportLoginAccessRuleDto'
-          xml:
-            name: ReportLoginAccessRuleDto
-            wrapped: true
-          type: array
-        databaseGroupAccessRules:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseGroupAccessRuleDto'
-          xml:
-            name: ReportDatabaseGroupAccessRuleDto
-            wrapped: true
-          type: array
-        databaseAccessRules:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseAccessRuleDto'
-          xml:
-            name: ReportDatabaseAccessRuleDto
-            wrapped: true
-          type: array
-        roleAccessRules:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportRoleAccessRuleDto'
-          xml:
-            name: ReportRoleAccessRuleDto
-            wrapped: true
-          type: array
-        userAccessRules:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportUserAccessRuleDto'
-          xml:
-            name: ReportUserAccessRuleDto
-            wrapped: true
-          type: array
-        representativeAccessRules:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportRepresentativeAccessRuleDto'
-          xml:
-            name: ReportRepresentativeAccessRuleDto
-            wrapped: true
-          type: array
-        representativesClientsAccessRules:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportRepresentativesClientsAccessRuleDto'
-          xml:
-            name: ReportRepresentativesClientsAccessRuleDto
-            wrapped: true
-          type: array
-        clientAccessRules:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportClientAccessRuleDto'
-          xml:
-            name: ReportClientAccessRuleDto
-            wrapped: true
-          type: array
-        brokerDealerAccessRules:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportBrokerDealerAccessRuleDto'
-          xml:
-            name: ReportBrokerDealerAccessRuleDto
-            wrapped: true
-          type: array
-        brokerDealersRepresentativesAccessRules:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportBrokerDealersRepresentativesAccessRuleDto'
-          xml:
-            name: ReportBrokerDealersRepresentativesAccessRuleDto
-            wrapped: true
-          type: array
-        brokerDealerVersionAssignments:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportBrokerDealerVersionAssignmentDto'
-          xml:
-            name: ReportBrokerDealerVersionAssignmentDto
-            wrapped: true
-          type: array
-        portfolioGroupVersionAssignments:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportPortfolioGroupVersionAssignmentDto'
-          xml:
-            name: ReportPortfolioGroupVersionAssignmentDto
-            wrapped: true
-          type: array
-        representativeVersionAssignments:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportRepresentativeVersionAssignmentDto'
-          xml:
-            name: ReportRepresentativeVersionAssignmentDto
-            wrapped: true
-          type: array
-        clientVersionAssignments:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportClientVersionAssignmentDto'
-          xml:
-            name: ReportClientVersionAssignmentDto
-            wrapped: true
-          type: array
-        referencedOptions:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.FragmentVerboseReferencedOptionDto'
-          xml:
-            name: FragmentVerboseReferencedOptionDto
-            wrapped: true
-          type: array
-      xml:
-        name: ReportVerboseDto
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakePerformanceOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakePerformanceOption
-      type: object
-    OAS.DataModel.Reporting.ReportOption:
-      required:
-      - id
-      - $type
-      properties:
-        id:
-          type: string
-        $type:
-          readOnly: true
-          type: string
-        optionGuid:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        optionId:
-          type: integer
-          format: int32
-        isDisabled:
-          type: boolean
-        isGlobal:
-          type: boolean
-        isIgnored:
-          type: boolean
-        name:
-          type: string
-        useInception:
-          type: boolean
-        prompt:
-          type: string
-          enum:
-          - Never
-          - Always
-      xml:
-        name: ReportOption
-      type: object
-    OAS.DataModel.Reporting.Controls.WorkSheetControl:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        control:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IRenderDataTable'
-        sheetName:
-          type: string
-        customClass:
-          type: string
-        width:
-          type: string
-      xml:
-        name: WorkSheetControl
-      type: object
-    OAS.DataModel.Reporting.Envision.Dtos.ReportHistoryDto:
-      required:
-      - historyId
-      - reportGuid
-      properties:
-        historyId:
-          type: integer
-          format: int32
-        changedBy:
-          type: string
-        changedOn:
-          type: string
-          format: date-time
-        reportGuid:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-      xml:
-        name: ReportHistoryDto
+        name: ExcelReportPortfolioDto
       type: object
     OAS.DataModel.Reporting.Engine.ContextTagResult:
       required:
@@ -10140,6 +9190,626 @@ components:
       xml:
         name: ContextTagResult
       type: object
+    OAS.WebApi.DTO.Reporting.Envision.ExcelReportFullDto:
+      properties:
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        requiredOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+        featureFlagOverrides:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IReportFeatureFlagOverrider'
+        deliveryOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+        queryType:
+          readOnly: true
+          type: string
+          enum:
+          - None
+          - Custom
+          - Excel
+          - All
+        databaseIdList:
+          items:
+            type: integer
+            format: int32
+          type: array
+        references:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Envision.ReportSettingsReference'
+          xml:
+            name: ReportSettingsReference
+            wrapped: true
+          type: array
+        category:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+      xml:
+        name: ExcelReportFullDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportThemeDto:
+      required:
+      - id
+      - name
+      - description
+      - css
+      properties:
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        name:
+          type: string
+          maxLength: 200
+          minLength: 0
+        description:
+          type: string
+        canEdit:
+          type: boolean
+        canDelete:
+          type: boolean
+        auditedBy:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        isDefault:
+          type: boolean
+        css:
+          type: string
+      xml:
+        name: ReportThemeDto
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeTaxOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeTaxOption
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportPdfFileDto:
+      properties:
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+        name:
+          type: string
+      xml:
+        name: ReportPdfFileDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportCoverPageSchemaDto:
+      properties:
+        body:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Controls.PositionedControlListControl'
+      xml:
+        name: ReportCoverPageSchemaDto
+      type: object
+    System.ValueTupleOfSystem.GuidAndSystem.Int32:
+      properties:
+        item1:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        item2:
+          type: integer
+          format: int32
+      xml:
+        name: ValueTuple`2
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportThemeOption:
+      properties:
+        tableGroupLevels:
+          type: integer
+          format: int32
+      xml:
+        name: ReportThemeOption
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportUserAccessRuleDto:
+      properties:
+        userId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        canRun:
+          type: boolean
+        canEdit:
+          type: boolean
+        canDelete:
+          type: boolean
+      xml:
+        name: ReportUserAccessRuleDto
+      type: object
+    OAS.DataModel.Reporting.Envision.ReportSettingsReference:
+      properties:
+        optionGuid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        reportId:
+          type: integer
+          format: int32
+        reportOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Envision.ReportSettings'
+      xml:
+        name: ReportSettingsReference
+      type: object
+    OAS.DataModel.Reporting.Envision.ReportSettingsAlClient:
+      properties:
+        reportSettingsId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        alClientId:
+          type: integer
+          format: int32
+      xml:
+        name: ReportSettingsAlClient
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportVerboseDto:
+      properties:
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        name:
+          type: string
+        portfolio:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportPortfolioDto'
+        schema:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportSchemaDto'
+        requiredOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+        additionalOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOptionCategory'
+          xml:
+            name: ReportOptionCategory
+            wrapped: true
+          type: array
+        versions:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportVersionDto'
+          xml:
+            name: ReportVersionDto
+            wrapped: true
+          type: array
+        loginAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportLoginAccessRuleDto'
+          xml:
+            name: ReportLoginAccessRuleDto
+            wrapped: true
+          type: array
+        databaseGroupAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseGroupAccessRuleDto'
+          xml:
+            name: ReportDatabaseGroupAccessRuleDto
+            wrapped: true
+          type: array
+        databaseAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportDatabaseAccessRuleDto'
+          xml:
+            name: ReportDatabaseAccessRuleDto
+            wrapped: true
+          type: array
+        roleAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportRoleAccessRuleDto'
+          xml:
+            name: ReportRoleAccessRuleDto
+            wrapped: true
+          type: array
+        userAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportUserAccessRuleDto'
+          xml:
+            name: ReportUserAccessRuleDto
+            wrapped: true
+          type: array
+        representativeAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportRepresentativeAccessRuleDto'
+          xml:
+            name: ReportRepresentativeAccessRuleDto
+            wrapped: true
+          type: array
+        representativesClientsAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportRepresentativesClientsAccessRuleDto'
+          xml:
+            name: ReportRepresentativesClientsAccessRuleDto
+            wrapped: true
+          type: array
+        clientAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportClientAccessRuleDto'
+          xml:
+            name: ReportClientAccessRuleDto
+            wrapped: true
+          type: array
+        brokerDealerAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportBrokerDealerAccessRuleDto'
+          xml:
+            name: ReportBrokerDealerAccessRuleDto
+            wrapped: true
+          type: array
+        brokerDealersRepresentativesAccessRules:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportBrokerDealersRepresentativesAccessRuleDto'
+          xml:
+            name: ReportBrokerDealersRepresentativesAccessRuleDto
+            wrapped: true
+          type: array
+        brokerDealerVersionAssignments:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportBrokerDealerVersionAssignmentDto'
+          xml:
+            name: ReportBrokerDealerVersionAssignmentDto
+            wrapped: true
+          type: array
+        portfolioGroupVersionAssignments:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportPortfolioGroupVersionAssignmentDto'
+          xml:
+            name: ReportPortfolioGroupVersionAssignmentDto
+            wrapped: true
+          type: array
+        representativeVersionAssignments:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportRepresentativeVersionAssignmentDto'
+          xml:
+            name: ReportRepresentativeVersionAssignmentDto
+            wrapped: true
+          type: array
+        clientVersionAssignments:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.ReportClientVersionAssignmentDto'
+          xml:
+            name: ReportClientVersionAssignmentDto
+            wrapped: true
+          type: array
+        referencedOptions:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Envision.FragmentVerboseReferencedOptionDto'
+          xml:
+            name: FragmentVerboseReferencedOptionDto
+            wrapped: true
+          type: array
+      xml:
+        name: ReportVerboseDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportRepresentativeVersionAssignmentDto:
+      properties:
+        representativeId:
+          type: integer
+          format: int32
+        reportId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        name:
+          type: string
+        reportVersionId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+      xml:
+        name: ReportRepresentativeVersionAssignmentDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.FragmentDto:
+      properties:
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        category:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        canEdit:
+          type: boolean
+        canDelete:
+          type: boolean
+        auditedBy:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        isDynamic:
+          type: boolean
+      xml:
+        name: FragmentDto
+      type: object
+    OAS.DataModel.Reporting.Controls.WorkSheetControl:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        control:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IRenderDataTable'
+        sheetName:
+          type: string
+        customClass:
+          type: string
+        width:
+          type: string
+      xml:
+        name: WorkSheetControl
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportLoginAccessRuleDto:
+      properties:
+        loginEntityId:
+          type: string
+          enum:
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - RIA
+          - Administrator
+          - SubAdvisor
+          - ThirdPartyAdministrator
+          - Custodian
+          - PlanSponsor
+          - ThirdParty
+          - ServiceAccount
+          - Participant
+          - RepAccountManager
+          - Payee
+          - RIATable
+          - Cotenant
+        canRun:
+          type: boolean
+      xml:
+        name: ReportLoginAccessRuleDto
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeCostBasisOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeCostBasisOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeIncomeOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeIncomeOption
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportPortfolioGroupVersionAssignmentDto:
+      properties:
+        portfolioGroupId:
+          type: integer
+          format: int32
+        reportId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        name:
+          type: string
+        reportVersionId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+      xml:
+        name: ReportPortfolioGroupVersionAssignmentDto
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    OAS.DataModel.SimpleEntityWithDescriptionOfSystem.Guid:
+      properties:
+        description:
+          type: string
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        name:
+          type: string
+      xml:
+        name: SimpleEntityWithDescription`1
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportVersionDto:
+      properties:
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        name:
+          type: string
+        isDeleted:
+          type: boolean
+      xml:
+        name: ReportVersionDto
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeStatisticalOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeStatisticalOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IRenderDataTable:
+      properties:
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IRenderDataTable
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeAttributionOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeAttributionOption
+      type: object
+    OAS.WebApi.DTO.Reporting.Custom.DataQueryBaseDto:
+      properties:
+        category:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        queryType:
+          readOnly: true
+          type: string
+          enum:
+          - None
+          - Custom
+          - Excel
+          - All
+      xml:
+        name: DataQueryBaseDto
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportRoleAccessRuleDto:
+      properties:
+        roleId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        canRun:
+          type: boolean
+        canEdit:
+          type: boolean
+        canDelete:
+          type: boolean
+      xml:
+        name: ReportRoleAccessRuleDto
+      type: object
+    OAS.DataModel.Reporting.Envision.Dtos.ReportHistoryDto:
+      required:
+      - historyId
+      - reportGuid
+      properties:
+        historyId:
+          type: integer
+          format: int32
+        changedBy:
+          type: string
+        changedOn:
+          type: string
+          format: date-time
+        reportGuid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+      xml:
+        name: ReportHistoryDto
+      type: object
+    OAS.DataModel.Reporting.Envision.ReportSettingsOfSettings:
+      properties:
+        parentReportSettingId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        childReportSettingId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+      xml:
+        name: ReportSettingsOfSettings
+      type: object
+    OAS.DataModel.Reporting.Engine.ContextFilter:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        change:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.ContextChange'
+        filters:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.ContextCalculationFilter'
+          xml:
+            name: ContextCalculationFilter
+            wrapped: true
+          type: array
+        method:
+          type: string
+          enum:
+          - All
+          - Any
+        oldFilterValue:
+          type: string
+          enum:
+          - None
+          - HasValue
+          - HasUnits
+      xml:
+        name: ContextFilter
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakePerformanceOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakePerformanceOption
+      type: object
     OAS.DataModel.Reporting.Calculate.ManagementOverride:
       properties:
         id:
@@ -10149,6 +9819,336 @@ components:
           type: boolean
       xml:
         name: ManagementOverride
+      type: object
+    OAS.DataModel.Reporting.Engine.ContextChange:
+      properties:
+        activityOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeActivityOption'
+        billingOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeBillingOption'
+        calculationOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculation.IMakeCalculationOption'
+        comparisonOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeComparisonOption'
+        costBasisOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeCostBasisOption'
+        dateRange:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeDateRange'
+        incomeOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeIncomeOption'
+        maturityPeriodOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeMaturityPeriodOption'
+        performanceOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakePerformanceOption'
+        projectedIncomeOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeProjectedIncomeOption'
+        statisticalOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeStatisticalOption'
+        taxOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeTaxOption'
+        tradingOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeTradingOption'
+        transactionOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeTransactionOption'
+        attributionOption:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IMakeAttributionOption'
+        activityOptionId:
+          type: integer
+          format: int32
+        billingOptionId:
+          type: integer
+          format: int32
+        calculationOptionId:
+          type: integer
+          format: int32
+        comparisonOptionId:
+          type: integer
+          format: int32
+        costBasisOptionId:
+          type: integer
+          format: int32
+        dateRangeId:
+          type: integer
+          format: int32
+        incomeOptionId:
+          type: integer
+          format: int32
+        maturityPeriodOptionId:
+          type: integer
+          format: int32
+        performanceOptionId:
+          type: integer
+          format: int32
+        projectedIncomeOptionId:
+          type: integer
+          format: int32
+        promptOptionId:
+          type: integer
+          format: int32
+        reportCategoryId:
+          type: integer
+          format: int32
+        statisticalOptionId:
+          type: integer
+          format: int32
+        taxOptionId:
+          type: integer
+          format: int32
+        tradingOptionId:
+          type: integer
+          format: int32
+        transactionOptionId:
+          type: integer
+          format: int32
+        attributionId:
+          type: integer
+          format: int32
+        returnStyle:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IReturnStyle'
+        percentFormat:
+          type: string
+        dollarFormat:
+          type: string
+        decimalFormat:
+          type: string
+        numericFormat:
+          type: string
+        quickDate:
+          type: string
+          enum:
+          - Day
+          - WTD
+          - MTD
+          - QTD
+          - YTD
+          - OneYear
+          - TwoYear
+          - ThreeYear
+          - FourYear
+          - FiveYear
+          - SixYear
+          - SevenYear
+          - EightYear
+          - NineYear
+          - TenYear
+          - PreviousOneYear
+          - PreviousTwoYear
+          - PreviousThreeYear
+          - PreviousFourYear
+          - PreviousFiveYear
+          - PreviousSixYear
+          - PreviousSevenYear
+          - PreviousEightYear
+          - PreviousNineYear
+          - PreviousTenYear
+          - Inception
+          - HoldingPeriod
+          - AIPLedger
+        globalsSynced:
+          type: boolean
+        useSmaSetting:
+          type: boolean
+      xml:
+        name: ContextChange
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportProtoRunForDto:
+      properties:
+        entity:
+          type: string
+          enum:
+          - Database
+          - BrokerDealer
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - AggregateModel
+          - DynamicGrouping
+          - PortfolioGroup
+          - UserDetail
+          - Prospect
+          - CustomGrouping
+        entityIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        prospectId:
+          type: string
+        asOfDate:
+          type: string
+        accountInclusion:
+          type: string
+          enum:
+          - Default
+          - All
+          - ActiveOnly
+          - ActiveWithValue
+          - ActiveRegistrationsOnly
+          - RegistrationsWithValue
+        groupCustodialCashTogether:
+          type: boolean
+        useSmaSettings:
+          type: boolean
+        unmanagedInclusionOverride:
+          type: string
+          enum:
+          - Unmanaged
+          - Performance
+          - ActivitySummary
+          - Allocation
+          - PortfolioDetail
+          - TaxDetail
+        includeHistoricalLinks:
+          type: string
+          enum:
+          - None
+          - CostBasis
+          - Performance
+        accountManagementOverride:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Calculate.ManagementOverride'
+          xml:
+            name: ManagementOverride
+            wrapped: true
+          type: array
+        exclusions:
+          properties:
+            account:
+              items:
+                type: integer
+                format: int32
+              type: array
+            fundFamily:
+              items:
+                type: integer
+                format: int32
+              type: array
+          type: object
+      xml:
+        name: ReportProtoRunForDto
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IReturnStyle:
+      properties:
+        frequency:
+          readOnly: true
+          type: string
+          enum:
+          - Summary
+          - Annually
+          - Quarterly
+          - Monthly
+          - Weekly
+          - Daily
+          - Automatic
+        basedOn:
+          readOnly: true
+          type: string
+          enum:
+          - Calendar
+          - RollingForward
+          - RollingBackward
+        breakBehavior:
+          readOnly: true
+          type: string
+          enum:
+          - AllowPartialPeriods
+          - PartialPeriodsWithBreakPoints
+          - FullPeriodsOnly
+        cumulative:
+          readOnly: true
+          type: boolean
+        cumulativeBasedOn:
+          readOnly: true
+          type: string
+          enum:
+          - ForwardFromStartDate
+          - BackwardFromEndDate
+        context:
+          readOnly: true
+          type: string
+          enum:
+          - Self
+          - Parent
+      xml:
+        name: IReturnStyle
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportBrokerDealerVersionAssignmentDto:
+      properties:
+        brokerDealerId:
+          type: integer
+          format: int32
+        reportId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        name:
+          type: string
+        reportVersionId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+      xml:
+        name: ReportBrokerDealerVersionAssignmentDto
+      type: object
+    OAS.DataModel.Reporting.Controls.PositionedControlListControl:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        height:
+          type: string
+        controls:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.Controls.PositionedControl'
+          xml:
+            name: PositionedControl
+            wrapped: true
+          type: array
+        customClass:
+          type: string
+        width:
+          type: string
+      xml:
+        name: PositionedControlListControl
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.ReportPdfDto:
+      properties:
+        id:
+          type: string
+        pdfUrl:
+          type: string
+        name:
+          type: string
+        pageCount:
+          type: integer
+          format: int32
+        alClientId:
+          type: integer
+          format: int32
+      xml:
+        name: ReportPdfDto
       type: object
   securitySchemes:
     Authorization:
