@@ -143,59 +143,16 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.DTO.HomepageDashboard.AvailableValueDto:
+    OAS.WebApi.DTO.HomepageDashboard.InputOption:
       properties:
-        displayName:
-          type: string
-        value:
-          type: string
-        sortOrder:
+        min:
           type: integer
           format: int32
-        bucketValue:
-          type: string
-        isHidden:
-          type: boolean
-        dataText:
-          type: string
-        cssClass:
-          type: string
-        setting:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardSettingDto'
+        max:
+          type: integer
+          format: int32
       xml:
-        name: AvailableValueDto
-      type: object
-    OAS.WebApi.DTO.HomepageDashboard.ListEditorConfigDto:
-      description: Declarative list editor UI config stored on card settings JSON (listEditor).
-      properties:
-        mode:
-          type: string
-        labelField:
-          type: string
-        valueField:
-          type: string
-        readOnlyFields:
-          items:
-            type: string
-          type: array
-        maxItems:
-          type: integer
-          format: int32
-        minItems:
-          type: integer
-          format: int32
-        allowAdd:
-          type: boolean
-        allowRemove:
-          type: boolean
-        allowReorder:
-          type: boolean
-        emptyMessage:
-          type: string
-        persistStrategy:
-          type: string
-      xml:
-        name: ListEditorConfigDto
+        name: InputOption
       type: object
     OAS.WebApi.DTO.HomepageDashboard.CardSettingDto:
       properties:
@@ -253,6 +210,103 @@ components:
       xml:
         name: CardSettingDto
       type: object
+    OAS.WebApi.DTO.HomepageDashboard.ValuesSourceDto:
+      properties:
+        endpoint:
+          type: string
+        labelField:
+          type: string
+        valueField:
+          type: string
+      xml:
+        name: ValuesSourceDto
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.ListEditorConfigDto:
+      description: Declarative list editor UI config stored on card settings JSON (listEditor).
+      properties:
+        mode:
+          type: string
+        labelField:
+          type: string
+        valueField:
+          type: string
+        readOnlyFields:
+          items:
+            type: string
+          type: array
+        maxItems:
+          type: integer
+          format: int32
+        minItems:
+          type: integer
+          format: int32
+        allowAdd:
+          type: boolean
+        allowRemove:
+          type: boolean
+        allowReorder:
+          type: boolean
+        emptyMessage:
+          type: string
+        persistStrategy:
+          type: string
+      xml:
+        name: ListEditorConfigDto
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.CardMappingDto:
+      properties:
+        type:
+          type: string
+        text:
+          type: string
+        originalAvailableValues:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.AvailableValueDto'
+          xml:
+            name: AvailableValueDto
+            wrapped: true
+          type: array
+        buckets:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.BucketMappingDto'
+          xml:
+            name: BucketMappingDto
+            wrapped: true
+          type: array
+      xml:
+        name: CardMappingDto
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.AvailableValueDto:
+      properties:
+        displayName:
+          type: string
+        value:
+          type: string
+        sortOrder:
+          type: integer
+          format: int32
+        bucketValue:
+          type: string
+        isHidden:
+          type: boolean
+        dataText:
+          type: string
+        cssClass:
+          type: string
+        setting:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardSettingDto'
+      xml:
+        name: AvailableValueDto
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.CardsettingOptionDto:
+      properties:
+        inputOption:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.InputOption'
+        sliderOption:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.SliderOptionDto'
+      xml:
+        name: CardsettingOptionDto
+      type: object
     OAS.WebApi.DTO.HomepageDashboard.BucketMappingDto:
       properties:
         name:
@@ -292,17 +346,6 @@ components:
       xml:
         name: CardSettingSaveDto
       type: object
-    OAS.WebApi.DTO.HomepageDashboard.InputOption:
-      properties:
-        min:
-          type: integer
-          format: int32
-        max:
-          type: integer
-          format: int32
-      xml:
-        name: InputOption
-      type: object
     OAS.WebApi.DTO.HomepageDashboard.SliderOptionDto:
       properties:
         min:
@@ -316,49 +359,6 @@ components:
           format: int32
       xml:
         name: SliderOptionDto
-      type: object
-    OAS.WebApi.DTO.HomepageDashboard.CardMappingDto:
-      properties:
-        type:
-          type: string
-        text:
-          type: string
-        originalAvailableValues:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.AvailableValueDto'
-          xml:
-            name: AvailableValueDto
-            wrapped: true
-          type: array
-        buckets:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.BucketMappingDto'
-          xml:
-            name: BucketMappingDto
-            wrapped: true
-          type: array
-      xml:
-        name: CardMappingDto
-      type: object
-    OAS.WebApi.DTO.HomepageDashboard.ValuesSourceDto:
-      properties:
-        endpoint:
-          type: string
-        labelField:
-          type: string
-        valueField:
-          type: string
-      xml:
-        name: ValuesSourceDto
-      type: object
-    OAS.WebApi.DTO.HomepageDashboard.CardsettingOptionDto:
-      properties:
-        inputOption:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.InputOption'
-        sliderOption:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.SliderOptionDto'
-      xml:
-        name: CardsettingOptionDto
       type: object
   securitySchemes:
     Authorization:

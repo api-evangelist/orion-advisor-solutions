@@ -1533,105 +1533,55 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.DataProcess.Integrations.Apex.DTOs.ApexHighWaterMark:
+    Microsoft.IdentityModel.Tokens.EncryptingCredentials:
       properties:
-        type:
+        alg:
+          readOnly: true
           type: string
-          enum:
-          - ACCOUNT_STATUS
-          - ACH_TRANSACTION
-          - INVESTIGATION_STATUS
-          - NOC
-          - ACH_TRANSACTION_V2
-          - NOC_V2
-          - ACAT
-        highWaterMark:
-          type: integer
-          format: int64
-        correspondentCode:
+        enc:
+          readOnly: true
           type: string
-        sinceDateTime:
-          type: string
-          format: date-time
+        keyExchangePublicKey:
+          $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.SecurityKey'
+        cryptoProviderFactory:
+          $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.CryptoProviderFactory'
+        setDefaultCtyClaim:
+          type: boolean
+        key:
+          $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.SecurityKey'
+          readOnly: true
+      xml:
+        name: EncryptingCredentials
+      type: object
+    OAS.DataProcess.Integrations.Apex.DTOs.ApexDocumentSystemConfiguration:
+      properties:
         alClientId:
           type: integer
           format: int32
-      xml:
-        name: ApexHighWaterMark
-      type: object
-    OAS.DataProcess.Integrations.Apex.DTOs.ApexProspectClient:
-      properties:
-        RepId:
-          type: integer
-          format: int32
-        ModelId:
-          type: integer
-          format: int32
-        FirstName:
+        apexCustomerId:
           type: string
-        LastName:
+        apexKey:
           type: string
-        Phone:
-          type: string
-        Address:
-          type: string
-        City:
-          type: string
-        Country:
-          type: string
-        State:
-          type: string
-        ZipCode:
-          type: string
-        DateOfBirth:
-          type: string
-        Email:
-          type: string
-        SSN:
-          type: string
-        JobTitle:
+        baseUrl:
           type: string
       xml:
-        name: ApexProspectClient
+        name: ApexDocumentSystemConfiguration
       type: object
-    Microsoft.IdentityModel.Tokens.SecurityKey:
+    Microsoft.IdentityModel.Tokens.CryptoProviderFactory:
       properties:
-        keySize:
+        cryptoProviderCache:
+          $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.CryptoProviderCache'
           readOnly: true
+        customCryptoProvider:
+          $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.ICryptoProvider'
+        cacheSignatureProviders:
+          type: boolean
+          default: true
+        signatureProviderObjectPoolCacheSize:
           type: integer
           format: int32
-        keyId:
-          type: string
-        cryptoProviderFactory:
-          $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.CryptoProviderFactory'
       xml:
-        name: SecurityKey
-      type: object
-    OAS.DataProcess.Integrations.Apex.DTOs.RetirementAccountBeneficiary:
-      properties:
-        GivenName:
-          type: string
-        FamilyName:
-          type: string
-        DateOfBirth:
-          type: string
-          format: date-time
-        BeneficiaryType:
-          type: string
-        Relationship:
-          type: string
-        SocialSecurityNumber:
-          type: string
-        SharePercent:
-          type: integer
-          format: int64
-      xml:
-        name: RetirementAccountBeneficiary
-      type: object
-    Microsoft.IdentityModel.Tokens.CryptoProviderCache:
-      properties: {}
-      xml:
-        name: CryptoProviderCache
+        name: CryptoProviderFactory
       type: object
     System.IdentityModel.Tokens.Jwt.JwtSecurityToken:
       properties:
@@ -1732,69 +1682,40 @@ components:
       xml:
         name: JwtSecurityToken
       type: object
-    OAS.DataProcess.Integrations.Apex.DTOs.ApexDocumentSystemConfiguration:
+    OAS.DataProcess.Integrations.Apex.DTOs.ApexProspectClient:
       properties:
-        alClientId:
+        RepId:
           type: integer
           format: int32
-        apexCustomerId:
-          type: string
-        apexKey:
-          type: string
-        baseUrl:
-          type: string
-      xml:
-        name: ApexDocumentSystemConfiguration
-      type: object
-    Microsoft.IdentityModel.Tokens.CryptoProviderFactory:
-      properties:
-        cryptoProviderCache:
-          $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.CryptoProviderCache'
-          readOnly: true
-        customCryptoProvider:
-          $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.ICryptoProvider'
-        cacheSignatureProviders:
-          type: boolean
-          default: true
-        signatureProviderObjectPoolCacheSize:
+        ModelId:
           type: integer
           format: int32
-      xml:
-        name: CryptoProviderFactory
-      type: object
-    System.Security.Claims.ClaimsIdentity:
-      properties:
-        authenticationType:
-          readOnly: true
+        FirstName:
           type: string
-        isAuthenticated:
-          readOnly: true
-          type: boolean
-        actor:
-          $ref: '#/components/schemas/System.Security.Claims.ClaimsIdentity'
-        bootstrapContext:
-          type: object
-        claims:
-          items:
-            $ref: '#/components/schemas/System.Security.Claims.Claim'
-          readOnly: true
-          xml:
-            name: Claim
-            wrapped: true
-          type: array
-        label:
+        LastName:
           type: string
-        name:
-          readOnly: true
+        Phone:
           type: string
-        nameClaimType:
-          readOnly: true
+        Address:
           type: string
-        roleClaimType:
-          readOnly: true
+        City:
+          type: string
+        Country:
+          type: string
+        State:
+          type: string
+        ZipCode:
+          type: string
+        DateOfBirth:
+          type: string
+        Email:
+          type: string
+        SSN:
+          type: string
+        JobTitle:
           type: string
       xml:
-        name: ClaimsIdentity
+        name: ApexProspectClient
       type: object
     OAT.Integrations.Apex.DTOs.ApexUserToken:
       properties:
@@ -1810,6 +1731,19 @@ components:
           $ref: '#/components/schemas/System.IdentityModel.Tokens.Jwt.JwtSecurityToken'
       xml:
         name: ApexUserToken
+      type: object
+    Microsoft.IdentityModel.Tokens.SecurityKey:
+      properties:
+        keySize:
+          readOnly: true
+          type: integer
+          format: int32
+        keyId:
+          type: string
+        cryptoProviderFactory:
+          $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.CryptoProviderFactory'
+      xml:
+        name: SecurityKey
       type: object
     Microsoft.IdentityModel.Tokens.SigningCredentials:
       properties:
@@ -1858,68 +1792,31 @@ components:
       xml:
         name: Claim
       type: object
-    OAS.DataProcess.Integrations.Apex.DTOs.ApexAccountOpeningDto:
+    OAS.DataProcess.Integrations.Apex.DTOs.ApexHighWaterMark:
       properties:
-        OrionDatabaseId:
+        type:
+          type: string
+          enum:
+          - ACCOUNT_STATUS
+          - ACH_TRANSACTION
+          - INVESTIGATION_STATUS
+          - NOC
+          - ACH_TRANSACTION_V2
+          - NOC_V2
+          - ACAT
+        highWaterMark:
+          type: integer
+          format: int64
+        correspondentCode:
+          type: string
+        sinceDateTime:
+          type: string
+          format: date-time
+        alClientId:
           type: integer
           format: int32
-        OrionHouseholdId:
-          type: integer
-          format: int32
-        ApexCorrespondentCode:
-          type: string
-        ApexBranch:
-          type: string
-        ApexRepCode:
-          type: string
-        ApexAccountRequestId:
-          type: string
-        ApexAccountType:
-          type: string
-        ApexCustomerType:
-          type: string
-        ApexIraType:
-          type: string
-        ApexAccountNumber:
-          type: string
-        ApexAccountStatus:
-          type: string
-        RetirementAccountBeneficiaries:
-          items:
-            $ref: '#/components/schemas/OAS.DataProcess.Integrations.Apex.DTOs.RetirementAccountBeneficiary'
-          xml:
-            name: RetirementAccountBeneficiary
-            wrapped: true
-          type: array
-        Household:
-          $ref: '#/components/schemas/OAS.DataProcess.Integrations.Apex.DTOs.ApexProspectClient'
       xml:
-        name: ApexAccountOpeningDto
-      type: object
-    Microsoft.IdentityModel.Tokens.ICryptoProvider:
-      properties: {}
-      xml:
-        name: ICryptoProvider
-      type: object
-    Microsoft.IdentityModel.Tokens.EncryptingCredentials:
-      properties:
-        alg:
-          readOnly: true
-          type: string
-        enc:
-          readOnly: true
-          type: string
-        keyExchangePublicKey:
-          $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.SecurityKey'
-        cryptoProviderFactory:
-          $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.CryptoProviderFactory'
-        setDefaultCtyClaim:
-          type: boolean
-        key:
-          $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.SecurityKey'
-          readOnly: true
-      xml:
-        name: EncryptingCredentials
+        name: ApexHighWaterMark
       type: object
     OAS.DataProcess.Integrations.Apex.Code.RepBranchDto:
       properties:
@@ -1967,6 +1864,50 @@ components:
       xml:
         name: ApexFileUploadDto
       type: object
+    System.Security.Claims.ClaimsIdentity:
+      properties:
+        authenticationType:
+          readOnly: true
+          type: string
+        isAuthenticated:
+          readOnly: true
+          type: boolean
+        actor:
+          $ref: '#/components/schemas/System.Security.Claims.ClaimsIdentity'
+        bootstrapContext:
+          type: object
+        claims:
+          items:
+            $ref: '#/components/schemas/System.Security.Claims.Claim'
+          readOnly: true
+          xml:
+            name: Claim
+            wrapped: true
+          type: array
+        label:
+          type: string
+        name:
+          readOnly: true
+          type: string
+        nameClaimType:
+          readOnly: true
+          type: string
+        roleClaimType:
+          readOnly: true
+          type: string
+      xml:
+        name: ClaimsIdentity
+      type: object
+    Microsoft.IdentityModel.Tokens.CryptoProviderCache:
+      properties: {}
+      xml:
+        name: CryptoProviderCache
+      type: object
+    Microsoft.IdentityModel.Tokens.ICryptoProvider:
+      properties: {}
+      xml:
+        name: ICryptoProvider
+      type: object
     OAS.DataProcess.Integrations.Apex.Code.ApexFirmDto:
       required:
       - alClientId
@@ -1998,6 +1939,65 @@ components:
           type: string
       xml:
         name: ApexFirmDto
+      type: object
+    OAS.DataProcess.Integrations.Apex.DTOs.RetirementAccountBeneficiary:
+      properties:
+        GivenName:
+          type: string
+        FamilyName:
+          type: string
+        DateOfBirth:
+          type: string
+          format: date-time
+        BeneficiaryType:
+          type: string
+        Relationship:
+          type: string
+        SocialSecurityNumber:
+          type: string
+        SharePercent:
+          type: integer
+          format: int64
+      xml:
+        name: RetirementAccountBeneficiary
+      type: object
+    OAS.DataProcess.Integrations.Apex.DTOs.ApexAccountOpeningDto:
+      properties:
+        OrionDatabaseId:
+          type: integer
+          format: int32
+        OrionHouseholdId:
+          type: integer
+          format: int32
+        ApexCorrespondentCode:
+          type: string
+        ApexBranch:
+          type: string
+        ApexRepCode:
+          type: string
+        ApexAccountRequestId:
+          type: string
+        ApexAccountType:
+          type: string
+        ApexCustomerType:
+          type: string
+        ApexIraType:
+          type: string
+        ApexAccountNumber:
+          type: string
+        ApexAccountStatus:
+          type: string
+        RetirementAccountBeneficiaries:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.Integrations.Apex.DTOs.RetirementAccountBeneficiary'
+          xml:
+            name: RetirementAccountBeneficiary
+            wrapped: true
+          type: array
+        Household:
+          $ref: '#/components/schemas/OAS.DataProcess.Integrations.Apex.DTOs.ApexProspectClient'
+      xml:
+        name: ApexAccountOpeningDto
       type: object
   securitySchemes:
     Authorization:

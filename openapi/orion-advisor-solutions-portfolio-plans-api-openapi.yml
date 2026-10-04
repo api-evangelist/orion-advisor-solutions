@@ -1276,36 +1276,22 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.DTO.Portfolio.ParticipantAccountDto:
+    OAS.DataModel.Portfolio.SimplePlan:
       properties:
-        accountId:
+        registrationTypeId:
           type: integer
           format: int32
-        householdId:
+        registrationType:
+          type: string
+        planNumber:
+          type: string
+        id:
           type: integer
           format: int32
-        householdName:
+        name:
           type: string
-        accountNumber:
-          type: string
-        currValue:
-          type: number
-          format: double
-        fundFamilyName:
-          type: string
-        managementStyleName:
-          type: string
-        houseHoldEmail:
-          type: string
-        isActive:
-          type: boolean
-        riskBudget:
-          type: integer
-          format: int32
-        isLifestyleOption:
-          type: boolean
       xml:
-        name: ParticipantAccountDto
+        name: SimplePlan
       type: object
     OAS.WebApi.DTO.Portfolio.PlanPersonalDto:
       properties:
@@ -1363,14 +1349,82 @@ components:
       xml:
         name: PlanPersonalDto
       type: object
-    OAS.WebApi.DTO.Portfolio.PlanParticipantFieldErrorDto:
+    OAS.WebApi.DTO.Portfolio.UpdateSsnDto:
       properties:
-        field:
+        ssn:
           type: string
-        message:
+        reason:
           type: string
       xml:
-        name: PlanParticipantFieldErrorDto
+        name: UpdateSsnDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.ParticipantAccountDto:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        householdId:
+          type: integer
+          format: int32
+        householdName:
+          type: string
+        accountNumber:
+          type: string
+        currValue:
+          type: number
+          format: double
+        fundFamilyName:
+          type: string
+        managementStyleName:
+          type: string
+        houseHoldEmail:
+          type: string
+        isActive:
+          type: boolean
+        riskBudget:
+          type: integer
+          format: int32
+        isLifestyleOption:
+          type: boolean
+      xml:
+        name: ParticipantAccountDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.PlanParticipantAddDto:
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        ssn:
+          type: string
+        dateOfBirth:
+          type: string
+        address1:
+          type: string
+        address2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        platformId:
+          type: integer
+          format: int32
+        businessLineId:
+          type: integer
+          format: int32
+        isLifestyleOption:
+          type: boolean
+        autoPopulate:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PlanParticipantAutoPopulateDto'
+      xml:
+        name: PlanParticipantAddDto
       type: object
     OAS.WebApi.DTO.Portfolio.PlanFeeDto:
       properties:
@@ -1436,54 +1490,6 @@ components:
       xml:
         name: PlanVerboseDto
       type: object
-    OAS.WebApi.DTO.Portfolio.PlanParticipantAutoPopulateDto:
-      properties:
-        accountNumber:
-          type: string
-        riskBudget:
-          type: integer
-          format: int32
-        riskTolerance:
-          type: integer
-          format: int32
-        returnObjective:
-          type: string
-        investmentObjective:
-          type: string
-        timeHorizon:
-          type: string
-        stockPercent:
-          type: string
-        modelId:
-          type: integer
-          format: int32
-        modelName:
-          type: string
-        platformId:
-          type: integer
-          format: int32
-        managementStyleName:
-          type: string
-      xml:
-        name: PlanParticipantAutoPopulateDto
-      type: object
-    OAS.DataModel.Portfolio.SimplePlan:
-      properties:
-        registrationTypeId:
-          type: integer
-          format: int32
-        registrationType:
-          type: string
-        planNumber:
-          type: string
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimplePlan
-      type: object
     OAS.WebApi.DTO.Portfolio.PlanPortfolioDto:
       properties:
         planName:
@@ -1528,35 +1534,46 @@ components:
       xml:
         name: PlanPortfolioDto
       type: object
-    OAS.WebApi.DTO.Portfolio.UpdateSsnDto:
-      properties:
-        ssn:
-          type: string
-        reason:
-          type: string
-      xml:
-        name: UpdateSsnDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.PlanPlatformDto:
+    OAS.WebApi.DTO.Portfolio.NoteDto:
       properties:
         id:
           type: integer
           format: int32
-        platformId:
-          type: integer
-          format: int32
-        platformName:
+        text:
           type: string
-        feePercent:
-          type: number
-          format: double
-        feeScheduleId:
-          type: integer
-          format: int32
-        feeScheduleName:
+        editedBy:
           type: string
+        editedDate:
+          type: string
+          format: date-time
+        category:
+          type: string
+        isWebVisible:
+          type: boolean
+        isSystemGenerated:
+          type: boolean
       xml:
-        name: PlanPlatformDto
+        name: NoteDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.PlanParticipantValidationResultDto:
+      properties:
+        isValid:
+          type: boolean
+        message:
+          type: string
+        warningMessage:
+          type: string
+        autoPopulate:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PlanParticipantAutoPopulateDto'
+        fieldErrors:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PlanParticipantFieldErrorDto'
+          xml:
+            name: PlanParticipantFieldErrorDto
+            wrapped: true
+          type: array
+      xml:
+        name: PlanParticipantValidationResultDto
       type: object
     OAS.WebApi.DTO.Portfolio.PlanSponsorDto:
       properties:
@@ -1617,6 +1634,81 @@ components:
           type: boolean
       xml:
         name: PlanSponsorDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.PlanParticipantAutoPopulateDto:
+      properties:
+        accountNumber:
+          type: string
+        riskBudget:
+          type: integer
+          format: int32
+        riskTolerance:
+          type: integer
+          format: int32
+        returnObjective:
+          type: string
+        investmentObjective:
+          type: string
+        timeHorizon:
+          type: string
+        stockPercent:
+          type: string
+        modelId:
+          type: integer
+          format: int32
+        modelName:
+          type: string
+        platformId:
+          type: integer
+          format: int32
+        managementStyleName:
+          type: string
+      xml:
+        name: PlanParticipantAutoPopulateDto
+      type: object
+    OAS.DataModel.Portfolio.SimpleRepresentative:
+      properties:
+        isActive:
+          type: boolean
+        number:
+          type: string
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleRepresentative
+      type: object
+    OAS.WebApi.DTO.Portfolio.PlanPlatformDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        platformId:
+          type: integer
+          format: int32
+        platformName:
+          type: string
+        feePercent:
+          type: number
+          format: double
+        feeScheduleId:
+          type: integer
+          format: int32
+        feeScheduleName:
+          type: string
+      xml:
+        name: PlanPlatformDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.PlanParticipantFieldErrorDto:
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+      xml:
+        name: PlanParticipantFieldErrorDto
       type: object
     OAS.WebApi.DTO.Portfolio.PlanDto:
       properties:
@@ -1687,98 +1779,6 @@ components:
           type: string
       xml:
         name: PlanDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.PlanParticipantAddDto:
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        ssn:
-          type: string
-        dateOfBirth:
-          type: string
-        address1:
-          type: string
-        address2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zip:
-          type: string
-        phone:
-          type: string
-        email:
-          type: string
-        platformId:
-          type: integer
-          format: int32
-        businessLineId:
-          type: integer
-          format: int32
-        isLifestyleOption:
-          type: boolean
-        autoPopulate:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PlanParticipantAutoPopulateDto'
-      xml:
-        name: PlanParticipantAddDto
-      type: object
-    OAS.DataModel.Portfolio.SimpleRepresentative:
-      properties:
-        isActive:
-          type: boolean
-        number:
-          type: string
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleRepresentative
-      type: object
-    OAS.WebApi.DTO.Portfolio.PlanParticipantValidationResultDto:
-      properties:
-        isValid:
-          type: boolean
-        message:
-          type: string
-        warningMessage:
-          type: string
-        autoPopulate:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PlanParticipantAutoPopulateDto'
-        fieldErrors:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PlanParticipantFieldErrorDto'
-          xml:
-            name: PlanParticipantFieldErrorDto
-            wrapped: true
-          type: array
-      xml:
-        name: PlanParticipantValidationResultDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.NoteDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        text:
-          type: string
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        category:
-          type: string
-        isWebVisible:
-          type: boolean
-        isSystemGenerated:
-          type: boolean
-      xml:
-        name: NoteDto
       type: object
   securitySchemes:
     Authorization:

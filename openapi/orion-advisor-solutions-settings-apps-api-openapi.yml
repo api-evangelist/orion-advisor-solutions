@@ -981,51 +981,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.DTO.Settings.AppDto:
-      properties:
-        appCode:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        category:
-          type: string
-        tags:
-          type: string
-        routeUrl:
-          type: string
-        securityCode:
-          type: string
-        imageName:
-          type: string
-        color:
-          type: string
-        isActive:
-          type: boolean
-        ssoType:
-          type: string
-          enum:
-          - None
-          - SameTabRedirect
-          - Portal
-          - FormPost
-          - NewTabRedirect
-          - AdvisoryWorld
-          - ByAllRep
-          - Schwab
-          - Pershing
-          - GoldmanSachs
-        userOptionCount:
-          description: Indicates the count of options for this App, the User can set.
-          type: integer
-          format: int32
-        createdDate:
-          type: string
-          format: date-time
-      xml:
-        name: AppDto
-      type: object
     OAS.WebApi.DTO.Settings.AppContextualLinkDto:
       properties:
         name:
@@ -1040,6 +995,66 @@ components:
           type: string
       xml:
         name: AppContextualLinkDto
+      type: object
+    OAS.WebApi.DTO.Settings.AppOptionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        parentAppOptionId:
+          type: integer
+          format: int32
+        category:
+          type: string
+        displayName:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        value:
+          type: string
+        controlType:
+          type: string
+        canUserOverride:
+          type: boolean
+      xml:
+        name: AppOptionDto
+      type: object
+    OAS.WebApi.DTO.Settings.AppPageDefaultDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        pageCode:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        routeUrl:
+          type: string
+        securityCode:
+          type: string
+        includeByDefault:
+          type: boolean
+        parameters:
+          type: string
+        helpText:
+          type: string
+        privilegeId:
+          type: integer
+          format: int32
+        sortOrder:
+          type: integer
+          format: int32
+        audienceExclusion:
+          type: string
+          enum:
+          - None
+          - WorkflowAssistant
+      xml:
+        name: AppPageDefaultDto
       type: object
     OAS.WebApi.DTO.Settings.AppFullDto:
       properties:
@@ -1118,40 +1133,75 @@ components:
       xml:
         name: AppFullDto
       type: object
-    OAS.WebApi.DTO.Settings.AppPageDefaultDto:
+    OAS.WebApi.DTO.Settings.AppOptionDefaultDto:
       properties:
         id:
           type: integer
           format: int32
-        pageCode:
+        parentAppOptionId:
+          type: integer
+          format: int32
+        category:
+          type: string
+        displayName:
           type: string
         name:
           type: string
         description:
           type: string
+        defaultValue:
+          type: string
+        controlType:
+          type: string
+        canUserOverride:
+          type: boolean
+      xml:
+        name: AppOptionDefaultDto
+      type: object
+    OAS.WebApi.DTO.Settings.AppDto:
+      properties:
+        appCode:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        tags:
+          type: string
         routeUrl:
           type: string
         securityCode:
           type: string
-        includeByDefault:
+        imageName:
+          type: string
+        color:
+          type: string
+        isActive:
           type: boolean
-        parameters:
-          type: string
-        helpText:
-          type: string
-        privilegeId:
-          type: integer
-          format: int32
-        sortOrder:
-          type: integer
-          format: int32
-        audienceExclusion:
+        ssoType:
           type: string
           enum:
           - None
-          - WorkflowAssistant
+          - SameTabRedirect
+          - Portal
+          - FormPost
+          - NewTabRedirect
+          - AdvisoryWorld
+          - ByAllRep
+          - Schwab
+          - Pershing
+          - GoldmanSachs
+        userOptionCount:
+          description: Indicates the count of options for this App, the User can set.
+          type: integer
+          format: int32
+        createdDate:
+          type: string
+          format: date-time
       xml:
-        name: AppPageDefaultDto
+        name: AppDto
       type: object
     OAS.WebApi.DTO.Settings.AppCategoryDefaultDto:
       properties:
@@ -1179,56 +1229,6 @@ components:
           type: array
       xml:
         name: AppCategoryDefaultDto
-      type: object
-    OAS.WebApi.DTO.Settings.AppOptionDefaultDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        parentAppOptionId:
-          type: integer
-          format: int32
-        category:
-          type: string
-        displayName:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        defaultValue:
-          type: string
-        controlType:
-          type: string
-        canUserOverride:
-          type: boolean
-      xml:
-        name: AppOptionDefaultDto
-      type: object
-    OAS.WebApi.DTO.Settings.AppOptionDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        parentAppOptionId:
-          type: integer
-          format: int32
-        category:
-          type: string
-        displayName:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        value:
-          type: string
-        controlType:
-          type: string
-        canUserOverride:
-          type: boolean
-      xml:
-        name: AppOptionDto
       type: object
     OAS.WebApi.DTO.Authorization.ServiceTeamDto:
       properties:

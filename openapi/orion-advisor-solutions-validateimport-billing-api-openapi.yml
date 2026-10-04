@@ -92,15 +92,6 @@ paths:
         required: true
 components:
   schemas:
-    OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
-      description: import file DTO for validating imports
-      properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-          description: the imported file
-      xml:
-        name: ValidateFileImportDto
-      type: object
     MultipartDataMediaFormatter.Infrastructure.HttpFile:
       properties:
         fileName:
@@ -111,6 +102,28 @@ components:
           $ref: '#/components/schemas/System.Net.Http.StreamContent'
       xml:
         name: HttpFile
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
+      description: import file DTO for validating imports
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+          description: the imported file
+      xml:
+        name: ValidateFileImportDto
       type: object
     OAS.WebApi.DTO.Billing.BillSimpleEntityDto:
       properties:
@@ -136,19 +149,6 @@ components:
           type: array
       xml:
         name: StreamContent
-      type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
-      properties:
-        key:
-          readOnly: true
-          type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: KeyValuePair`2
       type: object
   securitySchemes:
     Authorization:

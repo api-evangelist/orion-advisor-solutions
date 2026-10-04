@@ -1395,40 +1395,14 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAT.Integrations.Plaid.Acklann.Plaid.Entity.Institution:
+    OAT.Integrations.Plaid.Plaid.NET.Entity.WebHookUpdate:
       properties:
-        institution_id:
+        code_sent:
           type: string
-        name:
-          type: string
-        has_mfa:
-          type: boolean
-        mfa:
-          items:
-            type: string
-          type: array
-        credentials:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Plaid.Acklann.Plaid.Entity.Institution.Credential'
-          xml:
-            name: Credential
-            wrapped: true
-          type: array
-        products:
-          items:
-            type: string
-          type: array
-      xml:
-        name: Institution
-      type: object
-    OAS.DataModel.SimpleStringKeyEntity:
-      properties:
-        id:
-          type: string
-        name:
+        sent_at:
           type: string
       xml:
-        name: SimpleStringKeyEntity
+        name: WebHookUpdate
       type: object
     OAT.Integrations.Plaid.Classes.PlaidItemForUser:
       properties:
@@ -1464,14 +1438,53 @@ components:
       xml:
         name: PlaidItemForUser
       type: object
-    OAT.Integrations.Plaid.Plaid.NET.Entity.WebHookUpdate:
+    OAT.Integrations.Plaid.IntegrationConfig:
       properties:
-        code_sent:
+        secret:
           type: string
-        sent_at:
+        clientID:
+          type: string
+        plaidEnvironment:
           type: string
       xml:
-        name: WebHookUpdate
+        name: IntegrationConfig
+      type: object
+    OAT.Integrations.Plaid.Acklann.Plaid.Entity.Institution:
+      properties:
+        institution_id:
+          type: string
+        name:
+          type: string
+        has_mfa:
+          type: boolean
+        mfa:
+          items:
+            type: string
+          type: array
+        credentials:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Plaid.Acklann.Plaid.Entity.Institution.Credential'
+          xml:
+            name: Credential
+            wrapped: true
+          type: array
+        products:
+          items:
+            type: string
+          type: array
+      xml:
+        name: Institution
+      type: object
+    OAT.Integrations.Plaid.Classes.PlaidItemForUser.Credential:
+      properties:
+        label:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+      xml:
+        name: Credential
       type: object
     OAT.Integrations.Plaid.Acklann.Plaid.Entity.Institution.Credential:
       properties:
@@ -1484,26 +1497,6 @@ components:
       xml:
         name: Credential
       type: object
-    OAT.Integrations.Plaid.IntegrationConfig:
-      properties:
-        secret:
-          type: string
-        clientID:
-          type: string
-        plaidEnvironment:
-          type: string
-      xml:
-        name: IntegrationConfig
-      type: object
-    OAT.Integrations.Plaid.Plaid.NET.Entity.StatusUpdate:
-      properties:
-        last_successful_update:
-          type: string
-        last_failed_update:
-          type: string
-      xml:
-        name: StatusUpdate
-      type: object
     OAT.Integrations.Plaid.Plaid.NET.Entity.PlaidStatus:
       properties:
         investments:
@@ -1515,16 +1508,23 @@ components:
       xml:
         name: PlaidStatus
       type: object
-    OAT.Integrations.Plaid.Classes.PlaidItemForUser.Credential:
+    OAS.DataModel.SimpleStringKeyEntity:
       properties:
-        label:
+        id:
           type: string
         name:
           type: string
-        type:
+      xml:
+        name: SimpleStringKeyEntity
+      type: object
+    OAT.Integrations.Plaid.Plaid.NET.Entity.StatusUpdate:
+      properties:
+        last_successful_update:
+          type: string
+        last_failed_update:
           type: string
       xml:
-        name: Credential
+        name: StatusUpdate
       type: object
   securitySchemes:
     Authorization:

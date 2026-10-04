@@ -777,81 +777,39 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.Integrations.Eclipse.Models.EclipsePreferenceResponse:
+    OAS.Integrations.Eclipse.EclipseAccountResponse:
       properties:
-        levelName:
-          type: string
-        recordId:
-          type: integer
-          format: int32
         id:
           type: integer
           format: int32
-        preferenceId:
-          type: integer
-          format: int32
         name:
           type: string
-        displayName:
+        portfolio:
           type: string
-        categoryType:
-          type: string
-        securityPreferences:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.IndividualSecurityPreference'
-          xml:
-            name: IndividualSecurityPreference
-            wrapped: true
-          type: array
-      xml:
-        name: EclipsePreferenceResponse
-      type: object
-    OAS.WebApi.DTO.Integrations.Element.RiskScoreModelDto:
-      properties:
-        modelId:
+        portfolioId:
           type: integer
           format: int32
-        name:
+        accountId:
           type: string
-        isActive:
+        restrictedPlanId:
+          type: integer
+          format: int32
+        orionConnectFirmId:
+          type: integer
+          format: int32
+        orionConnectExternalId:
+          type: integer
+          format: int32
+        astroEnabled:
           type: boolean
-        subAdvisor:
-          type: integer
-          format: int32
-        representative:
-          type: integer
-          format: int32
-        asOfDate:
+        isDoNotBuySell:
+          type: boolean
+        needAnalyticsStatus:
           type: string
-          format: date-time
-        eclipseModelId:
-          type: integer
-          format: int32
-        modelAggId:
-          type: integer
-          format: int32
-        parentId:
-          type: integer
-          format: int64
-        riskScore:
-          type: integer
-          format: int32
-        accounts:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Element.RiskScoreModelAccountDto'
-          xml:
-            name: RiskScoreModelAccountDto
-            wrapped: true
-          type: array
-        items:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Element.RiskScoreModelItemsDto'
-          xml:
-            name: RiskScoreModelItemsDto
-            wrapped: true
-          type: array
+        tags:
+          type: string
       xml:
-        name: RiskScoreModelDto
+        name: EclipseAccountResponse
       type: object
     OAS.Integrations.Eclipse.Models.IndividualSecurityPreference:
       properties:
@@ -1059,6 +1017,23 @@ components:
       xml:
         name: IndividualSecurityPreference
       type: object
+    OAS.Integrations.Eclipse.Model.EclipseResponse:
+      properties:
+        status:
+          type: boolean
+        message:
+          type: string
+        entityId:
+          type: integer
+          format: int32
+        platform:
+          type: string
+          enum:
+          - TOM
+          - Eclipse
+      xml:
+        name: EclipseResponse
+      type: object
     OAS.WebApi.DTO.Integrations.Element.RiskScoreModelAccountDto:
       properties:
         name:
@@ -1077,44 +1052,6 @@ components:
       xml:
         name: RiskScoreModelAccountDto
       type: object
-    OAS.WebApi.Domains.Integrations.Element.ModelAggMinimal:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        subAdvisorId:
-          type: integer
-          format: int32
-        subAdvisorName:
-          type: string
-        riskScore:
-          type: number
-          format: double
-        modelAggType:
-          type: string
-        modelIds:
-          items:
-            type: integer
-            format: int32
-          type: array
-        modelAggTypeId:
-          type: integer
-          format: int32
-        managementStyleId:
-          type: integer
-          format: int32
-        minimumInvestmentAmount:
-          type: number
-          format: double
-        isAstroEnabled:
-          type: boolean
-        researchedStatus:
-          type: string
-      xml:
-        name: ModelAggMinimal
-      type: object
     OAS.Integrations.Eclipse.Models.EclipsePreferenceRequest:
       properties:
         level:
@@ -1131,6 +1068,82 @@ components:
           $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.SecurityPreference'
       xml:
         name: EclipsePreferenceRequest
+      type: object
+    OAS.WebApi.DTO.Integrations.Element.RiskScoreModelDto:
+      properties:
+        modelId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        isActive:
+          type: boolean
+        subAdvisor:
+          type: integer
+          format: int32
+        representative:
+          type: integer
+          format: int32
+        asOfDate:
+          type: string
+          format: date-time
+        eclipseModelId:
+          type: integer
+          format: int32
+        modelAggId:
+          type: integer
+          format: int32
+        parentId:
+          type: integer
+          format: int64
+        riskScore:
+          type: integer
+          format: int32
+        accounts:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Element.RiskScoreModelAccountDto'
+          xml:
+            name: RiskScoreModelAccountDto
+            wrapped: true
+          type: array
+        items:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.Element.RiskScoreModelItemsDto'
+          xml:
+            name: RiskScoreModelItemsDto
+            wrapped: true
+          type: array
+      xml:
+        name: RiskScoreModelDto
+      type: object
+    OAS.Integrations.Eclipse.Models.EclipsePreferenceResponse:
+      properties:
+        levelName:
+          type: string
+        recordId:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        preferenceId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        displayName:
+          type: string
+        categoryType:
+          type: string
+        securityPreferences:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.Eclipse.Models.IndividualSecurityPreference'
+          xml:
+            name: IndividualSecurityPreference
+            wrapped: true
+          type: array
+      xml:
+        name: EclipsePreferenceResponse
       type: object
     OAS.WebApi.DTO.Integrations.Element.RiskScoreModelItemsDto:
       properties:
@@ -1183,56 +1196,43 @@ components:
       xml:
         name: SecurityPreference
       type: object
-    OAS.Integrations.Eclipse.EclipseAccountResponse:
+    OAS.WebApi.Domains.Integrations.Element.ModelAggMinimal:
       properties:
         id:
           type: integer
           format: int32
         name:
           type: string
-        portfolio:
+        subAdvisorId:
+          type: integer
+          format: int32
+        subAdvisorName:
           type: string
-        portfolioId:
-          type: integer
-          format: int32
-        accountId:
+        riskScore:
+          type: number
+          format: double
+        modelAggType:
           type: string
-        restrictedPlanId:
+        modelIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        modelAggTypeId:
           type: integer
           format: int32
-        orionConnectFirmId:
+        managementStyleId:
           type: integer
           format: int32
-        orionConnectExternalId:
-          type: integer
-          format: int32
-        astroEnabled:
+        minimumInvestmentAmount:
+          type: number
+          format: double
+        isAstroEnabled:
           type: boolean
-        isDoNotBuySell:
-          type: boolean
-        needAnalyticsStatus:
-          type: string
-        tags:
+        researchedStatus:
           type: string
       xml:
-        name: EclipseAccountResponse
-      type: object
-    OAS.Integrations.Eclipse.Model.EclipseResponse:
-      properties:
-        status:
-          type: boolean
-        message:
-          type: string
-        entityId:
-          type: integer
-          format: int32
-        platform:
-          type: string
-          enum:
-          - TOM
-          - Eclipse
-      xml:
-        name: EclipseResponse
+        name: ModelAggMinimal
       type: object
   securitySchemes:
     Authorization:

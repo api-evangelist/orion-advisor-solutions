@@ -1464,28 +1464,68 @@ paths:
         required: true
 components:
   schemas:
-    OAS.WebApi.DTO.Trading.DeletedSleeveTargetDto:
+    OAS.WebApi.DTO.Trading.ValidateStrategiesDto:
       properties:
-        accountId:
-          type: integer
-          format: int32
-        deletedModelId:
-          type: integer
-          format: int32
-        targetModelId:
-          type: integer
-          format: int32
+        strategyId:
+          type: string
+        name:
+          type: string
+        contributionAllocationMethod:
+          type: string
+        distributionAllocationMethod:
+          type: string
+        autoRebalFreq:
+          type: string
+        autoRebalMonth:
+          type: string
+        autoRebalDay:
+          type: string
+        entityId:
+          type: string
+        entity:
+          type: string
+        tolerancePercent:
+          type: string
+        strategyDetailId:
+          type: string
+        sleeveType:
+          type: string
+        modelAggId:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.IdNameResolver'
+        platformId:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.IdNameResolver'
+        subAdvisorId:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.IdNameResolver'
+        targetAllocation:
+          type: string
+        contributionAllocation:
+          type: string
+        distributionAllocation:
+          type: string
+        toleranceUpper:
+          type: string
+        toleranceLower:
+          type: string
+        autoTradeTypes:
+          type: string
+        doNotTrade:
+          type: string
+        substituteDetailId:
+          type: string
+        substituteId:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.IdNameResolver'
+        assetLevelAllowed:
+          type: string
+        assetLevelIds:
+          type: string
+        isValid:
+          type: boolean
+        validationMessage:
+          type: string
+        warningMessage:
+          type: string
       xml:
-        name: DeletedSleeveTargetDto
-      type: object
-    OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
-      description: import file DTO for validating imports
-      properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-          description: the imported file
-      xml:
-        name: ValidateFileImportDto
+        name: ValidateStrategiesDto
       type: object
     MultipartDataMediaFormatter.Infrastructure.HttpFile:
       properties:
@@ -1498,28 +1538,69 @@ components:
       xml:
         name: HttpFile
       type: object
-    OAS.WebApi.DTO.Trading.AggregateModelSubstituteDto:
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
       properties:
-        sleeveStrategyDetailId:
-          type: integer
-          format: int32
-        sleeveStrategyId:
-          type: integer
-          format: int32
-        aggregateModelId:
-          type: integer
-          format: int32
-        modelAggName:
+        key:
+          readOnly: true
           type: string
-        auditedDate:
-          type: string
-          format: date-time
-        auditedByDisplay:
-          type: string
-        isSubstitute:
-          type: boolean
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
       xml:
-        name: AggregateModelSubstituteDto
+        name: KeyValuePair`2
+      type: object
+    OAS.WebApi.DTO.Trading.RegistrationSleeveValidationDto:
+      properties:
+        registrationId:
+          type: integer
+          format: int32
+        isDoNotTrade:
+          type: boolean
+        isValid:
+          type: boolean
+        validationMessage:
+          type: string
+      xml:
+        name: RegistrationSleeveValidationDto
+      type: object
+    OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
+      description: import file DTO for validating imports
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+          description: the imported file
+      xml:
+        name: ValidateFileImportDto
+      type: object
+    OAS.DataProcess.DTO.Trading.ValidateImport.FeeAndLoanDistributionValidationDto:
+      properties:
+        uploadType:
+          type: string
+        description:
+          type: string
+        accountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        amount:
+          type: number
+          format: double
+        productId:
+          type: integer
+          format: int32
+        cusip:
+          type: string
+        ticker:
+          type: string
+        isValid:
+          type: boolean
+        validationMessage:
+          type: string
+      xml:
+        name: FeeAndLoanDistributionValidationDto
       type: object
     OAS.WebApi.DTO.Trading.AccountSleeveAssetCategoryAllocationsDto:
       properties:
@@ -1533,6 +1614,101 @@ components:
           format: double
       xml:
         name: AccountSleeveAssetCategoryAllocationsDto
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    OAS.WebApi.DTO.Trading.SleeveNormalAcctBillingDto:
+      properties:
+        billFeeScheduleId:
+          type: integer
+          format: int32
+        billFeeScheduleName:
+          type: string
+        billMasterPayoutScheduleId:
+          type: integer
+          format: int32
+        billMasterPayoutScheduleName:
+          type: string
+        recurringAdjustments:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BillRecurrentAdjustmentDto'
+          xml:
+            name: BillRecurrentAdjustmentDto
+            wrapped: true
+          type: array
+      xml:
+        name: SleeveNormalAcctBillingDto
+      type: object
+    OAS.WebApi.DTO.ValidateImport.ValidateOrderDto:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        action:
+          type: string
+        ticker:
+          type: string
+        dollars:
+          type: number
+          format: double
+        shares:
+          type: number
+          format: double
+        percent:
+          type: number
+          format: double
+        productId:
+          type: integer
+          format: int32
+        message:
+          type: string
+        tradeType:
+          type: string
+          enum:
+          - Undefined
+          - Shares
+          - Dollars
+          - Percent
+        navPrice:
+          type: number
+          format: double
+        side:
+          type: string
+        amount:
+          type: number
+          format: double
+        exchangeTicker:
+          type: string
+        exchangeProductId:
+          type: integer
+          format: int32
+        cashTradeAmount:
+          type: number
+          format: double
+        cashValuePostTrade:
+          type: number
+          format: double
+        isValid:
+          type: boolean
+        validationMessage:
+          type: string
+        warningMessage:
+          type: string
+      xml:
+        name: ValidateOrderDto
       type: object
     OAS.WebApi.DTO.Portfolio.AssetDto:
       properties:
@@ -1883,6 +2059,63 @@ components:
       xml:
         name: AssetDto
       type: object
+    OAS.WebApi.DTO.Trading.DeletedSleeveTargetDto:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        deletedModelId:
+          type: integer
+          format: int32
+        targetModelId:
+          type: integer
+          format: int32
+      xml:
+        name: DeletedSleeveTargetDto
+      type: object
+    OAS.WebApi.DTO.Trading.DistributionValidationDto:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        amount:
+          type: number
+          format: double
+        regId:
+          type: integer
+          format: int32
+        isValid:
+          type: boolean
+        validationMessage:
+          type: string
+      xml:
+        name: DistributionValidationDto
+      type: object
+    OAS.WebApi.DTO.Trading.AggregateModelSubstituteDto:
+      properties:
+        sleeveStrategyDetailId:
+          type: integer
+          format: int32
+        sleeveStrategyId:
+          type: integer
+          format: int32
+        aggregateModelId:
+          type: integer
+          format: int32
+        modelAggName:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+        isSubstitute:
+          type: boolean
+      xml:
+        name: AggregateModelSubstituteDto
+      type: object
     OAS.WebApi.DTO.Trading.ModelItemFullDto:
       properties:
         id:
@@ -2062,131 +2295,6 @@ components:
       xml:
         name: RegistrationSleeveFullValidationDto
       type: object
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
-      type: object
-    OAS.WebApi.DTO.Portfolio.BillRecurrentAdjustmentDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        annualAmount:
-          type: number
-          format: double
-        type:
-          type: integer
-          format: int32
-        schedule:
-          type: integer
-          format: int32
-        adjustmentType:
-          type: integer
-          format: int32
-        responsibleEntity:
-          type: integer
-          format: int32
-        endDate:
-          type: string
-          format: date-time
-        startDate:
-          type: string
-          format: date-time
-      xml:
-        name: BillRecurrentAdjustmentDto
-      type: object
-    OAS.WebApi.DTO.Trading.DistributionValidationDto:
-      properties:
-        accountId:
-          type: integer
-          format: int32
-        accountNumber:
-          type: string
-        amount:
-          type: number
-          format: double
-        regId:
-          type: integer
-          format: int32
-        isValid:
-          type: boolean
-        validationMessage:
-          type: string
-      xml:
-        name: DistributionValidationDto
-      type: object
-    OAS.WebApi.DTO.Trading.ValidateStrategiesDto:
-      properties:
-        strategyId:
-          type: string
-        name:
-          type: string
-        contributionAllocationMethod:
-          type: string
-        distributionAllocationMethod:
-          type: string
-        autoRebalFreq:
-          type: string
-        autoRebalMonth:
-          type: string
-        autoRebalDay:
-          type: string
-        entityId:
-          type: string
-        entity:
-          type: string
-        tolerancePercent:
-          type: string
-        strategyDetailId:
-          type: string
-        sleeveType:
-          type: string
-        modelAggId:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.IdNameResolver'
-        platformId:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.IdNameResolver'
-        subAdvisorId:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.IdNameResolver'
-        targetAllocation:
-          type: string
-        contributionAllocation:
-          type: string
-        distributionAllocation:
-          type: string
-        toleranceUpper:
-          type: string
-        toleranceLower:
-          type: string
-        autoTradeTypes:
-          type: string
-        doNotTrade:
-          type: string
-        substituteDetailId:
-          type: string
-        substituteId:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.IdNameResolver'
-        assetLevelAllowed:
-          type: string
-        assetLevelIds:
-          type: string
-        isValid:
-          type: boolean
-        validationMessage:
-          type: string
-        warningMessage:
-          type: string
-      xml:
-        name: ValidateStrategiesDto
-      type: object
     OAS.WebApi.DTO.IdNameResolver:
       properties:
         id:
@@ -2196,117 +2304,6 @@ components:
           type: string
       xml:
         name: IdNameResolver
-      type: object
-    OAS.WebApi.DTO.ValidateImport.ValidateOrdersFileImportDto:
-      properties:
-        assetValues:
-          type: string
-          enum:
-          - Current
-          - Pending
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-          description: the imported file
-      xml:
-        name: ValidateOrdersFileImportDto
-      type: object
-    OAS.WebApi.DTO.ValidateImport.ValidateOrderDto:
-      properties:
-        accountId:
-          type: integer
-          format: int32
-        accountNumber:
-          type: string
-        action:
-          type: string
-        ticker:
-          type: string
-        dollars:
-          type: number
-          format: double
-        shares:
-          type: number
-          format: double
-        percent:
-          type: number
-          format: double
-        productId:
-          type: integer
-          format: int32
-        message:
-          type: string
-        tradeType:
-          type: string
-          enum:
-          - Undefined
-          - Shares
-          - Dollars
-          - Percent
-        navPrice:
-          type: number
-          format: double
-        side:
-          type: string
-        amount:
-          type: number
-          format: double
-        exchangeTicker:
-          type: string
-        exchangeProductId:
-          type: integer
-          format: int32
-        cashTradeAmount:
-          type: number
-          format: double
-        cashValuePostTrade:
-          type: number
-          format: double
-        isValid:
-          type: boolean
-        validationMessage:
-          type: string
-        warningMessage:
-          type: string
-      xml:
-        name: ValidateOrderDto
-      type: object
-    OAS.WebApi.DTO.Trading.RegistrationCheckDto:
-      description: A DTO used to inform the front-end of any issues pertaining to a given Registration.
-      properties:
-        promptToSplit:
-          description: 'If <see langword="true" />, causes the front-end to prompt the user
-
-            "Would you like to create separate registrations for each account so it can be sleeved?"'
-          type: boolean
-        message:
-          description: The message to display to the user relating to the error or warning.
-          type: string
-        id:
-          description: The ID of the Registration being validated.
-          type: integer
-          format: int32
-        regName:
-          description: The name of the Registration being validated.
-          type: string
-        isError:
-          description: When set to <see langword="true" />, the user is not able to process the sleeves.
-          type: boolean
-        isWarning:
-          type: boolean
-        alwaysLoadSleeves:
-          description: 'When {OAS.WebApi.DTO.Trading.RegistrationCheckDto.AlwaysLoadSleeves} and {OAS.WebApi.DTO.Trading.RegistrationCheckDto.IsError} are both <see langword="true" /> the
-
-            front-end should always load any sleeves associated with the Registration.'
-          type: boolean
-        sleeveStrategyAggId:
-          description: The ID of the Sleeve Strategy Agg being assigned to the Registration.
-          type: integer
-          format: int32
-        sleeveStrategyAggName:
-          description: The name of the Sleeve Strategy Agg being assigned to the Registration.
-          type: string
-      xml:
-        name: RegistrationCheckDto
       type: object
     OAS.WebApi.DTO.Trading.SleeveCustodialAcctBillingDto:
       properties:
@@ -2330,80 +2327,18 @@ components:
       xml:
         name: SleeveCustodialAcctBillingDto
       type: object
-    OAS.WebApi.DTO.Trading.SleeveNormalAcctBillingDto:
+    OAS.WebApi.DTO.ValidateImport.ValidateOrdersFileImportDto:
       properties:
-        billFeeScheduleId:
-          type: integer
-          format: int32
-        billFeeScheduleName:
+        assetValues:
           type: string
-        billMasterPayoutScheduleId:
-          type: integer
-          format: int32
-        billMasterPayoutScheduleName:
-          type: string
-        recurringAdjustments:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BillRecurrentAdjustmentDto'
-          xml:
-            name: BillRecurrentAdjustmentDto
-            wrapped: true
-          type: array
+          enum:
+          - Current
+          - Pending
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+          description: the imported file
       xml:
-        name: SleeveNormalAcctBillingDto
-      type: object
-    OAS.WebApi.DTO.Trading.ValidateStrategyAggregatesDto:
-      properties:
-        strategyAggregateId:
-          type: string
-        name:
-          type: string
-        contributionAllocationMethod:
-          type: string
-        distributionAllocationMethod:
-          type: string
-        autoRebalFreq:
-          type: string
-        autoRebalMonth:
-          type: string
-        autoRebalDay:
-          type: string
-        entityId:
-          type: string
-        entity:
-          type: string
-        eclipseFirmId:
-          type: string
-        strategyAggregateDetailId:
-          type: string
-        strategyId:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.IdNameResolver'
-        target:
-          type: string
-        contributionAllocation:
-          type: string
-        distributionAllocation:
-          type: string
-        toleranceUpper:
-          type: string
-        toleranceLower:
-          type: string
-        isValid:
-          type: boolean
-        validationMessage:
-          type: string
-        warningMessage:
-          type: string
-        sleeveType:
-          type: string
-        modelAggId:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.IdNameResolver'
-        platformId:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.IdNameResolver'
-        strategyAggregateSpecialDetailId:
-          type: string
-      xml:
-        name: ValidateStrategyAggregatesDto
+        name: ValidateOrdersFileImportDto
       type: object
     OAS.WebApi.DTO.Trading.AccountSleeveProcessDto:
       properties:
@@ -2566,60 +2501,125 @@ components:
       xml:
         name: AccountSleeveProcessDto
       type: object
-    OAS.WebApi.DTO.Trading.RegistrationSleeveValidationDto:
+    OAS.WebApi.DTO.Trading.ValidateStrategyAggregatesDto:
       properties:
-        registrationId:
-          type: integer
-          format: int32
-        isDoNotTrade:
-          type: boolean
+        strategyAggregateId:
+          type: string
+        name:
+          type: string
+        contributionAllocationMethod:
+          type: string
+        distributionAllocationMethod:
+          type: string
+        autoRebalFreq:
+          type: string
+        autoRebalMonth:
+          type: string
+        autoRebalDay:
+          type: string
+        entityId:
+          type: string
+        entity:
+          type: string
+        eclipseFirmId:
+          type: string
+        strategyAggregateDetailId:
+          type: string
+        strategyId:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.IdNameResolver'
+        target:
+          type: string
+        contributionAllocation:
+          type: string
+        distributionAllocation:
+          type: string
+        toleranceUpper:
+          type: string
+        toleranceLower:
+          type: string
         isValid:
           type: boolean
         validationMessage:
           type: string
+        warningMessage:
+          type: string
+        sleeveType:
+          type: string
+        modelAggId:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.IdNameResolver'
+        platformId:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.IdNameResolver'
+        strategyAggregateSpecialDetailId:
+          type: string
       xml:
-        name: RegistrationSleeveValidationDto
+        name: ValidateStrategyAggregatesDto
       type: object
-    OAS.DataProcess.DTO.Trading.ValidateImport.FeeAndLoanDistributionValidationDto:
+    OAS.WebApi.DTO.Trading.RegistrationCheckDto:
+      description: A DTO used to inform the front-end of any issues pertaining to a given Registration.
       properties:
-        uploadType:
+        promptToSplit:
+          description: 'If <see langword="true" />, causes the front-end to prompt the user
+
+            "Would you like to create separate registrations for each account so it can be sleeved?"'
+          type: boolean
+        message:
+          description: The message to display to the user relating to the error or warning.
           type: string
-        description:
-          type: string
-        accountId:
+        id:
+          description: The ID of the Registration being validated.
           type: integer
           format: int32
-        accountNumber:
+        regName:
+          description: The name of the Registration being validated.
           type: string
-        amount:
+        isError:
+          description: When set to <see langword="true" />, the user is not able to process the sleeves.
+          type: boolean
+        isWarning:
+          type: boolean
+        alwaysLoadSleeves:
+          description: 'When {OAS.WebApi.DTO.Trading.RegistrationCheckDto.AlwaysLoadSleeves} and {OAS.WebApi.DTO.Trading.RegistrationCheckDto.IsError} are both <see langword="true" /> the
+
+            front-end should always load any sleeves associated with the Registration.'
+          type: boolean
+        sleeveStrategyAggId:
+          description: The ID of the Sleeve Strategy Agg being assigned to the Registration.
+          type: integer
+          format: int32
+        sleeveStrategyAggName:
+          description: The name of the Sleeve Strategy Agg being assigned to the Registration.
+          type: string
+      xml:
+        name: RegistrationCheckDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.BillRecurrentAdjustmentDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        annualAmount:
           type: number
           format: double
-        productId:
+        type:
           type: integer
           format: int32
-        cusip:
+        schedule:
+          type: integer
+          format: int32
+        adjustmentType:
+          type: integer
+          format: int32
+        responsibleEntity:
+          type: integer
+          format: int32
+        endDate:
           type: string
-        ticker:
+          format: date-time
+        startDate:
           type: string
-        isValid:
-          type: boolean
-        validationMessage:
-          type: string
+          format: date-time
       xml:
-        name: FeeAndLoanDistributionValidationDto
-      type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
-      properties:
-        key:
-          readOnly: true
-          type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: KeyValuePair`2
+        name: BillRecurrentAdjustmentDto
       type: object
   securitySchemes:
     Authorization:

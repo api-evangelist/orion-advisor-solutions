@@ -131,6 +131,92 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAS.DataModel.Reporting.ReportOptionCategory:
+      required:
+      - category
+      - options
+      properties:
+        category:
+          type: string
+        options:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+      xml:
+        name: ReportOptionCategory
+      type: object
+    OAS.DataModel.Reporting.ReportOption:
+      required:
+      - id
+      - $type
+      properties:
+        id:
+          type: string
+        $type:
+          readOnly: true
+          type: string
+        optionGuid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        optionId:
+          type: integer
+          format: int32
+        isDisabled:
+          type: boolean
+        isGlobal:
+          type: boolean
+        isIgnored:
+          type: boolean
+        name:
+          type: string
+        useInception:
+          type: boolean
+        prompt:
+          type: string
+          enum:
+          - Never
+          - Always
+      xml:
+        name: ReportOption
+      type: object
+    OpenAI_API.Chat.ChatMessage:
+      properties:
+        role:
+          type: string
+        content:
+          type: string
+        name:
+          type: string
+      xml:
+        name: ChatMessage
+      type: object
+    OAS.DataModel.Reporting.Engine.IGroupingOptionOverrider:
+      properties:
+        allowExpireClientsToStorePerformance:
+          type: boolean
+        ensureAssetsUpdated:
+          type: boolean
+        groupCustodialCashTogether:
+          type: boolean
+        groupLinksTogether:
+          type: boolean
+        returnActiveLinkedEntity:
+          type: boolean
+        useAccountChange:
+          type: boolean
+        useSmaSettings:
+          type: boolean
+        accountInclusion:
+          type: string
+        includeHistoricalLinks:
+          type: string
+      xml:
+        name: IGroupingOptionOverrider
+      type: object
     OAS.WebApi.DTO.Reporting.Envision.EnvisionReportDto:
       properties:
         id:
@@ -178,41 +264,6 @@ components:
           type: boolean
       xml:
         name: EnvisionReportDto
-      type: object
-    OAS.DataModel.Reporting.ReportOption:
-      required:
-      - id
-      - $type
-      properties:
-        id:
-          type: string
-        $type:
-          readOnly: true
-          type: string
-        optionGuid:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        optionId:
-          type: integer
-          format: int32
-        isDisabled:
-          type: boolean
-        isGlobal:
-          type: boolean
-        isIgnored:
-          type: boolean
-        name:
-          type: string
-        useInception:
-          type: boolean
-        prompt:
-          type: string
-          enum:
-          - Never
-          - Always
-      xml:
-        name: ReportOption
       type: object
     OAS.DataModel.Reporting.Interfaces.IReportFeatureFlagOverrider:
       properties:
@@ -299,57 +350,6 @@ components:
           type: boolean
       xml:
         name: IReportFeatureFlagOverrider
-      type: object
-    OpenAI_API.Chat.ChatMessage:
-      properties:
-        role:
-          type: string
-        content:
-          type: string
-        name:
-          type: string
-      xml:
-        name: ChatMessage
-      type: object
-    OAS.DataModel.Reporting.ReportOptionCategory:
-      required:
-      - category
-      - options
-      properties:
-        category:
-          type: string
-        options:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
-          xml:
-            name: ReportOption
-            wrapped: true
-          type: array
-      xml:
-        name: ReportOptionCategory
-      type: object
-    OAS.DataModel.Reporting.Engine.IGroupingOptionOverrider:
-      properties:
-        allowExpireClientsToStorePerformance:
-          type: boolean
-        ensureAssetsUpdated:
-          type: boolean
-        groupCustodialCashTogether:
-          type: boolean
-        groupLinksTogether:
-          type: boolean
-        returnActiveLinkedEntity:
-          type: boolean
-        useAccountChange:
-          type: boolean
-        useSmaSettings:
-          type: boolean
-        accountInclusion:
-          type: string
-        includeHistoricalLinks:
-          type: string
-      xml:
-        name: IGroupingOptionOverrider
       type: object
   securitySchemes:
     Authorization:

@@ -2230,57 +2230,32 @@ paths:
         required: true
 components:
   schemas:
-    OAT.Integrations.DocuSign.Models.Envelope:
+    OAS.DataModel.Integrations.Quik.CustomerUser:
       properties:
-        envelopeId:
-          type: string
-        status:
-          type: string
-        documentsUri:
-          type: string
-        recipientsUri:
-          type: string
-        attachmentsUri:
-          type: string
-        envelopeUri:
-          type: string
-        createdDateTime:
-          type: string
-          format: date-time
-        statusDateTime:
-          type: string
-          format: date-time
-        lastModifiedDateTime:
-          type: string
-          format: date-time
-        initialSentDateTime:
-          type: string
-          format: date-time
-        sentDateTime:
-          type: string
-          format: date-time
-        statusChangedDateTime:
-          type: string
-          format: date-time
-      xml:
-        name: Envelope
-      type: object
-    OAS.DataModel.Integrations.Quik.Dealer:
-      properties:
-        dealerId:
+        customerId:
           type: integer
           format: int32
-        dealerTypeId:
+        customerUserId:
+          type: string
+        userId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        licenseStatusId:
           type: integer
           format: int32
-        dealerTypeName:
+        expirationDate:
           type: string
-        dealerName:
-          type: string
-        selected:
-          type: boolean
+          format: date-time
+        userDetailId:
+          type: integer
+          format: int32
       xml:
-        name: Dealer
+        name: CustomerUser
       type: object
     OAS.DataModel.Integrations.Quik.Associations:
       properties:
@@ -2322,28 +2297,115 @@ components:
       xml:
         name: Associations
       type: object
-    OAS.DataModel.Integrations.Quik.QuikNewAccount:
+    OAS.DataModel.Integrations.Quik.Form:
       properties:
-        id:
+        formId:
           type: integer
           format: int32
-        name:
+        dealerId:
+          type: integer
+          format: int32
+        dealerName:
           type: string
-        accountTypeName:
+        formName:
           type: string
-        custodianName:
+        formDescription:
           type: string
-        platformName:
+        publishDate:
           type: string
-        paperworkStatus:
+        revisionDate:
           type: string
-        createdDate:
-          type: string
-          format: date-time
-        signatureStatus:
+        formPreviewUrl:
           type: string
       xml:
-        name: QuikNewAccount
+        name: Form
+      type: object
+    OAS.DataModel.Integrations.Quik.Dealer:
+      properties:
+        dealerId:
+          type: integer
+          format: int32
+        dealerTypeId:
+          type: integer
+          format: int32
+        dealerTypeName:
+          type: string
+        dealerName:
+          type: string
+        selected:
+          type: boolean
+      xml:
+        name: Dealer
+      type: object
+    OAS.WebApi.Domains.Integrations.QuikController.QuikResponseDto:
+      properties:
+        StatusCode:
+          type: string
+        StatusMessage:
+          type: string
+      xml:
+        name: QuikResponseDto
+      type: object
+    OAS.DataModel.Integrations.Quik.FormGroup:
+      properties:
+        formGroupId:
+          type: integer
+          format: int32
+        formGroupName:
+          type: string
+        description:
+          type: string
+        isGlobal:
+          type: boolean
+        userDetailId:
+          type: integer
+          format: int32
+        forms:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Integrations.Quik.Form'
+          xml:
+            name: Form
+            wrapped: true
+          type: array
+        associations:
+          $ref: '#/components/schemas/OAS.DataModel.Integrations.Quik.Associations'
+      xml:
+        name: FormGroup
+      type: object
+    OAT.Integrations.DocuSign.Models.Envelope:
+      properties:
+        envelopeId:
+          type: string
+        status:
+          type: string
+        documentsUri:
+          type: string
+        recipientsUri:
+          type: string
+        attachmentsUri:
+          type: string
+        envelopeUri:
+          type: string
+        createdDateTime:
+          type: string
+          format: date-time
+        statusDateTime:
+          type: string
+          format: date-time
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+        initialSentDateTime:
+          type: string
+          format: date-time
+        sentDateTime:
+          type: string
+          format: date-time
+        statusChangedDateTime:
+          type: string
+          format: date-time
+      xml:
+        name: Envelope
       type: object
     OAS.DataModel.Integrations.QuikIntegration:
       required:
@@ -2615,90 +2677,28 @@ components:
       xml:
         name: IntegrationConfig
       type: object
-    OAS.WebApi.Domains.Integrations.QuikController.QuikResponseDto:
+    OAS.DataModel.Integrations.Quik.QuikNewAccount:
       properties:
-        StatusCode:
-          type: string
-        StatusMessage:
-          type: string
-      xml:
-        name: QuikResponseDto
-      type: object
-    OAS.DataModel.Integrations.Quik.Form:
-      properties:
-        formId:
+        id:
           type: integer
           format: int32
-        dealerId:
-          type: integer
-          format: int32
-        dealerName:
+        name:
           type: string
-        formName:
+        accountTypeName:
           type: string
-        formDescription:
+        custodianName:
           type: string
-        publishDate:
+        platformName:
           type: string
-        revisionDate:
+        paperworkStatus:
           type: string
-        formPreviewUrl:
-          type: string
-      xml:
-        name: Form
-      type: object
-    OAS.DataModel.Integrations.Quik.CustomerUser:
-      properties:
-        customerId:
-          type: integer
-          format: int32
-        customerUserId:
-          type: string
-        userId:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-        licenseStatusId:
-          type: integer
-          format: int32
-        expirationDate:
+        createdDate:
           type: string
           format: date-time
-        userDetailId:
-          type: integer
-          format: int32
-      xml:
-        name: CustomerUser
-      type: object
-    OAS.DataModel.Integrations.Quik.FormGroup:
-      properties:
-        formGroupId:
-          type: integer
-          format: int32
-        formGroupName:
+        signatureStatus:
           type: string
-        description:
-          type: string
-        isGlobal:
-          type: boolean
-        userDetailId:
-          type: integer
-          format: int32
-        forms:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Integrations.Quik.Form'
-          xml:
-            name: Form
-            wrapped: true
-          type: array
-        associations:
-          $ref: '#/components/schemas/OAS.DataModel.Integrations.Quik.Associations'
       xml:
-        name: FormGroup
+        name: QuikNewAccount
       type: object
   securitySchemes:
     Authorization:

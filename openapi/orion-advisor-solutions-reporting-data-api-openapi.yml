@@ -100,14 +100,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.DataModel.Reporting.Interfaces.IMakeComparisonOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeComparisonOption
-      type: object
     OAS.DataModel.Reporting.Interfaces.IMakeCostBasisOption:
       properties:
         type:
@@ -116,6 +108,97 @@ components:
       xml:
         name: IMakeCostBasisOption
       type: object
+    OAS.DataModel.Reporting.Interfaces.IReturnStyle:
+      properties:
+        frequency:
+          readOnly: true
+          type: string
+          enum:
+          - Summary
+          - Annually
+          - Quarterly
+          - Monthly
+          - Weekly
+          - Daily
+          - Automatic
+        basedOn:
+          readOnly: true
+          type: string
+          enum:
+          - Calendar
+          - RollingForward
+          - RollingBackward
+        breakBehavior:
+          readOnly: true
+          type: string
+          enum:
+          - AllowPartialPeriods
+          - PartialPeriodsWithBreakPoints
+          - FullPeriodsOnly
+        cumulative:
+          readOnly: true
+          type: boolean
+        cumulativeBasedOn:
+          readOnly: true
+          type: string
+          enum:
+          - ForwardFromStartDate
+          - BackwardFromEndDate
+        context:
+          readOnly: true
+          type: string
+          enum:
+          - Self
+          - Parent
+      xml:
+        name: IReturnStyle
+      type: object
+    OAS.DataProcess.Performance.ScopeCache.ScopeCacheResult:
+      properties:
+        cacheName:
+          type: string
+        lastUpdated:
+          type: string
+          format: date-time
+        scopeResult:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Calculate.ScopeDto'
+      xml:
+        name: ScopeCacheResult
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeAttributionOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeAttributionOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeMaturityPeriodOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeMaturityPeriodOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakePerformanceOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakePerformanceOption
+      type: object
+    OAS.DataAccess.Domains.Reporting.DataEngine.IGotCalculated:
+      properties:
+        id:
+          type: string
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IGotCalculated
+      type: object
     OAS.DataModel.Reporting.Interfaces.IMakeDateRange:
       properties:
         type:
@@ -123,6 +206,22 @@ components:
           type: string
       xml:
         name: IMakeDateRange
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeTransactionOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeTransactionOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeTradingOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeTradingOption
       type: object
     OAT.Utilities.Date.IDate:
       properties:
@@ -145,6 +244,38 @@ components:
       xml:
         name: IDate
       type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeStatisticalOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeStatisticalOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeBillingOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeBillingOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeProjectedIncomeOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeProjectedIncomeOption
+      type: object
+    OAS.DataModel.Reporting.Interfaces.IMakeComparisonOption:
+      properties:
+        type:
+          readOnly: true
+          type: string
+      xml:
+        name: IMakeComparisonOption
+      type: object
     OAS.DataModel.Reporting.Interfaces.IMakeIncomeOption:
       properties:
         type:
@@ -161,32 +292,6 @@ components:
       xml:
         name: IMakeCalculationOption
       type: object
-    OAS.DataAccess.Domains.Reporting.DataEngine.IGotCalculated:
-      properties:
-        id:
-          type: string
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IGotCalculated
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeMaturityPeriodOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeMaturityPeriodOption
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeStatisticalOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeStatisticalOption
-      type: object
     OAS.DataModel.Reporting.Interfaces.IMakeActivityOption:
       properties:
         type:
@@ -194,42 +299,6 @@ components:
           type: string
       xml:
         name: IMakeActivityOption
-      type: object
-    OAS.DataProcess.Performance.ScopeCache.ScopeCacheResult:
-      properties:
-        cacheName:
-          type: string
-        lastUpdated:
-          type: string
-          format: date-time
-        scopeResult:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Calculate.ScopeDto'
-      xml:
-        name: ScopeCacheResult
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeAttributionOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeAttributionOption
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeTransactionOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeTransactionOption
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeTaxOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeTaxOption
       type: object
     OAS.WebApi.DTO.Reporting.Calculate.ScopeDto:
       properties:
@@ -252,13 +321,13 @@ components:
       xml:
         name: ScopeDto
       type: object
-    OAS.DataModel.Reporting.Interfaces.IMakePerformanceOption:
+    OAS.DataModel.Reporting.Interfaces.IMakeTaxOption:
       properties:
         type:
           readOnly: true
           type: string
       xml:
-        name: IMakePerformanceOption
+        name: IMakeTaxOption
       type: object
     OAS.DataModel.Reporting.Engine.ContextChange:
       properties:
@@ -390,75 +459,6 @@ components:
           type: boolean
       xml:
         name: ContextChange
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IReturnStyle:
-      properties:
-        frequency:
-          readOnly: true
-          type: string
-          enum:
-          - Summary
-          - Annually
-          - Quarterly
-          - Monthly
-          - Weekly
-          - Daily
-          - Automatic
-        basedOn:
-          readOnly: true
-          type: string
-          enum:
-          - Calendar
-          - RollingForward
-          - RollingBackward
-        breakBehavior:
-          readOnly: true
-          type: string
-          enum:
-          - AllowPartialPeriods
-          - PartialPeriodsWithBreakPoints
-          - FullPeriodsOnly
-        cumulative:
-          readOnly: true
-          type: boolean
-        cumulativeBasedOn:
-          readOnly: true
-          type: string
-          enum:
-          - ForwardFromStartDate
-          - BackwardFromEndDate
-        context:
-          readOnly: true
-          type: string
-          enum:
-          - Self
-          - Parent
-      xml:
-        name: IReturnStyle
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeTradingOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeTradingOption
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeProjectedIncomeOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeProjectedIncomeOption
-      type: object
-    OAS.DataModel.Reporting.Interfaces.IMakeBillingOption:
-      properties:
-        type:
-          readOnly: true
-          type: string
-      xml:
-        name: IMakeBillingOption
       type: object
   securitySchemes:
     Authorization:

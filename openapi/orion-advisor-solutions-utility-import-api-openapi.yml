@@ -1464,6 +1464,372 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    OAS.WebApi.DTO.Code.SlickPercentCompleteFraction:
+      properties:
+        type:
+          readOnly: true
+          type: string
+        numerator:
+          type: integer
+          format: int32
+        denominator:
+          type: integer
+          format: int32
+      xml:
+        name: SlickPercentCompleteFraction
+      type: object
+    OAS.WebApi.DTO.Utility.ImportCommonExtImportCommonDto:
+      properties:
+        id:
+          readOnly: true
+          type: string
+        groupedName:
+          readOnly: true
+          type: string
+        masterId:
+          type: integer
+          format: int32
+        importId:
+          type: integer
+          format: int32
+        importName:
+          type: string
+        importStatus:
+          type: string
+          enum:
+          - Unknown
+          - ValidationErrors
+          - Validated
+          - ReverseGenerated
+          - Imported
+          - PendingImport
+          - PendingValidation
+          - PendingApply
+          - PendingReversal
+          - Failed
+          - PendingReset
+          - PendingDelete
+        importType:
+          type: string
+        importTypeId:
+          type: integer
+          format: int32
+        importTypeReverseId:
+          type: integer
+          format: int32
+        numberOfDatasets:
+          type: integer
+          format: int32
+        databaseName:
+          type: string
+        isReversal:
+          type: boolean
+        alClientId:
+          type: integer
+          format: int32
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        canDelete:
+          readOnly: true
+          type: boolean
+        canExcludeErrors:
+          readOnly: true
+          type: boolean
+      xml:
+        name: ImportCommonExtImportCommonDto
+      type: object
+    OAS.WebApi.DTO.Utility.ImportCommonSummaryDto:
+      properties:
+        importCommonId:
+          type: integer
+          format: int32
+        importType:
+          type: string
+        importTypeId:
+          type: integer
+          format: int32
+        importName:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        numberOfDbErrors:
+          type: integer
+          format: int32
+        numberOfDatabases:
+          type: integer
+          format: int32
+        canReverseImport:
+          type: boolean
+      xml:
+        name: ImportCommonSummaryDto
+      type: object
+    OAS.WebApi.DTO.Utility.UserDatabasesDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        databaseName:
+          type: string
+        clientName:
+          type: string
+        advisorNumber:
+          type: integer
+          format: int32
+      xml:
+        name: UserDatabasesDto
+      type: object
+    OAS.WebApi.DTO.Utility.ImportCommonExtDto:
+      properties:
+        importCommonId:
+          type: integer
+          format: int32
+        alClientId:
+          type: integer
+          format: int32
+        rowCountsJSON:
+          type: string
+        status:
+          type: string
+          enum:
+          - Unknown
+          - ValidationErrors
+          - Validated
+          - ReverseGenerated
+          - Imported
+          - PendingImport
+          - PendingValidation
+          - PendingApply
+          - PendingReversal
+          - Failed
+          - PendingReset
+          - PendingDelete
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+        canDelete:
+          type: boolean
+        isReversal:
+          type: boolean
+      xml:
+        name: ImportCommonExtDto
+      type: object
+    OAS.WebApi.DTO.Utility.ImportCommonActionDto:
+      properties:
+        alClientId:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        action:
+          type: string
+        importCommonId:
+          type: integer
+          format: int32
+        isReversal:
+          type: boolean
+        importSource:
+          type: string
+          enum:
+          - None
+          - OrionVision
+          - DataQuery
+      xml:
+        name: ImportCommonActionDto
+      type: object
+    OAS.WebApi.DTO.Utility.ImportMetadataDto:
+      properties:
+        validationMessage:
+          type: string
+        validated:
+          type: boolean
+        imported:
+          type: boolean
+        reversed:
+          type: boolean
+        importReverseId:
+          type: integer
+          format: int32
+        importTypeReverseId:
+          type: integer
+          format: int32
+        preImportDataIsNull:
+          type: boolean
+        postImportDataIsNull:
+          type: boolean
+        rowCounts:
+          type: object
+        importCommonId:
+          type: integer
+          format: int32
+      xml:
+        name: ImportMetadataDto
+      type: object
+    OAS.WebApi.DTO.Utility.ImportCreateFromFileDto:
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+        importTypeId:
+          type: integer
+          format: int32
+        importName:
+          type: string
+        source:
+          type: string
+          enum:
+          - None
+          - OrionVision
+          - DataQuery
+      xml:
+        name: ImportCreateFromFileDto
+      type: object
+    OAS.WebApi.DTO.Utility.ImportCommonDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        importTypeId:
+          type: integer
+          format: int32
+        importName:
+          type: string
+        originalFileName:
+          type: string
+        numberOfDatasets:
+          type: integer
+          format: int32
+        auditedDate:
+          type: string
+          format: date-time
+        auditedByDisplay:
+          type: string
+        canDelete:
+          type: boolean
+      xml:
+        name: ImportCommonDto
+      type: object
+    OAS.WebApi.DTO.Utility.ImportWithoutDataDto:
+      properties:
+        importId:
+          type: integer
+          format: int32
+        importStatusIcon:
+          readOnly: true
+          type: string
+        importName:
+          type: string
+        importStatus:
+          type: string
+        importType:
+          type: string
+        importTypeId:
+          type: integer
+          format: int32
+        startedByDisplay:
+          type: string
+        startedDate:
+          type: string
+          format: date-time
+        importedByDisplay:
+          type: string
+        importedDate:
+          type: string
+          format: date-time
+        auditInfoDisplay:
+          type: string
+        validated:
+          type: boolean
+        imported:
+          type: boolean
+        reversed:
+          type: boolean
+        validationPercentComplete:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Code.SlickPercentCompleteFraction'
+          readOnly: true
+        importParentId:
+          type: integer
+          format: int32
+        preImportDataIsNull:
+          type: boolean
+        postImportDataIsNull:
+          type: boolean
+        source:
+          type: string
+        importCommonId:
+          type: integer
+          format: int32
+      xml:
+        name: ImportWithoutDataDto
+      type: object
+    OAS.WebApi.DTO.Utility.ImportModifyDto:
+      properties:
+        importId:
+          type: integer
+          format: int32
+        importTypeId:
+          type: integer
+          format: int32
+        workingData:
+          type: object
+        importName:
+          type: string
+        source:
+          type: string
+          enum:
+          - None
+          - OrionVision
+          - DataQuery
+        importCommonId:
+          type: integer
+          format: int32
+      xml:
+        name: ImportModifyDto
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
     OAS.WebApi.DTO.Utility.ImportCommonExtDetailsDto:
       properties:
         id:
@@ -1532,124 +1898,6 @@ components:
       xml:
         name: ImportCommonExtDetailsDto
       type: object
-    OAS.WebApi.DTO.Utility.ImportCommonExtImportCommonDto:
-      properties:
-        id:
-          readOnly: true
-          type: string
-        groupedName:
-          readOnly: true
-          type: string
-        masterId:
-          type: integer
-          format: int32
-        importId:
-          type: integer
-          format: int32
-        importName:
-          type: string
-        importStatus:
-          type: string
-          enum:
-          - Unknown
-          - ValidationErrors
-          - Validated
-          - ReverseGenerated
-          - Imported
-          - PendingImport
-          - PendingValidation
-          - PendingApply
-          - PendingReversal
-          - Failed
-          - PendingReset
-          - PendingDelete
-        importType:
-          type: string
-        importTypeId:
-          type: integer
-          format: int32
-        importTypeReverseId:
-          type: integer
-          format: int32
-        numberOfDatasets:
-          type: integer
-          format: int32
-        databaseName:
-          type: string
-        isReversal:
-          type: boolean
-        alClientId:
-          type: integer
-          format: int32
-        createdDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        canDelete:
-          readOnly: true
-          type: boolean
-        canExcludeErrors:
-          readOnly: true
-          type: boolean
-      xml:
-        name: ImportCommonExtImportCommonDto
-      type: object
-    OAS.WebApi.DTO.Utility.ImportCommonExtDto:
-      properties:
-        importCommonId:
-          type: integer
-          format: int32
-        alClientId:
-          type: integer
-          format: int32
-        rowCountsJSON:
-          type: string
-        status:
-          type: string
-          enum:
-          - Unknown
-          - ValidationErrors
-          - Validated
-          - ReverseGenerated
-          - Imported
-          - PendingImport
-          - PendingValidation
-          - PendingApply
-          - PendingReversal
-          - Failed
-          - PendingReset
-          - PendingDelete
-        auditedDate:
-          type: string
-          format: date-time
-        auditedByDisplay:
-          type: string
-        canDelete:
-          type: boolean
-        isReversal:
-          type: boolean
-      xml:
-        name: ImportCommonExtDto
-      type: object
-    OAS.WebApi.DTO.Utility.ImportCreateFromFileDto:
-      properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-        importTypeId:
-          type: integer
-          format: int32
-        importName:
-          type: string
-        source:
-          type: string
-          enum:
-          - None
-          - OrionVision
-          - DataQuery
-      xml:
-        name: ImportCreateFromFileDto
-      type: object
     OAS.WebApi.DTO.Utility.ImportEditableDto:
       properties:
         importId:
@@ -1666,254 +1914,6 @@ components:
           type: string
       xml:
         name: ImportEditableDto
-      type: object
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
-      type: object
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
-      type: object
-    OAS.WebApi.DTO.Utility.ImportCommonSummaryDto:
-      properties:
-        importCommonId:
-          type: integer
-          format: int32
-        importType:
-          type: string
-        importTypeId:
-          type: integer
-          format: int32
-        importName:
-          type: string
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        numberOfDbErrors:
-          type: integer
-          format: int32
-        numberOfDatabases:
-          type: integer
-          format: int32
-        canReverseImport:
-          type: boolean
-      xml:
-        name: ImportCommonSummaryDto
-      type: object
-    OAS.WebApi.DTO.Utility.ImportCommonActionDto:
-      properties:
-        alClientId:
-          type: integer
-          format: int32
-        userId:
-          type: integer
-          format: int32
-        action:
-          type: string
-        importCommonId:
-          type: integer
-          format: int32
-        isReversal:
-          type: boolean
-        importSource:
-          type: string
-          enum:
-          - None
-          - OrionVision
-          - DataQuery
-      xml:
-        name: ImportCommonActionDto
-      type: object
-    OAS.WebApi.DTO.Utility.ImportMetadataDto:
-      properties:
-        validationMessage:
-          type: string
-        validated:
-          type: boolean
-        imported:
-          type: boolean
-        reversed:
-          type: boolean
-        importReverseId:
-          type: integer
-          format: int32
-        importTypeReverseId:
-          type: integer
-          format: int32
-        preImportDataIsNull:
-          type: boolean
-        postImportDataIsNull:
-          type: boolean
-        rowCounts:
-          type: object
-        importCommonId:
-          type: integer
-          format: int32
-      xml:
-        name: ImportMetadataDto
-      type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
-      properties:
-        key:
-          readOnly: true
-          type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: KeyValuePair`2
-      type: object
-    OAS.WebApi.DTO.Utility.ImportModifyDto:
-      properties:
-        importId:
-          type: integer
-          format: int32
-        importTypeId:
-          type: integer
-          format: int32
-        workingData:
-          type: object
-        importName:
-          type: string
-        source:
-          type: string
-          enum:
-          - None
-          - OrionVision
-          - DataQuery
-        importCommonId:
-          type: integer
-          format: int32
-      xml:
-        name: ImportModifyDto
-      type: object
-    OAS.WebApi.DTO.Utility.ImportCommonDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        importTypeId:
-          type: integer
-          format: int32
-        importName:
-          type: string
-        originalFileName:
-          type: string
-        numberOfDatasets:
-          type: integer
-          format: int32
-        auditedDate:
-          type: string
-          format: date-time
-        auditedByDisplay:
-          type: string
-        canDelete:
-          type: boolean
-      xml:
-        name: ImportCommonDto
-      type: object
-    OAS.WebApi.DTO.Utility.UserDatabasesDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        databaseName:
-          type: string
-        clientName:
-          type: string
-        advisorNumber:
-          type: integer
-          format: int32
-      xml:
-        name: UserDatabasesDto
-      type: object
-    OAS.WebApi.DTO.Utility.ImportWithoutDataDto:
-      properties:
-        importId:
-          type: integer
-          format: int32
-        importStatusIcon:
-          readOnly: true
-          type: string
-        importName:
-          type: string
-        importStatus:
-          type: string
-        importType:
-          type: string
-        importTypeId:
-          type: integer
-          format: int32
-        startedByDisplay:
-          type: string
-        startedDate:
-          type: string
-          format: date-time
-        importedByDisplay:
-          type: string
-        importedDate:
-          type: string
-          format: date-time
-        auditInfoDisplay:
-          type: string
-        validated:
-          type: boolean
-        imported:
-          type: boolean
-        reversed:
-          type: boolean
-        validationPercentComplete:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Code.SlickPercentCompleteFraction'
-          readOnly: true
-        importParentId:
-          type: integer
-          format: int32
-        preImportDataIsNull:
-          type: boolean
-        postImportDataIsNull:
-          type: boolean
-        source:
-          type: string
-        importCommonId:
-          type: integer
-          format: int32
-      xml:
-        name: ImportWithoutDataDto
-      type: object
-    OAS.WebApi.DTO.Code.SlickPercentCompleteFraction:
-      properties:
-        type:
-          readOnly: true
-          type: string
-        numerator:
-          type: integer
-          format: int32
-        denominator:
-          type: integer
-          format: int32
-      xml:
-        name: SlickPercentCompleteFraction
       type: object
   securitySchemes:
     Authorization:

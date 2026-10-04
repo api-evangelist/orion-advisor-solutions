@@ -645,77 +645,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.DTO.Security.RoleDetailsDto:
-      properties:
-        canEdit:
-          type: boolean
-        privileges:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RolePrivilegeDto'
-          xml:
-            name: RolePrivilegeDto
-            wrapped: true
-          type: array
-        defaultDashboardId:
-          type: integer
-          format: int32
-        dashboards:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
-          xml:
-            name: SimpleEntity
-            wrapped: true
-          type: array
-        defaultPVDashboardId:
-          type: integer
-          format: int32
-        pvDashboards:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
-          xml:
-            name: SimpleEntity
-            wrapped: true
-          type: array
-        id:
-          type: integer
-          format: int32
-        clientName:
-          type: string
-        name:
-          type: string
-        loginEntityId:
-          type: string
-          enum:
-          - BrokerDealer
-          - Wholesaler
-          - Representative
-          - Client
-          - RIA
-          - Administrator
-          - SubAdvisor
-          - ThirdPartyAdministrator
-          - Custodian
-          - PlanSponsor
-          - ThirdParty
-          - ServiceAccount
-          - Participant
-          - RepAccountManager
-          - Payee
-          - RIATable
-          - Cotenant
-        isGlobal:
-          type: boolean
-        loginEntityDescription:
-          type: string
-        tokenLife:
-          type: number
-          format: double
-        assignedProfiles:
-          type: integer
-          format: int32
-      xml:
-        name: RoleDetailsDto
-      type: object
     OAS.WebApi.DTO.Security.PrivilegeDetailsDto:
       properties:
         loginEntities:
@@ -797,16 +726,6 @@ components:
       xml:
         name: PrivilegeDetailsDto
       type: object
-    OAS.DataModel.SimpleEntity:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleEntity
-      type: object
     OAS.WebApi.DTO.Security.RolePrivilegeDto:
       properties:
         id:
@@ -848,6 +767,122 @@ components:
           type: boolean
       xml:
         name: RolePrivilegeDto
+      type: object
+    OAS.WebApi.DTO.Security.PrivilegeAllowEntityHistoryDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        privilege:
+          type: integer
+          format: int32
+        loginEntity:
+          type: string
+          enum:
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - RIA
+          - Administrator
+          - SubAdvisor
+          - ThirdPartyAdministrator
+          - Custodian
+          - PlanSponsor
+          - ThirdParty
+          - ServiceAccount
+          - Participant
+          - RepAccountManager
+          - Payee
+          - RIATable
+          - Cotenant
+        accessType:
+          type: string
+          enum:
+          - None
+          - Read
+          - Edit
+          - Delete
+        auditByDisplayName:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        changeType:
+          type: string
+      xml:
+        name: PrivilegeAllowEntityHistoryDto
+      type: object
+    OAS.WebApi.DTO.Security.RoleDetailsDto:
+      properties:
+        canEdit:
+          type: boolean
+        privileges:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Security.RolePrivilegeDto'
+          xml:
+            name: RolePrivilegeDto
+            wrapped: true
+          type: array
+        defaultDashboardId:
+          type: integer
+          format: int32
+        dashboards:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+          xml:
+            name: SimpleEntity
+            wrapped: true
+          type: array
+        defaultPVDashboardId:
+          type: integer
+          format: int32
+        pvDashboards:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+          xml:
+            name: SimpleEntity
+            wrapped: true
+          type: array
+        id:
+          type: integer
+          format: int32
+        clientName:
+          type: string
+        name:
+          type: string
+        loginEntityId:
+          type: string
+          enum:
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - RIA
+          - Administrator
+          - SubAdvisor
+          - ThirdPartyAdministrator
+          - Custodian
+          - PlanSponsor
+          - ThirdParty
+          - ServiceAccount
+          - Participant
+          - RepAccountManager
+          - Payee
+          - RIATable
+          - Cotenant
+        isGlobal:
+          type: boolean
+        loginEntityDescription:
+          type: string
+        tokenLife:
+          type: number
+          format: double
+        assignedProfiles:
+          type: integer
+          format: int32
+      xml:
+        name: RoleDetailsDto
       type: object
     OAS.WebApi.DTO.Security.PrivilegeLoginEntitiesDto:
       properties:
@@ -1193,50 +1228,15 @@ components:
       xml:
         name: PrivilegeDto
       type: object
-    OAS.WebApi.DTO.Security.PrivilegeAllowEntityHistoryDto:
+    OAS.DataModel.SimpleEntity:
       properties:
         id:
           type: integer
           format: int32
-        privilege:
-          type: integer
-          format: int32
-        loginEntity:
-          type: string
-          enum:
-          - BrokerDealer
-          - Wholesaler
-          - Representative
-          - Client
-          - RIA
-          - Administrator
-          - SubAdvisor
-          - ThirdPartyAdministrator
-          - Custodian
-          - PlanSponsor
-          - ThirdParty
-          - ServiceAccount
-          - Participant
-          - RepAccountManager
-          - Payee
-          - RIATable
-          - Cotenant
-        accessType:
-          type: string
-          enum:
-          - None
-          - Read
-          - Edit
-          - Delete
-        auditByDisplayName:
-          type: string
-        auditedDate:
-          type: string
-          format: date-time
-        changeType:
+        name:
           type: string
       xml:
-        name: PrivilegeAllowEntityHistoryDto
+        name: SimpleEntity
       type: object
   securitySchemes:
     Authorization:

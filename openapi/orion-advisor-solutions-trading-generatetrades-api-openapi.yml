@@ -190,6 +190,157 @@ paths:
         required: true
 components:
   schemas:
+    OAS.Remote.Trading.TradeDefinition:
+      properties:
+        routine:
+          type: string
+          enum:
+          - Undefined
+          - Rebalance
+          - GlobalTrades
+          - BuySell
+          - SellAll
+          - TargetPercent
+          - ProRated
+          - QuickTrade
+          - QuickTradeBlock
+          - Distribution
+          - OptionTrade
+        scheduled:
+          type: boolean
+        recalcInstance:
+          type: boolean
+        scheduledRunTime:
+          type: object
+        description:
+          type: string
+        nsccTransactionType:
+          type: string
+          enum:
+          - UseDefault
+          - NormalPurchase
+          - Nav
+          - Roa
+          - Loi
+        assetValues:
+          type: string
+          enum:
+          - UseDefault
+          - Current
+          - Pending
+          - PendingTransactionsAndOrders
+        minTradeAmount:
+          type: number
+          format: double
+        postProcess:
+          type: string
+          enum:
+          - Run
+          - Skip
+        useProductSubstitution:
+          type: string
+          enum:
+          - UseDefault
+          - Use
+          - Ignore
+        stfWarningDays:
+          type: integer
+          format: int32
+        tradeInstanceID:
+          type: integer
+          format: int32
+        includeCustodialCash:
+          type: boolean
+        notes:
+          type: string
+        inboxAlert:
+          type: boolean
+        disableRealTimePrices:
+          type: boolean
+        sessionID:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        caption:
+          type: string
+        filename:
+          type: string
+        runDisconnected:
+          type: boolean
+        instanceType:
+          type: string
+          enum:
+          - Undefined
+          - GlobalTrade
+          - Modeling
+          - CheckReq
+          - FeeReq
+          - BuySell
+          - ACHReq
+          - EligibleTrades
+          - All
+          - CashFundADV
+          - CashFundSWD
+          - SWPDCA
+          - SysPurchTrade
+          - Distribution
+          - Contribution
+        securityTicket:
+          type: string
+          format: byte
+        commonSecurityTicket:
+          type: string
+          format: byte
+        authToken:
+          type: string
+        commonServer:
+          type: string
+        databaseID:
+          type: integer
+          format: int32
+        correlationId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        a_UserDetailId:
+          type: integer
+          format: int32
+        i_UserDetailId:
+          type: integer
+          format: int32
+      xml:
+        name: TradeDefinition
+      type: object
+    OAS.Remote.Trading.BuySell:
+      properties:
+        accountID:
+          type: integer
+          format: int32
+        assetIDFrom:
+          type: integer
+          format: int32
+        assetIDTo:
+          type: integer
+          format: int32
+        productIDFrom:
+          type: integer
+          format: int32
+        productIDTo:
+          type: integer
+          format: int32
+        amount:
+          type: number
+          format: double
+        tradeType:
+          type: string
+          enum:
+          - Undefined
+          - Shares
+          - Dollars
+          - Percent
+      xml:
+        name: BuySell
+      type: object
     OAS.Remote.Trading.BuySells:
       properties:
         trades:
@@ -318,157 +469,6 @@ components:
           format: int32
       xml:
         name: BuySells
-      type: object
-    OAS.Remote.Trading.BuySell:
-      properties:
-        accountID:
-          type: integer
-          format: int32
-        assetIDFrom:
-          type: integer
-          format: int32
-        assetIDTo:
-          type: integer
-          format: int32
-        productIDFrom:
-          type: integer
-          format: int32
-        productIDTo:
-          type: integer
-          format: int32
-        amount:
-          type: number
-          format: double
-        tradeType:
-          type: string
-          enum:
-          - Undefined
-          - Shares
-          - Dollars
-          - Percent
-      xml:
-        name: BuySell
-      type: object
-    OAS.Remote.Trading.TradeDefinition:
-      properties:
-        routine:
-          type: string
-          enum:
-          - Undefined
-          - Rebalance
-          - GlobalTrades
-          - BuySell
-          - SellAll
-          - TargetPercent
-          - ProRated
-          - QuickTrade
-          - QuickTradeBlock
-          - Distribution
-          - OptionTrade
-        scheduled:
-          type: boolean
-        recalcInstance:
-          type: boolean
-        scheduledRunTime:
-          type: object
-        description:
-          type: string
-        nsccTransactionType:
-          type: string
-          enum:
-          - UseDefault
-          - NormalPurchase
-          - Nav
-          - Roa
-          - Loi
-        assetValues:
-          type: string
-          enum:
-          - UseDefault
-          - Current
-          - Pending
-          - PendingTransactionsAndOrders
-        minTradeAmount:
-          type: number
-          format: double
-        postProcess:
-          type: string
-          enum:
-          - Run
-          - Skip
-        useProductSubstitution:
-          type: string
-          enum:
-          - UseDefault
-          - Use
-          - Ignore
-        stfWarningDays:
-          type: integer
-          format: int32
-        tradeInstanceID:
-          type: integer
-          format: int32
-        includeCustodialCash:
-          type: boolean
-        notes:
-          type: string
-        inboxAlert:
-          type: boolean
-        disableRealTimePrices:
-          type: boolean
-        sessionID:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        caption:
-          type: string
-        filename:
-          type: string
-        runDisconnected:
-          type: boolean
-        instanceType:
-          type: string
-          enum:
-          - Undefined
-          - GlobalTrade
-          - Modeling
-          - CheckReq
-          - FeeReq
-          - BuySell
-          - ACHReq
-          - EligibleTrades
-          - All
-          - CashFundADV
-          - CashFundSWD
-          - SWPDCA
-          - SysPurchTrade
-          - Distribution
-          - Contribution
-        securityTicket:
-          type: string
-          format: byte
-        commonSecurityTicket:
-          type: string
-          format: byte
-        authToken:
-          type: string
-        commonServer:
-          type: string
-        databaseID:
-          type: integer
-          format: int32
-        correlationId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        a_UserDetailId:
-          type: integer
-          format: int32
-        i_UserDetailId:
-          type: integer
-          format: int32
-      xml:
-        name: TradeDefinition
       type: object
   securitySchemes:
     Authorization:

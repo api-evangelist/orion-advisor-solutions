@@ -58,6 +58,30 @@ paths:
         required: true
 components:
   schemas:
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
     OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
       description: import file DTO for validating imports
       properties:
@@ -79,30 +103,6 @@ components:
           type: array
       xml:
         name: KeyValuePair`2
-      type: object
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
-      type: object
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
       type: object
   securitySchemes:
     Authorization:

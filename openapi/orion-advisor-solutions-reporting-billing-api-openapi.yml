@@ -947,69 +947,33 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.DataProcess.Billing.Reports.AdvisoryFeeNotification.AdvisoryFeeNotificationReportModel:
-      required:
-      - $type
+    OAS.DataProcess.Billing.Reports.BillCancellationByAccount.BillCancellationByAccountDTO:
       properties:
-        $type:
-          readOnly: true
-          type: string
-        title:
-          type: string
-        author:
-          type: string
-        subject:
-          type: string
-        keywords:
-          type: string
-        generationTime:
+        startDate:
           type: string
           format: date-time
-        firstHeader:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
-        header:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
-        footer:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
-        body:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
-        overlay:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
-        hud:
-          type: string
-          enum:
-          - None
-          - Basic
-          - Debug
-        urlBuilder:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilderCore'
-          readOnly: true
-        pdfDownloadUrlBuilder:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
-        renderCssUrlBuilder:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
-        standardCssUrlBuilder:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
-        expirationDate:
+        endDate:
           type: string
           format: date-time
-        orientation:
+        reportFormat:
           type: string
           enum:
-          - Portrait
-          - Landscape
-        paperSize:
-          type: string
-          enum:
-          - Letter
-          - Legal
-          - A4
-        margins:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.DataEngine.PaperMargins'
-        breakOutEachAdjustment:
-          type: boolean
+          - Xml
+          - 'Null'
+          - Csv
+          - Image
+          - PDF
+          - Html
+          - Html40
+          - Html32
+          - Mhtml
+          - Excel
+          - ExcelX
+          - HtmlOwc
+          - Json
+          - CustomImport
       xml:
-        name: AdvisoryFeeNotificationReportModel
+        name: BillCancellationByAccountDTO
       type: object
     OAS.DataProcess.Billing.Reports.BillCancellationByAccount.BillCancellationByAccountReportModel:
       required:
@@ -1073,10 +1037,28 @@ components:
       xml:
         name: BillCancellationByAccountReportModel
       type: object
-    OAS.DataModel.Reporting.ReportUrlBuilderCore:
-      properties: {}
+    OAS.DataModel.Reporting.Interfaces.IGetRendered:
+      properties:
+        type:
+          readOnly: true
+          type: string
       xml:
-        name: ReportUrlBuilderCore
+        name: IGetRendered
+      type: object
+    OAS.DataModel.Reporting.ReportUrlBuilder:
+      properties:
+        originalPath:
+          readOnly: true
+          type: string
+        urlKind:
+          readOnly: true
+          type: string
+          enum:
+          - Literal
+          - OrionApi
+          - OrionUi
+      xml:
+        name: ReportUrlBuilder
       type: object
     OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutDTO:
       properties:
@@ -1125,28 +1107,156 @@ components:
       xml:
         name: PaperMargins
       type: object
-    OAS.DataModel.Reporting.Interfaces.IGetRendered:
+    OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutReportModel:
+      required:
+      - $type
       properties:
-        type:
+        $type:
           readOnly: true
           type: string
-      xml:
-        name: IGetRendered
-      type: object
-    OAS.DataModel.Reporting.ReportUrlBuilder:
-      properties:
-        originalPath:
-          readOnly: true
+        title:
           type: string
-        urlKind:
-          readOnly: true
+        author:
+          type: string
+        subject:
+          type: string
+        keywords:
+          type: string
+        generationTime:
+          type: string
+          format: date-time
+        firstHeader:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        header:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        footer:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        body:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        overlay:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        hud:
           type: string
           enum:
-          - Literal
-          - OrionApi
-          - OrionUi
+          - None
+          - Basic
+          - Debug
+        urlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilderCore'
+          readOnly: true
+        pdfDownloadUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        renderCssUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        standardCssUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        expirationDate:
+          type: string
+          format: date-time
+        orientation:
+          type: string
+          enum:
+          - Portrait
+          - Landscape
+        paperSize:
+          type: string
+          enum:
+          - Letter
+          - Legal
+          - A4
+        margins:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.DataEngine.PaperMargins'
       xml:
-        name: ReportUrlBuilder
+        name: RevenuePayoutReportModel
+      type: object
+    OAS.DataProcess.Billing.Reports.PayeePayble.PayeePayableDTO:
+      properties:
+        reportFormat:
+          type: string
+          enum:
+          - Xml
+          - 'Null'
+          - Csv
+          - Image
+          - PDF
+          - Html
+          - Html40
+          - Html32
+          - Mhtml
+          - Excel
+          - ExcelX
+          - HtmlOwc
+          - Json
+          - CustomImport
+      xml:
+        name: PayeePayableDTO
+      type: object
+    OAS.DataModel.Reporting.ReportUrlBuilderCore:
+      properties: {}
+      xml:
+        name: ReportUrlBuilderCore
+      type: object
+    OAS.DataProcess.Billing.Reports.PayeePayable.PayeePayableReportModel:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        title:
+          type: string
+        author:
+          type: string
+        subject:
+          type: string
+        keywords:
+          type: string
+        generationTime:
+          type: string
+          format: date-time
+        firstHeader:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        header:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        footer:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        body:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        overlay:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        hud:
+          type: string
+          enum:
+          - None
+          - Basic
+          - Debug
+        urlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilderCore'
+          readOnly: true
+        pdfDownloadUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        renderCssUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        standardCssUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        expirationDate:
+          type: string
+          format: date-time
+        orientation:
+          type: string
+          enum:
+          - Portrait
+          - Landscape
+        paperSize:
+          type: string
+          enum:
+          - Letter
+          - Legal
+          - A4
+        margins:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.DataEngine.PaperMargins'
+      xml:
+        name: PayeePayableReportModel
       type: object
     OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportModel:
       required:
@@ -1238,180 +1348,6 @@ components:
           type: boolean
       xml:
         name: AdvisoryFeeNotificationDTO
-      type: object
-    OAS.DataProcess.Billing.Reports.RevenuePayout.RevenuePayoutReportModel:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        title:
-          type: string
-        author:
-          type: string
-        subject:
-          type: string
-        keywords:
-          type: string
-        generationTime:
-          type: string
-          format: date-time
-        firstHeader:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
-        header:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
-        footer:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
-        body:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
-        overlay:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
-        hud:
-          type: string
-          enum:
-          - None
-          - Basic
-          - Debug
-        urlBuilder:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilderCore'
-          readOnly: true
-        pdfDownloadUrlBuilder:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
-        renderCssUrlBuilder:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
-        standardCssUrlBuilder:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
-        expirationDate:
-          type: string
-          format: date-time
-        orientation:
-          type: string
-          enum:
-          - Portrait
-          - Landscape
-        paperSize:
-          type: string
-          enum:
-          - Letter
-          - Legal
-          - A4
-        margins:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.DataEngine.PaperMargins'
-      xml:
-        name: RevenuePayoutReportModel
-      type: object
-    OAS.DataProcess.Billing.Reports.PayeePayble.PayeePayableDTO:
-      properties:
-        reportFormat:
-          type: string
-          enum:
-          - Xml
-          - 'Null'
-          - Csv
-          - Image
-          - PDF
-          - Html
-          - Html40
-          - Html32
-          - Mhtml
-          - Excel
-          - ExcelX
-          - HtmlOwc
-          - Json
-          - CustomImport
-      xml:
-        name: PayeePayableDTO
-      type: object
-    OAS.DataProcess.Billing.Reports.PayeePayable.PayeePayableReportModel:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        title:
-          type: string
-        author:
-          type: string
-        subject:
-          type: string
-        keywords:
-          type: string
-        generationTime:
-          type: string
-          format: date-time
-        firstHeader:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
-        header:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
-        footer:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
-        body:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
-        overlay:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
-        hud:
-          type: string
-          enum:
-          - None
-          - Basic
-          - Debug
-        urlBuilder:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilderCore'
-          readOnly: true
-        pdfDownloadUrlBuilder:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
-        renderCssUrlBuilder:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
-        standardCssUrlBuilder:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
-        expirationDate:
-          type: string
-          format: date-time
-        orientation:
-          type: string
-          enum:
-          - Portrait
-          - Landscape
-        paperSize:
-          type: string
-          enum:
-          - Letter
-          - Legal
-          - A4
-        margins:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.DataEngine.PaperMargins'
-      xml:
-        name: PayeePayableReportModel
-      type: object
-    OAS.DataProcess.Billing.Reports.BillCancellationByAccount.BillCancellationByAccountDTO:
-      properties:
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        reportFormat:
-          type: string
-          enum:
-          - Xml
-          - 'Null'
-          - Csv
-          - Image
-          - PDF
-          - Html
-          - Html40
-          - Html32
-          - Mhtml
-          - Excel
-          - ExcelX
-          - HtmlOwc
-          - Json
-          - CustomImport
-      xml:
-        name: BillCancellationByAccountDTO
       type: object
     OAS.DataProcess.Billing.Reports.LegacyAdvisoryFeeReport.LegacyAdvisoryFeeReportDto:
       properties:
@@ -1641,6 +1577,70 @@ components:
           - CustomImport
       xml:
         name: LegacyAdvisoryFeeReportDto
+      type: object
+    OAS.DataProcess.Billing.Reports.AdvisoryFeeNotification.AdvisoryFeeNotificationReportModel:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        title:
+          type: string
+        author:
+          type: string
+        subject:
+          type: string
+        keywords:
+          type: string
+        generationTime:
+          type: string
+          format: date-time
+        firstHeader:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        header:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        footer:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        body:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        overlay:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IGetRendered'
+        hud:
+          type: string
+          enum:
+          - None
+          - Basic
+          - Debug
+        urlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilderCore'
+          readOnly: true
+        pdfDownloadUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        renderCssUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        standardCssUrlBuilder:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportUrlBuilder'
+        expirationDate:
+          type: string
+          format: date-time
+        orientation:
+          type: string
+          enum:
+          - Portrait
+          - Landscape
+        paperSize:
+          type: string
+          enum:
+          - Letter
+          - Legal
+          - A4
+        margins:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.DataEngine.PaperMargins'
+        breakOutEachAdjustment:
+          type: boolean
+      xml:
+        name: AdvisoryFeeNotificationReportModel
       type: object
   securitySchemes:
     Authorization:

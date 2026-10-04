@@ -285,17 +285,41 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto:
+    OAS.DataProcess.DTO.Integrations.Redtail.RedtailUser:
       properties:
-        key:
+        id:
           type: integer
           format: int32
-        productName:
+        name:
           type: string
-        termsAccepted:
-          type: boolean
+        repIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        reps:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integrations.Redtail.RepEntry'
+          xml:
+            name: RepEntry
+            wrapped: true
+          type: array
       xml:
-        name: IntegrationSetupRequestDto
+        name: RedtailUser
+      type: object
+    OAS.DataProcess.DTO.Integrations.Redtail.RepEntry:
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        name:
+          type: string
+        repId:
+          type: integer
+          format: int32
+      xml:
+        name: RepEntry
       type: object
     OAT.Integrations.Redtail.UserConfig:
       properties:
@@ -308,6 +332,18 @@ components:
           format: int32
       xml:
         name: UserConfig
+      type: object
+    OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto:
+      properties:
+        key:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        termsAccepted:
+          type: boolean
+      xml:
+        name: IntegrationSetupRequestDto
       type: object
     OAS.DataProcess.DTO.Integrations.Redtail.FirmConfig:
       properties:
@@ -344,42 +380,6 @@ components:
           type: string
       xml:
         name: FirmConfig
-      type: object
-    OAS.DataProcess.DTO.Integrations.Redtail.RepEntry:
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        name:
-          type: string
-        repId:
-          type: integer
-          format: int32
-      xml:
-        name: RepEntry
-      type: object
-    OAS.DataProcess.DTO.Integrations.Redtail.RedtailUser:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        repIds:
-          items:
-            type: integer
-            format: int32
-          type: array
-        reps:
-          items:
-            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integrations.Redtail.RepEntry'
-          xml:
-            name: RepEntry
-            wrapped: true
-          type: array
-      xml:
-        name: RedtailUser
       type: object
   securitySchemes:
     Authorization:

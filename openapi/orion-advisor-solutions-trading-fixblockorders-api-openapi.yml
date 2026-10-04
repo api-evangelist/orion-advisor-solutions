@@ -1560,220 +1560,140 @@ paths:
         required: true
 components:
   schemas:
-    OAS.WebApi.DTO.Trading.FixFeeDetailDto:
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
       properties:
-        orderId:
-          type: integer
-          format: int32
-        accountNumber:
+        fileName:
           type: string
-        registrationName:
+        mediaType:
           type: string
-        accountType:
-          type: string
-        orderQty:
-          type: number
-          format: double
-        regulatory:
-          type: number
-          format: double
-        tax:
-          type: number
-          format: double
-        localCommission:
-          type: number
-          format: double
-        exchange:
-          type: number
-          format: double
-        stamp:
-          type: number
-          format: double
-        levy:
-          type: number
-          format: double
-        other:
-          type: number
-          format: double
-        commission:
-          type: number
-          format: double
-        custodian:
-          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
       xml:
-        name: FixFeeDetailDto
+        name: HttpFile
       type: object
-    OAS.WebApi.DTO.Trading.CustodianAlgorithmTagDto:
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
       properties:
-        custodianId:
-          type: integer
-          format: int32
-        algorithmTag:
+        key:
+          readOnly: true
           type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
       xml:
-        name: CustodianAlgorithmTagDto
+        name: KeyValuePair`2
       type: object
-    OAS.WebApi.DTO.Trading.UnallocatedOrderDto:
+    OAS.WebApi.DTO.Trading.TradingTransactionDto:
       properties:
         id:
           type: integer
           format: int32
+        assetId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        ticker:
+          type: string
         accountId:
           type: integer
           format: int32
-        fixBlockOrderId:
-          type: integer
-          format: int32
-        orderQty:
-          type: number
-          format: double
-        originalOrderQty:
-          type: number
-          format: double
-        orderAmt:
-          type: number
-          format: double
-        sharesOwned:
-          type: number
-          format: double
-        mktValue:
-          type: number
-          format: double
-        rowVersion:
-          type: string
-          format: byte
         accountNumber:
           type: string
+        registrationId:
+          type: integer
+          format: int32
         registrationName:
           type: string
-        accountType:
+        registrationCode:
           type: string
-        cashValue:
-          type: number
-          format: double
-        cashValuePending:
-          type: number
-          format: double
-        assetUnits:
-          type: number
-          format: double
-        assetUnitsPending:
-          type: number
-          format: double
-      xml:
-        name: UnallocatedOrderDto
-      type: object
-    OAS.WebApi.DTO.Trading.RealtimePriceDto:
-      properties:
-        date:
+        householdId:
+          type: integer
+          format: int32
+        fundFamilyName:
+          type: string
+        custodianName:
+          type: string
+        status:
+          type: string
+          enum:
+          - Complete
+          - Pending
+          - Rejected
+          - Reversed
+          - Inactive
+          - PendingCorpAction
+          - FutureAip
+        transDate:
           type: string
           format: date-time
-        last:
-          type: number
-          format: double
-        isRealTimeQuote:
-          type: boolean
-        isDelayedQuote:
-          type: boolean
-        changeFromLastClose:
-          type: number
-          format: double
-        changeFromLastMarketClose:
-          type: number
-          format: double
-        changeFromMarketClose:
-          type: number
-          format: double
-        changeFromMarketOpen:
-          type: number
-          format: double
-        changeFromPrev:
-          type: number
-          format: double
-        lastClosePrice:
-          type: number
-          format: double
-        lastMarketClosePrice:
-          type: number
-          format: double
-        marketClosePrice:
-          type: number
-          format: double
-        marketOpenPrice:
-          type: number
-          format: double
-        percentChangeFromLastClose:
-          type: number
-          format: double
-        percentChangeFromLastMarketClose:
-          type: number
-          format: double
-        percentChangeFromMarketClose:
-          type: number
-          format: double
-        percentChangeFromMarketOpen:
-          type: number
-          format: double
-        percentChangeFromOpen:
-          type: number
-          format: double
-        percentChangeFromPrev:
-          type: number
-          format: double
-        ask:
-          type: number
-          format: double
-        askQuantity:
-          type: number
-          format: double
-        bid:
-          type: number
-          format: double
-        bidQuantity:
-          type: number
-          format: double
-        changeFromOpen:
-          type: number
-          format: double
-        changeFromPrevious:
-          type: number
-          format: double
-        cusip:
+        transactionDescription:
           type: string
-        delay:
+        transAmount:
           type: number
           format: double
-        high:
+        navPrice:
           type: number
           format: double
-        low:
+        noUnits:
           type: number
           format: double
-        name:
+        notes:
           type: string
-        outcome:
+        orderId:
           type: string
-        percentageChangeFromOpen:
-          type: number
-          format: double
-        percentageChangeFromPrevious:
-          type: number
-          format: double
-        quantity:
-          type: number
-          format: double
-        volume:
-          type: number
-          format: double
-        open:
-          type: number
-          format: double
-        priceSource:
+        blockId:
+          type: integer
+          format: int32
+        orderCreatedBy:
           type: string
-        symbol:
+        avgPrice:
+          type: number
+          format: double
+        executionTime:
+          type: string
+          format: date-time
+        transTypeId:
+          type: integer
+          format: int32
+        contributionCodeId:
+          type: integer
+          format: int32
+        distributionCodeId:
+          type: integer
+          format: int32
+        clientId:
+          type: integer
+          format: int32
+        registrationSleeveStrategyName:
+          type: string
+        tradeOrderId:
+          type: integer
+          format: int32
+      xml:
+        name: TradingTransactionDto
+      type: object
+    OAS.WebApi.DTO.Trading.FixBlockOrderLogDetailDto:
+      properties:
+        tagId:
+          type: integer
+          format: int32
+        fixName:
+          type: string
+        value:
           type: string
       xml:
-        name: RealtimePriceDto
+        name: FixBlockOrderLogDetailDto
+      type: object
+    OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
+      description: import file DTO for validating imports
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+          description: the imported file
+      xml:
+        name: ValidateFileImportDto
       type: object
     OAS.WebApi.DTO.Trading.FixBlockOrderDto:
       properties:
@@ -1951,6 +1871,241 @@ components:
       xml:
         name: FixBlockOrderDto
       type: object
+    OAS.WebApi.DTO.Trading.FixBlockOrderLogDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        fixBlockOrderId:
+          type: integer
+          format: int32
+        msgType:
+          type: string
+        logType:
+          type: integer
+          format: int32
+        createdDate:
+          type: string
+          format: date-time
+        blockName:
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderLogDetailDto'
+          xml:
+            name: FixBlockOrderLogDetailDto
+            wrapped: true
+          type: array
+        logText:
+          type: string
+      xml:
+        name: FixBlockOrderLogDto
+      type: object
+    OAS.WebApi.DTO.Trading.UnallocatedOrderDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        fixBlockOrderId:
+          type: integer
+          format: int32
+        orderQty:
+          type: number
+          format: double
+        originalOrderQty:
+          type: number
+          format: double
+        orderAmt:
+          type: number
+          format: double
+        sharesOwned:
+          type: number
+          format: double
+        mktValue:
+          type: number
+          format: double
+        rowVersion:
+          type: string
+          format: byte
+        accountNumber:
+          type: string
+        registrationName:
+          type: string
+        accountType:
+          type: string
+        cashValue:
+          type: number
+          format: double
+        cashValuePending:
+          type: number
+          format: double
+        assetUnits:
+          type: number
+          format: double
+        assetUnitsPending:
+          type: number
+          format: double
+      xml:
+        name: UnallocatedOrderDto
+      type: object
+    OAS.WebApi.DTO.Trading.RealtimePriceDto:
+      properties:
+        date:
+          type: string
+          format: date-time
+        last:
+          type: number
+          format: double
+        isRealTimeQuote:
+          type: boolean
+        isDelayedQuote:
+          type: boolean
+        changeFromLastClose:
+          type: number
+          format: double
+        changeFromLastMarketClose:
+          type: number
+          format: double
+        changeFromMarketClose:
+          type: number
+          format: double
+        changeFromMarketOpen:
+          type: number
+          format: double
+        changeFromPrev:
+          type: number
+          format: double
+        lastClosePrice:
+          type: number
+          format: double
+        lastMarketClosePrice:
+          type: number
+          format: double
+        marketClosePrice:
+          type: number
+          format: double
+        marketOpenPrice:
+          type: number
+          format: double
+        percentChangeFromLastClose:
+          type: number
+          format: double
+        percentChangeFromLastMarketClose:
+          type: number
+          format: double
+        percentChangeFromMarketClose:
+          type: number
+          format: double
+        percentChangeFromMarketOpen:
+          type: number
+          format: double
+        percentChangeFromOpen:
+          type: number
+          format: double
+        percentChangeFromPrev:
+          type: number
+          format: double
+        ask:
+          type: number
+          format: double
+        askQuantity:
+          type: number
+          format: double
+        bid:
+          type: number
+          format: double
+        bidQuantity:
+          type: number
+          format: double
+        changeFromOpen:
+          type: number
+          format: double
+        changeFromPrevious:
+          type: number
+          format: double
+        cusip:
+          type: string
+        delay:
+          type: number
+          format: double
+        high:
+          type: number
+          format: double
+        low:
+          type: number
+          format: double
+        name:
+          type: string
+        outcome:
+          type: string
+        percentageChangeFromOpen:
+          type: number
+          format: double
+        percentageChangeFromPrevious:
+          type: number
+          format: double
+        quantity:
+          type: number
+          format: double
+        volume:
+          type: number
+          format: double
+        open:
+          type: number
+          format: double
+        priceSource:
+          type: string
+        symbol:
+          type: string
+      xml:
+        name: RealtimePriceDto
+      type: object
+    OAS.WebApi.DTO.Trading.FixFeeDetailDto:
+      properties:
+        orderId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        registrationName:
+          type: string
+        accountType:
+          type: string
+        orderQty:
+          type: number
+          format: double
+        regulatory:
+          type: number
+          format: double
+        tax:
+          type: number
+          format: double
+        localCommission:
+          type: number
+          format: double
+        exchange:
+          type: number
+          format: double
+        stamp:
+          type: number
+          format: double
+        levy:
+          type: number
+          format: double
+        other:
+          type: number
+          format: double
+        commission:
+          type: number
+          format: double
+        custodian:
+          type: string
+      xml:
+        name: FixFeeDetailDto
+      type: object
     OAS.WebApi.DTO.Trading.UpdateBlocksInMassDto:
       properties:
         blockIds:
@@ -1988,65 +2143,6 @@ components:
       xml:
         name: UpdateBlocksInMassDto
       type: object
-    OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
-      description: import file DTO for validating imports
-      properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-          description: the imported file
-      xml:
-        name: ValidateFileImportDto
-      type: object
-    OAS.WebApi.DTO.Trading.FixFeeDto:
-      properties:
-        fixBlockOrderId:
-          type: integer
-          format: int32
-        orderQty:
-          type: number
-          format: double
-        regulatory:
-          type: number
-          format: double
-        tax:
-          type: number
-          format: double
-        localCommission:
-          type: number
-          format: double
-        exchange:
-          type: number
-          format: double
-        stamp:
-          type: number
-          format: double
-        levy:
-          type: number
-          format: double
-        other:
-          type: number
-          format: double
-        details:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDetailDto'
-          xml:
-            name: FixFeeDetailDto
-            wrapped: true
-          type: array
-      xml:
-        name: FixFeeDto
-      type: object
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
-      type: object
     System.Net.Http.StreamContent:
       properties:
         headers:
@@ -2059,19 +2155,6 @@ components:
           type: array
       xml:
         name: StreamContent
-      type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
-      properties:
-        key:
-          readOnly: true
-          type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: KeyValuePair`2
       type: object
     OAS.WebApi.DTO.Trading.OrderDto:
       properties:
@@ -2610,137 +2693,54 @@ components:
       xml:
         name: OrderDto
       type: object
-    OAS.WebApi.DTO.Trading.FixBlockOrderLogDto:
+    OAS.WebApi.DTO.Trading.FixFeeDto:
       properties:
-        id:
-          type: integer
-          format: int32
         fixBlockOrderId:
           type: integer
           format: int32
-        msgType:
-          type: string
-        logType:
-          type: integer
-          format: int32
-        createdDate:
-          type: string
-          format: date-time
-        blockName:
-          type: string
+        orderQty:
+          type: number
+          format: double
+        regulatory:
+          type: number
+          format: double
+        tax:
+          type: number
+          format: double
+        localCommission:
+          type: number
+          format: double
+        exchange:
+          type: number
+          format: double
+        stamp:
+          type: number
+          format: double
+        levy:
+          type: number
+          format: double
+        other:
+          type: number
+          format: double
         details:
           items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixBlockOrderLogDetailDto'
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixFeeDetailDto'
           xml:
-            name: FixBlockOrderLogDetailDto
+            name: FixFeeDetailDto
             wrapped: true
           type: array
-        logText:
-          type: string
       xml:
-        name: FixBlockOrderLogDto
+        name: FixFeeDto
       type: object
-    OAS.WebApi.DTO.Trading.FixBlockOrderLogDetailDto:
+    OAS.WebApi.DTO.Trading.CustodianAlgorithmTagDto:
       properties:
-        tagId:
+        custodianId:
           type: integer
           format: int32
-        fixName:
-          type: string
-        value:
+        algorithmTag:
           type: string
       xml:
-        name: FixBlockOrderLogDetailDto
-      type: object
-    OAS.WebApi.DTO.Trading.TradingTransactionDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        assetId:
-          type: integer
-          format: int32
-        productName:
-          type: string
-        ticker:
-          type: string
-        accountId:
-          type: integer
-          format: int32
-        accountNumber:
-          type: string
-        registrationId:
-          type: integer
-          format: int32
-        registrationName:
-          type: string
-        registrationCode:
-          type: string
-        householdId:
-          type: integer
-          format: int32
-        fundFamilyName:
-          type: string
-        custodianName:
-          type: string
-        status:
-          type: string
-          enum:
-          - Complete
-          - Pending
-          - Rejected
-          - Reversed
-          - Inactive
-          - PendingCorpAction
-          - FutureAip
-        transDate:
-          type: string
-          format: date-time
-        transactionDescription:
-          type: string
-        transAmount:
-          type: number
-          format: double
-        navPrice:
-          type: number
-          format: double
-        noUnits:
-          type: number
-          format: double
-        notes:
-          type: string
-        orderId:
-          type: string
-        blockId:
-          type: integer
-          format: int32
-        orderCreatedBy:
-          type: string
-        avgPrice:
-          type: number
-          format: double
-        executionTime:
-          type: string
-          format: date-time
-        transTypeId:
-          type: integer
-          format: int32
-        contributionCodeId:
-          type: integer
-          format: int32
-        distributionCodeId:
-          type: integer
-          format: int32
-        clientId:
-          type: integer
-          format: int32
-        registrationSleeveStrategyName:
-          type: string
-        tradeOrderId:
-          type: integer
-          format: int32
-      xml:
-        name: TradingTransactionDto
+        name: CustodianAlgorithmTagDto
       type: object
   securitySchemes:
     Authorization:

@@ -700,6 +700,50 @@ paths:
       - Authorization: []
 components:
   schemas:
+    OAS.DataModel.Portfolio.SimpleClient:
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        entityName:
+          type: string
+        isActive:
+          type: boolean
+        repCode:
+          type: string
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleClient
+      type: object
+    OAS.WebApi.DTO.Mobile.PortfolioGroupValuesDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        grouping:
+          type: integer
+          format: int32
+        name:
+          type: string
+        asOfDate:
+          readOnly: true
+          type: string
+        value:
+          type: number
+          format: double
+        percent:
+          type: number
+          format: double
+        color:
+          type: string
+      xml:
+        name: PortfolioGroupValuesDto
+      type: object
     OAS.WebApi.DTO.Mobile.UnmanagedAccountsMenuDto:
       properties:
         accountId:
@@ -723,27 +767,6 @@ components:
           format: int32
       xml:
         name: UnmanagedAccountsMenuDto
-      type: object
-    OAS.WebApi.DTO.Mobile.AccountsMenuSettingsDto:
-      properties:
-        asOfDate:
-          type: string
-          format: date-time
-        includeBondAccrual:
-          type: boolean
-        clientPerformanceInclude:
-          type: string
-          enum:
-          - Default
-          - All
-          - ActiveOnly
-          - ActiveWithValue
-          - ActiveRegistrationsOnly
-          - RegistrationsWithValue
-        includeUnmanaged:
-          type: boolean
-      xml:
-        name: AccountsMenuSettingsDto
       type: object
     OAS.WebApi.DTO.Mobile.RepresentativeDto:
       properties:
@@ -783,26 +806,6 @@ components:
           format: byte
       xml:
         name: RepresentativeDto
-      type: object
-    OAS.DataModel.Portfolio.SimpleClient:
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        entityName:
-          type: string
-        isActive:
-          type: boolean
-        repCode:
-          type: string
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleClient
       type: object
     OAS.WebApi.DTO.Mobile.ManagedAccountsMenuDto:
       properties:
@@ -860,29 +863,26 @@ components:
       xml:
         name: AccountsMenuReturnDto
       type: object
-    OAS.WebApi.DTO.Mobile.PortfolioGroupValuesDto:
+    OAS.WebApi.DTO.Mobile.AccountsMenuSettingsDto:
       properties:
-        id:
-          type: integer
-          format: int32
-        grouping:
-          type: integer
-          format: int32
-        name:
-          type: string
         asOfDate:
-          readOnly: true
           type: string
-        value:
-          type: number
-          format: double
-        percent:
-          type: number
-          format: double
-        color:
+          format: date-time
+        includeBondAccrual:
+          type: boolean
+        clientPerformanceInclude:
           type: string
+          enum:
+          - Default
+          - All
+          - ActiveOnly
+          - ActiveWithValue
+          - ActiveRegistrationsOnly
+          - RegistrationsWithValue
+        includeUnmanaged:
+          type: boolean
       xml:
-        name: PortfolioGroupValuesDto
+        name: AccountsMenuSettingsDto
       type: object
   securitySchemes:
     Authorization:

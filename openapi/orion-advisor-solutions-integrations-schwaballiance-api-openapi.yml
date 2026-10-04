@@ -552,6 +552,107 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAS.Integrations.SchwabAlliance.SchwabAllianceToken:
+      properties:
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        scope:
+          type: string
+        token_type:
+          type: string
+        expires_in:
+          type: integer
+          format: int32
+        expires_datetime:
+          type: string
+          format: date-time
+        id_token:
+          type: string
+      xml:
+        name: SchwabAllianceToken
+      type: object
+    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersError:
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        source:
+          $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersErrorSource'
+      xml:
+        name: AccountBlockNumbersError
+      type: object
+    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseData'
+        errors:
+          items:
+            $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersError'
+          xml:
+            name: AccountBlockNumbersError
+            wrapped: true
+          type: array
+      xml:
+        name: AccountBlockNumbersRetrieveResponse
+      type: object
+    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersErrorSource:
+      properties:
+        header:
+          type: string
+      xml:
+        name: AccountBlockNumbersErrorSource
+      type: object
+    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseAccount:
+      properties:
+        account:
+          type: integer
+          format: int32
+        updatedBy:
+          type: string
+        UpdatedDate:
+          type: string
+          format: date-time
+      xml:
+        name: AccountBlockNumbersRetrieveResponseAccount
+      type: object
+    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseData:
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseAttributes'
+      xml:
+        name: AccountBlockNumbersRetrieveResponseData
+      type: object
+    OAS.Integrations.SchwabV2.Shared.SchwabSAPostDto:
+      properties:
+        alClientId:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        userDtlId:
+          type: integer
+          format: int32
+        type:
+          type: string
+          enum:
+          - NotSet
+          - RMD
+          - BlockAccountNumber
+      xml:
+        name: SchwabSAPostDto
+      type: object
     OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseAttributes:
       properties:
         status:
@@ -574,107 +675,6 @@ components:
           type: array
       xml:
         name: AccountBlockNumbersRetrieveResponseAttributes
-      type: object
-    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseAccount:
-      properties:
-        account:
-          type: integer
-          format: int32
-        updatedBy:
-          type: string
-        UpdatedDate:
-          type: string
-          format: date-time
-      xml:
-        name: AccountBlockNumbersRetrieveResponseAccount
-      type: object
-    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersError:
-      properties:
-        id:
-          type: string
-        status:
-          type: string
-        title:
-          type: string
-        detail:
-          type: string
-        source:
-          $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersErrorSource'
-      xml:
-        name: AccountBlockNumbersError
-      type: object
-    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersErrorSource:
-      properties:
-        header:
-          type: string
-      xml:
-        name: AccountBlockNumbersErrorSource
-      type: object
-    OAS.Integrations.SchwabAlliance.SchwabAllianceToken:
-      properties:
-        access_token:
-          type: string
-        refresh_token:
-          type: string
-        scope:
-          type: string
-        token_type:
-          type: string
-        expires_in:
-          type: integer
-          format: int32
-        expires_datetime:
-          type: string
-          format: date-time
-        id_token:
-          type: string
-      xml:
-        name: SchwabAllianceToken
-      type: object
-    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponse:
-      properties:
-        data:
-          $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseData'
-        errors:
-          items:
-            $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersError'
-          xml:
-            name: AccountBlockNumbersError
-            wrapped: true
-          type: array
-      xml:
-        name: AccountBlockNumbersRetrieveResponse
-      type: object
-    OAS.Integrations.SchwabV2.Shared.SchwabSAPostDto:
-      properties:
-        alClientId:
-          type: integer
-          format: int32
-        userId:
-          type: integer
-          format: int32
-        userDtlId:
-          type: integer
-          format: int32
-        type:
-          type: string
-          enum:
-          - NotSet
-          - RMD
-          - BlockAccountNumber
-      xml:
-        name: SchwabSAPostDto
-      type: object
-    OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseData:
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-        attributes:
-          $ref: '#/components/schemas/OAS.Integrations.SchwabAlliance.Models.AccountBlockNumbersRetrieveResponseAttributes'
-      xml:
-        name: AccountBlockNumbersRetrieveResponseData
       type: object
   securitySchemes:
     Authorization:

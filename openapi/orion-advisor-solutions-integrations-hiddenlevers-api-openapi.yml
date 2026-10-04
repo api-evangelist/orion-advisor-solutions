@@ -810,107 +810,6 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.AssetClasses:
-      properties:
-        detailed:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Detailed'
-          xml:
-            name: Detailed
-            wrapped: true
-          type: array
-        industry:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Industry'
-          xml:
-            name: Industry
-            wrapped: true
-          type: array
-        basic:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Basic'
-          xml:
-            name: Basic
-            wrapped: true
-          type: array
-      xml:
-        name: AssetClasses
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.RegionBreakdown:
-      properties:
-        Middle East + Africa:
-          type: number
-          format: double
-        Europe:
-          type: number
-          format: double
-        North America:
-          type: number
-          format: double
-        Asia + Pacific:
-          type: number
-          format: double
-        Latin America:
-          type: number
-          format: double
-      xml:
-        name: RegionBreakdown
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.RiskProfileV3Request:
-      properties:
-        allocationType:
-          type: string
-          enum:
-          - dollar
-          - qty
-          - pct
-        portfolio:
-          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.RiskProfileRequestProfileDto'
-        duration:
-          type: string
-          enum:
-          - _all
-          - _10yr
-          - _5yr
-          - _3yr
-          - _2yr
-          - _1yr
-          - _ytd
-          - _6mth
-          - _3mth
-          - _1mth
-          - _1wk
-        options:
-          items:
-            type: string
-          type: array
-      xml:
-        name: RiskProfileV3Request
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.FiCountry:
-      properties:
-        country:
-          type: string
-        value:
-          type: number
-          format: double
-      xml:
-        name: FiCountry
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.StyleBoxBreakdown:
-      properties:
-        Blend:
-          type: number
-          format: double
-        Growth:
-          type: number
-          format: double
-        Value:
-          type: number
-          format: double
-      xml:
-        name: StyleBoxBreakdown
-      type: object
     MultipartDataMediaFormatter.Infrastructure.HttpFile:
       properties:
         fileName:
@@ -921,6 +820,433 @@ components:
           $ref: '#/components/schemas/System.Net.Http.StreamContent'
       xml:
         name: HttpFile
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Taxlot:
+      properties:
+        purchaseDate:
+          type: string
+        quantity:
+          type: number
+          format: float
+        purchaseAmt:
+          type: number
+          format: float
+      xml:
+        name: Taxlot
+      type: object
+    OAS.DataModel.Integration.HiddenLevers.PortfolioSyncAssetDto:
+      properties:
+        shares:
+          type: number
+          format: double
+        price:
+          type: number
+          format: double
+        value:
+          type: number
+          format: double
+        productId:
+          type: integer
+          format: int32
+        ticker:
+          type: string
+        assetClass:
+          type: string
+        isCustodialCash:
+          type: boolean
+        accountId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        id:
+          type: integer
+          format: int32
+        isin:
+          type: string
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        productSubTypeId:
+          type: integer
+          format: int32
+        productSubTypeName:
+          type: string
+      xml:
+        name: PortfolioSyncAssetDto
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.FiMaturityBreakdown:
+      properties:
+        Intermediate:
+          type: number
+          format: double
+        Long:
+          type: number
+          format: double
+        Less than 1 Year:
+          type: number
+          format: double
+        Short:
+          type: number
+          format: double
+      xml:
+        name: FiMaturityBreakdown
+      type: object
+    OAS.WebApi.Domains.Integrations.RiskRewardScoresDto:
+      properties:
+        downsidePerformance:
+          type: number
+          format: double
+        upsidePerformance:
+          type: number
+          format: double
+        potentialDownside:
+          readOnly: true
+          type: number
+          format: double
+        expectedReturn5yr:
+          readOnly: true
+          type: number
+          format: double
+        riskScore:
+          type: number
+          format: double
+        aum:
+          type: number
+          format: double
+      xml:
+        name: RiskRewardScoresDto
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.StressTest.StressTestV3Request:
+      properties:
+        allocationType:
+          type: string
+          enum:
+          - dollar
+          - qty
+          - pct
+        portfolio:
+          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.StressTest.StressTestRequestPortfolioDto'
+        scenarioIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        firmId:
+          type: string
+        userId:
+          type: string
+        firmNames:
+          items:
+            type: string
+          type: array
+      xml:
+        name: StressTestV3Request
+      type: object
+    OAS.WebApi.Domains.Integrations.HiddenLeversClientDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        firstName:
+          type: string
+        lastName:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        representativeId:
+          type: integer
+          format: int32
+        riskScore:
+          type: number
+          format: double
+        proposalPdf:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+      xml:
+        name: HiddenLeversClientDto
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Sector:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        penalty:
+          type: integer
+          format: int32
+        minimumValue:
+          type: integer
+          format: int32
+        maximumValue:
+          type: integer
+          format: int32
+        industries:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Industry'
+          xml:
+            name: Industry
+            wrapped: true
+          type: array
+        active:
+          type: string
+        minWeight:
+          type: integer
+          format: int32
+        warning:
+          type: boolean
+        maxWeight:
+          type: integer
+          format: int32
+      xml:
+        name: Sector
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.SectorBreakdown:
+      properties:
+        Utilities:
+          type: number
+          format: double
+        Energy:
+          type: number
+          format: double
+        Consumer Staples:
+          type: number
+          format: double
+        Technology:
+          type: number
+          format: double
+        Real Estate:
+          type: number
+          format: double
+        Materials:
+          type: number
+          format: double
+        Financials:
+          type: number
+          format: double
+        Communications:
+          type: number
+          format: double
+        Healthcare:
+          type: number
+          format: double
+        Industrials:
+          type: number
+          format: double
+        Consumer Discretionary:
+          type: number
+          format: double
+      xml:
+        name: SectorBreakdown
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.FiSectorDetails:
+      properties:
+        Non-Agency MBS:
+          type: number
+          format: double
+        Cash Equivalent:
+          type: number
+          format: double
+        Corporate Bond:
+          type: number
+          format: double
+        Municipal:
+          type: number
+          format: double
+        Convertible:
+          type: number
+          format: double
+        Commercial MBS:
+          type: number
+          format: double
+        Bank Loan:
+          type: number
+          format: double
+        Agency MBS:
+          type: number
+          format: double
+        Asset-Backed:
+          type: number
+          format: double
+        US Treasury:
+          type: number
+          format: double
+        Foreign Govt:
+          type: number
+          format: double
+        Other:
+          type: number
+          format: double
+        TIPS:
+          type: number
+          format: double
+      xml:
+        name: FiSectorDetails
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.JsonPosition:
+      properties:
+        pricedatemap:
+          type: string
+        industry:
+          type: string
+        liquidity:
+          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Liquidity'
+        volatility:
+          type: number
+          format: double
+        type:
+          type: string
+        firstHistory:
+          type: string
+          format: date-time
+        indDesc:
+          type: string
+        price:
+          type: number
+          format: double
+        yield:
+          type: number
+          format: double
+        lastGoodPrice:
+          type: number
+          format: double
+        pctAllocation:
+          type: number
+          format: double
+        marketCap:
+          type: number
+          format: double
+        ticker:
+          type: string
+        mgrStartDate:
+          type: string
+        quantity:
+          type: number
+          format: double
+        pricedate:
+          type: string
+        mddstart:
+          type: string
+        trueYield:
+          type: number
+          format: double
+        tradedcurrencyid:
+          type: integer
+          format: int32
+        expenseRatio:
+          type: number
+          format: double
+        name:
+          type: string
+        orionProductId:
+          type: integer
+          format: int32
+        mddend:
+          type: string
+        monthAgoValue:
+          type: number
+          format: double
+        range:
+          type: number
+          format: double
+        leverid:
+          type: integer
+          format: int32
+        originalTicker:
+          type: string
+        duration:
+          type: number
+          format: double
+        value:
+          type: number
+          format: double
+        impact2yr:
+          type: number
+          format: double
+        yearAgoValue:
+          type: number
+          format: double
+        stderror:
+          type: number
+          format: double
+        impact:
+          type: number
+          format: double
+        unit:
+          type: string
+        leverdesc:
+          type: string
+        levername:
+          type: string
+        litype:
+          type: string
+        bookValuePerShare:
+          type: number
+          format: double
+      xml:
+        name: JsonPosition
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.RiskMeasures:
+      properties:
+        aumfee:
+          type: string
+        sharperatio:
+          type: string
+        annualizedReturn:
+          type: string
+        totalReturn:
+          type: string
+        yield:
+          type: string
+        expenseRatio:
+          type: string
+        volatility:
+          type: string
+        mdd:
+          type: string
+        sortinoRatio:
+          type: string
+      xml:
+        name: RiskMeasures
       type: object
     OAT.Integrations.HiddenLevers.Dto.RiskProfile.Liquidity:
       properties:
@@ -944,6 +1270,160 @@ components:
           format: double
       xml:
         name: Liquidity
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Jsonposition:
+      properties:
+        quantity:
+          type: integer
+          format: int32
+        ticker:
+          type: string
+        taxlots:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Taxlot'
+          xml:
+            name: Taxlot
+            wrapped: true
+          type: array
+      xml:
+        name: Jsonposition
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.Basic:
+      properties:
+        pct:
+          type: number
+          format: double
+        ticker:
+          type: string
+        quantity:
+          type: number
+          format: double
+        price:
+          type: number
+          format: double
+        name:
+          type: string
+      xml:
+        name: Basic
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.Portfolio:
+      properties:
+        ccrScore:
+          type: number
+          format: double
+        expectedReturn:
+          type: number
+          format: double
+        expectedReturn5Yr:
+          type: number
+          format: double
+        liquidity:
+          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Liquidity'
+        strategyFee:
+          type: number
+          format: double
+        usePctAllocation:
+          type: string
+        timeframe:
+          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Timeframe'
+        portStartDate:
+          type: string
+          format: date-time
+        jsonPositions:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.JsonPosition'
+          xml:
+            name: JsonPosition
+            wrapped: true
+          type: array
+        value:
+          type: number
+          format: double
+        averageYield:
+          type: number
+          format: double
+        feeAnalysis:
+          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.FeeAnalysis'
+        timeframesp500Beta:
+          type: number
+          format: double
+        pvh:
+          items:
+            type: object
+          type: array
+        leversToWatch:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.LeversToWatch'
+          xml:
+            name: LeversToWatch
+            wrapped: true
+          type: array
+        riskMeasures:
+          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.RiskMeasures'
+        mddstart:
+          type: string
+          format: date-time
+        worstScenarioImpact:
+          type: number
+          format: double
+        excludedSymbols:
+          items:
+            type: object
+          type: array
+        averageDuration:
+          type: number
+          format: double
+        mpt:
+          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Mpt'
+        pctLiquid:
+          type: number
+          format: double
+        famaFactors:
+          items:
+            type: object
+          type: array
+        analyzableValue:
+          type: number
+          format: double
+        assetClasses:
+          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.AssetClasses'
+        mddend:
+          type: string
+          format: date-time
+      xml:
+        name: Portfolio
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.StyleBoxBreakdown:
+      properties:
+        Blend:
+          type: number
+          format: double
+        Growth:
+          type: number
+          format: double
+        Value:
+          type: number
+          format: double
+      xml:
+        name: StyleBoxBreakdown
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.FeeAnalysis:
+      properties:
+        totalPctFee:
+          type: number
+          format: double
+        aumFee:
+          type: number
+          format: double
+        expenseRatio:
+          type: number
+          format: double
+        name:
+          type: string
+        currency:
+          type: string
+      xml:
+        name: FeeAnalysis
       type: object
     OAT.Integrations.HiddenLevers.Dto.RiskProfile.Mpt:
       properties:
@@ -994,92 +1474,202 @@ components:
       xml:
         name: Mpt
       type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.Detailed:
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.FiCountry:
       properties:
-        pct:
-          type: number
-          format: double
-        ticker:
+        country:
           type: string
-        quantity:
+        value:
           type: number
           format: double
-        price:
+      xml:
+        name: FiCountry
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.FiSectorBreakdown:
+      properties:
+        Government:
           type: number
           format: double
+        Cash Equivalent:
+          type: number
+          format: double
+        Corporate:
+          type: number
+          format: double
+        Securitized:
+          type: number
+          format: double
+        Other:
+          type: number
+          format: double
+        Municipal:
+          type: number
+          format: double
+      xml:
+        name: FiSectorBreakdown
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.FiMaturityDetails:
+      properties:
+        <1 Yr:
+          type: number
+          format: double
+        1-3 Yrs:
+          type: number
+          format: double
+        3-5 Yrs:
+          type: number
+          format: double
+        5-7 Yrs:
+          type: number
+          format: double
+        7-10 Yrs:
+          type: number
+          format: double
+        10-15 Yrs:
+          type: number
+          format: double
+        15-20 Yrs:
+          type: number
+          format: double
+        20-30 Yrs:
+          type: number
+          format: double
+        30+ Yrs:
+          type: number
+          format: double
+      xml:
+        name: FiMaturityDetails
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.RiskProfileRequestProfileDto:
+      properties:
+        jsonPositions:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.RiskProfileRequestPositionDto'
+          xml:
+            name: RiskProfileRequestPositionDto
+            wrapped: true
+          type: array
+      xml:
+        name: RiskProfileRequestProfileDto
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.RegionBreakdown:
+      properties:
+        Middle East + Africa:
+          type: number
+          format: double
+        Europe:
+          type: number
+          format: double
+        North America:
+          type: number
+          format: double
+        Asia + Pacific:
+          type: number
+          format: double
+        Latin America:
+          type: number
+          format: double
+      xml:
+        name: RegionBreakdown
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Portfolio:
+      properties:
+        jsonPositions:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Jsonposition'
+          xml:
+            name: Jsonposition
+            wrapped: true
+          type: array
+      xml:
+        name: Portfolio
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.Benchmark:
+      properties:
+        expectedReturn:
+          type: number
+          format: double
+        expectedReturn5Yr:
+          type: number
+          format: double
+        liquidity:
+          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Liquidity'
+        strategyFee:
+          type: number
+          format: double
+        usePctAllocation:
+          type: string
+        timeframe:
+          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Timeframe'
+        portStartDate:
+          type: string
+          format: date-time
+        jsonPositions:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.JsonPosition'
+          xml:
+            name: JsonPosition
+            wrapped: true
+          type: array
+        id:
+          type: string
+        value:
+          type: number
+          format: double
+        feeAnalysis:
+          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.FeeAnalysis'
+        timeframesp500Beta:
+          type: number
+          format: double
+        pvh:
+          items:
+            type: object
+          type: array
+        leversToWatch:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.LeversToWatch'
+          xml:
+            name: LeversToWatch
+            wrapped: true
+          type: array
+        riskMeasures:
+          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.RiskMeasures'
+        isTickerWrapper:
+          type: string
+        mddstart:
+          type: string
+          format: date-time
+        worstScenarioImpact:
+          type: number
+          format: double
+        excludedSymbols:
+          items:
+            type: object
+          type: array
+        assetType:
+          type: string
+        mpt:
+          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Mpt'
+        industryid:
+          type: string
         name:
           type: string
-      xml:
-        name: Detailed
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.Timeframe:
-      properties:
-        endDate:
+        pctLiquid:
+          type: number
+          format: double
+        famaFactors:
+          items:
+            type: object
+          type: array
+        analyzableValue:
+          type: number
+          format: double
+        assetClasses:
+          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.AssetClasses'
+        mddend:
           type: string
           format: date-time
-        timeString:
-          type: string
-        startDate:
-          type: string
-          format: date-time
       xml:
-        name: Timeframe
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.StressTest.StressTestV3Request:
-      properties:
-        allocationType:
-          type: string
-          enum:
-          - dollar
-          - qty
-          - pct
-        portfolio:
-          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.StressTest.StressTestRequestPortfolioDto'
-        scenarioIds:
-          items:
-            type: integer
-            format: int32
-          type: array
-        firmId:
-          type: string
-        userId:
-          type: string
-        firmNames:
-          items:
-            type: string
-          type: array
-      xml:
-        name: StressTestV3Request
-      type: object
-    OAS.WebApi.Domains.Integrations.HiddenLeversNewProposal:
-      properties:
-        externalId:
-          type: integer
-          format: int32
-        proposalName:
-          type: string
-        repId:
-          type: integer
-          format: int32
-        investmentAmount:
-          type: number
-          format: double
-      xml:
-        name: HiddenLeversNewProposal
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.EconBreakdown:
-      properties:
-        US Stock:
-          type: number
-          format: double
-        International Developed Markets:
-          type: number
-          format: double
-        Emerging Markets:
-          type: number
-          format: double
-      xml:
-        name: EconBreakdown
+        name: Benchmark
       type: object
     OAT.Integrations.HiddenLevers.Dto.RiskProfile.LeversToWatch:
       properties:
@@ -1241,21 +1831,18 @@ components:
       xml:
         name: LeversToWatch
       type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.RiskProfileV3Response:
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.Timeframe:
       properties:
-        portfolio:
-          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Portfolio'
-        benchmark:
-          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Benchmark'
-        correlations:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Correlation'
-          xml:
-            name: Correlation
-            wrapped: true
-          type: array
+        endDate:
+          type: string
+          format: date-time
+        timeString:
+          type: string
+        startDate:
+          type: string
+          format: date-time
       xml:
-        name: RiskProfileV3Response
+        name: Timeframe
       type: object
     OAT.Integrations.HiddenLevers.Dto.RiskProfile.FiRegions:
       properties:
@@ -1283,376 +1870,31 @@ components:
       xml:
         name: FiRegions
       type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.FeeAnalysis:
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.AssetClasses:
       properties:
-        totalPctFee:
-          type: number
-          format: double
-        aumFee:
-          type: number
-          format: double
-        expenseRatio:
-          type: number
-          format: double
-        name:
-          type: string
-        currency:
-          type: string
-      xml:
-        name: FeeAnalysis
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.FiMaturityBreakdown:
-      properties:
-        Intermediate:
-          type: number
-          format: double
-        Long:
-          type: number
-          format: double
-        Less than 1 Year:
-          type: number
-          format: double
-        Short:
-          type: number
-          format: double
-      xml:
-        name: FiMaturityBreakdown
-      type: object
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
+        detailed:
           items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
+            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Detailed'
           xml:
-            name: KeyValuePair`2
+            name: Detailed
+            wrapped: true
+          type: array
+        industry:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Industry'
+          xml:
+            name: Industry
+            wrapped: true
+          type: array
+        basic:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Basic'
+          xml:
+            name: Basic
             wrapped: true
           type: array
       xml:
-        name: StreamContent
-      type: object
-    OAS.DataModel.Integration.HiddenLevers.PortfolioSyncAssetDto:
-      properties:
-        shares:
-          type: number
-          format: double
-        price:
-          type: number
-          format: double
-        value:
-          type: number
-          format: double
-        productId:
-          type: integer
-          format: int32
-        ticker:
-          type: string
-        assetClass:
-          type: string
-        isCustodialCash:
-          type: boolean
-        accountId:
-          type: integer
-          format: int32
-        name:
-          type: string
-        id:
-          type: integer
-          format: int32
-        isin:
-          type: string
-        productType:
-          type: string
-          enum:
-          - None
-          - MutualFund
-          - Annuity
-          - AdvisorOne
-          - StockOrETF
-          - Option
-          - Bond
-          - Unknown
-          - CD
-          - Index
-        productSubTypeId:
-          type: integer
-          format: int32
-        productSubTypeName:
-          type: string
-      xml:
-        name: PortfolioSyncAssetDto
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.Portfolio:
-      properties:
-        ccrScore:
-          type: number
-          format: double
-        expectedReturn:
-          type: number
-          format: double
-        expectedReturn5Yr:
-          type: number
-          format: double
-        liquidity:
-          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Liquidity'
-        strategyFee:
-          type: number
-          format: double
-        usePctAllocation:
-          type: string
-        timeframe:
-          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Timeframe'
-        portStartDate:
-          type: string
-          format: date-time
-        jsonPositions:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.JsonPosition'
-          xml:
-            name: JsonPosition
-            wrapped: true
-          type: array
-        value:
-          type: number
-          format: double
-        averageYield:
-          type: number
-          format: double
-        feeAnalysis:
-          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.FeeAnalysis'
-        timeframesp500Beta:
-          type: number
-          format: double
-        pvh:
-          items:
-            type: object
-          type: array
-        leversToWatch:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.LeversToWatch'
-          xml:
-            name: LeversToWatch
-            wrapped: true
-          type: array
-        riskMeasures:
-          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.RiskMeasures'
-        mddstart:
-          type: string
-          format: date-time
-        worstScenarioImpact:
-          type: number
-          format: double
-        excludedSymbols:
-          items:
-            type: object
-          type: array
-        averageDuration:
-          type: number
-          format: double
-        mpt:
-          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Mpt'
-        pctLiquid:
-          type: number
-          format: double
-        famaFactors:
-          items:
-            type: object
-          type: array
-        analyzableValue:
-          type: number
-          format: double
-        assetClasses:
-          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.AssetClasses'
-        mddend:
-          type: string
-          format: date-time
-      xml:
-        name: Portfolio
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.CreateClient.CreateClientRequest:
-      properties:
-        name:
-          type: string
-        extClientId:
-          type: string
-        source:
-          type: string
-      xml:
-        name: CreateClientRequest
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.MktCapBreakdown:
-      properties:
-        small:
-          type: number
-          format: double
-        large:
-          type: number
-          format: double
-        mid:
-          type: number
-          format: double
-      xml:
-        name: MktCapBreakdown
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.Basic:
-      properties:
-        pct:
-          type: number
-          format: double
-        ticker:
-          type: string
-        quantity:
-          type: number
-          format: double
-        price:
-          type: number
-          format: double
-        name:
-          type: string
-      xml:
-        name: Basic
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Taxlot:
-      properties:
-        purchaseDate:
-          type: string
-        quantity:
-          type: number
-          format: float
-        purchaseAmt:
-          type: number
-          format: float
-      xml:
-        name: Taxlot
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.FiSectorDetails:
-      properties:
-        Non-Agency MBS:
-          type: number
-          format: double
-        Cash Equivalent:
-          type: number
-          format: double
-        Corporate Bond:
-          type: number
-          format: double
-        Municipal:
-          type: number
-          format: double
-        Convertible:
-          type: number
-          format: double
-        Commercial MBS:
-          type: number
-          format: double
-        Bank Loan:
-          type: number
-          format: double
-        Agency MBS:
-          type: number
-          format: double
-        Asset-Backed:
-          type: number
-          format: double
-        US Treasury:
-          type: number
-          format: double
-        Foreign Govt:
-          type: number
-          format: double
-        Other:
-          type: number
-          format: double
-        TIPS:
-          type: number
-          format: double
-      xml:
-        name: FiSectorDetails
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Industry:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        penalty:
-          type: integer
-          format: int32
-        minimumValue:
-          type: number
-          format: float
-        maximumValue:
-          type: number
-          format: float
-        sectorId:
-          type: string
-      xml:
-        name: Industry
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.StressTest.StressTestRequestPortfolioDto:
-      properties:
-        jsonPositions:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.StressTest.StressTestREquestPositionDto'
-          xml:
-            name: StressTestREquestPositionDto
-            wrapped: true
-          type: array
-      xml:
-        name: StressTestRequestPortfolioDto
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.RiskProfileRequestProfileDto:
-      properties:
-        jsonPositions:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.RiskProfileRequestPositionDto'
-          xml:
-            name: RiskProfileRequestPositionDto
-            wrapped: true
-          type: array
-      xml:
-        name: RiskProfileRequestProfileDto
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.RiskMeasures:
-      properties:
-        aumfee:
-          type: string
-        sharperatio:
-          type: string
-        annualizedReturn:
-          type: string
-        totalReturn:
-          type: string
-        yield:
-          type: string
-        expenseRatio:
-          type: string
-        volatility:
-          type: string
-        mdd:
-          type: string
-        sortinoRatio:
-          type: string
-      xml:
-        name: RiskMeasures
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.Industry:
-      properties:
-        pct:
-          type: number
-          format: double
-        ticker:
-          type: string
-        quantity:
-          type: number
-          format: double
-        price:
-          type: number
-          format: double
-        name:
-          type: string
-      xml:
-        name: Industry
+        name: AssetClasses
       type: object
     OAT.Integrations.HiddenLevers.Dto.RiskProfile.FiCouponDetails:
       properties:
@@ -1680,7 +1922,61 @@ components:
       xml:
         name: FiCouponDetails
       type: object
-    OAT.Integrations.HiddenLevers.Dto.StressTest.StressTestREquestPositionDto:
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.RiskProfileV3Request:
+      properties:
+        allocationType:
+          type: string
+          enum:
+          - dollar
+          - qty
+          - pct
+        portfolio:
+          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.RiskProfileRequestProfileDto'
+        duration:
+          type: string
+          enum:
+          - _all
+          - _10yr
+          - _5yr
+          - _3yr
+          - _2yr
+          - _1yr
+          - _ytd
+          - _6mth
+          - _3mth
+          - _1mth
+          - _1wk
+        options:
+          items:
+            type: string
+          type: array
+      xml:
+        name: RiskProfileV3Request
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.StressTest.StressTestRequestPortfolioDto:
+      properties:
+        jsonPositions:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.StressTest.StressTestREquestPositionDto'
+          xml:
+            name: StressTestREquestPositionDto
+            wrapped: true
+          type: array
+      xml:
+        name: StressTestRequestPortfolioDto
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.CreateClient.CreateClientRequest:
+      properties:
+        name:
+          type: string
+        extClientId:
+          type: string
+        source:
+          type: string
+      xml:
+        name: CreateClientRequest
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.RiskProfileRequestPositionDto:
       properties:
         ticker:
           type: string
@@ -1688,7 +1984,171 @@ components:
           type: number
           format: double
       xml:
-        name: StressTestREquestPositionDto
+        name: RiskProfileRequestPositionDto
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.Correlation:
+      properties:
+        correlation:
+          type: number
+          format: double
+        ticker1:
+          type: string
+        pvalue:
+          type: number
+          format: double
+        ticker2:
+          type: string
+        name2:
+          type: string
+        name1:
+          type: string
+      xml:
+        name: Correlation
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.MktCapBreakdown:
+      properties:
+        small:
+          type: number
+          format: double
+        large:
+          type: number
+          format: double
+        mid:
+          type: number
+          format: double
+      xml:
+        name: MktCapBreakdown
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.Industry:
+      properties:
+        pct:
+          type: number
+          format: double
+        ticker:
+          type: string
+        quantity:
+          type: number
+          format: double
+        price:
+          type: number
+          format: double
+        name:
+          type: string
+      xml:
+        name: Industry
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Data:
+      properties:
+        portfolio:
+          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Portfolio'
+        securityRestrictions:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Securityrestriction'
+          xml:
+            name: Securityrestriction
+            wrapped: true
+          type: array
+        sectors:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Sector'
+          xml:
+            name: Sector
+            wrapped: true
+          type: array
+        esgRestrictions:
+          items:
+            type: string
+          type: array
+        capitalGains:
+          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Capitalgains'
+        strategyName:
+          type: string
+      xml:
+        name: Data
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Industry:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        penalty:
+          type: integer
+          format: int32
+        minimumValue:
+          type: number
+          format: float
+        maximumValue:
+          type: number
+          format: float
+        sectorId:
+          type: string
+      xml:
+        name: Industry
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.EconBreakdown:
+      properties:
+        US Stock:
+          type: number
+          format: double
+        International Developed Markets:
+          type: number
+          format: double
+        Emerging Markets:
+          type: number
+          format: double
+      xml:
+        name: EconBreakdown
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.Detailed:
+      properties:
+        pct:
+          type: number
+          format: double
+        ticker:
+          type: string
+        quantity:
+          type: number
+          format: double
+        price:
+          type: number
+          format: double
+        name:
+          type: string
+      xml:
+        name: Detailed
+      type: object
+    OAT.Integrations.HiddenLevers.Dto.RiskProfile.RiskProfileV3Response:
+      properties:
+        portfolio:
+          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Portfolio'
+        benchmark:
+          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Benchmark'
+        correlations:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Correlation'
+          xml:
+            name: Correlation
+            wrapped: true
+          type: array
+      xml:
+        name: RiskProfileV3Response
+      type: object
+    OAS.WebApi.Domains.Integrations.HiddenLeversNewProposal:
+      properties:
+        externalId:
+          type: integer
+          format: int32
+        proposalName:
+          type: string
+        repId:
+          type: integer
+          format: int32
+        investmentAmount:
+          type: number
+          format: double
+      xml:
+        name: HiddenLeversNewProposal
       type: object
     OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest:
       properties:
@@ -1707,118 +2167,25 @@ components:
       xml:
         name: RepManagedRequest
       type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.Benchmark:
+    OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Capitalgains:
       properties:
-        expectedReturn:
+        shortGain:
           type: number
-          format: double
-        expectedReturn5Yr:
-          type: number
-          format: double
-        liquidity:
-          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Liquidity'
-        strategyFee:
-          type: number
-          format: double
-        usePctAllocation:
-          type: string
-        timeframe:
-          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Timeframe'
-        portStartDate:
-          type: string
-          format: date-time
-        jsonPositions:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.JsonPosition'
-          xml:
-            name: JsonPosition
-            wrapped: true
-          type: array
-        id:
-          type: string
-        value:
-          type: number
-          format: double
-        feeAnalysis:
-          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.FeeAnalysis'
-        timeframesp500Beta:
-          type: number
-          format: double
-        pvh:
-          items:
-            type: object
-          type: array
-        leversToWatch:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.LeversToWatch'
-          xml:
-            name: LeversToWatch
-            wrapped: true
-          type: array
-        riskMeasures:
-          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.RiskMeasures'
-        isTickerWrapper:
-          type: string
-        mddstart:
-          type: string
-          format: date-time
-        worstScenarioImpact:
-          type: number
-          format: double
-        excludedSymbols:
-          items:
-            type: object
-          type: array
-        assetType:
-          type: string
-        mpt:
-          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Mpt'
-        industryid:
-          type: string
-        name:
-          type: string
-        pctLiquid:
-          type: number
-          format: double
-        famaFactors:
-          items:
-            type: object
-          type: array
-        analyzableValue:
-          type: number
-          format: double
-        assetClasses:
-          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.AssetClasses'
-        mddend:
-          type: string
-          format: date-time
+          format: float
+        longGain:
+          type: integer
+          format: int32
+        maxCapitalGains1:
+          type: integer
+          format: int32
+        maxCapitalGains2:
+          type: integer
+          format: int32
+        maxCapitalGains3:
+          type: integer
+          format: int32
       xml:
-        name: Benchmark
-      type: object
-    OAS.WebApi.Domains.Integrations.RiskRewardScoresDto:
-      properties:
-        downsidePerformance:
-          type: number
-          format: double
-        upsidePerformance:
-          type: number
-          format: double
-        potentialDownside:
-          readOnly: true
-          type: number
-          format: double
-        expectedReturn5yr:
-          readOnly: true
-          type: number
-          format: double
-        riskScore:
-          type: number
-          format: double
-        aum:
-          type: number
-          format: double
-      xml:
-        name: RiskRewardScoresDto
+        name: Capitalgains
       type: object
     OAT.Integrations.HiddenLevers.Dto.RiskProfile.StyleRawBreakdown:
       properties:
@@ -1852,230 +2219,32 @@ components:
       xml:
         name: StyleRawBreakdown
       type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.FiSectorBreakdown:
+    OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Securityrestriction:
       properties:
-        Government:
-          type: number
-          format: double
-        Cash Equivalent:
-          type: number
-          format: double
-        Corporate:
-          type: number
-          format: double
-        Securitized:
-          type: number
-          format: double
-        Other:
-          type: number
-          format: double
-        Municipal:
-          type: number
-          format: double
-      xml:
-        name: FiSectorBreakdown
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Sector:
-      properties:
-        id:
-          type: string
         name:
           type: string
-        penalty:
-          type: integer
-          format: int32
-        minimumValue:
-          type: integer
-          format: int32
-        maximumValue:
-          type: integer
-          format: int32
-        industries:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Industry'
-          xml:
-            name: Industry
-            wrapped: true
-          type: array
-        active:
-          type: string
-        minWeight:
-          type: integer
-          format: int32
-        warning:
-          type: boolean
-        maxWeight:
-          type: integer
-          format: int32
-      xml:
-        name: Sector
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.FiMaturityDetails:
-      properties:
-        <1 Yr:
-          type: number
-          format: double
-        1-3 Yrs:
-          type: number
-          format: double
-        3-5 Yrs:
-          type: number
-          format: double
-        5-7 Yrs:
-          type: number
-          format: double
-        7-10 Yrs:
-          type: number
-          format: double
-        10-15 Yrs:
-          type: number
-          format: double
-        15-20 Yrs:
-          type: number
-          format: double
-        20-30 Yrs:
-          type: number
-          format: double
-        30+ Yrs:
-          type: number
-          format: double
-      xml:
-        name: FiMaturityDetails
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Data:
-      properties:
-        portfolio:
-          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Portfolio'
-        securityRestrictions:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Securityrestriction'
-          xml:
-            name: Securityrestriction
-            wrapped: true
-          type: array
-        sectors:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Sector'
-          xml:
-            name: Sector
-            wrapped: true
-          type: array
-        esgRestrictions:
-          items:
-            type: string
-          type: array
-        capitalGains:
-          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Capitalgains'
-        strategyName:
-          type: string
-      xml:
-        name: Data
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Jsonposition:
-      properties:
-        quantity:
-          type: integer
-          format: int32
         ticker:
           type: string
-        taxlots:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Taxlot'
-          xml:
-            name: Taxlot
-            wrapped: true
-          type: array
-      xml:
-        name: Jsonposition
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Capitalgains:
-      properties:
-        shortGain:
+        restrictionType:
+          type: string
+        minWeight:
           type: number
           format: float
-        longGain:
-          type: integer
-          format: int32
-        maxCapitalGains1:
-          type: integer
-          format: int32
-        maxCapitalGains2:
-          type: integer
-          format: int32
-        maxCapitalGains3:
-          type: integer
-          format: int32
+        maxWeight:
+          type: number
+          format: float
       xml:
-        name: Capitalgains
+        name: Securityrestriction
       type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.SectorBreakdown:
+    OAT.Integrations.HiddenLevers.Dto.StressTest.StressTestREquestPositionDto:
       properties:
-        Utilities:
-          type: number
-          format: double
-        Energy:
-          type: number
-          format: double
-        Consumer Staples:
-          type: number
-          format: double
-        Technology:
-          type: number
-          format: double
-        Real Estate:
-          type: number
-          format: double
-        Materials:
-          type: number
-          format: double
-        Financials:
-          type: number
-          format: double
-        Communications:
-          type: number
-          format: double
-        Healthcare:
-          type: number
-          format: double
-        Industrials:
-          type: number
-          format: double
-        Consumer Discretionary:
+        ticker:
+          type: string
+        quantity:
           type: number
           format: double
       xml:
-        name: SectorBreakdown
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Portfolio:
-      properties:
-        jsonPositions:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Jsonposition'
-          xml:
-            name: Jsonposition
-            wrapped: true
-          type: array
-      xml:
-        name: Portfolio
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.Correlation:
-      properties:
-        correlation:
-          type: number
-          format: double
-        ticker1:
-          type: string
-        pvalue:
-          type: number
-          format: double
-        ticker2:
-          type: string
-        name2:
-          type: string
-        name1:
-          type: string
-      xml:
-        name: Correlation
+        name: StressTestREquestPositionDto
       type: object
     OAT.Integrations.HiddenLevers.Dto.RiskProfile.FiCreditBreakdown:
       properties:
@@ -2102,175 +2271,6 @@ components:
           format: double
       xml:
         name: FiCreditBreakdown
-      type: object
-    OAS.WebApi.Domains.Integrations.HiddenLeversClientDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        firstName:
-          type: string
-        lastName:
-          type: string
-        name:
-          type: string
-        email:
-          type: string
-        phone:
-          type: string
-        representativeId:
-          type: integer
-          format: int32
-        riskScore:
-          type: number
-          format: double
-        proposalPdf:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-      xml:
-        name: HiddenLeversClientDto
-      type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
-      properties:
-        key:
-          readOnly: true
-          type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: KeyValuePair`2
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.RiskProfileRequestPositionDto:
-      properties:
-        ticker:
-          type: string
-        quantity:
-          type: number
-          format: double
-      xml:
-        name: RiskProfileRequestPositionDto
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.RiskProfile.JsonPosition:
-      properties:
-        pricedatemap:
-          type: string
-        industry:
-          type: string
-        liquidity:
-          $ref: '#/components/schemas/OAT.Integrations.HiddenLevers.Dto.RiskProfile.Liquidity'
-        volatility:
-          type: number
-          format: double
-        type:
-          type: string
-        firstHistory:
-          type: string
-          format: date-time
-        indDesc:
-          type: string
-        price:
-          type: number
-          format: double
-        yield:
-          type: number
-          format: double
-        lastGoodPrice:
-          type: number
-          format: double
-        pctAllocation:
-          type: number
-          format: double
-        marketCap:
-          type: number
-          format: double
-        ticker:
-          type: string
-        mgrStartDate:
-          type: string
-        quantity:
-          type: number
-          format: double
-        pricedate:
-          type: string
-        mddstart:
-          type: string
-        trueYield:
-          type: number
-          format: double
-        tradedcurrencyid:
-          type: integer
-          format: int32
-        expenseRatio:
-          type: number
-          format: double
-        name:
-          type: string
-        orionProductId:
-          type: integer
-          format: int32
-        mddend:
-          type: string
-        monthAgoValue:
-          type: number
-          format: double
-        range:
-          type: number
-          format: double
-        leverid:
-          type: integer
-          format: int32
-        originalTicker:
-          type: string
-        duration:
-          type: number
-          format: double
-        value:
-          type: number
-          format: double
-        impact2yr:
-          type: number
-          format: double
-        yearAgoValue:
-          type: number
-          format: double
-        stderror:
-          type: number
-          format: double
-        impact:
-          type: number
-          format: double
-        unit:
-          type: string
-        leverdesc:
-          type: string
-        levername:
-          type: string
-        litype:
-          type: string
-        bookValuePerShare:
-          type: number
-          format: double
-      xml:
-        name: JsonPosition
-      type: object
-    OAT.Integrations.HiddenLevers.Dto.Portfolio_Rep_Managed.RepManagedRequest.Securityrestriction:
-      properties:
-        name:
-          type: string
-        ticker:
-          type: string
-        restrictionType:
-          type: string
-        minWeight:
-          type: number
-          format: float
-        maxWeight:
-          type: number
-          format: float
-      xml:
-        name: Securityrestriction
       type: object
   securitySchemes:
     Authorization:

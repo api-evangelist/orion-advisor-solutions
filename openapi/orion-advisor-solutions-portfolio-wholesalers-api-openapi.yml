@@ -1358,15 +1358,38 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.DataModel.SimpleEntity:
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
       properties:
-        id:
-          type: integer
-          format: int32
-        name:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    OAS.WebApi.DTO.Portfolio.UpdateSsnDto:
+      properties:
+        ssn:
+          type: string
+        reason:
           type: string
       xml:
-        name: SimpleEntity
+        name: UpdateSsnDto
       type: object
     OAS.WebApi.DTO.Portfolio.DocumentDto:
       properties:
@@ -1386,218 +1409,6 @@ components:
           type: boolean
       xml:
         name: DocumentDto
-      type: object
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
-      type: object
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
-      type: object
-    OAS.WebApi.DTO.Portfolio.UpdateSsnDto:
-      properties:
-        ssn:
-          type: string
-        reason:
-          type: string
-      xml:
-        name: UpdateSsnDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.WholesalerPortfolioDto:
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        name:
-          type: string
-        isActive:
-          type: boolean
-        company:
-          type: string
-        jobTitle:
-          type: string
-        ssN_TaxID:
-          type: string
-        dob:
-          type: string
-          format: date-time
-        gender:
-          type: string
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        addressLine1:
-          type: string
-        addressLine2:
-          type: string
-        addressLine3:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zip:
-          type: string
-        salutation:
-          type: string
-        homePhone:
-          type: string
-        homePhoneExt:
-          type: string
-        mobilePhone:
-          type: string
-        businessPhone:
-          type: string
-        businessPhoneExt:
-          type: string
-        otherPhone:
-          type: string
-        otherPhoneExt:
-          type: string
-        fax:
-          type: string
-        faxExt:
-          type: string
-        pager:
-          type: string
-        pagerExt:
-          type: string
-        email:
-          type: string
-        webAddress:
-          type: string
-        wholesalerStates:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.WholesalerStateDto'
-          xml:
-            name: WholesalerStateDto
-            wrapped: true
-          type: array
-      xml:
-        name: WholesalerPortfolioDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.WholesalerStateDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        stateId:
-          type: integer
-          format: int32
-        stateName:
-          type: string
-      xml:
-        name: WholesalerStateDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.WholesalerFileDto:
-      properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-        openWith:
-          type: string
-        blobDesc:
-          type: string
-        category:
-          type: string
-        blobType:
-          type: string
-          enum:
-          - CrmDocuments
-      xml:
-        name: WholesalerFileDto
-      type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
-      properties:
-        key:
-          readOnly: true
-          type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: KeyValuePair`2
-      type: object
-    OAS.WebApi.DTO.Portfolio.WholesalerVerboseDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        portfolio:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.WholesalerPortfolioDto'
-        notes:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.NoteDto'
-          xml:
-            name: NoteDto
-            wrapped: true
-          type: array
-        documents:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.DocumentDto'
-          xml:
-            name: DocumentDto
-            wrapped: true
-          type: array
-        userDefinedFields:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
-          xml:
-            name: EntityOptionDto
-            wrapped: true
-          type: array
-      xml:
-        name: WholesalerVerboseDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.WholesalerDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        firstName:
-          type: string
-        lastName:
-          type: string
-        value:
-          type: number
-          format: double
-        repCount:
-          type: integer
-          format: int32
-        name:
-          type: string
-        isActive:
-          type: boolean
-      xml:
-        name: WholesalerDto
       type: object
     OAS.WebApi.DTO.Settings.EntityOptionDto:
       properties:
@@ -1867,6 +1678,39 @@ components:
       xml:
         name: BlobBaseDto
       type: object
+    OAS.WebApi.DTO.Portfolio.WholesalerVerboseDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        portfolio:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.WholesalerPortfolioDto'
+        notes:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.NoteDto'
+          xml:
+            name: NoteDto
+            wrapped: true
+          type: array
+        documents:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.DocumentDto'
+          xml:
+            name: DocumentDto
+            wrapped: true
+          type: array
+        userDefinedFields:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+          xml:
+            name: EntityOptionDto
+            wrapped: true
+          type: array
+      xml:
+        name: WholesalerVerboseDto
+      type: object
     OAS.WebApi.DTO.Portfolio.NoteDto:
       properties:
         id:
@@ -1887,6 +1731,162 @@ components:
           type: boolean
       xml:
         name: NoteDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.WholesalerStateDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        stateId:
+          type: integer
+          format: int32
+        stateName:
+          type: string
+      xml:
+        name: WholesalerStateDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.WholesalerDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        firstName:
+          type: string
+        lastName:
+          type: string
+        value:
+          type: number
+          format: double
+        repCount:
+          type: integer
+          format: int32
+        name:
+          type: string
+        isActive:
+          type: boolean
+      xml:
+        name: WholesalerDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.WholesalerFileDto:
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+        openWith:
+          type: string
+        blobDesc:
+          type: string
+        category:
+          type: string
+        blobType:
+          type: string
+          enum:
+          - CrmDocuments
+      xml:
+        name: WholesalerFileDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.WholesalerPortfolioDto:
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        name:
+          type: string
+        isActive:
+          type: boolean
+        company:
+          type: string
+        jobTitle:
+          type: string
+        ssN_TaxID:
+          type: string
+        dob:
+          type: string
+          format: date-time
+        gender:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        addressLine3:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        salutation:
+          type: string
+        homePhone:
+          type: string
+        homePhoneExt:
+          type: string
+        mobilePhone:
+          type: string
+        businessPhone:
+          type: string
+        businessPhoneExt:
+          type: string
+        otherPhone:
+          type: string
+        otherPhoneExt:
+          type: string
+        fax:
+          type: string
+        faxExt:
+          type: string
+        pager:
+          type: string
+        pagerExt:
+          type: string
+        email:
+          type: string
+        webAddress:
+          type: string
+        wholesalerStates:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.WholesalerStateDto'
+          xml:
+            name: WholesalerStateDto
+            wrapped: true
+          type: array
+      xml:
+        name: WholesalerPortfolioDto
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
       type: object
   securitySchemes:
     Authorization:

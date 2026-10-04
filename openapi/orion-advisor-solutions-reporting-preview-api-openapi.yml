@@ -100,6 +100,55 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAS.WebApi.DTO.Reporting.Envision.DateExpression:
+      properties:
+        date:
+          type: string
+        expression:
+          type: string
+        dateSource:
+          type: string
+          enum:
+          - Static
+          - Dynamic
+      xml:
+        name: DateExpression
+      type: object
+    OAS.DataModel.Reporting.ReportOption:
+      required:
+      - id
+      - $type
+      properties:
+        id:
+          type: string
+        $type:
+          readOnly: true
+          type: string
+        optionGuid:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        optionId:
+          type: integer
+          format: int32
+        isDisabled:
+          type: boolean
+        isGlobal:
+          type: boolean
+        isIgnored:
+          type: boolean
+        name:
+          type: string
+        useInception:
+          type: boolean
+        prompt:
+          type: string
+          enum:
+          - Never
+          - Always
+      xml:
+        name: ReportOption
+      type: object
     OAS.WebApi.DTO.Reporting.Envision.PreviewDto:
       properties:
         entity:
@@ -151,6 +200,14 @@ components:
       xml:
         name: PreviewDto
       type: object
+    OAS.WebApi.DTO.Reporting.RunReport.InceptionDateDto:
+      properties:
+        inceptionDate:
+          type: string
+          format: date-time
+      xml:
+        name: InceptionDateDto
+      type: object
     OAS.DataModel.Reporting.Controls.ListControl:
       required:
       - $type
@@ -175,6 +232,22 @@ components:
           type: string
       xml:
         name: ListControl
+      type: object
+    OAS.DataModel.Reporting.ControlBase:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        width:
+          type: string
+      xml:
+        name: ControlBase
       type: object
     OAS.DataModel.Reporting.Interfaces.IReportFeatureFlagOverrider:
       properties:
@@ -261,79 +334,6 @@ components:
           type: boolean
       xml:
         name: IReportFeatureFlagOverrider
-      type: object
-    OAS.DataModel.Reporting.ReportOption:
-      required:
-      - id
-      - $type
-      properties:
-        id:
-          type: string
-        $type:
-          readOnly: true
-          type: string
-        optionGuid:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        optionId:
-          type: integer
-          format: int32
-        isDisabled:
-          type: boolean
-        isGlobal:
-          type: boolean
-        isIgnored:
-          type: boolean
-        name:
-          type: string
-        useInception:
-          type: boolean
-        prompt:
-          type: string
-          enum:
-          - Never
-          - Always
-      xml:
-        name: ReportOption
-      type: object
-    OAS.WebApi.DTO.Reporting.RunReport.InceptionDateDto:
-      properties:
-        inceptionDate:
-          type: string
-          format: date-time
-      xml:
-        name: InceptionDateDto
-      type: object
-    OAS.DataModel.Reporting.ControlBase:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        width:
-          type: string
-      xml:
-        name: ControlBase
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.DateExpression:
-      properties:
-        date:
-          type: string
-        expression:
-          type: string
-        dateSource:
-          type: string
-          enum:
-          - Static
-          - Dynamic
-      xml:
-        name: DateExpression
       type: object
   securitySchemes:
     Authorization:

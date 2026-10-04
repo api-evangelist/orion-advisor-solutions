@@ -224,119 +224,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ReportAssistantPrompt:
-      properties:
-        code:
-          type: string
-        displayName:
-          type: string
-        prompt:
-          type: string
-      xml:
-        name: ReportAssistantPrompt
-      type: object
-    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ReportAssistantPromptResponse:
-      properties:
-        promptType:
-          type: string
-          enum:
-          - System
-          - Prompt
-        promptParams:
-          type: string
-        sortOrder:
-          type: integer
-          format: int32
-        code:
-          type: string
-        displayName:
-          type: string
-        prompt:
-          type: string
-      xml:
-        name: ReportAssistantPromptResponse
-      type: object
-    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ConversationSummaryContext:
-      properties:
-        summary:
-          type: string
-        messageCount:
-          type: integer
-          format: int32
-      xml:
-        name: ConversationSummaryContext
-      type: object
-    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ReportAssistantControlListResponse:
-      properties:
-        displayName:
-          type: string
-        defaultSchema:
-          type: string
-      xml:
-        name: ReportAssistantControlListResponse
-      type: object
-    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ReportAssistantResponse:
-      properties:
-        response:
-          type: string
-        promptSuggestions:
-          items:
-            $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ReportAssistantPromptResponse'
-          xml:
-            name: ReportAssistantPromptResponse
-            wrapped: true
-          type: array
-        intentParams:
-          $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.UserIntentParams'
-        summaryContext:
-          $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ConversationSummaryContext'
-        primaryIntent:
-          $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.RouteUserIntentOutput'
-        originalPrompt:
-          type: string
-        secondaryIntents:
-          items:
-            $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.SecondaryIntentStepDto'
-          xml:
-            name: SecondaryIntentStepDto
-            wrapped: true
-          type: array
-        cachedReferenceMaterial:
-          $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.CachedReferenceMaterial'
-      xml:
-        name: ReportAssistantResponse
-      type: object
-    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.UserIntentParams:
-      properties:
-        intent:
-          type: string
-        parentControlId:
-          type: string
-        addControlLocation:
-          type: string
-        addControlType:
-          type: string
-        documentationType:
-          type: string
-          enum:
-          - Full
-          - Property
-        requests:
-          items:
-            type: string
-          type: array
-      xml:
-        name: UserIntentParams
-      type: object
-    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.AiChatMessage:
-      properties:
-        role:
-          type: string
-        text:
-          type: string
-      xml:
-        name: AiChatMessage
-      type: object
     OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ReportAssistantRequest:
       properties:
         editorContext:
@@ -391,6 +278,91 @@ components:
       xml:
         name: ReportAssistantRequest
       type: object
+    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.UserContext:
+      properties:
+        alClientId:
+          type: integer
+          format: int32
+        loginEntityId:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        loginUserId:
+          type: string
+      xml:
+        name: UserContext
+      type: object
+    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.CachedReferenceMaterial:
+      properties:
+        groupingList:
+          type: string
+        tagList:
+          type: string
+        settingsList:
+          type: string
+      xml:
+        name: CachedReferenceMaterial
+      type: object
+    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.PaginationInfo:
+      properties:
+        pageNumber:
+          type: integer
+          format: int32
+      xml:
+        name: PaginationInfo
+      type: object
+    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ReportAssistantResponse:
+      properties:
+        response:
+          type: string
+        promptSuggestions:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ReportAssistantPromptResponse'
+          xml:
+            name: ReportAssistantPromptResponse
+            wrapped: true
+          type: array
+        intentParams:
+          $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.UserIntentParams'
+        summaryContext:
+          $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ConversationSummaryContext'
+        primaryIntent:
+          $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.RouteUserIntentOutput'
+        originalPrompt:
+          type: string
+        secondaryIntents:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.SecondaryIntentStepDto'
+          xml:
+            name: SecondaryIntentStepDto
+            wrapped: true
+          type: array
+        cachedReferenceMaterial:
+          $ref: '#/components/schemas/OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.CachedReferenceMaterial'
+      xml:
+        name: ReportAssistantResponse
+      type: object
+    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.AiChatMessage:
+      properties:
+        role:
+          type: string
+        text:
+          type: string
+      xml:
+        name: AiChatMessage
+      type: object
+    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ConversationSummaryContext:
+      properties:
+        summary:
+          type: string
+        messageCount:
+          type: integer
+          format: int32
+      xml:
+        name: ConversationSummaryContext
+      type: object
     OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.RouteUserIntentOutput:
       properties:
         intent:
@@ -427,21 +399,16 @@ components:
       xml:
         name: RouteUserIntentOutput
       type: object
-    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.UserContext:
+    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ReportAssistantPrompt:
       properties:
-        alClientId:
-          type: integer
-          format: int32
-        loginEntityId:
-          type: integer
-          format: int32
-        userId:
-          type: integer
-          format: int32
-        loginUserId:
+        code:
+          type: string
+        displayName:
+          type: string
+        prompt:
           type: string
       xml:
-        name: UserContext
+        name: ReportAssistantPrompt
       type: object
     OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.PromptSystemResponse:
       properties:
@@ -489,24 +456,27 @@ components:
       xml:
         name: PromptSystemResponse
       type: object
-    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.PaginationInfo:
+    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.UserIntentParams:
       properties:
-        pageNumber:
-          type: integer
-          format: int32
+        intent:
+          type: string
+        parentControlId:
+          type: string
+        addControlLocation:
+          type: string
+        addControlType:
+          type: string
+        documentationType:
+          type: string
+          enum:
+          - Full
+          - Property
+        requests:
+          items:
+            type: string
+          type: array
       xml:
-        name: PaginationInfo
-      type: object
-    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.CachedReferenceMaterial:
-      properties:
-        groupingList:
-          type: string
-        tagList:
-          type: string
-        settingsList:
-          type: string
-      xml:
-        name: CachedReferenceMaterial
+        name: UserIntentParams
       type: object
     OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.SecondaryIntentStepDto:
       properties:
@@ -518,6 +488,36 @@ components:
           type: object
       xml:
         name: SecondaryIntentStepDto
+      type: object
+    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ReportAssistantPromptResponse:
+      properties:
+        promptType:
+          type: string
+          enum:
+          - System
+          - Prompt
+        promptParams:
+          type: string
+        sortOrder:
+          type: integer
+          format: int32
+        code:
+          type: string
+        displayName:
+          type: string
+        prompt:
+          type: string
+      xml:
+        name: ReportAssistantPromptResponse
+      type: object
+    OAS.DataProcess.Reporting.ReportingAi.ReportAssistant.ReportAssistantControlListResponse:
+      properties:
+        displayName:
+          type: string
+        defaultSchema:
+          type: string
+      xml:
+        name: ReportAssistantControlListResponse
       type: object
   securitySchemes:
     Authorization:

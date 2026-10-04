@@ -721,17 +721,154 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.DataModel.Compliance.GetRepresentativesModel.FundModel:
+    OAS.WebApi.DTO.Compliance.InformAccountForBccDto:
       properties:
-        alertId:
+        informBrokerageAccountId:
           type: integer
           format: int32
-        ticker:
+        accessPersonId:
+          type: integer
+          format: int32
+        informUserId:
+          type: integer
+          format: int32
+        vendorAccountCode:
           type: string
-        custodian:
+        accountNumber:
+          type: string
+        institutionName:
+          type: string
+        recordSource:
+          type: string
+          enum:
+          - Unknown
+          - Quovo
+          - Retirement
+          - OrionConnect
+          - Plaid
+          - ByAll
+        isActive:
+          type: boolean
+      xml:
+        name: InformAccountForBccDto
+      type: object
+    OAS.WebApi.DTO.Compliance.InformTransactionForBccDto:
+      properties:
+        transactionId:
+          type: integer
+          format: int32
+        accessPersonId:
+          type: integer
+          format: int32
+        informBrokerageAccountId:
+          type: integer
+          format: int32
+        price:
+          type: number
+          format: double
+        quantity:
+          type: number
+          format: double
+        transactionAmount:
+          type: number
+          format: double
+        transDate:
+          type: string
+          format: date-time
+        productName:
+          type: string
+        sourceCusip:
+          type: string
+        sourceTicker:
+          type: string
+        transTypeId:
+          type: integer
+          format: int32
+        transactionTypeName:
+          type: string
+        accountNumber:
           type: string
       xml:
-        name: FundModel
+        name: InformTransactionForBccDto
+      type: object
+    OAS.WebApi.DTO.Compliance.InformHoldingForBccDto:
+      properties:
+        transactionId:
+          type: integer
+          format: int32
+        accessPersonId:
+          type: integer
+          format: int32
+        informBrokerageAccountId:
+          type: integer
+          format: int32
+        price:
+          type: number
+          format: double
+        quantity:
+          type: number
+          format: double
+        holdingAmount:
+          type: number
+          format: double
+        asOfDate:
+          type: string
+          format: date-time
+        productId:
+          type: integer
+          format: int32
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        sourceProductType:
+          type: string
+        productName:
+          type: string
+        cusip:
+          type: string
+        ticker:
+          type: string
+      xml:
+        name: InformHoldingForBccDto
+      type: object
+    OAS.WebApi.DTO.Compliance.InformUserForBccDto:
+      properties:
+        userId:
+          type: integer
+          format: int32
+        userDtlId:
+          type: integer
+          format: int32
+        informUserId:
+          type: integer
+          format: int32
+        accessPersonId:
+          type: integer
+          format: int32
+        loginUserId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        isActiveUser:
+          type: boolean
+        isActiveAccessPerson:
+          type: boolean
+      xml:
+        name: InformUserForBccDto
       type: object
     OAS.WebApi.DTO.Security.ProfileDto:
       properties:
@@ -951,54 +1088,29 @@ components:
       xml:
         name: ProfileDto
       type: object
-    OAS.WebApi.DTO.Compliance.InformTransactionForBccDto:
+    OAS.DataModel.Compliance.GetRepresentativesModel.FundModel:
       properties:
-        transactionId:
+        alertId:
           type: integer
           format: int32
-        accessPersonId:
-          type: integer
-          format: int32
-        informBrokerageAccountId:
-          type: integer
-          format: int32
-        price:
-          type: number
-          format: double
-        quantity:
-          type: number
-          format: double
-        transactionAmount:
-          type: number
-          format: double
-        transDate:
+        ticker:
           type: string
-          format: date-time
-        productName:
-          type: string
-        sourceCusip:
-          type: string
-        sourceTicker:
-          type: string
-        transTypeId:
-          type: integer
-          format: int32
-        transactionTypeName:
-          type: string
-        accountNumber:
+        custodian:
           type: string
       xml:
-        name: InformTransactionForBccDto
+        name: FundModel
       type: object
-    OAS.DataModel.SimpleEntity:
+    OAS.DataModel.Compliance.GetRepresentativesModel:
       properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
+        funds:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Compliance.GetRepresentativesModel.FundModel'
+          xml:
+            name: FundModel
+            wrapped: true
+          type: array
       xml:
-        name: SimpleEntity
+        name: GetRepresentativesModel
       type: object
     OAS.DataModel.Compliance.NotifyConsultantsModel:
       properties:
@@ -1017,78 +1129,6 @@ components:
           type: string
       xml:
         name: NotifyConsultantsModel
-      type: object
-    OAS.WebApi.DTO.Compliance.InformAccountForBccDto:
-      properties:
-        informBrokerageAccountId:
-          type: integer
-          format: int32
-        accessPersonId:
-          type: integer
-          format: int32
-        informUserId:
-          type: integer
-          format: int32
-        vendorAccountCode:
-          type: string
-        accountNumber:
-          type: string
-        institutionName:
-          type: string
-        recordSource:
-          type: string
-          enum:
-          - Unknown
-          - Quovo
-          - Retirement
-          - OrionConnect
-          - Plaid
-          - ByAll
-        isActive:
-          type: boolean
-      xml:
-        name: InformAccountForBccDto
-      type: object
-    OAS.WebApi.DTO.Compliance.InformUserForBccDto:
-      properties:
-        userId:
-          type: integer
-          format: int32
-        userDtlId:
-          type: integer
-          format: int32
-        informUserId:
-          type: integer
-          format: int32
-        accessPersonId:
-          type: integer
-          format: int32
-        loginUserId:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-        isActiveUser:
-          type: boolean
-        isActiveAccessPerson:
-          type: boolean
-      xml:
-        name: InformUserForBccDto
-      type: object
-    OAS.DataModel.Compliance.GetRepresentativesModel:
-      properties:
-        funds:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Compliance.GetRepresentativesModel.FundModel'
-          xml:
-            name: FundModel
-            wrapped: true
-          type: array
-      xml:
-        name: GetRepresentativesModel
       type: object
     OAS.WebApi.DTO.Security.UserInfoDetailsDto:
       properties:
@@ -1162,55 +1202,15 @@ components:
       xml:
         name: UserInfoDetailsDto
       type: object
-    OAS.WebApi.DTO.Compliance.InformHoldingForBccDto:
+    OAS.DataModel.SimpleEntity:
       properties:
-        transactionId:
+        id:
           type: integer
           format: int32
-        accessPersonId:
-          type: integer
-          format: int32
-        informBrokerageAccountId:
-          type: integer
-          format: int32
-        price:
-          type: number
-          format: double
-        quantity:
-          type: number
-          format: double
-        holdingAmount:
-          type: number
-          format: double
-        asOfDate:
-          type: string
-          format: date-time
-        productId:
-          type: integer
-          format: int32
-        productType:
-          type: string
-          enum:
-          - None
-          - MutualFund
-          - Annuity
-          - AdvisorOne
-          - StockOrETF
-          - Option
-          - Bond
-          - Unknown
-          - CD
-          - Index
-        sourceProductType:
-          type: string
-        productName:
-          type: string
-        cusip:
-          type: string
-        ticker:
+        name:
           type: string
       xml:
-        name: InformHoldingForBccDto
+        name: SimpleEntity
       type: object
   securitySchemes:
     Authorization:

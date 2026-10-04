@@ -672,34 +672,32 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.DataModel.SimpleEntity:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleEntity
-      type: object
-    OAS.WebApi.DTO.Portfolio.InvestmentObjectiveVerboseDto:
+    OAS.WebApi.DTO.Portfolio.InvestmentObjectiveDto:
       properties:
         id:
           type: integer
           format: int32
         description:
           type: string
-        general:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.InvestmentObjectiveGeneralDto'
-        hypotheticalMonthlyPerformanceValues:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.InvestmentObjectiveHypotheticalMonthlyPerformanceValueDto'
-          xml:
-            name: InvestmentObjectiveHypotheticalMonthlyPerformanceValueDto
-            wrapped: true
-          type: array
+        sequenceNumber:
+          type: integer
+          format: int32
+        riskRangeLow:
+          type: integer
+          format: int32
+        riskRangeHigh:
+          type: integer
+          format: int32
+        driftRangeLow:
+          type: integer
+          format: int32
+        driftRangeHigh:
+          type: integer
+          format: int32
+        detail:
+          type: string
       xml:
-        name: InvestmentObjectiveVerboseDto
+        name: InvestmentObjectiveDto
       type: object
     OAS.WebApi.DTO.Portfolio.InvestmentObjectiveHypotheticalMonthlyPerformanceValueDto:
       properties:
@@ -731,32 +729,34 @@ components:
       xml:
         name: InvestmentObjectiveGeneralDto
       type: object
-    OAS.WebApi.DTO.Portfolio.InvestmentObjectiveDto:
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
+    OAS.WebApi.DTO.Portfolio.InvestmentObjectiveVerboseDto:
       properties:
         id:
           type: integer
           format: int32
         description:
           type: string
-        sequenceNumber:
-          type: integer
-          format: int32
-        riskRangeLow:
-          type: integer
-          format: int32
-        riskRangeHigh:
-          type: integer
-          format: int32
-        driftRangeLow:
-          type: integer
-          format: int32
-        driftRangeHigh:
-          type: integer
-          format: int32
-        detail:
-          type: string
+        general:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.InvestmentObjectiveGeneralDto'
+        hypotheticalMonthlyPerformanceValues:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.InvestmentObjectiveHypotheticalMonthlyPerformanceValueDto'
+          xml:
+            name: InvestmentObjectiveHypotheticalMonthlyPerformanceValueDto
+            wrapped: true
+          type: array
       xml:
-        name: InvestmentObjectiveDto
+        name: InvestmentObjectiveVerboseDto
       type: object
   securitySchemes:
     Authorization:

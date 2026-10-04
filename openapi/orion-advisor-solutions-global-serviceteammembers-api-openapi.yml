@@ -518,6 +518,50 @@ components:
       xml:
         name: AlClientOpsDto
       type: object
+    OAS.WebApi.DTO.Authorization.ServiceTeamMemberDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        serviceTeamId:
+          type: integer
+          format: int32
+        serviceTeam:
+          type: string
+        userId:
+          type: integer
+          format: int32
+        userName:
+          type: string
+        isAnalyst:
+          type: boolean
+        isAccountManager:
+          type: boolean
+        userManagerId:
+          type: integer
+          format: int32
+        userManagerName:
+          type: string
+        alClients:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.ALClientDto'
+          xml:
+            name: ALClientDto
+            wrapped: true
+          type: array
+      xml:
+        name: ServiceTeamMemberDto
+      type: object
+    OAS.WebApi.DTO.Authorization.SimpleServiceTeamMemberUserManagerDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleServiceTeamMemberUserManagerDto
+      type: object
     OAS.WebApi.DTO.Authorization.ServiceTeamMemberAlClientDto:
       properties:
         serviceTeamMemberId:
@@ -558,50 +602,6 @@ components:
           format: uuid
       xml:
         name: ALClientDto
-      type: object
-    OAS.WebApi.DTO.Authorization.SimpleServiceTeamMemberUserManagerDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleServiceTeamMemberUserManagerDto
-      type: object
-    OAS.WebApi.DTO.Authorization.ServiceTeamMemberDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        serviceTeamId:
-          type: integer
-          format: int32
-        serviceTeam:
-          type: string
-        userId:
-          type: integer
-          format: int32
-        userName:
-          type: string
-        isAnalyst:
-          type: boolean
-        isAccountManager:
-          type: boolean
-        userManagerId:
-          type: integer
-          format: int32
-        userManagerName:
-          type: string
-        alClients:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Authorization.ALClientDto'
-          xml:
-            name: ALClientDto
-            wrapped: true
-          type: array
-      xml:
-        name: ServiceTeamMemberDto
       type: object
   securitySchemes:
     Authorization:

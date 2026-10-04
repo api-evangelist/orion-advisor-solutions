@@ -630,20 +630,163 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.WebApi.DTO.Security.PartnerAppLinkDto:
+    OAS.WebApi.DTO.Security.PartnerAndAppSimpleDto:
       properties:
-        appLinkId:
+        id:
+          type: integer
+          format: int32
+        productDescription:
+          type: string
+        partnerName:
+          type: string
+        productName:
+          type: string
+        productShortDescription:
+          type: string
+        homePageURL:
+          type: string
+        termsOfService:
+          type: string
+        installed:
+          type: boolean
+        learnMorePath:
+          type: string
+        acceptedTOS:
+          type: boolean
+        imageName:
+          type: string
+        appCode:
+          type: string
+        routeUrl:
+          type: string
+        privilegeId:
+          type: integer
+          format: int32
+      xml:
+        name: PartnerAndAppSimpleDto
+      type: object
+    OAS.WebApi.DTO.Security.PartnerAppUrlWhitelistDto:
+      properties:
+        url:
+          type: string
+        sslRequired:
+          type: boolean
+      xml:
+        name: PartnerAppUrlWhitelistDto
+      type: object
+    OAS.DataModel.Security.PartnerAppUser:
+      required:
+      - partnerAppId
+      - userId
+      - refreshToken
+      - expirationDate
+      - isRevolked
+      properties:
+        partnerAppId:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        refreshToken:
+          type: string
+          maxLength: 100
+          minLength: 0
+        expirationDate:
+          type: string
+          format: date-time
+        isRevolked:
+          type: boolean
+      xml:
+        name: PartnerAppUser
+      type: object
+    OAS.DataModel.Security.PartnerAppSamlEmailDomain:
+      required:
+      - id
+      - partnerAppId
+      - emailDomain
+      properties:
+        id:
           type: integer
           format: int32
         partnerAppId:
           type: integer
           format: int32
-        appCode:
-          type: string
-        appDescription:
+        emailDomain:
           type: string
       xml:
-        name: PartnerAppLinkDto
+        name: PartnerAppSamlEmailDomain
+      type: object
+    OAS.DataModel.Security.PartnerAppUrlWhitelist:
+      required:
+      - id
+      - partnerAppId
+      - url
+      - sslRequired
+      properties:
+        id:
+          type: integer
+          format: int32
+        partnerAppId:
+          type: integer
+          format: int32
+        url:
+          type: string
+        sslRequired:
+          type: boolean
+      xml:
+        name: PartnerAppUrlWhitelist
+      type: object
+    OAS.DataModel.Security.PartnerAppIpRange:
+      required:
+      - id
+      - partnerAppId
+      - startAddress
+      - endAddress
+      - createdBy
+      - createdDate
+      - editedBy
+      - editedDate
+      properties:
+        id:
+          type: integer
+          format: int32
+        partnerAppId:
+          type: integer
+          format: int32
+        description:
+          type: string
+          maxLength: 255
+          minLength: 0
+        startAddress:
+          type: string
+          maxLength: 15
+          minLength: 0
+          pattern: ^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+        endAddress:
+          type: string
+          maxLength: 15
+          minLength: 0
+          pattern: ^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+        isBlacklist:
+          readOnly: true
+          type: boolean
+        createdBy:
+          type: string
+          maxLength: 100
+          minLength: 0
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+          maxLength: 100
+          minLength: 0
+        editedDate:
+          type: string
+          format: date-time
+      xml:
+        name: PartnerAppIpRange
       type: object
     OAS.WebApi.DTO.Security.PartnerAppSimpleDto:
       properties:
@@ -773,16 +916,36 @@ components:
       xml:
         name: PartnerAppFullReadDto
       type: object
-    OAS.DataModel.Security.PartnerAppIpRange:
+    OAS.DataModel.Security.PartnerAppCustomUrl:
       required:
       - id
-      - partnerAppId
-      - startAddress
-      - endAddress
-      - createdBy
-      - createdDate
-      - editedBy
-      - editedDate
+      - urlType
+      - url
+      - indexId
+      properties:
+        id:
+          type: integer
+          format: int32
+        alClientId:
+          type: integer
+          format: int32
+        partnerAppId:
+          type: integer
+          format: int32
+        urlType:
+          type: string
+          enum:
+          - ResetPassword
+          - PartnerAppRedirect
+        url:
+          type: string
+        indexId:
+          type: integer
+          format: int32
+      xml:
+        name: PartnerAppCustomUrl
+      type: object
+    OAS.DataModel.Security.PartnerAppAdvisor:
       properties:
         id:
           type: integer
@@ -790,59 +953,52 @@ components:
         partnerAppId:
           type: integer
           format: int32
-        description:
+        alClientId:
+          type: integer
+          format: int32
+        serviceCredentials:
           type: string
-          maxLength: 255
+          maxLength: 8000
           minLength: 0
-        startAddress:
-          type: string
-          maxLength: 15
-          minLength: 0
-          pattern: ^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
-        endAddress:
-          type: string
-          maxLength: 15
-          minLength: 0
-          pattern: ^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
-        isBlacklist:
-          readOnly: true
+        acceptedTOS:
           type: boolean
-        createdBy:
+        acceptedTOSUserId:
           type: string
-          maxLength: 100
-          minLength: 0
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-          maxLength: 100
-          minLength: 0
-        editedDate:
+        created:
           type: string
           format: date-time
       xml:
-        name: PartnerAppIpRange
+        name: PartnerAppAdvisor
       type: object
-    OAS.WebApi.DTO.Security.PartnerAppCustodianRestrictionDto:
+    OAS.WebApi.DTO.Security.PartnerAppAdvisorDto:
       properties:
         id:
           type: integer
           format: int32
-        name:
+        alClientId:
+          type: integer
+          format: int32
+        acceptedTOS:
+          type: boolean
+        acceptedTOSUser:
           type: string
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
       xml:
-        name: PartnerAppCustodianRestrictionDto
+        name: PartnerAppAdvisorDto
+      type: object
+    OAS.WebApi.DTO.Security.PartnerAppLinkDto:
+      properties:
+        appLinkId:
+          type: integer
+          format: int32
+        partnerAppId:
+          type: integer
+          format: int32
+        appCode:
+          type: string
+        appDescription:
+          type: string
+      xml:
+        name: PartnerAppLinkDto
       type: object
     OAS.DataModel.Security.PartnerApp:
       required:
@@ -1049,39 +1205,40 @@ components:
       xml:
         name: PartnerApp
       type: object
-    OAS.DataModel.Security.PartnerAppAdvisor:
+    OAS.WebApi.DTO.Security.PartnerAppSamlEmailDomainDto:
+      properties:
+        emailDomain:
+          type: string
+      xml:
+        name: PartnerAppSamlEmailDomainDto
+      type: object
+    OAS.DataModel.Portfolio.CustodianCommon:
+      required:
+      - id
+      - code
+      - name
       properties:
         id:
           type: integer
           format: int32
-        partnerAppId:
-          type: integer
-          format: int32
-        alClientId:
-          type: integer
-          format: int32
-        serviceCredentials:
+        code:
           type: string
-          maxLength: 8000
+          maxLength: 10
           minLength: 0
-        acceptedTOS:
-          type: boolean
-        acceptedTOSUserId:
+        name:
           type: string
-        created:
-          type: string
-          format: date-time
+          maxLength: 100
+          minLength: 0
       xml:
-        name: PartnerAppAdvisor
+        name: CustodianCommon
       type: object
-    OAS.WebApi.DTO.Security.PartnerAppUrlWhitelistDto:
+    OAS.WebApi.DTO.Security.PartnerAppImageDto:
       properties:
-        url:
+        image:
           type: string
-        sslRequired:
-          type: boolean
+          format: byte
       xml:
-        name: PartnerAppUrlWhitelistDto
+        name: PartnerAppImageDto
       type: object
     OAS.DataModel.Security.PartnerAppCustodianRestriction:
       required:
@@ -1117,88 +1274,12 @@ components:
       xml:
         name: PartnerAppCustodianRestriction
       type: object
-    OAS.WebApi.DTO.Security.PartnerAppReadDto:
-      description: Read-only DTO for Partner App list endpoint that excludes sensitive fields.
+    OAS.WebApi.DTO.Security.PartnerAppCustodianRestrictionDto:
       properties:
         id:
           type: integer
           format: int32
-        partnerName:
-          type: string
-        productName:
-          type: string
-        productDescription:
-          type: string
-        enabled:
-          type: boolean
-        useIPRestrictions:
-          type: boolean
-        useCustodianRestrictions:
-          type: boolean
-        contactName:
-          type: string
-        contactPhone:
-          type: string
-        contactEmail:
-          type: string
-        supportName:
-          type: string
-        supportPhone:
-          type: string
-        supportEmail:
-          type: string
-        homePageURL:
-          type: string
-        productLogo:
-          type: string
-          format: byte
-        termsOfService:
-          type: string
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        learnMorePath:
-          type: string
-      xml:
-        name: PartnerAppReadDto
-      type: object
-    OAS.DataModel.Security.PartnerAppUrlWhitelist:
-      required:
-      - id
-      - partnerAppId
-      - url
-      - sslRequired
-      properties:
-        id:
-          type: integer
-          format: int32
-        partnerAppId:
-          type: integer
-          format: int32
-        url:
-          type: string
-        sslRequired:
-          type: boolean
-      xml:
-        name: PartnerAppUrlWhitelist
-      type: object
-    OAS.WebApi.DTO.Security.PartnerAppIpRangeDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        description:
-          type: string
-        startAddress:
-          type: string
-        endAddress:
+        name:
           type: string
         createdBy:
           type: string
@@ -1211,42 +1292,7 @@ components:
           type: string
           format: date-time
       xml:
-        name: PartnerAppIpRangeDto
-      type: object
-    OAS.WebApi.DTO.Security.PartnerAndAppSimpleDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        productDescription:
-          type: string
-        partnerName:
-          type: string
-        productName:
-          type: string
-        productShortDescription:
-          type: string
-        homePageURL:
-          type: string
-        termsOfService:
-          type: string
-        installed:
-          type: boolean
-        learnMorePath:
-          type: string
-        acceptedTOS:
-          type: boolean
-        imageName:
-          type: string
-        appCode:
-          type: string
-        routeUrl:
-          type: string
-        privilegeId:
-          type: integer
-          format: int32
-      xml:
-        name: PartnerAndAppSimpleDto
+        name: PartnerAppCustodianRestrictionDto
       type: object
     OAS.WebApi.DTO.Security.PartnerAppUpdateDto:
       description: DTO for updating Partner App that excludes sensitive fields and audit fields.
@@ -1343,127 +1389,81 @@ components:
       xml:
         name: PartnerAppUpdateDto
       type: object
-    OAS.DataModel.Portfolio.CustodianCommon:
-      required:
-      - id
-      - code
-      - name
+    OAS.WebApi.DTO.Security.PartnerAppReadDto:
+      description: Read-only DTO for Partner App list endpoint that excludes sensitive fields.
       properties:
         id:
           type: integer
           format: int32
-        code:
+        partnerName:
           type: string
-          maxLength: 10
-          minLength: 0
-        name:
+        productName:
           type: string
-          maxLength: 100
-          minLength: 0
-      xml:
-        name: CustodianCommon
-      type: object
-    OAS.DataModel.Security.PartnerAppCustomUrl:
-      required:
-      - id
-      - urlType
-      - url
-      - indexId
-      properties:
-        id:
-          type: integer
-          format: int32
-        alClientId:
-          type: integer
-          format: int32
-        partnerAppId:
-          type: integer
-          format: int32
-        urlType:
+        productDescription:
           type: string
-          enum:
-          - ResetPassword
-          - PartnerAppRedirect
-        url:
+        enabled:
+          type: boolean
+        useIPRestrictions:
+          type: boolean
+        useCustodianRestrictions:
+          type: boolean
+        contactName:
           type: string
-        indexId:
-          type: integer
-          format: int32
-      xml:
-        name: PartnerAppCustomUrl
-      type: object
-    OAS.DataModel.Security.PartnerAppSamlEmailDomain:
-      required:
-      - id
-      - partnerAppId
-      - emailDomain
-      properties:
-        id:
-          type: integer
-          format: int32
-        partnerAppId:
-          type: integer
-          format: int32
-        emailDomain:
+        contactPhone:
           type: string
-      xml:
-        name: PartnerAppSamlEmailDomain
-      type: object
-    OAS.WebApi.DTO.Security.PartnerAppSamlEmailDomainDto:
-      properties:
-        emailDomain:
+        contactEmail:
           type: string
-      xml:
-        name: PartnerAppSamlEmailDomainDto
-      type: object
-    OAS.WebApi.DTO.Security.PartnerAppImageDto:
-      properties:
-        image:
+        supportName:
+          type: string
+        supportPhone:
+          type: string
+        supportEmail:
+          type: string
+        homePageURL:
+          type: string
+        productLogo:
           type: string
           format: byte
+        termsOfService:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        learnMorePath:
+          type: string
       xml:
-        name: PartnerAppImageDto
+        name: PartnerAppReadDto
       type: object
-    OAS.WebApi.DTO.Security.PartnerAppAdvisorDto:
+    OAS.WebApi.DTO.Security.PartnerAppIpRangeDto:
       properties:
         id:
           type: integer
           format: int32
-        alClientId:
-          type: integer
-          format: int32
-        acceptedTOS:
-          type: boolean
-        acceptedTOSUser:
+        description:
           type: string
-      xml:
-        name: PartnerAppAdvisorDto
-      type: object
-    OAS.DataModel.Security.PartnerAppUser:
-      required:
-      - partnerAppId
-      - userId
-      - refreshToken
-      - expirationDate
-      - isRevolked
-      properties:
-        partnerAppId:
-          type: integer
-          format: int32
-        userId:
-          type: integer
-          format: int32
-        refreshToken:
+        startAddress:
           type: string
-          maxLength: 100
-          minLength: 0
-        expirationDate:
+        endAddress:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
           type: string
           format: date-time
-        isRevolked:
-          type: boolean
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
       xml:
-        name: PartnerAppUser
+        name: PartnerAppIpRangeDto
       type: object
   securitySchemes:
     Authorization:

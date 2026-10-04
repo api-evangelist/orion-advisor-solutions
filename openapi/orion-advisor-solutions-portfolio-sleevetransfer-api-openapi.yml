@@ -634,6 +634,34 @@ paths:
       - Authorization: []
 components:
   schemas:
+    OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductAvailableModel:
+      properties:
+        modelAggId:
+          readOnly: true
+          type: integer
+          format: int32
+        modelName:
+          readOnly: true
+          type: string
+        sleeveType:
+          readOnly: true
+          type: string
+          enum:
+          - Normal sleeve
+          - Custodial account
+          - Contribution sleeve
+          - Distribution sleeve
+          - Unmanaged sleeve
+        displayModelName:
+          readOnly: true
+          type: string
+        accountId:
+          readOnly: true
+          type: integer
+          format: int32
+      xml:
+        name: SleeveProductAvailableModel
+      type: object
     OAS.WebApi.DTO.Portfolio.Sleeve.SleeveTransferBatchTransactionDto:
       properties:
         registrationId:
@@ -675,33 +703,38 @@ components:
       xml:
         name: SleeveTransferBatchTransactionDto
       type: object
-    OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductAvailableModel:
+    OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductModelDto:
       properties:
-        modelAggId:
+        sleeveModels:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveModelDto'
           readOnly: true
-          type: integer
-          format: int32
-        modelName:
+          xml:
+            name: SleeveModelDto
+            wrapped: true
+          type: array
+        sleeveModelsByRegistrationId:
+          additionalProperties:
+            items:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductAvailableModel'
+            xml:
+              name: SleeveProductAvailableModel
+              wrapped: true
+            type: array
           readOnly: true
-          type: string
-        sleeveType:
+          type: object
+        sleeveModelsByProductId:
+          additionalProperties:
+            items:
+              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductAvailableModel'
+            xml:
+              name: SleeveProductAvailableModel
+              wrapped: true
+            type: array
           readOnly: true
-          type: string
-          enum:
-          - Normal sleeve
-          - Custodial account
-          - Contribution sleeve
-          - Distribution sleeve
-          - Unmanaged sleeve
-        displayModelName:
-          readOnly: true
-          type: string
-        accountId:
-          readOnly: true
-          type: integer
-          format: int32
+          type: object
       xml:
-        name: SleeveProductAvailableModel
+        name: SleeveProductModelDto
       type: object
     OAS.WebApi.DTO.Portfolio.Sleeve.SleeveTransferBatchDto:
       properties:
@@ -840,39 +873,6 @@ components:
           type: boolean
       xml:
         name: AssetSleeveDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductModelDto:
-      properties:
-        sleeveModels:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveModelDto'
-          readOnly: true
-          xml:
-            name: SleeveModelDto
-            wrapped: true
-          type: array
-        sleeveModelsByRegistrationId:
-          additionalProperties:
-            items:
-              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductAvailableModel'
-            xml:
-              name: SleeveProductAvailableModel
-              wrapped: true
-            type: array
-          readOnly: true
-          type: object
-        sleeveModelsByProductId:
-          additionalProperties:
-            items:
-              $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.Sleeve.SleeveProductAvailableModel'
-            xml:
-              name: SleeveProductAvailableModel
-              wrapped: true
-            type: array
-          readOnly: true
-          type: object
-      xml:
-        name: SleeveProductModelDto
       type: object
   securitySchemes:
     Authorization:

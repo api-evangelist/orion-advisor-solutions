@@ -393,40 +393,16 @@ paths:
         required: true
 components:
   schemas:
-    OAT.CloudStorage.ShareFile.Models.WebhookAccountInfo:
+    OAT.CloudStorage.ShareFile.Models.WebhookCallbackBody:
       properties:
-        accountId:
+        webhookSubscriptionId:
           type: string
-        subdomain:
-          type: string
-        appControlPlane:
-          type: string
-        apiControlPlane:
-          type: string
+        accountInfo:
+          $ref: '#/components/schemas/OAT.CloudStorage.ShareFile.Models.WebhookAccountInfo'
+        event:
+          $ref: '#/components/schemas/OAT.CloudStorage.ShareFile.Models.WebHookCallbackEvent'
       xml:
-        name: WebhookAccountInfo
-      type: object
-    OAT.CloudStorage.ShareFile.Models.WebHookCallbackEvent:
-      properties:
-        resourceType:
-          type: string
-        timestamp:
-          type: string
-        resource:
-          $ref: '#/components/schemas/OAT.CloudStorage.ShareFile.Models.WebhookCallbackResource'
-        operationName:
-          type: string
-      xml:
-        name: WebHookCallbackEvent
-      type: object
-    OAT.CloudStorage.ShareFile.Models.WebhookCallbackResource:
-      properties:
-        id:
-          type: string
-        parent:
-          $ref: '#/components/schemas/OAT.CloudStorage.ShareFile.Models.WebhookCallbackResource'
-      xml:
-        name: WebhookCallbackResource
+        name: WebhookCallbackBody
       type: object
     OAS.WebApi.DTO.Fuse.NotificationDto:
       description: 'A notification that is pushed to users.
@@ -487,16 +463,40 @@ components:
       xml:
         name: NotificationDto
       type: object
-    OAT.CloudStorage.ShareFile.Models.WebhookCallbackBody:
+    OAT.CloudStorage.ShareFile.Models.WebHookCallbackEvent:
       properties:
-        webhookSubscriptionId:
+        resourceType:
           type: string
-        accountInfo:
-          $ref: '#/components/schemas/OAT.CloudStorage.ShareFile.Models.WebhookAccountInfo'
-        event:
-          $ref: '#/components/schemas/OAT.CloudStorage.ShareFile.Models.WebHookCallbackEvent'
+        timestamp:
+          type: string
+        resource:
+          $ref: '#/components/schemas/OAT.CloudStorage.ShareFile.Models.WebhookCallbackResource'
+        operationName:
+          type: string
       xml:
-        name: WebhookCallbackBody
+        name: WebHookCallbackEvent
+      type: object
+    OAT.CloudStorage.ShareFile.Models.WebhookAccountInfo:
+      properties:
+        accountId:
+          type: string
+        subdomain:
+          type: string
+        appControlPlane:
+          type: string
+        apiControlPlane:
+          type: string
+      xml:
+        name: WebhookAccountInfo
+      type: object
+    OAT.CloudStorage.ShareFile.Models.WebhookCallbackResource:
+      properties:
+        id:
+          type: string
+        parent:
+          $ref: '#/components/schemas/OAT.CloudStorage.ShareFile.Models.WebhookCallbackResource'
+      xml:
+        name: WebhookCallbackResource
       type: object
   securitySchemes:
     Authorization:

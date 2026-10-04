@@ -434,62 +434,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.DataProcess.Performance.Overview.PerformanceDto:
-      properties:
-        entityId:
-          type: integer
-          format: int32
-        entityEnum:
-          type: integer
-          format: int32
-        parentId:
-          type: integer
-          format: int32
-        groupName:
-          type: string
-        marketValue:
-          type: number
-          format: double
-        day:
-          type: number
-          format: double
-        mtd:
-          type: number
-          format: double
-        qtd:
-          type: number
-          format: double
-        ytd:
-          type: number
-          format: double
-        oneYear:
-          type: number
-          format: double
-        threeYear:
-          type: number
-          format: double
-        fiveYear:
-          type: number
-          format: double
-        tenYear:
-          type: number
-          format: double
-        inception:
-          type: number
-          format: double
-      xml:
-        name: PerformanceDto
-      type: object
-    OAS.DataProcess.Performance.Overview.PerformanceStatusDto:
-      properties:
-        status:
-          type: string
-        lastUpdated:
-          type: string
-          format: date-time
-      xml:
-        name: PerformanceStatusDto
-      type: object
     OAS.DataProcess.Performance.Overview.PerformanceDateRangeDto:
       properties:
         dateRangeName:
@@ -502,6 +446,39 @@ components:
           format: date-time
       xml:
         name: PerformanceDateRangeDto
+      type: object
+    OAS.DataProcess.Performance.Overview.PerformanceStatusDto:
+      properties:
+        status:
+          type: string
+        lastUpdated:
+          type: string
+          format: date-time
+      xml:
+        name: PerformanceStatusDto
+      type: object
+    OAS.DataProcess.Performance.Overview.PerformanceWithDateRangeInfoDto:
+      properties:
+        performance:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.PerformanceDto'
+          xml:
+            name: PerformanceDto
+            wrapped: true
+          type: array
+        dateRanges:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.PerformanceDateRangeDto'
+          xml:
+            name: PerformanceDateRangeDto
+            wrapped: true
+          type: array
+        status:
+          $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.PerformanceStatusDto'
+        asOfDate:
+          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
+      xml:
+        name: PerformanceWithDateRangeInfoDto
       type: object
     OAS.DataProcess.Performance.Overview.OverviewPerformanceRequestParameters:
       properties:
@@ -744,28 +721,51 @@ components:
       xml:
         name: IDate
       type: object
-    OAS.DataProcess.Performance.Overview.PerformanceWithDateRangeInfoDto:
+    OAS.DataProcess.Performance.Overview.PerformanceDto:
       properties:
-        performance:
-          items:
-            $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.PerformanceDto'
-          xml:
-            name: PerformanceDto
-            wrapped: true
-          type: array
-        dateRanges:
-          items:
-            $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.PerformanceDateRangeDto'
-          xml:
-            name: PerformanceDateRangeDto
-            wrapped: true
-          type: array
-        status:
-          $ref: '#/components/schemas/OAS.DataProcess.Performance.Overview.PerformanceStatusDto'
-        asOfDate:
-          $ref: '#/components/schemas/OAT.Utilities.Date.IDate'
+        entityId:
+          type: integer
+          format: int32
+        entityEnum:
+          type: integer
+          format: int32
+        parentId:
+          type: integer
+          format: int32
+        groupName:
+          type: string
+        marketValue:
+          type: number
+          format: double
+        day:
+          type: number
+          format: double
+        mtd:
+          type: number
+          format: double
+        qtd:
+          type: number
+          format: double
+        ytd:
+          type: number
+          format: double
+        oneYear:
+          type: number
+          format: double
+        threeYear:
+          type: number
+          format: double
+        fiveYear:
+          type: number
+          format: double
+        tenYear:
+          type: number
+          format: double
+        inception:
+          type: number
+          format: double
       xml:
-        name: PerformanceWithDateRangeInfoDto
+        name: PerformanceDto
       type: object
   securitySchemes:
     Authorization:

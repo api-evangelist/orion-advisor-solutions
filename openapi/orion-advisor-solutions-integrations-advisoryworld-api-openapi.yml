@@ -2114,41 +2114,39 @@ paths:
         required: true
 components:
   schemas:
-    OAS.DataModel.Integration.AdvisoryWorld.StrategyAllocations:
+    OAS.Integrations.AdvisoryWorld.Dto.AdvisoryWorldDetailedAnalyticsDto:
       properties:
-        strategic:
+        cashFlows:
           items:
-            $ref: '#/components/schemas/OAS.DataModel.Integration.AdvisoryWorld.ModelAggAndAllocations'
+            $ref: '#/components/schemas/OAS.Integrations.AdvisoryWorld.External.HypoReportService.CashFlow'
           xml:
-            name: ModelAggAndAllocations
+            name: CashFlow
             wrapped: true
           type: array
-        tactical:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Integration.AdvisoryWorld.ModelAggAndAllocations'
-          xml:
-            name: ModelAggAndAllocations
-            wrapped: true
-          type: array
-        diversifier:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Integration.AdvisoryWorld.ModelAggAndAllocations'
-          xml:
-            name: ModelAggAndAllocations
-            wrapped: true
-          type: array
-      xml:
-        name: StrategyAllocations
-      type: object
-    OAS.Integrations.AdvisoryWorld.Dto.AdvisoryWorldCustomAllocationDto:
-      properties:
+        assumedReturn:
+          type: number
+          format: double
         allocations:
           additionalProperties:
             type: number
             format: double
           type: object
       xml:
-        name: AdvisoryWorldCustomAllocationDto
+        name: AdvisoryWorldDetailedAnalyticsDto
+      type: object
+    OAS.DataModel.Integration.AdvisoryWorld.ModelAggAssignment:
+      properties:
+        modelAggId:
+          type: integer
+          format: int32
+        eclipseModelId:
+          type: integer
+          format: int32
+        weight:
+          type: number
+          format: double
+      xml:
+        name: ModelAggAssignment
       type: object
     OAS.Integrations.AdvisoryWorld.External.HypoReportService.CashFlow:
       properties:
@@ -2208,127 +2206,6 @@ components:
       xml:
         name: CashFlow
       type: object
-    OAS.Integrations.AdvisoryWorld.External.HypoReportService.Inflation:
-      properties:
-        type:
-          type: string
-          enum:
-          - None
-          - Historical
-          - Custom
-        value:
-          type: number
-          format: double
-        valueSpecified:
-          type: boolean
-      xml:
-        name: Inflation
-      type: object
-    OAS.DataModel.Integration.AdvisoryWorld.ModelAggAndAllocations:
-      properties:
-        modelAggId:
-          type: integer
-          format: int32
-        allocation:
-          type: number
-          format: double
-      xml:
-        name: ModelAggAndAllocations
-      type: object
-    OAS.WebApi.DTO.Integrations.AdvisoryWorld.AdvisoryWorldSetupCompleteDto:
-      description: The data provided from AdvisoryWorld's API to ours when the advisor finishes or updates their integration configuration in Advisory World.
-      properties:
-        licenseType:
-          description: The license type of the advisory world product that has been updated.
-          type: string
-        advisoryWorldUsername:
-          description: The firms username in AdvisoryWorld.
-          type: string
-        repChanges:
-          description: The list of changes to the licensed reps from advisory world. Only contains reps that need to be updated.
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.AdvisoryWorld.RepConfigDto'
-          xml:
-            name: RepConfigDto
-            wrapped: true
-          type: array
-      xml:
-        name: AdvisoryWorldSetupCompleteDto
-      type: object
-    OAS.Integrations.AdvisoryWorld.Dto.AdvisoryWorldCompariScanDto:
-      properties:
-        modelAllocations:
-          additionalProperties:
-            type: number
-            format: double
-          type: object
-        allocations:
-          additionalProperties:
-            type: number
-            format: double
-          type: object
-      xml:
-        name: AdvisoryWorldCompariScanDto
-      type: object
-    OAS.WebApi.DTO.Integrations.AdvisoryWorld.CompatibleModelAttributesDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        eclipsePortfolioCompatible:
-          type: boolean
-        mmsCompatible:
-          type: boolean
-      xml:
-        name: CompatibleModelAttributesDto
-      type: object
-    OAS.DataModel.Portfolio.IpsBuilderSection:
-      properties:
-        name:
-          type: string
-        percentage:
-          type: number
-          format: double
-      xml:
-        name: IpsBuilderSection
-      type: object
-    OAS.WebApi.DTO.Integrations.AdvisoryWorld.AdvisoryWorldModelAggAndRiskScoreDto:
-      properties:
-        modelAggId:
-          type: integer
-          format: int32
-        riskScore:
-          type: number
-          format: double
-      xml:
-        name: AdvisoryWorldModelAggAndRiskScoreDto
-      type: object
-    OAS.DataModel.Integration.AdvisoryWorld.IntegrationConfig:
-      properties:
-        userId:
-          type: string
-        password:
-          type: string
-      xml:
-        name: IntegrationConfig
-      type: object
-    OAS.Integrations.AdvisoryWorld.Dto.AdvisoryWorldSsoUrlDto:
-      properties:
-        ssoUrl:
-          type: string
-      xml:
-        name: AdvisoryWorldSsoUrlDto
-      type: object
-    OAS.WebApi.DTO.Integrations.AdvisoryWorld.RiskScoreUpdateErrorListDto:
-      properties:
-        modelAggId:
-          type: integer
-          format: int32
-        errorMessage:
-          type: string
-      xml:
-        name: RiskScoreUpdateErrorListDto
-      type: object
     OAS.DataModel.Integration.AdvisoryWorld.Proposal:
       properties:
         registrationId:
@@ -2355,68 +2232,96 @@ components:
       xml:
         name: Proposal
       type: object
-    OAS.DataModel.Integration.AdvisoryWorld.ModelAggAssignment:
+    OAS.WebApi.DTO.Integrations.AdvisoryWorld.AdviosryWorldRiskStatisticsAndCompositesDto:
       properties:
-        modelAggId:
-          type: integer
-          format: int32
-        eclipseModelId:
-          type: integer
-          format: int32
-        weight:
+        riskScore:
+          type: number
+          format: double
+        alpha:
+          type: number
+          format: double
+        beta:
+          type: number
+          format: double
+        rSquared:
+          type: number
+          format: double
+        maxDrawdown:
+          type: number
+          format: double
+        annualizedMontlyReturns:
+          $ref: '#/components/schemas/OAS.DataModel.Integration.AdvisoryWorld.AnnualizedMontlyReturns'
+        strategic:
+          type: number
+          format: double
+        tactical:
+          type: number
+          format: double
+        diversifier:
           type: number
           format: double
       xml:
-        name: ModelAggAssignment
+        name: AdviosryWorldRiskStatisticsAndCompositesDto
       type: object
-    OAS.WebApi.DTO.Integrations.AdvisoryWorld.AggAssetDto:
-      description: The asset object that we aggregate and return to AdvisoryWorld for proposals
+    OAS.WebApi.DTO.Integrations.AdvisoryWorld.CompatibleModelAttributesDto:
       properties:
-        ticker:
-          description: asset.Ticker
-          type: string
-        assetValue:
-          description: Total value of shares of that ticker
-          type: number
-          format: double
-        shares:
-          description: Number of shares owned
-          type: number
-          format: double
-      xml:
-        name: AggAssetDto
-      type: object
-    OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto:
-      properties:
-        key:
+        id:
           type: integer
           format: int32
-        productName:
-          type: string
-        termsAccepted:
+        eclipsePortfolioCompatible:
+          type: boolean
+        mmsCompatible:
           type: boolean
       xml:
-        name: IntegrationSetupRequestDto
+        name: CompatibleModelAttributesDto
       type: object
-    OAS.Integrations.AdvisoryWorld.Dto.AdvisoryWorldDetailedAnalyticsDto:
+    OAS.WebApi.DTO.Integrations.AdvisoryWorld.AdvisoryWorldSetupCompleteDto:
+      description: The data provided from AdvisoryWorld's API to ours when the advisor finishes or updates their integration configuration in Advisory World.
       properties:
-        cashFlows:
+        licenseType:
+          description: The license type of the advisory world product that has been updated.
+          type: string
+        advisoryWorldUsername:
+          description: The firms username in AdvisoryWorld.
+          type: string
+        repChanges:
+          description: The list of changes to the licensed reps from advisory world. Only contains reps that need to be updated.
           items:
-            $ref: '#/components/schemas/OAS.Integrations.AdvisoryWorld.External.HypoReportService.CashFlow'
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Integrations.AdvisoryWorld.RepConfigDto'
           xml:
-            name: CashFlow
+            name: RepConfigDto
             wrapped: true
           type: array
-        assumedReturn:
-          type: number
-          format: double
+      xml:
+        name: AdvisoryWorldSetupCompleteDto
+      type: object
+    OAS.Integrations.AdvisoryWorld.Dto.AdvisoryWorldCustomAllocationDto:
+      properties:
         allocations:
           additionalProperties:
             type: number
             format: double
           type: object
       xml:
-        name: AdvisoryWorldDetailedAnalyticsDto
+        name: AdvisoryWorldCustomAllocationDto
+      type: object
+    OAS.WebApi.DTO.Integrations.AdvisoryWorld.AdvisoryWorldModelAggAndRiskScoreDto:
+      properties:
+        modelAggId:
+          type: integer
+          format: int32
+        riskScore:
+          type: number
+          format: double
+      xml:
+        name: AdvisoryWorldModelAggAndRiskScoreDto
+      type: object
+    OAS.Integrations.AdvisoryWorld.Dto.AdvisoryWorldSsoUrlDto:
+      properties:
+        ssoUrl:
+          type: string
+      xml:
+        name: AdvisoryWorldSsoUrlDto
       type: object
     OAS.WebApi.DTO.Integrations.AdvisoryWorld.AggAccountDto:
       description: When we return accounts to AdvisoryWorld for proposals, show the "aggregated" account
@@ -2455,6 +2360,54 @@ components:
       xml:
         name: AggAccountDto
       type: object
+    OAS.DataModel.Portfolio.IpsBuilderSection:
+      properties:
+        name:
+          type: string
+        percentage:
+          type: number
+          format: double
+      xml:
+        name: IpsBuilderSection
+      type: object
+    OAS.WebApi.DTO.Integrations.IntegrationSetupRequestDto:
+      properties:
+        key:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        termsAccepted:
+          type: boolean
+      xml:
+        name: IntegrationSetupRequestDto
+      type: object
+    OAS.WebApi.DTO.Integrations.AdvisoryWorld.RepConfigDto:
+      properties:
+        repId:
+          type: integer
+          format: int32
+        isEnabled:
+          type: boolean
+      xml:
+        name: RepConfigDto
+      type: object
+    OAS.Integrations.AdvisoryWorld.External.HypoReportService.Inflation:
+      properties:
+        type:
+          type: string
+          enum:
+          - None
+          - Historical
+          - Custom
+        value:
+          type: number
+          format: double
+        valueSpecified:
+          type: boolean
+      xml:
+        name: Inflation
+      type: object
     OAS.DataModel.Integration.AdvisoryWorld.AnnualizedMontlyReturns:
       properties:
         ytd:
@@ -2472,46 +2425,93 @@ components:
       xml:
         name: AnnualizedMontlyReturns
       type: object
-    OAS.WebApi.DTO.Integrations.AdvisoryWorld.AdviosryWorldRiskStatisticsAndCompositesDto:
+    OAS.DataModel.Integration.AdvisoryWorld.IntegrationConfig:
       properties:
-        riskScore:
+        userId:
+          type: string
+        password:
+          type: string
+      xml:
+        name: IntegrationConfig
+      type: object
+    OAS.WebApi.DTO.Integrations.AdvisoryWorld.AggAssetDto:
+      description: The asset object that we aggregate and return to AdvisoryWorld for proposals
+      properties:
+        ticker:
+          description: asset.Ticker
+          type: string
+        assetValue:
+          description: Total value of shares of that ticker
           type: number
           format: double
-        alpha:
-          type: number
-          format: double
-        beta:
-          type: number
-          format: double
-        rSquared:
-          type: number
-          format: double
-        maxDrawdown:
-          type: number
-          format: double
-        annualizedMontlyReturns:
-          $ref: '#/components/schemas/OAS.DataModel.Integration.AdvisoryWorld.AnnualizedMontlyReturns'
-        strategic:
-          type: number
-          format: double
-        tactical:
-          type: number
-          format: double
-        diversifier:
+        shares:
+          description: Number of shares owned
           type: number
           format: double
       xml:
-        name: AdviosryWorldRiskStatisticsAndCompositesDto
+        name: AggAssetDto
       type: object
-    OAS.WebApi.DTO.Integrations.AdvisoryWorld.RepConfigDto:
+    OAS.WebApi.DTO.Integrations.AdvisoryWorld.RiskScoreUpdateErrorListDto:
       properties:
-        repId:
+        modelAggId:
           type: integer
           format: int32
-        isEnabled:
-          type: boolean
+        errorMessage:
+          type: string
       xml:
-        name: RepConfigDto
+        name: RiskScoreUpdateErrorListDto
+      type: object
+    OAS.DataModel.Integration.AdvisoryWorld.StrategyAllocations:
+      properties:
+        strategic:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Integration.AdvisoryWorld.ModelAggAndAllocations'
+          xml:
+            name: ModelAggAndAllocations
+            wrapped: true
+          type: array
+        tactical:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Integration.AdvisoryWorld.ModelAggAndAllocations'
+          xml:
+            name: ModelAggAndAllocations
+            wrapped: true
+          type: array
+        diversifier:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Integration.AdvisoryWorld.ModelAggAndAllocations'
+          xml:
+            name: ModelAggAndAllocations
+            wrapped: true
+          type: array
+      xml:
+        name: StrategyAllocations
+      type: object
+    OAS.DataModel.Integration.AdvisoryWorld.ModelAggAndAllocations:
+      properties:
+        modelAggId:
+          type: integer
+          format: int32
+        allocation:
+          type: number
+          format: double
+      xml:
+        name: ModelAggAndAllocations
+      type: object
+    OAS.Integrations.AdvisoryWorld.Dto.AdvisoryWorldCompariScanDto:
+      properties:
+        modelAllocations:
+          additionalProperties:
+            type: number
+            format: double
+          type: object
+        allocations:
+          additionalProperties:
+            type: number
+            format: double
+          type: object
+      xml:
+        name: AdvisoryWorldCompariScanDto
       type: object
   securitySchemes:
     Authorization:

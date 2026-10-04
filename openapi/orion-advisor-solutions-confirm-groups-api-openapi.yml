@@ -1321,31 +1321,6 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.WebApi.DTO.Confirm.ConfirmGroupDataQueryDto:
-      properties:
-        confirmGroupId:
-          type: integer
-          format: int32
-        customReportId:
-          type: integer
-          format: int32
-        dataQueryParams:
-          type: string
-        dataQuery:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Custom.CustomReportFullDto'
-      xml:
-        name: ConfirmGroupDataQueryDto
-      type: object
-    OAS.DataModel.SimpleEntity:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleEntity
-      type: object
     OAS.WebApi.DTO.Reporting.Custom.CustomReportPromptDto:
       properties:
         id:
@@ -1374,6 +1349,166 @@ components:
           format: int32
       xml:
         name: CustomReportPromptDto
+      type: object
+    OAS.WebApi.DTO.Confirm.ConfirmOverviewDto:
+      description: ''
+      properties:
+        id:
+          type: integer
+          format: int32
+        accountStatusIcon:
+          readOnly: true
+          type: string
+        databaseName:
+          type: string
+        downloadFileId:
+          type: integer
+          format: int32
+        formatName:
+          type: string
+        recordTypeName:
+          type: string
+        fileName:
+          type: string
+        confirmedCount:
+          type: integer
+          format: int32
+        notConfirmedCount:
+          type: integer
+          format: int32
+        excludedCount:
+          type: integer
+          format: int32
+        dataAggOnlyCount:
+          type: integer
+          format: int32
+        unmappedTransTypeCount:
+          type: integer
+          format: int32
+        status:
+          type: integer
+          format: int32
+        isImportComplete:
+          type: boolean
+        fileStatus:
+          type: string
+          enum:
+          - Created
+          - PendingImport
+          - StartingImport
+          - CreatingRecords
+          - RecordsCreated
+          - PostImportsStarted
+          - ImportFinished
+          - ImportFailed
+          - InitialVerifyStarted
+          - InitialVerifyFinished
+          - InitialVerifyFailed
+          - InitialApplyStarted
+          - InitialApplyFinished
+          - InitialApplyFailed
+          - ProcessingCompleted
+          - ProcessingFailed
+        fileStatusInt:
+          type: integer
+          format: int32
+        agentAnalysisStatus:
+          type: string
+          enum:
+          - NA
+          - NotStarted
+          - Running
+          - Complete
+        noteCount:
+          type: integer
+          format: int32
+        alClientId:
+          type: integer
+          format: int32
+        downloadSourceId:
+          type: integer
+          format: int32
+        fileDate:
+          type: string
+          format: date-time
+        fileCreated:
+          type: string
+          format: date-time
+        fileCreatedBy:
+          type: string
+        dateConfirmed:
+          type: string
+          format: date-time
+        downloadSource:
+          type: string
+        reconTargetTime:
+          type: string
+          format: date-time
+        noteSummary:
+          type: string
+        refreshStart:
+          type: string
+          format: date-time
+        refreshEnd:
+          type: string
+          format: date-time
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        serviceTeamRecon:
+          type: string
+        serviceTeamMember:
+          type: string
+        signOffBy:
+          type: string
+        signOffDate:
+          type: string
+          format: date-time
+        signOffByUserId:
+          type: integer
+          format: int32
+        message:
+          type: string
+        costBasisType:
+          type: string
+          enum:
+          - None
+          - Unrealized
+          - Realized
+          - Both
+        advisorNumber:
+          type: string
+        batchProcessingId:
+          type: integer
+          format: int32
+        isNonFileFormat:
+          type: boolean
+        hasReconNotes:
+          type: boolean
+      xml:
+        name: ConfirmOverviewDto
+      type: object
+    OAS.WebApi.DTO.Confirm.ConfirmGroupDataQueryDto:
+      properties:
+        confirmGroupId:
+          type: integer
+          format: int32
+        customReportId:
+          type: integer
+          format: int32
+        dataQueryParams:
+          type: string
+        dataQuery:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Custom.CustomReportFullDto'
+      xml:
+        name: ConfirmGroupDataQueryDto
       type: object
     OAS.WebApi.DTO.Reporting.Custom.CustomReportFullDto:
       properties:
@@ -1644,211 +1779,6 @@ components:
       xml:
         name: CustomReportFullDto
       type: object
-    OAS.WebApi.DTO.Confirm.ConfirmOverviewDto:
-      description: ''
-      properties:
-        id:
-          type: integer
-          format: int32
-        accountStatusIcon:
-          readOnly: true
-          type: string
-        databaseName:
-          type: string
-        downloadFileId:
-          type: integer
-          format: int32
-        formatName:
-          type: string
-        recordTypeName:
-          type: string
-        fileName:
-          type: string
-        confirmedCount:
-          type: integer
-          format: int32
-        notConfirmedCount:
-          type: integer
-          format: int32
-        excludedCount:
-          type: integer
-          format: int32
-        dataAggOnlyCount:
-          type: integer
-          format: int32
-        unmappedTransTypeCount:
-          type: integer
-          format: int32
-        status:
-          type: integer
-          format: int32
-        isImportComplete:
-          type: boolean
-        fileStatus:
-          type: string
-          enum:
-          - Created
-          - PendingImport
-          - StartingImport
-          - CreatingRecords
-          - RecordsCreated
-          - PostImportsStarted
-          - ImportFinished
-          - ImportFailed
-          - InitialVerifyStarted
-          - InitialVerifyFinished
-          - InitialVerifyFailed
-          - InitialApplyStarted
-          - InitialApplyFinished
-          - InitialApplyFailed
-          - ProcessingCompleted
-          - ProcessingFailed
-        fileStatusInt:
-          type: integer
-          format: int32
-        agentAnalysisStatus:
-          type: string
-          enum:
-          - NA
-          - NotStarted
-          - Running
-          - Complete
-        noteCount:
-          type: integer
-          format: int32
-        alClientId:
-          type: integer
-          format: int32
-        downloadSourceId:
-          type: integer
-          format: int32
-        fileDate:
-          type: string
-          format: date-time
-        fileCreated:
-          type: string
-          format: date-time
-        fileCreatedBy:
-          type: string
-        dateConfirmed:
-          type: string
-          format: date-time
-        downloadSource:
-          type: string
-        reconTargetTime:
-          type: string
-          format: date-time
-        noteSummary:
-          type: string
-        refreshStart:
-          type: string
-          format: date-time
-        refreshEnd:
-          type: string
-          format: date-time
-        createdDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        serviceTeamRecon:
-          type: string
-        serviceTeamMember:
-          type: string
-        signOffBy:
-          type: string
-        signOffDate:
-          type: string
-          format: date-time
-        signOffByUserId:
-          type: integer
-          format: int32
-        message:
-          type: string
-        costBasisType:
-          type: string
-          enum:
-          - None
-          - Unrealized
-          - Realized
-          - Both
-        advisorNumber:
-          type: string
-        batchProcessingId:
-          type: integer
-          format: int32
-        isNonFileFormat:
-          type: boolean
-        hasReconNotes:
-          type: boolean
-      xml:
-        name: ConfirmOverviewDto
-      type: object
-    OAS.WebApi.DTO.Confirm.ConfirmGroupDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        isPrivate:
-          type: boolean
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        userId:
-          type: integer
-          format: int32
-        databases:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
-          xml:
-            name: SimpleEntity
-            wrapped: true
-          type: array
-        downloadFormats:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
-          xml:
-            name: SimpleEntity
-            wrapped: true
-          type: array
-        recordTypes:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
-          xml:
-            name: SimpleEntity
-            wrapped: true
-          type: array
-        scrubGroups:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
-          xml:
-            name: SimpleEntity
-            wrapped: true
-          type: array
-        dataQueries:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.ConfirmGroupDataQueryDto'
-          xml:
-            name: ConfirmGroupDataQueryDto
-            wrapped: true
-          type: array
-      xml:
-        name: ConfirmGroupDto
-      type: object
     OAS.WebApi.DTO.Reporting.RunReport.RunToDto:
       properties:
         reportFormat:
@@ -1911,6 +1841,76 @@ components:
           - DashboardDataAuditProcessCountOnly
       xml:
         name: RunToDto
+      type: object
+    OAS.WebApi.DTO.Confirm.ConfirmGroupDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        isPrivate:
+          type: boolean
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        userId:
+          type: integer
+          format: int32
+        databases:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+          xml:
+            name: SimpleEntity
+            wrapped: true
+          type: array
+        downloadFormats:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+          xml:
+            name: SimpleEntity
+            wrapped: true
+          type: array
+        recordTypes:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+          xml:
+            name: SimpleEntity
+            wrapped: true
+          type: array
+        scrubGroups:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+          xml:
+            name: SimpleEntity
+            wrapped: true
+          type: array
+        dataQueries:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.ConfirmGroupDataQueryDto'
+          xml:
+            name: ConfirmGroupDataQueryDto
+            wrapped: true
+          type: array
+      xml:
+        name: ConfirmGroupDto
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
       type: object
   securitySchemes:
     Authorization:

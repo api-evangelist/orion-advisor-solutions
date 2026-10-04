@@ -2301,6 +2301,227 @@ paths:
         required: true
 components:
   schemas:
+    OAS.WebApi.DTO.Portfolio.CustodianOnlyCostBasisLotDto:
+      properties:
+        acquiredDate:
+          type: string
+          format: date-time
+        assetId:
+          type: integer
+          format: int32
+        assetCostCustodianId:
+          type: integer
+          format: int32
+        type:
+          type: string
+          enum:
+          - Sell
+          - Buy
+          - WashSale
+          - NotUsed
+          - MoneyMarket
+          - StepUp
+          - Spinoff
+        productName:
+          type: string
+        description:
+          type: string
+        symbol:
+          type: string
+        costBasisPerUnit:
+          type: number
+          format: double
+        valuePrice:
+          type: number
+          format: double
+        units:
+          type: number
+          format: double
+        avaiableUnits:
+          type: number
+          format: double
+        currentValue:
+          type: number
+          format: double
+        costBasis:
+          type: number
+          format: double
+        gainLoss:
+          type: number
+          format: double
+        gainLossPercent:
+          type: number
+          format: double
+        selectedLots:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SelectedLotsDto'
+          xml:
+            name: SelectedLotsDto
+            wrapped: true
+          type: array
+      xml:
+        name: CustodianOnlyCostBasisLotDto
+      type: object
+    OAS.WebApi.DTO.Trading.FixMutualFundsNotSentDto:
+      properties:
+        custodian:
+          type: string
+        side:
+          type: string
+        numberOrders:
+          type: integer
+          format: int32
+        dollarAmount:
+          type: number
+          format: double
+        ids:
+          items:
+            type: integer
+            format: int32
+          type: array
+      xml:
+        name: FixMutualFundsNotSentDto
+      type: object
+    OAS.WebApi.DTO.Trading.FixIncomeTradeOrderListDto:
+      properties:
+        fixTradeRequestId:
+          type: integer
+          format: int32
+        fixIncomeTradeOrdersInfos:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixIncomeTradeOrdersInfoDto'
+          xml:
+            name: FixIncomeTradeOrdersInfoDto
+            wrapped: true
+          type: array
+      xml:
+        name: FixIncomeTradeOrderListDto
+      type: object
+    OAS.WebApi.DTO.Trading.RealtimePriceDto:
+      properties:
+        date:
+          type: string
+          format: date-time
+        last:
+          type: number
+          format: double
+        isRealTimeQuote:
+          type: boolean
+        isDelayedQuote:
+          type: boolean
+        changeFromLastClose:
+          type: number
+          format: double
+        changeFromLastMarketClose:
+          type: number
+          format: double
+        changeFromMarketClose:
+          type: number
+          format: double
+        changeFromMarketOpen:
+          type: number
+          format: double
+        changeFromPrev:
+          type: number
+          format: double
+        lastClosePrice:
+          type: number
+          format: double
+        lastMarketClosePrice:
+          type: number
+          format: double
+        marketClosePrice:
+          type: number
+          format: double
+        marketOpenPrice:
+          type: number
+          format: double
+        percentChangeFromLastClose:
+          type: number
+          format: double
+        percentChangeFromLastMarketClose:
+          type: number
+          format: double
+        percentChangeFromMarketClose:
+          type: number
+          format: double
+        percentChangeFromMarketOpen:
+          type: number
+          format: double
+        percentChangeFromOpen:
+          type: number
+          format: double
+        percentChangeFromPrev:
+          type: number
+          format: double
+        ask:
+          type: number
+          format: double
+        askQuantity:
+          type: number
+          format: double
+        bid:
+          type: number
+          format: double
+        bidQuantity:
+          type: number
+          format: double
+        changeFromOpen:
+          type: number
+          format: double
+        changeFromPrevious:
+          type: number
+          format: double
+        cusip:
+          type: string
+        delay:
+          type: number
+          format: double
+        high:
+          type: number
+          format: double
+        low:
+          type: number
+          format: double
+        name:
+          type: string
+        outcome:
+          type: string
+        percentageChangeFromOpen:
+          type: number
+          format: double
+        percentageChangeFromPrevious:
+          type: number
+          format: double
+        quantity:
+          type: number
+          format: double
+        volume:
+          type: number
+          format: double
+        open:
+          type: number
+          format: double
+        priceSource:
+          type: string
+        symbol:
+          type: string
+      xml:
+        name: RealtimePriceDto
+      type: object
+    OAS.WebApi.DTO.Trading.CreateBlocksDto:
+      properties:
+        batchId:
+          type: integer
+          format: int32
+        orderIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+      xml:
+        name: CreateBlocksDto
+      type: object
     OAS.WebApi.DTO.Portfolio.SelectedLotsDto:
       properties:
         acquiredDate:
@@ -2324,6 +2545,152 @@ components:
           format: double
       xml:
         name: SelectedLotsDto
+      type: object
+    OAS.WebApi.DTO.Trading.ActionDeleteDto:
+      properties:
+        deletedIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+        updatedItems:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
+          xml:
+            name: OrderDto
+            wrapped: true
+          type: array
+      xml:
+        name: ActionDeleteDto
+      type: object
+    OAS.Remote.Trading.OptionTrades:
+      properties:
+        trades:
+          items:
+            $ref: '#/components/schemas/OAS.Remote.Trading.OptionTrade'
+          readOnly: true
+          xml:
+            name: OptionTrade
+            wrapped: true
+          type: array
+        routine:
+          type: string
+          enum:
+          - Undefined
+          - Rebalance
+          - GlobalTrades
+          - BuySell
+          - SellAll
+          - TargetPercent
+          - ProRated
+          - QuickTrade
+          - QuickTradeBlock
+          - Distribution
+          - OptionTrade
+        scheduled:
+          type: boolean
+        recalcInstance:
+          type: boolean
+        scheduledRunTime:
+          type: object
+        description:
+          type: string
+        nsccTransactionType:
+          type: string
+          enum:
+          - UseDefault
+          - NormalPurchase
+          - Nav
+          - Roa
+          - Loi
+        assetValues:
+          type: string
+          enum:
+          - UseDefault
+          - Current
+          - Pending
+          - PendingTransactionsAndOrders
+        minTradeAmount:
+          type: number
+          format: double
+        postProcess:
+          type: string
+          enum:
+          - Run
+          - Skip
+        useProductSubstitution:
+          type: string
+          enum:
+          - UseDefault
+          - Use
+          - Ignore
+        stfWarningDays:
+          type: integer
+          format: int32
+        tradeInstanceID:
+          type: integer
+          format: int32
+        includeCustodialCash:
+          type: boolean
+        notes:
+          type: string
+        inboxAlert:
+          type: boolean
+        disableRealTimePrices:
+          type: boolean
+        sessionID:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        caption:
+          type: string
+        filename:
+          type: string
+        runDisconnected:
+          type: boolean
+        instanceType:
+          type: string
+          enum:
+          - Undefined
+          - GlobalTrade
+          - Modeling
+          - CheckReq
+          - FeeReq
+          - BuySell
+          - ACHReq
+          - EligibleTrades
+          - All
+          - CashFundADV
+          - CashFundSWD
+          - SWPDCA
+          - SysPurchTrade
+          - Distribution
+          - Contribution
+        securityTicket:
+          type: string
+          format: byte
+        commonSecurityTicket:
+          type: string
+          format: byte
+        authToken:
+          type: string
+        commonServer:
+          type: string
+        databaseID:
+          type: integer
+          format: int32
+        correlationId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        a_UserDetailId:
+          type: integer
+          format: int32
+        i_UserDetailId:
+          type: integer
+          format: int32
+      xml:
+        name: OptionTrades
       type: object
     OAS.Remote.Trading.OptionTrade:
       properties:
@@ -2361,56 +2728,6 @@ components:
       xml:
         name: OptionTrade
       type: object
-    OAS.WebApi.DTO.Trading.ActionDeleteDto:
-      properties:
-        deletedIds:
-          items:
-            type: integer
-            format: int32
-          type: array
-        updatedItems:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.OrderDto'
-          xml:
-            name: OrderDto
-            wrapped: true
-          type: array
-      xml:
-        name: ActionDeleteDto
-      type: object
-    OAS.WebApi.DTO.Trading.CreateBlocksDto:
-      properties:
-        batchId:
-          type: integer
-          format: int32
-        orderIds:
-          items:
-            type: integer
-            format: int32
-          type: array
-      xml:
-        name: CreateBlocksDto
-      type: object
-    OAS.WebApi.DTO.Trading.FixMutualFundsNotSentDto:
-      properties:
-        custodian:
-          type: string
-        side:
-          type: string
-        numberOrders:
-          type: integer
-          format: int32
-        dollarAmount:
-          type: number
-          format: double
-        ids:
-          items:
-            type: integer
-            format: int32
-          type: array
-      xml:
-        name: FixMutualFundsNotSentDto
-      type: object
     OAS.WebApi.DTO.Trading.FixIncomeTradeOrdersInfoDto:
       properties:
         fixTradeRequestId:
@@ -2434,384 +2751,6 @@ components:
           format: double
       xml:
         name: FixIncomeTradeOrdersInfoDto
-      type: object
-    OAS.WebApi.DTO.Trading.FixTradeRequestHistoryDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        tradeRequestFixId:
-          type: integer
-          format: int32
-        tradeIt:
-          type: boolean
-        productId:
-          type: integer
-          format: int32
-        accountId:
-          type: integer
-          format: int32
-        accountNumber:
-          type: string
-        assetId:
-          type: integer
-          format: int32
-        transactionId:
-          type: integer
-          format: int32
-        fixBlockOrderId:
-          type: integer
-          format: int32
-        trInstanceId:
-          type: integer
-          format: int32
-        handlInst:
-          type: string
-        execInst:
-          type: string
-        side:
-          type: string
-        locateReqd:
-          type: boolean
-        ordType:
-          type: string
-        limitPrice:
-          type: number
-          format: double
-        stopPrice:
-          type: number
-          format: double
-        timeInForce:
-          type: string
-        ticker:
-          type: string
-        expireTime:
-          type: string
-          format: date-time
-        warningMessage:
-          type: string
-        orderQty:
-          type: number
-          format: double
-        originalOrderQty:
-          type: number
-          format: double
-        orderAmt:
-          type: number
-          format: double
-        orderPct:
-          type: number
-          format: double
-        sharesOwned:
-          type: number
-          format: double
-        mktValue:
-          type: number
-          format: double
-        navPrice:
-          type: number
-          format: double
-        createdDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        notes:
-          type: string
-        isDiscretionary:
-          type: boolean
-        settlmntTyp:
-          type: string
-        futSettDate:
-          type: string
-          format: date-time
-        changeType:
-          type: string
-        recalcState:
-          type: integer
-          format: int32
-        approvalStatus:
-          type: integer
-          format: int32
-        tradeRequestFixExchangeId:
-          type: integer
-          format: int32
-        solicited:
-          type: boolean
-        sellPriority:
-          type: integer
-          format: int32
-        registrationId:
-          type: integer
-          format: int32
-        registrationName:
-          type: string
-        tradingInstructions:
-          type: string
-        productName:
-          type: string
-        productType:
-          type: string
-          enum:
-          - None
-          - MutualFund
-          - Annuity
-          - AdvisorOne
-          - StockOrETF
-          - Option
-          - Bond
-          - Unknown
-          - CD
-          - Index
-        accountType:
-          type: string
-        custodian:
-          type: string
-        trustType:
-          type: string
-          enum:
-          - None
-          - CTC
-          - EAS
-        fixRouting:
-          type: string
-        subAdvisor:
-          type: string
-        currentModelName:
-          type: string
-        masterAccountNumber:
-          type: string
-        managementStyle:
-          type: string
-        groupNum:
-          type: string
-        qualified:
-          type: boolean
-        rebalanceLevel:
-          type: string
-          enum:
-          - Undefined
-          - Payee
-          - BrokerDealer
-          - Wholesaler
-          - Representative
-          - Client
-          - Registration
-          - Account
-          - Asset
-          - Product
-          - Transaction
-          - Distribution
-          - FundFamily
-          - Personal
-          - PayoutSchedule
-          - FeeSchedule
-          - Platform
-          - RIA
-          - Custodian
-          - Journal
-          - SWP
-          - Other
-          - NASD
-          - CashFunding
-          - Bill
-          - BillInstance
-          - BillMasterPayout
-          - Model
-          - NewAccountClient
-          - NewAccountReg
-          - DownloadExclusion
-          - Price
-          - UserDefinedFields
-          - NewAcctUserDef
-          - ManagersMessage
-          - IndexEntry
-          - PerformanceFee
-          - PerformancePayout
-          - NewAccountAsset
-          - Owner
-          - Administrator
-          - OutsideClient
-          - SubAdvisor
-          - ModelRange
-          - FaxCover
-          - Fax
-          - OneTimeDistribution
-          - WebLogin
-          - Plan401k
-          - BillAccountItem
-          - ThirdPartyAdministrator
-          - CrmContact
-          - Participant
-          - PlanSponsor
-          - CRMEmailList
-          - ThirdParty
-          - WorkflowItem
-          - WorkflowAction
-          - ServiceAccount
-          - EntityOption
-          - HouseholdMember
-          - DownloadSymbol
-          - IndexBlend
-          - NABenefit
-          - AggregateModel
-          - CompositeRange
-          - RepAccountManager
-          - ScriptsScrubs
-          - ServiceAccountBrokerDealer
-          - BusinessLine
-          - Blob
-          - AssetClass
-          - ServiceAccountLite
-          - NewAcctUserDefDtl
-          - Branch
-          - AssetLevelStrategy
-          - Report
-          - DataQueries
-          - PriceUnUsed
-          - ModelItem
-          - AssetCategory
-          - RiskCategory
-          - PlatformRange
-          - Dividend
-          - RegistrationType
-          - CustodianCommon
-          - RepState
-          - QpeDashboard
-          - ReportBatch
-          - ModelGroup
-          - ShareClass
-          - DownloadFile
-          - User
-          - DynamicGrouping
-          - ProductType
-          - ProductSubType
-          - InvestmentObjective
-          - PortfolioGroup
-          - OrionRealizedLot
-          - OrionUnrealizedLot
-          - CustodianRealizedLot
-          - CustodianUnrealizedLot
-          - AssetCategoryParent
-          - TaxType
-          - AuditRequest
-          - AuditRequestLetter
-          - ManagedUnmanaged
-          - AuditRowAttachment
-          - InformPolicy
-          - InformAnswerAttachment
-          - UserDetail
-          - BillPayMethod
-          - ModelInclusion
-          - CommunityModel
-          - EclipseModel
-          - Global
-          - ClientCategory
-          - Taxability
-          - Qualified
-          - TaxID
-          - BondState
-          - ProductTaxability
-          - TargetAllocation
-          - RIATable
-          - ProductRegion
-          - ProductPropertyType
-          - ProductManagerAip
-          - MoodyRating
-          - SPRating
-          - BondMaturityYear
-          - InterestRate
-          - RegistrationTaxType
-          - MaturityPeriod
-          - NewHousehold
-          - BillPayoutDashboardPayment
-          - OptionLevel
-          - MarginAgreement
-          - PrimeBrokerage
-          - InformHistoricalDocument
-          - SleeveStrategyAggregate
-          - MorningstarSector
-          - BillEntity
-          - SleeveStrategy
-          - MorningstarGeography
-          - GenericProspect
-          - BillEntityType
-          - AdditionalRep
-          - BillPayoutReport
-          - ProductSubHolding
-          - DownloadSource
-          - ModelVsActual
-          - ProductVintageYear
-          - EclipsePortfolio
-          - Country
-          - Currency
-          - SecurityClassification1
-          - SecurityClassification2
-          - SecurityClassification3
-          - SecurityClassification4
-          - SecurityClassification5
-          - SecurityClassification6
-          - SecurityClassification7
-          - SecurityClassification8
-          - SecurityClassification9
-          - SecurityClassification10
-          - SecurityClassification11
-          - SecurityClassification12
-          - SecurityClassification13
-          - SecurityClassification14
-          - SecurityClassification15
-          - SecurityClassification16
-          - SecurityClassification17
-          - SecurityClassification18
-          - SecurityClassification19
-          - SecurityClassification20
-          - SecurityClassification21
-          - SecurityClassification22
-          - SecurityClassification23
-          - SecurityClassification24
-          - SecurityClassification25
-          - DownloadRecord
-          - CustomGrouping
-          - Cotenant
-          - AllocatedUnrealizedCostBasis
-          - AllocatedRealizedCostBasis
-        representativeName:
-          type: string
-        allocStatus:
-          type: string
-        ordStatus:
-          type: string
-        vspDate:
-          type: string
-          format: date-time
-        vspPrice:
-          type: number
-          format: double
-        minCashBalance:
-          type: number
-          format: double
-        minCashBalanceType:
-          type: string
-          enum:
-          - Dollars
-          - Percent
-        replenishMinCash:
-          type: boolean
-        assetCostCustodianId:
-          type: integer
-          format: int32
-        cashValuePostTradeExecution:
-          type: number
-          format: double
-        registrationSleeveStrategyName:
-          type: string
-      xml:
-        name: FixTradeRequestHistoryDto
       type: object
     OAS.WebApi.DTO.Trading.OrderDto:
       properties:
@@ -3350,322 +3289,383 @@ components:
       xml:
         name: OrderDto
       type: object
-    OAS.WebApi.DTO.Portfolio.CustodianOnlyCostBasisLotDto:
+    OAS.WebApi.DTO.Trading.FixTradeRequestHistoryDto:
       properties:
-        acquiredDate:
+        id:
+          type: integer
+          format: int32
+        tradeRequestFixId:
+          type: integer
+          format: int32
+        tradeIt:
+          type: boolean
+        productId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+        accountNumber:
           type: string
-          format: date-time
         assetId:
           type: integer
           format: int32
+        transactionId:
+          type: integer
+          format: int32
+        fixBlockOrderId:
+          type: integer
+          format: int32
+        trInstanceId:
+          type: integer
+          format: int32
+        handlInst:
+          type: string
+        execInst:
+          type: string
+        side:
+          type: string
+        locateReqd:
+          type: boolean
+        ordType:
+          type: string
+        limitPrice:
+          type: number
+          format: double
+        stopPrice:
+          type: number
+          format: double
+        timeInForce:
+          type: string
+        ticker:
+          type: string
+        expireTime:
+          type: string
+          format: date-time
+        warningMessage:
+          type: string
+        orderQty:
+          type: number
+          format: double
+        originalOrderQty:
+          type: number
+          format: double
+        orderAmt:
+          type: number
+          format: double
+        orderPct:
+          type: number
+          format: double
+        sharesOwned:
+          type: number
+          format: double
+        mktValue:
+          type: number
+          format: double
+        navPrice:
+          type: number
+          format: double
+        createdDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        editedBy:
+          type: string
+        notes:
+          type: string
+        isDiscretionary:
+          type: boolean
+        settlmntTyp:
+          type: string
+        futSettDate:
+          type: string
+          format: date-time
+        changeType:
+          type: string
+        recalcState:
+          type: integer
+          format: int32
+        approvalStatus:
+          type: integer
+          format: int32
+        tradeRequestFixExchangeId:
+          type: integer
+          format: int32
+        solicited:
+          type: boolean
+        sellPriority:
+          type: integer
+          format: int32
+        registrationId:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        tradingInstructions:
+          type: string
+        productName:
+          type: string
+        productType:
+          type: string
+          enum:
+          - None
+          - MutualFund
+          - Annuity
+          - AdvisorOne
+          - StockOrETF
+          - Option
+          - Bond
+          - Unknown
+          - CD
+          - Index
+        accountType:
+          type: string
+        custodian:
+          type: string
+        trustType:
+          type: string
+          enum:
+          - None
+          - CTC
+          - EAS
+        fixRouting:
+          type: string
+        subAdvisor:
+          type: string
+        currentModelName:
+          type: string
+        masterAccountNumber:
+          type: string
+        managementStyle:
+          type: string
+        groupNum:
+          type: string
+        qualified:
+          type: boolean
+        rebalanceLevel:
+          type: string
+          enum:
+          - Undefined
+          - Payee
+          - BrokerDealer
+          - Wholesaler
+          - Representative
+          - Client
+          - Registration
+          - Account
+          - Asset
+          - Product
+          - Transaction
+          - Distribution
+          - FundFamily
+          - Personal
+          - PayoutSchedule
+          - FeeSchedule
+          - Platform
+          - RIA
+          - Custodian
+          - Journal
+          - SWP
+          - Other
+          - NASD
+          - CashFunding
+          - Bill
+          - BillInstance
+          - BillMasterPayout
+          - Model
+          - NewAccountClient
+          - NewAccountReg
+          - DownloadExclusion
+          - Price
+          - UserDefinedFields
+          - NewAcctUserDef
+          - ManagersMessage
+          - IndexEntry
+          - PerformanceFee
+          - PerformancePayout
+          - NewAccountAsset
+          - Owner
+          - Administrator
+          - OutsideClient
+          - SubAdvisor
+          - ModelRange
+          - FaxCover
+          - Fax
+          - OneTimeDistribution
+          - WebLogin
+          - Plan401k
+          - BillAccountItem
+          - ThirdPartyAdministrator
+          - CrmContact
+          - Participant
+          - PlanSponsor
+          - CRMEmailList
+          - ThirdParty
+          - WorkflowItem
+          - WorkflowAction
+          - ServiceAccount
+          - EntityOption
+          - HouseholdMember
+          - DownloadSymbol
+          - IndexBlend
+          - NABenefit
+          - AggregateModel
+          - CompositeRange
+          - RepAccountManager
+          - ScriptsScrubs
+          - ServiceAccountBrokerDealer
+          - BusinessLine
+          - Blob
+          - AssetClass
+          - ServiceAccountLite
+          - NewAcctUserDefDtl
+          - Branch
+          - AssetLevelStrategy
+          - Report
+          - DataQueries
+          - PriceUnUsed
+          - ModelItem
+          - AssetCategory
+          - RiskCategory
+          - PlatformRange
+          - Dividend
+          - RegistrationType
+          - CustodianCommon
+          - RepState
+          - QpeDashboard
+          - ReportBatch
+          - ModelGroup
+          - ShareClass
+          - DownloadFile
+          - User
+          - DynamicGrouping
+          - ProductType
+          - ProductSubType
+          - InvestmentObjective
+          - PortfolioGroup
+          - OrionRealizedLot
+          - OrionUnrealizedLot
+          - CustodianRealizedLot
+          - CustodianUnrealizedLot
+          - AssetCategoryParent
+          - TaxType
+          - AuditRequest
+          - AuditRequestLetter
+          - ManagedUnmanaged
+          - AuditRowAttachment
+          - InformPolicy
+          - InformAnswerAttachment
+          - UserDetail
+          - BillPayMethod
+          - ModelInclusion
+          - CommunityModel
+          - EclipseModel
+          - Global
+          - ClientCategory
+          - Taxability
+          - Qualified
+          - TaxID
+          - BondState
+          - ProductTaxability
+          - TargetAllocation
+          - RIATable
+          - ProductRegion
+          - ProductPropertyType
+          - ProductManagerAip
+          - MoodyRating
+          - SPRating
+          - BondMaturityYear
+          - InterestRate
+          - RegistrationTaxType
+          - MaturityPeriod
+          - NewHousehold
+          - BillPayoutDashboardPayment
+          - OptionLevel
+          - MarginAgreement
+          - PrimeBrokerage
+          - InformHistoricalDocument
+          - SleeveStrategyAggregate
+          - MorningstarSector
+          - BillEntity
+          - SleeveStrategy
+          - MorningstarGeography
+          - GenericProspect
+          - BillEntityType
+          - AdditionalRep
+          - BillPayoutReport
+          - ProductSubHolding
+          - DownloadSource
+          - ModelVsActual
+          - ProductVintageYear
+          - EclipsePortfolio
+          - Country
+          - Currency
+          - SecurityClassification1
+          - SecurityClassification2
+          - SecurityClassification3
+          - SecurityClassification4
+          - SecurityClassification5
+          - SecurityClassification6
+          - SecurityClassification7
+          - SecurityClassification8
+          - SecurityClassification9
+          - SecurityClassification10
+          - SecurityClassification11
+          - SecurityClassification12
+          - SecurityClassification13
+          - SecurityClassification14
+          - SecurityClassification15
+          - SecurityClassification16
+          - SecurityClassification17
+          - SecurityClassification18
+          - SecurityClassification19
+          - SecurityClassification20
+          - SecurityClassification21
+          - SecurityClassification22
+          - SecurityClassification23
+          - SecurityClassification24
+          - SecurityClassification25
+          - DownloadRecord
+          - CustomGrouping
+          - Cotenant
+          - AllocatedUnrealizedCostBasis
+          - AllocatedRealizedCostBasis
+        representativeName:
+          type: string
+        allocStatus:
+          type: string
+        ordStatus:
+          type: string
+        vspDate:
+          type: string
+          format: date-time
+        vspPrice:
+          type: number
+          format: double
+        minCashBalance:
+          type: number
+          format: double
+        minCashBalanceType:
+          type: string
+          enum:
+          - Dollars
+          - Percent
+        replenishMinCash:
+          type: boolean
         assetCostCustodianId:
           type: integer
           format: int32
-        type:
-          type: string
-          enum:
-          - Sell
-          - Buy
-          - WashSale
-          - NotUsed
-          - MoneyMarket
-          - StepUp
-          - Spinoff
-        productName:
-          type: string
-        description:
-          type: string
-        symbol:
-          type: string
-        costBasisPerUnit:
+        cashValuePostTradeExecution:
           type: number
           format: double
-        valuePrice:
-          type: number
-          format: double
-        units:
-          type: number
-          format: double
-        avaiableUnits:
-          type: number
-          format: double
-        currentValue:
-          type: number
-          format: double
-        costBasis:
-          type: number
-          format: double
-        gainLoss:
-          type: number
-          format: double
-        gainLossPercent:
-          type: number
-          format: double
-        selectedLots:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.SelectedLotsDto'
-          xml:
-            name: SelectedLotsDto
-            wrapped: true
-          type: array
-      xml:
-        name: CustodianOnlyCostBasisLotDto
-      type: object
-    OAS.Remote.Trading.OptionTrades:
-      properties:
-        trades:
-          items:
-            $ref: '#/components/schemas/OAS.Remote.Trading.OptionTrade'
-          readOnly: true
-          xml:
-            name: OptionTrade
-            wrapped: true
-          type: array
-        routine:
-          type: string
-          enum:
-          - Undefined
-          - Rebalance
-          - GlobalTrades
-          - BuySell
-          - SellAll
-          - TargetPercent
-          - ProRated
-          - QuickTrade
-          - QuickTradeBlock
-          - Distribution
-          - OptionTrade
-        scheduled:
-          type: boolean
-        recalcInstance:
-          type: boolean
-        scheduledRunTime:
-          type: object
-        description:
-          type: string
-        nsccTransactionType:
-          type: string
-          enum:
-          - UseDefault
-          - NormalPurchase
-          - Nav
-          - Roa
-          - Loi
-        assetValues:
-          type: string
-          enum:
-          - UseDefault
-          - Current
-          - Pending
-          - PendingTransactionsAndOrders
-        minTradeAmount:
-          type: number
-          format: double
-        postProcess:
-          type: string
-          enum:
-          - Run
-          - Skip
-        useProductSubstitution:
-          type: string
-          enum:
-          - UseDefault
-          - Use
-          - Ignore
-        stfWarningDays:
-          type: integer
-          format: int32
-        tradeInstanceID:
-          type: integer
-          format: int32
-        includeCustodialCash:
-          type: boolean
-        notes:
-          type: string
-        inboxAlert:
-          type: boolean
-        disableRealTimePrices:
-          type: boolean
-        sessionID:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        caption:
-          type: string
-        filename:
-          type: string
-        runDisconnected:
-          type: boolean
-        instanceType:
-          type: string
-          enum:
-          - Undefined
-          - GlobalTrade
-          - Modeling
-          - CheckReq
-          - FeeReq
-          - BuySell
-          - ACHReq
-          - EligibleTrades
-          - All
-          - CashFundADV
-          - CashFundSWD
-          - SWPDCA
-          - SysPurchTrade
-          - Distribution
-          - Contribution
-        securityTicket:
-          type: string
-          format: byte
-        commonSecurityTicket:
-          type: string
-          format: byte
-        authToken:
-          type: string
-        commonServer:
-          type: string
-        databaseID:
-          type: integer
-          format: int32
-        correlationId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        a_UserDetailId:
-          type: integer
-          format: int32
-        i_UserDetailId:
-          type: integer
-          format: int32
-      xml:
-        name: OptionTrades
-      type: object
-    OAS.WebApi.DTO.Trading.FixIncomeTradeOrderListDto:
-      properties:
-        fixTradeRequestId:
-          type: integer
-          format: int32
-        fixIncomeTradeOrdersInfos:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Trading.FixIncomeTradeOrdersInfoDto'
-          xml:
-            name: FixIncomeTradeOrdersInfoDto
-            wrapped: true
-          type: array
-      xml:
-        name: FixIncomeTradeOrderListDto
-      type: object
-    OAS.WebApi.DTO.Trading.RealtimePriceDto:
-      properties:
-        date:
-          type: string
-          format: date-time
-        last:
-          type: number
-          format: double
-        isRealTimeQuote:
-          type: boolean
-        isDelayedQuote:
-          type: boolean
-        changeFromLastClose:
-          type: number
-          format: double
-        changeFromLastMarketClose:
-          type: number
-          format: double
-        changeFromMarketClose:
-          type: number
-          format: double
-        changeFromMarketOpen:
-          type: number
-          format: double
-        changeFromPrev:
-          type: number
-          format: double
-        lastClosePrice:
-          type: number
-          format: double
-        lastMarketClosePrice:
-          type: number
-          format: double
-        marketClosePrice:
-          type: number
-          format: double
-        marketOpenPrice:
-          type: number
-          format: double
-        percentChangeFromLastClose:
-          type: number
-          format: double
-        percentChangeFromLastMarketClose:
-          type: number
-          format: double
-        percentChangeFromMarketClose:
-          type: number
-          format: double
-        percentChangeFromMarketOpen:
-          type: number
-          format: double
-        percentChangeFromOpen:
-          type: number
-          format: double
-        percentChangeFromPrev:
-          type: number
-          format: double
-        ask:
-          type: number
-          format: double
-        askQuantity:
-          type: number
-          format: double
-        bid:
-          type: number
-          format: double
-        bidQuantity:
-          type: number
-          format: double
-        changeFromOpen:
-          type: number
-          format: double
-        changeFromPrevious:
-          type: number
-          format: double
-        cusip:
-          type: string
-        delay:
-          type: number
-          format: double
-        high:
-          type: number
-          format: double
-        low:
-          type: number
-          format: double
-        name:
-          type: string
-        outcome:
-          type: string
-        percentageChangeFromOpen:
-          type: number
-          format: double
-        percentageChangeFromPrevious:
-          type: number
-          format: double
-        quantity:
-          type: number
-          format: double
-        volume:
-          type: number
-          format: double
-        open:
-          type: number
-          format: double
-        priceSource:
-          type: string
-        symbol:
+        registrationSleeveStrategyName:
           type: string
       xml:
-        name: RealtimePriceDto
+        name: FixTradeRequestHistoryDto
       type: object
   securitySchemes:
     Authorization:

@@ -607,29 +607,18 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.WebApi.DTO.Billing.PostedPaymentReportDTO:
+    OAS.WebApi.DTO.Billing.UndoPostedPaymentRequestDto:
       properties:
-        batchNumber:
-          type: string
-        postedDate:
-          type: string
-          format: date-time
-        accountNumber:
-          type: string
-        active:
-          type: boolean
-        paymentCreatedDate:
-          type: string
-          format: date-time
-        paymentCreatedBy:
-          type: string
-        amount:
-          type: number
-          format: double
-        clientName:
-          type: string
+        billPaymentId:
+          type: integer
+          format: int32
+        ids:
+          items:
+            type: integer
+            format: int32
+          type: array
       xml:
-        name: PostedPaymentReportDTO
+        name: UndoPostedPaymentRequestDto
       type: object
     OAS.WebApi.DTO.Billing.PostedPaymentDto:
       properties:
@@ -692,18 +681,29 @@ components:
       xml:
         name: PostedPaymentDto
       type: object
-    OAS.WebApi.DTO.Billing.UndoPostedPaymentRequestDto:
+    OAS.WebApi.DTO.Billing.PostedPaymentReportDTO:
       properties:
-        billPaymentId:
-          type: integer
-          format: int32
-        ids:
-          items:
-            type: integer
-            format: int32
-          type: array
+        batchNumber:
+          type: string
+        postedDate:
+          type: string
+          format: date-time
+        accountNumber:
+          type: string
+        active:
+          type: boolean
+        paymentCreatedDate:
+          type: string
+          format: date-time
+        paymentCreatedBy:
+          type: string
+        amount:
+          type: number
+          format: double
+        clientName:
+          type: string
       xml:
-        name: UndoPostedPaymentRequestDto
+        name: PostedPaymentReportDTO
       type: object
   securitySchemes:
     Authorization:
