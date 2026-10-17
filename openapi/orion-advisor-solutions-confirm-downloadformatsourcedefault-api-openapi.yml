@@ -1690,17 +1690,6 @@ paths:
       - Authorization: []
 components:
   schemas:
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
-      type: object
     System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
       properties:
         key:
@@ -1713,6 +1702,19 @@ components:
           type: array
       xml:
         name: KeyValuePair`2
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
       type: object
     OAS.WebApi.DTO.Confirm.DownloadSubFormatSourceScheduleDefaultDto:
       properties:
@@ -1733,6 +1735,13 @@ components:
           type: boolean
       xml:
         name: DownloadSubFormatSourceScheduleDefaultDto
+      type: object
+    OAS.WebApi.DTO.Confirm.SourceFileDto:
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+      xml:
+        name: SourceFileDto
       type: object
     OAS.WebApi.DTO.Confirm.DownloadFormatSourceDefaultDto:
       properties:
@@ -1939,25 +1948,16 @@ components:
       xml:
         name: DownloadFormatSourceDefaultDto
       type: object
-    OAS.WebApi.DTO.Confirm.SourceFileDto:
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
       properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
       xml:
-        name: SourceFileDto
-      type: object
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
+        name: HttpFile
       type: object
   securitySchemes:
     Authorization:

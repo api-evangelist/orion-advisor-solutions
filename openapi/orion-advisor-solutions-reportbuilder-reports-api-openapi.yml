@@ -587,6 +587,67 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAS.WebApi.DTO.ReportAdministration.ReportSectionParameterDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        displayName:
+          type: string
+        value:
+          type: string
+      xml:
+        name: ReportSectionParameterDto
+      type: object
+    OAS.WebApi.DTO.ReportAdministration.ReportSectionDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        displayName:
+          type: string
+        description:
+          type: string
+        width:
+          type: string
+          enum:
+          - PortraitFull
+          - LandscapeFull
+          - LandscapeHalf
+        templateType:
+          type: string
+          enum:
+          - All
+          - Standard
+          - FooterImage
+          - Disclaimer
+          - WiderLogo
+          - HeaderSlim
+        parameters:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.ReportAdministration.ReportSectionParameterDto'
+          xml:
+            name: ReportSectionParameterDto
+            wrapped: true
+          type: array
+        createdDate:
+          type: string
+          format: date-time
+      xml:
+        name: ReportSectionDto
+      type: object
+    OAS.WebApi.DTO.ReportAdministration.ReportOptionDateDto:
+      properties:
+        value:
+          type: string
+        sign:
+          type: string
+        modifier:
+          type: integer
+          format: int32
+      xml:
+        name: ReportOptionDateDto
+      type: object
     OAS.WebApi.DTO.ReportAdministration.ReportVersionDto:
       properties:
         id:
@@ -1181,6 +1242,16 @@ components:
       xml:
         name: ReportListFullDto
       type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
     OAS.WebApi.DTO.ReportAdministration.ReportListDto:
       properties:
         id:
@@ -1443,77 +1514,6 @@ components:
           type: array
       xml:
         name: ReportListDto
-      type: object
-    OAS.WebApi.DTO.ReportAdministration.ReportSectionDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        displayName:
-          type: string
-        description:
-          type: string
-        width:
-          type: string
-          enum:
-          - PortraitFull
-          - LandscapeFull
-          - LandscapeHalf
-        templateType:
-          type: string
-          enum:
-          - All
-          - Standard
-          - FooterImage
-          - Disclaimer
-          - WiderLogo
-          - HeaderSlim
-        parameters:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.ReportAdministration.ReportSectionParameterDto'
-          xml:
-            name: ReportSectionParameterDto
-            wrapped: true
-          type: array
-        createdDate:
-          type: string
-          format: date-time
-      xml:
-        name: ReportSectionDto
-      type: object
-    OAS.WebApi.DTO.ReportAdministration.ReportSectionParameterDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        displayName:
-          type: string
-        value:
-          type: string
-      xml:
-        name: ReportSectionParameterDto
-      type: object
-    OAS.DataModel.SimpleEntity:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleEntity
-      type: object
-    OAS.WebApi.DTO.ReportAdministration.ReportOptionDateDto:
-      properties:
-        value:
-          type: string
-        sign:
-          type: string
-        modifier:
-          type: integer
-          format: int32
-      xml:
-        name: ReportOptionDateDto
       type: object
   securitySchemes:
     Authorization:

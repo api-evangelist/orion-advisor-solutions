@@ -1018,7 +1018,7 @@ paths:
             schema:
               $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.WholesalerVerboseDto'
         required: true
-      summary: Wholesalers put V1 portfolio wholesalers verbose by key
+      summary: Wholesalers put V1Portfolio wholesalers verbose by key
       x-summary-source: derived
   /v1/Portfolio/Wholesalers/Verbose/{key}/SSNTaxId:
     put:
@@ -1305,7 +1305,7 @@ paths:
                 format: int32
               type: array
         required: true
-      summary: Wholesalers post V1 portfolio wholesalers verbose list id
+      summary: Wholesalers post V1Portfolio wholesalers verbose list id
       x-summary-source: derived
   /v1/Portfolio/Wholesalers/Verbose/New:
     get:
@@ -1358,58 +1358,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
-      type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
-      properties:
-        key:
-          readOnly: true
-          type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: KeyValuePair`2
-      type: object
-    OAS.WebApi.DTO.Portfolio.UpdateSsnDto:
-      properties:
-        ssn:
-          type: string
-        reason:
-          type: string
-      xml:
-        name: UpdateSsnDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.DocumentDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        description:
-          type: string
-        category:
-          type: string
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        systemGenerated:
-          type: boolean
-      xml:
-        name: DocumentDto
-      type: object
     OAS.WebApi.DTO.Settings.EntityOptionDto:
       properties:
         userDefineDataId:
@@ -1655,28 +1603,41 @@ components:
       xml:
         name: EntityOptionDto
       type: object
-    OAS.WebApi.DTO.Portfolio.BlobBaseDto:
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
       properties:
-        createdDate:
+        key:
+          readOnly: true
           type: string
-          format: date-time
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
         id:
           type: integer
           format: int32
-        openWith:
+        name:
           type: string
-        fileName:
-          type: string
-        blobDesc:
-          type: string
-        blobText:
-          type: string
-        category:
-          type: string
-        isZip:
-          type: boolean
       xml:
-        name: BlobBaseDto
+        name: SimpleEntity
       type: object
     OAS.WebApi.DTO.Portfolio.WholesalerVerboseDto:
       properties:
@@ -1711,6 +1672,38 @@ components:
       xml:
         name: WholesalerVerboseDto
       type: object
+    OAS.WebApi.DTO.Portfolio.UpdateSsnDto:
+      properties:
+        ssn:
+          type: string
+        reason:
+          type: string
+      xml:
+        name: UpdateSsnDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.BlobBaseDto:
+      properties:
+        createdDate:
+          type: string
+          format: date-time
+        id:
+          type: integer
+          format: int32
+        openWith:
+          type: string
+        fileName:
+          type: string
+        blobDesc:
+          type: string
+        blobText:
+          type: string
+        category:
+          type: string
+        isZip:
+          type: boolean
+      xml:
+        name: BlobBaseDto
+      type: object
     OAS.WebApi.DTO.Portfolio.NoteDto:
       properties:
         id:
@@ -1731,19 +1724,6 @@ components:
           type: boolean
       xml:
         name: NoteDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.WholesalerStateDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        stateId:
-          type: integer
-          format: int32
-        stateName:
-          type: string
-      xml:
-        name: WholesalerStateDto
       type: object
     OAS.WebApi.DTO.Portfolio.WholesalerDto:
       properties:
@@ -1766,23 +1746,6 @@ components:
           type: boolean
       xml:
         name: WholesalerDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.WholesalerFileDto:
-      properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-        openWith:
-          type: string
-        blobDesc:
-          type: string
-        category:
-          type: string
-        blobType:
-          type: string
-          enum:
-          - CrmDocuments
-      xml:
-        name: WholesalerFileDto
       type: object
     OAS.WebApi.DTO.Portfolio.WholesalerPortfolioDto:
       properties:
@@ -1865,28 +1828,65 @@ components:
       xml:
         name: WholesalerPortfolioDto
       type: object
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
-      type: object
-    OAS.DataModel.SimpleEntity:
+    OAS.WebApi.DTO.Portfolio.DocumentDto:
       properties:
         id:
           type: integer
           format: int32
-        name:
+        description:
+          type: string
+        category:
+          type: string
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        systemGenerated:
+          type: boolean
+      xml:
+        name: DocumentDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.WholesalerStateDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        stateId:
+          type: integer
+          format: int32
+        stateName:
           type: string
       xml:
-        name: SimpleEntity
+        name: WholesalerStateDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.WholesalerFileDto:
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+        openWith:
+          type: string
+        blobDesc:
+          type: string
+        category:
+          type: string
+        blobType:
+          type: string
+          enum:
+          - CrmDocuments
+      xml:
+        name: WholesalerFileDto
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
       type: object
   securitySchemes:
     Authorization:

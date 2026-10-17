@@ -131,23 +131,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.DataModel.Reporting.ReportOptionCategory:
-      required:
-      - category
-      - options
-      properties:
-        category:
-          type: string
-        options:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
-          xml:
-            name: ReportOption
-            wrapped: true
-          type: array
-      xml:
-        name: ReportOptionCategory
-      type: object
     OAS.DataModel.Reporting.ReportOption:
       required:
       - id
@@ -193,77 +176,6 @@ components:
           type: string
       xml:
         name: ChatMessage
-      type: object
-    OAS.DataModel.Reporting.Engine.IGroupingOptionOverrider:
-      properties:
-        allowExpireClientsToStorePerformance:
-          type: boolean
-        ensureAssetsUpdated:
-          type: boolean
-        groupCustodialCashTogether:
-          type: boolean
-        groupLinksTogether:
-          type: boolean
-        returnActiveLinkedEntity:
-          type: boolean
-        useAccountChange:
-          type: boolean
-        useSmaSettings:
-          type: boolean
-        accountInclusion:
-          type: string
-        includeHistoricalLinks:
-          type: string
-      xml:
-        name: IGroupingOptionOverrider
-      type: object
-    OAS.WebApi.DTO.Reporting.Envision.EnvisionReportDto:
-      properties:
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        requiredOptions:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
-          xml:
-            name: ReportOption
-            wrapped: true
-          type: array
-        additionalOptions:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOptionCategory'
-          xml:
-            name: ReportOptionCategory
-            wrapped: true
-          type: array
-        deliveryOptions:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
-          xml:
-            name: ReportOption
-            wrapped: true
-          type: array
-        hasAdditionalOptions:
-          type: boolean
-        featureFlagOverrides:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IReportFeatureFlagOverrider'
-        groupingOptionOverrider:
-          $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.IGroupingOptionOverrider'
-        isFavorite:
-          type: boolean
-        reportName:
-          type: string
-        reportDescription:
-          type: string
-        parentCategory:
-          type: string
-        category:
-          type: string
-        runAssignedVersion:
-          type: boolean
-      xml:
-        name: EnvisionReportDto
       type: object
     OAS.DataModel.Reporting.Interfaces.IReportFeatureFlagOverrider:
       properties:
@@ -350,6 +262,94 @@ components:
           type: boolean
       xml:
         name: IReportFeatureFlagOverrider
+      type: object
+    OAS.DataModel.Reporting.ReportOptionCategory:
+      required:
+      - category
+      - options
+      properties:
+        category:
+          type: string
+        options:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+      xml:
+        name: ReportOptionCategory
+      type: object
+    OAS.WebApi.DTO.Reporting.Envision.EnvisionReportDto:
+      properties:
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        requiredOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+        additionalOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOptionCategory'
+          xml:
+            name: ReportOptionCategory
+            wrapped: true
+          type: array
+        deliveryOptions:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ReportOption'
+          xml:
+            name: ReportOption
+            wrapped: true
+          type: array
+        hasAdditionalOptions:
+          type: boolean
+        featureFlagOverrides:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Interfaces.IReportFeatureFlagOverrider'
+        groupingOptionOverrider:
+          $ref: '#/components/schemas/OAS.DataModel.Reporting.Engine.IGroupingOptionOverrider'
+        isFavorite:
+          type: boolean
+        reportName:
+          type: string
+        reportDescription:
+          type: string
+        parentCategory:
+          type: string
+        category:
+          type: string
+        runAssignedVersion:
+          type: boolean
+      xml:
+        name: EnvisionReportDto
+      type: object
+    OAS.DataModel.Reporting.Engine.IGroupingOptionOverrider:
+      properties:
+        allowExpireClientsToStorePerformance:
+          type: boolean
+        ensureAssetsUpdated:
+          type: boolean
+        groupCustodialCashTogether:
+          type: boolean
+        groupLinksTogether:
+          type: boolean
+        returnActiveLinkedEntity:
+          type: boolean
+        useAccountChange:
+          type: boolean
+        useSmaSettings:
+          type: boolean
+        accountInclusion:
+          type: string
+        includeHistoricalLinks:
+          type: string
+      xml:
+        name: IGroupingOptionOverrider
       type: object
   securitySchemes:
     Authorization:

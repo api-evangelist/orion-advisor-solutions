@@ -96,6 +96,83 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAS.WebApi.Domains.Integrations.ExpirationDatesDto:
+      properties:
+        value:
+          type: integer
+          format: int64
+        displayValue:
+          type: string
+          format: date-time
+      xml:
+        name: ExpirationDatesDto
+      type: object
+    OAT.Integrations.YahooFinance.Options:
+      properties:
+        expirationDate:
+          type: integer
+          format: int64
+        hasMiniOptions:
+          type: boolean
+        calls:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Call'
+          xml:
+            name: Call
+            wrapped: true
+          type: array
+        puts:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Put'
+          xml:
+            name: Put
+            wrapped: true
+          type: array
+        straddles:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Straddles'
+          xml:
+            name: Straddles
+            wrapped: true
+          type: array
+      xml:
+        name: Options
+      type: object
+    OAS.WebApi.Domains.Integrations.CoveredCallOptionsDto:
+      properties:
+        underlyingSymbol:
+          type: string
+        expirationDates:
+          items:
+            type: integer
+            format: int64
+          type: array
+        strikes:
+          items:
+            type: number
+            format: double
+          type: array
+        hasMiniOptions:
+          type: boolean
+        quote:
+          $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Quote'
+        options:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Options'
+          xml:
+            name: Options
+            wrapped: true
+          type: array
+        convertedDates:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.ExpirationDatesDto'
+          xml:
+            name: ExpirationDatesDto
+            wrapped: true
+          type: array
+      xml:
+        name: CoveredCallOptionsDto
+      type: object
     OAT.Integrations.YahooFinance.Quote:
       properties:
         quoteType:
@@ -268,6 +345,18 @@ components:
       xml:
         name: Quote
       type: object
+    OAT.Integrations.YahooFinance.Straddles:
+      properties:
+        strike:
+          type: number
+          format: double
+        call:
+          $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Call'
+        put:
+          $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Put'
+      xml:
+        name: Straddles
+      type: object
     OAT.Integrations.YahooFinance.Call:
       properties:
         contractSymbol:
@@ -314,48 +403,6 @@ components:
       xml:
         name: Call
       type: object
-    OAT.Integrations.YahooFinance.Options:
-      properties:
-        expirationDate:
-          type: integer
-          format: int64
-        hasMiniOptions:
-          type: boolean
-        calls:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Call'
-          xml:
-            name: Call
-            wrapped: true
-          type: array
-        puts:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Put'
-          xml:
-            name: Put
-            wrapped: true
-          type: array
-        straddles:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Straddles'
-          xml:
-            name: Straddles
-            wrapped: true
-          type: array
-      xml:
-        name: Options
-      type: object
-    OAS.WebApi.Domains.Integrations.ExpirationDatesDto:
-      properties:
-        value:
-          type: integer
-          format: int64
-        displayValue:
-          type: string
-          format: date-time
-      xml:
-        name: ExpirationDatesDto
-      type: object
     OAT.Integrations.YahooFinance.Put:
       properties:
         contractSymbol:
@@ -401,53 +448,6 @@ components:
           type: boolean
       xml:
         name: Put
-      type: object
-    OAT.Integrations.YahooFinance.Straddles:
-      properties:
-        strike:
-          type: number
-          format: double
-        call:
-          $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Call'
-        put:
-          $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Put'
-      xml:
-        name: Straddles
-      type: object
-    OAS.WebApi.Domains.Integrations.CoveredCallOptionsDto:
-      properties:
-        underlyingSymbol:
-          type: string
-        expirationDates:
-          items:
-            type: integer
-            format: int64
-          type: array
-        strikes:
-          items:
-            type: number
-            format: double
-          type: array
-        hasMiniOptions:
-          type: boolean
-        quote:
-          $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Quote'
-        options:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.YahooFinance.Options'
-          xml:
-            name: Options
-            wrapped: true
-          type: array
-        convertedDates:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.Domains.Integrations.ExpirationDatesDto'
-          xml:
-            name: ExpirationDatesDto
-            wrapped: true
-          type: array
-      xml:
-        name: CoveredCallOptionsDto
       type: object
   securitySchemes:
     Authorization:

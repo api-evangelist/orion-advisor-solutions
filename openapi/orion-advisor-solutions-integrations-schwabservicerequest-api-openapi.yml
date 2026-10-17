@@ -261,10 +261,104 @@ paths:
                 type: object
       security:
       - Authorization: []
-      summary: Schwab service request get schwab request center topics V2 async
+      summary: Schwab service request get schwab request center topics V2Async
       x-summary-source: derived
 components:
   schemas:
+    OAT.Integrations.Schwab.SII.Dto.Attachmentdata:
+      properties:
+        location:
+          type: string
+        name:
+          type: string
+        size:
+          type: string
+        id:
+          type: string
+        isValidFileType:
+          type: boolean
+      xml:
+        name: Attachmentdata
+      type: object
+    OAT.Integrations.Schwab.SII.Dto.SchwabRequestCenterDTO:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        subtopics:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRequestCenterDTO.Subtopic'
+          xml:
+            name: Subtopic
+            wrapped: true
+          type: array
+      xml:
+        name: SchwabRequestCenterDTO
+      type: object
+    OAS.Integrations.SchwabV2.ServiceRequest.Models.SchwabCreateServiceRequestRequestDto:
+      properties:
+        files:
+          items:
+            $ref: '#/components/schemas/System.Web.HttpPostedFile'
+          xml:
+            name: HttpPostedFile
+            wrapped: true
+          type: array
+        masterAccount:
+          type: string
+        account:
+          type: string
+        topicName:
+          type: string
+        subTopicName:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        schwabCaseId:
+          type: string
+        ccEmail:
+          type: boolean
+        showAccount:
+          type: string
+      xml:
+        name: SchwabCreateServiceRequestRequestDto
+      type: object
+    System.IO.Stream:
+      properties:
+        canRead:
+          readOnly: true
+          type: boolean
+        canSeek:
+          readOnly: true
+          type: boolean
+        canTimeout:
+          readOnly: true
+          type: boolean
+        canWrite:
+          readOnly: true
+          type: boolean
+        length:
+          readOnly: true
+          type: integer
+          format: int64
+        position:
+          type: integer
+          format: int64
+        readTimeout:
+          type: integer
+          format: int32
+        writeTimeout:
+          type: integer
+          format: int32
+      xml:
+        name: Stream
+      type: object
     OAT.Integrations.Schwab.SII.Dto.SchwabServiceResponseDto:
       properties:
         id:
@@ -346,91 +440,19 @@ components:
       xml:
         name: SchwabServiceResponseDto
       type: object
-    OAS.DataModel.Integration.ResultItemOfOAT.Integrations.Schwab.SII.Dto.SchwabServiceResponseDto:
+    OAT.Integrations.Schwab.SII.Dto.SchwabRequestCenterDTO.Subtopic:
       properties:
-        item:
-          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabServiceResponseDto'
-        hasError:
-          type: boolean
-        status:
+        name:
           type: string
-      xml:
-        name: ResultItem`1
-      type: object
-    System.IO.Stream:
-      properties:
-        canRead:
-          readOnly: true
+        attachmentAllowed:
           type: boolean
-        canSeek:
-          readOnly: true
+        attachmentRequired:
           type: boolean
-        canTimeout:
-          readOnly: true
-          type: boolean
-        canWrite:
-          readOnly: true
-          type: boolean
-        length:
-          readOnly: true
-          type: integer
-          format: int64
-        position:
-          type: integer
-          format: int64
-        readTimeout:
-          type: integer
-          format: int32
-        writeTimeout:
+        maxAttachmentSize:
           type: integer
           format: int32
       xml:
-        name: Stream
-      type: object
-    OAS.Integrations.SchwabV2.ServiceRequest.Models.SchwabCreateServiceRequestRequestDto:
-      properties:
-        files:
-          items:
-            $ref: '#/components/schemas/System.Web.HttpPostedFile'
-          xml:
-            name: HttpPostedFile
-            wrapped: true
-          type: array
-        masterAccount:
-          type: string
-        account:
-          type: string
-        topicName:
-          type: string
-        subTopicName:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        schwabCaseId:
-          type: string
-        ccEmail:
-          type: boolean
-        showAccount:
-          type: string
-      xml:
-        name: SchwabCreateServiceRequestRequestDto
-      type: object
-    OAT.Integrations.Schwab.SII.Dto.Attachmentdata:
-      properties:
-        location:
-          type: string
-        name:
-          type: string
-        size:
-          type: string
-        id:
-          type: string
-        isValidFileType:
-          type: boolean
-      xml:
-        name: Attachmentdata
+        name: Subtopic
       type: object
     OAT.Integrations.Schwab.SII.Dto.ServiceRequestData:
       properties:
@@ -458,38 +480,16 @@ components:
       xml:
         name: ServiceRequestData
       type: object
-    OAT.Integrations.Schwab.SII.Dto.SchwabRequestCenterDTO.Subtopic:
+    OAS.DataModel.Integration.ResultItemOfOAT.Integrations.Schwab.SII.Dto.SchwabServiceResponseDto:
       properties:
-        name:
-          type: string
-        attachmentAllowed:
+        item:
+          $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabServiceResponseDto'
+        hasError:
           type: boolean
-        attachmentRequired:
-          type: boolean
-        maxAttachmentSize:
-          type: integer
-          format: int32
-      xml:
-        name: Subtopic
-      type: object
-    OAT.Integrations.Schwab.SII.Dto.SchwabRequestCenterDTO:
-      properties:
-        id:
+        status:
           type: string
-        name:
-          type: string
-        order:
-          type: integer
-          format: int32
-        subtopics:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.Schwab.SII.Dto.SchwabRequestCenterDTO.Subtopic'
-          xml:
-            name: Subtopic
-            wrapped: true
-          type: array
       xml:
-        name: SchwabRequestCenterDTO
+        name: ResultItem`1
       type: object
     System.Web.HttpPostedFile:
       properties:

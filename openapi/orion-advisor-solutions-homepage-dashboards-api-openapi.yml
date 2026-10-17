@@ -782,72 +782,81 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.DTO.HomepageDashboard.CardSettingDto:
+    OAS.WebApi.DTO.HomepageDashboard.DataSource:
+      properties:
+        id:
+          type: integer
+          format: int32
+        text:
+          type: string
+        description:
+          type: string
+        privilegeId:
+          type: integer
+          format: int32
+        hasAccess:
+          type: boolean
+        connector:
+          type: string
+          enum:
+          - DB
+          - RestApi
+          - DirectRestApi
+          - Eclipse
+          - RB3
+          - AWSPOC
+        type:
+          type: string
+          enum:
+          - External
+          - Internal
+        configurationJson:
+          type: string
+        parameters:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ParameterDto'
+          xml:
+            name: ParameterDto
+            wrapped: true
+          type: array
+      xml:
+        name: DataSource
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.SliderOptionDto:
+      properties:
+        min:
+          type: integer
+          format: int32
+        max:
+          type: integer
+          format: int32
+        dimension:
+          type: integer
+          format: int32
+      xml:
+        name: SliderOptionDto
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.AvailableValueDto:
       properties:
         displayName:
           type: string
-        promptType:
+        value:
+          type: string
+        sortOrder:
           type: integer
           format: int32
-        selectedValue:
+        bucketValue:
           type: string
-        code:
-          type: string
-        dataType:
-          type: string
-        availableValues:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.AvailableValueDto'
-          xml:
-            name: AvailableValueDto
-            wrapped: true
-          type: array
-        valuesSource:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ValuesSourceDto'
-        option:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardsettingOptionDto'
-        hidden:
+        isHidden:
           type: boolean
-        settings:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardSettingDto'
-          xml:
-            name: CardSettingDto
-            wrapped: true
-          type: array
-        category:
+        dataText:
           type: string
-        dragSortEnabled:
-          type: boolean
-        useDefaultIfHidden:
-          type: boolean
-        isThreeDotMenu:
-          type: boolean
-        cardEventType:
-          type: integer
-          format: int32
-        mappings:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardMappingDto'
-        listEditor:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ListEditorConfigDto'
-        listEditorMenuTargetCode:
+        cssClass:
           type: string
-        maxOptionsAllowed:
-          type: integer
-          format: int32
+        setting:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardSettingDto'
       xml:
-        name: CardSettingDto
-      type: object
-    OAS.WebApi.DTO.HomepageDashboard.ValuesSourceDto:
-      properties:
-        endpoint:
-          type: string
-        labelField:
-          type: string
-        valueField:
-          type: string
-      xml:
-        name: ValuesSourceDto
+        name: AvailableValueDto
       type: object
     OAS.WebApi.DTO.HomepageDashboard.ListEditorConfigDto:
       description: Declarative list editor UI config stored on card settings JSON (listEditor).
@@ -881,68 +890,189 @@ components:
       xml:
         name: ListEditorConfigDto
       type: object
-    OAS.WebApi.DTO.HomepageDashboard.UserHomepageDashboardWithRoleDto:
+    OAS.WebApi.DTO.HomepageDashboard.CardDto:
       properties:
+        dashboardCardId:
+          type: integer
+          format: int32
+        isGlobal:
+          type: boolean
+        position:
+          type: integer
+          format: int32
+        isVisible:
+          type: boolean
+        hideIfRestricted:
+          type: boolean
+        setting:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardSettingDto'
+          xml:
+            name: CardSettingDto
+            wrapped: true
+          type: array
+        components:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ComponentDto'
+          xml:
+            name: ComponentDto
+            wrapped: true
+          type: array
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        description:
+          type: string
+        size:
+          type: integer
+          format: int32
+        category:
+          type: string
+          enum:
+          - General
+          - Billing
+          - Compliance
+          - Data
+          - Reporting
+          - Trading
+          - Performance
+          - Query
+          - NewAccountCenter
+          - ReconcilliationStatus
+          - QuarterEndDashboard
+          - Trends
+          - Eclipse
+          - Custodian
+          - Integrations
+          - Allocation
+          - Activity
+          - TargetAllocation
+          - Alternatives
+          - GainLoss
+          - Income
+          - Planning
+          - CustomIndexing
+          - IFrame
+        icon:
+          type: string
+      xml:
+        name: CardDto
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.AddCardDto:
+      properties:
+        name:
+          type: string
+        setting:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardSettingDto'
+          xml:
+            name: CardSettingDto
+            wrapped: true
+          type: array
+      xml:
+        name: AddCardDto
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.DataSourceDto:
+      required:
+      - connector
+      - setting
+      properties:
+        id:
+          type: integer
+          format: int32
+        text:
+          type: string
+        description:
+          type: string
+        privilegeId:
+          type: integer
+          format: int32
+        connector:
+          type: string
+          enum:
+          - DB
+          - RestApi
+          - DirectRestApi
+          - Eclipse
+          - RB3
+          - AWSPOC
+        type:
+          type: string
+          enum:
+          - External
+          - Internal
+        setting:
+          type: object
+      xml:
+        name: DataSourceDto
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.ValuesSourceDto:
+      properties:
+        endpoint:
+          type: string
+        labelField:
+          type: string
+        valueField:
+          type: string
+      xml:
+        name: ValuesSourceDto
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.HomepageDashboardDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        isDefault:
+          type: boolean
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        isGlobal:
+          type: boolean
         parentDashboardId:
           type: integer
           format: int32
-        roles:
-          items:
-            type: integer
-            format: int32
-          type: array
-        isShared:
-          type: boolean
-        isVisible:
-          type: boolean
-        isDefault:
-          type: boolean
-        isGlobal:
-          type: boolean
-        isPortfolioView:
-          type: boolean
         userId:
           type: integer
           format: int32
+        isShared:
+          type: boolean
         dashboardType:
           type: string
           enum:
           - Homepage
           - View
           - Tool
-        id:
-          type: integer
-          format: int32
-        dashboardName:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
+        cards:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardDto'
+          xml:
+            name: CardDto
+            wrapped: true
+          type: array
       xml:
-        name: UserHomepageDashboardWithRoleDto
+        name: HomepageDashboardDto
       type: object
-    OAS.WebApi.DTO.HomepageDashboard.CardMappingDto:
+    OAS.WebApi.DTO.HomepageDashboard.ParameterDto:
       properties:
-        type:
+        name:
           type: string
-        text:
+        value:
           type: string
-        originalAvailableValues:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.AvailableValueDto'
-          xml:
-            name: AvailableValueDto
-            wrapped: true
-          type: array
-        buckets:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.BucketMappingDto'
-          xml:
-            name: BucketMappingDto
-            wrapped: true
-          type: array
+        displayName:
+          type: string
+        options:
+          type: string
+        code:
+          type: string
       xml:
-        name: CardMappingDto
+        name: ParameterDto
       type: object
     OAS.DataModel.Homepage.PortfolioViewSearchHistoryResult:
       properties:
@@ -1158,50 +1288,28 @@ components:
       xml:
         name: PortfolioViewSearchHistoryResult
       type: object
-    OAS.WebApi.DTO.HomepageDashboard.AvailableValueDto:
+    OAS.WebApi.DTO.HomepageDashboard.CardMappingDto:
       properties:
-        displayName:
+        type:
           type: string
-        value:
+        text:
           type: string
-        sortOrder:
-          type: integer
-          format: int32
-        bucketValue:
-          type: string
-        isHidden:
-          type: boolean
-        dataText:
-          type: string
-        cssClass:
-          type: string
-        setting:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardSettingDto'
-      xml:
-        name: AvailableValueDto
-      type: object
-    OAS.WebApi.DTO.HomepageDashboard.AddCardDto:
-      properties:
-        name:
-          type: string
-        setting:
+        originalAvailableValues:
           items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardSettingDto'
+            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.AvailableValueDto'
           xml:
-            name: CardSettingDto
+            name: AvailableValueDto
+            wrapped: true
+          type: array
+        buckets:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.BucketMappingDto'
+          xml:
+            name: BucketMappingDto
             wrapped: true
           type: array
       xml:
-        name: AddCardDto
-      type: object
-    OAS.WebApi.DTO.HomepageDashboard.CardsettingOptionDto:
-      properties:
-        inputOption:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.InputOption'
-        sliderOption:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.SliderOptionDto'
-      xml:
-        name: CardsettingOptionDto
+        name: CardMappingDto
       type: object
     OAS.WebApi.DTO.HomepageDashboard.ComponentDto:
       properties:
@@ -1258,46 +1366,6 @@ components:
       xml:
         name: ComponentDto
       type: object
-    OAS.WebApi.DTO.HomepageDashboard.DataSource:
-      properties:
-        id:
-          type: integer
-          format: int32
-        text:
-          type: string
-        description:
-          type: string
-        privilegeId:
-          type: integer
-          format: int32
-        hasAccess:
-          type: boolean
-        connector:
-          type: string
-          enum:
-          - DB
-          - RestApi
-          - DirectRestApi
-          - Eclipse
-          - RB3
-          - AWSPOC
-        type:
-          type: string
-          enum:
-          - External
-          - Internal
-        configurationJson:
-          type: string
-        parameters:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ParameterDto'
-          xml:
-            name: ParameterDto
-            wrapped: true
-          type: array
-      xml:
-        name: DataSource
-      type: object
     OAS.WebApi.DTO.HomepageDashboard.BucketMappingDto:
       properties:
         name:
@@ -1310,45 +1378,54 @@ components:
       xml:
         name: BucketMappingDto
       type: object
-    OAS.WebApi.DTO.HomepageDashboard.HomepageDashboardDto:
+    OAS.WebApi.DTO.HomepageDashboard.CardsettingOptionDto:
       properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        isDefault:
-          type: boolean
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        isGlobal:
-          type: boolean
+        inputOption:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.InputOption'
+        sliderOption:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.SliderOptionDto'
+      xml:
+        name: CardsettingOptionDto
+      type: object
+    OAS.WebApi.DTO.HomepageDashboard.UserHomepageDashboardWithRoleDto:
+      properties:
         parentDashboardId:
           type: integer
           format: int32
+        roles:
+          items:
+            type: integer
+            format: int32
+          type: array
+        isShared:
+          type: boolean
+        isVisible:
+          type: boolean
+        isDefault:
+          type: boolean
+        isGlobal:
+          type: boolean
+        isPortfolioView:
+          type: boolean
         userId:
           type: integer
           format: int32
-        isShared:
-          type: boolean
         dashboardType:
           type: string
           enum:
           - Homepage
           - View
           - Tool
-        cards:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardDto'
-          xml:
-            name: CardDto
-            wrapped: true
-          type: array
+        id:
+          type: integer
+          format: int32
+        dashboardName:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
       xml:
-        name: HomepageDashboardDto
+        name: UserHomepageDashboardWithRoleDto
       type: object
     OAS.WebApi.DTO.HomepageDashboard.InputOption:
       properties:
@@ -1361,138 +1438,61 @@ components:
       xml:
         name: InputOption
       type: object
-    OAS.WebApi.DTO.HomepageDashboard.DataSourceDto:
-      required:
-      - connector
-      - setting
+    OAS.WebApi.DTO.HomepageDashboard.CardSettingDto:
       properties:
-        id:
-          type: integer
-          format: int32
-        text:
-          type: string
-        description:
-          type: string
-        privilegeId:
-          type: integer
-          format: int32
-        connector:
-          type: string
-          enum:
-          - DB
-          - RestApi
-          - DirectRestApi
-          - Eclipse
-          - RB3
-          - AWSPOC
-        type:
-          type: string
-          enum:
-          - External
-          - Internal
-        setting:
-          type: object
-      xml:
-        name: DataSourceDto
-      type: object
-    OAS.WebApi.DTO.HomepageDashboard.SliderOptionDto:
-      properties:
-        min:
-          type: integer
-          format: int32
-        max:
-          type: integer
-          format: int32
-        dimension:
-          type: integer
-          format: int32
-      xml:
-        name: SliderOptionDto
-      type: object
-    OAS.WebApi.DTO.HomepageDashboard.ParameterDto:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
         displayName:
           type: string
-        options:
+        promptType:
+          type: integer
+          format: int32
+        selectedValue:
           type: string
         code:
           type: string
-      xml:
-        name: ParameterDto
-      type: object
-    OAS.WebApi.DTO.HomepageDashboard.CardDto:
-      properties:
-        dashboardCardId:
-          type: integer
-          format: int32
-        isGlobal:
+        dataType:
+          type: string
+        availableValues:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.AvailableValueDto'
+          xml:
+            name: AvailableValueDto
+            wrapped: true
+          type: array
+        valuesSource:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ValuesSourceDto'
+        option:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardsettingOptionDto'
+        hidden:
           type: boolean
-        position:
-          type: integer
-          format: int32
-        isVisible:
-          type: boolean
-        hideIfRestricted:
-          type: boolean
-        setting:
+        settings:
           items:
             $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardSettingDto'
           xml:
             name: CardSettingDto
             wrapped: true
           type: array
-        components:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ComponentDto'
-          xml:
-            name: ComponentDto
-            wrapped: true
-          type: array
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        description:
-          type: string
-        size:
-          type: integer
-          format: int32
         category:
           type: string
-          enum:
-          - General
-          - Billing
-          - Compliance
-          - Data
-          - Reporting
-          - Trading
-          - Performance
-          - Query
-          - NewAccountCenter
-          - ReconcilliationStatus
-          - QuarterEndDashboard
-          - Trends
-          - Eclipse
-          - Custodian
-          - Integrations
-          - Allocation
-          - Activity
-          - TargetAllocation
-          - Alternatives
-          - GainLoss
-          - Income
-          - Planning
-          - CustomIndexing
-          - IFrame
-        icon:
+        dragSortEnabled:
+          type: boolean
+        useDefaultIfHidden:
+          type: boolean
+        isThreeDotMenu:
+          type: boolean
+        cardEventType:
+          type: integer
+          format: int32
+        mappings:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.CardMappingDto'
+        listEditor:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.HomepageDashboard.ListEditorConfigDto'
+        listEditorMenuTargetCode:
           type: string
+        maxOptionsAllowed:
+          type: integer
+          format: int32
       xml:
-        name: CardDto
+        name: CardSettingDto
       type: object
   securitySchemes:
     Authorization:

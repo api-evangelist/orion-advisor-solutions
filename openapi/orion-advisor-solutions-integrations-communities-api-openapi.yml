@@ -1335,46 +1335,68 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.Eclipse.Lambda.Model.TLHSecurity:
+    OAS.Eclipse.Lambda.Model.CommunitySyncMessageListOfOAS.Eclipse.Lambda.Model.CommunityModel:
       properties:
-        productId:
+        data:
+          items:
+            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.CommunityModel'
+          xml:
+            name: CommunityModel
+            wrapped: true
+          type: array
+        orionBaseUrl:
+          type: string
+        communitiesBaseUrl:
+          type: string
+        strategist:
+          $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.Strategist'
+        manager:
+          $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.Manager'
+        orionFirmId:
           type: integer
           format: int32
-      xml:
-        name: TLHSecurity
-      type: object
-    OAS.Eclipse.Lambda.Model.Strategist:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
+        orionToken:
           type: string
-        abbreviation:
+        userName:
           type: string
-      xml:
-        name: Strategist
-      type: object
-    OAS.DataProcess.DTO.Integration.Communities.CommunitiesStrategistAumReportRequestDto:
-      properties:
-        requestId:
+        timeStamp:
+          type: string
+          format: date-time
+        logId:
           example: 00000000-0000-0000-0000-000000000000
           type: string
           format: uuid
-        asOfDate:
-          type: string
-          format: date-time
-        strategistExternalIds:
-          type: string
-        dataExportFiles:
-          items:
-            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.Communities.CommunitiesDataExportFileDto'
-          xml:
-            name: CommunitiesDataExportFileDto
-            wrapped: true
-          type: array
+        firmType:
+          type: integer
+          format: int32
+        updateOrionConnect:
+          type: boolean
+        tradeType:
+          type: integer
+          format: int32
+        communitiesTradeQueueId:
+          type: integer
+          format: int32
       xml:
-        name: CommunitiesStrategistAumReportRequestDto
+        name: CommunitySyncMessageList`1
+      type: object
+    OAS.WebApi.DTO.Integrations.Communities.CommunityModelSimpleDto:
+      properties:
+        communityModelId:
+          type: integer
+          format: int64
+        communityModelName:
+          type: string
+        modelId:
+          type: integer
+          format: int32
+        strategistId:
+          type: integer
+          format: int32
+        strategistName:
+          type: string
+      xml:
+        name: CommunityModelSimpleDto
       type: object
     OAS.WebApi.DTO.Integrations.Communities.CommunityModelWithDetailsDto:
       properties:
@@ -1519,50 +1541,94 @@ components:
       xml:
         name: CommunityModelWithDetailsDto
       type: object
-    OAS.Eclipse.Lambda.Model.CommunitySyncMessageListOfOAS.Eclipse.Lambda.Model.CommunityModel:
+    OAS.DataProcess.DTO.Integration.Communities.CommunitiesStrategistFlowReportRequestDto:
       properties:
-        data:
-          items:
-            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.CommunityModel'
-          xml:
-            name: CommunityModel
-            wrapped: true
-          type: array
-        orionBaseUrl:
-          type: string
-        communitiesBaseUrl:
-          type: string
-        strategist:
-          $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.Strategist'
-        manager:
-          $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.Manager'
-        orionFirmId:
-          type: integer
-          format: int32
-        orionToken:
-          type: string
-        userName:
-          type: string
-        timeStamp:
-          type: string
-          format: date-time
-        logId:
+        requestId:
           example: 00000000-0000-0000-0000-000000000000
           type: string
           format: uuid
-        firmType:
-          type: integer
-          format: int32
-        updateOrionConnect:
-          type: boolean
-        tradeType:
-          type: integer
-          format: int32
-        communitiesTradeQueueId:
-          type: integer
-          format: int32
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        strategistExternalIds:
+          type: string
+        dataExportFiles:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.Communities.CommunitiesDataExportFileDto'
+          xml:
+            name: CommunitiesDataExportFileDto
+            wrapped: true
+          type: array
       xml:
-        name: CommunitySyncMessageList`1
+        name: CommunitiesStrategistFlowReportRequestDto
+      type: object
+    OAS.Eclipse.Lambda.Model.AssignedAccount:
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        orionAccountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        orionConnectFirmId:
+          type: integer
+          format: int32
+        portfolioId:
+          type: integer
+          format: int32
+        modelAllocationSynchLevel:
+          type: string
+      xml:
+        name: AssignedAccount
+      type: object
+    OAS.Eclipse.Lambda.Model.Strategist:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        abbreviation:
+          type: string
+      xml:
+        name: Strategist
+      type: object
+    OAS.Eclipse.Lambda.Model.ModelItem:
+      properties:
+        ticker:
+          type: string
+        orionConnectExternalId:
+          type: integer
+          format: int32
+        targetPercent:
+          type: number
+          format: double
+        upperTolerance:
+          type: number
+          format: double
+        lowerTolerance:
+          type: number
+          format: double
+        assetCategoryName:
+          type: string
+        assetClassName:
+          type: string
+        subClassName:
+          type: string
+        tlhSecurities:
+          items:
+            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.TLHSecurity'
+          xml:
+            name: TLHSecurity
+            wrapped: true
+          type: array
+      xml:
+        name: ModelItem
       type: object
     OAS.Eclipse.Lambda.Model.CommunityModel:
       properties:
@@ -1699,43 +1765,31 @@ components:
       xml:
         name: CommunityModel
       type: object
-    OAS.Eclipse.Lambda.Model.Manager:
+    OAS.WebApi.DTO.Integrations.Communities.CommunitiesRebalanceRequestExecutionDto:
       properties:
-        id:
+        modelId:
           type: integer
           format: int32
-        name:
+        communityModelId:
+          type: integer
+          format: int32
+        dateRebalanceExecutionRequested:
           type: string
-        category:
-          type: string
-        abbreviation:
-          type: string
+          format: date-time
       xml:
-        name: Manager
+        name: CommunitiesRebalanceRequestExecutionDto
       type: object
-    OAS.DataProcess.DTO.Integration.Communities.CommunitiesStrategistFlowReportRequestDto:
+    OAS.DataProcess.DTO.Integration.Communities.CommunitiesDataExportFileDto:
       properties:
-        requestId:
+        alClientId:
+          type: integer
+          format: int32
+        fileId:
           example: 00000000-0000-0000-0000-000000000000
           type: string
           format: uuid
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        strategistExternalIds:
-          type: string
-        dataExportFiles:
-          items:
-            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.Communities.CommunitiesDataExportFileDto'
-          xml:
-            name: CommunitiesDataExportFileDto
-            wrapped: true
-          type: array
       xml:
-        name: CommunitiesStrategistFlowReportRequestDto
+        name: CommunitiesDataExportFileDto
       type: object
     OAS.WebApi.DTO.Trading.ModelItemFullDto:
       properties:
@@ -1784,6 +1838,41 @@ components:
           format: int32
       xml:
         name: ModelItemFullDto
+      type: object
+    OAS.Eclipse.Lambda.Model.Manager:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        category:
+          type: string
+        abbreviation:
+          type: string
+      xml:
+        name: Manager
+      type: object
+    OAS.DataProcess.DTO.Integration.Communities.CommunitiesStrategistAumReportRequestDto:
+      properties:
+        requestId:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        asOfDate:
+          type: string
+          format: date-time
+        strategistExternalIds:
+          type: string
+        dataExportFiles:
+          items:
+            $ref: '#/components/schemas/OAS.DataProcess.DTO.Integration.Communities.CommunitiesDataExportFileDto'
+          xml:
+            name: CommunitiesDataExportFileDto
+            wrapped: true
+          type: array
+      xml:
+        name: CommunitiesStrategistAumReportRequestDto
       type: object
     OAS.WebApi.DTO.Integrations.Communities.CommunityModelDto:
       properties:
@@ -1934,102 +2023,13 @@ components:
       xml:
         name: SimpleCommunityModel
       type: object
-    OAS.WebApi.DTO.Integrations.Communities.CommunityModelSimpleDto:
+    OAS.Eclipse.Lambda.Model.TLHSecurity:
       properties:
-        communityModelId:
-          type: integer
-          format: int64
-        communityModelName:
-          type: string
-        modelId:
+        productId:
           type: integer
           format: int32
-        strategistId:
-          type: integer
-          format: int32
-        strategistName:
-          type: string
       xml:
-        name: CommunityModelSimpleDto
-      type: object
-    OAS.Eclipse.Lambda.Model.AssignedAccount:
-      properties:
-        accountId:
-          type: integer
-          format: int32
-        orionAccountId:
-          type: integer
-          format: int32
-        accountNumber:
-          type: string
-        orionConnectFirmId:
-          type: integer
-          format: int32
-        portfolioId:
-          type: integer
-          format: int32
-        modelAllocationSynchLevel:
-          type: string
-      xml:
-        name: AssignedAccount
-      type: object
-    OAS.Eclipse.Lambda.Model.ModelItem:
-      properties:
-        ticker:
-          type: string
-        orionConnectExternalId:
-          type: integer
-          format: int32
-        targetPercent:
-          type: number
-          format: double
-        upperTolerance:
-          type: number
-          format: double
-        lowerTolerance:
-          type: number
-          format: double
-        assetCategoryName:
-          type: string
-        assetClassName:
-          type: string
-        subClassName:
-          type: string
-        tlhSecurities:
-          items:
-            $ref: '#/components/schemas/OAS.Eclipse.Lambda.Model.TLHSecurity'
-          xml:
-            name: TLHSecurity
-            wrapped: true
-          type: array
-      xml:
-        name: ModelItem
-      type: object
-    OAS.DataProcess.DTO.Integration.Communities.CommunitiesDataExportFileDto:
-      properties:
-        alClientId:
-          type: integer
-          format: int32
-        fileId:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-      xml:
-        name: CommunitiesDataExportFileDto
-      type: object
-    OAS.WebApi.DTO.Integrations.Communities.CommunitiesRebalanceRequestExecutionDto:
-      properties:
-        modelId:
-          type: integer
-          format: int32
-        communityModelId:
-          type: integer
-          format: int32
-        dateRebalanceExecutionRequested:
-          type: string
-          format: date-time
-      xml:
-        name: CommunitiesRebalanceRequestExecutionDto
+        name: TLHSecurity
       type: object
   securitySchemes:
     Authorization:

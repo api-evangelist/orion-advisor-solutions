@@ -415,6 +415,36 @@ paths:
       - Authorization: []
 components:
   schemas:
+    OAS.WebApi.DTO.Performance.AttributionDetailDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        groupingSelection:
+          type: string
+          enum:
+          - AssetClass
+          - AssetCategory
+        auditedBy:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+      xml:
+        name: AttributionDetailDto
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
+      type: object
     OAS.WebApi.DTO.Performance.AttributionDetailAllocationDto:
       properties:
         id:
@@ -437,31 +467,6 @@ components:
           $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.BenchmarkDto'
       xml:
         name: AttributionDetailAllocationDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.BenchmarkDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        type:
-          type: string
-        key:
-          readOnly: true
-          type: string
-        name:
-          type: string
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-      xml:
-        name: BenchmarkDto
       type: object
     OAS.WebApi.DTO.Performance.AttributionDetailFullDto:
       properties:
@@ -490,25 +495,30 @@ components:
       xml:
         name: AttributionDetailFullDto
       type: object
-    OAS.WebApi.DTO.Performance.AttributionDetailDto:
+    OAS.WebApi.DTO.Portfolio.BenchmarkDto:
       properties:
         id:
           type: integer
           format: int32
+        type:
+          type: string
+        key:
+          readOnly: true
+          type: string
         name:
           type: string
-        groupingSelection:
+        createdBy:
           type: string
-          enum:
-          - AssetClass
-          - AssetCategory
-        auditedBy:
+        createdDate:
           type: string
-        auditedDate:
+          format: date-time
+        editedBy:
+          type: string
+        editedDate:
           type: string
           format: date-time
       xml:
-        name: AttributionDetailDto
+        name: BenchmarkDto
       type: object
     OAS.WebApi.DTO.Performance.AttributionDetailTimeframeDto:
       properties:
@@ -527,16 +537,6 @@ components:
           type: array
       xml:
         name: AttributionDetailTimeframeDto
-      type: object
-    OAS.DataModel.SimpleEntity:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleEntity
       type: object
   securitySchemes:
     Authorization:

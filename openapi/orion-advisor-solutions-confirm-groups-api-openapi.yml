@@ -445,7 +445,7 @@ paths:
                 wrapped: true
               type: array
         required: true
-      summary: Confirm groups put V1 confirm groups by confirm group key data queries list
+      summary: Confirm groups put V1Confirm groups by confirm group key data queries list
       x-summary-source: derived
     post:
       tags:
@@ -571,7 +571,7 @@ paths:
                 wrapped: true
               type: array
         required: true
-      summary: Confirm groups post V1 confirm groups by confirm group key data queries list
+      summary: Confirm groups post V1Confirm groups by confirm group key data queries list
       x-summary-source: derived
   /v1/Confirm/Groups/{key}:
     get:
@@ -955,7 +955,7 @@ paths:
                 format: int32
               type: array
         required: true
-      summary: Confirm groups put V1 confirm groups action delete
+      summary: Confirm groups put V1Confirm groups action delete
       x-summary-source: derived
   /v1/Confirm/Groups/DataQueries/List:
     put:
@@ -1208,7 +1208,7 @@ paths:
                 wrapped: true
               type: array
         required: true
-      summary: Confirm groups post V1 confirm groups data queries list
+      summary: Confirm groups post V1Confirm groups data queries list
       x-summary-source: derived
   /v1/Confirm/Groups/DataQuery:
     post:
@@ -1321,35 +1321,6 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAS.WebApi.DTO.Reporting.Custom.CustomReportPromptDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        code:
-          type: string
-        prompt:
-          type: string
-        promptDescription:
-          type: string
-        promptType:
-          type: string
-          enum:
-          - None
-          - Text
-          - Numeric
-          - Date
-          - Dynamic Group
-        defaultValue:
-          type: string
-        isPromptUser:
-          type: boolean
-        sortOrder:
-          type: integer
-          format: int32
-      xml:
-        name: CustomReportPromptDto
-      type: object
     OAS.WebApi.DTO.Confirm.ConfirmOverviewDto:
       description: ''
       properties:
@@ -1509,6 +1480,139 @@ components:
           $ref: '#/components/schemas/OAS.WebApi.DTO.Reporting.Custom.CustomReportFullDto'
       xml:
         name: ConfirmGroupDataQueryDto
+      type: object
+    OAS.WebApi.DTO.Reporting.RunReport.RunToDto:
+      properties:
+        reportFormat:
+          type: string
+          enum:
+          - Xml
+          - 'Null'
+          - Csv
+          - Image
+          - PDF
+          - Html
+          - Html40
+          - Html32
+          - Mhtml
+          - Excel
+          - ExcelX
+          - HtmlOwc
+          - Json
+          - CustomImport
+        storageType:
+          type: string
+        provider:
+          type: string
+        folderPath:
+          type: string
+        combinationMethod:
+          type: string
+          enum:
+          - None
+          - Aggregate
+          - Zip
+          - Merge
+          - MergeSimplex
+          - MergeDuplex
+          - TarGzip
+        userIdList:
+          items:
+            type: integer
+            format: int32
+          type: array
+        archiveReport:
+          type: boolean
+        uploadTargetId:
+          type: integer
+          format: int32
+        source:
+          type: string
+          enum:
+          - OnDemandUI
+          - OnDemandAPI
+          - QueryTester
+          - Scheduled
+          - AuditRequestOnDemand
+          - AuditTestOnDemand
+          - AuditTestSchedule
+          - SubscriptionNotification
+          - ReportBatchSyncDynamicGroupEntities
+          - ReconCompleteNotification
+          - DashboardDataAuditProcess
+          - DashboardDataAuditProcessCountOnly
+      xml:
+        name: RunToDto
+      type: object
+    OAS.WebApi.DTO.Confirm.ConfirmGroupDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        isPrivate:
+          type: boolean
+        editedBy:
+          type: string
+        editedDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        userId:
+          type: integer
+          format: int32
+        databases:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+          xml:
+            name: SimpleEntity
+            wrapped: true
+          type: array
+        downloadFormats:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+          xml:
+            name: SimpleEntity
+            wrapped: true
+          type: array
+        recordTypes:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+          xml:
+            name: SimpleEntity
+            wrapped: true
+          type: array
+        scrubGroups:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
+          xml:
+            name: SimpleEntity
+            wrapped: true
+          type: array
+        dataQueries:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.ConfirmGroupDataQueryDto'
+          xml:
+            name: ConfirmGroupDataQueryDto
+            wrapped: true
+          type: array
+      xml:
+        name: ConfirmGroupDto
+      type: object
+    OAS.DataModel.SimpleEntity:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: SimpleEntity
       type: object
     OAS.WebApi.DTO.Reporting.Custom.CustomReportFullDto:
       properties:
@@ -1779,138 +1883,34 @@ components:
       xml:
         name: CustomReportFullDto
       type: object
-    OAS.WebApi.DTO.Reporting.RunReport.RunToDto:
+    OAS.WebApi.DTO.Reporting.Custom.CustomReportPromptDto:
       properties:
-        reportFormat:
+        id:
+          type: integer
+          format: int32
+        code:
           type: string
-          enum:
-          - Xml
-          - 'Null'
-          - Csv
-          - Image
-          - PDF
-          - Html
-          - Html40
-          - Html32
-          - Mhtml
-          - Excel
-          - ExcelX
-          - HtmlOwc
-          - Json
-          - CustomImport
-        storageType:
+        prompt:
           type: string
-        provider:
+        promptDescription:
           type: string
-        folderPath:
-          type: string
-        combinationMethod:
+        promptType:
           type: string
           enum:
           - None
-          - Aggregate
-          - Zip
-          - Merge
-          - MergeSimplex
-          - MergeDuplex
-          - TarGzip
-        userIdList:
-          items:
-            type: integer
-            format: int32
-          type: array
-        archiveReport:
+          - Text
+          - Numeric
+          - Date
+          - Dynamic Group
+        defaultValue:
+          type: string
+        isPromptUser:
           type: boolean
-        uploadTargetId:
+        sortOrder:
           type: integer
           format: int32
-        source:
-          type: string
-          enum:
-          - OnDemandUI
-          - OnDemandAPI
-          - QueryTester
-          - Scheduled
-          - AuditRequestOnDemand
-          - AuditTestOnDemand
-          - AuditTestSchedule
-          - SubscriptionNotification
-          - ReportBatchSyncDynamicGroupEntities
-          - ReconCompleteNotification
-          - DashboardDataAuditProcess
-          - DashboardDataAuditProcessCountOnly
       xml:
-        name: RunToDto
-      type: object
-    OAS.WebApi.DTO.Confirm.ConfirmGroupDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        isPrivate:
-          type: boolean
-        editedBy:
-          type: string
-        editedDate:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        userId:
-          type: integer
-          format: int32
-        databases:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
-          xml:
-            name: SimpleEntity
-            wrapped: true
-          type: array
-        downloadFormats:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
-          xml:
-            name: SimpleEntity
-            wrapped: true
-          type: array
-        recordTypes:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
-          xml:
-            name: SimpleEntity
-            wrapped: true
-          type: array
-        scrubGroups:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.SimpleEntity'
-          xml:
-            name: SimpleEntity
-            wrapped: true
-          type: array
-        dataQueries:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Confirm.ConfirmGroupDataQueryDto'
-          xml:
-            name: ConfirmGroupDataQueryDto
-            wrapped: true
-          type: array
-      xml:
-        name: ConfirmGroupDto
-      type: object
-    OAS.DataModel.SimpleEntity:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: SimpleEntity
+        name: CustomReportPromptDto
       type: object
   securitySchemes:
     Authorization:

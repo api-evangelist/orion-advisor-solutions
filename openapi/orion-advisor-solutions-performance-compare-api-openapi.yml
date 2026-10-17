@@ -1072,30 +1072,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
-      type: object
-    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
-      properties:
-        key:
-          readOnly: true
-          type: string
-        value:
-          items:
-            type: string
-          readOnly: true
-          type: array
-      xml:
-        name: KeyValuePair`2
-      type: object
     OAS.WebApi.DTO.Performance.PerformanceCompareNoteDto:
       properties:
         performanceCompareId:
@@ -1116,8 +1092,14 @@ components:
       xml:
         name: PerformanceCompareNoteDto
       type: object
-    OAS.WebApi.DTO.Performance.PerformanceCompareDetailDto:
+    OAS.WebApi.DTO.Performance.ValidatePerformanceCompareDetailDto:
       properties:
+        isValid:
+          type: boolean
+        validationMessage:
+          type: string
+        warningMessage:
+          type: string
         performanceCompareId:
           type: integer
           format: int32
@@ -1354,7 +1336,69 @@ components:
           type: number
           format: double
       xml:
-        name: PerformanceCompareDetailDto
+        name: ValidatePerformanceCompareDetailDto
+      type: object
+    System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
+      properties:
+        key:
+          readOnly: true
+          type: string
+        value:
+          items:
+            type: string
+          readOnly: true
+          type: array
+      xml:
+        name: KeyValuePair`2
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    OAS.WebApi.DTO.Performance.PerformanceCompareDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        calcMethod:
+          type: string
+          enum:
+          - TWR
+          - Simple
+          - IRR
+        auditedBy:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        isLockedDown:
+          type: boolean
+        haveTimeframes:
+          type: boolean
+      xml:
+        name: PerformanceCompareDto
+      type: object
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
+      xml:
+        name: HttpFile
       type: object
     OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
       description: import file DTO for validating imports
@@ -1716,44 +1760,6 @@ components:
       xml:
         name: PerformanceCompareDetailFullDto
       type: object
-    OAS.WebApi.DTO.Performance.PerformanceCompareDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        calcMethod:
-          type: string
-          enum:
-          - TWR
-          - Simple
-          - IRR
-        auditedBy:
-          type: string
-        auditedDate:
-          type: string
-          format: date-time
-        isLockedDown:
-          type: boolean
-        haveTimeframes:
-          type: boolean
-      xml:
-        name: PerformanceCompareDto
-      type: object
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
-      type: object
     OAS.WebApi.DTO.Performance.PerformanceCompareDetailPivotDto:
       properties:
         performanceCompareId:
@@ -1981,14 +1987,8 @@ components:
       xml:
         name: PerformanceCompareDetailPivotDto
       type: object
-    OAS.WebApi.DTO.Performance.ValidatePerformanceCompareDetailDto:
+    OAS.WebApi.DTO.Performance.PerformanceCompareDetailDto:
       properties:
-        isValid:
-          type: boolean
-        validationMessage:
-          type: string
-        warningMessage:
-          type: string
         performanceCompareId:
           type: integer
           format: int32
@@ -2225,7 +2225,7 @@ components:
           type: number
           format: double
       xml:
-        name: ValidatePerformanceCompareDetailDto
+        name: PerformanceCompareDetailDto
       type: object
     OAS.WebApi.DTO.Interface.AdditionalColumnDefinition:
       properties:

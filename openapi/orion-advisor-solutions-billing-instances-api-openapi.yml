@@ -1838,7 +1838,7 @@ paths:
                 type: array
       security:
       - Authorization: []
-      summary: Billing instance get V1 billing instances search by search
+      summary: Billing instance get V1Billing instances search by search
       x-summary-source: derived
   /v1/Billing/Instances/Simple:
     get:
@@ -2120,89 +2120,15 @@ paths:
         required: true
 components:
   schemas:
-    OAS.WebApi.DTO.Billing.BillInstanceClientDto:
+    OAS.DataModel.SimpleEntity:
       properties:
         id:
           type: integer
           format: int32
-        billInstanceId:
-          type: integer
-          format: int32
-        billType:
+        name:
           type: string
-          enum:
-          - Unknown
-          - Renewal
-          - NewMoney
-          - NewAccount
-          - FinancialPlanningFee
-          - Performance
-          - AdvanceCreditDebit
-        clientId:
-          type: integer
-          format: int32
-        clientName:
-          type: string
-        status:
-          type: string
-          enum:
-          - NotGenerated
-          - Generated
-          - Errored
-          - PendingGeneration
-          - OnHold
-          - Warning
-          - FeeFileError
-          - ReconError
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        initialAmt:
-          type: number
-          format: double
-        adjAmt:
-          type: number
-          format: double
-        balanceDue:
-          type: number
-          format: double
-        marketValue:
-          type: number
-          format: double
-        feeAmount:
-          type: number
-          format: double
-        feeFileGenerated:
-          type: boolean
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        updatedBy:
-          type: string
-        billId:
-          type: integer
-          format: int32
-        errorMessage:
-          type: string
-        repName:
-          type: string
-        repID:
-          type: integer
-          format: int32
-        repNumber:
-          type: string
-        relatedHouseholds:
-          readOnly: true
-          type: string
-        isValid:
-          type: boolean
       xml:
-        name: BillInstanceClientDto
+        name: SimpleEntity
       type: object
     OAS.WebApi.DTO.Billing.BillingEngineStatusDto:
       description: Bill-generator execution status for a bill instance (from Billing API Gateway).
@@ -2227,36 +2153,6 @@ components:
           format: date-time
       xml:
         name: BillingEngineStatusDto
-      type: object
-    OAS.WebApi.DTO.Billing.CreateBillFeeFilesDto:
-      properties:
-        billInstances:
-          items:
-            type: integer
-            format: int32
-          type: array
-        custodianSelectOption:
-          type: string
-        ffSelectOption:
-          type: string
-        custodians:
-          items:
-            type: integer
-            format: int32
-          type: array
-        fundFamilies:
-          items:
-            type: integer
-            format: int32
-          type: array
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-      xml:
-        name: CreateBillFeeFilesDto
       type: object
     OAS.WebApi.DTO.Billing.BillInstanceDto:
       properties:
@@ -2356,15 +2252,119 @@ components:
       xml:
         name: BillInstanceDto
       type: object
-    OAS.DataModel.SimpleEntity:
+    OAS.WebApi.DTO.Billing.CreateBillFeeFilesDto:
+      properties:
+        billInstances:
+          items:
+            type: integer
+            format: int32
+          type: array
+        custodianSelectOption:
+          type: string
+        ffSelectOption:
+          type: string
+        custodians:
+          items:
+            type: integer
+            format: int32
+          type: array
+        fundFamilies:
+          items:
+            type: integer
+            format: int32
+          type: array
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+      xml:
+        name: CreateBillFeeFilesDto
+      type: object
+    OAS.WebApi.DTO.Billing.BillInstanceClientDto:
       properties:
         id:
           type: integer
           format: int32
-        name:
+        billInstanceId:
+          type: integer
+          format: int32
+        billType:
           type: string
+          enum:
+          - Unknown
+          - Renewal
+          - NewMoney
+          - NewAccount
+          - FinancialPlanningFee
+          - Performance
+          - AdvanceCreditDebit
+        clientId:
+          type: integer
+          format: int32
+        clientName:
+          type: string
+        status:
+          type: string
+          enum:
+          - NotGenerated
+          - Generated
+          - Errored
+          - PendingGeneration
+          - OnHold
+          - Warning
+          - FeeFileError
+          - ReconError
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        initialAmt:
+          type: number
+          format: double
+        adjAmt:
+          type: number
+          format: double
+        balanceDue:
+          type: number
+          format: double
+        marketValue:
+          type: number
+          format: double
+        feeAmount:
+          type: number
+          format: double
+        feeFileGenerated:
+          type: boolean
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        updatedBy:
+          type: string
+        billId:
+          type: integer
+          format: int32
+        errorMessage:
+          type: string
+        repName:
+          type: string
+        repID:
+          type: integer
+          format: int32
+        repNumber:
+          type: string
+        relatedHouseholds:
+          readOnly: true
+          type: string
+        isValid:
+          type: boolean
       xml:
-        name: SimpleEntity
+        name: BillInstanceClientDto
       type: object
   securitySchemes:
     Authorization:

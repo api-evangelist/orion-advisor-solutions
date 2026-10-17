@@ -1850,17 +1850,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
-      type: object
     System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
       properties:
         key:
@@ -1873,6 +1862,51 @@ components:
           type: array
       xml:
         name: KeyValuePair`2
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntityMapDto:
+      properties:
+        dataSharingSourceId:
+          type: integer
+          format: int32
+        entityEnum:
+          type: integer
+          format: int32
+        entitySource:
+          type: integer
+          format: int32
+        entityDescriptionSource:
+          type: string
+        entityInfoSourceJSON:
+          type: string
+        entityDestination:
+          type: integer
+          format: int32
+        entityDescriptionDestination:
+          type: string
+      xml:
+        name: DataSharingEntityMapDto
+      type: object
+    OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
+      description: import file DTO for validating imports
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+          description: the imported file
+      xml:
+        name: ValidateFileImportDto
       type: object
     OAS.WebApi.DTO.PortfolioDataSync.DataSharingNotificationDto:
       properties:
@@ -1946,38 +1980,6 @@ components:
       xml:
         name: DataSharingSourceDto
       type: object
-    OAS.WebApi.DTO.ValidateImport.ValidateFileImportDto:
-      description: import file DTO for validating imports
-      properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-          description: the imported file
-      xml:
-        name: ValidateFileImportDto
-      type: object
-    OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntityMapDto:
-      properties:
-        dataSharingSourceId:
-          type: integer
-          format: int32
-        entityEnum:
-          type: integer
-          format: int32
-        entitySource:
-          type: integer
-          format: int32
-        entityDescriptionSource:
-          type: string
-        entityInfoSourceJSON:
-          type: string
-        entityDestination:
-          type: integer
-          format: int32
-        entityDescriptionDestination:
-          type: string
-      xml:
-        name: DataSharingEntityMapDto
-      type: object
     OAS.WebApi.DTO.PortfolioDataSync.DataSharingEntitySelectionDto:
       properties:
         dataSharingSourceId:
@@ -2003,18 +2005,16 @@ components:
       xml:
         name: DataSharingEntitySelectionDto
       type: object
-    System.Net.Http.StreamContent:
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
       properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
       xml:
-        name: StreamContent
+        name: HttpFile
       type: object
   securitySchemes:
     Authorization:

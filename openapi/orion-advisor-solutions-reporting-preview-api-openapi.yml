@@ -100,20 +100,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.DTO.Reporting.Envision.DateExpression:
-      properties:
-        date:
-          type: string
-        expression:
-          type: string
-        dateSource:
-          type: string
-          enum:
-          - Static
-          - Dynamic
-      xml:
-        name: DateExpression
-      type: object
     OAS.DataModel.Reporting.ReportOption:
       required:
       - id
@@ -208,46 +194,19 @@ components:
       xml:
         name: InceptionDateDto
       type: object
-    OAS.DataModel.Reporting.Controls.ListControl:
-      required:
-      - $type
+    OAS.WebApi.DTO.Reporting.Envision.DateExpression:
       properties:
-        $type:
-          readOnly: true
+        date:
           type: string
-        id:
-          example: 00000000-0000-0000-0000-000000000000
+        expression:
           type: string
-          format: uuid
-        controls:
-          items:
-            $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
-          xml:
-            name: ControlBase
-            wrapped: true
-          type: array
-        customClass:
+        dateSource:
           type: string
-        width:
-          type: string
+          enum:
+          - Static
+          - Dynamic
       xml:
-        name: ListControl
-      type: object
-    OAS.DataModel.Reporting.ControlBase:
-      required:
-      - $type
-      properties:
-        $type:
-          readOnly: true
-          type: string
-        id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-          format: uuid
-        width:
-          type: string
-      xml:
-        name: ControlBase
+        name: DateExpression
       type: object
     OAS.DataModel.Reporting.Interfaces.IReportFeatureFlagOverrider:
       properties:
@@ -334,6 +293,47 @@ components:
           type: boolean
       xml:
         name: IReportFeatureFlagOverrider
+      type: object
+    OAS.DataModel.Reporting.ControlBase:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        width:
+          type: string
+      xml:
+        name: ControlBase
+      type: object
+    OAS.DataModel.Reporting.Controls.ListControl:
+      required:
+      - $type
+      properties:
+        $type:
+          readOnly: true
+          type: string
+        id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          format: uuid
+        controls:
+          items:
+            $ref: '#/components/schemas/OAS.DataModel.Reporting.ControlBase'
+          xml:
+            name: ControlBase
+            wrapped: true
+          type: array
+        customClass:
+          type: string
+        width:
+          type: string
+      xml:
+        name: ListControl
       type: object
   securitySchemes:
     Authorization:

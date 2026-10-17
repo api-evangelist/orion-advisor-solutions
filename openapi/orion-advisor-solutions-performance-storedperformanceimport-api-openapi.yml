@@ -440,7 +440,7 @@ paths:
           description: No Content
       security:
       - Authorization: []
-      summary: Stored performance import entity post V1 performance stored performance import…
+      summary: Stored performance import entity post V1Performance stored performance import…
       x-summary-source: derived
   /v1/Performance/StoredPerformanceImport/Entities/Actions/Notes/Update:
     post:
@@ -722,17 +722,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
-      type: object
     System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
       properties:
         key:
@@ -745,6 +734,78 @@ components:
           type: array
       xml:
         name: KeyValuePair`2
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
+      type: object
+    OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceImportFileDto:
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+        delimiter:
+          type: string
+      xml:
+        name: StoredPerformanceImportFileDto
+      type: object
+    OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceColumnMapping:
+      properties:
+        columnName:
+          type: string
+        columnType:
+          type: string
+          enum:
+          - AccountNumber
+          - StartDate
+          - EndDate
+          - StartValue
+          - EndValue
+          - Contributions
+          - Distributions
+          - Cashflows
+          - FeeAmount
+          - GrossPerformance
+          - NetPerformance
+          - AccountId
+      xml:
+        name: StoredPerformanceColumnMapping
+      type: object
+    OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceImportVerboseDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        importName:
+          type: string
+        notes:
+          type: string
+        importOptions:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceImportVerboseOptionsDto'
+        fileStatus:
+          type: string
+          enum:
+          - FileNotLoaded
+          - FileLoading
+          - FileLoaded
+          - Error
+        hangfireJobId:
+          type: string
+        auditedDate:
+          type: string
+          format: date-time
+        auditedBy:
+          type: string
+      xml:
+        name: StoredPerformanceImportVerboseDto
       type: object
     OAS.DataModel.Performance.StoredPerformanceImportEntity:
       required:
@@ -973,34 +1034,6 @@ components:
       xml:
         name: StoredPerformanceImportEntity
       type: object
-    OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceImportVerboseDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        importName:
-          type: string
-        notes:
-          type: string
-        importOptions:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceImportVerboseOptionsDto'
-        fileStatus:
-          type: string
-          enum:
-          - FileNotLoaded
-          - FileLoading
-          - FileLoaded
-          - Error
-        hangfireJobId:
-          type: string
-        auditedDate:
-          type: string
-          format: date-time
-        auditedBy:
-          type: string
-      xml:
-        name: StoredPerformanceImportVerboseDto
-      type: object
     OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceImportVerboseOptionsDto:
       properties:
         s3FileName:
@@ -1017,49 +1050,16 @@ components:
       xml:
         name: StoredPerformanceImportVerboseOptionsDto
       type: object
-    OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceColumnMapping:
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
       properties:
-        columnName:
+        fileName:
           type: string
-        columnType:
+        mediaType:
           type: string
-          enum:
-          - AccountNumber
-          - StartDate
-          - EndDate
-          - StartValue
-          - EndValue
-          - Contributions
-          - Distributions
-          - Cashflows
-          - FeeAmount
-          - GrossPerformance
-          - NetPerformance
-          - AccountId
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
       xml:
-        name: StoredPerformanceColumnMapping
-      type: object
-    System.Net.Http.StreamContent:
-      properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
-      type: object
-    OAS.WebApi.DTO.Performance.StoredPerformance.StoredPerformanceImportFileDto:
-      properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-        delimiter:
-          type: string
-      xml:
-        name: StoredPerformanceImportFileDto
+        name: HttpFile
       type: object
   securitySchemes:
     Authorization:

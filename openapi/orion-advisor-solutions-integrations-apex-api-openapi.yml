@@ -1027,7 +1027,7 @@ paths:
                 wrapped: true
               type: array
         required: true
-      summary: Apex setup post V1 integrations apex setup high watermark by al client id
+      summary: Apex setup post V1Integrations apex setup high watermark by al client id
       x-summary-source: derived
   /v1/Integrations/Apex/Setup/SystemConfig/{alClientId}:
     get:
@@ -1178,7 +1178,7 @@ paths:
             schema:
               $ref: '#/components/schemas/OAS.DataProcess.Integrations.Apex.DTOs.ApexDocumentSystemConfiguration'
         required: true
-      summary: Apex setup post V1 integrations apex setup system config by al client id
+      summary: Apex setup post V1Integrations apex setup system config by al client id
       x-summary-source: derived
   /v1/Integrations/Apex/Setup/TestSettings:
     get:
@@ -1398,7 +1398,7 @@ paths:
             schema:
               $ref: '#/components/schemas/OAT.Integrations.Apex.DTOs.ApexUserToken'
         required: true
-      summary: Apex setup post V1 integrations apex setup user config by al client id
+      summary: Apex setup post V1Integrations apex setup user config by al client id
       x-summary-source: derived
   /v1/Integrations/Apex/Transaction:
     get:
@@ -1533,40 +1533,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Microsoft.IdentityModel.Tokens.EncryptingCredentials:
-      properties:
-        alg:
-          readOnly: true
-          type: string
-        enc:
-          readOnly: true
-          type: string
-        keyExchangePublicKey:
-          $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.SecurityKey'
-        cryptoProviderFactory:
-          $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.CryptoProviderFactory'
-        setDefaultCtyClaim:
-          type: boolean
-        key:
-          $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.SecurityKey'
-          readOnly: true
-      xml:
-        name: EncryptingCredentials
-      type: object
-    OAS.DataProcess.Integrations.Apex.DTOs.ApexDocumentSystemConfiguration:
-      properties:
-        alClientId:
-          type: integer
-          format: int32
-        apexCustomerId:
-          type: string
-        apexKey:
-          type: string
-        baseUrl:
-          type: string
-      xml:
-        name: ApexDocumentSystemConfiguration
-      type: object
     Microsoft.IdentityModel.Tokens.CryptoProviderFactory:
       properties:
         cryptoProviderCache:
@@ -1582,6 +1548,118 @@ components:
           format: int32
       xml:
         name: CryptoProviderFactory
+      type: object
+    OAT.Integrations.Apex.DTOs.ApexUserToken:
+      properties:
+        user:
+          type: string
+        secret:
+          type: string
+        baseUrl:
+          type: string
+        correspondentCode:
+          type: string
+        token:
+          $ref: '#/components/schemas/System.IdentityModel.Tokens.Jwt.JwtSecurityToken'
+      xml:
+        name: ApexUserToken
+      type: object
+    Microsoft.IdentityModel.Tokens.SigningCredentials:
+      properties:
+        algorithm:
+          readOnly: true
+          type: string
+        digest:
+          readOnly: true
+          type: string
+        cryptoProviderFactory:
+          $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.CryptoProviderFactory'
+        key:
+          $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.SecurityKey'
+          readOnly: true
+        kid:
+          readOnly: true
+          type: string
+      xml:
+        name: SigningCredentials
+      type: object
+    OAS.DataProcess.Integrations.Apex.Code.RepBranchDto:
+      properties:
+        firmDefault:
+          type: boolean
+        orionRepId:
+          type: integer
+          format: int32
+        apexRepBranchId:
+          type: integer
+          format: int32
+        repName:
+          readOnly: true
+          type: string
+        repCode:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        branchCode:
+          type: string
+      xml:
+        name: RepBranchDto
+      type: object
+    OAS.DataProcess.Integrations.Apex.Code.ApexFirmDto:
+      required:
+      - alClientId
+      - correspondenceCode
+      - apexCustomerId
+      - ApexKey
+      - documentBaseUrl
+      - apiBaseUrl
+      - user
+      - secret
+      properties:
+        alClientId:
+          type: integer
+          format: int32
+        correspondenceCode:
+          type: string
+          pattern: ^[a-zA-Z0-9,-._, ]+$
+        apexCustomerId:
+          type: string
+        ApexKey:
+          type: string
+        documentBaseUrl:
+          type: string
+        apiBaseUrl:
+          type: string
+        user:
+          type: string
+        secret:
+          type: string
+      xml:
+        name: ApexFirmDto
+      type: object
+    OAS.DataProcess.Integrations.Apex.DTOs.ApexFileUploadDto:
+      required:
+      - apexAccountNumber
+      - sketchId
+      properties:
+        apexAccountNumber:
+          type: string
+        sketchId:
+          type: string
+        description:
+          type: string
+        documentTag:
+          type: string
+          enum:
+          - SIGNATURE_IMAGE
+          - ID_DOCUMENT
+          - AFFILIATED_APPROVAL
+          - DOCUMENT
+          - OTHER
+      xml:
+        name: ApexFileUploadDto
       type: object
     System.IdentityModel.Tokens.Jwt.JwtSecurityToken:
       properties:
@@ -1682,263 +1760,30 @@ components:
       xml:
         name: JwtSecurityToken
       type: object
-    OAS.DataProcess.Integrations.Apex.DTOs.ApexProspectClient:
+    Microsoft.IdentityModel.Tokens.EncryptingCredentials:
       properties:
-        RepId:
-          type: integer
-          format: int32
-        ModelId:
-          type: integer
-          format: int32
-        FirstName:
-          type: string
-        LastName:
-          type: string
-        Phone:
-          type: string
-        Address:
-          type: string
-        City:
-          type: string
-        Country:
-          type: string
-        State:
-          type: string
-        ZipCode:
-          type: string
-        DateOfBirth:
-          type: string
-        Email:
-          type: string
-        SSN:
-          type: string
-        JobTitle:
-          type: string
-      xml:
-        name: ApexProspectClient
-      type: object
-    OAT.Integrations.Apex.DTOs.ApexUserToken:
-      properties:
-        user:
-          type: string
-        secret:
-          type: string
-        baseUrl:
-          type: string
-        correspondentCode:
-          type: string
-        token:
-          $ref: '#/components/schemas/System.IdentityModel.Tokens.Jwt.JwtSecurityToken'
-      xml:
-        name: ApexUserToken
-      type: object
-    Microsoft.IdentityModel.Tokens.SecurityKey:
-      properties:
-        keySize:
+        alg:
           readOnly: true
-          type: integer
-          format: int32
-        keyId:
           type: string
+        enc:
+          readOnly: true
+          type: string
+        keyExchangePublicKey:
+          $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.SecurityKey'
         cryptoProviderFactory:
           $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.CryptoProviderFactory'
-      xml:
-        name: SecurityKey
-      type: object
-    Microsoft.IdentityModel.Tokens.SigningCredentials:
-      properties:
-        algorithm:
-          readOnly: true
-          type: string
-        digest:
-          readOnly: true
-          type: string
-        cryptoProviderFactory:
-          $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.CryptoProviderFactory'
+        setDefaultCtyClaim:
+          type: boolean
         key:
           $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.SecurityKey'
           readOnly: true
-        kid:
-          readOnly: true
-          type: string
       xml:
-        name: SigningCredentials
-      type: object
-    System.Security.Claims.Claim:
-      properties:
-        issuer:
-          readOnly: true
-          type: string
-        originalIssuer:
-          readOnly: true
-          type: string
-        properties:
-          additionalProperties:
-            type: string
-          readOnly: true
-          type: object
-        subject:
-          $ref: '#/components/schemas/System.Security.Claims.ClaimsIdentity'
-          readOnly: true
-        type:
-          readOnly: true
-          type: string
-        value:
-          readOnly: true
-          type: string
-        valueType:
-          readOnly: true
-          type: string
-      xml:
-        name: Claim
-      type: object
-    OAS.DataProcess.Integrations.Apex.DTOs.ApexHighWaterMark:
-      properties:
-        type:
-          type: string
-          enum:
-          - ACCOUNT_STATUS
-          - ACH_TRANSACTION
-          - INVESTIGATION_STATUS
-          - NOC
-          - ACH_TRANSACTION_V2
-          - NOC_V2
-          - ACAT
-        highWaterMark:
-          type: integer
-          format: int64
-        correspondentCode:
-          type: string
-        sinceDateTime:
-          type: string
-          format: date-time
-        alClientId:
-          type: integer
-          format: int32
-      xml:
-        name: ApexHighWaterMark
-      type: object
-    OAS.DataProcess.Integrations.Apex.Code.RepBranchDto:
-      properties:
-        firmDefault:
-          type: boolean
-        orionRepId:
-          type: integer
-          format: int32
-        apexRepBranchId:
-          type: integer
-          format: int32
-        repName:
-          readOnly: true
-          type: string
-        repCode:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        branchCode:
-          type: string
-      xml:
-        name: RepBranchDto
-      type: object
-    OAS.DataProcess.Integrations.Apex.DTOs.ApexFileUploadDto:
-      required:
-      - apexAccountNumber
-      - sketchId
-      properties:
-        apexAccountNumber:
-          type: string
-        sketchId:
-          type: string
-        description:
-          type: string
-        documentTag:
-          type: string
-          enum:
-          - SIGNATURE_IMAGE
-          - ID_DOCUMENT
-          - AFFILIATED_APPROVAL
-          - DOCUMENT
-          - OTHER
-      xml:
-        name: ApexFileUploadDto
-      type: object
-    System.Security.Claims.ClaimsIdentity:
-      properties:
-        authenticationType:
-          readOnly: true
-          type: string
-        isAuthenticated:
-          readOnly: true
-          type: boolean
-        actor:
-          $ref: '#/components/schemas/System.Security.Claims.ClaimsIdentity'
-        bootstrapContext:
-          type: object
-        claims:
-          items:
-            $ref: '#/components/schemas/System.Security.Claims.Claim'
-          readOnly: true
-          xml:
-            name: Claim
-            wrapped: true
-          type: array
-        label:
-          type: string
-        name:
-          readOnly: true
-          type: string
-        nameClaimType:
-          readOnly: true
-          type: string
-        roleClaimType:
-          readOnly: true
-          type: string
-      xml:
-        name: ClaimsIdentity
+        name: EncryptingCredentials
       type: object
     Microsoft.IdentityModel.Tokens.CryptoProviderCache:
       properties: {}
       xml:
         name: CryptoProviderCache
-      type: object
-    Microsoft.IdentityModel.Tokens.ICryptoProvider:
-      properties: {}
-      xml:
-        name: ICryptoProvider
-      type: object
-    OAS.DataProcess.Integrations.Apex.Code.ApexFirmDto:
-      required:
-      - alClientId
-      - correspondenceCode
-      - apexCustomerId
-      - ApexKey
-      - documentBaseUrl
-      - apiBaseUrl
-      - user
-      - secret
-      properties:
-        alClientId:
-          type: integer
-          format: int32
-        correspondenceCode:
-          type: string
-          pattern: ^[a-zA-Z0-9,-._, ]+$
-        apexCustomerId:
-          type: string
-        ApexKey:
-          type: string
-        documentBaseUrl:
-          type: string
-        apiBaseUrl:
-          type: string
-        user:
-          type: string
-        secret:
-          type: string
-      xml:
-        name: ApexFirmDto
       type: object
     OAS.DataProcess.Integrations.Apex.DTOs.RetirementAccountBeneficiary:
       properties:
@@ -1960,6 +1805,38 @@ components:
           format: int64
       xml:
         name: RetirementAccountBeneficiary
+      type: object
+    OAS.DataProcess.Integrations.Apex.DTOs.ApexDocumentSystemConfiguration:
+      properties:
+        alClientId:
+          type: integer
+          format: int32
+        apexCustomerId:
+          type: string
+        apexKey:
+          type: string
+        baseUrl:
+          type: string
+      xml:
+        name: ApexDocumentSystemConfiguration
+      type: object
+    Microsoft.IdentityModel.Tokens.ICryptoProvider:
+      properties: {}
+      xml:
+        name: ICryptoProvider
+      type: object
+    Microsoft.IdentityModel.Tokens.SecurityKey:
+      properties:
+        keySize:
+          readOnly: true
+          type: integer
+          format: int32
+        keyId:
+          type: string
+        cryptoProviderFactory:
+          $ref: '#/components/schemas/Microsoft.IdentityModel.Tokens.CryptoProviderFactory'
+      xml:
+        name: SecurityKey
       type: object
     OAS.DataProcess.Integrations.Apex.DTOs.ApexAccountOpeningDto:
       properties:
@@ -1998,6 +1875,129 @@ components:
           $ref: '#/components/schemas/OAS.DataProcess.Integrations.Apex.DTOs.ApexProspectClient'
       xml:
         name: ApexAccountOpeningDto
+      type: object
+    OAS.DataProcess.Integrations.Apex.DTOs.ApexHighWaterMark:
+      properties:
+        type:
+          type: string
+          enum:
+          - ACCOUNT_STATUS
+          - ACH_TRANSACTION
+          - INVESTIGATION_STATUS
+          - NOC
+          - ACH_TRANSACTION_V2
+          - NOC_V2
+          - ACAT
+        highWaterMark:
+          type: integer
+          format: int64
+        correspondentCode:
+          type: string
+        sinceDateTime:
+          type: string
+          format: date-time
+        alClientId:
+          type: integer
+          format: int32
+      xml:
+        name: ApexHighWaterMark
+      type: object
+    System.Security.Claims.ClaimsIdentity:
+      properties:
+        authenticationType:
+          readOnly: true
+          type: string
+        isAuthenticated:
+          readOnly: true
+          type: boolean
+        actor:
+          $ref: '#/components/schemas/System.Security.Claims.ClaimsIdentity'
+        bootstrapContext:
+          type: object
+        claims:
+          items:
+            $ref: '#/components/schemas/System.Security.Claims.Claim'
+          readOnly: true
+          xml:
+            name: Claim
+            wrapped: true
+          type: array
+        label:
+          type: string
+        name:
+          readOnly: true
+          type: string
+        nameClaimType:
+          readOnly: true
+          type: string
+        roleClaimType:
+          readOnly: true
+          type: string
+      xml:
+        name: ClaimsIdentity
+      type: object
+    OAS.DataProcess.Integrations.Apex.DTOs.ApexProspectClient:
+      properties:
+        RepId:
+          type: integer
+          format: int32
+        ModelId:
+          type: integer
+          format: int32
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        Phone:
+          type: string
+        Address:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        State:
+          type: string
+        ZipCode:
+          type: string
+        DateOfBirth:
+          type: string
+        Email:
+          type: string
+        SSN:
+          type: string
+        JobTitle:
+          type: string
+      xml:
+        name: ApexProspectClient
+      type: object
+    System.Security.Claims.Claim:
+      properties:
+        issuer:
+          readOnly: true
+          type: string
+        originalIssuer:
+          readOnly: true
+          type: string
+        properties:
+          additionalProperties:
+            type: string
+          readOnly: true
+          type: object
+        subject:
+          $ref: '#/components/schemas/System.Security.Claims.ClaimsIdentity'
+          readOnly: true
+        type:
+          readOnly: true
+          type: string
+        value:
+          readOnly: true
+          type: string
+        valueType:
+          readOnly: true
+          type: string
+      xml:
+        name: Claim
       type: object
   securitySchemes:
     Authorization:

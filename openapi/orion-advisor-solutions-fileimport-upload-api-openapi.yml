@@ -337,17 +337,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    MultipartDataMediaFormatter.Infrastructure.HttpFile:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        data:
-          $ref: '#/components/schemas/System.Net.Http.StreamContent'
-      xml:
-        name: HttpFile
-      type: object
     System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String:
       properties:
         key:
@@ -360,6 +349,19 @@ components:
           type: array
       xml:
         name: KeyValuePair`2
+      type: object
+    System.Net.Http.StreamContent:
+      properties:
+        headers:
+          items:
+            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
+          readOnly: true
+          xml:
+            name: KeyValuePair`2
+            wrapped: true
+          type: array
+      xml:
+        name: StreamContent
       type: object
     OAS.WebApi.DTO.Utility.FileImportRequestDto:
       required:
@@ -417,6 +419,31 @@ components:
           format: int32
       xml:
         name: FileImportRequestDto
+      type: object
+    OAS.WebApi.DTO.Utility.FileImportDto:
+      properties:
+        pkBlob:
+          type: integer
+          format: int32
+        fkParent:
+          type: integer
+          format: int32
+        fileName:
+          type: string
+        blobDesc:
+          type: string
+        blobText:
+          type: string
+        emailsSent:
+          type: integer
+          format: int32
+        invalidEmail:
+          type: integer
+          format: int32
+        message:
+          type: string
+      xml:
+        name: FileImportDto
       type: object
     OAS.WebApi.DTO.Utility.FileImportSettingDto:
       required:
@@ -493,6 +520,15 @@ components:
       xml:
         name: FileImportDownloadLogsRequestDto
       type: object
+    OAS.WebApi.DTO.Utility.FileImportUploadDto:
+      required:
+      - file
+      properties:
+        file:
+          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
+      xml:
+        name: FileImportUploadDto
+      type: object
     OAS.WebApi.DTO.Utility.FileImportSettingUploadDto:
       required:
       - file
@@ -557,52 +593,16 @@ components:
       xml:
         name: FileImportSettingUploadDto
       type: object
-    System.Net.Http.StreamContent:
+    MultipartDataMediaFormatter.Infrastructure.HttpFile:
       properties:
-        headers:
-          items:
-            $ref: '#/components/schemas/System.Collections.Generic.KeyValuePairOfSystem.StringAndSystem.Collections.Generic.IEnumerableOfSystem.String'
-          readOnly: true
-          xml:
-            name: KeyValuePair`2
-            wrapped: true
-          type: array
-      xml:
-        name: StreamContent
-      type: object
-    OAS.WebApi.DTO.Utility.FileImportDto:
-      properties:
-        pkBlob:
-          type: integer
-          format: int32
-        fkParent:
-          type: integer
-          format: int32
         fileName:
           type: string
-        blobDesc:
+        mediaType:
           type: string
-        blobText:
-          type: string
-        emailsSent:
-          type: integer
-          format: int32
-        invalidEmail:
-          type: integer
-          format: int32
-        message:
-          type: string
+        data:
+          $ref: '#/components/schemas/System.Net.Http.StreamContent'
       xml:
-        name: FileImportDto
-      type: object
-    OAS.WebApi.DTO.Utility.FileImportUploadDto:
-      required:
-      - file
-      properties:
-        file:
-          $ref: '#/components/schemas/MultipartDataMediaFormatter.Infrastructure.HttpFile'
-      xml:
-        name: FileImportUploadDto
+        name: HttpFile
       type: object
   securitySchemes:
     Authorization:

@@ -435,8 +435,14 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OAS.WebApi.DTO.Confirm.TaxCenterAuditTypeCountDto:
+    OAS.WebApi.DTO.Portfolio.CostBasis.TaxCenterErrorDto:
       properties:
+        errorStatusIcon:
+          readOnly: true
+          type: string
+        taxErrorId:
+          type: integer
+          format: int32
         auditType:
           type: string
           enum:
@@ -451,14 +457,21 @@ components:
           - MoneyMarketProducts
           - OrionMissingCostBasis
         auditTypeId:
+          type: integer
+          format: int32
+        resolutionMessage:
           readOnly: true
-          type: integer
-          format: int32
-        errorCount:
-          type: integer
-          format: int32
+          type: string
+        expectedUnits:
+          type: number
+          format: double
+        costUnits:
+          type: number
+          format: double
+        reviewed:
+          type: boolean
       xml:
-        name: TaxCenterAuditTypeCountDto
+        name: TaxCenterErrorDto
       type: object
     OAS.WebApi.DTO.Confirm.TaxCenterDownloadSourceSummaryDto:
       properties:
@@ -503,24 +516,8 @@ components:
       xml:
         name: TaxCenterDownloadSourceSummaryDto
       type: object
-    OAS.WebApi.DTO.Portfolio.CostBasis.TaxCenterCountsDto:
+    OAS.WebApi.DTO.Confirm.TaxCenterAuditTypeCountDto:
       properties:
-        taxErrors:
-          additionalProperties:
-            type: integer
-            format: int32
-          type: object
-      xml:
-        name: TaxCenterCountsDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.CostBasis.TaxCenterErrorDto:
-      properties:
-        errorStatusIcon:
-          readOnly: true
-          type: string
-        taxErrorId:
-          type: integer
-          format: int32
         auditType:
           type: string
           enum:
@@ -535,21 +532,24 @@ components:
           - MoneyMarketProducts
           - OrionMissingCostBasis
         auditTypeId:
+          readOnly: true
           type: integer
           format: int32
-        resolutionMessage:
-          readOnly: true
-          type: string
-        expectedUnits:
-          type: number
-          format: double
-        costUnits:
-          type: number
-          format: double
-        reviewed:
-          type: boolean
+        errorCount:
+          type: integer
+          format: int32
       xml:
-        name: TaxCenterErrorDto
+        name: TaxCenterAuditTypeCountDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.CostBasis.TaxCenterCountsDto:
+      properties:
+        taxErrors:
+          additionalProperties:
+            type: integer
+            format: int32
+          type: object
+      xml:
+        name: TaxCenterCountsDto
       type: object
   securitySchemes:
     Authorization:

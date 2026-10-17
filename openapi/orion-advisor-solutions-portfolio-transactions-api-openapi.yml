@@ -2547,7 +2547,7 @@ paths:
                 format: int32
               type: array
         required: true
-      summary: Transactions post V1 portfolio transactions verbose list id
+      summary: Transactions post V1Portfolio transactions verbose list id
       x-summary-source: derived
   /v1/Portfolio/Transactions/Verbose/New:
     get:
@@ -2731,39 +2731,6 @@ paths:
         required: true
 components:
   schemas:
-    OAS.WebApi.DTO.Portfolio.TransactionBillingDto:
-      properties:
-        isNMReady:
-          type: boolean
-        isBilled:
-          type: boolean
-        isAdvanceBilled:
-          type: boolean
-        isCashFlow:
-          type: boolean
-        billedDate:
-          type: string
-          format: date-time
-      xml:
-        name: TransactionBillingDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.TransactionSimpleDto:
-      properties:
-        transDate:
-          type: string
-          format: date-time
-        productName:
-          type: string
-        ticker:
-          type: string
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-      xml:
-        name: TransactionSimpleDto
-      type: object
     OAS.WebApi.DTO.Settings.EntityOptionDto:
       properties:
         userDefineDataId:
@@ -3009,33 +2976,49 @@ components:
       xml:
         name: EntityOptionDto
       type: object
-    OAS.WebApi.DTO.Portfolio.TransactionPortfolioDto:
+    OAS.WebApi.DTO.Portfolio.TransactionFeeDto:
       properties:
-        productId:
+        id:
           type: integer
           format: int32
+        transactionFeeTypeId:
+          type: integer
+          format: int32
+        feeAmount:
+          type: number
+          format: double
+        fileFeeDescription:
+          type: string
+        feeType:
+          type: string
+      xml:
+        name: TransactionFeeDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.TransactionBaseDto:
+      properties:
+        id:
+          type: integer
+          format: int32
+        transDate:
+          type: string
+          format: date-time
+        transactionDescription:
+          type: string
         productName:
           type: string
         ticker:
           type: string
-        transDate:
-          type: string
-          format: date-time
-        transTime:
-          type: string
-          format: date-time
         transAmount:
-          type: number
-          format: double
-        navPrice:
           type: number
           format: double
         noUnits:
           type: number
           format: double
-        assetId:
-          type: integer
-          format: int32
+        navPrice:
+          type: number
+          format: double
+        accountNumber:
+          type: string
         status:
           type: string
           enum:
@@ -3046,7 +3029,20 @@ components:
           - Inactive
           - PendingCorpAction
           - FutureAip
-        transactionDescription:
+        fileTranCode:
+          type: string
+        type:
+          type: string
+        transTime:
+          type: string
+          format: date-time
+        assetId:
+          type: integer
+          format: int32
+        assetStatusId:
+          type: integer
+          format: int32
+        cusip:
           type: string
         notes:
           type: string
@@ -3058,17 +3054,24 @@ components:
           format: int32
         transactionSubTypeName:
           type: string
+        transactionSubTypeDescription:
+          type: string
         contributionCodeId:
           type: integer
           format: int32
+        contributionCodeName:
+          type: string
         distributionCodeId:
           type: integer
           format: int32
+        distributionCodeName:
+          type: string
         accountId:
           type: integer
           format: int32
-        accountNumber:
-          type: string
+        accountStatusId:
+          type: integer
+          format: int32
         managementStyle:
           type: string
         payee:
@@ -3103,11 +3106,23 @@ components:
           format: int32
         typeCode:
           type: string
-        typeSource:
+        brokerCode:
           type: string
-        signField:
+        accountType:
           type: string
-        eclipseOrderId:
+        fundFamily:
+          type: string
+        custodian:
+          type: string
+        count:
+          type: integer
+          format: int32
+        registrationName:
+          type: string
+        unitBalance:
+          type: number
+          format: double
+        productId:
           type: integer
           format: int32
         performanceFeeBreak:
@@ -3125,89 +3140,8 @@ components:
           - MiscFees
           - Journal
           - Merges
-        fileTranCode:
-          type: string
       xml:
-        name: TransactionPortfolioDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.TransactionVerboseAlternativeDto:
-      properties:
-        impactsCommitment:
-          type: boolean
-        impactsCapitalBalance:
-          type: boolean
-        originalCost:
-          type: number
-          format: double
-        originalCostDate:
-          type: string
-          format: date-time
-        equityFundingType:
-          type: string
-        equityFundingTypeId:
-          type: integer
-          format: int32
-        equityActivityType:
-          type: string
-        equityActivityTypeId:
-          type: integer
-          format: int32
-        productTransactionId:
-          type: integer
-          format: int32
-        cashDate:
-          type: string
-          format: date-time
-        isParent:
-          type: boolean
-      xml:
-        name: TransactionVerboseAlternativeDto
-      type: object
-    OAS.WebApi.DTO.Portfolio.TransactionVerboseDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        isDataSharingEntity:
-          type: boolean
-        portfolio:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionPortfolioDto'
-        billing:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionBillingDto'
-        costBasis:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CostBasisDto'
-          xml:
-            name: CostBasisDto
-            wrapped: true
-          type: array
-        additionalInformation:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioTransactionAdditionalInformationDto'
-        alternative:
-          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionVerboseAlternativeDto'
-        userDefinedFields:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
-          xml:
-            name: EntityOptionDto
-            wrapped: true
-          type: array
-        entityOptions:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
-          xml:
-            name: EntityOptionDto
-            wrapped: true
-          type: array
-        transactionFee:
-          items:
-            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionFeeDto'
-          xml:
-            name: TransactionFeeDto
-            wrapped: true
-          type: array
-      xml:
-        name: TransactionVerboseDto
+        name: TransactionBaseDto
       type: object
     OAS.WebApi.DTO.Portfolio.TransactionAlternativeDto:
       properties:
@@ -3425,32 +3359,143 @@ components:
       xml:
         name: CostBasisDto
       type: object
-    OAS.WebApi.DTO.Portfolio.TransactionBaseDto:
+    OAS.WebApi.DTO.Portfolio.TransactionVerboseDto:
       properties:
         id:
+          type: integer
+          format: int32
+        isDataSharingEntity:
+          type: boolean
+        portfolio:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionPortfolioDto'
+        billing:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionBillingDto'
+        costBasis:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.CostBasisDto'
+          xml:
+            name: CostBasisDto
+            wrapped: true
+          type: array
+        additionalInformation:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.PortfolioTransactionAdditionalInformationDto'
+        alternative:
+          $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionVerboseAlternativeDto'
+        userDefinedFields:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+          xml:
+            name: EntityOptionDto
+            wrapped: true
+          type: array
+        entityOptions:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Settings.EntityOptionDto'
+          xml:
+            name: EntityOptionDto
+            wrapped: true
+          type: array
+        transactionFee:
+          items:
+            $ref: '#/components/schemas/OAS.WebApi.DTO.Portfolio.TransactionFeeDto'
+          xml:
+            name: TransactionFeeDto
+            wrapped: true
+          type: array
+      xml:
+        name: TransactionVerboseDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.TransactionVerboseAlternativeDto:
+      properties:
+        impactsCommitment:
+          type: boolean
+        impactsCapitalBalance:
+          type: boolean
+        originalCost:
+          type: number
+          format: double
+        originalCostDate:
+          type: string
+          format: date-time
+        equityFundingType:
+          type: string
+        equityFundingTypeId:
+          type: integer
+          format: int32
+        equityActivityType:
+          type: string
+        equityActivityTypeId:
+          type: integer
+          format: int32
+        productTransactionId:
+          type: integer
+          format: int32
+        cashDate:
+          type: string
+          format: date-time
+        isParent:
+          type: boolean
+      xml:
+        name: TransactionVerboseAlternativeDto
+      type: object
+    OAS.WebApi.DTO.Portfolio.TransactionSimpleDto:
+      properties:
+        transDate:
+          type: string
+          format: date-time
+        productName:
+          type: string
+        ticker:
+          type: string
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+      xml:
+        name: TransactionSimpleDto
+      type: object
+    OAS.WebApi.DTO.Confirm.CorpAction.CorpActionTransactionV2Dto:
+      properties:
+        id:
+          readOnly: true
+          type: string
+        dbName:
+          type: string
+        transactionId:
+          type: integer
+          format: int32
+        corpActionId:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+        processingType:
+          type: string
+        accountId:
+          type: integer
+          format: int32
+        assetId:
           type: integer
           format: int32
         transDate:
           type: string
           format: date-time
-        transactionDescription:
+        transType:
           type: string
-        productName:
-          type: string
-        ticker:
-          type: string
-        transAmount:
+        amount:
           type: number
           format: double
-        noUnits:
+        units:
           type: number
           format: double
-        navPrice:
+        price:
           type: number
           format: double
-        accountNumber:
-          type: string
-        status:
+        tradeStatus:
           type: string
           enum:
           - Complete
@@ -3460,119 +3505,61 @@ components:
           - Inactive
           - PendingCorpAction
           - FutureAip
-        fileTranCode:
+        custodian:
           type: string
-        type:
+        transSubType:
           type: string
-        transTime:
-          type: string
-          format: date-time
-        assetId:
+        isProcessing:
+          type: boolean
+        processingId:
           type: integer
           format: int32
-        assetStatusId:
+        alClientId:
           type: integer
           format: int32
-        cusip:
-          type: string
-        notes:
-          type: string
         transTypeId:
           type: integer
           format: int32
-        transactionSubTypeId:
+        transSubTypeId:
           type: integer
           format: int32
-        transactionSubTypeName:
+        notes:
           type: string
-        transactionSubTypeDescription:
-          type: string
-        contributionCodeId:
-          type: integer
-          format: int32
-        contributionCodeName:
-          type: string
-        distributionCodeId:
-          type: integer
-          format: int32
-        distributionCodeName:
-          type: string
-        accountId:
-          type: integer
-          format: int32
-        accountStatusId:
-          type: integer
-          format: int32
-        managementStyle:
-          type: string
-        payee:
-          type: integer
-          format: int32
-        advisorNotes:
-          type: string
-        state:
-          type: string
-        settleDate:
-          type: string
-          format: date-time
-        tradeReferenceNumber:
-          type: string
-        transactionLinkCode:
-          type: string
-        createdBy:
+        accountNumber:
           type: string
         createdDate:
           type: string
           format: date-time
-        editedBy:
+        createdBy:
           type: string
         editedDate:
           type: string
           format: date-time
-        registrationId:
-          type: integer
-          format: int32
-        clientId:
-          type: integer
-          format: int32
-        typeCode:
+        editedBy:
           type: string
-        brokerCode:
-          type: string
-        accountType:
-          type: string
-        fundFamily:
-          type: string
-        custodian:
-          type: string
-        count:
-          type: integer
-          format: int32
-        registrationName:
-          type: string
-        unitBalance:
-          type: number
-          format: double
-        productId:
-          type: integer
-          format: int32
-        performanceFeeBreak:
+        isCil:
           type: boolean
-        financialType:
-          type: string
-          enum:
-          - None
-          - Contribution
-          - Distribution
-          - Exchange
-          - DivReinvest
-          - MgmntFees
-          - DivCash
-          - MiscFees
-          - Journal
-          - Merges
+        custodianId:
+          type: integer
+          format: int32
       xml:
-        name: TransactionBaseDto
+        name: CorpActionTransactionV2Dto
+      type: object
+    OAS.WebApi.DTO.Portfolio.TransactionBillingDto:
+      properties:
+        isNMReady:
+          type: boolean
+        isBilled:
+          type: boolean
+        isAdvanceBilled:
+          type: boolean
+        isCashFlow:
+          type: boolean
+        billedDate:
+          type: string
+          format: date-time
+      xml:
+        name: TransactionBillingDto
       type: object
     OAS.WebApi.DTO.Portfolio.TransactionDto:
       properties:
@@ -3723,24 +3710,6 @@ components:
       xml:
         name: TransactionDto
       type: object
-    OAS.WebApi.DTO.Portfolio.TransactionFeeDto:
-      properties:
-        id:
-          type: integer
-          format: int32
-        transactionFeeTypeId:
-          type: integer
-          format: int32
-        feeAmount:
-          type: number
-          format: double
-        fileFeeDescription:
-          type: string
-        feeType:
-          type: string
-      xml:
-        name: TransactionFeeDto
-      type: object
     OAS.WebApi.DTO.Portfolio.PortfolioTransactionAdditionalInformationDto:
       properties:
         yieldToMaturity:
@@ -3787,47 +3756,34 @@ components:
       xml:
         name: PortfolioTransactionAdditionalInformationDto
       type: object
-    OAS.WebApi.DTO.Confirm.CorpAction.CorpActionTransactionV2Dto:
+    OAS.WebApi.DTO.Portfolio.TransactionPortfolioDto:
       properties:
-        id:
-          readOnly: true
-          type: string
-        dbName:
-          type: string
-        transactionId:
-          type: integer
-          format: int32
-        corpActionId:
-          type: integer
-          format: int32
         productId:
           type: integer
           format: int32
         productName:
           type: string
-        processingType:
+        ticker:
           type: string
-        accountId:
-          type: integer
-          format: int32
-        assetId:
-          type: integer
-          format: int32
         transDate:
           type: string
           format: date-time
-        transType:
+        transTime:
           type: string
-        amount:
+          format: date-time
+        transAmount:
           type: number
           format: double
-        units:
+        navPrice:
           type: number
           format: double
-        price:
+        noUnits:
           type: number
           format: double
-        tradeStatus:
+        assetId:
+          type: integer
+          format: int32
+        status:
           type: string
           enum:
           - Complete
@@ -3837,45 +3793,89 @@ components:
           - Inactive
           - PendingCorpAction
           - FutureAip
-        custodian:
+        transactionDescription:
           type: string
-        transSubType:
+        notes:
           type: string
-        isProcessing:
-          type: boolean
-        processingId:
-          type: integer
-          format: int32
-        alClientId:
-          type: integer
-          format: int32
         transTypeId:
           type: integer
           format: int32
-        transSubTypeId:
+        transactionSubTypeId:
           type: integer
           format: int32
-        notes:
+        transactionSubTypeName:
           type: string
+        contributionCodeId:
+          type: integer
+          format: int32
+        distributionCodeId:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
         accountNumber:
+          type: string
+        managementStyle:
+          type: string
+        payee:
+          type: integer
+          format: int32
+        advisorNotes:
+          type: string
+        state:
+          type: string
+        settleDate:
+          type: string
+          format: date-time
+        tradeReferenceNumber:
+          type: string
+        transactionLinkCode:
+          type: string
+        createdBy:
           type: string
         createdDate:
           type: string
           format: date-time
-        createdBy:
+        editedBy:
           type: string
         editedDate:
           type: string
           format: date-time
-        editedBy:
-          type: string
-        isCil:
-          type: boolean
-        custodianId:
+        registrationId:
           type: integer
           format: int32
+        clientId:
+          type: integer
+          format: int32
+        typeCode:
+          type: string
+        typeSource:
+          type: string
+        signField:
+          type: string
+        eclipseOrderId:
+          type: integer
+          format: int32
+        performanceFeeBreak:
+          type: boolean
+        financialType:
+          type: string
+          enum:
+          - None
+          - Contribution
+          - Distribution
+          - Exchange
+          - DivReinvest
+          - MgmntFees
+          - DivCash
+          - MiscFees
+          - Journal
+          - Merges
+        fileTranCode:
+          type: string
       xml:
-        name: CorpActionTransactionV2Dto
+        name: TransactionPortfolioDto
       type: object
   securitySchemes:
     Authorization:

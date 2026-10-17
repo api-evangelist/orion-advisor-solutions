@@ -685,6 +685,38 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OAS.WebApi.DTO.Reporting.Notification.DaysOfWeekBool:
+      properties:
+        monday:
+          type: boolean
+        tuesday:
+          type: boolean
+        wednesday:
+          type: boolean
+        thursday:
+          type: boolean
+        friday:
+          type: boolean
+        saturday:
+          type: boolean
+        sunday:
+          type: boolean
+        toEnumArray:
+          items:
+            type: string
+            enum:
+            - Sunday
+            - Monday
+            - Tuesday
+            - Wednesday
+            - Thursday
+            - Friday
+            - Saturday
+          readOnly: true
+          type: array
+      xml:
+        name: DaysOfWeekBool
+      type: object
     OAS.WebApi.DTO.Reporting.Notification.MonthsOfYearBool:
       properties:
         january:
@@ -735,31 +767,6 @@ components:
           type: array
       xml:
         name: MonthsOfYearBool
-      type: object
-    OAS.WebApi.DTO.Reporting.Notification.UserDestinationDto:
-      properties:
-        notificationDestinationId:
-          type: integer
-          format: int32
-        destinationName:
-          type: string
-          enum:
-          - ClientPortal
-          - OrionApp
-          - Email
-          - Rss
-          - AdvisorMail
-          - Zapier
-          - NotificationInbox
-          - SMSText
-          - MobilePush
-        enabled:
-          type: boolean
-        notificationSubscriptionId:
-          type: integer
-          format: int32
-      xml:
-        name: UserDestinationDto
       type: object
     OAS.WebApi.DTO.Reporting.Notification.NotificationSubscriptionsForUserDto:
       properties:
@@ -856,6 +863,17 @@ components:
       xml:
         name: NotificationSubscriptionWithDestinationDto
       type: object
+    OAS.WebApi.DTO.Reporting.Notification.NotificationCountSummaryDto:
+      properties:
+        unreadInboxNotifications:
+          type: integer
+          format: int32
+        lastUpdate:
+          type: string
+          format: date-time
+      xml:
+        name: NotificationCountSummaryDto
+      type: object
     OAS.WebApi.DTO.Reporting.Notification.NotificationSchedule:
       properties:
         frequency:
@@ -933,48 +951,30 @@ components:
       xml:
         name: NotificationDto
       type: object
-    OAS.WebApi.DTO.Reporting.Notification.NotificationCountSummaryDto:
+    OAS.WebApi.DTO.Reporting.Notification.UserDestinationDto:
       properties:
-        unreadInboxNotifications:
+        notificationDestinationId:
           type: integer
           format: int32
-        lastUpdate:
+        destinationName:
           type: string
-          format: date-time
+          enum:
+          - ClientPortal
+          - OrionApp
+          - Email
+          - Rss
+          - AdvisorMail
+          - Zapier
+          - NotificationInbox
+          - SMSText
+          - MobilePush
+        enabled:
+          type: boolean
+        notificationSubscriptionId:
+          type: integer
+          format: int32
       xml:
-        name: NotificationCountSummaryDto
-      type: object
-    OAS.WebApi.DTO.Reporting.Notification.DaysOfWeekBool:
-      properties:
-        monday:
-          type: boolean
-        tuesday:
-          type: boolean
-        wednesday:
-          type: boolean
-        thursday:
-          type: boolean
-        friday:
-          type: boolean
-        saturday:
-          type: boolean
-        sunday:
-          type: boolean
-        toEnumArray:
-          items:
-            type: string
-            enum:
-            - Sunday
-            - Monday
-            - Tuesday
-            - Wednesday
-            - Thursday
-            - Friday
-            - Saturday
-          readOnly: true
-          type: array
-      xml:
-        name: DaysOfWeekBool
+        name: UserDestinationDto
       type: object
   securitySchemes:
     Authorization:

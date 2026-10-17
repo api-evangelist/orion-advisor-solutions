@@ -443,84 +443,6 @@ paths:
       - Authorization: []
 components:
   schemas:
-    OAT.Integrations.ByAllAccounts.FinancialProfile:
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      xml:
-        name: FinancialProfile
-      type: object
-    OAT.Integrations.ByAllAccounts.DeleteAccountResponseBody:
-      properties:
-        status:
-          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Status'
-        fpId:
-          type: string
-        id:
-          type: string
-      xml:
-        name: DeleteAccountResponseBody
-      type: object
-    OAT.Integrations.ByAllAccounts.AccountCredential:
-      properties:
-        profileId:
-          type: integer
-          format: int64
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        financialInstitutionId:
-          type: integer
-          format: int64
-        accountLogin:
-          type: string
-        credComplete:
-          type: boolean
-        lastAuthenticationAttempt:
-          type: string
-        authStatusErrCode:
-          type: string
-        autoManage:
-          type: boolean
-        gatherLots:
-          type: boolean
-        authType:
-          type: string
-      xml:
-        name: AccountCredential
-      type: object
-    OAT.Integrations.ByAllAccounts.Person:
-      properties:
-        firmTag1:
-          type: string
-        firmTag2:
-          type: string
-        firmTag3:
-          type: string
-        role:
-          type: string
-        firstName:
-          type: string
-        middleName:
-          type: string
-        lastName:
-          type: string
-        emailAddress:
-          type: string
-        phone:
-          type: string
-        taxId:
-          type: string
-        isSso:
-          type: string
-      xml:
-        name: Person
-      type: object
     OAT.Integrations.ByAllAccounts.Account:
       properties:
         fpId:
@@ -620,6 +542,248 @@ components:
       xml:
         name: Account
       type: object
+    OAT.Integrations.ByAllAccounts.IntegrationConfig:
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        personId:
+          type: string
+        financialProfileId:
+          type: string
+      xml:
+        name: IntegrationConfig
+      type: object
+    OAS.WebApi.DTO.Integrations.ByAllAggregatedAccountDto:
+      properties:
+        baaId:
+          type: integer
+          format: int64
+        baaAccountId:
+          type: integer
+          format: int64
+        clientId:
+          type: integer
+          format: int32
+        isLiability:
+          type: integer
+          format: int32
+        accountName:
+          type: string
+        accountValue:
+          type: number
+          format: double
+      xml:
+        name: ByAllAggregatedAccountDto
+      type: object
+    OAT.Integrations.ByAllAccounts.FinancialProfile:
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      xml:
+        name: FinancialProfile
+      type: object
+    OAT.Integrations.ByAllAccounts.Status:
+      properties:
+        errorCode:
+          type: integer
+          format: int32
+        errorMessage:
+          type: string
+      xml:
+        name: Status
+      type: object
+    OAT.Integrations.ByAllAccounts.Person:
+      properties:
+        firmTag1:
+          type: string
+        firmTag2:
+          type: string
+        firmTag3:
+          type: string
+        role:
+          type: string
+        firstName:
+          type: string
+        middleName:
+          type: string
+        lastName:
+          type: string
+        emailAddress:
+          type: string
+        phone:
+          type: string
+        taxId:
+          type: string
+        isSso:
+          type: string
+      xml:
+        name: Person
+      type: object
+    OAT.Integrations.ByAllAccounts.UserItem:
+      properties:
+        person:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Person'
+        login:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.LoginItems'
+        profileAccessList:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.ProfileAccess'
+          xml:
+            name: ProfileAccess
+            wrapped: true
+          type: array
+      xml:
+        name: UserItem
+      type: object
+    OAT.Integrations.ByAllAccounts.Transaction:
+      properties:
+        fpId:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        accountId:
+          type: integer
+          format: int64
+        holdingId:
+          type: integer
+          format: int64
+        securityId:
+          type: integer
+          format: int64
+        txType:
+          type: string
+        totalAmount:
+          type: number
+          format: double
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+          format: double
+        flowAmount:
+          type: number
+          format: double
+        flowUnits:
+          type: number
+          format: double
+        cusip:
+          type: string
+        ticker:
+          type: string
+        security:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Security'
+      xml:
+        name: Transaction
+      type: object
+    OAT.Integrations.ByAllAccounts.LoginResponse:
+      properties:
+        status:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Status'
+      xml:
+        name: LoginResponse
+      type: object
+    OAT.Integrations.ByAllAccounts.LoginItems:
+      properties:
+        username:
+          type: string
+        personId:
+          type: string
+        lastLoginDate:
+          type: string
+      xml:
+        name: LoginItems
+      type: object
+    OAT.Integrations.ByAllAccounts.ProfileAccess:
+      properties:
+        personId:
+          type: integer
+          format: int64
+        profileId:
+          type: integer
+          format: int64
+        role:
+          type: string
+        access:
+          type: string
+      xml:
+        name: ProfileAccess
+      type: object
+    OAT.Integrations.ByAllAccounts.Portfolio:
+      properties:
+        fpId:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      xml:
+        name: Portfolio
+      type: object
+    OAT.Integrations.ByAllAccounts.Security:
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        secruityType:
+          type: string
+        ticker:
+          type: string
+        cusip:
+          type: string
+        assetClass:
+          type: string
+        assetSubClass:
+          type: string
+        closePrice:
+          type: number
+          format: double
+        bondMaturity:
+          type: string
+        bondCoupon:
+          type: number
+          format: double
+        morningStarSECID:
+          type: string
+        morningSTartPERFID:
+          type: string
+      xml:
+        name: Security
+      type: object
+    OAT.Integrations.ByAllAccounts.SSOResponse:
+      properties:
+        version:
+          type: string
+        loginResponse:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.LoginResponse'
+        sessionAuthResponse:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.SessionAuthResponse'
+      xml:
+        name: SSOResponse
+      type: object
+    OAT.Integrations.ByAllAccounts.DeleteAccountResponseBody:
+      properties:
+        status:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Status'
+        fpId:
+          type: string
+        id:
+          type: string
+      xml:
+        name: DeleteAccountResponseBody
+      type: object
     OAT.Integrations.ByAllAccounts.Data:
       properties:
         financialProfiles:
@@ -674,16 +838,30 @@ components:
       xml:
         name: Data
       type: object
-    OAT.Integrations.ByAllAccounts.DeleteAccountResponse:
+    OAT.Integrations.ByAllAccounts.FiList:
       properties:
-        version:
-          type: string
-        loginResponse:
-          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.LoginResponse'
-        body:
-          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.DeleteAccountResponseBody'
+        fi:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.FinancialInstitution'
+          xml:
+            name: FinancialInstitution
+            wrapped: true
+          type: array
       xml:
-        name: DeleteAccountResponse
+        name: FiList
+      type: object
+    OAT.Integrations.ByAllAccounts.SessionAuthResponse:
+      properties:
+        status:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Status'
+        applicationUrl:
+          type: string
+        sessionId:
+          type: string
+        csrfToken:
+          type: string
+      xml:
+        name: SessionAuthResponse
       type: object
     OAT.Integrations.ByAllAccounts.UserList:
       properties:
@@ -697,7 +875,68 @@ components:
       xml:
         name: UserList
       type: object
-    OAT.Integrations.ByAllAccounts.Transaction:
+    OAT.Integrations.ByAllAccounts.DeleteAccountResponse:
+      properties:
+        version:
+          type: string
+        loginResponse:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.LoginResponse'
+        body:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.DeleteAccountResponseBody'
+      xml:
+        name: DeleteAccountResponse
+      type: object
+    OAT.Integrations.ByAllAccounts.AccountCredential:
+      properties:
+        profileId:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        financialInstitutionId:
+          type: integer
+          format: int64
+        accountLogin:
+          type: string
+        credComplete:
+          type: boolean
+        lastAuthenticationAttempt:
+          type: string
+        authStatusErrCode:
+          type: string
+        autoManage:
+          type: boolean
+        gatherLots:
+          type: boolean
+        authType:
+          type: string
+      xml:
+        name: AccountCredential
+      type: object
+    OAT.Integrations.ByAllAccounts.DataGetResponseBody:
+      properties:
+        status:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Status'
+        securityList:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.SecurityList'
+        fiList:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.FiList'
+        userList:
+          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.UserList'
+        data:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Data'
+          xml:
+            name: Data
+            wrapped: true
+          type: array
+      xml:
+        name: DataGetResponseBody
+      type: object
+    OAT.Integrations.ByAllAccounts.InvestmentOption:
       properties:
         fpId:
           type: integer
@@ -708,60 +947,37 @@ components:
         accountId:
           type: integer
           format: int64
-        holdingId:
-          type: integer
-          format: int64
-        securityId:
-          type: integer
-          format: int64
-        txType:
-          type: string
-        totalAmount:
+        unitPrice:
           type: number
           format: double
+        priceDataAsOf:
+          type: string
+        lastUpdated:
+          type: string
         name:
           type: string
-        description:
-          type: string
-        price:
-          type: number
-          format: double
-        flowAmount:
-          type: number
-          format: double
-        flowUnits:
-          type: number
-          format: double
         cusip:
           type: string
         ticker:
           type: string
+        morningStarFundID:
+          type: string
         security:
           $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Security'
       xml:
-        name: Transaction
+        name: InvestmentOption
       type: object
-    OAS.WebApi.DTO.Integrations.ByAllAggregatedAccountDto:
+    OAT.Integrations.ByAllAccounts.SecurityList:
       properties:
-        baaId:
-          type: integer
-          format: int64
-        baaAccountId:
-          type: integer
-          format: int64
-        clientId:
-          type: integer
-          format: int32
-        isLiability:
-          type: integer
-          format: int32
-        accountName:
-          type: string
-        accountValue:
-          type: number
-          format: double
+        items:
+          items:
+            $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Security'
+          xml:
+            name: Security
+            wrapped: true
+          type: array
       xml:
-        name: ByAllAggregatedAccountDto
+        name: SecurityList
       type: object
     OAT.Integrations.ByAllAccounts.Holding:
       properties:
@@ -808,85 +1024,6 @@ components:
       xml:
         name: Holding
       type: object
-    OAT.Integrations.ByAllAccounts.Security:
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        secruityType:
-          type: string
-        ticker:
-          type: string
-        cusip:
-          type: string
-        assetClass:
-          type: string
-        assetSubClass:
-          type: string
-        closePrice:
-          type: number
-          format: double
-        bondMaturity:
-          type: string
-        bondCoupon:
-          type: number
-          format: double
-        morningStarSECID:
-          type: string
-        morningSTartPERFID:
-          type: string
-      xml:
-        name: Security
-      type: object
-    OAT.Integrations.ByAllAccounts.Portfolio:
-      properties:
-        fpId:
-          type: integer
-          format: int64
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      xml:
-        name: Portfolio
-      type: object
-    OAT.Integrations.ByAllAccounts.SessionAuthResponse:
-      properties:
-        status:
-          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Status'
-        applicationUrl:
-          type: string
-        sessionId:
-          type: string
-        csrfToken:
-          type: string
-      xml:
-        name: SessionAuthResponse
-      type: object
-    OAT.Integrations.ByAllAccounts.LoginItems:
-      properties:
-        username:
-          type: string
-        personId:
-          type: string
-        lastLoginDate:
-          type: string
-      xml:
-        name: LoginItems
-      type: object
-    OAT.Integrations.ByAllAccounts.Status:
-      properties:
-        errorCode:
-          type: integer
-          format: int32
-        errorMessage:
-          type: string
-      xml:
-        name: Status
-      type: object
     OAT.Integrations.ByAllAccounts.DataGetResponse:
       properties:
         version:
@@ -897,132 +1034,6 @@ components:
           $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.DataGetResponseBody'
       xml:
         name: DataGetResponse
-      type: object
-    OAT.Integrations.ByAllAccounts.InvestmentOption:
-      properties:
-        fpId:
-          type: integer
-          format: int64
-        id:
-          type: integer
-          format: int64
-        accountId:
-          type: integer
-          format: int64
-        unitPrice:
-          type: number
-          format: double
-        priceDataAsOf:
-          type: string
-        lastUpdated:
-          type: string
-        name:
-          type: string
-        cusip:
-          type: string
-        ticker:
-          type: string
-        morningStarFundID:
-          type: string
-        security:
-          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Security'
-      xml:
-        name: InvestmentOption
-      type: object
-    OAT.Integrations.ByAllAccounts.IntegrationConfig:
-      properties:
-        username:
-          type: string
-        password:
-          type: string
-        personId:
-          type: string
-        financialProfileId:
-          type: string
-      xml:
-        name: IntegrationConfig
-      type: object
-    OAT.Integrations.ByAllAccounts.ProfileAccess:
-      properties:
-        personId:
-          type: integer
-          format: int64
-        profileId:
-          type: integer
-          format: int64
-        role:
-          type: string
-        access:
-          type: string
-      xml:
-        name: ProfileAccess
-      type: object
-    OAT.Integrations.ByAllAccounts.LoginResponse:
-      properties:
-        status:
-          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Status'
-      xml:
-        name: LoginResponse
-      type: object
-    OAT.Integrations.ByAllAccounts.SecurityList:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Security'
-          xml:
-            name: Security
-            wrapped: true
-          type: array
-      xml:
-        name: SecurityList
-      type: object
-    OAT.Integrations.ByAllAccounts.UserItem:
-      properties:
-        person:
-          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Person'
-        login:
-          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.LoginItems'
-        profileAccessList:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.ProfileAccess'
-          xml:
-            name: ProfileAccess
-            wrapped: true
-          type: array
-      xml:
-        name: UserItem
-      type: object
-    OAT.Integrations.ByAllAccounts.DataGetResponseBody:
-      properties:
-        status:
-          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Status'
-        securityList:
-          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.SecurityList'
-        fiList:
-          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.FiList'
-        userList:
-          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.UserList'
-        data:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.Data'
-          xml:
-            name: Data
-            wrapped: true
-          type: array
-      xml:
-        name: DataGetResponseBody
-      type: object
-    OAT.Integrations.ByAllAccounts.FiList:
-      properties:
-        fi:
-          items:
-            $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.FinancialInstitution'
-          xml:
-            name: FinancialInstitution
-            wrapped: true
-          type: array
-      xml:
-        name: FiList
       type: object
     OAT.Integrations.ByAllAccounts.FinancialInstitution:
       properties:
@@ -1035,17 +1046,6 @@ components:
           type: string
       xml:
         name: FinancialInstitution
-      type: object
-    OAT.Integrations.ByAllAccounts.SSOResponse:
-      properties:
-        version:
-          type: string
-        loginResponse:
-          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.LoginResponse'
-        sessionAuthResponse:
-          $ref: '#/components/schemas/OAT.Integrations.ByAllAccounts.SessionAuthResponse'
-      xml:
-        name: SSOResponse
       type: object
   securitySchemes:
     Authorization:
